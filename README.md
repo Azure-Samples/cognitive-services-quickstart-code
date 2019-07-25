@@ -29,11 +29,7 @@ If you do want to run these snippets are are the steps. Choose the language and 
 
 Data files should not be checked into the repo. Please add data files to the following central location: [cognitive-services-sample-data-files](https://github.com/Azure-Samples/cognitive-services-sample-data-files)
 
-## Samples vs snippets
-
-*Samples* differ from these code snippets in that samples aim to provide users with code that more closely aligns with how the services might be used within an application. Samples should follow coding best practices and design. However, in the case of a library Quickstart or API reference, we need to to present easily digestible snippets of code--those few lines a developer can copy and paste to get their (single) task at hand completed.
-
-Once they've completed the Quickstart, viewing a sample that presents a more integrated usage scenario can be quite valuable. It can help put into context the Quickstart's atomic snippets and API calls they've just learned about and executed, giving them an idea of how the library can be used in a larger application.
+## Samples
 
 We offer samples for each language here:
 
