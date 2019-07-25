@@ -1,3 +1,4 @@
+// <{snippet_imports}>
 import com.microsoft.azure.cognitiveservices.vision.computervision.*;
 import com.microsoft.azure.cognitiveservices.vision.computervision.models.*;
 
@@ -7,15 +8,46 @@ import java.nio.file.Files;
 
 import java.util.ArrayList;
 import java.util.List;
+// </{snippet_imports}>
 
 public class ComputerVisionQuickstarts
 {
+    private static ComputerVisionClient compVisClient;
+    
+    // <{snippet_main}>
     public static void main(String[] args)
     {
-        System.out.println("\nAzure Cognitive Services Computer Vision - Java Quickstart Sample");
-        RunQuickstarts();
-    }
+        /*  Configure the local environment:
+         *
+         *  Set the AZURE_COMPUTERVISION_API_KEY environment variable on your
+         *  local machine using the appropriate method for your preferred command shell.
+         *
+         *  Note that environment variables cannot contain quotation marks, so the quotation marks
+         *  are included in the code below to stringify them.
+         *
+         *  Note that after setting these environment variables in your preferred command shell,
+         *  you will need to close and then re-open your command shell.
+         */
+        String azureComputerVisionApiKey = System.getenv("AZURE_COMPUTERVISION_API_KEY");
+        //  END - Configure the local environment.
 
+
+        /*  Create an authenticated Computer Vision client:
+         *
+         *  Create the endpoint URL. You may have to change the first part ("westus") 
+         *  to match your subscription
+         *  Then create an authenticated client with the API key and the endpoint URL.
+         */
+        String endpointUrl = ("https://westus.api.cognitive.microsoft.com");
+        ComputerVisionClient compVisClient = ComputerVisionManager.authenticate(azureComputerVisionApiKey).withEndpoint(endpointUrl);
+        //  END - Create an authenticated Computer Vision client.
+        
+        System.out.println("\nAzure Cognitive Services Computer Vision - Java Quickstart Sample");
+        AnalyzeLocalImage(compVisClient);
+    }
+    // </{snippet_main}>
+
+    // <{snippet_analyzelocal}>
     /*  This Quickstart for the Azure Cognitive Services Computer Vision API shows how to analyze
      *  an image both locally and from a URL.
      *  Analyzing an image includes:
@@ -30,46 +62,13 @@ public class ComputerVisionQuickstarts
      *  - Displaying what type of clip art or line drawing the image is
      *
      */
-
-
-    public static void RunQuickstarts()
+    public static void AnalyzeLocalImage(ComputerVisionClient compVisClient)
     {
-        /*  Configure the local environment:
-         *
-         *  Set the AZURE_COMPUTERVISION_API_KEY and AZURE_REGION environment variables on your
-         *  local machine using the appropriate method for your preferred command shell.
-         *
-         *  For AZURE_REGION, use the same region you used to get your subscription keys.
-         ***Can we link (or just put the URL here) to the docs for finding your region?
-         *
-         *  Note that environment variables cannot contain quotation marks, so the quotation marks
-         *  are included in the code below to stringify them.
-         *
-         *  Note that after setting these environment variables in your preferred command shell,
-         *  you will need to close and then re-open your command shell.
-         */
-
-        String azureComputerVisionApiKey = System.getenv("AZURE_COMPUTERVISION_API_KEY");
-        String azureRegion = System.getenv("AZURE_REGION");
-        //  END - Configure the local environment.
-
-
-        /*  Create an authenticated Computer Vision client:
-         *
-         *  Concatenate the Azure region with the Azure base URL to create the endpoint URL, and
-         *  then create an authenticated client with the API key and the endpoint URL.
-         */
-
-        String endpointUrl = ("https://").concat(azureRegion).concat(".api.cognitive.microsoft.com");
-        ComputerVisionClient compVisClient = ComputerVisionManager.authenticate(azureComputerVisionApiKey).withEndpoint(endpointUrl);
-        //  END - Create an authenticated Computer Vision client.
-
-
         /*  Analyze a local image:
          *
          *  Set a string variable equal to the path of a local image. The image path below is a relative path.
          */
-        String pathToLocalImage = "src\\main\\resources\\landmark.jpg";
+        String pathToLocalImage = "src\\main\\resources\\myImage.jpg";
 
         //  This list defines the features to be extracted from the image.
         List<VisualFeatureTypes> featuresToExtractFromLocalImage = new ArrayList<>();
@@ -175,9 +174,13 @@ public class ComputerVisionQuickstarts
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
-        //  END - Analyze a local image.
+    }
+    //  END - Analyze a local image.
+    // </{snippet_analyzelocal}>
 
-
+    // <{snippet_analyzeurl}>
+    public static void AnalyzeRemoteImage(ComputerVisionClient compVisClient)
+    {
         /*  Analyze an image from a URL:
          *
          *  Set a string variable equal to the path of a remote image.
@@ -277,7 +280,6 @@ public class ComputerVisionQuickstarts
             System.out.println("\nImage type:");
             System.out.println("Clip art type: " + analysis.imageType().clipArtType());
             System.out.println("Line drawing type: " + analysis.imageType().lineDrawingType());
-            //  END - Analyze an image from a URL.
         }
 
         catch (Exception e)
@@ -286,4 +288,6 @@ public class ComputerVisionQuickstarts
             e.printStackTrace();
         }
     }
+    //  END - Analyze an image from a URL.
+    // </{snippet_analyzeurl}>
 }
