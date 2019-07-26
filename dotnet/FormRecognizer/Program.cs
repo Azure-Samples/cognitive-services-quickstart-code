@@ -39,7 +39,7 @@ namespace FormRecognizerQuickStart
         }
         // </snippet_main>
 
-        // <snippet_mainTask>
+        // <snippet_maintask>
         static async Task RunFormRecognizerClient()
         { 
             // Create form client object with Form Recognizer subscription key
@@ -70,7 +70,7 @@ namespace FormRecognizerQuickStart
             Console.WriteLine("Delete Model...");
             await DeleteModel(formClient, modelId);
         }
-        // </snippet_mainTask
+        // </snippet_maintask
 
         // <snippet_train>
         // Train model using training form data (pdf, jpg, png files)
