@@ -33,11 +33,11 @@ public class ComputerVisionQuickstarts
 
         /*  Create an authenticated Computer Vision client:
          *
-         *  Create the endpoint URL. You may have to change the first part ("westus") 
-         *  to match your subscription
-         *  Then create an authenticated client with the API key and the endpoint URL.
+         *  Enter the endpoint URL. Your endpoint will have the format: https://westus.api.cognitive.microsoft.com 
+         *  You may need to change the first part ("westus") to match your subscription.
+         *  Then, create an authenticated client with the API key and the endpoint URL.
          */
-        String endpointUrl = ("https://westus.api.cognitive.microsoft.com");
+        String endpointUrl = ("<your endpoint here>");
         ComputerVisionClient compVisClient = ComputerVisionManager.authenticate(azureComputerVisionApiKey).withEndpoint(endpointUrl);
         //  END - Create an authenticated Computer Vision client.
         
