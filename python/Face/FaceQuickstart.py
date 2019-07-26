@@ -1,10 +1,10 @@
-# <{snippet_imports}>
+# <snippet_imports>
 import asyncio, io, glob, os, sys, time, uuid
 from urllib.parse import urlparse
 from azure.cognitiveservices.vision.face import FaceClient
 from msrest.authentication import CognitiveServicesCredentials
 from azure.cognitiveservices.vision.face.models import TrainingStatusType, Person, SnapshotObjectType, OperationStatusType
-# </{snippet_imports}>
+# </snippet_imports>
 
 '''
 Face Quickstart
@@ -24,7 +24,7 @@ References:
     - SDK: https://docs.microsoft.com/en-us/python/api/azure-cognitiveservices-vision-face/azure.cognitiveservices.vision.face?view=azure-python
 '''
 
-# <{snippet_subvars}>
+# <snippet_subvars>
 # Set the FACE_SUBSCRIPTION_KEY environment variable with your key as the value.
 # This key will serve all examples in this document.
 KEY = os.environ['FACE_SUBSCRIPTION_KEY']
@@ -32,7 +32,7 @@ KEY = os.environ['FACE_SUBSCRIPTION_KEY']
 # Set the API endpoint for your Face subscription.
 # You may need to change the first part ("westus") to match your subscription
 ENDPOINT = 'https://westus.api.cognitive.microsoft.com/'
-# </{snippet_subvars}>
+# </snippet_subvars>
 
 # This person group name is for our Person Group Operations and Snapshot Operations examples.
 # You can call list_person_groups to print a list of preexisting PersonGroups.
@@ -62,7 +62,7 @@ TARGET_ID = os.environ['AZURE_SUBSCRIPTION_ID']
 # NOTE: We do not need to specify the target PersonGroup ID here because we generate it with this example.
 # Each new location you transfer a person group to will have a generated, new person group ID for that region.
 
-# <{snippet_auth}>
+# <snippet_auth>
 '''
 Authenticate
 All examples use the same client, except for Snapshot Operations.
@@ -72,9 +72,9 @@ face_client = FaceClient(ENDPOINT, CognitiveServicesCredentials(KEY))
 '''
 END - Authenticate
 '''
-# </{snippet_auth}>
+# </snippet_auth>
 
-# <{snippet_detect}>
+# <snippet_detect>
 '''
 Detect faces in two images
 '''
@@ -113,9 +113,9 @@ else:
 '''
 END - Detect faces
 '''
-# </{snippet_detect}>
+# </snippet_detect>
 
-# <{snippet_findsimilar}>
+# <snippet_findsimilar>
 '''
 Find a similar face
 This example uses detected faces in a group photo to find a similar face using a single-faced image as query.
@@ -150,13 +150,13 @@ for face in similar_faces:
 '''
 END - Find Similar
 '''
-# </{snippet_findsimilar}>
+# </snippet_findsimilar>
 
 '''
 Create/Train/Detect/Identify Person Group 
 This example creates a Person Group, then trains it. It can then be used to detect and identify faces in other group images.
 '''
-# <{snippet_persongroup}>
+# <snippet_persongroup>
 print('-----------------------------')
 print() 
 print('PERSON GROUP OPERATIONS')
@@ -218,9 +218,9 @@ while (True):
     elif (training_status.status is TrainingStatusType.failed):
         sys.exit('Training the person group has failed.')
     time.sleep(5)
-# </{snippet_persongroup}>
+# </snippet_persongroup>
 
-# <{snippet_identify}>
+# <snippet_identify>
 '''
 Identify a face against a defined PersonGroup
 '''
@@ -244,9 +244,9 @@ for person in results:
 '''
 END - Create/Train/Detect/Identify Person Group example
 '''
-# </{snippet_identify}>
+# </snippet_identify>
 
-# <{snippet_snapshot}>
+# <snippet_snapshot>
 '''
 Snapshot Operations
 This example transfers a person group from one region to another region.
@@ -340,7 +340,7 @@ async def wait_for_operation(client, operation_id):
     elif ('failed' == status):
         raise Exception("Operation failed. Reason:" + result.message)
     return result
-# </{snippet_snapshot}>
+# </snippet_snapshot>
 
 '''
 Nice-to-have List API calls
