@@ -70,7 +70,7 @@ namespace FormRecognizerQuickStart
             Console.WriteLine("Delete Model...");
             await DeleteModel(formClient, modelId);
         }
-        // </snippet_maintask
+        // </snippet_maintask>
 
         // <snippet_train>
         // Train model using training form data (pdf, jpg, png files)
@@ -160,7 +160,7 @@ namespace FormRecognizerQuickStart
                 Console.WriteLine("Analyze PDF form : " + ex.Message);
             }
         }
-        // </snippet_analyzepdf
+        // </snippet_analyzepdf>
 
         // Analyze JPEG form data
         private static async Task AnalyzeJpgForm(
