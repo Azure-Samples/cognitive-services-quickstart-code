@@ -9,7 +9,7 @@ namespace FormRecognizerQuickStart
 {
     class Program
     {
-        // <{snippet_variables}>
+        // <snippet_variables>
         private static string subscriptionKey = Environment.GetEnvironmentVariable("FORM_RECOGNIZER_KEY");
 
         private static string formRecognizerEndpoint = "https://westus2.api.cognitive.microsoft.com/";
@@ -28,18 +28,18 @@ namespace FormRecognizerQuickStart
         private const string pdfFormFile = @"<pdfFormFileLocalPath>";
         private const string jpgFormFile = @"<jpgFormFileLocalPath>";
         private const string pngFormFile = @"<pngFormFileLocalPath>";
-        // </{snippet_variables}>
+        // </snippet_variables>
 
-        // <{snippet_main}>
+        // <snippet_main>
         static void Main(string[] args)
         {
             var t1 = RunFormRecognizerClient();
 
             Task.WaitAll(t1);
         }
-        // </{snippet_main}>
+        // </snippet_main>
 
-        // <{snippet_mainTask}>
+        // <snippet_mainTask>
         static async Task RunFormRecognizerClient()
         { 
             // Create form client object with Form Recognizer subscription key
@@ -70,9 +70,9 @@ namespace FormRecognizerQuickStart
             Console.WriteLine("Delete Model...");
             await DeleteModel(formClient, modelId);
         }
-        // </{snippet_mainTask}
+        // </snippet_mainTask
 
-        // <{snippet_train}>
+        // <snippet_train>
         // Train model using training form data (pdf, jpg, png files)
         private static async Task<Guid> TrainModelAsync(
             IFormRecognizerClient formClient, string trainingDataUrl)
@@ -98,7 +98,7 @@ namespace FormRecognizerQuickStart
                 return Guid.Empty;
             }
         }
-        // </{snippet_train}>
+        // </snippet_train>
 
         // Get and display list of extracted keys for training data 
         // provided to train the model
@@ -130,7 +130,7 @@ namespace FormRecognizerQuickStart
             }
         }
 
-        // <{snippet_analyzepdf}>
+        // <snippet_analyzepdf>
         // Analyze PDF form data
         private static async Task AnalyzePdfForm(
             IFormRecognizerClient formClient, Guid modelId, string pdfFormFile)
@@ -160,7 +160,7 @@ namespace FormRecognizerQuickStart
                 Console.WriteLine("Analyze PDF form : " + ex.Message);
             }
         }
-        // </{snippet_analyzepdf}
+        // </snippet_analyzepdf
 
         // Analyze JPEG form data
         private static async Task AnalyzeJpgForm(
@@ -222,7 +222,7 @@ namespace FormRecognizerQuickStart
             }
         }
 
-        // <{snippet_getmodellist}>
+        // <snippet_getmodellist>
         // Get and display list of trained the models
         private static async Task GetListOfModels(
             IFormRecognizerClient formClient)
@@ -241,7 +241,7 @@ namespace FormRecognizerQuickStart
                 Console.WriteLine("Get list of models : " + e.Message);
             }
         }
-        // </{snippet_getmodellist}>
+        // </snippet_getmodellist>
 
         // Get and display list of trained the models
         private static async Task DeleteModel(
@@ -259,7 +259,7 @@ namespace FormRecognizerQuickStart
             }
         }
 
-        // <{snippet_displayanalyze}>
+        // <snippet_displayanalyze>
         // Display analyze status
         private static void DisplayAnalyzeResult(AnalyzeResult result)
         {
@@ -298,9 +298,9 @@ namespace FormRecognizerQuickStart
                 }
             }
         }
-        // </{snippet_displayanalyze}>
+        // </snippet_displayanalyze>
 
-        // <{snippet_displaymodel}>
+        // <snippet_displaymodel>
         // Display model status
         private static void DisplayModelStatus(ModelResult model)
         {
@@ -310,7 +310,7 @@ namespace FormRecognizerQuickStart
             Console.WriteLine("\tCreated: " + model.CreatedDateTime);
             Console.WriteLine("\tUpdated: " + model.LastUpdatedDateTime);
         }
-        // </{snippet_displaymodel}>
+        // </snippet_displaymodel>
 
        
     }
