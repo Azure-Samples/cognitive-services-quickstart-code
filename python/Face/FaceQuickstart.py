@@ -161,9 +161,6 @@ print('-----------------------------')
 print() 
 print('PERSON GROUP OPERATIONS')
 print() 
-# Group image for testing against
-group_photo = 'test-image-person-group.jpg'
-IMAGES_FOLDER = os.path.join(os.path.dirname(os.path.realpath(__file__)))
 
 ''' 
 Create the PersonGroup
@@ -224,6 +221,10 @@ while (True):
 '''
 Identify a face against a defined PersonGroup
 '''
+# Reference image for testing against
+group_photo = 'test-image-person-group.jpg'
+IMAGES_FOLDER = os.path.join(os.path.dirname(os.path.realpath(__file__)))
+
 # Get test image
 test_image_array = glob.glob(os.path.join(IMAGES_FOLDER, group_photo))
 image = open(test_image_array[0], 'r+b')
