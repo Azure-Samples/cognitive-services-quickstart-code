@@ -12,7 +12,6 @@ import java.util.List;
 
 public class ComputerVisionQuickstarts
 {
-    private static ComputerVisionClient compVisClient;
     
     // <{snippet_main}>
     public static void main(String[] args)
