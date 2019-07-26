@@ -34,13 +34,16 @@ KEY = os.environ['FACE_SUBSCRIPTION_KEY']
 ENDPOINT = 'https://westus.api.cognitive.microsoft.com/'
 # </snippet_subvars>
 
+# <snippet_persongroupvars>
 # This person group name is for our Person Group Operations and Snapshot Operations examples.
 # You can call list_person_groups to print a list of preexisting PersonGroups.
 # SOURCE_PERSON_GROUP_ID should be all lowercase and alphanumeric. For example, 'mygroupname'.
 PERSON_GROUP_ID = 'my-unique-person-group'
 # Used solely for the Snapshot example.
 TARGET_PERSON_GROUP_ID = str(uuid.uuid4()) # assign a random ID (or name it anything)
+# </snippet_persongroupvars>
 
+# <snippet_snapshotvars>
 '''
 Snapshot operations variables
 These are only used for the snapshot example. Set your environment variables accordingly.
@@ -61,6 +64,7 @@ TARGET_KEY = os.environ['FACE_SUBSCRIPTION_KEY2']
 TARGET_ID = os.environ['AZURE_SUBSCRIPTION_ID']
 # NOTE: We do not need to specify the target PersonGroup ID here because we generate it with this example.
 # Each new location you transfer a person group to will have a generated, new person group ID for that region.
+# </snippet_snapshotvars>
 
 # <snippet_auth>
 '''
@@ -375,6 +379,7 @@ and the target person group from the Snapshot Operations (uses a different clien
 List the person groups in your account through the online testing console to check:
 https://westus2.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395248
 '''
+# <snippet_deletegroup>
 print('-----------------------------')
 print() 
 print('DELETE PERSON GROUP')
@@ -383,7 +388,9 @@ print()
 face_client.person_group.delete(person_group_id=PERSON_GROUP_ID)
 print("Deleted the person group {} from the source location.".format(PERSON_GROUP_ID))
 print()
+# </snippet_deletegroup>
 
+# <snippet_deletetargetgroup>
 # Delete the person group in the target region.
 face_client_target.person_group.delete(TARGET_PERSON_GROUP_ID)
 print("Deleted the person group {} from the target location.".format(TARGET_PERSON_GROUP_ID))
@@ -391,3 +398,4 @@ print()
 print('-----------------------------')
 print()
 print('End of quickstart.')
+# </snippet_deletetargetgroup>
