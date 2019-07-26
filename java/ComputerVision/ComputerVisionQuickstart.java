@@ -1,4 +1,4 @@
-// <{snippet_imports}>
+// <snippet_imports>
 import com.microsoft.azure.cognitiveservices.vision.computervision.*;
 import com.microsoft.azure.cognitiveservices.vision.computervision.models.*;
 
@@ -8,12 +8,12 @@ import java.nio.file.Files;
 
 import java.util.ArrayList;
 import java.util.List;
-// </{snippet_imports}>
+// </snippet_imports>
 
 public class ComputerVisionQuickstarts
 {
     
-    // <{snippet_main}>
+    // <snippet_main>
     public static void main(String[] args)
     {
         /*  Configure the local environment:
@@ -44,9 +44,9 @@ public class ComputerVisionQuickstarts
         System.out.println("\nAzure Cognitive Services Computer Vision - Java Quickstart Sample");
         AnalyzeLocalImage(compVisClient);
     }
-    // </{snippet_main}>
+    // </snippet_main>
 
-    // <{snippet_analyzelocal}>
+    // <snippet_analyzelocal>
     /*  This Quickstart for the Azure Cognitive Services Computer Vision API shows how to analyze
      *  an image both locally and from a URL.
      *  Analyzing an image includes:
@@ -175,9 +175,9 @@ public class ComputerVisionQuickstarts
         }
     }
     //  END - Analyze a local image.
-    // </{snippet_analyzelocal}>
+    // </snippet_analyzelocal>
 
-    // <{snippet_analyzeurl}>
+    // <snippet_analyzeurl>
     public static void AnalyzeRemoteImage(ComputerVisionClient compVisClient)
     {
         /*  Analyze an image from a URL:
@@ -288,5 +288,5 @@ public class ComputerVisionQuickstarts
         }
     }
     //  END - Analyze an image from a URL.
-    // </{snippet_analyzeurl}>
+    // </snippet_analyzeurl>
 }
