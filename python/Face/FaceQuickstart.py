@@ -17,8 +17,8 @@ Examples include:
 Prerequisites:
     - Python 3+
     - Install Face SDK: pip install azure-cognitiveservices-vision-face
-    - In your root folder, add all images downloaded from here:
-      https://github.com/Azure-examples/cognitive-services-example-data-files/tree/master/Face/images
+    - Sample images:
+      https://github.com/Azure-Samples/cognitive-services-sample-data-files/tree/master/Face/images
 References: 
     - Documentation: https://docs.microsoft.com/en-us/azure/cognitive-services/face/
     - SDK: https://docs.microsoft.com/en-us/python/api/azure-cognitiveservices-vision-face/azure.cognitiveservices.vision.face?view=azure-python
