@@ -27,17 +27,18 @@ public class ComputerVisionQuickstarts
          *  Note that after setting these environment variables in your preferred command shell,
          *  you will need to close and then re-open your command shell.
          */
-        String azureComputerVisionApiKey = System.getenv("AZURE_COMPUTERVISION_API_KEY");
+        String azureComputerVisionApiKey = System.getenv("COMPUTER_VISION_SUBSCRIPTION_KEY");
         //  END - Configure the local environment.
 
 
         /*  Create an authenticated Computer Vision client:
          *
-         *  Enter the endpoint URL. Your endpoint will have the format: https://westus.api.cognitive.microsoft.com 
+         *  Enter your Computer Vision endpoint URL into your environment variables. 
+         *  It will have the format: https://westus.api.cognitive.microsoft.com 
          *  You may need to change the first part ("westus") to match your subscription.
          *  Then, create an authenticated client with the API key and the endpoint URL.
          */
-        String endpointUrl = ("<your endpoint here>");
+        String endpointUrl = System.getenv("COMPUTER_VISION_ENDPOINT");
         ComputerVisionClient compVisClient = ComputerVisionManager.authenticate(azureComputerVisionApiKey).withEndpoint(endpointUrl);
         //  END - Create an authenticated Computer Vision client.
         
