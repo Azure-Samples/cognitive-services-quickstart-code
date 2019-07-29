@@ -173,10 +173,10 @@ Create the PersonGroup
 print('Person group:', PERSON_GROUP_ID)
 face_client.person_group.create(person_group_id=PERSON_GROUP_ID, name=PERSON_GROUP_ID)
 
-# Define Adult1 
-adult1 = face_client.person_group_person.create(PERSON_GROUP_ID, "Adult1")
-# Define Adult2
-adult2 = face_client.person_group_person.create(PERSON_GROUP_ID, "Adult2")
+# Define woman friend 
+woman = face_client.person_group_person.create(PERSON_GROUP_ID, "Woman")
+# Define man friend
+man = face_client.person_group_person.create(PERSON_GROUP_ID, "Man")
 # Define child friend
 child = face_client.person_group_person.create(PERSON_GROUP_ID, "Child")
 
@@ -184,19 +184,19 @@ child = face_client.person_group_person.create(PERSON_GROUP_ID, "Child")
 Detect faces and register to correct person
 '''
 # Find all jpeg images of friends in working directory
-adult1_images = [file for file in glob.glob('*.jpg') if file.startswith("adult1")]
-adult2_images = [file for file in glob.glob('*.jpg') if file.startswith("adult2")]
+woman_images = [file for file in glob.glob('*.jpg') if file.startswith("woman")]
+man_images = [file for file in glob.glob('*.jpg') if file.startswith("man")]
 child_images = [file for file in glob.glob('*.jpg') if file.startswith("child")]
 
-# Add to a adult1 person
-for image in adult1_images:
+# Add to a woman person
+for image in woman_images:
     w = open(image, 'r+b')
-    face_client.person_group_person.add_face_from_stream(PERSON_GROUP_ID, adult1.person_id, w)
+    face_client.person_group_person.add_face_from_stream(PERSON_GROUP_ID, woman.person_id, w)
 
-# Add to a adult2 person
-for image in adult2_images:
+# Add to a man person
+for image in man_images:
     m = open(image, 'r+b')
-    face_client.person_group_person.add_face_from_stream(PERSON_GROUP_ID, adult2.person_id, m)
+    face_client.person_group_person.add_face_from_stream(PERSON_GROUP_ID, man.person_id, m)
 
 # Add to a child person
 for image in child_images:
