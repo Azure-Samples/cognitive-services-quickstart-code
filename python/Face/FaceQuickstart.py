@@ -69,19 +69,18 @@ TARGET_ID = os.environ['AZURE_SUBSCRIPTION_ID']
 # Each new location you transfer a person group to will have a generated, new person group ID for that region.
 # </snippet_snapshotvars>
 
-# <snippet_auth>
 '''
 Authenticate
 All examples use the same client, except for Snapshot Operations.
 '''
+# <snippet_auth>
 # Create an authenticated FaceClient.
 face_client = FaceClient(ENDPOINT, CognitiveServicesCredentials(KEY))
+# </snippet_auth>
 '''
 END - Authenticate
 '''
-# </snippet_auth>
 
-# <snippet_detect>
 '''
 Detect faces in two images
 '''
@@ -89,6 +88,7 @@ print('-----------------------------')
 print() 
 print('DETECT FACES')
 print() 
+# <snippet_detect>
 # Detect a face in an image that contains a single face
 single_face_image_url = 'https://www.biography.com/.image/t_share/MTQ1MzAyNzYzOTgxNTE0NTEz/john-f-kennedy---mini-biography.jpg'
 single_image_name = os.path.basename(single_face_image_url)
