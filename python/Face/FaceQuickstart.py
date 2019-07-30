@@ -1,8 +1,10 @@
+# <snippet_imports>
 import asyncio, io, glob, os, sys, time, uuid
 from urllib.parse import urlparse
 from azure.cognitiveservices.vision.face import FaceClient
 from msrest.authentication import CognitiveServicesCredentials
 from azure.cognitiveservices.vision.face.models import TrainingStatusType, Person, SnapshotObjectType, OperationStatusType
+# </snippet_imports>
 
 '''
 Face Quickstart
@@ -15,61 +17,71 @@ Examples include:
 Prerequisites:
     - Python 3+
     - Install Face SDK: pip install azure-cognitiveservices-vision-face
-    - In your root folder, add all images downloaded from here:
-      https://github.com/Azure-examples/cognitive-services-example-data-files/tree/master/Face/images
+    - Sample images:
+      https://github.com/Azure-Samples/cognitive-services-sample-data-files/tree/master/Face/images
 References: 
     - Documentation: https://docs.microsoft.com/en-us/azure/cognitive-services/face/
     - SDK: https://docs.microsoft.com/en-us/python/api/azure-cognitiveservices-vision-face/azure.cognitiveservices.vision.face?view=azure-python
 '''
 
+# <snippet_subvars>
 # Set the FACE_SUBSCRIPTION_KEY environment variable with your key as the value.
 # This key will serve all examples in this document.
 KEY = os.environ['FACE_SUBSCRIPTION_KEY']
 
-# Set the FACE_REGION environment variable with same the region as your subscription keys.
-# For example, 'westus' or 'eastus', etc.
-# This region will serve all examples in this document.
-REGION = os.environ['FACE_REGION']
+# Set the API endpoint for your Face subscription.
+# You may need to change the first part ("westus") to match your subscription
+ENDPOINT_STRING = "westus"
 
+ENDPOINT = 'https://{}.api.cognitive.microsoft.com/'.format(ENDPOINT_STRING)
+# </snippet_subvars>
+
+# <snippet_persongroupvars>
 # This person group name is for our Person Group Operations and Snapshot Operations examples.
 # You can call list_person_groups to print a list of preexisting PersonGroups.
 # SOURCE_PERSON_GROUP_ID should be all lowercase and alphanumeric. For example, 'mygroupname'.
 PERSON_GROUP_ID = 'my-unique-person-group'
 # Used solely for the Snapshot example.
 TARGET_PERSON_GROUP_ID = str(uuid.uuid4()) # assign a random ID (or name it anything)
+# </snippet_persongroupvars>
 
+# <snippet_snapshotvars>
 '''
 Snapshot operations variables
 These are only used for the snapshot example. Set your environment variables accordingly.
 '''
 # Source endpoint, the region where the original person group is located. 
-SOURCE_ENDPOINT = 'https://{}.api.cognitive.microsoft.com/'.format(os.environ['FACE_REGION'])
+SOURCE_ENDPOINT = 'https://{}.api.cognitive.microsoft.com/'.format(ENDPOINT_STRING)
 # Source subscription key. Must match the source endpoint region.
 SOURCE_KEY = os.environ['FACE_SUBSCRIPTION_KEY']
 # Source subscription ID. Found in the Azure portal in the Overview page of your Face (or any) resource.
 SOURCE_ID = os.environ['AZURE_SUBSCRIPTION_ID']
 # Person group name that will get created in this quickstart's Person Group Operations example.
 SOURCE_PERSON_GROUP_ID = PERSON_GROUP_ID
-# Target endpoint. Change the region (westus2) if desired.
-TARGET_ENDPOINT = 'https://{}.api.cognitive.microsoft.com/'.format(os.environ['FACE_REGION2'])
+# Target endpoint. You may need to change the first part ("westus2") to match your subscription
+TARGET_ENDPOINT_STRING = "westus2"
+TARGET_ENDPOINT = 'https://{}.api.cognitive.microsoft.com/'.format(TARGET_ENDPOINT_STRING)
 # Target subscription key. Must match the target endpoint region.
 TARGET_KEY = os.environ['FACE_SUBSCRIPTION_KEY2']
 # Target subscription ID. It will be the same as the source ID if created Face resources from the same subscription (but moving from region to region). If they are differnt subscriptions, add the other target ID here.
 TARGET_ID = os.environ['AZURE_SUBSCRIPTION_ID']
 # NOTE: We do not need to specify the target PersonGroup ID here because we generate it with this example.
 # Each new location you transfer a person group to will have a generated, new person group ID for that region.
+# </snippet_snapshotvars>
 
-
+# <snippet_auth>
 '''
 Authenticate
 All examples use the same client, except for Snapshot Operations.
 '''
 # Create an authenticated FaceClient.
-face_client = FaceClient('https://{}.api.cognitive.microsoft.com'.format(REGION), CognitiveServicesCredentials(KEY))
+face_client = FaceClient(ENDPOINT, CognitiveServicesCredentials(KEY))
 '''
 END - Authenticate
 '''
+# </snippet_auth>
 
+# <snippet_detect>
 '''
 Detect faces in two images
 '''
@@ -92,12 +104,15 @@ print()
 
 # Save this ID for use in Find Similar
 first_image_face_ID = detected_faces[0].face_id
+# </snippet_detect>
 
+# <snippet_detectgroup>
 # Detect the faces in an image that contains multiple faces
 # Each detected face gets assigned a new ID
 multi_face_image_url = "http://www.historyplace.com/kennedy/president-family-portrait-closeup.jpg"
 multi_image_name = os.path.basename(multi_face_image_url)
 detected_faces2 = face_client.face.detect_with_url(url=multi_face_image_url)
+# </snippet_detectgroup>
 
 print('Detected face IDs from', multi_image_name, ':')
 if not detected_faces2:
@@ -109,6 +124,7 @@ else:
 END - Detect faces
 '''
 
+
 '''
 Find a similar face
 This example uses detected faces in a group photo to find a similar face using a single-faced image as query.
@@ -117,6 +133,7 @@ print('-----------------------------')
 print() 
 print('FIND SIMILAR')
 print() 
+# <snippet_findsimilar>
 # Search through faces detected in group image for the single face from first image.
 # First, create a list of the face IDs found in the second image.
 second_image_face_IDs = list(map(lambda x: x.face_id, detected_faces2))
@@ -124,7 +141,9 @@ second_image_face_IDs = list(map(lambda x: x.face_id, detected_faces2))
 similar_faces = face_client.face.find_similar(face_id=first_image_face_ID, face_ids=second_image_face_IDs)
 if not similar_faces[0]:
 	print('No similar faces found in', multi_image_name, '.')
+# </snippet_findsimilar>
 
+# <snippet_findsimilar_print>
 # Print the details of the similar faces detected 
 print('Similar faces found in', multi_image_name + ':')
 for face in similar_faces:
@@ -139,10 +158,11 @@ for face in similar_faces:
 		print('    Top: ', str(face_info.face_rectangle.top))
 		print('    Width: ', str(face_info.face_rectangle.width))
 		print('    Height: ', str(face_info.face_rectangle.height))
-
+# </snippet_findsimilar_print>
 '''
 END - Find Similar
 '''
+
 
 '''
 Create/Train/Detect/Identify Person Group 
@@ -152,10 +172,8 @@ print('-----------------------------')
 print() 
 print('PERSON GROUP OPERATIONS')
 print() 
-# Group image for testing against
-group_photo = 'test-image-person-group.jpg'
-IMAGES_FOLDER = os.path.join(os.path.dirname(os.path.realpath(__file__)))
 
+# <snippet_persongroup_create>
 ''' 
 Create the PersonGroup
 '''
@@ -169,7 +187,9 @@ woman = face_client.person_group_person.create(PERSON_GROUP_ID, "Woman")
 man = face_client.person_group_person.create(PERSON_GROUP_ID, "Man")
 # Define child friend
 child = face_client.person_group_person.create(PERSON_GROUP_ID, "Child")
+# </snippet_persongroup_create>
 
+# <snippet_persongroup_assign>
 '''
 Detect faces and register to correct person
 '''
@@ -192,7 +212,9 @@ for image in man_images:
 for image in child_images:
     ch = open(image, 'r+b')
     face_client.person_group_person.add_face_from_stream(PERSON_GROUP_ID, child.person_id, ch)
+# </snippet_persongroup_assign>
 
+# <snippet_persongroup_train>
 ''' 
 Train PersonGroup
 '''
@@ -209,10 +231,16 @@ while (True):
     elif (training_status.status is TrainingStatusType.failed):
         sys.exit('Training the person group has failed.')
     time.sleep(5)
+# </snippet_persongroup_train>
 
+# <snippet_identify_testimage>
 '''
 Identify a face against a defined PersonGroup
 '''
+# Reference image for testing against
+group_photo = 'test-image-person-group.jpg'
+IMAGES_FOLDER = os.path.join(os.path.dirname(os.path.realpath(__file__)))
+
 # Get test image
 test_image_array = glob.glob(os.path.join(IMAGES_FOLDER, group_photo))
 image = open(test_image_array[0], 'r+b')
@@ -222,7 +250,9 @@ face_ids = []
 faces = face_client.face.detect_with_stream(image)
 for face in faces:
     face_ids.append(face.face_id)
+# </snippet_identify_testimage>
 
+# <snippet_identify>
 # Identify faces
 results = face_client.face.identify(face_ids, PERSON_GROUP_ID)
 print('Identifying faces in {}')
@@ -230,9 +260,11 @@ if not results:
     print('No person identified in the person group for faces from the {}.'.format(os.path.basename(image.name)))
 for person in results:
     print('Person for face ID {} is identified in {} with a confidence of {}.'.format(person.face_id, os.path.basename(image.name), person.candidates[0].confidence)) # Get topmost confidence score
+# </snippet_identify>
 '''
 END - Create/Train/Detect/Identify Person Group example
 '''
+
 
 '''
 Snapshot Operations
@@ -245,6 +277,7 @@ print()
 print('SNAPSHOT OPERATIONS')
 print() 
 
+# <snippet_snapshot_auth>
 '''
 Authenticate
 '''
@@ -252,7 +285,10 @@ Authenticate
 face_client_source = face_client
 # Create a new FaceClient instance for your target with authentication.
 face_client_target = FaceClient(TARGET_ENDPOINT, CognitiveServicesCredentials(TARGET_KEY))
+# </snippet_snapshot_auth>
 
+
+# <snippet_snapshot_take>
 '''
 Snapshot operations in 4 steps
 '''
@@ -280,7 +316,9 @@ async def run():
     take_operation_id = take_snapshot_result.response.headers['Operation-Location'].replace('/operations/', '')
 
     print('Taking snapshot( operation ID:', take_operation_id, ')...')
+    # </snippet_snapshot_take>
 
+    # <snippet_snapshot_wait>
     # STEP 2, Wait for snapshot taking to complete.
     take_status = await wait_for_operation(face_client_source, take_operation_id)
 
@@ -289,7 +327,9 @@ async def run():
 
     print('Snapshot ID:', snapshot_id)
     print('Taking snapshot... Done\n')
+    # </snippet_snapshot_wait>
 
+    # <snippet_snapshot_apply>
     # STEP 3, apply the snapshot to target region(s)
     # Snapshot.apply is not asynchronous.
     # For information about Snapshot.apply see:
@@ -303,13 +343,18 @@ async def run():
         )
     apply_operation_id = apply_snapshot_result.response.headers['Operation-Location'].replace('/operations/', '')
     print('Applying snapshot( operation ID:', apply_operation_id, ')...')
+    # </snippet_snapshot_apply>
 
+    # <snippet_snapshot_wait2>
     # STEP 4, wait for applying snapshot process to complete.
     await wait_for_operation(face_client_target, apply_operation_id)
     print('Applying snapshot... Done\n')
     print('End of transfer.')
     print()
+    # </snippet_snapshot_wait2>
 
+
+# <snippet_waitforop>
 # Helper function that waits and checks status of API call processing.
 async def wait_for_operation(client, operation_id):
     # Track progress of taking the snapshot.
@@ -327,6 +372,7 @@ async def wait_for_operation(client, operation_id):
     elif ('failed' == status):
         raise Exception("Operation failed. Reason:" + result.message)
     return result
+# </snippet_waitforop>
 
 '''
 Nice-to-have List API calls
@@ -364,14 +410,18 @@ print('-----------------------------')
 print() 
 print('DELETE PERSON GROUP')
 print() 
+# <snippet_deletegroup>
 # Delete the main person group.
 face_client.person_group.delete(person_group_id=PERSON_GROUP_ID)
 print("Deleted the person group {} from the source location.".format(PERSON_GROUP_ID))
 print()
+# </snippet_deletegroup>
 
+# <snippet_deletetargetgroup>
 # Delete the person group in the target region.
 face_client_target.person_group.delete(TARGET_PERSON_GROUP_ID)
 print("Deleted the person group {} from the target location.".format(TARGET_PERSON_GROUP_ID))
+# </snippet_deletetargetgroup>
 print()
 print('-----------------------------')
 print()
