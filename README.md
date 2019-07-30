@@ -4,17 +4,17 @@ This repository contains the code examples used by the QuickStarts on the [Cogni
 
 ## What are code examples
 
-Code examples are a collection of snippets whose primary purpose is to be ingested by QuickStart documentation. This code can compile and run but not intended as a template for how a solution should be developed.
+Code examples are a collection of snippets whose primary purpose is to be demonstrated in the QuickStart documentation. This code can compile and run, but is not intended as a template for how a solution should be developed. They are intentionally shortened and written in script-style to make understanding their basic concepts, easier.
 
-This code is ingested our documentation directly and intended to be read or used by themselves.
+Most of these examples can be run independent of the steps in the Quickstarts, yet represent what they offer.
 
 ## Getting Started
 
-These code snippets back Quickstarts found on [Cognitive Services Documentation](https://docs.microsoft.com/en-us/azure/cognitive-services/). These snippets are not intended as standalone code samples or for production use. To learn how to use the Cognitive Services, go to a QuickStart for each service.
+These code snippets back Quickstarts found on [Cognitive Services Documentation](https://docs.microsoft.com/en-us/azure/cognitive-services/). These snippets are not intended as standalone solutions or for production use. To learn how to use the Cognitive Services, go to a QuickStart for each service.
 
 ### Running the code snippets
 
-If you do want to run these snippets are are the steps. Choose the language and service you wish to run. Navigate to the corresponding folder and open the README.
+Choose the language and service you wish to run. Navigate to the corresponding folder and open the README. Each quickstart contains prerequisites and run instructions at the top of its main execution file. 
 
 ## How this repo is structured
 
@@ -27,9 +27,11 @@ If you do want to run these snippets are are the steps. Choose the language and 
     └── README.md
 ```
 
-Data files should not be checked into the repo. Please add data files to the following central location: [cognitive-services-sample-data-files](https://github.com/Azure-Samples/cognitive-services-sample-data-files)
+Data files (images, audio, video) should not be checked into the repo. Please add data files to the following central location: [cognitive-services-sample-data-files](https://github.com/Azure-Samples/cognitive-services-sample-data-files)
 
 ## Samples
+
+Samples (unlike examples) are a more complete, best-practices solution for each of the snippets. They're better for integrating into production code.
 
 We offer samples for each language here:
 
