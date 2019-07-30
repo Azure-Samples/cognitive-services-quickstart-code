@@ -246,10 +246,12 @@ def image_moderation():
     This will review an image using workflow and job.
     """
 
-    # <snippet_imagemod>
+    # <snippet_imagemod_iterate>
     for image_url in IMAGE_LIST:
         print("\nEvaluate image {}".format(image_url))
+        # </snippet_imagemod_iterate>
 
+        # <snippet_imagemod_ar>
         print("\nEvaluate for adult and racy content.")
         evaluation = client.image_moderation.evaluate_url_input(
             content_type="application/json",
@@ -259,7 +261,9 @@ def image_moderation():
         )
         assert isinstance(evaluation, Evaluate)
         pprint(evaluation.as_dict())
+        # </snippet_imagemod_ar>
 
+        # <snippet_imagemod_text>
         print("\nDetect and extract text.")
         evaluation = client.image_moderation.ocr_url_input(
             language="eng",
@@ -270,7 +274,9 @@ def image_moderation():
         )
         assert isinstance(evaluation, OCR)
         pprint(evaluation.as_dict())
+        # </snippet_imagemod_text>
 
+        # <snippet_imagemod_face>
         print("\nDetect faces.")
         evaluation = client.image_moderation.find_faces_url_input(
             content_type="application/json",
@@ -280,7 +286,7 @@ def image_moderation():
         )
         assert isinstance(evaluation, FoundFaces)
         pprint(evaluation.as_dict())
-# </snippet_imagemod>
+        # </snippet_imagemod_face>
 
 def image_lists():
     """ImageList.
@@ -309,7 +315,7 @@ def image_lists():
     list_id = custom_list.id
     # </snippet_imagelist_create>
 
-    # <snippet_imagelist_add>
+    # <snippet_imagelist_addhelper>
     #
     # Add images
     #
@@ -332,7 +338,9 @@ def image_lists():
             assert isinstance(added_image, Image)
             pprint(added_image.as_dict())
             return added_image
+    # </snippet_imagelist_addhelper>
 
+    # <snippet_imagelist_add>
     print("\nAdding images to list {}".format(list_id))
     index = {}  # Keep an index url to id for later removal
     for label, urls in IMAGE_LIST.items():
@@ -474,12 +482,11 @@ def image_lists():
     image_lists = client.list_management_image_lists.get_all_image_lists()
     assert not any(list_id == image_list.id for image_list in image_lists)
 
-# <snippet_imagereview1>
 def image_review(subscription_key):
     """ImageReview.
     This will create a review for images.
     """
-
+    # <snippet_imagereview_vars>
     # The name of the team to assign the job to.
     # This must be the team name you used to create your Content Moderator account. You can
     # retrieve your team name from the Review tool web site. Your team name is the Id
@@ -491,8 +498,8 @@ def image_review(subscription_key):
 
     # Where you want to receive the approval/refuse event. This is the only way to get this information.
     call_back_endpoint = "https://requestb.in/qmsakwqm"
-# </snippet_imagereview1>
-# <snippet_imagereview2>
+# </snippet_imagereview_vars>
+# <snippet_imagereview_create>
     # Create review
     print("Create review for {}.\n".format(image_url))
     review_item = {
@@ -514,11 +521,15 @@ def image_review(subscription_key):
 
     # Get review ID
     review_id = reviews[0]  # Ordered list of string of review ID
+    # </snippet_imagereview_create>
 
+    # <snippet_imagereview_getdetails>
     print("\nGet review details")
     review_details = client.reviews.get_review(
         team_name=team_name, review_id=review_id)
     pprint(review_details.as_dict())
+    # <snippet_imagereview_getdetails>
+
 
     # wait for user input through the Review tool web portal
     input("\nPerform manual reviews on the Content Moderator Review Site, and hit enter here.")
@@ -528,4 +539,3 @@ def image_review(subscription_key):
     review_details = client.reviews.get_review(
         team_name=team_name, review_id=review_id)
     pprint(review_details.as_dict())
-# </snippet_imagereview2>
