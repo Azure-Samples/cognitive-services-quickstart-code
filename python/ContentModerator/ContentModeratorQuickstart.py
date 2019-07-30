@@ -58,12 +58,12 @@ IMAGES_TO_MATCH = [
 ]
 # </snippet_imagelistvars>
 
-# <snippet_textmod>
 def text_moderation():
     """TextModeration.
     This will moderate a given long text.
     """
 
+    # <snippet_textmod>
     # Screen the input text: check for profanity,
     # do autocorrect text, and check for personally identifying
     # information (PII)
@@ -79,12 +79,12 @@ def text_moderation():
         pprint(screen.as_dict())
 # </snippet_textmod>
 
-# <snippet_termslist>
 def terms_lists():
     """TermsList.
     This will screen text using a term list.
     """
 
+    # <snippet_termslist_create>
     #
     # Create list
     #
@@ -100,7 +100,9 @@ def terms_lists():
     assert isinstance(custom_list, TermList)
     pprint(custom_list.as_dict())
     list_id = custom_list.id
+    # </snippet_termslist_create>
 
+    # <snippet_termslist_details>
     #
     # Update list details
     #
@@ -115,7 +117,9 @@ def terms_lists():
     )
     assert isinstance(updated_list, TermList)
     pprint(updated_list.as_dict())
+    # </snippet_termslist_details>
 
+    # <snippet_termslist_add>
     #
     # Add terms
     #
@@ -130,7 +134,9 @@ def terms_lists():
         term="term2",
         language="eng"
     )
+    # </snippet_termslist_add>
 
+    # <snippet_termslist_getterms>
     #
     # Get all terms ids
     #
@@ -141,7 +147,9 @@ def terms_lists():
     terms_data = terms.data
     assert isinstance(terms_data, TermsData)
     pprint(terms_data.as_dict())
+    # </snippet_termslist_getterms>
 
+    # <snippet_termslist_refresh>
     #
     # Refresh the index
     #
@@ -154,7 +162,9 @@ def terms_lists():
     print("\nWaiting {} minutes to allow the server time to propagate the index changes.".format(
         LATENCY_DELAY))
     time.sleep(LATENCY_DELAY * 60)
+    # </snippet_termslist_refresh>
 
+    # <snippet_termslist_screen>
     #
     # Screen text
     #
@@ -169,7 +179,9 @@ def terms_lists():
         )
         assert isinstance(screen, Screen)
         pprint(screen.as_dict())
+    # </snippet_termslist_screen>
 
+    # <snippet_termslist_remove>
     #
     # Remove terms
     #
@@ -180,6 +192,7 @@ def terms_lists():
         term=term_to_remove,
         language="eng"
     )
+    # </snippet_termslist_remove>
 
     #
     # Refresh the index
@@ -210,29 +223,35 @@ def terms_lists():
         assert isinstance(screen, Screen)
         pprint(screen.as_dict())
 
+    # <snippet_termslist_removeall>
     #
     # Delete all terms
     #
     print("\nDelete all terms in the image list {}".format(list_id))
     client.list_management_term.delete_all_terms(
         list_id=list_id, language="eng")
+    # </snippet_termslist_removeall>
 
+    # <snippet_termslist_deletelist>
     #
     # Delete list
     #
     print("\nDelete the term list {}".format(list_id))
     client.list_management_term_lists.delete(list_id=list_id)
-# </snippet_termslist>
+    # </snippet_termslist_deletelist>
 
-# <snippet_imagemod>
+
 def image_moderation():
     """ImageModeration.
     This will review an image using workflow and job.
     """
 
+    # <snippet_imagemod_iterate>
     for image_url in IMAGE_LIST:
         print("\nEvaluate image {}".format(image_url))
+        # </snippet_imagemod_iterate>
 
+        # <snippet_imagemod_ar>
         print("\nEvaluate for adult and racy content.")
         evaluation = client.image_moderation.evaluate_url_input(
             content_type="application/json",
@@ -242,7 +261,9 @@ def image_moderation():
         )
         assert isinstance(evaluation, Evaluate)
         pprint(evaluation.as_dict())
+        # </snippet_imagemod_ar>
 
+        # <snippet_imagemod_text>
         print("\nDetect and extract text.")
         evaluation = client.image_moderation.ocr_url_input(
             language="eng",
@@ -253,7 +274,9 @@ def image_moderation():
         )
         assert isinstance(evaluation, OCR)
         pprint(evaluation.as_dict())
+        # </snippet_imagemod_text>
 
+        # <snippet_imagemod_face>
         print("\nDetect faces.")
         evaluation = client.image_moderation.find_faces_url_input(
             content_type="application/json",
@@ -263,14 +286,14 @@ def image_moderation():
         )
         assert isinstance(evaluation, FoundFaces)
         pprint(evaluation.as_dict())
-# </snippet_imagemod>
+        # </snippet_imagemod_face>
 
-# <snippet_imagelist>
 def image_lists():
     """ImageList.
     This will review an image using workflow and job.
     """
 
+    # <snippet_imagelist_create>
     #
     # Create list
     #
@@ -290,7 +313,9 @@ def image_lists():
     assert isinstance(custom_list, ImageList)
     pprint(custom_list.as_dict())
     list_id = custom_list.id
+    # </snippet_imagelist_create>
 
+    # <snippet_imagelist_addhelper>
     #
     # Add images
     #
@@ -313,7 +338,9 @@ def image_lists():
             assert isinstance(added_image, Image)
             pprint(added_image.as_dict())
             return added_image
+    # </snippet_imagelist_addhelper>
 
+    # <snippet_imagelist_add>
     print("\nAdding images to list {}".format(list_id))
     index = {}  # Keep an index url to id for later removal
     for label, urls in IMAGE_LIST.items():
@@ -322,6 +349,9 @@ def image_lists():
             if image:
                 index[url] = image.content_id
 
+    # </snippet_imagelist_add>
+
+    # <snippet_imagelist_getimages>
     #
     # Get all images ids
     #
@@ -329,7 +359,9 @@ def image_lists():
     image_ids = client.list_management_image.get_all_image_ids(list_id=list_id)
     assert isinstance(image_ids, ImageIds)
     pprint(image_ids.as_dict())
+    # </snippet_imagelist_getimages>
 
+    # <snippet_imagelist_updatedetails>
     #
     # Update list details
     #
@@ -343,7 +375,9 @@ def image_lists():
     )
     assert isinstance(updated_list, ImageList)
     pprint(updated_list.as_dict())
+    # </snippet_imagelist_updatedetails>
 
+    # <snippet_imagelist_getdetails>
     #
     # Get list details
     #
@@ -352,7 +386,9 @@ def image_lists():
         list_id=list_id)
     assert isinstance(list_details, ImageList)
     pprint(list_details.as_dict())
+    # </snippet_imagelist_getdetails>
 
+    # <snippet_imagelist_refresh>
     #
     # Refresh the index
     #
@@ -365,7 +401,9 @@ def image_lists():
     print("\nWaiting {} minutes to allow the server time to propagate the index changes.".format(
         LATENCY_DELAY))
     time.sleep(LATENCY_DELAY * 60)
+    # </snippet_imagelist_refresh>
 
+    # <snippet_imagelist_match>
     #
     # Match images against the image list.
     #
@@ -381,7 +419,9 @@ def image_lists():
         print("Is match? {}".format(match_result.is_match))
         print("Complete match details:")
         pprint(match_result.as_dict())
+    # </snippet_imagelist_match>
 
+    # <snippet_imagelist_remove>
     #
     # Remove images
     #
@@ -391,6 +431,7 @@ def image_lists():
         list_id=list_id,
         image_id=index[correction]
     )
+    # </snippet_imagelist_remove>
 
     #
     # Refresh the index
@@ -418,18 +459,21 @@ def image_lists():
         print("Is match? {}".format(match_result.is_match))
         print("Complete match details:")
         pprint(match_result.as_dict())
-
+    # <snippet_imagelist_removeall>
     #
     # Delete all images
     #
     print("\nDelete all images in the image list {}".format(list_id))
     client.list_management_image.delete_all_images(list_id=list_id)
+    # </snippet_imagelist_removeall>
 
+    # <snippet_imagelist_delete>
     #
     # Delete list
     #
     print("\nDelete the image list {}".format(list_id))
     client.list_management_image_lists.delete(list_id=list_id)
+    # </snippet_imagelist_delete>
 
     #
     # Get all list ids
@@ -437,14 +481,12 @@ def image_lists():
     print("\nVerify that the list {} was deleted.".format(list_id))
     image_lists = client.list_management_image_lists.get_all_image_lists()
     assert not any(list_id == image_list.id for image_list in image_lists)
-# </snippet_imagelist>
 
-# <snippet_imagereview1>
 def image_review(subscription_key):
     """ImageReview.
     This will create a review for images.
     """
-
+    # <snippet_imagereview_vars>
     # The name of the team to assign the job to.
     # This must be the team name you used to create your Content Moderator account. You can
     # retrieve your team name from the Review tool web site. Your team name is the Id
@@ -456,8 +498,8 @@ def image_review(subscription_key):
 
     # Where you want to receive the approval/refuse event. This is the only way to get this information.
     call_back_endpoint = "https://requestb.in/qmsakwqm"
-# </snippet_imagereview1>
-# <snippet_imagereview2>
+# </snippet_imagereview_vars>
+# <snippet_imagereview_create>
     # Create review
     print("Create review for {}.\n".format(image_url))
     review_item = {
@@ -479,11 +521,15 @@ def image_review(subscription_key):
 
     # Get review ID
     review_id = reviews[0]  # Ordered list of string of review ID
+    # </snippet_imagereview_create>
 
+    # <snippet_imagereview_getdetails>
     print("\nGet review details")
     review_details = client.reviews.get_review(
         team_name=team_name, review_id=review_id)
     pprint(review_details.as_dict())
+    # <snippet_imagereview_getdetails>
+
 
     # wait for user input through the Review tool web portal
     input("\nPerform manual reviews on the Content Moderator Review Site, and hit enter here.")
@@ -493,4 +539,3 @@ def image_review(subscription_key):
     review_details = client.reviews.get_review(
         team_name=team_name, review_id=review_id)
     pprint(review_details.as_dict())
-# </snippet_imagereview2>
