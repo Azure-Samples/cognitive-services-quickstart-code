@@ -528,7 +528,7 @@ def image_review(subscription_key):
     review_details = client.reviews.get_review(
         team_name=team_name, review_id=review_id)
     pprint(review_details.as_dict())
-    # <snippet_imagereview_getdetails>
+    # </snippet_imagereview_getdetails>
 
 
     # wait for user input through the Review tool web portal
