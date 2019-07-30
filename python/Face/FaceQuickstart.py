@@ -327,7 +327,7 @@ async def run():
 
     print('Snapshot ID:', snapshot_id)
     print('Taking snapshot... Done\n')
-    # <snippet_snapshot_wait>
+    # </snippet_snapshot_wait>
 
     # <snippet_snapshot_apply>
     # STEP 3, apply the snapshot to target region(s)
@@ -351,7 +351,7 @@ async def run():
     print('Applying snapshot... Done\n')
     print('End of transfer.')
     print()
-    # <snippet_snapshot_wait2>
+    # </snippet_snapshot_wait2>
 
 
 # <snippet_waitforop>
@@ -406,11 +406,11 @@ and the target person group from the Snapshot Operations (uses a different clien
 List the person groups in your account through the online testing console to check:
 https://westus2.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395248
 '''
-# <snippet_deletegroup>
 print('-----------------------------')
 print() 
 print('DELETE PERSON GROUP')
 print() 
+# <snippet_deletegroup>
 # Delete the main person group.
 face_client.person_group.delete(person_group_id=PERSON_GROUP_ID)
 print("Deleted the person group {} from the source location.".format(PERSON_GROUP_ID))
@@ -421,8 +421,8 @@ print()
 # Delete the person group in the target region.
 face_client_target.person_group.delete(TARGET_PERSON_GROUP_ID)
 print("Deleted the person group {} from the target location.".format(TARGET_PERSON_GROUP_ID))
+# </snippet_deletetargetgroup>
 print()
 print('-----------------------------')
 print()
 print('End of quickstart.')
-# </snippet_deletetargetgroup>
