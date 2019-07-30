@@ -13,7 +13,7 @@ import java.util.List;
 public class ComputerVisionQuickstarts
 {
     
-    // <snippet_main>
+    // <snippet_mainvars>
     public static void main(String[] args)
     {
         /*  Configure the local environment:
@@ -30,7 +30,6 @@ public class ComputerVisionQuickstarts
         String azureComputerVisionApiKey = System.getenv("AZURE_COMPUTERVISION_API_KEY");
         //  END - Configure the local environment.
 
-
         /*  Create an authenticated Computer Vision client:
          *
          *  Enter the endpoint URL. Your endpoint will have the format: https://westus.api.cognitive.microsoft.com 
@@ -38,15 +37,18 @@ public class ComputerVisionQuickstarts
          *  Then, create an authenticated client with the API key and the endpoint URL.
          */
         String endpointUrl = ("<your endpoint here>");
+// </snippet_mainvars>
+
+        // <snippet_client>
         ComputerVisionClient compVisClient = ComputerVisionManager.authenticate(azureComputerVisionApiKey).withEndpoint(endpointUrl);
         //  END - Create an authenticated Computer Vision client.
         
         System.out.println("\nAzure Cognitive Services Computer Vision - Java Quickstart Sample");
         AnalyzeLocalImage(compVisClient);
     }
-    // </snippet_main>
+    // </snippet_client>
 
-    // <snippet_analyzelocal>
+
     /*  This Quickstart for the Azure Cognitive Services Computer Vision API shows how to analyze
      *  an image both locally and from a URL.
      *  Analyzing an image includes:
@@ -61,6 +63,7 @@ public class ComputerVisionQuickstarts
      *  - Displaying what type of clip art or line drawing the image is
      *
      */
+    // <snippet_analyzelocal_refs>
     public static void AnalyzeLocalImage(ComputerVisionClient compVisClient)
     {
         /*  Analyze a local image:
@@ -68,7 +71,9 @@ public class ComputerVisionQuickstarts
          *  Set a string variable equal to the path of a local image. The image path below is a relative path.
          */
         String pathToLocalImage = "src\\main\\resources\\myImage.jpg";
+        // </snippet_analyzelocal_refs>
 
+        // <snippet_analyzelocal_features>
         //  This list defines the features to be extracted from the image.
         List<VisualFeatureTypes> featuresToExtractFromLocalImage = new ArrayList<>();
         featuresToExtractFromLocalImage.add(VisualFeatureTypes.DESCRIPTION);
@@ -78,11 +83,14 @@ public class ComputerVisionQuickstarts
         featuresToExtractFromLocalImage.add(VisualFeatureTypes.ADULT);
         featuresToExtractFromLocalImage.add(VisualFeatureTypes.COLOR);
         featuresToExtractFromLocalImage.add(VisualFeatureTypes.IMAGE_TYPE);
+        // <snippet_analyzelocal_features>
 
         System.out.println("\nAnalyzing local image ...");
 
+        // <snippet_analyzelocal_analyze>
         try
         {
+            // <snippet_analyzelocal_analyze>
             //  Need a byte array for analyzing a local image.
             File rawImage = new File(pathToLocalImage);
             byte[] imageByteArray = Files.readAllBytes(rawImage.toPath());
@@ -93,11 +101,16 @@ public class ComputerVisionQuickstarts
                 .withVisualFeatures(featuresToExtractFromLocalImage)
                 .execute();
 
+            // </snippet_analyzelocal_analyze>
+
+            // <snippet_analyzelocal_display>
             //  Display image captions and confidence values.
             System.out.println("\nCaptions: ");
             for (ImageCaption caption : analysis.description().captions()) {
                 System.out.printf("\'%s\' with confidence %f\n", caption.text(), caption.confidence());
             }
+            // <snippet_analyzelocal_display>
+
 
             //  Display image category names and confidence values.
             System.out.println("\nCategories: ");
@@ -175,7 +188,6 @@ public class ComputerVisionQuickstarts
         }
     }
     //  END - Analyze a local image.
-    // </snippet_analyzelocal>
 
     // <snippet_analyzeurl>
     public static void AnalyzeRemoteImage(ComputerVisionClient compVisClient)
