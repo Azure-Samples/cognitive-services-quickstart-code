@@ -84,7 +84,7 @@ public class ComputerVisionQuickstarts
         featuresToExtractFromLocalImage.add(VisualFeatureTypes.ADULT);
         featuresToExtractFromLocalImage.add(VisualFeatureTypes.COLOR);
         featuresToExtractFromLocalImage.add(VisualFeatureTypes.IMAGE_TYPE);
-        // <snippet_analyzelocal_features>
+        // </snippet_analyzelocal_features>
 
         System.out.println("\nAnalyzing local image ...");
 
@@ -110,7 +110,7 @@ public class ComputerVisionQuickstarts
             for (ImageCaption caption : analysis.description().captions()) {
                 System.out.printf("\'%s\' with confidence %f\n", caption.text(), caption.confidence());
             }
-            // <snippet_analyzelocal_display>
+            // </snippet_analyzelocal_display>
 
 
             //  Display image category names and confidence values.
