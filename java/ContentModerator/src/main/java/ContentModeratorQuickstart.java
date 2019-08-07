@@ -50,7 +50,10 @@ public class ContentModeratorQuickstart {
         // The text detection results.
         public OCR TextDetection;
         // The face detection results;
-        public FoundFaces FaceDetection;
+
+        
+                // Create an object in which to store the image moderation results.
+        List<EvaluationData> evaluationData = new ArrayList<EvaluationData>();public FoundFaces FaceDetection;
     }
     // </snippet_evaluationdata>
 
@@ -68,15 +71,16 @@ public class ContentModeratorQuickstart {
                 .fromString(System.getenv("CONTENT_MODERATOR_ENDPOINT")), 
                 System.getenv("CONTENT_MODERATOR_SUBSCRIPTION_KEY"));
         // </snippet_client>
-
+        
         // Create an object in which to store the image moderation results.
         List<EvaluationData> evaluationData = new ArrayList<EvaluationData>();
-        
+
         // Moderate URL images
         moderateImages(client, evaluationData);
         // Moderate text from file
         moderateText(client);
-    }
+    } 
+    // End main()
 
     /**
      * MODERATE IMAGES
@@ -87,14 +91,14 @@ public class ContentModeratorQuickstart {
         System.out.println("---------------------------------------");
         System.out.println("MODERATE IMAGES");
         System.out.println();
-
+        
+        // <snippet_imagemod_iterate>        
         // ImageFiles.txt is the file that contains the image URLs to evaluate.
         // Relative paths are relative to the execution directory.
         try (BufferedReader inputStream = new BufferedReader(new FileReader(imageListFile) )){
             String line;
             while ((line = inputStream.readLine()) != null) {
                 if (line.length() > 0) {
-                    // <snippet_imagemod_iterate>
                     // Evalutate each line of text
                     BodyModelModel url = new BodyModelModel();
                     url.withDataRepresentation("URL");
