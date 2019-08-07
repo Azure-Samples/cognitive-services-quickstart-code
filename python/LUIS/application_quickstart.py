@@ -17,25 +17,32 @@
 # https://docs.microsoft.com/azure/cognitive-services/luis/luis-concept-entity-types
 # https://docs.microsoft.com/azure/cognitive-services/luis/luis-concept-utterance
 
+# <Dependencies>
 from azure.cognitiveservices.language.luis.authoring import LUISAuthoringClient
 from msrest.authentication import CognitiveServicesCredentials
 
 import datetime, json, os, time
+# </Dependencies>
 
-key_var_name = 'LUIS_SUBSCRIPTION_KEY'
+# <AuthorizationVariables>
+key_var_name = 'LUIS_AUTHORING_KEY'
 if not key_var_name in os.environ:
 	raise Exception('Please set/export the environment variable: {}'.format(key_var_name))
-subscription_key = os.environ[key_var_name]
+authoring_key = os.environ[key_var_name]
 
 region_var_name = 'LUIS_REGION'
 if not region_var_name in os.environ:
 	raise Exception('Please set/export the environment variable: {}'.format(region_var_name))
 region = os.environ[region_var_name]
 endpoint = "https://{}.api.cognitive.microsoft.com".format(region)
+# </AuthorizationVariables>
 
+# <Client>
 # Instantiate a LUIS client
-client = LUISAuthoringClient(endpoint, CognitiveServicesCredentials(subscription_key))
+client = LUISAuthoringClient(endpoint, CognitiveServicesCredentials(authoring_key))
+# </Client>
 
+# <createApp>
 def create_app():
 	# Create a new LUIS app
 	app_name    = "Contoso {}".format(datetime.datetime.now())
@@ -50,6 +57,7 @@ def create_app():
 
 	print("Created LUIS app {}\n    with ID {}".format(app_name, app_id))
 	return app_id, app_version
+# </createApp>
 
 # Declare entities:
 #
@@ -63,6 +71,7 @@ def create_app():
 #
 # Creating an entity (or other LUIS object) returns its ID.
 # We don't use IDs further in this script, so we don't keep the return value.
+# <addEntities>
 def add_entities(app_id, app_version):
 	client.model.add_entity(app_id, app_version, "Destination")
 
@@ -73,15 +82,20 @@ def add_entities(app_id, app_version):
 									  children=["Class", "Destination"])
 
 	print("Entities Destination, Class, Flight created.")
+# </addEntities>
 
 # Declare an intent, FindFlights, that recognizes a user's Flight request
 # Creating an intent returns its ID, which we don't need, so don't keep.
+# <addIntents>
 def add_intents(app_id, app_version):
 	client.model.add_intent(app_id, app_version, "FindFlights")
 
 	print("Intent FindFlights added.")
+# </addIntents>
+
 
 # Helper function for creating the utterance data structure.
+# <createUtterance>
 def create_utterance(intent, utterance, *labels):
     """Add an example LUIS utterance from utterance text and a list of
        labels.  Each label is a 2-tuple containing a label name and the
@@ -99,6 +113,7 @@ def create_utterance(intent, utterance, *labels):
 
     return dict(text=text, intent_name=intent,
                 entity_labels=[label(n, v) for (n, v) in labels])
+# </createUtterance>
 
 # Add example utterances for the intent.  Each utterance includes labels
 # that identify the entities within each utterance by index.  LUIS learns
@@ -108,6 +123,7 @@ def create_utterance(intent, utterance, *labels):
 # Labels: Flight -> "economy to Madrid" (composite of Destination and Class)
 #         Destination -> "Madrid"
 #         Class -> "economy"
+# <addUtterances>
 def add_utterances(app_id, app_version):
 	# Now define the utterances
 	utterances = [create_utterance("FindFlights", "find flights in economy to Madrid",
@@ -124,7 +140,9 @@ def add_utterances(app_id, app_version):
 	# for any number of intents in one call.
 	client.examples.batch(app_id, app_version, utterances)
 	print("{} example utterance(s) added.".format(len(utterances)))
+# </addUtterances>
 
+# <train>
 def train_app(app_id, app_version):
 	response = client.train.train_version(app_id, app_version)
 	waiting = True
@@ -135,10 +153,14 @@ def train_app(app_id, app_version):
 		if waiting:
 			print ("Waiting 10 seconds for training to complete...")
 			time.sleep(10)
+# </train>
 
+# <publish>
 def publish_app(app_id, app_version):
 	response = client.apps.publish(app_id, version_id=app_version, is_staging=True)
 	print("Application published. Endpoint URL: " + response.endpoint_url)
+# </publish>
+
 
 print("Creating application...")
 app_id, app_version = create_app()
