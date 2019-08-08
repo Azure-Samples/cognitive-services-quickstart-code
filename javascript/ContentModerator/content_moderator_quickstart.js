@@ -15,11 +15,11 @@ const ContentModerator = require("@azure/cognitiveservices-contentmoderator")
  * 
  * Prerequisites
  *  - A Content Moderator subscription at https://ms.portal.azure.com.
- *  - Install the content moderator and ms-rest-js libraries in the command line with:
+ *  - Install the content moderator library from the command line with:
  *      npm install @azure/cognitiveservices-contentmoderator
  *  - Set your environment variables (in Authenticate section) with your subscription keys and endpoint.
- *    The endpoint is in this format: https://{YOUR_REGION}.api.cognitive.microsoft.com/
- *  - Download and add the content_moderator_text_moderation.txt file in this quickstart's root folder to your local root folder.
+ *    The endpoint is in this format: https://{REGION OR CUSTOM NAME}.api.cognitive.microsoft.com/
+ *  - Download and add (or create a local one) the text_file.txt file in this quickstart's root folder to your local root folder.
  * 
  * How to run:
  *  - From the command line:
@@ -38,7 +38,7 @@ const IMAGE_MODERATION_URLS = ['https://moderatorsampleimages.blob.core.windows.
 
 // Text moderation variables
 const TEXT_MODERATION_FILE = 'text_file.txt'
-const outputFile = 'text_moderation_output.txt';
+const outputFile = 'text_moderation_output.txt'; // gets created at runtime
 
 /**
  * AUTHENTICATE
