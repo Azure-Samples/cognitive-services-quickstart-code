@@ -73,13 +73,18 @@ def create_app():
 # We don't use IDs further in this script, so we don't keep the return value.
 # <addEntities>
 def add_entities(app_id, app_version):
-	client.model.add_entity(app_id, app_version, "Destination")
 
-	client.model.add_hierarchical_entity(app_id, app_version, name="Class",
-										 children=["First", "Business", "Economy"])
+	locationEntityId = client.model.add_entity(app_id, app_version, "Location")
+
+	client.model.create_entity_role(app_id, app_version, locationEntityId, "Origin")
+	client.model.create_entity_role(app_id, app_version, locationEntityId, "Destination")
+
+	client.model.add_entity(app_id, app_version, name="Class")
+
+	client.model.add_prebuilt(app_id, app_version, prebuilt_extractor_names=["number", "datetimeV2", "geographyV2", "ordinal"])
 
 	client.model.add_composite_entity(app_id, app_version, name="Flight",
-									  children=["Class", "Destination"])
+									  children=["Location", "Class", "number", "datetimeV2", "geographyV2", "ordinal"])
 
 	print("Entities Destination, Class, Flight created.")
 # </addEntities>
@@ -157,7 +162,9 @@ def train_app(app_id, app_version):
 
 # <publish>
 def publish_app(app_id, app_version):
-	response = client.apps.publish(app_id, version_id=app_version, is_staging=True)
+	print("test")
+	response = client.apps.publish(app_id, app_version, is_staging=True)
+	print("Application published. response: " + response)
 	print("Application published. Endpoint URL: " + response.endpoint_url)
 # </publish>
 
