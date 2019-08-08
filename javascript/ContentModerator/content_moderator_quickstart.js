@@ -16,7 +16,6 @@ const ContentModerator = require("@azure/cognitiveservices-contentmoderator")
  * Prerequisites
  *  - A Content Moderator subscription at https://ms.portal.azure.com.
  *  - Install the content moderator and ms-rest-js libraries in the command line with:
- *      npm install @azure/ms-rest-js
  *      npm install @azure/cognitiveservices-contentmoderator
  *  - Set your environment variables (in Authenticate section) with your subscription keys and endpoint.
  *    The endpoint is in this format: https://{YOUR_REGION}.api.cognitive.microsoft.com/
