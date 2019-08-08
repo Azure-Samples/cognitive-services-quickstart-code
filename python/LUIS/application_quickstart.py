@@ -164,7 +164,7 @@ def train_app(app_id, app_version):
 	waiting = True
 	while waiting:
 		info = client.train.get_status(app_id, app_version)
-		print("training {}.".format(info))
+
 		# get_status returns a list of training statuses, one for each model. Loop through them and make sure all are done.
 		waiting = any(map(lambda x: 'Queued' == x.details.status or 'InProgress' == x.details.status, info))
 		if waiting:
