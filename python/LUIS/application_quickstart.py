@@ -75,27 +75,32 @@ def create_app():
 def add_entities(app_id, app_version):
 
 	locationEntityId = client.model.add_entity(app_id, app_version, "Location")
+	print("locationEntityId {} added.".format(locationEntityId)) 
 
-	client.model.create_entity_role(app_id, app_version, locationEntityId, "Origin")
-	client.model.create_entity_role(app_id, app_version, locationEntityId, "Destination")
+	originRoleId = client.model.create_entity_role(app_id, app_version, locationEntityId, "Origin")
+	print("originRoleId {} added.".format(originRoleId)) 
 
-	client.model.add_entity(app_id, app_version, name="Class")
+	destinationRoleId = client.model.create_entity_role(app_id, app_version, locationEntityId, "Destination")
+	print("destinationRoleId {} added.".format(destinationRoleId)) 
+
+	classEntityId = client.model.add_entity(app_id, app_version, name="Class")
+	print("classEntityId {} added.".format(classEntityId)) 
 
 	client.model.add_prebuilt(app_id, app_version, prebuilt_extractor_names=["number", "datetimeV2", "geographyV2", "ordinal"])
 
-	client.model.add_composite_entity(app_id, app_version, name="Flight",
+	compositeEntityId = client.model.add_composite_entity(app_id, app_version, name="Flight",
 									  children=["Location", "Class", "number", "datetimeV2", "geographyV2", "ordinal"])
+	print("compositeEntityId {} added.".format(compositeEntityId)) 
 
-	print("Entities Destination, Class, Flight created.")
 # </addEntities>
 
 # Declare an intent, FindFlights, that recognizes a user's Flight request
 # Creating an intent returns its ID, which we don't need, so don't keep.
 # <addIntents>
 def add_intents(app_id, app_version):
-	client.model.add_intent(app_id, app_version, "FindFlights")
+	intentId = client.model.add_intent(app_id, app_version, "FindFlights")
 
-	print("Intent FindFlights added.")
+	print("Intent FindFlights {} added.".format(intentId))
 # </addIntents>
 
 
@@ -133,12 +138,18 @@ def add_utterances(app_id, app_version):
 	# Now define the utterances
 	utterances = [create_utterance("FindFlights", "find flights in economy to Madrid",
 							("Flight", "economy to Madrid"),
-							("Destination", "Madrid"),
+							("Location", "Madrid"),
 							("Class", "economy")),
 
 				  create_utterance("FindFlights", "find flights to London in first class",
 							("Flight", "London in first class"),
-							("Destination", "London"),
+							("Location", "London"),
+							("Class", "first")),
+
+				  create_utterance("FindFlights", "find flights from seattle to London in first class",
+							("Flight", "flights from seattle to London in first class"),
+							("Location", "London"),
+							("Location", "Seattle"),
 							("Class", "first"))]
 
 	# Add the utterances in batch. You may add any number of example utterances
@@ -153,6 +164,7 @@ def train_app(app_id, app_version):
 	waiting = True
 	while waiting:
 		info = client.train.get_status(app_id, app_version)
+		print("training {}.".format(info))
 		# get_status returns a list of training statuses, one for each model. Loop through them and make sure all are done.
 		waiting = any(map(lambda x: 'Queued' == x.details.status or 'InProgress' == x.details.status, info))
 		if waiting:
@@ -162,9 +174,7 @@ def train_app(app_id, app_version):
 
 # <publish>
 def publish_app(app_id, app_version):
-	print("test")
 	response = client.apps.publish(app_id, app_version, is_staging=True)
-	print("Application published. response: " + response)
 	print("Application published. Endpoint URL: " + response.endpoint_url)
 # </publish>
 
