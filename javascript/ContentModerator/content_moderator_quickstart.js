@@ -24,6 +24,11 @@ const ContentModerator = require("@azure/cognitiveservices-contentmoderator")
  *  - Set your environment variables (in Authenticate section) with your subscription keys and endpoint.
  *    The endpoint is in this format: https://{REGION OR CUSTOM NAME}.api.cognitive.microsoft.com/
  *  - Download/add the text_file.txt file in this quickstart's root folder to your local root folder.
+ *  - Install the content moderator library from the command line with:
+ *      npm install @azure/cognitiveservices-contentmoderator
+ *  - Set your environment variables (in Authenticate section) with your subscription keys and endpoint.
+ *    The endpoint is in this format: https://{REGION OR CUSTOM NAME}.api.cognitive.microsoft.com/
+ *  - Download and add (or create a local one) the text_file.txt file in this quickstart's root folder to your local root folder.
  * 
  * How to run:
  *  - From the command line:
@@ -42,7 +47,7 @@ const IMAGE_MODERATION_URLS = ['https://moderatorsampleimages.blob.core.windows.
 
 // TEXT MODERATION variables
 const TEXT_MODERATION_FILE = 'text_file.txt'
-const outputFile = 'text_moderation_output.txt';
+const outputFile = 'text_moderation_output.txt'; // gets created at runtime
 
 // Human Reviews - Images variables
 // Set your callback endpoint in your environment variables with your own region. 
