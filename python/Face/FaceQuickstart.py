@@ -13,6 +13,7 @@ Examples include:
     - Detect Faces: detects faces in an image. Returns IDs for them.
     - Find Similar: finds a similar face in an image using ID from Detect Faces. Also displays the face ID and the bounding box (face location in image) of the found face.
     - Person Group: creates a person group and uses it to identify faces in other images. Person groups are good for grouping all different kinds images from one person into a group or to categorize a group of people (for example a family).
+    - Snapshot: copies a person group from one region to another, or from one Azure subscription to another.
 
 Prerequisites:
     - Python 3+
