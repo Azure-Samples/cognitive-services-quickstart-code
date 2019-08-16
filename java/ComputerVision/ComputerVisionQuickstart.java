@@ -16,32 +16,14 @@ public class ComputerVisionQuickstarts
     // <snippet_mainvars>
     public static void main(String[] args)
     {
-        /*  Configure the local environment:
-         *
-         *  Set the COMPUTER_VISION_SUBSCRIPTION_KEY environment variable on your
-         *  local machine using the appropriate method for your preferred command shell.
-         *
-         *  Note that environment variables cannot contain quotation marks, so the quotation marks
-         *  are included in the code below to stringify them.
-         *
-         *  Note that after setting these environment variables in your preferred command shell,
-         *  you will need to close and then re-open your command shell.
-         */
-        String azureComputerVisionApiKey = System.getenv("COMPUTER_VISION_SUBSCRIPTION_KEY");
-        //  END - Configure the local environment.
-
-        /*  Create an authenticated Computer Vision client:
-         *
-         *  Enter your Computer Vision endpoint URL.
-         *  It will have the format: https://westus.api.cognitive.microsoft.com 
-         *  You may need to change the first part ("westus") to match your subscription.
-         *  Then, create an authenticated client with the API key and the endpoint URL.
-         */
-        String endpointUrl = ("<your endpoint here>");
+        // Add your Computer Vision subscription key and endpoint to your environment variables.
+        // After setting, close and then re-open your command shell or project for the changes to take effect.
+        String subscriptionKey = System.getenv("COMPUTER_VISION_SUBSCRIPTION_KEY");
+        String endpoint = ("COMPUTER_VISION_ENDPOINT");
 // </snippet_mainvars>
 
         // <snippet_client>
-        ComputerVisionClient compVisClient = ComputerVisionManager.authenticate(azureComputerVisionApiKey).withEndpoint(endpointUrl);
+        ComputerVisionClient compVisClient = ComputerVisionManager.authenticate(subscriptionKey).withEndpoint(endpoint);
         //  END - Create an authenticated Computer Vision client.
         
         System.out.println("\nAzure Cognitive Services Computer Vision - Java Quickstart Sample");
