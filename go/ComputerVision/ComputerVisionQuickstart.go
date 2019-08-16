@@ -36,31 +36,22 @@ import (
 var computerVisionContext context.Context
 
 func main() {
-	/*	Configure the Computer Vision client by:
-	 *    1. Reading the Computer Vision API key and the Azure region from environment
-	 *       variables (COMPUTERVISION_API_KEY and COMPUTERVISION_REGION), which must
-	 *       be set prior to running this code. After setting the	environment variables,
-	 *       restart your command shell or your IDE.
-	 *	  2. Constructing the endpoint URL from the base URL and the Azure region.
-	 *	  3. Setting up the authorization on the client with the subscription key.
-	 *	  4. Getting the context.
-	 */
-  computerVisionAPIKey := os.Getenv("COMPUTERVISION_API_KEY")
-	if ("" == computerVisionAPIKey) {
-		log.Fatal("\n\nPlease set the COMPUTERVISION_API_KEY environment variable.\n" +
-							  "**Note that you might need to restart your shell or IDE.**\n")
+
+  // Add your Computer Vision subscription key and endpoint to your environment variables.
+  subscriptionKey := os.Getenv("COMPUTER_VISION_SUBSCRIPTION_KEY")
+	if (subscriptionKey == "") {
+		log.Fatal("\n\nSet the COMPUTER_VISION_SUBSCRIPTION_KEY environment variable.\n" +
+							  "**Restart your shell or IDE for changes to take effect.**\n")
 	}
 
-	computerVisionRegion := os.Getenv("COMPUTERVISION_REGION")
-	if ("" == computerVisionRegion) {
-		log.Fatal("\n\nPlease set the COMPUTERVISION_REGION environment variable.\n" +
-							  "**Note that you might need to restart your shell or IDE.**")
+	endpoint := os.Getenv("COMPUTER_VISION_ENDPOINT")
+	if ("" == endpoint) {
+		log.Fatal("\n\nSet the COMPUTER_VISION_ENDPOINT environment variable.\n" +
+							  "**Restart your shell or IDE for changes to take effect.**")
 	}
 
-	endpointURL := "https://" + computerVisionRegion + ".api.cognitive.microsoft.com"
-
-	computerVisionClient := computervision.New(endpointURL);
-	computerVisionClient.Authorizer = autorest.NewCognitiveServicesAuthorizer(computerVisionAPIKey)
+	computerVisionClient := computervision.New(endpoint);
+	computerVisionClient.Authorizer = autorest.NewCognitiveServicesAuthorizer(subscriptionKey)
 
 	computerVisionContext = context.Background()
 	//	END - Configure the Computer Vision client
