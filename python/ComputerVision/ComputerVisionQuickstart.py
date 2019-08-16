@@ -26,35 +26,24 @@ import time
 #     - Recognizing printed text with OCR
 
 
-#   Configure the Computer Vision client by:
-#     1. Reading the Computer Vision API key and the Azure region from environment
-#        variables (COMPUTERVISION_API_KEY and COMPUTERVISION_REGION), which must
-#        be set prior to running this code. After setting the	environment variables,
-#        restart your command shell or your IDE.
-#     2. Constructing the endpoint URL from the base URL and the Azure region.
-#     3. Setting up the authorization on the client with the subscription key.
-#     4. Getting the context.
-if 'COMPUTERVISION_API_KEY' in os.environ:
-    computervision_api_key = os.environ['COMPUTERVISION_API_KEY']
+# Add your Computer Vision subscription key and endpoint to your environment variables.
+if 'COMPUTER_VISION_SUBSCRIPTION_KEY' in os.environ:
+    subscription_key = os.environ['COMPUTER_VISION_SUBSCRIPTION_KEY']
 else:
-    print("\nPlease set the COMPUTERVISION_API_KEY environment variable.\n**Note that you might need to restart your shell or IDE.**")
+    print("\nSet the COMPUTER_VISION_SUBSCRIPTION_KEY environment variable.\n**Restart your shell or IDE for changes to take effect.**")
     sys.exit()
 
-if 'COMPUTERVISION_REGION' in os.environ:
-    computervision_region = os.environ['COMPUTERVISION_REGION']
+if 'COMPUTER_VISION_ENDPOINT' in os.environ:
+    endpoint = os.environ['COMPUTER_VISION_ENDPOINT']
 else:
-    print("\nPlease set the COMPUTERVISION_REGION environment variable.\n**Note that you might need to restart your shell or IDE.**")
+    print("\nSet the COMPUTER_VISION_ENDPOINT environment variable.\n**Restart your shell or IDE for changes to take effect.**")
     sys.exit()
 
-endpoint_url = "https://" + computervision_region + ".api.cognitive.microsoft.com"
-
-computervision_client = ComputerVisionClient(endpoint_url, CognitiveServicesCredentials(computervision_api_key))
-#	END - Configure the Computer Vision client
+computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(subscription_key))
 
 #   Get a local image for analysis
 local_image_path = "resources\\faces.jpg"
 print("\n\nLocal image path:\n" + os.getcwd() + local_image_path)
-#   END - Get a local image for analysis
 
 # Describe a local image by:
 #   1. Opening the binary file for reading.
