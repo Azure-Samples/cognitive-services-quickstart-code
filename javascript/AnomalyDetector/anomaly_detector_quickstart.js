@@ -7,7 +7,9 @@ const AnomalyDetector = require('@azure/cognitiveservices-anomalydetector')
 const msRest = require('@azure/ms-rest-js')
 
 /**
- * This quickstart will detect anomolies in spreadsheet data
+ * This quickstart will detect anomolies in spreadsheet (.csv) data in two different ways:
+ *  - Using the batch method (detects anomalies in entire series of data points)
+ *  - Using the stream method (detects the latest data point in a series)
  * 
  * Prerequisites:
  *   - Install the following modules: 
@@ -22,6 +24,9 @@ const msRest = require('@azure/ms-rest-js')
  *   API: https://westus2.dev.cognitive.microsoft.com/docs/services/AnomalyDetector/operations/post-timeseries-entire-detect
  */
 
+// Spreadsheet with 2 columns and n rows.
+let CSV_FILE = './request-data.csv'
+
 // Authenticate
 let key = process.env['ANOMALY_DETECTOR_SUBSCRIPTION_KEY']
 let endpoint = process.env['ANOMALY_DETECTOR_ENDPOINT']
@@ -29,10 +34,11 @@ let credentials = new msRest.ApiKeyCredentials({ inHeader: { 'Ocp-Apim-Subscript
 let anomalyDetectorClient = new AnomalyDetector.AnomalyDetectorClient(credentials, endpoint)
 
 async function main() {
-    // Spreadsheet with 2 columns and n rows.
-    let CSV_FILE = './request-data.csv'
 
-    // Points[] for the request body
+    /*
+    ANOMALY DETECTOR - BATCH
+    */
+    // Points array for the request body
     var points = []
 
     // Read the .csv file
@@ -43,15 +49,16 @@ async function main() {
         var row = line.split(",")
         // Create points from each row of data
         let point = {
-            timestamp: new Date(row[0]), 
+            timestamp: new Date(row[0]).toISOString(), 
             value: parseFloat(row[1])
         };
         points.push(point)
     }).on('close', function() {
+        console.log(points)
+
          // Create request body for API call
         let body = { series: points, granularity: 'daily' }
-
-        // Make the call to detect anomalies
+        // Make the call to detect anomalies in whole series of points
         anomalyDetectorClient.entireDetect(body)
             .then((response) => {
                 for (let item = 0; item < response.isAnomaly.length; item++) {
@@ -65,5 +72,46 @@ async function main() {
     }).on('error', function(err) {
         console.log(err);    
     });
+    /*
+    END - ANOMALY DETECTOR - BATCH
+    */
+
+    /*
+    ANOMALY DETECTOR - STREAM
+    */
+    // Points array for the request body
+    var points = []
+
+    await readline.createInterface({
+        input: fs.createReadStream(CSV_FILE),
+        terminal: false
+    }).on('line', function(line) {
+        var row = line.split(",")
+        // Create points from each row of data
+        let point = {
+            timestamp: new Date(row[0]).toISOString(), 
+            value: parseFloat(row[1])
+        };
+        points.push(point)
+    }).on('close', function() {
+        // Create request body for API call
+        let body = { series: points, granularity: 'daily' }
+        // Make the call to detect anomalies in the lastest point of a series
+        anomalyDetectorClient.lastDetect(body)
+            .then((response) => {
+                if (response.isAnomaly) {
+                    console.log("The latest point, in row " + points.length + ", is detected as an anomaly.");
+                } else {
+                    console.log("The latest point, in row " + points.length + ", is not detected as an anomaly.");
+                }
+            }).catch((error) => {
+                console.log(error)
+            })  
+    }).on('error', function(err) {
+        console.log(err);    
+    });
+    /*
+    END - ANOMALY DETECTOR - STREAM
+    */
 }
 main()
