@@ -10,10 +10,11 @@ from azure.cognitiveservices.vision.face.models import TrainingStatusType, Perso
 Face Quickstart
 
 Examples include:
-    - Detect Faces: detects faces in an image. Returns IDs for them.
-    - Find Similar: finds a similar face in an image using ID from Detect Faces. Also displays the face ID and the bounding box (face location in image) of the found face.
+    - Detect Faces: detects faces in an image. 
+    - Find Similar: finds a similar face in an image using ID from Detect Faces. 
     - Verify: compares two images to check if they are the same person or not.
-    - Person Group: creates a person group and uses it to identify faces in other images. Person groups are good for grouping all different kinds images from one person into a group or to categorize a group of people (for example a family).
+    - Person Group: creates a person group and uses it to identify faces in other images. 
+    - Large Person Group: similar to person group, but with different API calls to handle scale.
     - Snapshot: copies a person group from one region to another, or from one Azure subscription to another.
 
 Prerequisites:
@@ -21,6 +22,12 @@ Prerequisites:
     - Install Face SDK: pip install azure-cognitiveservices-vision-face
     - Sample images (download and include in your local root folder):
       https://github.com/Azure-Samples/cognitive-services-sample-data-files/tree/master/Face/images
+
+How to run:
+    - Run from command line or an IDE
+    - If the Person Group or Large Person Group examples get interrupted after creation, be sure to delete your created person group from the API, as you cannot create a new one with the same name. Use 'Person group - List' to check them all, and 'Person Group - Delete' to remove one. The examples have a delete function in them, but at the end.
+    Person Group API: https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395244 
+
 References: 
     - Documentation: https://docs.microsoft.com/en-us/azure/cognitive-services/face/
     - SDK: https://docs.microsoft.com/en-us/python/api/azure-cognitiveservices-vision-face/azure.cognitiveservices.vision.face?view=azure-python
@@ -32,11 +39,9 @@ References:
 # This key will serve all examples in this document.
 KEY = os.environ['FACE_SUBSCRIPTION_KEY']
 
-# Set the API endpoint for your Face subscription.
-# You may need to change the first part ("westus") to match your subscription
-ENDPOINT_STRING = "westus"
-
-ENDPOINT = 'https://{}.api.cognitive.microsoft.com/'.format(ENDPOINT_STRING)
+# Set the FACE_ENDPOINT environment variable with the endpoint from your Face service in Azure.
+# This endpoint will be used in all examples in this quickstart.
+ENDPOINT = os.environ['FACE_ENDPOINT']
 # </snippet_subvars>
 
 # Base url for the Verify operations
@@ -45,8 +50,10 @@ VERIFY_BASE_URL = 'https://csdx.blob.core.windows.net/resources/Face/Images/'
 # <snippet_persongroupvars>
 # This person group name is for our Person Group Operations and Snapshot Operations examples.
 # You can call list_person_groups to print a list of preexisting PersonGroups.
-# SOURCE_PERSON_GROUP_ID should be all lowercase and alphanumeric. For example, 'mygroupname'.
+# SOURCE_PERSON_GROUP_ID should be all lowercase and alphanumeric. For example, 'mygroupname' (dashes are OK).
 PERSON_GROUP_ID = 'my-unique-person-group'
+# Large Person Group ID, should be all lowercase and alphanumeric. For example, 'mygroupname' (dashes are OK).
+LARGE_PERSON_GROUP_ID = 'my-unique-large-person-group'
 # Used solely for the Snapshot example.
 TARGET_PERSON_GROUP_ID = str(uuid.uuid4()) # assign a random ID (or name it anything)
 # </snippet_persongroupvars>
@@ -57,7 +64,7 @@ Snapshot operations variables
 These are only used for the snapshot example. Set your environment variables accordingly.
 '''
 # Source endpoint, the region where the original person group is located. 
-SOURCE_ENDPOINT = 'https://{}.api.cognitive.microsoft.com/'.format(ENDPOINT_STRING)
+SOURCE_ENDPOINT = ENDPOINT
 # Source subscription key. Must match the source endpoint region.
 SOURCE_KEY = os.environ['FACE_SUBSCRIPTION_KEY']
 # Source subscription ID. Found in the Azure portal in the Overview page of your Face (or any) resource.
@@ -283,8 +290,9 @@ print()
 print('Training the person group...')
 # Train the person group
 face_client.person_group.train(PERSON_GROUP_ID)
-training_status = face_client.person_group.get_training_status(PERSON_GROUP_ID)
+
 while (True):
+    training_status = face_client.person_group.get_training_status(PERSON_GROUP_ID)
     print("Training status: {}.".format(training_status.status))
     print()
     if (training_status.status is TrainingStatusType.succeeded):
@@ -326,6 +334,86 @@ for person in results:
 END - Create/Train/Detect/Identify Person Group example
 '''
 
+'''
+Create/List/Delete Large Person Group
+Uses the same list used for creating a regular-sized person group.
+The operations are similar in structure as the Person Group example.
+'''
+print('-----------------------------')
+print() 
+print('LARGE PERSON GROUP OPERATIONS')
+print() 
+
+# Create empty Large Person Group. Person Group ID must be lower case, alphanumeric, and/or with '-', '_'.
+# The name and the ID can be either the same or different
+print('Large person group:', LARGE_PERSON_GROUP_ID)
+face_client.large_person_group.create(large_person_group_id=LARGE_PERSON_GROUP_ID, name=PERSON_GROUP_ID)
+
+# Define woman friend , by creating a large person group person
+woman = face_client.large_person_group_person.create(LARGE_PERSON_GROUP_ID, "Woman")
+# Define man friend
+man = face_client.large_person_group_person.create(LARGE_PERSON_GROUP_ID, "Man")
+# Define child friend
+child = face_client.large_person_group_person.create(LARGE_PERSON_GROUP_ID, "Child")
+
+'''
+Detect faces and register to correct person
+'''
+# Find all jpeg images of friends in working directory
+woman_images = [file for file in glob.glob('*.jpg') if file.startswith("woman")]
+man_images = [file for file in glob.glob('*.jpg') if file.startswith("man")]
+child_images = [file for file in glob.glob('*.jpg') if file.startswith("child")]
+
+# Add to a woman person
+for image in woman_images:
+    w = open(image, 'r+b')
+    face_client.large_person_group_person.add_face_from_stream(LARGE_PERSON_GROUP_ID, woman.person_id, w)
+
+# Add to a man person
+for image in man_images:
+    m = open(image, 'r+b')
+    face_client.large_person_group_person.add_face_from_stream(LARGE_PERSON_GROUP_ID, man.person_id, m)
+
+# Add to a child person
+for image in child_images:
+    ch = open(image, 'r+b')
+    face_client.large_person_group_person.add_face_from_stream(LARGE_PERSON_GROUP_ID, child.person_id, ch)
+
+''' 
+Train LargePersonGroup
+'''
+print()
+print('Training the large person group...')
+# Train the person group
+face_client.large_person_group.train(LARGE_PERSON_GROUP_ID)
+# Check training status
+while (True):
+    training_status = face_client.large_person_group.get_training_status(LARGE_PERSON_GROUP_ID)
+    print("Training status: {}.".format(training_status.status))
+    print()
+    if (training_status.status is TrainingStatusType.succeeded):
+        break
+    elif (training_status.status is TrainingStatusType.failed):
+        sys.exit('Training the large person group has failed.')
+    time.sleep(5)
+
+# Now that we have created and trained a large person group, we can retrieve data from it.
+# Returns a list[Person] of how many Persons were created/defined in the large person group.
+person_list_large = face_client.large_person_group_person.list(large_person_group_id=LARGE_PERSON_GROUP_ID, start='')
+
+print('Persisted Face IDs from {} large person group persons:'.format(len(person_list_large)))
+print()
+for person_large in person_list_large:
+    for persisted_face_id in person_large.persisted_face_ids:
+        print('The person {} has an image with ID: {}'.format(person_large.name, persisted_face_id))
+print()
+
+# After testing, delete the large person group, LargePersonGroupPersons also get deleted.
+face_client.large_person_group.delete(LARGE_PERSON_GROUP_ID)
+print("Deleted the large person group.")
+'''
+END - Create/List/Delete Large Person Group
+'''
 
 '''
 Snapshot Operations
