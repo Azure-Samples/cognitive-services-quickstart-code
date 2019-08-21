@@ -21,10 +21,13 @@ import (
 /*
 Face Quickstart
 
-Using URL images, these samples detect faces, find similar faces, and identify faces.
-The Person Group Operations sample uses local image files to create a person group with serveral person group persons and uses the group ID to identify faces in another local image. 
-Finally, we take a snapshot of the person group and copy it to a target region.
-All person groups (source and target region) created are deleted at the end of the sample.
+- Detect Faces 
+- Find Similar
+- Verify
+- Identify
+- Person Group Operations
+- Large Person Group Operations
+- Snapshot Operations
 
 Prerequisites:
     - Go 1.12+
@@ -32,11 +35,13 @@ Prerequisites:
     - Create an images folder in your root folder and copy images from here:
 	  https://github.com/Azure-Samples/cognitive-services-sample-data-files/tree/master/Face/images
 	- Set your keys and endpoints in the variables below, in the Authenticate section.
+How to run:
+	- 'go run GoQuickstart.go' from the command line or run from an IDE
 
 References: 
     - Documentation: https://docs.microsoft.com/en-us/azure/cognitive-services/face/
-    - SDK: https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v1.0/face
-    - API: https://docs.microsoft.com/en-us/azure/cognitive-services/face/apireference
+	- SDK: https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v1.0/face
+	- API: https://docs.microsoft.com/en-us/azure/cognitive-services/face/apireference
 */
 
 func main() {
@@ -44,35 +49,39 @@ func main() {
 	// A global context for use in all samples
 	faceContext := context.Background()
 
-/*
+	// Base url for the Verify example
+	const verifyBaseURL = "https://csdx.blob.core.windows.net/resources/Face/Images/"
+
+	/*
 	Authenticate
 	*/
-	// Add the "FACE_SUBSCRIPTION_KEY"s, "FACE_REGION"s, and the "AZURE_SUBSCRIPTION_ID" to your environment variables.
-	// Use the same region as you used for your Face subscription key resource in Azure, for example 'westus'.
+	// Add FACE_SUBSCRIPTION_KEY, FACE_ENDPOINT, and AZURE_SUBSCRIPTION_ID to your environment variables.
 	sourceSubscriptionKey := os.Getenv("FACE_SUBSCRIPTION_KEY")
+	// This key should be from another Face resource with a different region. 
+	// Used for the Snapshot example only.
 	targetSubscriptionKey := os.Getenv("FACE_SUBSCRIPTION_KEY2")
-	sourceRegion := os.Getenv("FACE_REGION")
-	// Use this region for targetEndpoint.
-	targetRegion := os.Getenv("FACE_REGION2")
-	// Replace this with the endpoint for your subscription key.
-	sourceEndpoint := "https://"+sourceRegion+".api.cognitive.microsoft.com"
-	// Use this endpoint for the snapshot sample only.
-	targetEndpoint := "https://"+targetRegion+".api.cognitive.microsoft.com"
-	// Get your subscription ID from any Face resource in Azure on the Overview page.
+
+	sourceEndpoint := os.Getenv("FACE_ENDPOINT")
+	// This should have a different region than your source endpoint. used only in Snapshot.
+	targetEndpoint := os.Getenv("FACE_ENDPOINT2")
+	// Get your subscription ID (different than the key) from any Face resource in Azure.
 	azureSubscriptionID, uuidErr := uuid.FromString(os.Getenv("AZURE_SUBSCRIPTION_ID"))
 	if uuidErr != nil { log.Fatal(uuidErr) }
 
-	// Client used for Detect Faces and Find Similar samples.
+	// Client used for Detect Faces, Find Similar, and Verify examples.
 	client := face.NewClient(sourceEndpoint)
 	client.Authorizer = autorest.NewCognitiveServicesAuthorizer(sourceSubscriptionKey)
+	/*
+	END - Authenticate
+	*/
 
 	/*
-	Detect faces in two images
-	This sample detects all faces in the images, then extracts some features from them.
+	DETECT FACES
+	This example detects all faces in the images, then extracts some features from them.
 	*/
 	fmt.Println()
 	fmt.Println("------------------------------")
-	fmt.Println("DETECTING FACES ... ")
+	fmt.Println("DETECT FACES")
 	// Detect a face in an image that contains a single face
 	singleFaceImageURL := "https://www.biography.com/.image/t_share/MTQ1MzAyNzYzOTgxNTE0NTEz/john-f-kennedy---mini-biography.jpg" 
 	singleImageURL := face.ImageURL { URL: &singleFaceImageURL } 
@@ -94,7 +103,7 @@ func main() {
 
 	// Display the detected face ID in the first single-face image.
 	// Face IDs are used for comparison to faces (their IDs) detected in other images.
-	fmt.Println("Detected face in (" + singleImageName + ") with ID: ")
+	fmt.Println("Detected face in (" + singleImageName + ") with ID(s): ")
 	fmt.Println(dFaces[0].FaceID)
 	fmt.Println()
 	// Find/display the age and gender attributes
@@ -137,9 +146,9 @@ func main() {
 	// Detect faces in the group image.
 	// Dereference *[]DetectedFace, in order to loop through it.
 	dFaces2 := *detectedGroupFaces.Value
-	// Make list of UUIDs
+	// Make slice list of UUIDs
 	faceIDs := make([]uuid.UUID, len(dFaces2))
-	fmt.Print("Detected faces in (" + groupImageName + ") with IDs:\n")
+	fmt.Print("Detected faces in (" + groupImageName + ") with ID(s):\n")
 	for i, face := range dFaces2 {
 		faceIDs[i] = *face.FaceID // Dereference DetectedFace.FaceID
 		fmt.Println(*face.FaceID)
@@ -149,12 +158,12 @@ func main() {
 	*/
 	
 	/*
-	Find a similar face
+	FIND SIMILAR
 	Finds a list of detected faces in group image, using the single-faced image as a query.
 	*/
 	fmt.Println()
 	fmt.Println("------------------------------")
-	fmt.Println("FINDING SIMILAR FACE ... ")
+	fmt.Println("FIND SIMILAR")
 
 	// Add single-faced image ID to struct
 	findSimilarBody := face.FindSimilarRequest { FaceID: firstImageFaceID, FaceIds: &faceIDs }
@@ -166,7 +175,7 @@ func main() {
 	simFaces := *listSimilarFaces.Value
 
 	// Print the details of the similar faces detected 
-	fmt.Print("Similar faces found in (" + groupImageName + "):\n")
+	fmt.Print("Similar faces found in (" + groupImageName + ") with ID(s):\n")
 	var sScore float64
 	for _, face := range simFaces {
 		fmt.Println(face.FaceID)
@@ -174,22 +183,117 @@ func main() {
 		sScore = *face.Confidence
 		fmt.Println("The similarity confidence: ", strconv.FormatFloat(sScore, 'f', 3, 64))
 	}
-
 	// NOTE: The similar face IDs of the single face image and the similar one found in the group image do not need to match, 
 	// they are only used for identification purposes in each image. 
 	// The similarity of the faces are matched using the Cognitive Services algorithm in FindSimilar().
 	/*
-	END - Find similar
+	END - Find Similar
 	*/
 
 	/*
-	Person Group operations
-	This sample creates a Person Group from local, single-faced images, then trains it. 
+	VERIFY
+	Compares one face with another to check if they are from the same person.
+	*/
+	fmt.Println()
+	fmt.Println("-----------------------------")
+	fmt.Println("VERIFY")
+	// Create a slice list to hold the target photos of the same person
+	targetImageFileNames :=  make([]string, 2)
+	targetImageFileNames[0] = "Family1-Dad1.jpg"
+	targetImageFileNames[1] = "Family1-Dad2.jpg"
+	
+	// The source photos contain this person, maybe
+	sourceImageFileName1 := "Family1-Dad3.jpg"
+	sourceImageFileName2 := "Family1-Son1.jpg"
+
+	// DetectWithURL parameters
+	urlSource1 := verifyBaseURL + sourceImageFileName1
+	urlSource2 := verifyBaseURL + sourceImageFileName2
+	url1 :=  face.ImageURL { URL: &urlSource1 }
+	url2 := face.ImageURL { URL: &urlSource2 }
+	returnFaceIDVerify := true
+	returnFaceLandmarksVerify := false
+	returnRecognitionModelVerify := false
+	// Recognition model 1 is used to rcognise a face, not extract features from it.
+	recognitionModel01 := face.Recognition01
+
+	// Detect face(s) from source image 1, returns a ListDetectedFace struct
+	detectedVerifyFaces1, dErrV1 := client.DetectWithURL(faceContext, url1 , &returnFaceIDVerify, &returnFaceLandmarksVerify, nil, recognitionModel01, &returnRecognitionModelVerify)
+	if dErrV1 != nil { log.Fatal(dErrV1) }
+	// Dereference the result, before getting the ID
+	dVFaceIds1 := *detectedVerifyFaces1.Value 
+	// Get ID of the detected face
+	imageSource1Id := dVFaceIds1[0].FaceID
+	fmt.Println(fmt.Sprintf("%v face(s) detected from image: %v", len(dVFaceIds1), sourceImageFileName1))
+
+	// Detect face(s) from source image 2, returns a ListDetectedFace struct
+	detectedVerifyFaces2, dErrV2 := client.DetectWithURL(faceContext, url2 , &returnFaceIDVerify, &returnFaceLandmarksVerify, nil, recognitionModel01, &returnRecognitionModelVerify)
+	if dErrV2 != nil { log.Fatal(dErrV2) }
+	// Dereference the result, before getting the ID
+	dVFaceIds2 := *detectedVerifyFaces2.Value 
+	// Get ID of the detected face
+	imageSource2Id := dVFaceIds2[0].FaceID
+	fmt.Println(fmt.Sprintf("%v face(s) detected from image: %v", len(dVFaceIds2), sourceImageFileName2))
+
+	// Detect faces from each target image url in list. DetectWithURL returns a VerifyResult with Value of list[DetectedFaces]
+	// Empty slice list for the target face IDs (UUIDs)
+	var detectedVerifyFacesIds [2]uuid.UUID
+	for i, imageFileName := range targetImageFileNames {
+		urlSource := verifyBaseURL + imageFileName 
+		url :=  face.ImageURL { URL: &urlSource}
+		detectedVerifyFaces, dErrV := client.DetectWithURL(faceContext, url, &returnFaceIDVerify, &returnFaceLandmarksVerify, nil, recognitionModel01, &returnRecognitionModelVerify)
+		if dErrV != nil { log.Fatal(dErrV) }
+		// Dereference *[]DetectedFace from Value in order to loop through it.
+		dVFaces := *detectedVerifyFaces.Value
+		// Add the returned face's face ID
+		detectedVerifyFacesIds[i] = *dVFaces[0].FaceID
+		fmt.Println(fmt.Sprintf("%v face(s) detected from image: %v", len(dVFaces), imageFileName))
+	}
+
+	// Verification example for faces of the same person. The higher the confidence, the more identical the faces in the images are.
+    // Since target faces are the same person, in this example, we can use the 1st ID in the detectedVerifyFacesIds list to compare.
+	verifyRequestBody1 := face.VerifyFaceToFaceRequest{ FaceID1: imageSource1Id, FaceID2: &detectedVerifyFacesIds[0] }
+	verifyResultSame, vErrSame := client.VerifyFaceToFace(faceContext, verifyRequestBody1)
+	if vErrSame != nil { log.Fatal(vErrSame) }
+	// Check if the faces are from the same person.
+	if (*verifyResultSame.IsIdentical) {
+		fmt.Println(fmt.Sprintf("Faces from %v & %v are of the same person, with confidence %v", 
+		sourceImageFileName1, targetImageFileNames[0], strconv.FormatFloat(*verifyResultSame.Confidence, 'f', 3, 64)))
+	} else {
+		// Low confidence means they are more differant than same.
+		fmt.Println(fmt.Sprintf("Faces from %v & %v are of a different person, with confidence %v", 
+		sourceImageFileName1, targetImageFileNames[0], strconv.FormatFloat(*verifyResultSame.Confidence, 'f', 3, 64)))
+	}
+
+	// Verification example for faces of different persons. 
+	// Since target faces are same person, in this example, we can use the 1st ID in the detectedVerifyFacesIds list to compare.
+	verifyRequestBody2 := face.VerifyFaceToFaceRequest{ FaceID1: imageSource2Id, FaceID2: &detectedVerifyFacesIds[0] }
+	verifyResultDiff, vErrDiff := client.VerifyFaceToFace(faceContext, verifyRequestBody2)
+	if vErrDiff != nil { log.Fatal(vErrDiff) }
+	// Check if the faces are from the same person.
+	if (*verifyResultDiff.IsIdentical) {
+		fmt.Println(fmt.Sprintf("Faces from %v & %v are of the same person, with confidence %v", 
+		sourceImageFileName2, targetImageFileNames[0], strconv.FormatFloat(*verifyResultDiff.Confidence, 'f', 3, 64)))
+	} else {
+		// Low confidence means they are more differant than same.
+		fmt.Println(fmt.Sprintf("Faces from %v & %v are of a different person, with confidence %v", 
+		sourceImageFileName2, targetImageFileNames[0], strconv.FormatFloat(*verifyResultDiff.Confidence, 'f', 3, 64)))
+	}
+	/*
+	END - Verify
+	*/
+
+	/*
+	PERSON GROUP OPERATIONS
+	This example creates a Person Group from local, single-faced images, then trains it. 
 	It can then be used to detect and identify faces in a group image.
+	A Person Group is made up of several Person Group Persons
+	The Person Groups Persons are Person objects, each of which contain Persisted Face objects
+	for each similar image of that person.
 	*/
 	fmt.Println()
 	fmt.Println("------------------------------")
-	fmt.Println("PERSON GROUP OPERATIONS...")
+	fmt.Println("PERSON GROUP OPERATIONS")
 
 	// Get working directory
 	root, rootErr := os.Getwd()
@@ -250,9 +354,9 @@ func main() {
 	// Collect the local images for each person, add them to their own person group person
 	images, fErr := ioutil.ReadDir(imagePathRoot)
 	if fErr != nil { log.Fatal(fErr)}
-	for _, f := range images {
+    for _, f := range images {
 		path:= (imagePathRoot+f.Name())
-	if strings.HasPrefix(f.Name(), "w") {
+        if strings.HasPrefix(f.Name(), "w") {
 			var wfile io.ReadCloser
 			wfile, err:= os.Open(path)
 			if err != nil { log.Fatal(err) }
@@ -288,13 +392,135 @@ func main() {
 			break
 		}
 		time.Sleep(2)
-	    }
+	}
 	/*
 	END - Person Group operations
 	*/
 
 	/*
-	Identify a face
+	LARGE PERSON GROUP OPERATIONS
+	The same in structure as the regular-sized person group but with different API calls,
+	able to handle scale. To distingish from the person group example, "L" (large) is appended to
+	similarly named variables. Two clients are created in this example.
+	Once a large person group is created and trained, it can be used to detect or 
+	identify faces in other images.
+	*/
+	fmt.Println()
+	fmt.Println("------------------------------")
+	fmt.Println("LARGE PERSON GROUP OPERATIONS")
+
+	// Get working directory
+	rootL, rootErrL := os.Getwd()
+	if rootErrL != nil { log.Fatal(rootErrL) }
+
+	// Full path to images folder
+	imagePathRootL := path.Join(rootL+"\\images\\")
+
+	// Authenticate - Need a special person group client for your person group
+	personGroupClientL := face.NewLargePersonGroupClient(sourceEndpoint)
+	personGroupClientL.Authorizer = autorest.NewCognitiveServicesAuthorizer(sourceSubscriptionKey)
+
+	// Create the large Person Group
+	// Create an empty large Person Group. 
+	// Large Person Group ID must be lower case, alphanumeric, and/or with '-', '_'.
+	largePersonGroupID := "unique-large-person-group"
+	fmt.Println("Large person group ID: " + largePersonGroupID)
+
+	// Prepare metadata for large person group creation
+	metadataL := face.MetaDataContract { Name: &largePersonGroupID }
+	// Create the large person group
+	personGroupClientL.Create(faceContext, largePersonGroupID, metadataL)
+	
+	// Authenticate - Need a special person group person client for your person group person
+	personGroupPersonClientL := face.NewLargePersonGroupPersonClient(sourceEndpoint)
+	personGroupPersonClientL.Authorizer = autorest.NewCognitiveServicesAuthorizer(sourceSubscriptionKey)
+
+	// Create each person group person for each group of images (woman, man, child)
+	// Define woman friend
+	wL := "Woman"
+	nameWomanL := face.NameAndUserDataContract { Name: &wL }
+	// Returns a Person type
+	womanPersonL, wErrL := personGroupPersonClientL.Create(faceContext, largePersonGroupID, nameWomanL)
+	if wErrL != nil { log.Fatal(wErrL) }
+	fmt.Print("Woman person ID: ")
+	fmt.Println(womanPersonL.PersonID)
+	// Define man friend
+	mL := "Man"
+	nameManL := face.NameAndUserDataContract { Name: &mL }
+	// Returns a Person type
+	manPersonL, mErrL := personGroupPersonClientL.Create(faceContext, largePersonGroupID, nameManL)
+	if mErrL != nil { log.Fatal(mErrL) }
+	fmt.Print("Man person ID: ")
+	fmt.Println(manPersonL.PersonID)
+	// Define child friend
+	chL := "Child"
+	nameChildL := face.NameAndUserDataContract { Name: &chL }
+	// Returns a Person type
+	childPersonL, chErrL := personGroupPersonClientL.Create(faceContext, largePersonGroupID, nameChildL)
+	if chErrL != nil { log.Fatal(chErrL) }
+	fmt.Print("Child person ID: ")
+	fmt.Println(childPersonL.PersonID)
+
+	// Detect faces and register to correct person
+	// Lists to hold all their person images
+	womanImagesL := list.New()
+	manImagesL := list.New()
+	childImagesL := list.New()
+	
+	// Collect the local images for each person, add them to their own person group person
+	imagesL, fErrL := ioutil.ReadDir(imagePathRootL)
+	if fErrL != nil { log.Fatal(fErrL)}
+    for _, f := range imagesL {
+		path:= (imagePathRootL+f.Name())
+        if strings.HasPrefix(f.Name(), "w") {
+			var wfileL io.ReadCloser
+			wfileL, errL:= os.Open(path)
+			if errL != nil { log.Fatal(errL) }
+			womanImagesL.PushBack(wfileL)
+			personGroupPersonClientL.AddFaceFromStream(faceContext, largePersonGroupID, *womanPersonL.PersonID, wfileL, "", nil)
+		}
+		if strings.HasPrefix(f.Name(), "m") {
+			var mfileL io.ReadCloser
+			mfileL, errL:= os.Open(path)
+			if errL != nil { log.Fatal(errL) }
+			manImagesL.PushBack(mfileL)
+			personGroupPersonClientL.AddFaceFromStream(faceContext, largePersonGroupID, *manPersonL.PersonID, mfileL, "", nil)
+		}
+		if strings.HasPrefix(f.Name(), "ch") {
+			var chfileL io.ReadCloser
+			chfileL, errL:= os.Open(path)
+			if errL != nil { log.Fatal(errL) }
+			childImagesL.PushBack(chfileL)
+			personGroupPersonClientL.AddFaceFromStream(faceContext, largePersonGroupID, *childPersonL.PersonID, chfileL, "", nil)
+		}
+	}
+	
+	// Train the person group
+	personGroupClientL.Train(faceContext, largePersonGroupID)
+
+	// Wait for it to succeed in training
+	for {
+		trainingStatusL, tErrL := personGroupClientL.GetTrainingStatus(faceContext, largePersonGroupID)
+		if tErrL != nil { log.Fatal(tErrL) }
+		
+		if trainingStatusL.Status == "succeeded" {
+			fmt.Println("Training status:", trainingStatusL.Status)
+			break
+		}
+		time.Sleep(2)
+	}
+
+	// Since testing, delete the large person group so you can run multiple times.
+	// A large person group of the same exact name is not allowed to be created.
+	personGroupClientL.Delete(faceContext, largePersonGroupID)
+	fmt.Println()
+	fmt.Println("Deleted large person group : " + largePersonGroupID)
+	/*
+	END - LARGE PERSON GROUP OPERATIONS
+	*/
+
+	/*
+	IDENTIFY
 	Uses an existing person group to identify a face in an image
 	*/
 	fmt.Println()
@@ -335,18 +561,18 @@ func main() {
 		fmt.Println(" is identified in " + personGroupTestImageName + ".")
 	}
 	/*
-	END - Identify a face
+	END - Identify
 	*/
 
 	/*
-	Take a snapshot
-	This sample moves a person group from one region to another. The person group created in Person Group Operations will be used.
+	SNAPSHOT OPERATIONS
+	This example moves a person group from one region to another. The person group created in Person Group Operations will be used.
 	You must have 2 Face resources created in Azure with 2 different regions, for example 'westus' and 'eastus'. Any region will work.
 	Snapshot requires its own special authenticated client.
 	*/
 	fmt.Println()
 	fmt.Println("------------------------------")
-	fmt.Println("TAKING A SNAPSHOT...")
+	fmt.Println("SNAPSHOT OPERATIONS")
 
 	// Create a client from your source region, where your person group exists. Use for taking the snapshot.
 	snapshotSourceClient := face.NewSnapshotClient(sourceEndpoint)
@@ -417,12 +643,12 @@ func main() {
 
 	fmt.Println("Applying snapshot... Done")
 	/*
-	END - Take a snapshot
+	END - Snapshot
 	*/
 
 	/*
-	Delete Person Group
-	Delete once sample is complete. This deletes a person group, since we are only testing. 
+	DELETE PERSON GROUP
+	Delete once example is complete. This deletes a person group, since we are only testing. 
 	If not deleted, rerunning this sample will recreate a Person Group with the same name, which will cause an error.
 	*/	
 	fmt.Println()
