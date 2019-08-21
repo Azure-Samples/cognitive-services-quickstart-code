@@ -62,7 +62,7 @@ func main() {
 	targetSubscriptionKey := os.Getenv("FACE_SUBSCRIPTION_KEY2")
 
 	sourceEndpoint := os.Getenv("FACE_ENDPOINT")
-	// This should have a different region than your source endpoint. used only in Snapshot.
+	// This should have a different region than your source endpoint. Used only in Snapshot.
 	targetEndpoint := os.Getenv("FACE_ENDPOINT2")
 	// Get your subscription ID (different than the key) from any Face resource in Azure.
 	azureSubscriptionID, uuidErr := uuid.FromString(os.Getenv("AZURE_SUBSCRIPTION_ID"))
