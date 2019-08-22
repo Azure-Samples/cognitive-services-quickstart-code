@@ -21,9 +21,9 @@ var Face = require("@azure/cognitiveservices-face");
 */
 // Set the FACE_SUBSCRIPTION_KEY in your environment variables with your subscription key as a value.
 let credentials = new msRest.ApiKeyCredentials({ inHeader: { 'Ocp-Apim-Subscription-Key': process.env['FACE_SUBSCRIPTION_KEY'] } });
-// Set FACE_REGION in your environment variables with its endpoint region (such as 'westus') as a value.
-let client = new Face.FaceClient(credentials, `https://${process.env['FACE_REGION']}.api.cognitive.microsoft.com/`);
-
+// Set FACE_ENDPOINT in your environment variables with your endpoint from your Face subscription.
+let client = new Face.FaceClient(credentials, process.env['FACE_ENDPOINT'])
+                                 
 async function main() {
     /**
     * Detect face in the source image, then in the target image
