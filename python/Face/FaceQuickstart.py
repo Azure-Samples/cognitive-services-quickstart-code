@@ -30,7 +30,7 @@ References:
 KEY = os.environ['FACE_SUBSCRIPTION_KEY']
 
 # Set the API endpoint for your Face subscription.
-ENDPOINT= os.environ["ENDPOINT"]
+ENDPOINT= os.environ["FACE_ENDPOINT"]
 # </snippet_subvars>
 
 # <snippet_persongroupvars>
@@ -56,7 +56,7 @@ SOURCE_ID = os.environ['AZURE_SUBSCRIPTION_ID']
 # Person group name that will get created in this quickstart's Person Group Operations example.
 SOURCE_PERSON_GROUP_ID = PERSON_GROUP_ID
 # Target endpoint. A separate Face resource in a different region (or a different subscription with same region).
-TARGET_ENDPOINT = os.environ["ENDPOINT2"]
+TARGET_ENDPOINT = os.environ["FACE_ENDPOINT2"]
 # Target subscription key. Must match the target endpoint region/subscription.
 TARGET_KEY = os.environ['FACE_SUBSCRIPTION_KEY2']
 # Target subscription ID. It will be the same as the source ID if created Face resources from the same subscription (but moving from region to region). If they are differnt subscriptions, add the other target ID here.
