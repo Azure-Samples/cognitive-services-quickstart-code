@@ -15,6 +15,8 @@ Examples include:
     - Verify: compares two images to check if they are the same person or not.
     - Person Group: creates a person group and uses it to identify faces in other images. 
     - Large Person Group: similar to person group, but with different API calls to handle scale.
+    - Face List: creates a list of single-faced images, then gets data from list.
+    - Large Face List: creates a large list for single-faced images, trains it, then gets data.
     - Snapshot: copies a person group from one region to another, or from one Azure subscription to another.
 
 Prerequisites:
@@ -25,8 +27,12 @@ Prerequisites:
 
 How to run:
     - Run from command line or an IDE
-    - If the Person Group or Large Person Group examples get interrupted after creation, be sure to delete your created person group from the API, as you cannot create a new one with the same name. Use 'Person group - List' to check them all, and 'Person Group - Delete' to remove one. The examples have a delete function in them, but at the end.
-    Person Group API: https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395244 
+    - If the Person Group or Large Person Group (or Face List / Large Face List) examples get 
+      interrupted after creation, be sure to delete your created person group (lists) from the API, 
+      as you cannot create a new one with the same name. Use 'Person group - List' to check them all, 
+      and 'Person Group - Delete' to remove one. The examples have a delete function in them, but at the end.
+      Person Group API: https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395244 
+      Face List API: https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039524d
 
 References: 
     - Documentation: https://docs.microsoft.com/en-us/azure/cognitive-services/face/
@@ -44,17 +50,15 @@ KEY = os.environ['FACE_SUBSCRIPTION_KEY']
 ENDPOINT = os.environ['FACE_ENDPOINT']
 # </snippet_subvars>
 
-# Base url for the Verify operations
-VERIFY_BASE_URL = 'https://csdx.blob.core.windows.net/resources/Face/Images/'
+# Base url for the Verify and Facelist/Large Facelist operations
+IMAGE_BASE_URL = 'https://csdx.blob.core.windows.net/resources/Face/Images/'
 
 # <snippet_persongroupvars>
-# This person group name is for our Person Group Operations and Snapshot Operations examples.
+# Used in the Person Group Operations,  Snapshot Operations, and Delete Person Group examples.
 # You can call list_person_groups to print a list of preexisting PersonGroups.
 # SOURCE_PERSON_GROUP_ID should be all lowercase and alphanumeric. For example, 'mygroupname' (dashes are OK).
 PERSON_GROUP_ID = 'my-unique-person-group'
-# Large Person Group ID, should be all lowercase and alphanumeric. For example, 'mygroupname' (dashes are OK).
-LARGE_PERSON_GROUP_ID = 'my-unique-large-person-group'
-# Used solely for the Snapshot example.
+# Used for the Snapshot and Delete Person Group examples.
 TARGET_PERSON_GROUP_ID = str(uuid.uuid4()) # assign a random ID (or name it anything)
 # </snippet_persongroupvars>
 
@@ -63,7 +67,7 @@ TARGET_PERSON_GROUP_ID = str(uuid.uuid4()) # assign a random ID (or name it anyt
 Snapshot operations variables
 These are only used for the snapshot example. Set your environment variables accordingly.
 '''
-# Source endpoint, the region where the original person group is located. 
+# Source endpoint, the location/subscription where the original person group is located. 
 SOURCE_ENDPOINT = ENDPOINT
 # Source subscription key. Must match the source endpoint region.
 SOURCE_KEY = os.environ['FACE_SUBSCRIPTION_KEY']
@@ -71,9 +75,8 @@ SOURCE_KEY = os.environ['FACE_SUBSCRIPTION_KEY']
 SOURCE_ID = os.environ['AZURE_SUBSCRIPTION_ID']
 # Person group name that will get created in this quickstart's Person Group Operations example.
 SOURCE_PERSON_GROUP_ID = PERSON_GROUP_ID
-# Target endpoint. You may need to change the first part ("westus2") to match your subscription
-TARGET_ENDPOINT_STRING = "westus2"
-TARGET_ENDPOINT = 'https://{}.api.cognitive.microsoft.com/'.format(TARGET_ENDPOINT_STRING)
+# Target endpoint. This is your 2nd Face subscription.
+TARGET_ENDPOINT = os.environ['FACE_ENDPOINT2']
 # Target subscription key. Must match the target endpoint region.
 TARGET_KEY = os.environ['FACE_SUBSCRIPTION_KEY2']
 # Target subscription ID. It will be the same as the source ID if created Face resources from the same subscription (but moving from region to region). If they are differnt subscriptions, add the other target ID here.
@@ -191,13 +194,13 @@ source_image_file_name1 = 'Family1-Dad3.jpg'
 source_image_file_name2 = 'Family1-Son1.jpg'
 
 # Detect face(s) from source image 1, returns a list[DetectedFaces]
-detected_faces1 = face_client.face.detect_with_url(VERIFY_BASE_URL + source_image_file_name1)
+detected_faces1 = face_client.face.detect_with_url(IMAGE_BASE_URL + source_image_file_name1)
 # Add the returned face's face ID
 source_image1_id = detected_faces1[0].face_id
 print('{} face(s) detected from image {}.'.format(len(detected_faces1), source_image_file_name1))
 
 # Detect face(s) from source image 2, returns a list[DetectedFaces]
-detected_faces2 = face_client.face.detect_with_url(VERIFY_BASE_URL + source_image_file_name2)
+detected_faces2 = face_client.face.detect_with_url(IMAGE_BASE_URL + source_image_file_name2)
 # Add the returned face's face ID
 source_image2_id = detected_faces2[0].face_id
 print('{} face(s) detected from image {}.'.format(len(detected_faces2), source_image_file_name2))
@@ -206,7 +209,7 @@ print('{} face(s) detected from image {}.'.format(len(detected_faces2), source_i
 detected_faces_ids = []
 # Detect faces from target image url list, returns a list[DetectedFaces]
 for image_file_name in target_image_file_names:
-    detected_faces = face_client.face.detect_with_url(VERIFY_BASE_URL + image_file_name)
+    detected_faces = face_client.face.detect_with_url(IMAGE_BASE_URL + image_file_name)
     # Add the returned face's face ID
     detected_faces_ids.append(detected_faces[0].face_id)
     print('{} face(s) detected from image {}.'.format(len(detected_faces), image_file_name))
@@ -344,10 +347,13 @@ print()
 print('LARGE PERSON GROUP OPERATIONS')
 print() 
 
+# Large Person Group ID, should be all lowercase and alphanumeric. For example, 'mygroupname' (dashes are OK).
+LARGE_PERSON_GROUP_ID = 'my-unique-large-person-group'
+
 # Create empty Large Person Group. Person Group ID must be lower case, alphanumeric, and/or with '-', '_'.
 # The name and the ID can be either the same or different
 print('Large person group:', LARGE_PERSON_GROUP_ID)
-face_client.large_person_group.create(large_person_group_id=LARGE_PERSON_GROUP_ID, name=PERSON_GROUP_ID)
+face_client.large_person_group.create(large_person_group_id=LARGE_PERSON_GROUP_ID, name=LARGE_PERSON_GROUP_ID)
 
 # Define woman friend , by creating a large person group person
 woman = face_client.large_person_group_person.create(LARGE_PERSON_GROUP_ID, "Woman")
@@ -413,6 +419,127 @@ face_client.large_person_group.delete(LARGE_PERSON_GROUP_ID)
 print("Deleted the large person group.")
 '''
 END - Create/List/Delete Large Person Group
+'''
+
+'''
+FACELIST
+This example adds single-faced images from URL to a list, then gets data from the list.
+'''
+print('-----------------------------')
+print() 
+print('FACELIST OPERATIONS')
+print() 
+
+# Create our list of URL images 
+image_file_names = [
+    "Family1-Dad1.jpg",
+    "Family1-Daughter1.jpg",
+    "Family1-Mom1.jpg",
+    "Family1-Son1.jpg",
+    "Family2-Lady1.jpg",
+    "Family2-Man1.jpg",
+    "Family3-Lady1.jpg",
+    "Family3-Man1.jpg"
+]
+
+# Create an empty face list with an assigned ID.
+face_list_id = "my-face-list"
+print("Creating face list: {}...".format(face_list_id))
+print()
+face_client.face_list.create(face_list_id=face_list_id, name=face_list_id)
+
+# Add each face in our array to the facelist
+for image_file_name in image_file_names:
+    face_client.face_list.add_face_from_url(
+        face_list_id=face_list_id,
+        url=IMAGE_BASE_URL + image_file_name,
+        user_data=image_file_name
+    )
+
+# Get persisted faces from the face list.
+the_face_list = face_client.face_list.get(face_list_id)
+if not the_face_list :
+    raise Exception("No persisted face in face list {}.".format(face_list_id))
+
+print('Persisted face ids of images in face list:')
+print()
+for persisted_face in the_face_list.persisted_faces:
+    print(persisted_face.persisted_face_id)
+
+# Delete the face list, so you can retest (recreate) the list with same name.
+face_client.face_list.delete(face_list_id=face_list_id)
+print()
+print("Deleted the face list: {}.\n".format(face_list_id))
+
+'''
+END - FACELIST
+'''
+
+'''
+LARGE FACELIST
+This example adds single-faced images from URL to a large-capacity list, then gets data from the list.
+This list could handle up to 1 million images.
+'''
+print('-----------------------------')
+print() 
+print('LARGE FACELIST OPERATIONS')
+print() 
+
+# Create our list of URL images 
+image_file_names_large = [
+    "Family1-Dad1.jpg",
+    "Family1-Daughter1.jpg",
+    "Family1-Mom1.jpg",
+    "Family1-Son1.jpg",
+    "Family2-Lady1.jpg",
+    "Family2-Man1.jpg",
+    "Family3-Lady1.jpg",
+    "Family3-Man1.jpg"
+]
+
+# Create an empty face list with an assigned ID.
+large_face_list_id = "my-large-face-list"
+print("Creating large face list: {}...".format(large_face_list_id))
+print()
+face_client.large_face_list.create(large_face_list_id=large_face_list_id, name=large_face_list_id)
+
+# Add each face in our array to the large face list
+# Returns a PersistedFace
+for image_file_name in image_file_names_large:
+    face_client.large_face_list.add_face_from_url(
+        large_face_list_id=large_face_list_id,
+        url=IMAGE_BASE_URL + image_file_name,
+        user_data=image_file_name
+    )
+
+# Train the large list. Must train before getting any data from the list.
+# Training is not required of the regular-sized facelist.
+print("Train large face list {}".format(large_face_list_id))
+print()
+face_client.large_face_list.train(large_face_list_id=large_face_list_id)
+
+# Get training status
+training_status_list = face_client.large_face_list.get_training_status(large_face_list_id=large_face_list_id)
+if training_status_list.status == TrainingStatusType.failed:
+    raise Exception("Training failed with message {}.".format(training_status_list.message))
+
+# Returns a list[PersistedFace]. Can retrieve data from each face. 
+large_face_list_faces = face_client.large_face_list.list_faces(large_face_list_id)
+if not large_face_list_faces :
+    raise Exception("No persisted face in face list {}.".format(large_face_list_id))
+
+print('Face ids of images in large face list:')
+print()
+for large_face in large_face_list_faces:
+    print(large_face.persisted_face_id)
+
+# Delete the large face list, so you can retest (recreate) the list with same name.
+face_client.large_face_list.delete(large_face_list_id=large_face_list_id)
+print()
+print("Deleted the large face list: {}.\n".format(large_face_list_id))
+
+'''
+END - LARGE FACELIST
 '''
 
 '''
@@ -483,6 +610,7 @@ async def run():
     # Snapshot.apply is not asynchronous.
     # For information about Snapshot.apply see:
     # https://github.com/Azure/azure-sdk-for-python/blob/master/azure-cognitiveservices-vision-face/azure/cognitiveservices/vision/face/operations/snapshot_operations.py#L366
+
     apply_snapshot_result = face_client_target.snapshot.apply(
         snapshot_id=snapshot_id,
         # Generate a new UUID for the target person group ID.
