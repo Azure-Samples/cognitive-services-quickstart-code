@@ -36,31 +36,24 @@ import (
 var computerVisionContext context.Context
 
 func main() {
-	/*	Configure the Computer Vision client by:
-	 *    1. Reading the Computer Vision API key and the Azure region from environment
-	 *       variables (COMPUTERVISION_API_KEY and COMPUTERVISION_REGION), which must
-	 *       be set prior to running this code. After setting the	environment variables,
-	 *       restart your command shell or your IDE.
-	 *	  2. Constructing the endpoint URL from the base URL and the Azure region.
-	 *	  3. Setting up the authorization on the client with the subscription key.
-	 *	  4. Getting the context.
+	/*    Prerequisites for the Computer Vision client:
+	 *    Set environment variables for COMPUTER_VISION_SUBSCRIPTION_KEY and COMPUTER_VISION_ENDPOINT,
+	 *    then restart your command shell or your IDE for changes to take effect.
 	 */
-  computerVisionAPIKey := os.Getenv("COMPUTERVISION_API_KEY")
-	if ("" == computerVisionAPIKey) {
-		log.Fatal("\n\nPlease set the COMPUTERVISION_API_KEY environment variable.\n" +
+  computerVisionKey := os.Getenv("COMPUTER_VISION_SUBSCRIPTION_KEY")
+	if ("" == computerVisionKey) {
+		log.Fatal("\n\nPlease set a COMPUTERVISION_SUBSCRIPTION_KEY environment variable.\n" +
 							  "**Note that you might need to restart your shell or IDE.**\n")
 	}
 
-	computerVisionRegion := os.Getenv("COMPUTERVISION_REGION")
+	endpointURL := os.Getenv("COMPUTER_VISION_ENDPOINT")
 	if ("" == computerVisionRegion) {
-		log.Fatal("\n\nPlease set the COMPUTERVISION_REGION environment variable.\n" +
+		log.Fatal("\n\nPlease set a COMPUTER_VISION_ENDPOINT environment variable.\n" +
 							  "**Note that you might need to restart your shell or IDE.**")
 	}
 
-	endpointURL := "https://" + computerVisionRegion + ".api.cognitive.microsoft.com"
-
 	computerVisionClient := computervision.New(endpointURL);
-	computerVisionClient.Authorizer = autorest.NewCognitiveServicesAuthorizer(computerVisionAPIKey)
+	computerVisionClient.Authorizer = autorest.NewCognitiveServicesAuthorizer(computerVisionKey)
 
 	computerVisionContext = context.Background()
 	//	END - Configure the Computer Vision client
