@@ -12,16 +12,19 @@ Face Quickstart
 Examples include:
     - Detect Faces: detects faces in an image. Returns IDs for them.
     - Find Similar: finds a similar face in an image using ID from Detect Faces. Also displays the face ID and the bounding box (face location in image) of the found face.
+    - Verify: compares two images to check if they are the same person or not.
     - Person Group: creates a person group and uses it to identify faces in other images. Person groups are good for grouping all different kinds images from one person into a group or to categorize a group of people (for example a family).
+    - Snapshot: copies a person group from one region to another, or from one Azure subscription to another.
 
 Prerequisites:
     - Python 3+
     - Install Face SDK: pip install azure-cognitiveservices-vision-face
-    - Sample images:
+    - Sample images (download and include in your local root folder):
       https://github.com/Azure-Samples/cognitive-services-sample-data-files/tree/master/Face/images
 References: 
     - Documentation: https://docs.microsoft.com/en-us/azure/cognitive-services/face/
     - SDK: https://docs.microsoft.com/en-us/python/api/azure-cognitiveservices-vision-face/azure.cognitiveservices.vision.face?view=azure-python
+    - All Face APIs: https://docs.microsoft.com/en-us/azure/cognitive-services/face/APIReference
 '''
 
 # <snippet_subvars>
@@ -30,11 +33,11 @@ References:
 KEY = os.environ['FACE_SUBSCRIPTION_KEY']
 
 # Set the API endpoint for your Face subscription.
-# You may need to change the first part ("westus") to match your subscription
-ENDPOINT_STRING = "westus"
-
-ENDPOINT = 'https://{}.api.cognitive.microsoft.com/'.format(ENDPOINT_STRING)
+ENDPOINT= os.environ["FACE_ENDPOINT"]
 # </snippet_subvars>
+
+# Base url for the Verify operations
+VERIFY_BASE_URL = 'https://csdx.blob.core.windows.net/resources/Face/Images/'
 
 # <snippet_persongroupvars>
 # This person group name is for our Person Group Operations and Snapshot Operations examples.
@@ -51,17 +54,16 @@ Snapshot operations variables
 These are only used for the snapshot example. Set your environment variables accordingly.
 '''
 # Source endpoint, the region where the original person group is located. 
-SOURCE_ENDPOINT = 'https://{}.api.cognitive.microsoft.com/'.format(ENDPOINT_STRING)
+SOURCE_ENDPOINT = ENDPOINT
 # Source subscription key. Must match the source endpoint region.
-SOURCE_KEY = os.environ['FACE_SUBSCRIPTION_KEY']
-# Source subscription ID. Found in the Azure portal in the Overview page of your Face (or any) resource.
+SOURCE_KEY = KEY
+# Source subscription ID (different than  key). From the Azure portal.
 SOURCE_ID = os.environ['AZURE_SUBSCRIPTION_ID']
 # Person group name that will get created in this quickstart's Person Group Operations example.
 SOURCE_PERSON_GROUP_ID = PERSON_GROUP_ID
-# Target endpoint. You may need to change the first part ("westus2") to match your subscription
-TARGET_ENDPOINT_STRING = "westus2"
-TARGET_ENDPOINT = 'https://{}.api.cognitive.microsoft.com/'.format(TARGET_ENDPOINT_STRING)
-# Target subscription key. Must match the target endpoint region.
+# Target endpoint. A separate Face resource in a different region (or a different subscription with same region).
+TARGET_ENDPOINT = os.environ["FACE_ENDPOINT2"]
+# Target subscription key. Must match the target endpoint region/subscription.
 TARGET_KEY = os.environ['FACE_SUBSCRIPTION_KEY2']
 # Target subscription ID. It will be the same as the source ID if created Face resources from the same subscription (but moving from region to region). If they are differnt subscriptions, add the other target ID here.
 TARGET_ID = os.environ['AZURE_SUBSCRIPTION_ID']
@@ -163,6 +165,61 @@ for face in similar_faces:
 END - Find Similar
 '''
 
+'''
+Verify
+The Verify operation takes a face ID from DetectedFace or PersistedFace and either another face ID or a Person object and determines whether they belong to the same person. If you pass in a Person object, you can optionally pass in a PersonGroup to which that Person belongs to improve performance.
+'''
+print('-----------------------------')
+print() 
+print('VERIFY')
+print()
+# Create a list to hold the target photos of the same person
+target_image_file_names = ['Family1-Dad1.jpg', 'Family1-Dad2.jpg']
+# The source photos contain this person
+source_image_file_name1 = 'Family1-Dad3.jpg'
+source_image_file_name2 = 'Family1-Son1.jpg'
+
+# Detect face(s) from source image 1, returns a list[DetectedFaces]
+detected_faces1 = face_client.face.detect_with_url(VERIFY_BASE_URL + source_image_file_name1)
+# Add the returned face's face ID
+source_image1_id = detected_faces1[0].face_id
+print('{} face(s) detected from image {}.'.format(len(detected_faces1), source_image_file_name1))
+
+# Detect face(s) from source image 2, returns a list[DetectedFaces]
+detected_faces2 = face_client.face.detect_with_url(VERIFY_BASE_URL + source_image_file_name2)
+# Add the returned face's face ID
+source_image2_id = detected_faces2[0].face_id
+print('{} face(s) detected from image {}.'.format(len(detected_faces2), source_image_file_name2))
+
+# List for the target face IDs (uuids)
+detected_faces_ids = []
+# Detect faces from target image url list, returns a list[DetectedFaces]
+for image_file_name in target_image_file_names:
+    detected_faces = face_client.face.detect_with_url(VERIFY_BASE_URL + image_file_name)
+    # Add the returned face's face ID
+    detected_faces_ids.append(detected_faces[0].face_id)
+    print('{} face(s) detected from image {}.'.format(len(detected_faces), image_file_name))
+
+# Verification example for faces of the same person. The higher the confidence, the more identical the faces in the images are.
+# Since target faces are the same person, in this example, we can use the 1st ID in the detected_faces_ids list to compare.
+verify_result_same = face_client.face.verify_face_to_face(source_image1_id, detected_faces_ids[0])
+print('Faces from {} & {} are of the same person, with confidence: {}'
+    .format(source_image_file_name1, target_image_file_names[0], verify_result_same.confidence)    
+    if verify_result_same.is_identical 
+    else 'Faces from {} & {} are of a different person, with confidence: {}'
+        .format(source_image_file_name1, target_image_file_names[0], verify_result_same.confidence))
+
+# Verification example for faces of different persons. 
+# Since target faces are same person, in this example, we can use the 1st ID in the detected_faces_ids list to compare.
+verify_result_diff = face_client.face.verify_face_to_face(source_image2_id, detected_faces_ids[0])
+print('Faces from {} & {} are of the same person, with confidence: {}'
+    .format(source_image_file_name2, target_image_file_names[0], verify_result_diff.confidence)    
+    if verify_result_diff.is_identical 
+    else 'Faces from {} & {} are of a different person, with confidence: {}'
+        .format(source_image_file_name2, target_image_file_names[0], verify_result_diff.confidence))
+'''
+END - VERIFY
+'''
 
 '''
 Create/Train/Detect/Identify Person Group 
