@@ -15,6 +15,7 @@ import (
 	"path"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 )
 
@@ -25,6 +26,7 @@ Face Quickstart
 - Find Similar
 - Verify
 - Identify
+- Large Face List
 - Person Group Operations
 - Large Person Group Operations
 - Snapshot Operations
@@ -49,29 +51,29 @@ func main() {
 	// A global context for use in all samples
 	faceContext := context.Background()
 
-	// Base url for the Verify example
-	const verifyBaseURL = "https://csdx.blob.core.windows.net/resources/Face/Images/"
+	// Base url for the Verify and Large Face List examples
+	const imageBaseURL = "https://csdx.blob.core.windows.net/resources/Face/Images/"
 
 	/*
 	Authenticate
 	*/
 	// Add FACE_SUBSCRIPTION_KEY, FACE_ENDPOINT, and AZURE_SUBSCRIPTION_ID to your environment variables.
-	sourceSubscriptionKey := os.Getenv("FACE_SUBSCRIPTION_KEY")
+	subscriptionKey := os.Getenv("FACE_SUBSCRIPTION_KEY")
 	// This key should be from another Face resource with a different region. 
 	// Used for the Snapshot example only.
 	targetSubscriptionKey := os.Getenv("FACE_SUBSCRIPTION_KEY2")
-	// Set your FACE_ENDPOINT in your environment variables
-	sourceEndpoint := os.Getenv("FACE_ENDPOINT")
-	// This should have a different region (or different subscription with same region)
-	// than your source endpoint. Used only in Snapshot.
+
+	// This is also known as the 'source' endpoint for the Snapshot example
+	endpoint := os.Getenv("FACE_ENDPOINT")
+	// This should have a different region than your source endpoint. used only in Snapshot.
 	targetEndpoint := os.Getenv("FACE_ENDPOINT2")
 	// Get your subscription ID (different than the key) from any Face resource in Azure.
 	azureSubscriptionID, uuidErr := uuid.FromString(os.Getenv("AZURE_SUBSCRIPTION_ID"))
 	if uuidErr != nil { log.Fatal(uuidErr) }
 
 	// Client used for Detect Faces, Find Similar, and Verify examples.
-	client := face.NewClient(sourceEndpoint)
-	client.Authorizer = autorest.NewCognitiveServicesAuthorizer(sourceSubscriptionKey)
+	client := face.NewClient(endpoint)
+	client.Authorizer = autorest.NewCognitiveServicesAuthorizer(subscriptionKey)
 	/*
 	END - Authenticate
 	*/
@@ -208,8 +210,8 @@ func main() {
 	sourceImageFileName2 := "Family1-Son1.jpg"
 
 	// DetectWithURL parameters
-	urlSource1 := verifyBaseURL + sourceImageFileName1
-	urlSource2 := verifyBaseURL + sourceImageFileName2
+	urlSource1 := imageBaseURL + sourceImageFileName1
+	urlSource2 := imageBaseURL + sourceImageFileName2
 	url1 :=  face.ImageURL { URL: &urlSource1 }
 	url2 := face.ImageURL { URL: &urlSource2 }
 	returnFaceIDVerify := true
@@ -240,7 +242,7 @@ func main() {
 	// Empty slice list for the target face IDs (UUIDs)
 	var detectedVerifyFacesIds [2]uuid.UUID
 	for i, imageFileName := range targetImageFileNames {
-		urlSource := verifyBaseURL + imageFileName 
+		urlSource := imageBaseURL + imageFileName 
 		url :=  face.ImageURL { URL: &urlSource}
 		detectedVerifyFaces, dErrV := client.DetectWithURL(faceContext, url, &returnFaceIDVerify, &returnFaceLandmarksVerify, nil, recognitionModel01, &returnRecognitionModelVerify)
 		if dErrV != nil { log.Fatal(dErrV) }
@@ -256,6 +258,9 @@ func main() {
 	verifyRequestBody1 := face.VerifyFaceToFaceRequest{ FaceID1: imageSource1Id, FaceID2: &detectedVerifyFacesIds[0] }
 	verifyResultSame, vErrSame := client.VerifyFaceToFace(faceContext, verifyRequestBody1)
 	if vErrSame != nil { log.Fatal(vErrSame) }
+
+	fmt.Println()
+
 	// Check if the faces are from the same person.
 	if (*verifyResultSame.IsIdentical) {
 		fmt.Println(fmt.Sprintf("Faces from %v & %v are of the same person, with confidence %v", 
@@ -285,6 +290,88 @@ func main() {
 	*/
 
 	/*
+	LARGE FACE LIST
+	This example creates a large face list from single-faced images
+	*/
+		fmt.Println()
+		fmt.Println("-----------------------------")
+		fmt.Println("LARGE FACE LIST")
+
+		// Create a slice for the images you want to add
+		imagesForList :=  make([]string, 9)
+		imagesForList[0] = "Family1-Dad1.jpg"
+		imagesForList[1] = "Family1-Dad2.jpg"
+		imagesForList[2] = "Family1-Daughter1.jpg"
+		imagesForList[3] = "Family1-Mom1.jpg"
+		imagesForList[4] = "Family1-Son1.jpg"
+		imagesForList[5] = "Family2-Lady1.jpg"
+		imagesForList[6] = "Family2-Man1.jpg"
+		imagesForList[7] = "Family3-Lady1.jpg"
+		imagesForList[8] = "Family3-Man1.jpg"
+
+		// Create a special face list client
+		faceListClient := face.NewLargeFaceListClient(endpoint)
+		faceListClient.Authorizer = autorest.NewCognitiveServicesAuthorizer(subscriptionKey)
+
+		// Create an ID for our list
+		faceListID := "my-face-list"
+
+		fmt.Printf("Creating large face list: %v...", faceListID)
+		fmt.Println()
+
+		// Create the metadata for the body of the requset
+		listMetadata := face.MetaDataContract { RecognitionModel: recognitionModel01, Name: &faceListID }
+		// Create the large face list, empty for now
+		faceListClient.Create(faceContext, faceListID, listMetadata)
+
+		// Prepare to add each face
+		// Define a targetFace=left,top,width,height
+		//targetFaceDimensions := []int32 {10, 10, 100, 100}
+		listUserData := ""
+
+		// First face added to list
+		var firstFace uuid.UUID
+		// Add each face in image array
+		for i, listFace := range imagesForList {
+			// Add base URL with the specific image to a struct
+			listImage := imageBaseURL + listFace
+			listImageURL:= face.ImageURL { URL: &listImage }
+			// Add the slice of faces to our face list
+			oneFace, pFaceErr := faceListClient.AddFaceFromURL(faceContext, faceListID, listImageURL, listUserData, nil)
+			if pFaceErr != nil { log.Fatal(pFaceErr) }
+				if (i == 0) {
+					firstFace = *oneFace.PersistedFaceID
+				}
+		}
+
+		// Get persisted faces from the face list.
+		fmt.Println("Persisted faces in large face list:")
+		fmt.Println()
+
+		stringFirstFace := firstFace.String()
+		numberInList := int32(len(imagesForList))
+
+		// Returns a ListPersistedFace struct
+		persistedFaces, pListErr := faceListClient.ListFaces(faceContext, faceListID, stringFirstFace, &numberInList)
+		if pListErr != nil { log.Fatal(pListErr) }
+
+		// The persistedFaces.Value returns a *[]PersistedFace
+		for _, persistedFace := range *persistedFaces.Value {
+			fmt.Println(persistedFace.PersistedFaceID)
+		 }
+
+		// Delete the large face list, so we can retest (recreate) the list again and again.
+		// If this example fails before deleting the list (and after it was created), delete the list from
+		// the API console, so you can test it again:
+		// https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/5a1580d5d2de3616c086f2cd
+		faceListClient.Delete(faceContext, faceListID)
+		fmt.Println()
+		fmt.Println("Deleted the large face list:" + faceListID)
+	/*
+	END - Large Face List
+	*/
+
+	/*
 	PERSON GROUP OPERATIONS
 	This example creates a Person Group from local, single-faced images, then trains it. 
 	It can then be used to detect and identify faces in a group image.
@@ -304,8 +391,8 @@ func main() {
 	imagePathRoot := path.Join(root+"\\images\\")
 
 	// Authenticate - Need a special person group client for your person group
-	personGroupClient := face.NewPersonGroupClient(sourceEndpoint)
-	personGroupClient.Authorizer = autorest.NewCognitiveServicesAuthorizer(sourceSubscriptionKey)
+	personGroupClient := face.NewPersonGroupClient(endpoint)
+	personGroupClient.Authorizer = autorest.NewCognitiveServicesAuthorizer(subscriptionKey)
 
 	// Create the Person Group
 	// Create an empty Person Group. Person Group ID must be lower case, alphanumeric, and/or with '-', '_'.
@@ -317,8 +404,8 @@ func main() {
 	personGroupClient.Create(faceContext, personGroupID, metadata)
 	
 	// Authenticate - Need a special person group person client for your person group person
-	personGroupPersonClient := face.NewPersonGroupPersonClient(sourceEndpoint)
-	personGroupPersonClient.Authorizer = autorest.NewCognitiveServicesAuthorizer(sourceSubscriptionKey)
+	personGroupPersonClient := face.NewPersonGroupPersonClient(endpoint)
+	personGroupPersonClient.Authorizer = autorest.NewCognitiveServicesAuthorizer(subscriptionKey)
 
 	// Create each person group person for each group of images (woman, man, child)
 	// Define woman friend
@@ -418,8 +505,8 @@ func main() {
 	imagePathRootL := path.Join(rootL+"\\images\\")
 
 	// Authenticate - Need a special person group client for your person group
-	personGroupClientL := face.NewLargePersonGroupClient(sourceEndpoint)
-	personGroupClientL.Authorizer = autorest.NewCognitiveServicesAuthorizer(sourceSubscriptionKey)
+	personGroupClientL := face.NewLargePersonGroupClient(endpoint)
+	personGroupClientL.Authorizer = autorest.NewCognitiveServicesAuthorizer(subscriptionKey)
 
 	// Create the large Person Group
 	// Create an empty large Person Group. 
@@ -433,8 +520,8 @@ func main() {
 	personGroupClientL.Create(faceContext, largePersonGroupID, metadataL)
 	
 	// Authenticate - Need a special person group person client for your person group person
-	personGroupPersonClientL := face.NewLargePersonGroupPersonClient(sourceEndpoint)
-	personGroupPersonClientL.Authorizer = autorest.NewCognitiveServicesAuthorizer(sourceSubscriptionKey)
+	personGroupPersonClientL := face.NewLargePersonGroupPersonClient(endpoint)
+	personGroupPersonClientL.Authorizer = autorest.NewCognitiveServicesAuthorizer(subscriptionKey)
 
 	// Create each person group person for each group of images (woman, man, child)
 	// Define woman friend
@@ -576,8 +663,8 @@ func main() {
 	fmt.Println("SNAPSHOT OPERATIONS")
 
 	// Create a client from your source region, where your person group exists. Use for taking the snapshot.
-	snapshotSourceClient := face.NewSnapshotClient(sourceEndpoint)
-	snapshotSourceClient.Authorizer = autorest.NewCognitiveServicesAuthorizer(sourceSubscriptionKey)
+	snapshotSourceClient := face.NewSnapshotClient(endpoint)
+	snapshotSourceClient.Authorizer = autorest.NewCognitiveServicesAuthorizer(subscriptionKey)
 	// Create a client for your target region. Use for applying the snapshot.
 	snapshotTargetClient := face.NewSnapshotClient(targetEndpoint)
 	snapshotTargetClient.Authorizer = autorest.NewCognitiveServicesAuthorizer(targetSubscriptionKey)
