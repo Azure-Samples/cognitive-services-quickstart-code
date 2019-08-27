@@ -40,7 +40,7 @@ func main() {
 	 *    Set environment variables for COMPUTER_VISION_SUBSCRIPTION_KEY and COMPUTER_VISION_ENDPOINT,
 	 *    then restart your command shell or your IDE for changes to take effect.
 	 */
-  computerVisionKey := os.Getenv("COMPUTER_VISION_SUBSCRIPTION_KEY")
+  	computerVisionKey := os.Getenv("COMPUTER_VISION_SUBSCRIPTION_KEY")
 	if ("" == computerVisionKey) {
 		log.Fatal("\n\nPlease set a COMPUTERVISION_SUBSCRIPTION_KEY environment variable.\n" +
 							  "**Note that you might need to restart your shell or IDE.**\n")
