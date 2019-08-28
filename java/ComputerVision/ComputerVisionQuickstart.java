@@ -88,7 +88,6 @@ public class ComputerVisionQuickstarts
 
         System.out.println("\nAnalyzing local image ...");
 
-        // <snippet_analyzelocal_analyze>
         try
         {
             // <snippet_analyzelocal_analyze>
@@ -104,27 +103,32 @@ public class ComputerVisionQuickstarts
 
             // </snippet_analyzelocal_analyze>
 
-            // <snippet_analyzelocal_display>
+            // <snippet_analyzelocal_captions>
             //  Display image captions and confidence values.
             System.out.println("\nCaptions: ");
             for (ImageCaption caption : analysis.description().captions()) {
                 System.out.printf("\'%s\' with confidence %f\n", caption.text(), caption.confidence());
             }
-            // </snippet_analyzelocal_display>
+            // </snippet_analyzelocal_captions>
 
-
+            // <snippet_analyzelocal_category>
             //  Display image category names and confidence values.
             System.out.println("\nCategories: ");
             for (Category category : analysis.categories()) {
                 System.out.printf("\'%s\' with confidence %f\n", category.name(), category.score());
             }
+            // </snippet_analyzelocal_category>
 
+
+            // <snippet_analyzelocal_tags>
             //  Display image tags and confidence values.
             System.out.println("\nTags: ");
             for (ImageTag tag : analysis.tags()) {
                 System.out.printf("\'%s\' with confidence %f\n", tag.name(), tag.confidence());
             }
+            // </snippet_analyzelocal_tags>
 
+            // <snippet_analyzelocal_faces>
             //  Display any faces found in the image and their location.
             System.out.println("\nFaces: ");
             for (FaceDescription face : analysis.faces()) {
@@ -133,12 +137,16 @@ public class ComputerVisionQuickstarts
                     face.faceRectangle().left() + face.faceRectangle().width(),
                     face.faceRectangle().top() + face.faceRectangle().height());
             }
+            // </snippet_analyzelocal_faces>
 
+            // <snippet_analyzelocal_adult>
             //  Display whether any adult or racy content was detected and the confidence values.
             System.out.println("\nAdult: ");
             System.out.printf("Is adult content: %b with confidence %f\n", analysis.adult().isAdultContent(), analysis.adult().adultScore());
             System.out.printf("Has racy content: %b with confidence %f\n", analysis.adult().isRacyContent(), analysis.adult().racyScore());
+            // </snippet_analyzelocal_adult>
 
+            // <snippet_analyzelocal_colors>
             //  Display the image color scheme.
             System.out.println("\nColor scheme: ");
             System.out.println("Is black and white: " + analysis.color().isBWImg());
@@ -146,7 +154,9 @@ public class ComputerVisionQuickstarts
             System.out.println("Dominant background color: " + analysis.color().dominantColorBackground());
             System.out.println("Dominant foreground color: " + analysis.color().dominantColorForeground());
             System.out.println("Dominant colors: " + String.join(", ", analysis.color().dominantColors()));
+            // </snippet_analyzelocal_colors>
 
+            // <snippet_analyzelocal_celebrities>
             //  Display any celebrities detected in the image and their locations.
             System.out.println("\nCelebrities: ");
             for (Category category : analysis.categories())
@@ -162,7 +172,9 @@ public class ComputerVisionQuickstarts
                     }
                 }
             }
+            // </snippet_analyzelocal_celebrities>
 
+            // <snippet_analyzelocal_landmarks>
             //  Display any landmarks detected in the image and their locations.
             System.out.println("\nLandmarks: ");
             for (Category category : analysis.categories())
@@ -175,6 +187,7 @@ public class ComputerVisionQuickstarts
                     }
                 }
             }
+            // </snippet_analyzelocal_landmarks>
 
             //  Display what type of clip art or line drawing the image is.
             System.out.println("\nImage type:");
