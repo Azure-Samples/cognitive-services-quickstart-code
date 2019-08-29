@@ -39,6 +39,7 @@ References:
     - SDK: https://docs.microsoft.com/en-us/python/api/azure-cognitiveservices-vision-face/azure.cognitiveservices.vision.face?view=azure-python
     - All Face APIs: https://docs.microsoft.com/en-us/azure/cognitive-services/face/APIReference
 '''
+
 # <snippet_subvars>
 # Set the FACE_SUBSCRIPTION_KEY environment variable with your key as the value.
 # This key will serve all examples in this document.
@@ -66,7 +67,6 @@ TARGET_PERSON_GROUP_ID = str(uuid.uuid4()) # assign a random ID (or name it anyt
 Snapshot operations variables
 These are only used for the snapshot example. Set your environment variables accordingly.
 '''
-
 # Source endpoint, the location/subscription where the original person group is located. 
 SOURCE_ENDPOINT = ENDPOINT
 # Source subscription key. Must match the source endpoint region.
@@ -243,7 +243,6 @@ print('-----------------------------')
 print() 
 print('PERSON GROUP OPERATIONS')
 print() 
-
 # <snippet_persongroup_create>
 ''' 
 Create the PersonGroup
@@ -470,7 +469,6 @@ for persisted_face in the_face_list.persisted_faces:
 face_client.face_list.delete(face_list_id=face_list_id)
 print()
 print("Deleted the face list: {}.\n".format(face_list_id))
-
 '''
 END - FACELIST
 '''
@@ -537,7 +535,6 @@ for large_face in large_face_list_faces:
 face_client.large_face_list.delete(large_face_list_id=large_face_list_id)
 print()
 print("Deleted the large face list: {}.\n".format(large_face_list_id))
-
 '''
 END - LARGE FACELIST
 '''
@@ -562,7 +559,6 @@ face_client_source = face_client
 # Create a new FaceClient instance for your target with authentication.
 face_client_target = FaceClient(TARGET_ENDPOINT, CognitiveServicesCredentials(TARGET_KEY))
 # </snippet_snapshot_auth>
-
 
 # <snippet_snapshot_take>
 '''
@@ -629,7 +625,6 @@ async def run():
     print('End of transfer.')
     print()
     # </snippet_snapshot_wait2>
-
 
 # <snippet_waitforop>
 # Helper function that waits and checks status of API call processing.
