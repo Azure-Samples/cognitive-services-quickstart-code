@@ -243,7 +243,8 @@ namespace FormRecognizerQuickStart
         }
         // </snippet_getmodellist>
 
-        // Get and display list of trained the models
+        // <snippet_deletemodel>
+        // Delete a model
         private static async Task DeleteModel(
             IFormRecognizerClient formClient, Guid modelId)
         {
@@ -258,6 +259,7 @@ namespace FormRecognizerQuickStart
                 Console.WriteLine("Delete model : " + e.Message);
             }
         }
+        // </snippet_deletemodel>
 
         // <snippet_displayanalyze>
         // Display analyze status

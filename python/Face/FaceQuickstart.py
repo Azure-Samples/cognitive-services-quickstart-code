@@ -39,7 +39,6 @@ References:
     - SDK: https://docs.microsoft.com/en-us/python/api/azure-cognitiveservices-vision-face/azure.cognitiveservices.vision.face?view=azure-python
     - All Face APIs: https://docs.microsoft.com/en-us/azure/cognitive-services/face/APIReference
 '''
-
 # <snippet_subvars>
 # Set the FACE_SUBSCRIPTION_KEY environment variable with your key as the value.
 # This key will serve all examples in this document.
@@ -67,17 +66,18 @@ TARGET_PERSON_GROUP_ID = str(uuid.uuid4()) # assign a random ID (or name it anyt
 Snapshot operations variables
 These are only used for the snapshot example. Set your environment variables accordingly.
 '''
+
 # Source endpoint, the location/subscription where the original person group is located. 
 SOURCE_ENDPOINT = ENDPOINT
 # Source subscription key. Must match the source endpoint region.
-SOURCE_KEY = os.environ['FACE_SUBSCRIPTION_KEY']
-# Source subscription ID. Found in the Azure portal in the Overview page of your Face (or any) resource.
+SOURCE_KEY = KEY
+# Source subscription ID (different than  key). From the Azure portal.
 SOURCE_ID = os.environ['AZURE_SUBSCRIPTION_ID']
 # Person group name that will get created in this quickstart's Person Group Operations example.
 SOURCE_PERSON_GROUP_ID = PERSON_GROUP_ID
-# Target endpoint. This is your 2nd Face subscription.
-TARGET_ENDPOINT = os.environ['FACE_ENDPOINT2']
-# Target subscription key. Must match the target endpoint region.
+# Target endpoint. A separate Face resource in a different region (or a different subscription with same region).
+TARGET_ENDPOINT = os.environ["FACE_ENDPOINT2"]
+# Target subscription key. Must match the target endpoint region/subscription.
 TARGET_KEY = os.environ['FACE_SUBSCRIPTION_KEY2']
 # Target subscription ID. It will be the same as the source ID if created Face resources from the same subscription (but moving from region to region). If they are differnt subscriptions, add the other target ID here.
 TARGET_ID = os.environ['AZURE_SUBSCRIPTION_ID']

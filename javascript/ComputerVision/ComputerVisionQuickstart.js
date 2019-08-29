@@ -20,11 +20,12 @@ const ApiKeyCredentials = require('@azure/ms-rest-js').ApiKeyCredentials;
  *       NPM package: https://www.npmjs.com/package/@azure/cognitiveservices-computervision
  *  - Install the 'ms-rest-js' package: npm i @azure/ms-rest-js
  *  - Install the 'async' package: npm i async
- *  - Get your Computer Vision resource key and region from the Azure portal: https://ms.portal.azure.com
+ *  - Set your subscription key and endpoint into your environment variables
  *  - The DESCRIBE IMAGE example uses a local image, download and place in your working folder: 
  *    https://moderatorsampleimages.blob.core.windows.net/samples/sample1.png 
  * How to run:
- *  - This quickstart can be run all at once (node ComputerVisionQuickstart.js from the command line) or used to copy/paste sections as needed. If sections are extracted, make sure to copy/paste the authenticate section too, as each example relies on it.
+ *  - This quickstart can be run all at once (node ComputerVisionQuickstart.js from the command line) or used to copy/paste sections as needed. 
+ *    If sections are extracted, make sure to copy/paste the authenticate section too, as each example relies on it.
  * Resources:
  *  - Node SDK: https://docs.microsoft.com/en-us/javascript/api/azure-cognitiveservices-computervision/?view=azure-node-latest
  *  - Documentation: https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/
@@ -41,12 +42,11 @@ const ApiKeyCredentials = require('@azure/ms-rest-js').ApiKeyCredentials;
  * This single client is used for all examples.
  */
 let key = process.env['COMPUTER_VISION_SUBSCRIPTION_KEY'];
-let region = process.env['COMPUTER_VISION_REGION']
-if (!key) { throw new Error('Set your environment variable: ' + key); }
+let endpoint = process.env['COMPUTER_VISION_ENDPOINT']
+if (!key) { throw new Error('Set your environment variables for your subscription key and endpoint.'); }
 
 let computerVisionClient = new ComputerVisionClient(
-    new ApiKeyCredentials({inHeader: {'Ocp-Apim-Subscription-Key': key}}), 
-    `https://${region}.api.cognitive.microsoft.com/` );
+    new ApiKeyCredentials({inHeader: {'Ocp-Apim-Subscription-Key': key}}), endpoint);
 /**
  * END - Authenticate
  */
