@@ -41,13 +41,13 @@ func main() {
 	 *  then restart your command shell or your IDE for changes to take effect.
 	 */
   	computerVisionKey := os.Getenv("COMPUTER_VISION_SUBSCRIPTION_KEY")
-	if (computerVisionKey != "COMPUTER_VISION_SUBSCRIPTION_KEY") {
+	if (computerVisionKey == null) {
 		log.Fatal("\n\nPlease set a COMPUTER_VISION_SUBSCRIPTION_KEY environment variable.\n" +
 							  "**You may need to restart your shell or IDE after it's set.**\n")
 	}
 
 	endpointURL := os.Getenv("COMPUTER_VISION_ENDPOINT")
-	if (endpointURL != "COMPUTER_VISION_ENDPOINT") {
+	if (endpointURL == null) {
 		log.Fatal("\n\nPlease set a COMPUTER_VISION_ENDPOINT environment variable.\n" +
 							  "**You may need to restart your shell or IDE after it's set.**")
 	}
