@@ -19,7 +19,7 @@ public class ComputerVisionQuickstarts
         // Add your Computer Vision subscription key and endpoint to your environment variables.
         // After setting, close and then re-open your command shell or project for the changes to take effect.
         String subscriptionKey = System.getenv("COMPUTER_VISION_SUBSCRIPTION_KEY");
-        String endpoint = ("COMPUTER_VISION_ENDPOINT");
+        String endpoint = System.getenv("COMPUTER_VISION_ENDPOINT");
 // </snippet_mainvars>
 
         // <snippet_client>
