@@ -131,7 +131,7 @@ Print image and draw rectangles around faces
 '''
 # <snippet_frame>
 # Detect a face in an image that contains a single face
-single_face_image_url = 'https://www.biography.com/.image/t_share/MTQ1MzAyNzYzOTgxNTE0NTEz/john-f-kennedy---mini-biography.jpg'
+single_face_image_url = 'https://raw.githubusercontent.com/Microsoft/Cognitive-Face-Windows/master/Data/detection1.jpg'
 single_image_name = os.path.basename(single_face_image_url)
 detected_faces = face_client.face.detect_with_url(url=single_face_image_url)
 if not detected_faces:
@@ -139,7 +139,7 @@ if not detected_faces:
 
 # Convert width height to a point in a rectangle
 def getRectangle(faceDictionary):
-    rect = faceDictionary['faceRectangle']
+    rect = faceDictionary['face_rectangle']
     left = rect['left']
     top = rect['top']
     bottom = left + rect['height']
