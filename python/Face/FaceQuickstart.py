@@ -1,6 +1,8 @@
 # <snippet_imports>
-import asyncio, io, glob, os, sys, time, uuid
+import asyncio, io, glob, os, sys, time, uuid, requests
 from urllib.parse import urlparse
+from io import BytesIO
+from PIL import Image, ImageDraw
 from azure.cognitiveservices.vision.face import FaceClient
 from msrest.authentication import CognitiveServicesCredentials
 from azure.cognitiveservices.vision.face.models import TrainingStatusType, Person, SnapshotObjectType, OperationStatusType
@@ -124,6 +126,41 @@ else:
 END - Detect faces
 '''
 
+'''
+Print image and draw rectangles around faces
+'''
+# <snippet_frame>
+# Detect a face in an image that contains a single face
+single_face_image_url = 'https://www.biography.com/.image/t_share/MTQ1MzAyNzYzOTgxNTE0NTEz/john-f-kennedy---mini-biography.jpg'
+single_image_name = os.path.basename(single_face_image_url)
+detected_faces = face_client.face.detect_with_url(url=single_face_image_url)
+if not detected_faces:
+	raise Exception('No face detected from image {}'.format(single_image_name))
+
+# Convert width height to a point in a rectangle
+def getRectangle(faceDictionary):
+    rect = faceDictionary['faceRectangle']
+    left = rect['left']
+    top = rect['top']
+    bottom = left + rect['height']
+    right = top + rect['width']
+    return ((left, top), (bottom, right))
+
+# Download the image from the url
+response = requests.get(img_url)
+img = Image.open(BytesIO(response.content))
+
+# For each face returned use the face rectangle and draw a red box.
+draw = ImageDraw.Draw(img)
+for face in detected_faces:
+    draw.rectangle(getRectangle(face), outline='red')
+
+# Display the image in the users default image browser.
+img.show()
+# </snippet_frame>
+'''
+END - Draw rectangles
+'''
 
 '''
 Find a similar face
