@@ -10,10 +10,12 @@ import (
 )
 
 func main() {
+	// Add your Bing Autosuggest subscription key to your environment variables.
 	if "" == os.Getenv("BING_AUTOSUGGEST_SUBSCRIPTION_KEY") {
 		log.Fatal("Please set/export the environment variable BING_AUTOSUGGEST_SUBSCRIPTION_KEY.")
 	}
-	var subscription_key string = os.Getenv("BING_AUTOSUGGEST_SUBSCRIPTION_KEY")
+	// Add your Bing Autosuggest endpoint to your environment variables.
+	var subscription_key string = os.Getenv("BING_AUTOSUGGEST_ENDPOINT")
 	if "" == os.Getenv("BING_AUTOSUGGEST_ENDPOINT") {
 		log.Fatal("Please set/export the environment variable BING_AUTOSUGGEST_ENDPOINT.")
 	}
