@@ -10,14 +10,14 @@ import (
 )
 
 func main() {
-	if "" == os.Getenv("AUTOSUGGEST_SUBSCRIPTION_KEY") {
-		log.Fatal("Please set/export the environment variable AUTOSUGGEST_SUBSCRIPTION_KEY.")
+	if "" == os.Getenv("BING_AUTOSUGGEST_SUBSCRIPTION_KEY") {
+		log.Fatal("Please set/export the environment variable BING_AUTOSUGGEST_SUBSCRIPTION_KEY.")
 	}
-	var subscription_key string = os.Getenv("AUTOSUGGEST_SUBSCRIPTION_KEY")
-	if "" == os.Getenv("AUTOSUGGEST_ENDPOINT") {
-		log.Fatal("Please set/export the environment variable AUTOSUGGEST_ENDPOINT.")
+	var subscription_key string = os.Getenv("BING_AUTOSUGGEST_SUBSCRIPTION_KEY")
+	if "" == os.Getenv("BING_AUTOSUGGEST_ENDPOINT") {
+		log.Fatal("Please set/export the environment variable BING_AUTOSUGGEST_ENDPOINT.")
 	}
-	var endpoint string = os.Getenv("AUTOSUGGEST_ENDPOINT")
+	var endpoint string = os.Getenv("BING_AUTOSUGGEST_ENDPOINT")
 
 	// Get the context, which is required by the SDK methods.
 	ctx := context.Background()
