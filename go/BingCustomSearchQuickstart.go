@@ -10,14 +10,17 @@ import (
 )
 
 func main() {
-	if "" == os.Getenv("CUSTOM_SEARCH_SUBSCRIPTION_KEY") {
-		log.Fatal("Please set/export the environment variable CUSTOM_SEARCH_SUBSCRIPTION_KEY.")
+	// Add your Bing Custom Search subscription key to your environment variables.
+	if "" == os.Getenv("BING_CUSTOM_SEARCH_SUBSCRIPTION_KEY") {
+		log.Fatal("Please set/export the environment variable BING_CUSTOM_SEARCH_SUBSCRIPTION_KEY.")
 	}
-	var subscription_key string = os.Getenv("CUSTOM_SEARCH_SUBSCRIPTION_KEY")
-	if "" == os.Getenv("CUSTOM_SEARCH_INSTANCE_ID") {
-		log.Fatal("Please set/export the environment variable CUSTOM_SEARCH_INSTANCE_ID.")
+	var subscription_key string = os.Getenv("BING_CUSTOM_SEARCH_SUBSCRIPTION_KEY")
+	
+	// Add your Bing Custom Search instance ID to your environment variables.
+	if "" == os.Getenv("BING_CUSTOM_SEARCH_INSTANCE_ID") {
+		log.Fatal("Please set/export the environment variable BING_CUSTOM_SEARCH_INSTANCE_ID.")
 	}
-	var search_instance_id string = os.Getenv("CUSTOM_SEARCH_INSTANCE_ID")
+	var search_instance_id string = os.Getenv("BING_CUSTOM_SEARCH_INSTANCE_ID")
 
 	// Get the context, which is required by the SDK methods.
 	ctx := context.Background()
