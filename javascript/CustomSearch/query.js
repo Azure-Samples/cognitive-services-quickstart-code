@@ -15,18 +15,18 @@
 const search = require('azure-cognitiveservices-customsearch');
 const auth = require('ms-rest-azure');
 
-if (!process.env.CUSTOM_SEARCH_SUBSCRIPTION_KEY) {
-    throw 'Please set/export the following environment variable: CUSTOM_SEARCH_SUBSCRIPTION_KEY';
+if (!process.env.BING_CUSTOM_SEARCH_SUBSCRIPTION_KEY) {
+    throw 'Please set/export the following environment variable: BING_CUSTOM_SEARCH_SUBSCRIPTION_KEY';
 }
-let subscriptionKey = process.env.CUSTOM_SEARCH_SUBSCRIPTION_KEY;
+let subscriptionKey = process.env.BING_CUSTOM_SEARCH_SUBSCRIPTION_KEY;
 
 /* For more information, see:
  * https://docs.microsoft.com/en-us/azure/cognitive-services/bing-custom-search/quick-start#create-a-custom-search-instance
  */
-if (!process.env.CUSTOM_SEARCH_INSTANCE_ID) {
-    throw 'Please set/export the following environment variable: CUSTOM_SEARCH_INSTANCE_ID';
+if (!process.env.BING_CUSTOM_SEARCH_INSTANCE_ID) {
+    throw 'Please set/export the following environment variable: BING_CUSTOM_SEARCH_INSTANCE_ID';
 }
-let instance_ID = process.env.CUSTOM_SEARCH_INSTANCE_ID;
+let instance_ID = process.env.BING_CUSTOM_SEARCH_INSTANCE_ID;
 
 let query = 'xbox';
 
