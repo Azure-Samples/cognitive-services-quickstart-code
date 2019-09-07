@@ -51,6 +51,7 @@ public class ContentModeratorQuickstart {
     // HUMAN REVIEWS - IMAGES variables
     private static final String REVIEW_URL = "https://moderatorsampleimages.blob.core.windows.net/samples/sample5.png";
     private static final long LATENCY_DELAY = 30; // milliseconds of delay
+    // Add your Content Moderator team name and callback endpoint to your environment variables.
     private static final String TEAM_NAME = System.getenv("CONTENT_MODERATOR_TEAM_NAME");
     private static final String CALLBACK_ENDPOINT = System.getenv("CONTENT_MODERATOR_REVIEWS_ENDPOINT");
 
@@ -75,8 +76,7 @@ public class ContentModeratorQuickstart {
          * Authenticate
          */
         // Set CONTENT_MODERATOR_SUBSCRIPTION_KEY in your environment settings, with your key as its value.
-        // Set COMPUTER_MODERATOR_ENDPOINT in your environment variables, 
-        // replace the first part (for example, "westus") with your own, if needed.
+        // Set COMPUTER_MODERATOR_ENDPOINT in your environment variables with your Azure endpoint.
         ContentModeratorClient client = 
             ContentModeratorManager.authenticate(AzureRegionBaseUrl
                                    .fromString(System.getenv("CONTENT_MODERATOR_ENDPOINT")), 
