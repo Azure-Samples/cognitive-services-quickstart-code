@@ -171,10 +171,12 @@ public class ComputerVisionQuickstarts
             }
             // </snippet_analyzelocal_landmarks>
 
+            // <snippet_imagetype>
             //  Display what type of clip art or line drawing the image is.
             System.out.println("\nImage type:");
             System.out.println("Clip art type: " + analysis.imageType().clipArtType());
             System.out.println("Line drawing type: " + analysis.imageType().lineDrawingType());
+            // </snippet_imagetype>
         }
 
         catch (Exception e)
