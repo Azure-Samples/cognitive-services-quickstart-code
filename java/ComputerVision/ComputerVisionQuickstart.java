@@ -10,6 +10,21 @@ import java.util.ArrayList;
 import java.util.List;
 // </snippet_imports>
 
+/*  This Quickstart for the Azure Cognitive Services Computer Vision API shows how to analyze
+ *  an image both locally and from a URL.
+ *
+ *  Analyzing an image includes:
+ *  - Displaying image captions and confidence values
+ *  - Displaying image category names and confidence values
+ *  - Displaying image tags and confidence values
+ *  - Displaying any faces found in the image and their bounding boxes
+ *  - Displaying whether any adult or racy content was detected and the confidence values
+ *  - Displaying the image color scheme
+ *  - Displaying any celebrities detected in the image and their bounding boxes
+ *  - Displaying any landmarks detected in the image and their bounding boxes
+ *  - Displaying what type of clip art or line drawing the image is
+ */
+
 public class ComputerVisionQuickstarts
 {
     
@@ -31,21 +46,6 @@ public class ComputerVisionQuickstarts
     }
     // </snippet_client>
 
-
-    /*  This Quickstart for the Azure Cognitive Services Computer Vision API shows how to analyze
-     *  an image both locally and from a URL.
-     *  Analyzing an image includes:
-     *  - Displaying image captions and confidence values
-     *  - Displaying image category names and confidence values
-     *  - Displaying image tags and confidence values
-     *  - Displaying any faces found in the image and their bounding boxes
-     *  - Displaying whether any adult or racy content was detected and the confidence values
-     *  - Displaying the image color scheme
-     *  - Displaying any celebrities detected in the image and their bounding boxes
-     *  - Displaying any landmarks detected in the image and their bounding boxes
-     *  - Displaying what type of clip art or line drawing the image is
-     *
-     */
     // <snippet_analyzelocal_refs>
     public static void AnalyzeLocalImage(ComputerVisionClient compVisClient)
     {
