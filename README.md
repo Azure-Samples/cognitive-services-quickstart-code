@@ -1,3 +1,18 @@
+---
+page_type: sample
+languages:
+- go
+- python
+- javascript
+- csharp
+- php
+- ruby
+products:
+- azure
+description: "This repository contains the code examples used by the QuickStarts on the Cognitive Services Documentation"
+urlFragment: cognitive-services-quickstart-code
+---
+
 # Code examples for Cognitive Services Quickstarts 
 
 This repository contains the code examples used by the QuickStarts on the [Cognitive Services Documentation](https://docs.microsoft.com/en-us/azure/cognitive-services/)
