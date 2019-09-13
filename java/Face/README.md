@@ -17,8 +17,8 @@ If cutting / pasting specific examples only, for instance say you only want Iden
  
 ## Compile and run
 Enter the following at a command prompt from your root folder: <br>
-  javac FaceQuickstart.java -cp .;lib\* <br>
-  java -cp .;lib\* FaceQuickstart
+  `javac FaceQuickstart.java -cp .;lib\*` <br>
+  `java -cp .;lib\* FaceQuickstart`
 
 NOTE: If you run this sample with JRE 9+, you may encounter the following issue: 
 https://github.com/Azure/autorest-clientruntime-for-java/issues/569 which results in the following output: <br>
