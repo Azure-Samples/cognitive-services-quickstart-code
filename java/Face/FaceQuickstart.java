@@ -9,6 +9,8 @@ import java.util.concurrent.TimeUnit;
  * This quickstart contains:
  *  - Detect Faces: detect a face or faces in an image and URL
  *  - Find Similar: find face similar to the single-faced image in the group image
+ *  - Verify: with 2 images, check if they are the same person or different people
+ *  - Identify: with grouped images of the same person, use group to find similar faces in another image
  * 
  * Prerequisites:
  * - Create a lib folder in the root directory of your project, then add the jars from dependencies.txt
@@ -72,6 +74,10 @@ public class FaceQuickstart {
         System.out.println("============== Find Similar ==============");
         // Finds a similar face in group image. Returns a list of UUIDs and prints them.
         findSimilar(client, singleFaceID, groupFaceIDs, groupImageName);
+        
+        System.out.println("============== Verify ==============");
+        // Checks if 2 photos are of the same or different person.
+        verify(client, IMAGE_BASE_URL);
 
         System.out.println("============== Identify ==============");
         // Groups similar photos of a person, then uses that group 
@@ -131,6 +137,52 @@ public class FaceQuickstart {
     }
     /**
      * END - Find Similar
+     */
+    
+    /**
+     * Verify
+     * With 2 photos, compare them to check if they are the same or different person.
+     */
+    public static void verify(FaceAPI client, String imageBaseURL) {
+
+        // Source images to use for the query
+        String sourceImage1 = "Family1-Dad3.jpg";
+        String sourceImage2 = "Family1-Son1.jpg";
+
+        // The target images to find similarities in.
+        List<String> targetImages = new ArrayList<>();
+        targetImages.add("Family1-Dad1.jpg");
+        targetImages.add("Family1-Dad2.jpg");
+
+        // Detect faces in the source images
+        List<UUID> source1ID = detectFaces(client, imageBaseURL + sourceImage1, sourceImage1);
+        List<UUID> source2ID = detectFaces(client, imageBaseURL + sourceImage2, sourceImage2);
+
+        // Create list to hold target image IDs
+        List<UUID> targetIDs = new ArrayList<>(); 
+
+        // Detect the faces in the target images
+        for (String face : targetImages) {
+            List<UUID> faceId = detectFaces(client, imageBaseURL + face, face);
+            targetIDs.add(faceId.get(0));
+        }
+
+        // Verification example for faces of the same person.
+        VerifyResult sameResult = client.faces().verifyFaceToFace(source1ID.get(0), targetIDs.get(0));
+        System.out.println(sameResult.isIdentical() ? 
+            "Faces from " + sourceImage1 + " & " + targetImages.get(0) + " are of the same person." : 
+            "Faces from " + sourceImage1 + " & " + targetImages.get(0) + " are different people.");
+
+        // Verification example for faces of different persons.
+        VerifyResult differentResult = client.faces().verifyFaceToFace(source2ID.get(0), targetIDs.get(0));
+        System.out.println(differentResult.isIdentical() ? 
+            "Faces from " + sourceImage2 + " & " + targetImages.get(1) + " are of the same person." : 
+            "Faces from " + sourceImage2 + " & " + targetImages.get(1) + " are different people.");
+
+            System.out.println();
+    }
+    /**
+     * END - Verify
      */
 
     /**
