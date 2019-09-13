@@ -1,0 +1,25 @@
+Include these jar libraries in a lib folder, in the root of your project.
+They are dependencies for the FaceAPI SDK and AutoRest libraries.
+Avoid any alpha or beta versions. 
+If specific versions are noted below, those are older versions that work better than the most recent, at the time of this commit.
+
+* https://mvnrepository.com/artifact/com.microsoft.azure/azure-client-runtime
+* https://mvnrepository.com/artifact/com.microsoft.rest/client-runtime
+* https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-joda
+* https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations
+* https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
+* https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+* https://mvnrepository.com/artifact/joda-time/joda-time
+* https://mvnrepository.com/artifact/com.google.guava/guava
+* https://mvnrepository.com/artifact/com.microsoft.azure/azure-annotations
+* https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp/3.14.2
+* https://mvnrepository.com/artifact/com.squareup.okio/okio/1.17.4
+* https://mvnrepository.com/artifact/com.squareup.okhttp3/logging-interceptor
+* https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp-urlconnection/3.14.2
+* https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit
+* https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-jackson
+* https://mvnrepository.com/artifact/com.squareup.retrofit2/adapter-rxjava
+* https://mvnrepository.com/artifact/io.reactivex/rxjava
+* https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+* https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+* https://mvnrepository.com/artifact/org.slf4j/slf4j-jdk14/1.7.28
