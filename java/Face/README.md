@@ -23,7 +23,7 @@ Enter the following at a command prompt from your root folder: <br>
 NOTE: If you run this sample with JRE 9+, you may encounter the following issue: 
 https://github.com/Azure/autorest-clientruntime-for-java/issues/569 which results in the following output: <br>
 `WARNING: An illegal reflective access operation has occurred` ... (plus several more warnings) <br>
-This should not prevent the sample from running correctly, so this can be ignored.
+This should not prevent the quickstart from running correctly, so this can be ignored.
  
 ## References
   - Face Documentation: https://docs.microsoft.com/en-us/azure/cognitive-services/face/
