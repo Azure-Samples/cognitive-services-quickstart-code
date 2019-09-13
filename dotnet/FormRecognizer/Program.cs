@@ -1,9 +1,11 @@
-﻿using Microsoft.Azure.CognitiveServices.FormRecognizer;
+﻿// <snippet_using>
+using Microsoft.Azure.CognitiveServices.FormRecognizer;
 using Microsoft.Azure.CognitiveServices.FormRecognizer.Models;
 
 using System;
 using System.IO;
 using System.Threading.Tasks;
+// </snippet_using>
 
 namespace FormRecognizerQuickStart
 {
@@ -55,14 +57,17 @@ namespace FormRecognizerQuickStart
             Console.WriteLine("Get list of extracted keys...");
             await GetListOfExtractedKeys(formClient, modelId);
 
+            // Choose any of the following three Analyze tasks:
+
             Console.WriteLine("Analyze PDF form...");
             await AnalyzePdfForm(formClient, modelId, pdfFormFile);
 
-            Console.WriteLine("Analyze JPEG form...");
-            await AnalyzeJpgForm(formClient, modelId, jpgFormFile);
+            //Console.WriteLine("Analyze JPEG form...");
+            //await AnalyzeJpgForm(formClient, modelId, jpgFormFile);
 
-            Console.WriteLine("Analyze PNG form...");
-            await AnalyzePngForm(formClient, modelId, pngFormFile);
+            //Console.WriteLine("Analyze PNG form...");
+            //await AnalyzePngForm(formClient, modelId, pngFormFile);
+
 
             Console.WriteLine("Get list of trained models ...");
             await GetListOfModels(formClient);
@@ -100,6 +105,7 @@ namespace FormRecognizerQuickStart
         }
         // </snippet_train>
 
+        // <snippet_getkeys>
         // Get and display list of extracted keys for training data 
         // provided to train the model
         private static async Task GetListOfExtractedKeys(
@@ -117,7 +123,7 @@ namespace FormRecognizerQuickStart
                 var clusters = kr.Clusters;
                 foreach (var kvp in clusters)
                 {
-                    Console.WriteLine("  Cluster: " + kvp.Key + "");
+                    Console.WriteLine("  Cluster: " + kvp.Key + ""); 
                     foreach (var v in kvp.Value)
                     {
                         Console.WriteLine("\t" + v);
@@ -129,6 +135,7 @@ namespace FormRecognizerQuickStart
                 Console.WriteLine("Get list of extracted keys : " + e.Message);
             }
         }
+        // </snippet_getkeys>
 
         // <snippet_analyzepdf>
         // Analyze PDF form data
