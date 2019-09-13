@@ -28,5 +28,6 @@ This should not prevent the quickstart from running correctly, so this can be ig
 ## References
   - Face Documentation: https://docs.microsoft.com/en-us/azure/cognitive-services/face/
   - Face Java SDK: https://docs.microsoft.com/en-us/java/api/overview/azure/cognitiveservices/client/faceapi?view=azure-java-stable
+  - Face SDK source code: https://github.com/Azure/azure-sdk-for-java/tree/master/sdk/cognitiveservices/ms-azure-cs-faceapi
   - API Reference: https://docs.microsoft.com/en-us/azure/cognitive-services/face/apireference
  
