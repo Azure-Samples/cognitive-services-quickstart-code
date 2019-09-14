@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
  *  - Find Similar: find face similar to the single-faced image in the group image
  *  - Verify: with 2 images, check if they are the same person or different people
  *  - Identify: with grouped images of the same person, use group to find similar faces in another image
+ *  - Group Faces: groups images into sub-groups based on same person images
  * 
  * Prerequisites:
  * - Create a lib folder in the root directory of your project, then add the jars from dependencies.txt
@@ -46,7 +47,7 @@ public class FaceQuickstart {
         final String  groupFacesUrl = "http://www.historyplace.com/kennedy/president-family-portrait-closeup.jpg";
         final String groupImageName = groupFacesUrl.substring( groupFacesUrl.lastIndexOf('/')+1, groupFacesUrl.length() );
 
-        // For Identify Faces example
+        // For Verify, Identify Faces, and Group Faces examples
         final String IMAGE_BASE_URL = "https://csdx.blob.core.windows.net/resources/Face/Images/";
 
         /**
@@ -83,6 +84,10 @@ public class FaceQuickstart {
         // Groups similar photos of a person, then uses that group 
         // to recognize the person in another photo.
         identifyFaces(client, IMAGE_BASE_URL);
+        
+        System.out.println("============== Group Faces ==============");
+        // Groups all faces in list into sub-groups based on similar faces.
+        groupFaces(client, IMAGE_BASE_URL); 
     }
     /**
      * END - Main
@@ -258,6 +263,61 @@ public class FaceQuickstart {
     }
     /**
      * END - Identify Faces
+     */
+    
+    /**
+     * Group Faces
+     * This method of grouping is useful if you don't need to create a person group. It will automatically group similar
+     * images, whereas the person group method allows you to define the grouping.
+     * A single "messyGroup" array contains face IDs for which no similarities were found.
+     */
+    public static void groupFaces(FaceAPI client, String imageBaseURL) {
+        // Images we want to group
+        List<String> imagesList = new ArrayList<>();
+        imagesList.add("Family1-Dad1.jpg");
+        imagesList.add("Family1-Dad2.jpg");
+        imagesList.add("Family3-Lady1.jpg");
+        imagesList.add("Family1-Daughter1.jpg");
+        imagesList.add("Family1-Daughter2.jpg");
+        imagesList.add("Family1-Daughter3.jpg");
+
+        // Create empty dictionary to store the groups
+        Map<String, String> faces = new HashMap<>();
+        List<UUID> faceIds = new ArrayList<>();
+
+        // First, detect the faces in your images
+        for (String image : imagesList) {
+            // Detect faces from image url (prints detected face results)
+            List<UUID> detectedFaces = detectFaces(client, imageBaseURL + image, image);
+            // Add detected faceId to faceIds and faces.
+            faceIds.add(detectedFaces.get(0)); // get first in list, since all images only have 1 face.
+            faces.put(detectedFaces.get(0).toString(), image);
+        }
+
+        // Group the faces. Grouping result is a collection that contains similar faces and a "messy group".
+        GroupResult results = client.faces().group(faceIds);
+
+        // Find the number of groups (inner lists) found in all images.
+        // GroupResult.groups() returns a List<List<UUID>>.
+        for (int i = 0; i < results.groups().size(); i++) {
+            System.out.println("Found face group " + (i + 1) + ": ");
+            for (UUID id : results.groups().get(i)) {
+                // Print the IDs from each group found, as seen associated in your map.
+                System.out.println(id);
+            }
+            System.out.println();
+        }
+
+        // MessyGroup contains all faces which are not similar to any other faces. 
+        // The faces that cannot be grouped by similarities. Odd ones out.
+        System.out.println("Found messy group: ");
+        for (UUID mID : results.messyGroup()) {
+            System.out.println(mID);
+        }
+        System.out.println();
+    }
+    /**
+     * END - Group Faces
      */
 }
 
