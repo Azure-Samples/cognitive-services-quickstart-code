@@ -4,7 +4,6 @@ import com.microsoft.azure.cognitiveservices.vision.faceapi.models.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-
 /**
  * This quickstart contains:
  *  - Detect Faces: detect a face or faces in an image and URL
