@@ -4,7 +4,9 @@
 This quickstart contains many examples that can be run all at once.
   - Detect Faces: detect a face or faces in an image and URL
   - Find Similar: find face similar to the single-faced image in the group image
-  - Identify: uses similar images of a person, grouped together, to learn how to identify that person in other images
+  - Verify: with 2 images, check if they are the same person or different people
+  - Identify: with grouped images of the same person, use group to find similar faces in another image
+  - Group Faces: groups images into sub-groups based on same person images
   
 If cutting / pasting specific examples only, for instance say you only want Identify, be sure to include any helper methods it uses. For instance, Identify uses the Detect Faces example as a helper method.
  
