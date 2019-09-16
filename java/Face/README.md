@@ -5,13 +5,14 @@ This quickstart contains many examples that can be run all at once.
   - Detect Faces: detect a face or faces in an image and URL
   - Find Similar: find face similar to the single-faced image in the group image
   - Verify: with 2 images, check if they are the same person or different people
-  - Identify: with grouped images of the same person, use group to find similar faces in another image
+  - Identify: with grouped images of the same person (in a person group), use group to find similar faces in another image
   - Group Faces: groups images into sub-groups based on same person images
   
 If cutting / pasting specific examples only, for instance say you only want Identify, be sure to include any helper methods it uses. For instance, Identify uses the Detect Faces example as a helper method.
  
 ## Prerequisites
   - Create a **lib** folder in the root directory of your project, then add the jars from dependencies.txt list.
+    As an option, you can open the faceapi-dependencies.jar file to have all dependency jars immediately, although versions may have changed since the time of this post. Refer to dependencies.txt for URLs of the libraries to update if needed.
   - Download the ms-azure-cs-faceapi.jar in this repo and add to your lib folder.
   - Add your Face subscription key to your environment variables with the name FACE_SUBSCRIPTION_KEY.
   - Replace the "myRegion" variable in the authenticate section with your region. <br>
