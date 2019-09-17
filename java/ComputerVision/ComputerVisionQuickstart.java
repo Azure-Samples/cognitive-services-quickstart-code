@@ -11,7 +11,7 @@ import java.util.List;
 // </snippet_imports>
 
 /*  This Quickstart for the Azure Cognitive Services Computer Vision API shows how to analyze
- *  an image both locally and from a URL.
+ *  an image and recognize text for both a local and remote (URL) image.
  *
  *  Analyzing an image includes:
  *  - Displaying image captions and confidence values
@@ -22,7 +22,8 @@ import java.util.List;
  *  - Displaying the image color scheme
  *  - Displaying any celebrities detected in the image and their bounding boxes
  *  - Displaying any landmarks detected in the image and their bounding boxes
- *  - Displaying what type of clip art or line drawing the image is
+ *  - Displaying whether an image is a clip art or line drawing type
+ *  Recongnize Printed Text: uses optical character recognition (OCR) to find text in an image.
  */
 
 public class ComputerVisionQuickstarts
@@ -42,7 +43,12 @@ public class ComputerVisionQuickstarts
         //  END - Create an authenticated Computer Vision client.
         
         System.out.println("\nAzure Cognitive Services Computer Vision - Java Quickstart Sample");
+        
+        // Analyze local and remote images
         AnalyzeLocalImage(compVisClient);
+        
+        // Recognize text with OCR for a local and remote (URL) image
+        RecognizeTextOCR(computerVisionClient, localTextImagePath, remoteTextImageURL);
     }
     // </snippet_client>
 
@@ -299,4 +305,66 @@ public class ComputerVisionQuickstarts
     }
     //  END - Analyze an image from a URL.
     // </snippet_analyzeurl>
+    
+  /** 
+   * RECOGNIZE TEXT:
+   * Displays text found in image with angle and orientation of the block of text.
+   */
+  private static void RecognizeTextOCR(ComputerVisionClient client, String localTextImagePath, String remoteTextImageURL){
+    System.out.println("-----------------------------------------------");
+    System.out.println("RECOGNIZE TEXT");
+    try {
+      File rawImage = new File(localTextImagePath);
+      byte[] localImageBytes = Files.readAllBytes(rawImage.toPath());
+
+      // Recognize text in local image
+      OcrResult ocrResultLocal = client.computerVision().recognizePrintedTextInStream()
+          .withDetectOrientation(true)
+          .withImage(localImageBytes)
+          .withLanguage(OcrLanguages.EN)
+          .execute();
+
+      // Recognize text in remote image
+      OcrResult ocrResultRemote = client.computerVision().recognizePrintedText()
+          .withDetectOrientation(true)
+          .withUrl(remoteTextImageURL)
+          .withLanguage(OcrLanguages.EN)
+          .execute();    
+
+      OcrResult[] results = { ocrResultLocal , ocrResultRemote };
+
+      // Print results of local and remote images
+      for (OcrResult result : results){
+        String location = null;
+        OcrResult ocrResult = null;
+        if (result == ocrResultLocal) { ocrResult = ocrResultLocal; location = "local"; }
+        else { ocrResult = ocrResultRemote; location = "remote"; } 
+        System.out.println();
+        System.out.println("Recognizing text from " + location + " image with OCR ...");
+        System.out.println("\nLanguage: " + ocrResult.language());
+        System.out.printf("Text angle: %1.3f\n", ocrResult.textAngle());
+        System.out.println("Orientation: " + ocrResult.orientation());
+
+        boolean firstWord = true; 
+        // Gets entire region of text block
+        for (OcrRegion reg : ocrResult.regions()) {
+          // Get one line in the text block
+          for (OcrLine line : reg.lines()) {
+            for (OcrWord word : line.words()) {
+              // get bounding box of first word recognized (just to demo)
+              if (firstWord) {
+                System.out.println("\nFirst word in first line is \"" + word.text() + "\" with  bounding box: " + word.boundingBox());
+                firstWord = false;
+                System.out.println();
+              }
+              System.out.print(word.text() + " ");
+            }
+            System.out.println();
+          }
+        }
+      }
+    } catch (Exception e) {
+        System.out.println(e.getMessage());
+        e.printStackTrace();
+    }
 }
