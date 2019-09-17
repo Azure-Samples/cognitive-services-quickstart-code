@@ -44,15 +44,17 @@ public class FaceQuickstart {
 
         // For Detect Faces and Find Similar Faces examples
         // This image should have a single face.
-        final String singleFaceUrl = "https://www.biography.com/.image/t_share/MTQ1MzAyNzYzOTgxNTE0NTEz/john-f-kennedy---mini-biography.jpg";
-        final String singleImageName = singleFaceUrl.substring( singleFaceUrl.lastIndexOf('/')+1, singleFaceUrl.length() );
+        final String SINGLE_FACE_URL = "https://www.biography.com/.image/t_share/MTQ1MzAyNzYzOTgxNTE0NTEz/john-f-kennedy---mini-biography.jpg";
+        final String SINGLE_IMAGE_NAME = 
+                SINGLE_FACE_URL.substring(SINGLE_FACE_URL.lastIndexOf('/')+1, SINGLE_FACE_URL.length());
         // This image should have several faces. At least one should be similar to the face in singleFaceImage.
-        final String  groupFacesUrl = "http://www.historyplace.com/kennedy/president-family-portrait-closeup.jpg";
-        final String groupImageName = groupFacesUrl.substring( groupFacesUrl.lastIndexOf('/')+1, groupFacesUrl.length() );
+        final String  GROUP_FACES_URL = "http://www.historyplace.com/kennedy/president-family-portrait-closeup.jpg";
+        final String GROUP_IMAGE_NAME = 
+                GROUP_FACES_URL.substring(GROUP_FACES_URL.lastIndexOf('/')+1, GROUP_FACES_URL.length());
 
-        // For Verify, Identify Faces, and Group Faces examples
+        // For Identify, Verify, Group Faces, and Face Lists examples
         final String IMAGE_BASE_URL = "https://csdx.blob.core.windows.net/resources/Face/Images/";
-        
+
         // Used for the Identify example and Delete examples
         final String PERSON_GROUP_ID = "my-families"; // can be any lowercase, 0-9, "-", or "_" character.
         // Used for the Face List and Delete examples
@@ -69,20 +71,20 @@ public class FaceQuickstart {
         final AzureRegions myRegion = AzureRegions.WESTUS;
 
         // Create Face client
-        FaceAPI client = FaceAPIManager.authenticate(myRegion, key);
+        FaceAPI client = FaceAPIManager.authenticate(REGION, KEY);
         /**
          * END - Authenticate
          */
 
         System.out.println("============== Detect Face ==============");
         // Detect the face in a single-faced image. Returns a list of UUIDs and prints them.
-        List<UUID> singleFaceID = detectFaces(client, singleFaceUrl, singleImageName);
+        List<UUID> singleFaceIDs = detectFaces(client, SINGLE_FACE_URL, SINGLE_IMAGE_NAME);
         // Detect the faces in a group image. Returns a list of UUIDs and prints them.
-        List<UUID> groupFaceIDs = detectFaces(client, groupFacesUrl, groupImageName);
+        List<UUID> groupFaceIDs = detectFaces(client, GROUP_FACES_URL, GROUP_IMAGE_NAME);
 
         System.out.println("============== Find Similar ==============");
         // Finds a similar face in group image. Returns a list of UUIDs and prints them.
-        findSimilar(client, singleFaceID, groupFaceIDs, groupImageName);
+        findSimilar(client, singleFaceIDs, groupFaceIDs, GROUP_IMAGE_NAME);
         
         System.out.println("============== Verify ==============");
         // Checks if 2 photos are of the same or different person.
@@ -91,7 +93,7 @@ public class FaceQuickstart {
         System.out.println("============== Identify ==============");
         // Groups similar photos of a person, then uses that group 
         // to recognize the person in another photo.
-        identifyFaces(client, IMAGE_BASE_URL);
+        identifyFaces(client, IMAGE_BASE_URL, PERSON_GROUP_ID);
         
         System.out.println("============== Group Faces ==============");
         // Groups all faces in list into sub-groups based on similar faces.
@@ -211,7 +213,7 @@ public class FaceQuickstart {
     * to teach the AI how to identify future images of that person.
     * Uses the detectFaces() method from this quickstart.
     */
-    public static void identifyFaces(FaceAPI client, String imageBaseURL) {
+    public static void identifyFaces(FaceAPI client, String imageBaseURL, String personGroupID) {
         // Create a dictionary to hold all your faces
         Map<String, String[]> facesList = new HashMap<String, String[]>();
         facesList.put("Family1-Dad", new String[] { "Family1-Dad1.jpg", "Family1-Dad2.jpg" });
@@ -224,8 +226,6 @@ public class FaceQuickstart {
         // A group photo that includes some of the persons you seek to identify from your dictionary.
         String groupPhoto = "identification1.jpg";
 
-        // Create a person group ID for a new person group (the group that holds all the person group persons).
-        String personGroupID = "my-families";
         System.out.println("Creating the person group " + personGroupID + " ...");
         // Create the person group, so our photos have one to belong to.
         client.personGroups().create(personGroupID, new CreatePersonGroupsOptionalParameter().withName(personGroupID));
