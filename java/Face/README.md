@@ -15,10 +15,10 @@ If cutting / pasting specific examples only, for instance say you only want Iden
 ## Prerequisites
   - Create a Face subscription in the Azure portal.
   - Download the faceAPI library (ms-azure-cs-faceapi.jar) from this repo.
-  - Download the dependency jars (choose one of these ways):
-        - Option 1: obtain jars in the dependencies.txt file from Maven (mvnrepository.com)
-        - Option 2: download the faceapi-dependencies.jar file from this repo, open (expand) to find all the dependency jars.
-                    Refer to dependencies.txt for URLs of the libraries to update if needed.
+  - Download the dependency jars (choose one of these ways):<br>
+        - Option 1: obtain jars in the dependencies.txt file from Maven (mvnrepository.com)<br>
+        - Option 2: download the faceapi-dependencies.jar file from this repo, open (expand) to find all the dependency jars. <br>
+          Refer to dependencies.txt for URLs of the libraries to update if needed.
   - Create a **lib** folder in the root directory of your project, then add the FaceAPI library and dependency jars.
   - Add your Face subscription key to your environment variables with the name FACE_SUBSCRIPTION_KEY.
   - Replace the "REGION" variable in the authenticate section with your region. <br>
