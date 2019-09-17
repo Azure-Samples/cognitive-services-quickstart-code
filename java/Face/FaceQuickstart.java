@@ -11,12 +11,16 @@ import java.util.concurrent.TimeUnit;
  *  - Verify: with 2 images, check if they are the same person or different people
  *  - Identify: with grouped images of the same person, use group to find similar faces in another image
  *  - Group Faces: groups images into sub-groups based on same person images
+ *  - Face Lists: adds images to a face list, then retrieves them
+ *  - Delete: deletes the person group and face list to enable repeated testing
  * 
  * Prerequisites:
+ * - Create a Face subscription in the Azure portal.
  * - Create a lib folder in the root directory of your project, then add the jars from dependencies.txt
- * - Download the FaceAPI library jar and add to your lib folder.
- * - Replace the "myRegion" variable in the authenticate section with your region. 
- *   The "westus" is used, otherwise, as the default.
+ * - Download the FaceAPI library (ms-azure-cs-faceapi.jar) from this repo and add to your lib folder.
+ * - Replace the "REGION" variable in the authenticate section with your region. 
+ *   The "westus" region is used, otherwise, as the default. 
+ *   NOTE: this quickstart does not need your Face endpoint.
  * 
  * To compile and run, enter the following at a command prompt:
  *   javac FaceQuickstart.java -cp .;lib\*
@@ -48,6 +52,11 @@ public class FaceQuickstart {
 
         // For Verify, Identify Faces, and Group Faces examples
         final String IMAGE_BASE_URL = "https://csdx.blob.core.windows.net/resources/Face/Images/";
+        
+        // Used for the Identify example and Delete examples
+        final String PERSON_GROUP_ID = "my-families"; // can be any lowercase, 0-9, "-", or "_" character.
+        // Used for the Face List and Delete examples
+        final String FACE_LIST_ID = "my-families-list";
 
         /**
          * Authenticate
@@ -86,7 +95,13 @@ public class FaceQuickstart {
         
         System.out.println("============== Group Faces ==============");
         // Groups all faces in list into sub-groups based on similar faces.
-        groupFaces(client, IMAGE_BASE_URL); 
+        groupFaces(client, IMAGE_BASE_URL);
+        
+        System.out.println("============== Face Lists ==============");
+        faceLists(client, IMAGE_BASE_URL, FACE_LIST_ID);
+
+        System.out.println("============== Delete ==============");
+        delete(client, PERSON_GROUP_ID, FACE_LIST_ID);
     }
     /**
      * END - Main
@@ -317,6 +332,69 @@ public class FaceQuickstart {
     }
     /**
      * END - Group Faces
+     */
+    
+    /**
+     * Face Lists
+     * This example adds images to a face list. Can add up to 1 million.
+     */
+    public static void faceLists(FaceAPI client, String imageBaseURL, String faceListID) {
+        // Images we want to the face list
+        List<String> imagesList = new ArrayList<>();
+        imagesList.add("Family1-Dad1.jpg");
+        imagesList.add("Family1-Dad2.jpg");
+        imagesList.add("Family3-Lady1.jpg");
+        imagesList.add("Family1-Daughter1.jpg");
+        imagesList.add("Family1-Daughter2.jpg");
+        imagesList.add("Family1-Daughter3.jpg");
+
+        // Create an empty face list with a face list ID
+        // (optional) Add the name you want to give the list to the CreateFaceListsOptionalParameter
+        System.out.println("Creating the face list " + faceListID + " ...");
+        client.faceLists().create(faceListID, new CreateFaceListsOptionalParameter().withName(faceListID));
+
+        // Add each image from our ArrayList to our face list
+        for (String image : imagesList) {
+            // Returns a PersistedFace object
+            client.faceLists().addFaceFromUrl(faceListID, imageBaseURL + image, null);
+        }
+
+        // Get the persisted faces we added to our face list.
+        FaceList retrievedFaceList = client.faceLists().get(faceListID);
+
+        // Print the UUIDs retrieved
+        System.out.println("Face list IDs: ");
+        for (PersistedFace face : retrievedFaceList.persistedFaces()) {
+            System.out.println(face.persistedFaceId());
+        }
+        System.out.println();
+    }
+    /**
+     * END - Face Lists
+     */
+    
+    /**
+     * Delete
+     * The delete operations erase the person group and face list from your API account,
+     * so you can test multiple times with the same name.
+     */
+    public static void delete(FaceAPI client, String personGroupID, String faceListID){
+        // Delete the person group
+        // There is also an option in the SDK to delete one Person 
+        // from the person group, but we don't show that here.
+        System.out.println("Deleting the person group...");
+        client.personGroups().delete(personGroupID);
+        System.out.println("Deleted the person group " + personGroupID);
+
+        // Delete the entire face list
+        // There is also an option in the SDK to delete one face 
+        // from the list, but we don't show that here.
+        System.out.println("Deleting the face list...");
+        client.faceLists().delete(faceListID);
+        System.out.println("Deleted the face list " + faceListID);
+    }
+    /**
+     * END - Delete
      */
 }
 
