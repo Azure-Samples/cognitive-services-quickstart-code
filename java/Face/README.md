@@ -7,15 +7,21 @@ This quickstart contains many examples that can be run all at once.
   - Verify: with 2 images, check if they are the same person or different people
   - Identify: with grouped images of the same person (in a person group), use group to find similar faces in another image
   - Group Faces: groups images into sub-groups based on same person images
+  - Face Lists: adds images to a face list, then retrieves them
+  - Delete: deletes the person group and face list to enable repeated testing
   
 If cutting / pasting specific examples only, for instance say you only want Identify, be sure to include any helper methods it uses. For instance, Identify uses the Detect Faces example as a helper method.
  
 ## Prerequisites
-  - Create a **lib** folder in the root directory of your project, then add the jars from dependencies.txt list.
-    As an option, you can open the faceapi-dependencies.jar file to have all dependency jars immediately, although versions may have changed since the time of this post. Refer to dependencies.txt for URLs of the libraries to update if needed.
-  - Download the ms-azure-cs-faceapi.jar in this repo and add to your lib folder.
+  - Create a Face subscription in the Azure portal.
+  - Download the faceAPI library (ms-azure-cs-faceapi.jar) from this repo.
+  - Download the dependency jars (choose one of these ways):
+        - Option 1: obtain jars in the dependencies.txt file from Maven (mvnrepository.com)
+        - Option 2: download the faceapi-dependencies.jar file from this repo, open (expand) to find all the dependency jars.
+                    Refer to dependencies.txt for URLs of the libraries to update if needed.
+  - Create a **lib** folder in the root directory of your project, then add the FaceAPI library and dependency jars.
   - Add your Face subscription key to your environment variables with the name FACE_SUBSCRIPTION_KEY.
-  - Replace the "myRegion" variable in the authenticate section with your region. <br>
+  - Replace the "REGION" variable in the authenticate section with your region. <br>
     The "westus" is used, otherwise, as the default. NOTE: this quickstart does **not** need your Face endpoint.
  
 ## Compile and run
