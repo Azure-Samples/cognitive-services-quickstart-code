@@ -388,7 +388,7 @@ function computerVision() {
         while (result.status !== 'Succeeded') { await sleep(1000); result = await client.getTextOperationResult(operation); }
         return result.recognitionResult;
       }
-      // <snippet_read_helper>
+      // </snippet_read_helper>
 
       // <snippet_read_print>
       // Prints all text from OCR result
