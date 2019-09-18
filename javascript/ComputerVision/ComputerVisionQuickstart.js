@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft Corporation. All rights reserved.
  * Licensed under the MIT License. 
  */
+// <snippet_imports>
 'use strict';
 
 const async = require('async');
@@ -10,6 +11,7 @@ const createReadStream = require('fs').createReadStream
 const sleep = require('util').promisify(setTimeout);
 const ComputerVisionClient = require('@azure/cognitiveservices-computervision').ComputerVisionClient;
 const ApiKeyCredentials = require('@azure/ms-rest-js').ApiKeyCredentials;
+// </snippet_imports>
 
 /**
  * Computer Vision example
@@ -37,6 +39,7 @@ const ApiKeyCredentials = require('@azure/ms-rest-js').ApiKeyCredentials;
  * Recognize Printed & Handwritten Text, Detect Domain-specific Content, Detect Adult Content.
  */
 
+// <snippet_vars>
 /**
  * AUTHENTICATE
  * This single client is used for all examples.
@@ -44,16 +47,21 @@ const ApiKeyCredentials = require('@azure/ms-rest-js').ApiKeyCredentials;
 let key = process.env['COMPUTER_VISION_SUBSCRIPTION_KEY'];
 let endpoint = process.env['COMPUTER_VISION_ENDPOINT']
 if (!key) { throw new Error('Set your environment variables for your subscription key and endpoint.'); }
+// </snippet_vars>
 
+// <snippet_client>
 let computerVisionClient = new ComputerVisionClient(
     new ApiKeyCredentials({inHeader: {'Ocp-Apim-Subscription-Key': key}}), endpoint);
+// </snippet_client>
 /**
  * END - Authenticate
  */
 
+// <snippet_functiondef_begin>
 function computerVision() {
   async.series([
     async function () {
+      // </snippet_functiondef_begin>
 
       /**
        * DESCRIBE IMAGE
@@ -64,13 +72,17 @@ function computerVision() {
       console.log('DESCRIBE IMAGE');
       console.log();
 
+      // <snippet_describe_image>
       var describeURL = 'https://moderatorsampleimages.blob.core.windows.net/samples/sample1.jpg';
+      // </snippet_describe_image>
       var describeImagePath = __dirname + '\\sample1.png';
 
+      // <snippet_describe>
       // Analyze URL image
       console.log('Analyzing URL image to describe...', describeURL.split('/').pop());
       var caption = (await computerVisionClient.describeImage(describeURL)).captions[0];
       console.log(`This may be ${caption.text} (${caption.confidence.toFixed(2)} confidence)`);
+      // </snippet_describe>
 
       // Analyze local image
       console.log('\nAnalyzing local image to describe...', path.basename(describeImagePath));
@@ -92,6 +104,7 @@ function computerVision() {
       console.log('DETECT FACES');
       console.log();
 
+      // <snippet_faces>
       const facesImageURL = 'https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/faces.jpg';
 
       // Analyze URL image.
@@ -105,12 +118,16 @@ function computerVision() {
         for (let face of faces) { console.log(`    Gender: ${face.gender}`.padEnd(20) 
           + ` Age: ${face.age}`.padEnd(10) + `at ${formatRectFaces(face.faceRectangle)}`); }
       } else { console.log('No faces found.'); }
+      // </snippet_faces>
 
+      // <snippet_formatfaces>
       // Formats the bounding box
       function formatRectFaces(rect) {
         return `top=${rect.top}`.padEnd(10) + `left=${rect.left}`.padEnd(10) + `bottom=${rect.top + rect.height}`.padEnd(12) 
           + `right=${rect.left + rect.width}`.padEnd(10) + `(${rect.width}x${rect.height})`;
       }
+      // </snippet_formatfaces>
+     
       /**
        * END - Detect Faces
        */
@@ -125,6 +142,7 @@ function computerVision() {
       console.log('DETECT OBJECTS');
       console.log();
       
+      // <snippet_objects>
       // Image of a dog
       const objectURL = 'https://raw.githubusercontent.com/Azure-Samples/cognitive-services-node-sdk-samples/master/Data/image.jpg';
 
@@ -138,12 +156,15 @@ function computerVision() {
           console.log(`${objects.length} object${objects.length == 1 ? '' : 's'} found:`);
           for (let obj of objects) { console.log(`    ${obj.object} (${obj.confidence.toFixed(2)}) at ${formatRectObjects(obj.rectangle)}`); }
       } else { console.log('No objects found.'); }
+      // </snippet_objects>
 
+      // <snippet_objectformat>
       // Formats the bounding box
       function formatRectObjects(rect) {
         return `top=${rect.y}`.padEnd(10) + `left=${rect.x}`.padEnd(10) + `bottom=${rect.y + rect.h}`.padEnd(12) 
         + `right=${rect.x + rect.w}`.padEnd(10) + `(${rect.w}x${rect.h})`;
       }
+      // </snippet_objectformat>
       /**
        * END - Detect Objects
        */
@@ -154,6 +175,7 @@ function computerVision() {
        * Detects tags for an image, which returns:
        *     all objects in image and confidence score.
        */
+      // <snippet_tags>
       console.log('-------------------------------------------------');
       console.log('DETECT TAGS');
       console.log();
@@ -165,11 +187,14 @@ function computerVision() {
       console.log('Analyzing tags in image...', tagsURL.split('/').pop());
       let tags = (await computerVisionClient.analyzeImage(tagsURL, {visualFeatures: ['Tags']})).tags;
       console.log(`Tags: ${formatTags(tags)}`);
+      // </snippet_tags>
 
+      // <snippet_tagsformat>
       // Format tags for display
       function formatTags(tags) {
         return tags.map(tag => (`${tag.name} (${tag.confidence.toFixed(2)})`)).join(', ');
       }
+      // </snippet_tagsformat>
       /**
        * END - Detect Tags
        */
@@ -183,18 +208,22 @@ function computerVision() {
       console.log('DETECT TYPE');
       console.log();
 
+      // <snippet_imagetype>
       const typeURLImage = 'https://raw.githubusercontent.com/Azure-Samples/cognitive-services-python-sdk-samples/master/samples/vision/images/make_things_happen.jpg';
 
        // Analyze URL image
       console.log('Analyzing type in image...', typeURLImage.split('/').pop());
       let types = (await computerVisionClient.analyzeImage(typeURLImage, {visualFeatures: ['ImageType']})).imageType;
       console.log(`Image appears to be ${describeType(types)}`);
+      // </snippet_imagetype>
 
+      // <snippet_imagetype_describe>
       function describeType(imageType) {
         if (imageType.clipArtType && imageType.clipArtType > imageType.lineDrawingType) return 'clip art';
         if (imageType.lineDrawingType && imageType.clipArtType < imageType.lineDrawingType) return 'a line drawing';
         return 'a photograph';
       }
+      // </snippet_imagetype_describe>
       /**
        * END - Detect Type
        */
@@ -208,18 +237,22 @@ function computerVision() {
       console.log('DETECT CATEGORY');
       console.log();
 
+      // <snippet_categories>
       const categoryURLImage = 'https://moderatorsampleimages.blob.core.windows.net/samples/sample16.png';
 
       // Analyze URL image
       console.log('Analyzing category in image...', categoryURLImage.split('/').pop());
       let categories = (await computerVisionClient.analyzeImage(categoryURLImage)).categories;
       console.log(`Categories: ${formatCategories(categories)}`);
+      // </snippet_categories>
 
+      // <snippet_categories_format>
       // Formats the image categories
       function formatCategories(categories) {
         categories.sort((a, b) => b.score - a.score);
         return categories.map(cat => `${cat.name} (${cat.score.toFixed(2)})`).join(', ');
       }
+      // </snippet_categories_format>
       /**
        * END - Detect Categories
        */
@@ -233,6 +266,7 @@ function computerVision() {
       console.log('DETECT BRAND');
       console.log();
 
+      // <snippet_brands>
       const brandURLImage = 'https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/images/red-shirt-logo.jpg';
 
       // Analyze URL image
@@ -246,7 +280,7 @@ function computerVision() {
               console.log(`    ${brand.name} (${brand.confidence.toFixed(2)} confidence)`);
           }
       } else { console.log(`No brands found.`); }
- 
+      // </snippet_brands>
       console.log();
 
       /**
@@ -257,13 +291,16 @@ function computerVision() {
       console.log('DETECT COLOR SCHEME');
       console.log();
 
+      // <snippet_colors>
       const colorURLImage = 'https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/celebrities.jpg';
 
       // Analyze URL image
       console.log('Analyzing image for color scheme...', colorURLImage.split('/').pop());
       let color = (await computerVisionClient.analyzeImage(colorURLImage, {visualFeatures: ['Color']})).color;
       printColorScheme(color);
+      // </snippet_colors>
 
+      // <snippet_colors_print>
       // Print a detected color scheme
       function printColorScheme(colors){
         console.log(`    Image is in ${colors.isBwImg ? 'black and white' : 'color'}`);
@@ -272,6 +309,7 @@ function computerVision() {
         console.log(`    Dominant background color: ${colors.dominantColorBackground}`);
         console.log(`    Suggested accent color: #${colors.accentColor}`);
       }
+      // </snippet_colors_print>
       /**
        * END - Detect Color Scheme
        */
@@ -318,10 +356,13 @@ function computerVision() {
      console.log('RECOGNIZE PRINTED & HANDWRITTEN TEXT');
      console.log();
 
+     // <snippet_read_images>
      // URL images containing printed and handwritten text
       const printedText     = 'https://moderatorsampleimages.blob.core.windows.net/samples/sample2.jpg';
       const handwrittenText = 'https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/handwritten_text.jpg';
+      // </snippet_read_images>
       
+      // <snippet_read_call>
       // Recognize text in printed image
       console.log('Recognizing printed text...', printedText.split('/').pop());
       var printed = await recognizeText(computerVisionClient, 'Printed', printedText);
@@ -331,7 +372,9 @@ function computerVision() {
       console.log('\nRecognizing handwritten text...', handwrittenText.split('/').pop());
       var handwriting = await recognizeText(computerVisionClient, 'Handwritten', handwrittenText);
       printRecText(handwriting);
+      // </snippet_read_call>
 
+      // <snippet_read_helper>
       // Perform text recognition and await the result
       async function recognizeText(client, mode, url) {
         // To recognize text in a local image, replace client.recognizeText() with recognizeTextInStream() as shown:
@@ -345,7 +388,9 @@ function computerVision() {
         while (result.status !== 'Succeeded') { await sleep(1000); result = await client.getTextOperationResult(operation); }
         return result.recognitionResult;
       }
+      // <snippet_read_helper>
 
+      // <snippet_read_print>
       // Prints all text from OCR result
       function printRecText(ocr) {
         if (ocr.lines.length) {
@@ -356,6 +401,7 @@ function computerVision() {
         }
         else { console.log('No recognized text.'); }
       }
+      // </snippet_read_print>
       /**
        * END - Recognize Printed & Handwritten Text
        */
@@ -369,8 +415,11 @@ function computerVision() {
       console.log('DETECT DOMAIN-SPECIFIC CONTENT');
       console.log();
 
+      // <snippet_domain_image>
       const domainURLImage = 'https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/landmark.jpg';
+      // </snippet_domain_image>
 
+      // <snippet_landmarks>
       // Analyze URL image
       console.log('Analyzing image for landmarks...', domainURLImage.split('/').pop());
       let domain = (await computerVisionClient.analyzeImageByDomain('landmarks', domainURLImage)).result.landmarks;
@@ -382,13 +431,16 @@ function computerVision() {
               console.log(`    ${obj.name}`.padEnd(20) + `(${obj.confidence.toFixed(2)} confidence)`.padEnd(20) + `${formatRectDomain(obj.faceRectangle)}`);
           }
       } else { console.log('No landmarks found.'); }
+      // </snippet_landmarks>
 
+      // <snippet_landmarks_rect>
       // Formats bounding box
       function formatRectDomain(rect) {
         if (!rect) return '';
         return `top=${rect.top}`.padEnd(10) + `left=${rect.left}`.padEnd(10) + `bottom=${rect.top + rect.height}`.padEnd(12) 
               + `right=${rect.left + rect.width}`.padEnd(10) + `(${rect.width}x${rect.height})`;
       }
+      // </snippet_landmarks_rect>
 
       console.log();
 
@@ -402,9 +454,13 @@ function computerVision() {
       console.log('DETECT ADULT CONTENT');
       console.log();
 
+      // <snippet_adult_image>
       // The URL image and local images are not racy/adult. 
       // Try your own racy/adult images for a more effective result.
       const adultURLImage = 'https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/celebrities.jpg';
+      // </snippet_adult_image>
+
+      // <snippet_adult>
       // Function to confirm racy or not
       const isIt = flag => flag ? 'is' : "isn't";
 
@@ -413,11 +469,13 @@ function computerVision() {
       var adult = (await computerVisionClient.analyzeImage(adultURLImage, {visualFeatures: ['Adult']})).adult;
       console.log(`This probably ${isIt(adult.isAdultContent)} adult content (${adult.adultScore.toFixed(4)} score)`);
       console.log(`This probably ${isIt(adult.isRacyContent)} racy content (${adult.racyScore.toFixed(4)} score)`);
+      // </snippet_adult>
       /**
        * END - Detect Adult Content
        */
       console.log();
       console.log('-------------------------------------------------');
+    // <snippet_functiondef_end>
     },
     function () {
       return new Promise((resolve) => {
@@ -430,3 +488,4 @@ function computerVision() {
 }
 
 computerVision();
+// </snippet_functiondef_end>
