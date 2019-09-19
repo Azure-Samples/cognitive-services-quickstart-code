@@ -28,7 +28,7 @@ const creds = new msRest.ApiKeyCredentials({ inHeader: { 'Ocp-Apim-Subscription-
 const client = new SpellCheck.SpellCheckClient(creds, { endpoint: endpoint });
 
 async function quickstart() {
-    let query = "bill gtaes was eher";
+    let query = 'bill gtaes was eher';
     let misspelledWords = [];
     let suggestedWords = [];
     await client.spellChecker(query)
@@ -40,12 +40,12 @@ async function quickstart() {
                 var correction = spellingFlaggedToken.suggestions[0].suggestion; // gets each word
                 suggestedWords.push(correction);
             }
-            console.log("Original query: " + query);
+            console.log('Original query: ' + query);
             console.log();
-            console.log("Misspelled words: ");
+            console.log('Misspelled words: ');
             console.log(misspelledWords);
             console.log();
-            console.log("Suggested correction(s): ");
+            console.log('Suggested correction(s): ');
             console.log(suggestedWords);
         }).catch((err) => {
             throw err;
