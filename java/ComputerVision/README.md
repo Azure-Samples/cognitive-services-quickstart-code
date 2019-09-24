@@ -14,6 +14,9 @@ This quickstart uses image classification and object detection on an image with 
 - If you don't have a Microsoft Azure subscription you can get a FREE trial account [here](http://go.microsoft.com/fwlink/?LinkId=330212).
 - Get an [Azure Computer Vision](https://azure.microsoft.com/en-us/services/cognitive-services/computer-vision/) account to get your subscription key and endpoint.
 - Add COMPUTER_VISION_SUBSCRIPTION_KEY and COMPUTER_VISION_ENDPOINT to your environment variables with your key and endpoint as values.
+- Create a 'resources' folder in your 'src/main/' folder. 
+- Add images **landmark.jpg** and **printed_text.jpg** to it, downloaded locally from here:
+  https://github.com/Azure-Samples/cognitive-services-sample-data-files/tree/master/ComputerVision/Images
 
 ### Clone and run
 
