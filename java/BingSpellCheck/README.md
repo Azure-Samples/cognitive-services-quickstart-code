@@ -19,7 +19,7 @@ This quickstart checks the spelling for the query "Bill Gatas" (with market and 
 
 Execute the following from a command line:
 
-1. `https://github.com/Azure-Samples/cognitive-services-quickstart-code.git`
+1. `git clone https://github.com/Azure-Samples/cognitive-services-quickstart-code.git`
 1. `cd cognitive-services-quickstart-code/java/BingSpellCheck`
 1. `mvn compile exec:java cleanupDaemonThreads = false`
 
