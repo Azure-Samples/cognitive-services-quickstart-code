@@ -6,7 +6,7 @@ author: wiazur
 
 # Computer Vision SDK Quickstart
 
-This quickstart uses image classification and object detection on an image with the Computer Vision Cognitive Service. It will retrieve and print information from the image. Maven is used.
+This quickstart uses image classification and object detection on an image with the Computer Vision Cognitive Service. It will retrieve and print information (include text) from the image. Maven is used.
 
 ## Getting Started
 
@@ -19,8 +19,8 @@ This quickstart uses image classification and object detection on an image with 
 
 Execute from the command line:
 
-1. `git clone https://github.com/Azure-Samples/cognitive-services-java-sdk-samples.git`
-1. `cd cognitive-services-java-sdk-samples/Vision/ComputerVision`
+1. `git clone https://github.com/Azure-Samples/cognitive-services-quickstart-code.git`
+1. `cd cognitive-services-quickstart-code/java/ComputerVision`
 1. `mvn compile exec:java -Dexec.cleanupDaemonThreads=false`
 
 ## More information 
