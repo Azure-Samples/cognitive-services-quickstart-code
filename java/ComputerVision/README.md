@@ -6,7 +6,7 @@ author: wiazur
 
 # Computer Vision SDK Quickstart
 
-This quickstart uses image classification and object detection on an image with the Computer Vision Cognitive Service. It will retrieve and print information (include text) from the image. Maven is used.
+This quickstart uses image classification and object detection on an image with the Computer Vision Cognitive Service. It will retrieve and print information (including text) from the image. Maven is used.
 
 ## Getting Started
 
