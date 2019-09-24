@@ -4,7 +4,7 @@ platforms: java
 author: wiazur
 ---
 
-# Bing Spell Check Sample
+# Bing Spell Check Quickstart
 
 This quickstart checks the spelling for the query "Bill Gatas" (with market and mode settings) and print outs the flagged tokens and spelling correction suggestions.
 
