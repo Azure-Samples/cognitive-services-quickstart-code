@@ -1,12 +1,12 @@
 package main
 
 import (
-	"context"
-	"fmt"
-	"github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v1.0/spellcheck"
-	"github.com/Azure/go-autorest/autorest"
-	"log"
-	"os"
+    "context"
+    "fmt"
+    "github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v1.0/spellcheck"
+    "github.com/Azure/go-autorest/autorest"
+    "log"
+    "os"
 )
 
 /*
@@ -29,55 +29,55 @@ Resources:
 */
 
 func main() {
-	// Authenticate
-	subscriptionKey := os.Getenv("BING_SPELL_CHECK_SUBSCRIPTION_KEY")
-	spellCheckClient := spellcheck.New() //BaseClient class
-	csAuthorizer := autorest.NewCognitiveServicesAuthorizer(subscriptionKey)
-	spellCheckClient.Authorizer = csAuthorizer
+    // Authenticate
+    subscriptionKey := os.Getenv("BING_SPELL_CHECK_SUBSCRIPTION_KEY")
+    spellCheckClient := spellcheck.New() //BaseClient class
+    csAuthorizer := autorest.NewCognitiveServicesAuthorizer(subscriptionKey)
+    spellCheckClient.Authorizer = csAuthorizer
 
-	// Check the spelling of a query
-	query := "bill Gatas was ehre"
-	// Returns a SpellCheck struct
-	spellCheckResult, err := spellCheckClient.SpellCheckerMethod(
-		context.Background(), // context
-		query,                // text to check
-		"",                   // Accept-Language header
-		"",                   // Pragma header
-		"",                   // User-Agent header
-		"",                   // X-MSEdge-ClientID header
-		"",                   // X-MSEdge-ClientIP header
-		"",                   // X-Search-Location header
-		spellcheck.ActionType(""), // action type
-		"",      // app name
-		"",      // country code
-		"",      // client machine name
-		"",      // doc ID
-		"",      // market
-		"",      // session ID
-		"",      // set lang
-		"proof", // user ID
-		"",      // mode
-		"",      // pre context text
-		"",      // post context text
-	)
-	if err != nil { log.Fatal(err) }
+    // Check the spelling of a query
+    query := "bill Gatas was ehre"
+    // Returns a SpellCheck struct
+    spellCheckResult, err := spellCheckClient.SpellCheckerMethod(
+	context.Background(), // context
+	query,                // text to check
+	"",                   // Accept-Language header
+	"",                   // Pragma header
+	"",                   // User-Agent header
+	"",                   // X-MSEdge-ClientID header
+	"",                   // X-MSEdge-ClientIP header
+	"",                   // X-Search-Location header
+	spellcheck.ActionType(""), // action type
+	"",      // app name
+	"",      // country code
+	"",      // client machine name
+	"",      // doc ID
+	"",      // market
+	"",      // session ID
+	"",      // set lang
+	"proof", // user ID
+	"",      // mode
+	"",      // pre context text
+	"",      // post context text
+    )
+    if err != nil { log.Fatal(err) }
 
-	fmt.Println()
-	fmt.Println("Original query: \n" + query)
-	fmt.Println()
+    fmt.Println()
+    fmt.Println("Original query: \n" + query)
+    fmt.Println()
 
-	// The misspelled words are referred to as tokens 
-	fmt.Println("Misspelled words: ")
-	// 'eachWord' is a SpellingFlagToken struct
-	for _, eachWord := range *spellCheckResult.FlaggedTokens {
-		fmt.Println(*eachWord.Token) // the misspelled words
-	}
+    // The misspelled words are referred to as tokens 
+    fmt.Println("Misspelled words: ")
+    // 'eachWord' is a SpellingFlagToken struct
+    for _, eachWord := range *spellCheckResult.FlaggedTokens {
+    	fmt.Println(*eachWord.Token) // the misspelled words
+    }
 
-	fmt.Println()
-	fmt.Println("Suggested corrections: ")
-	for _, eachWord := range *spellCheckResult.FlaggedTokens {
-		for _, suggestedWord := range *eachWord.Suggestions { // Returns a *[]SpellingTokenSuggestion
-			fmt.Println(*suggestedWord.Suggestion)
-		} 
-	}
+    fmt.Println()
+    fmt.Println("Suggested corrections: ")
+    for _, eachWord := range *spellCheckResult.FlaggedTokens {
+	    for _, suggestedWord := range *eachWord.Suggestions { // Returns a *[]SpellingTokenSuggestion
+	    	fmt.Println(*suggestedWord.Suggestion)
+	    } 
+    }
 }
