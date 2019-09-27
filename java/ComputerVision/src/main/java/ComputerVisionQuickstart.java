@@ -27,7 +27,7 @@ import java.util.List;
  *  Recognize Printed Text: uses optical character recognition (OCR) to find text in an image.
  */
 
-public class ComputerVisionQuickstarts {
+public class ComputerVisionQuickstart {
 
     // <snippet_mainvars>
     public static void main(String[] args) {
