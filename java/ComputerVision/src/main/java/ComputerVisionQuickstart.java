@@ -48,7 +48,7 @@ public class ComputerVisionQuickstart {
         // Analyze local and remote images
         AnalyzeLocalImage(compVisClient);
 
-        // Recognize text with OCR for a local and remote (URL) image
+        // Recognize printed text with OCR for a local and remote (URL) image
         RecognizeTextOCRLocal(compVisClient);
         // </snippet_client>
     }
@@ -295,29 +295,29 @@ public class ComputerVisionQuickstart {
 
     // <snippet_read_call>
     /**
-     * RECOGNIZE TEXT: Displays text found in image with angle and orientation of
+     * RECOGNIZE PRINTED TEXT: Displays text found in image with angle and orientation of
      * the block of text.
      */
     private static void RecognizeTextOCRLocal(ComputerVisionClient client) {
         System.out.println("-----------------------------------------------");
-        System.out.println("RECOGNIZE TEXT");
+        System.out.println("RECOGNIZE PRINTED TEXT");
         
-        // replace this string with the path to your own image.
+        // Replace this string with the path to your own image.
         String localTextImagePath = "<local image path>";
         
         try {
             File rawImage = new File(localTextImagePath);
             byte[] localImageBytes = Files.readAllBytes(rawImage.toPath());
 
-            // Recognize text in local image
+            // Recognize printed text in local image
             OcrResult ocrResultLocal = client.computerVision().recognizePrintedTextInStream()
                     .withDetectOrientation(true).withImage(localImageBytes).withLanguage(OcrLanguages.EN).execute();
             // </snippet_read_call>
 
             // <snippet_read_print>
-            // Print results of local and remote images
+            // Print results of local image
             System.out.println();
-            System.out.println("Recognizing text from local image with OCR ...");
+            System.out.println("Recognizing printed text from a local image with OCR ...");
             System.out.println("\nLanguage: " + ocrResultLocal.language());
             System.out.printf("Text angle: %1.3f\n", ocrResultLocal.textAngle());
             System.out.println("Orientation: " + ocrResultLocal.orientation());
@@ -352,13 +352,13 @@ public class ComputerVisionQuickstart {
 
     private static void RecognizeTextOCRRemote(ComputerVisionClient client, String remoteTextImageURL) {
         System.out.println("-----------------------------------------------");
-        System.out.println("RECOGNIZE TEXT");
+        System.out.println("RECOGNIZE PRINTED TEXT");
         try {
-            // Recognize text in remote image
+            // Recognize printed text in remote image
             OcrResult ocrResultRemote = client.computerVision().recognizePrintedText().withDetectOrientation(true)
                     .withUrl(remoteTextImageURL).withLanguage(OcrLanguages.EN).execute();
 
-            // Print results of local and remote images
+            // Print results of remote image
             System.out.println();
             System.out.println("Recognizing text from remote image with OCR ...");
             System.out.println("\nLanguage: " + ocrResultRemote.language());
