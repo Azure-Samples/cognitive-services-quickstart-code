@@ -511,7 +511,7 @@ remote_image_url = "https://raw.githubusercontent.com/Azure-Samples/cognitive-se
 text_recognition_mode = TextRecognitionMode.printed
 num_chars_in_operation_id = 36
 
-client_response = computervision_client.batch_read_file(remote_image_url, text_recognition_mode, raw=True)
+client_response = computervision_client.batch_read_file(remote_image_url,  raw=True, kwargs=text_recognition_mode)
 # </snippet_read_call>
 # <snippet_read_response>
 operation_location = client_response.headers["Operation-Location"]
