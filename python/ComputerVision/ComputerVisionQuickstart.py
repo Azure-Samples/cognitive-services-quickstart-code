@@ -53,7 +53,9 @@ These variables are shared by several examples
 # Detect faces, Detect adult or racy content, Detect the color scheme, 
 # Detect domain-specific content, Detect image types, Detect objects
 local_image_path = "resources\\faces.jpg"
+# <snippet_remoteimage>
 remote_image_url = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/landmark.jpg"
+# </snippet_remoteimage>
 '''
 END - Quickstart variables
 '''
