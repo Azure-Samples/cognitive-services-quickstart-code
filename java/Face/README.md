@@ -13,7 +13,7 @@ This quickstart contains many examples that can be run all at once.
 If cutting / pasting specific examples only, for instance say you only want Identify, be sure to include any helper methods it uses. For instance, Identify uses the Detect Faces example as a helper method.
  
 ## Prerequisites
-  - Create a Face subscription in the Azure portal.
+  - Create a Face subscription in the [Azure portal](https://ms.portal.azure.com).
   - Download the faceAPI library (ms-azure-cs-faceapi.jar) from this repo.
   - Download the dependency jars (choose one of these ways):<br>
         - Option 1: obtain jars in the dependencies.txt file from Maven (mvnrepository.com)<br>
@@ -21,7 +21,7 @@ If cutting / pasting specific examples only, for instance say you only want Iden
           Refer to dependencies.txt for URLs of the libraries to update if needed.
   - Create a **lib** folder in the root directory of your project, then add the FaceAPI library and dependency jars.
   - Add your Face subscription key to your environment variables with the name FACE_SUBSCRIPTION_KEY.
-  - Replace the "REGION" variable in the authenticate section with your region. <br>
+  - Replace the "REGION" variable in the authenticate section with your Azure subscription's region. <br>
     The "westus" is used, otherwise, as the default. NOTE: this quickstart does **not** need your Face endpoint.
  
 ## Compile and run
