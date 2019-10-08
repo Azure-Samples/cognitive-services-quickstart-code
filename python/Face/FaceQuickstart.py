@@ -83,7 +83,8 @@ SOURCE_PERSON_GROUP_ID = PERSON_GROUP_ID
 TARGET_ENDPOINT = os.environ["FACE_ENDPOINT2"]
 # Target subscription key. Must match the target endpoint region/subscription.
 TARGET_KEY = os.environ['FACE_SUBSCRIPTION_KEY2']
-# Target subscription ID. It will be the same as the source ID if created Face resources from the same subscription (but moving from region to region). If they are differnt subscriptions, add the other target ID here.
+# Target subscription ID. It will be the same as the source ID if created Face resources from the 
+# same subscription (but moving from region to region). If they are different subscriptions, add the other target ID here.
 TARGET_ID = os.environ['AZURE_SUBSCRIPTION_ID']
 # NOTE: We do not need to specify the target PersonGroup ID here because we generate it with this example.
 # Each new location you transfer a person group to will have a generated, new person group ID for that region.
@@ -203,7 +204,8 @@ if not similar_faces[0]:
 print('Similar faces found in', multi_image_name + ':')
 for face in similar_faces:
 	first_image_face_ID = face.face_id
-	# The similar face IDs of the single face image and the group image do not need to match, they are only used for identification purposes in each image. 
+	# The similar face IDs of the single face image and the group image do not need to match, 
+	# they are only used for identification purposes in each image. 
 	# The similar faces are matched using the Cognitive Services algorithm in find_similar().
 	face_info = next(x for x in detected_faces2 if x.face_id == first_image_face_ID)
 	if face_info:
@@ -220,7 +222,9 @@ END - Find Similar
 
 '''
 Verify
-The Verify operation takes a face ID from DetectedFace or PersistedFace and either another face ID or a Person object and determines whether they belong to the same person. If you pass in a Person object, you can optionally pass in a PersonGroup to which that Person belongs to improve performance.
+The Verify operation takes a face ID from DetectedFace or PersistedFace and either another face ID 
+or a Person object and determines whether they belong to the same person. If you pass in a Person object, 
+you can optionally pass in a PersonGroup to which that Person belongs to improve performance.
 '''
 print('-----------------------------')
 print() 
@@ -618,8 +622,6 @@ async def run():
     source_list = list(dict.fromkeys(source_list))
 
     # Note Snapshot.take is not asynchronous.
-    # For information about Snapshot.take see:
-    # https://github.com/Azure/azure-sdk-for-python/blob/master/azure-cognitiveservices-vision-face/azure/cognitiveservices/vision/face/operations/snapshot_operations.py#L36
     take_snapshot_result = face_client_source.snapshot.take(
         type=SnapshotObjectType.person_group,
         object_id=PERSON_GROUP_ID,
@@ -628,8 +630,7 @@ async def run():
         raw=True
         )
     # Get operation ID from response for tracking
-    # Snapshot.type return value is of type msrest.pipeline.ClientRawResponse. See:
-    # https://docs.microsoft.com/en-us/python/api/msrest/msrest.pipeline.clientrawresponse?view=azure-python
+    # Snapshot.type return value is of type msrest.pipeline.ClientRawResponse. 
     take_operation_id = take_snapshot_result.response.headers['Operation-Location'].replace('/operations/', '')
 
     print('Taking snapshot( operation ID:', take_operation_id, ')...')
@@ -649,9 +650,6 @@ async def run():
     # <snippet_snapshot_apply>
     # STEP 3, apply the snapshot to target region(s)
     # Snapshot.apply is not asynchronous.
-    # For information about Snapshot.apply see:
-    # https://github.com/Azure/azure-sdk-for-python/blob/master/azure-cognitiveservices-vision-face/azure/cognitiveservices/vision/face/operations/snapshot_operations.py#L366
-
     apply_snapshot_result = face_client_target.snapshot.apply(
         snapshot_id=snapshot_id,
         # Generate a new UUID for the target person group ID.
@@ -676,8 +674,6 @@ async def run():
 async def wait_for_operation(client, operation_id):
     # Track progress of taking the snapshot.
     # Note Snapshot.get_operation_status is not asynchronous.
-    # For information about Snapshot.get_operation_status see:
-    # https://github.com/Azure/azure-sdk-for-python/blob/master/azure-cognitiveservices-vision-face/azure/cognitiveservices/vision/face/operations/snapshot_operations.py#L466
     result = client.snapshot.get_operation_status(operation_id=operation_id)
 
     status = result.status.lower()
