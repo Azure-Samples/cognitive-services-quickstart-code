@@ -49,7 +49,6 @@ async function main() {
         .then((faces) => {
             console.log('Face IDs found in group image:')
             // Initialize empty array of strings
-            //var faceIds = Array(faces.length).join(".").split(".")
             var faceIds = new Array(faces.length)
             for (let face of faces) {
                 faceIds.unshift(face.faceId)
