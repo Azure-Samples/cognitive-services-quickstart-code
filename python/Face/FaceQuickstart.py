@@ -12,10 +12,10 @@ from azure.cognitiveservices.vision.face.models import TrainingStatusType, Perso
 Face Quickstart
 
 Examples include:
-    - Detect Faces: detects faces in an image. 
-    - Find Similar: finds a similar face in an image using ID from Detect Faces. 
+    - Detect Faces: detects faces in an image.
+    - Find Similar: finds a similar face in an image using ID from Detect Faces.
     - Verify: compares two images to check if they are the same person or not.
-    - Person Group: creates a person group and uses it to identify faces in other images. 
+    - Person Group: creates a person group and uses it to identify faces in other images.
     - Large Person Group: similar to person group, but with different API calls to handle scale.
     - Face List: creates a list of single-faced images, then gets data from list.
     - Large Face List: creates a large list for single-faced images, trains it, then gets data.
@@ -29,14 +29,14 @@ Prerequisites:
 
 How to run:
     - Run from command line or an IDE
-    - If the Person Group or Large Person Group (or Face List / Large Face List) examples get 
-      interrupted after creation, be sure to delete your created person group (lists) from the API, 
-      as you cannot create a new one with the same name. Use 'Person group - List' to check them all, 
+    - If the Person Group or Large Person Group (or Face List / Large Face List) examples get
+      interrupted after creation, be sure to delete your created person group (lists) from the API,
+      as you cannot create a new one with the same name. Use 'Person group - List' to check them all,
       and 'Person Group - Delete' to remove one. The examples have a delete function in them, but at the end.
-      Person Group API: https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395244 
+      Person Group API: https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395244
       Face List API: https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039524d
 
-References: 
+References:
     - Documentation: https://docs.microsoft.com/en-us/azure/cognitive-services/face/
     - SDK: https://docs.microsoft.com/en-us/python/api/azure-cognitiveservices-vision-face/azure.cognitiveservices.vision.face?view=azure-python
     - All Face APIs: https://docs.microsoft.com/en-us/azure/cognitive-services/face/APIReference
@@ -71,7 +71,7 @@ TARGET_PERSON_GROUP_ID = str(uuid.uuid4()) # assign a random ID (or name it anyt
 Snapshot operations variables
 These are only used for the snapshot example. Set your environment variables accordingly.
 '''
-# Source endpoint, the location/subscription where the original person group is located. 
+# Source endpoint, the location/subscription where the original person group is located.
 SOURCE_ENDPOINT = ENDPOINT
 # Source subscription key. Must match the source endpoint region.
 SOURCE_KEY = KEY
@@ -83,7 +83,7 @@ SOURCE_PERSON_GROUP_ID = PERSON_GROUP_ID
 TARGET_ENDPOINT = os.environ["FACE_ENDPOINT2"]
 # Target subscription key. Must match the target endpoint region/subscription.
 TARGET_KEY = os.environ['FACE_SUBSCRIPTION_KEY2']
-# Target subscription ID. It will be the same as the source ID if created Face resources from the 
+# Target subscription ID. It will be the same as the source ID if created Face resources from the
 # same subscription (but moving from region to region). If they are different subscriptions, add the other target ID here.
 TARGET_ID = os.environ['AZURE_SUBSCRIPTION_ID']
 # NOTE: We do not need to specify the target PersonGroup ID here because we generate it with this example.
@@ -106,9 +106,9 @@ END - Authenticate
 Detect faces in two images
 '''
 print('-----------------------------')
-print() 
+print()
 print('DETECT FACES')
-print() 
+print()
 # <snippet_detect>
 # Detect a face in an image that contains a single face
 single_face_image_url = 'https://www.biography.com/.image/t_share/MTQ1MzAyNzYzOTgxNTE0NTEz/john-f-kennedy---mini-biography.jpg'
@@ -158,11 +158,11 @@ if not detected_faces:
 
 # Convert width height to a point in a rectangle
 def getRectangle(faceDictionary):
-    rect = faceDictionary['face_rectangle']
-    left = rect['left']
-    top = rect['top']
-    bottom = left + rect['height']
-    right = top + rect['width']
+    rect = faceDictionary.face_rectangle
+    left = rect.left
+    top = rect.top
+    bottom = left + rect.height
+    right = top + rect.width
     return ((left, top), (bottom, right))
 
 # Download the image from the url
@@ -186,9 +186,9 @@ Find a similar face
 This example uses detected faces in a group photo to find a similar face using a single-faced image as query.
 '''
 print('-----------------------------')
-print() 
+print()
 print('FIND SIMILAR')
-print() 
+print()
 # <snippet_findsimilar>
 # Search through faces detected in group image for the single face from first image.
 # First, create a list of the face IDs found in the second image.
@@ -200,12 +200,12 @@ if not similar_faces[0]:
 # </snippet_findsimilar>
 
 # <snippet_findsimilar_print>
-# Print the details of the similar faces detected 
+# Print the details of the similar faces detected
 print('Similar faces found in', multi_image_name + ':')
 for face in similar_faces:
 	first_image_face_ID = face.face_id
-	# The similar face IDs of the single face image and the group image do not need to match, 
-	# they are only used for identification purposes in each image. 
+	# The similar face IDs of the single face image and the group image do not need to match,
+	# they are only used for identification purposes in each image.
 	# The similar faces are matched using the Cognitive Services algorithm in find_similar().
 	face_info = next(x for x in detected_faces2 if x.face_id == first_image_face_ID)
 	if face_info:
@@ -222,12 +222,12 @@ END - Find Similar
 
 '''
 Verify
-The Verify operation takes a face ID from DetectedFace or PersistedFace and either another face ID 
-or a Person object and determines whether they belong to the same person. If you pass in a Person object, 
+The Verify operation takes a face ID from DetectedFace or PersistedFace and either another face ID
+or a Person object and determines whether they belong to the same person. If you pass in a Person object,
 you can optionally pass in a PersonGroup to which that Person belongs to improve performance.
 '''
 print('-----------------------------')
-print() 
+print()
 print('VERIFY')
 print()
 # <snippet_verify_photos>
@@ -266,17 +266,17 @@ for image_file_name in target_image_file_names:
 # Since target faces are the same person, in this example, we can use the 1st ID in the detected_faces_ids list to compare.
 verify_result_same = face_client.face.verify_face_to_face(source_image1_id, detected_faces_ids[0])
 print('Faces from {} & {} are of the same person, with confidence: {}'
-    .format(source_image_file_name1, target_image_file_names[0], verify_result_same.confidence)    
-    if verify_result_same.is_identical 
+    .format(source_image_file_name1, target_image_file_names[0], verify_result_same.confidence)
+    if verify_result_same.is_identical
     else 'Faces from {} & {} are of a different person, with confidence: {}'
         .format(source_image_file_name1, target_image_file_names[0], verify_result_same.confidence))
 
-# Verification example for faces of different persons. 
+# Verification example for faces of different persons.
 # Since target faces are same person, in this example, we can use the 1st ID in the detected_faces_ids list to compare.
 verify_result_diff = face_client.face.verify_face_to_face(source_image2_id, detected_faces_ids[0])
 print('Faces from {} & {} are of the same person, with confidence: {}'
-    .format(source_image_file_name2, target_image_file_names[0], verify_result_diff.confidence)    
-    if verify_result_diff.is_identical 
+    .format(source_image_file_name2, target_image_file_names[0], verify_result_diff.confidence)
+    if verify_result_diff.is_identical
     else 'Faces from {} & {} are of a different person, with confidence: {}'
         .format(source_image_file_name2, target_image_file_names[0], verify_result_diff.confidence))
 # </snippet_verify>
@@ -285,22 +285,22 @@ END - VERIFY
 '''
 
 '''
-Create/Train/Detect/Identify Person Group 
+Create/Train/Detect/Identify Person Group
 This example creates a Person Group, then trains it. It can then be used to detect and identify faces in other group images.
 '''
 print('-----------------------------')
-print() 
+print()
 print('PERSON GROUP OPERATIONS')
-print() 
+print()
 # <snippet_persongroup_create>
-''' 
+'''
 Create the PersonGroup
 '''
 # Create empty Person Group. Person Group ID must be lower case, alphanumeric, and/or with '-', '_'.
 print('Person group:', PERSON_GROUP_ID)
 face_client.person_group.create(person_group_id=PERSON_GROUP_ID, name=PERSON_GROUP_ID)
 
-# Define woman friend 
+# Define woman friend
 woman = face_client.person_group_person.create(PERSON_GROUP_ID, "Woman")
 # Define man friend
 man = face_client.person_group_person.create(PERSON_GROUP_ID, "Man")
@@ -334,7 +334,7 @@ for image in child_images:
 # </snippet_persongroup_assign>
 
 # <snippet_persongroup_train>
-''' 
+'''
 Train PersonGroup
 '''
 print()
@@ -391,9 +391,9 @@ Uses the same list used for creating a regular-sized person group.
 The operations are similar in structure as the Person Group example.
 '''
 print('-----------------------------')
-print() 
+print()
 print('LARGE PERSON GROUP OPERATIONS')
-print() 
+print()
 
 # Large Person Group ID, should be all lowercase and alphanumeric. For example, 'mygroupname' (dashes are OK).
 LARGE_PERSON_GROUP_ID = 'my-unique-large-person-group'
@@ -433,7 +433,7 @@ for image in child_images:
     ch = open(image, 'r+b')
     face_client.large_person_group_person.add_face_from_stream(LARGE_PERSON_GROUP_ID, child.person_id, ch)
 
-''' 
+'''
 Train LargePersonGroup
 '''
 print()
@@ -474,11 +474,11 @@ FACELIST
 This example adds single-faced images from URL to a list, then gets data from the list.
 '''
 print('-----------------------------')
-print() 
+print()
 print('FACELIST OPERATIONS')
-print() 
+print()
 
-# Create our list of URL images 
+# Create our list of URL images
 image_file_names = [
     "Family1-Dad1.jpg",
     "Family1-Daughter1.jpg",
@@ -528,11 +528,11 @@ This example adds single-faced images from URL to a large-capacity list, then ge
 This list could handle up to 1 million images.
 '''
 print('-----------------------------')
-print() 
+print()
 print('LARGE FACELIST OPERATIONS')
-print() 
+print()
 
-# Create our list of URL images 
+# Create our list of URL images
 image_file_names_large = [
     "Family1-Dad1.jpg",
     "Family1-Daughter1.jpg",
@@ -570,7 +570,7 @@ training_status_list = face_client.large_face_list.get_training_status(large_fac
 if training_status_list.status == TrainingStatusType.failed:
     raise Exception("Training failed with message {}.".format(training_status_list.message))
 
-# Returns a list[PersistedFace]. Can retrieve data from each face. 
+# Returns a list[PersistedFace]. Can retrieve data from each face.
 large_face_list_faces = face_client.large_face_list.list_faces(large_face_list_id)
 if not large_face_list_faces :
     raise Exception("No persisted face in face list {}.".format(large_face_list_id))
@@ -595,9 +595,9 @@ You can also transfer it to another subscription (change the target subscription
 It uses the same client as the above examples for its source client.
 '''
 print('-----------------------------')
-print() 
+print()
 print('SNAPSHOT OPERATIONS')
-print() 
+print()
 
 # <snippet_snapshot_auth>
 '''
@@ -630,7 +630,7 @@ async def run():
         raw=True
         )
     # Get operation ID from response for tracking
-    # Snapshot.type return value is of type msrest.pipeline.ClientRawResponse. 
+    # Snapshot.type return value is of type msrest.pipeline.ClientRawResponse.
     take_operation_id = take_snapshot_result.response.headers['Operation-Location'].replace('/operations/', '')
 
     print('Taking snapshot( operation ID:', take_operation_id, ')...')
@@ -698,7 +698,7 @@ def list_person_groups(client):
     ids = list(map(lambda x: x.PERSON_GROUP_ID, client.person_group.list()))
     for x in ids: print (x)
 
-# OPTIONAL: Prints a list of existing snapshots. 
+# OPTIONAL: Prints a list of existing snapshots.
 def list_snapshots(client):
     snapshots = client.snapshot.list()
     for x in snapshots:
@@ -714,15 +714,15 @@ END - SNAPSHOT OPERATIONS
 
 '''
 Delete Person Group
-For testing purposes, delete the person group made in the Person Group Operations, 
+For testing purposes, delete the person group made in the Person Group Operations,
 and the target person group from the Snapshot Operations (uses a different client).
 List the person groups in your account through the online testing console to check:
 https://westus2.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395248
 '''
 print('-----------------------------')
-print() 
+print()
 print('DELETE PERSON GROUP')
-print() 
+print()
 # <snippet_deletegroup>
 # Delete the main person group.
 face_client.person_group.delete(person_group_id=PERSON_GROUP_ID)
