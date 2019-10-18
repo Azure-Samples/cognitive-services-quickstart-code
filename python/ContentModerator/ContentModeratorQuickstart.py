@@ -12,7 +12,7 @@ from msrest.authentication import CognitiveServicesCredentials
 # </snippet_imports>
 
 # <snippet_vars>
-CONTENTMODERATOR_ENDPOINT = "https://westus.api.cognitive.microsoft.com"
+CONTENTMODERATOR_ENDPOINT = os.environ.get("CONTENT_MODERATOR_ENDPOINT")
 subscription_key = os.environ.get("CONTENT_MODERATOR_SUBSCRIPTION_KEY")
 # </snippet_vars>
 
