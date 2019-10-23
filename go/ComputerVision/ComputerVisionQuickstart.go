@@ -1,3 +1,4 @@
+// <snippet_imports>
 package main
 
 /*  Import the required libraries. If this is your first time running a Go program,
@@ -15,6 +16,7 @@ import (
 	"strings"
 	"time"
 )
+// </snippet_imports>
 
 /*  The examples in this quickstart are for the Computer Vision API for Microsoft
  *  Cognitive Services with the following tasks:
@@ -36,6 +38,7 @@ import (
 var computerVisionContext context.Context
 
 func main() {
+	// <snippet_client>
 	/*  Prerequisites for the Computer Vision client:
 	 *  Set environment variables for COMPUTER_VISION_SUBSCRIPTION_KEY and COMPUTER_VISION_ENDPOINT,
 	 *  then restart your command shell or your IDE for changes to take effect.
@@ -57,6 +60,7 @@ func main() {
 
 	computerVisionContext = context.Background()
 	// END - Configure the Computer Vision client
+	// </snippet_client>
 
 
 	// Analyze a local image
@@ -114,36 +118,40 @@ func main() {
 	ExtractTextOCRLocalImage(computerVisionClient, localImagePath)
 	// END - Text recognition on a local image with OCR
 
+	// <snippet_analyze_url>
 	// Analyze a remote image
 	remoteImageURL := "https://github.com/Azure-Samples/cognitive-services-sample-data-files/raw/master/ComputerVision/Images/landmark.jpg"
 	fmt.Printf("\nRemote image path: \n%v\n", remoteImageURL)
+	// </snippet_analyze_url>
 
+	// <snippet_brand_url>
+	// Brand detection on a remote image
+	remoteImageBrandsURL = "https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/images/gray-shirt-logo.jpg"
+	fmt.Printf("Remote image path for brands: \n%v\n", remoteImageBrandsURL)
+	// </snippet_brand_url>
+
+	// <snippet_analyze>
 	DescribeRemoteImage(computerVisionClient, remoteImageURL)
 	CategorizeRemoteImage(computerVisionClient, remoteImageURL)
 	TagRemoteImage(computerVisionClient, remoteImageURL)
+	DetectObjectsRemoteImage(computerVisionClient, remoteImageURL)
+	DetectBrandsRemoteImage(computerVisionClient, remoteImageURL)
 	DetectFacesRemoteImage(computerVisionClient, remoteImageURL)
 	DetectAdultOrRacyContentRemoteImage(computerVisionClient, remoteImageURL)
 	DetectColorSchemeRemoteImage(computerVisionClient, remoteImageURL)
 	DetectDomainSpecificContentRemoteImage(computerVisionClient, remoteImageURL)
 	DetectImageTypesRemoteImage(computerVisionClient, remoteImageURL)
-	DetectObjectsRemoteImage(computerVisionClient, remoteImageURL)
 	// END - Analyze a remote image
+	// </snippet_analyze>
 
-	// Brand detection on a remote image
-	fmt.Println("\nGetting new remote image for brand recognition ... \n")
-	remoteImageURL = "https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/images/gray-shirt-logo.jpg"
-	fmt.Printf("Remote image path: \n%v\n", remoteImageURL)
-
-	DetectBrandsRemoteImage(computerVisionClient, remoteImageURL)
-	// END - Brand detection on a remote image
-
-
+	// <snippet_readinmain>
 	// Text recognition on a remote image
 	fmt.Println("\nGetting new remote image for text recognition of printed text with the Read API... \n")
 	remoteImageURL = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/printed_text.jpg"
 	fmt.Printf("Remote image path: \n%v\n", remoteImageURL)
 
 	RecognizeTextReadAPIRemoteImage(computerVisionClient, remoteImageURL)
+	// </snippet_readinmain>
 	// END - Text recognition on a remote image
 
 	// Text recognition on a remote image with OCR
@@ -203,6 +211,7 @@ func DescribeLocalImage(client computervision.BaseClient, localImagePath string)
 *       - "" to specify the default language ("en") as the output language
 *    4. Displaying the image captions and their confidence values.
  */
+// <snippet_analyze_describe>
 func DescribeRemoteImage(client computervision.BaseClient, remoteImageURL string) {
 	var remoteImage computervision.ImageURL
 	remoteImage.URL = &remoteImageURL
@@ -228,6 +237,7 @@ func DescribeRemoteImage(client computervision.BaseClient, remoteImageURL string
 			}
 		}
 }
+// </snippet_analyze_describe>
 // END - Describe a remote image
 
 /*  Categorize a local image by:
@@ -283,6 +293,7 @@ func CategorizeLocalImage(client computervision.BaseClient, localImagePath strin
 *       - "" to specify the default language ("en") as the output language
 *    4. Displaying the image categories and their confidence values.
  */
+// <snippet_analyze_categorize>
 func CategorizeRemoteImage(client computervision.BaseClient, remoteImageURL string) {
 	var remoteImage computervision.ImageURL
 	remoteImage.URL = &remoteImageURL
@@ -307,6 +318,7 @@ func CategorizeRemoteImage(client computervision.BaseClient, remoteImageURL stri
 		}
 	}
 }
+// <snippet_analyze_categorize>
 // END - Categorize a remote image
 
 
@@ -354,6 +366,7 @@ func TagLocalImage(client computervision.BaseClient, localImagePath string) {
  *       - "" to specify the default language ("en") as the output language
  *    3. Displaying the image categories and their confidence values.
  */
+// <snippet_tags>
 func TagRemoteImage(client computervision.BaseClient, remoteImageURL string) {
 	var remoteImage computervision.ImageURL
 	remoteImage.URL = &remoteImageURL
@@ -375,6 +388,7 @@ func TagRemoteImage(client computervision.BaseClient, remoteImageURL string) {
 			}
 		}
 }
+// </snippet_tags>
 // END - Tag a remote image
 
 
@@ -436,6 +450,7 @@ func DetectFacesLocalImage(client computervision.BaseClient, localImagePath stri
 *       - "" to specify the default language ("en") as the output language
 *    4. Displaying the image categories and their confidence values.
  */
+// <snippet_faces>
 func DetectFacesRemoteImage(client computervision.BaseClient, remoteImageURL string) {
 	var remoteImage computervision.ImageURL
 	remoteImage.URL = &remoteImageURL
@@ -464,6 +479,7 @@ func DetectFacesRemoteImage(client computervision.BaseClient, remoteImageURL str
 		}
 	}
 }
+// </snippet_faces>
 // END - Detect faces in a remote image
 
 
@@ -515,6 +531,7 @@ func DetectAdultOrRacyContentLocalImage(client computervision.BaseClient, localI
 *       - "" to specify the default language ("en") as the output language
 *    4. Displaying the image categories and their confidence values.
  */
+// <snippet_adult>
 func DetectAdultOrRacyContentRemoteImage(client computervision.BaseClient, remoteImageURL string) {
 	var remoteImage computervision.ImageURL
 	remoteImage.URL = &remoteImageURL
@@ -534,6 +551,7 @@ func DetectAdultOrRacyContentRemoteImage(client computervision.BaseClient, remot
 		fmt.Printf("Is adult content: %v with confidence %.2f%%\n", *imageAnalysis.Adult.IsAdultContent, *imageAnalysis.Adult.AdultScore * 100)
 		fmt.Printf("Has racy content: %v with confidence %.2f%%\n", *imageAnalysis.Adult.IsRacyContent, *imageAnalysis.Adult.RacyScore * 100)
 }
+// </snippet_adult>
 // END - Detect adult or racy content in a remote image
 
 
@@ -588,6 +606,7 @@ func DetectColorSchemeLocalImage(client computervision.BaseClient, localImagePat
 *       - "" to specify the default language ("en") as the output language
 *    4. Displaying the image categories and their confidence values.
  */
+// <snippet_color>
 func DetectColorSchemeRemoteImage(client computervision.BaseClient, remoteImageURL string) {
 	var remoteImage computervision.ImageURL
 	remoteImage.URL = &remoteImageURL
@@ -610,6 +629,7 @@ func DetectColorSchemeRemoteImage(client computervision.BaseClient, remoteImageU
 		fmt.Printf("Dominant foreground color: %v\n", *imageAnalysis.Color.DominantColorForeground)
 		fmt.Printf("Dominant colors: %v\n", strings.Join(*imageAnalysis.Color.DominantColors, ", "))
 }
+// </snippet_color>
 // END - Detect the color scheme of a remote image
 
 
@@ -731,6 +751,7 @@ func DetectDomainSpecificContentLocalImage(client computervision.BaseClient, loc
 *    3. Decoding the data returned from AnalyzeImageByDomain.
 *    4. Displaying the celebrities/landmarks and their bounding boxes.
 */
+// <snippet_celebs>
 func DetectDomainSpecificContentRemoteImage(client computervision.BaseClient, remoteImageURL string) {
 	var remoteImage computervision.ImageURL
 	remoteImage.URL = &remoteImageURL
@@ -776,7 +797,9 @@ func DetectDomainSpecificContentRemoteImage(client computervision.BaseClient, re
 			fmt.Printf("name: %v\n", celebrity.Name)
 		}
 	}
+	// </snippet_celebs>
 
+	// <snippet_landmarks>
 	fmt.Println("\nLandmarks: ")
 
 	landmarks, err := client.AnalyzeImageByDomain(
@@ -817,6 +840,7 @@ func DetectDomainSpecificContentRemoteImage(client computervision.BaseClient, re
 		}
 	}
 }
+// </snippet_landmarks>
 // END - Detect domain-specific content in a remote image
 
 
@@ -886,6 +910,7 @@ func DetectImageTypesLocalImage(client computervision.BaseClient, localImagePath
 *       - "" to specify the default language ("en") as the output language
 *    4. Displaying the image categories and their confidence values.
  */
+// <snippet_type>
 func DetectImageTypesRemoteImage(client computervision.BaseClient, remoteImageURL string) {
 	var remoteImage computervision.ImageURL
 	remoteImage.URL = &remoteImageURL
@@ -922,7 +947,8 @@ func DetectImageTypesRemoteImage(client computervision.BaseClient, remoteImageUR
 		}	else {
 			fmt.Println("Image is not a line drawing.")
 		}
-	}
+}
+// </snippet_type>
 // END - Detect image type of a remote image
 
 
@@ -971,6 +997,7 @@ func DetectObjectsLocalImage(client computervision.BaseClient, localImagePath st
 *       - image
 *    3. Displaying the objects and their bounding boxes.
  */
+// <snippet_objects>
 func DetectObjectsRemoteImage(client computervision.BaseClient, remoteImageURL string) {
 	var remoteImage computervision.ImageURL
 	remoteImage.URL = &remoteImageURL
@@ -995,6 +1022,7 @@ func DetectObjectsRemoteImage(client computervision.BaseClient, remoteImageURL s
 		}
 	}
 }
+// </snippet_objects>
 // END - Detect objects in remote image
 
 
@@ -1055,6 +1083,7 @@ func DetectBrandsLocalImage(client computervision.BaseClient, localImagePath str
 *       - "" to specify the default language ("en") as the output language
 *    5. Displaying the brands, confidence values, and their bounding boxes.
  */
+// <snippet_brands>
 func DetectBrandsRemoteImage(client computervision.BaseClient, remoteImageURL string) {
 	var remoteImage computervision.ImageURL
 	remoteImage.URL = &remoteImageURL
@@ -1083,6 +1112,7 @@ func DetectBrandsRemoteImage(client computervision.BaseClient, remoteImageURL st
 		}
 	}
 }
+// </snippet_brands>
 // END - Detect brands in remote image
 
 
@@ -1174,6 +1204,7 @@ func RecognizeTextReadAPILocalImage(client computervision.BaseClient, localImage
  *    5. Waiting for the operation to complete.
  *    6. Displaying the results.
  */
+// <snippet_read_call>
 func RecognizeTextReadAPIRemoteImage(client computervision.BaseClient, remoteImageURL string) {
 	var remoteImage computervision.ImageURL
 	remoteImage.URL = &remoteImageURL
@@ -1196,7 +1227,9 @@ func RecognizeTextReadAPIRemoteImage(client computervision.BaseClient, remoteIma
 
 	numberOfCharsInOperationId := 36
 	operationId := string(operationLocation[len(operationLocation)-numberOfCharsInOperationId : len(operationLocation)])
+	// </snippet_read_call>
 
+	// <snippet_read_response>
 	readOperationResult, err := client.GetReadOperationResult(computerVisionContext, operationId)
 	if err != nil {
 		log.Fatal(err)
@@ -1222,7 +1255,9 @@ func RecognizeTextReadAPIRemoteImage(client computervision.BaseClient, remoteIma
 			log.Fatal(err)
 		}
 	}
+	// </snippet_read_results>
 
+	// <snippet_read_display>
 	// Display the results.
 	fmt.Println()
 	for _, recResult := range *(readOperationResult.RecognitionResults) {
@@ -1230,6 +1265,7 @@ func RecognizeTextReadAPIRemoteImage(client computervision.BaseClient, remoteIma
 			fmt.Println(*line.Text)
 		}
 	}
+	// </snippet_read_display>
 }
 
 
