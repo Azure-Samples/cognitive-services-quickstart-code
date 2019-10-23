@@ -34,8 +34,10 @@ import (
  *	- Recognizing printed text with OCR
  */
 
+ // <snippet_context>
 // Declare global so don't have to pass it to all of the tasks.
 var computerVisionContext context.Context
+// </snippet_context>
 
 func main() {
 	// <snippet_client>
