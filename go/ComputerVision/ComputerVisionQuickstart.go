@@ -1255,7 +1255,7 @@ func RecognizeTextReadAPIRemoteImage(client computervision.BaseClient, remoteIma
 			log.Fatal(err)
 		}
 	}
-	// </snippet_read_results>
+	// </snippet_read_response>
 
 	// <snippet_read_display>
 	// Display the results.
