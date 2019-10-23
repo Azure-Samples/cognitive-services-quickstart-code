@@ -14,7 +14,7 @@ namespace FormRecognizerQuickStart
         // <snippet_variables>
         // // Add your Azure Form Recognizer subscription key and endpoint to your environment variables.
         private static string subscriptionKey = Environment.GetEnvironmentVariable("FORM_RECOGNIZER_SUBSCRIPTION_KEY");
-        private static string formRecognizerEndpoint = Environment.GetEnvironmentVariable("FORM_RECOGNIZER__ENDPOINT");
+        private static string formRecognizerEndpoint = Environment.GetEnvironmentVariable("FORM_RECOGNIZER_ENDPOINT");
 
         // SAS Url to Azure Blob Storage container; this used for training the custom model
         // For help using SAS see: 
