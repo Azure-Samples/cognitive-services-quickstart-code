@@ -320,7 +320,7 @@ func CategorizeRemoteImage(client computervision.BaseClient, remoteImageURL stri
 		}
 	}
 }
-// <snippet_analyze_categorize>
+// </snippet_analyze_categorize>
 // END - Categorize a remote image
 
 
