@@ -6,6 +6,7 @@
 'use strict';
 
 const async = require('async');
+const fs = require('fs');
 const path = require("path");
 const createReadStream = require('fs').createReadStream
 const sleep = require('util').promisify(setTimeout);
@@ -35,8 +36,8 @@ const ApiKeyCredentials = require('@azure/ms-rest-js').ApiKeyCredentials;
  * 
  * Examples included in this quickstart:
  * Authenticate, Describe Image, Detect Faces, Detect Objects, Detect Tags, Detect Type, 
- * Detect Category, Detect Brand, Detect Color Scheme, Recognize Text (OCR), 
- * Recognize Printed & Handwritten Text, Detect Domain-specific Content, Detect Adult Content.
+ * Detect Category, Detect Brand, Detect Color Scheme, Detect Domain-specific Content, Detect Adult Content
+ * Generate Thumbnail, Recognize Text (OCR), Recognize Printed & Handwritten Text.
  */
 
 // <snippet_vars>
@@ -296,6 +297,7 @@ function computerVision() {
 
       // Analyze URL image
       console.log('Analyzing image for color scheme...', colorURLImage.split('/').pop());
+      console.log();
       let color = (await computerVisionClient.analyzeImage(colorURLImage, {visualFeatures: ['Color']})).color;
       printColorScheme(color);
       // </snippet_colors>
@@ -303,17 +305,110 @@ function computerVision() {
       // <snippet_colors_print>
       // Print a detected color scheme
       function printColorScheme(colors){
-        console.log(`    Image is in ${colors.isBwImg ? 'black and white' : 'color'}`);
-        console.log(`    Dominant colors: ${colors.dominantColors.join(', ')}`);
-        console.log(`    Dominant foreground color: ${colors.dominantColorForeground}`);
-        console.log(`    Dominant background color: ${colors.dominantColorBackground}`);
-        console.log(`    Suggested accent color: #${colors.accentColor}`);
+        console.log(`Image is in ${colors.isBwImg ? 'black and white' : 'color'}`);
+        console.log(`Dominant colors: ${colors.dominantColors.join(', ')}`);
+        console.log(`Dominant foreground color: ${colors.dominantColorForeground}`);
+        console.log(`Dominant background color: ${colors.dominantColorBackground}`);
+        console.log(`Suggested accent color: #${colors.accentColor}`);
       }
       // </snippet_colors_print>
       /**
        * END - Detect Color Scheme
        */
       console.log();
+
+      /**
+       * GENERATE THUMBNAIL
+       * This example generates a thumbnail image of a specified size, from a URL and a local image.
+       */
+      console.log('-------------------------------------------------');
+      console.log('GENERATE THUMBNAIL');
+      console.log();
+      // Image of a dog.
+      const dogURL = 'https://moderatorsampleimages.blob.core.windows.net/samples/sample16.png';
+      console.log('Generating thumbnail...')
+      await computerVisionClient.generateThumbnail(100, 100, dogURL, { smartCropping: true } )
+          .then((thumbResponse) => {
+            const destination = fs.createWriteStream("thumb.png")
+            thumbResponse.readableStreamBody.pipe(destination)
+            console.log('Thumbnail saved.') // Saves into root folder
+          })
+      console.log();
+      /**
+       * END - Generate Thumbnail
+       */
+
+      /**
+      * DETECT DOMAIN-SPECIFIC CONTENT
+      * Detects landmarks or celebrities.
+      */
+      console.log('-------------------------------------------------');
+      console.log('DETECT DOMAIN-SPECIFIC CONTENT');
+      console.log();
+
+      // <snippet_domain_image>
+      const domainURLImage = 'https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/landmark.jpg';
+      // </snippet_domain_image>
+
+      // <snippet_landmarks>
+      // Analyze URL image
+      console.log('Analyzing image for landmarks...', domainURLImage.split('/').pop());
+      let domain = (await computerVisionClient.analyzeImageByDomain('landmarks', domainURLImage)).result.landmarks;
+
+      // Prints domain-specific, recognized objects
+      if (domain.length) {
+        console.log(`${domain.length} ${domain.length == 1 ? 'landmark' : 'landmarks'} found:`);
+        for (let obj of domain) {
+          console.log(`    ${obj.name}`.padEnd(20) + `(${obj.confidence.toFixed(2)} confidence)`.padEnd(20) + `${formatRectDomain(obj.faceRectangle)}`);
+        }
+      } else {
+        console.log('No landmarks found.');
+      }
+      // </snippet_landmarks>
+
+      // <snippet_landmarks_rect>
+      // Formats bounding box
+      function formatRectDomain(rect) {
+        if (!rect) return '';
+        return `top=${rect.top}`.padEnd(10) + `left=${rect.left}`.padEnd(10) + `bottom=${rect.top + rect.height}`.padEnd(12) +
+          `right=${rect.left + rect.width}`.padEnd(10) + `(${rect.width}x${rect.height})`;
+      }
+      // </snippet_landmarks_rect>
+
+      console.log();
+
+      /**
+      * DETECT ADULT CONTENT
+      * Detects "adult" or "racy" content that may be found in images. 
+      * The score closer to 1.0 indicates racy/adult content.
+      * Detection for both local and URL images.
+      */
+      console.log('-------------------------------------------------');
+      console.log('DETECT ADULT CONTENT');
+      console.log();
+
+      // <snippet_adult_image>
+      // The URL image and local images are not racy/adult. 
+      // Try your own racy/adult images for a more effective result.
+      const adultURLImage = 'https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/celebrities.jpg';
+      // </snippet_adult_image>
+
+      // <snippet_adult>
+      // Function to confirm racy or not
+      const isIt = flag => flag ? 'is' : "isn't";
+
+      // Analyze URL image
+      console.log('Analyzing image for racy/adult content...', adultURLImage.split('/').pop());
+      var adult = (await computerVisionClient.analyzeImage(adultURLImage, {
+        visualFeatures: ['Adult']
+      })).adult;
+      console.log(`This probably ${isIt(adult.isAdultContent)} adult content (${adult.adultScore.toFixed(4)} score)`);
+      console.log(`This probably ${isIt(adult.isRacyContent)} racy content (${adult.racyScore.toFixed(4)} score)`);
+      // </snippet_adult>
+      console.log();
+      /**
+      * END - Detect Adult Content
+      */
 
       /**
        * RECOGNIZE TEXT (OCR) 
@@ -405,76 +500,10 @@ function computerVision() {
       /**
        * END - Recognize Printed & Handwritten Text
        */
-      console.log();
 
-      /**
-       * DETECT DOMAIN-SPECIFIC CONTENT
-       * Detects landmarks or celebrities.
-       */
-      console.log('-------------------------------------------------');
-      console.log('DETECT DOMAIN-SPECIFIC CONTENT');
-      console.log();
-
-      // <snippet_domain_image>
-      const domainURLImage = 'https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/landmark.jpg';
-      // </snippet_domain_image>
-
-      // <snippet_landmarks>
-      // Analyze URL image
-      console.log('Analyzing image for landmarks...', domainURLImage.split('/').pop());
-      let domain = (await computerVisionClient.analyzeImageByDomain('landmarks', domainURLImage)).result.landmarks;
-
-      // Prints domain-specific, recognized objects
-      if (domain.length) {
-          console.log(`${domain.length} ${domain.length == 1 ? 'landmark' : 'landmarks'} found:`);
-          for (let obj of domain) {
-              console.log(`    ${obj.name}`.padEnd(20) + `(${obj.confidence.toFixed(2)} confidence)`.padEnd(20) + `${formatRectDomain(obj.faceRectangle)}`);
-          }
-      } else { console.log('No landmarks found.'); }
-      // </snippet_landmarks>
-
-      // <snippet_landmarks_rect>
-      // Formats bounding box
-      function formatRectDomain(rect) {
-        if (!rect) return '';
-        return `top=${rect.top}`.padEnd(10) + `left=${rect.left}`.padEnd(10) + `bottom=${rect.top + rect.height}`.padEnd(12) 
-              + `right=${rect.left + rect.width}`.padEnd(10) + `(${rect.width}x${rect.height})`;
-      }
-      // </snippet_landmarks_rect>
-
-      console.log();
-
-      /**
-       * DETECT ADULT CONTENT
-       * Detects "adult" or "racy" content that may be found in images. 
-       * The score closer to 1.0 indicates racy/adult content.
-       * Detection for both local and URL images.
-       */
-      console.log('-------------------------------------------------');
-      console.log('DETECT ADULT CONTENT');
-      console.log();
-
-      // <snippet_adult_image>
-      // The URL image and local images are not racy/adult. 
-      // Try your own racy/adult images for a more effective result.
-      const adultURLImage = 'https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/celebrities.jpg';
-      // </snippet_adult_image>
-
-      // <snippet_adult>
-      // Function to confirm racy or not
-      const isIt = flag => flag ? 'is' : "isn't";
-
-      // Analyze URL image
-      console.log('Analyzing image for racy/adult content...', adultURLImage.split('/').pop());
-      var adult = (await computerVisionClient.analyzeImage(adultURLImage, {visualFeatures: ['Adult']})).adult;
-      console.log(`This probably ${isIt(adult.isAdultContent)} adult content (${adult.adultScore.toFixed(4)} score)`);
-      console.log(`This probably ${isIt(adult.isRacyContent)} racy content (${adult.racyScore.toFixed(4)} score)`);
-      // </snippet_adult>
-      /**
-       * END - Detect Adult Content
-       */
       console.log();
       console.log('-------------------------------------------------');
+      console.log('End of quickstart.');
     // <snippet_functiondef_end>
     },
     function () {
