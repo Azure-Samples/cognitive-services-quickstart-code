@@ -1,13 +1,29 @@
+// <snippet_using>
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.CognitiveServices.Language.LUIS.Runtime;
 using Microsoft.Azure.CognitiveServices.Language.LUIS.Runtime.Models;
+// </snippet_using>
 
 namespace UsePredictionRuntime
 {
     class Program
     {
+        // <snippet_variables>
+        // Use Language Understanding (LUIS) endpoint key
+        // to create authentication credentials
+        // Make sure the non-public key has been assigned to the app before running script
+        var endpointPredictionkey = Environment.GetEnvironmentVariable("LUIS_PREDICTION_ENDPOINT_SUBSCRIPTION_KEY");   
+
+        // Endpoint URL example value = "https://westus.api.cognitive.microsoft.com"
+        var endpointPredictionEndpoint = Environment.GetEnvironmentVariable("LUIS_PREDICTION_ENDPOINT");   
+
+        // App Id example value = "df67dcdb-c37d-46af-88e1-8b97951ca1c2"
+        var endpointPredictionAppId = Environment.GetEnvironmentVariable("LUIS_PREDICTION_APP_ID");   
+        // </snippet_variables>
+
+        // <snippet_main>
         static void Main(string[] args)
         {
 
@@ -33,22 +49,22 @@ namespace UsePredictionRuntime
             Console.Write("done");
 
         }
+        // </snippet_main>
+
+        // <snippet_maintask>
         static async Task<PredictionResponse> GetPrediction() {
 
-            // Use Language Understanding or Cognitive Services key
-            // to create authentication credentials
-            var endpointPredictionkey = Environment.GetEnvironmentVariable("LUIS_PREDICTION_ENDPOINT_SUBSCRIPTION_KEY");
             var credentials = new ApiKeyServiceClientCredentials(endpointPredictionkey);
 
             // Create Luis client and set endpoint
             // region of endpoint must match key's region
             var luisClient = new LUISRuntimeClient(credentials, new System.Net.Http.DelegatingHandler[] { });
-            luisClient.Endpoint = "https://westus.api.cognitive.microsoft.com";
+            luisClient.Endpoint = endpointPredictionEndpoint;
 
             // Set query values
 
             // public Language Understanding Home Automation app
-            var appId = "df67dcdb-c37d-46af-88e1-8b97951ca1c2";
+            var appId = endpointPredictionAppId;
 
             var requestOptions = new PredictionRequestOptions
             {
@@ -74,5 +90,6 @@ namespace UsePredictionRuntime
 
 
         }
+        // </snippet_maintask>
     }
 }
