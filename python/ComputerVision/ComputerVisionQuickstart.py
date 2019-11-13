@@ -5,7 +5,9 @@ from azure.cognitiveservices.vision.computervision.models import TextRecognition
 from azure.cognitiveservices.vision.computervision.models import VisualFeatureTypes
 from msrest.authentication import CognitiveServicesCredentials
 
+from array import array
 import os
+from PIL import Image
 import sys
 import time
 # </snippet_imports>
@@ -26,18 +28,19 @@ Prerequisites:
         objects.jpg, printed_text.jpg and type-image.jpg
 
 Run the entire file to demonstrate the following examples:
-    - Describing images
-    - Categorizing images
-    - Tagging images
-    - Detecting faces
-    - Detecting adult or racy content
-    - Detecting the color scheme
-    - Detecting domain-specific content (celebrities/landmarks)
-    - Detecting image types (clip art/line drawing)
-    - Detecting objects
-    - Detecting brands
-    - Recognizing handwritten text with the batch read API
-    - Recognizing printed text with OCR
+    - Describe Image
+    - Categorize Image
+    - Tag Image
+    - Detect Faces
+    - Detect Adult or Racy Content
+    - Detect Color Scheme
+    - Detect Domain-specific Content (celebrities/landmarks)
+    - Detect Image Types (clip art/line drawing)
+    - Detect Objects
+    - Detect Brands
+    - Generate Thumbnail
+    - Batch Read File (recognize both handwritten and printed text) 
+    - Recognize Printed Text with OCR
 
 References:
     - SDK: https://docs.microsoft.com/en-us/python/api/azure-cognitiveservices-vision-computervision/azure.cognitiveservices.vision.computervision?view=azure-python
@@ -87,10 +90,10 @@ END - Authenticate
 '''
 
 '''
-Describe an image - local
+Describe an Image - local
 This example describes the contents of an image with the confidence score.
 '''
-print("===== Describe an image - local =====")
+print("===== Describe an Image - local =====")
 # Open local image file
 local_image = open(local_image_path, "rb")
 
@@ -106,12 +109,12 @@ else:
         print("'{}' with confidence {:.2f}%".format(caption.text, caption.confidence * 100))
 print()
 '''
-END - Describe an image - local
+END - Describe an Image - local
 '''
 
 # <snippet_describe>
 '''
-Describe an image - remote
+Describe an Image - remote
 This example describes the contents of an image with the confidence score.
 '''
 print("===== Describe an image - remote =====")
@@ -128,14 +131,14 @@ else:
 # </snippet_describe>
 print()
 '''
-END - Describe an image - remote
+END - Describe an Image - remote
 '''
 
 '''
-Categorize an image -  local
+Categorize an Image -  local
 This example extracts categories from a local image with a confidence score
 '''
-print("===== Categorize an image - local =====")
+print("===== Categorize an Image - local =====")
 # Open local image file
 local_image = open(local_image_path, "rb")
 # Select visual feature type(s)
@@ -152,12 +155,12 @@ else:
         print("'{}' with confidence {:.2f}%".format(category.name, category.score * 100))
 print()
 '''
-END - Categorize an image - local
+END - Categorize an Image - local
 '''
 
 # <snippet_categorize>
 '''
-Categorize an image - remote
+Categorize an Image - remote
 This example extracts (general) categories from a remote image with a confidence score.
 '''
 print("===== Categorize an image - remote =====")
@@ -176,14 +179,14 @@ else:
 # </snippet_categorize>
 print()
 '''
- END - Categorize an image - remote
+ END - Categorize an Image - remote
 '''
 
 '''
-Tag an image - local
+Tag an Image - local
 This example returns a tag (key word) for each thing in the image.
 '''
-print("===== Tag an image - local =====")
+print("===== Tag an Image - local =====")
 # Open local image file
 local_image = open(local_image_path, "rb")
 # Call API local image
@@ -198,12 +201,12 @@ else:
         print("'{}' with confidence {:.2f}%".format(tag.name, tag.confidence * 100))
 print()
 '''
-END - Tag an image - local
+END - Tag an Image - local
 '''
 
 # <snippet_tags>
 '''
-Tag an image - remote
+Tag an Image - remote
 This example returns a tag (key word) for each thing in the image.
 '''
 print("===== Tag an image - remote =====")
@@ -220,15 +223,15 @@ else:
 # </snippet_tags>
 print()
 '''
-END - Tag an image - remote
+END - Tag an Image - remote
 '''
 
 '''
-Detect faces - local
+Detect Faces - local
 This example detects faces in a local image, gets their gender and age, 
 and marks them with a bounding box.
 '''
-print("===== Detect faces - local =====")
+print("===== Detect Faces - local =====")
 # Open local image
 local_image = open(local_image_path, "rb")
 # Select visual features(s) you want
@@ -248,16 +251,16 @@ else:
         face.face_rectangle.top + face.face_rectangle.height))
 print()
 '''
-END - Detect faces - local
+END - Detect Faces - local
 '''
 
 # <snippet_faces>
 '''
-Detect faces - remote
+Detect Faces - remote
 This example detects faces in a remote image, gets their gender and age, 
 and marks them with a bounding box.
 '''
-print("===== Detect faces - remote =====")
+print("===== Detect Faces - remote =====")
 # Get an image with faces
 remote_image_url_faces = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/faces.jpg"
 # Select the visual feature(s) you want.
@@ -278,15 +281,15 @@ else:
 # </snippet_faces>
 print()
 '''
-END - Detect faces - remote
+END - Detect Faces - remote
 '''
 
 '''
-Detect adult or racy content - local
+Detect Adult or Racy Content - local
 This example detects adult or racy content in a local image, then prints the adult/racy score.
 The score is ranged 0.0 - 1.0 with smaller numbers indicating negative results.
 '''
-print("===== Detect adult or racy content - local =====")
+print("===== Detect Adult or Racy Content - local =====")
 # Open local file
 local_image = open(local_image_path, "rb")
 # Select visual features you want
@@ -300,16 +303,16 @@ print("Is adult content: {} with confidence {:.2f}".format(detect_adult_results_
 print("Has racy content: {} with confidence {:.2f}".format(detect_adult_results_local .adult.is_racy_content, detect_adult_results_local .adult.racy_score * 100))
 print()
 '''
-END - Detect adult or racy content - local
+END - Detect Adult or Racy Content - local
 '''
 
 # <snippet_adult>
 '''
-Detect adult or racy content - remote
+Detect Adult or Racy Content - remote
 This example detects adult or racy content in a remote image, then prints the adult/racy score.
 The score is ranged 0.0 - 1.0 with smaller numbers indicating negative results.
 '''
-print("===== Detect adult or racy content - remote =====")
+print("===== Detect Adult or Racy Content - remote =====")
 # Select the visual feature(s) you want
 remote_image_features = ["adult"]
 # Call API with URL and features
@@ -322,14 +325,14 @@ print("Has racy content: {} with confidence {:.2f}".format(detect_adult_results_
 # </snippet_adult>
 print()
 '''
-END - Detect adult or racy content - remote
+END - Detect Adult or Racy Content - remote
 '''
 
 '''
-Detect color - local
+Detect Color - local
 This example detects the different aspects of its color scheme in a local image.
 '''
-print("===== Detect color - local =====")
+print("===== Detect Color - local =====")
 # Open local image
 local_image = open(local_image_path, "rb")
 # Select visual feature(s) you want
@@ -346,15 +349,15 @@ print("Dominant foreground color: {}".format(detect_color_results_local.color.do
 print("Dominant colors: {}".format(detect_color_results_local.color.dominant_colors))
 print()
 '''
-END - Detect color - local
+END - Detect Color - local
 '''
 
 # <snippet_color>
 '''
-Detect color - remote
+Detect Color - remote
 This example detects the different aspects of its color scheme in a remote image.
 '''
-print("===== Detect color - remote =====")
+print("===== Detect Color - remote =====")
 # Select the feature(s) you want
 remote_image_features = ["color"]
 # Call API with URL and features
@@ -370,14 +373,14 @@ print("Dominant colors: {}".format(detect_color_results_remote.color.dominant_co
 # </snippet_color>
 print()
 '''
-END - Detect color - remote
+END - Detect Color - remote
 '''
 
 '''
-Detect domain-specific content - local
+Detect Domain-specific Content - local
 This example detects celebrites and landmarks in local images.
 '''
-print("===== Detect domain-specific content - local =====")
+print("===== Detect Domain-specific Content - local =====")
 # Open local image file containing a celebtriy
 local_image = open(local_image_path, "rb")
 # Call API with the type of content (celebrities) and local image
@@ -407,15 +410,15 @@ else:
         print(landmark["name"])
 print()
 '''
-END - Detect domain-specific content - local
+END - Detect Domain-specific Content - local
 '''
 
 # <snippet_celebs>
 '''
-Detect domain-specific content - remote
+Detect Domain-specific Content - remote
 This example detects celebrites and landmarks in remote images.
 '''
-print("===== Detect domain-specific content - remote =====")
+print("===== Detect Domain-specific Content - remote =====")
 # URL of one or more celebrities
 remote_image_url_celebs = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/faces.jpg"
 # Call API with content type (celebrities) and URL
@@ -429,6 +432,7 @@ else:
     for celeb in detect_domain_results_celebs_remote.result["celebrities"]:
         print(celeb["name"])
 # </snippet_celebs>
+
 # <snippet_landmarks>
 # Call API with content type (landmarks) and URL
 detect_domain_results_landmarks = computervision_client.analyze_image_by_domain("landmarks", remote_image_url)
@@ -443,14 +447,14 @@ else:
 # </snippet_landmarks>
 print()
 '''
-END - Detect domain-specific content - remote
+END - Detect Domain-specific Content - remote
 '''
 
 '''
-Detect image types - local
+Detect Image Types - local
 This example detects an image's type (clip art/line drawing).
 '''
-print("===== Detect image types - local =====")
+print("===== Detect Image Types - local =====")
 # Open local image
 local_image_path_type = "resources\\type-image.jpg"
 local_image_type = open(local_image_path_type, "rb")
@@ -476,15 +480,15 @@ else:
     print("Image is a line drawing")
 print()
 '''
-END - Detect image types - local
+END - Detect Image Types - local
 '''
 
 # <snippet_type>
 '''
-Detect image types - remote
+Detect Image Types - remote
 This example detects an image's type (clip art/line drawing).
 '''
-print("===== Detect image types - remote =====")
+print("===== Detect Image Types - remote =====")
 # Get URL of an image with a type
 remote_image_url_type = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/type-image.jpg"
 # Select visual feature(s) you want
@@ -510,14 +514,14 @@ else:
 # </snippet_type>
 print()
 '''
-END - Detect image types - remote
+END - Detect Image Types - remote
 '''
 
 '''
-Detect objects - local
+Detect Objects - local
 This example detects different kinds of objects with bounding boxes in a local image.
 '''
-print("===== Detect objects - local =====")
+print("===== Detect Objects - local =====")
 # Get local image with different objects in it
 local_image_path_objects = "resources\\objects.jpg"
 local_image_objects = open(local_image_path_objects, "rb")
@@ -535,15 +539,15 @@ else:
         object.rectangle.y, object.rectangle.y + object.rectangle.h))
 print()
 '''
-END - Detect objects - local
+END - Detect Objects - local
 '''
 
 # <snippet_objects>
 '''
-Detect objects - remote
+Detect Objects - remote
 This example detects different kinds of objects with bounding boxes in a remote image.
 '''
-print("===== Detect objects - remote =====")
+print("===== Detect Objects - remote =====")
 # Get URL image with different objects
 remote_image_url_objects = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/objects.jpg"
 # Call API with URL
@@ -561,14 +565,14 @@ else:
 # </snippet_objects>
 print()
 '''
-END - Detect objects - remote
+END - Detect Objects - remote
 '''
 
 '''
-Detect brands - local
+Detect Brands - local
 This example detects common brands like logos and puts a bounding box around them.
 '''
-print("===== Detect brands - local =====")
+print("===== Detect Brands - local =====")
 # Open image file
 local_image_path_shirt = "resources\\gray-shirt-logo.jpg"
 local_image_shirt = open(local_image_path_shirt, "rb")
@@ -593,10 +597,10 @@ END - Detect brands - local
 
 # <snippet_brands>
 '''
-Detect brands - remote
+Detect Brands - remote
 This example detects common brands like logos and puts a bounding box around them.
 '''
-print("===== Detect brands - remote =====")
+print("===== Detect Brands - remote =====")
 # Get a URL with a brand logo
 remote_image_url = "https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/images/gray-shirt-logo.jpg"
 # Select the visual feature(s) you want
@@ -615,15 +619,69 @@ else:
 # </snippet_brands>
 print()
 '''
-END - Detect brands - remote
+END - Detect Brands - remote
 '''
 
 '''
-Recognize handwritten text - local
-This example extracts text from a handwritten local image, then prints results.
-This API call can also recognize printed text (not shown).
+Generate Thumbnail
+This example creates a thumbnail from both a local and URL image.
 '''
-print("===== Detect handwritten text - local =====")
+print("===== Generate Thumbnail =====")
+
+# Generate a thumbnail from a local image
+local_image_path_thumb = "resources\\objects.jpg"
+local_image_thumb = open(local_image_path_objects, "rb")
+
+print("Generating thumbnail from a local image...")
+# Call the API with a local image, set the width/height if desired (pixels)
+# Returns a Generator object, a thumbnail image binary (list).
+thumb_local = computervision_client.generate_thumbnail_in_stream(100, 100, local_image_thumb, True)
+
+# Write the image binary to file
+with open("thumb_local.png", "wb") as f:
+    for chunk in thumb_local:
+        f.write(chunk)
+
+# Uncomment/use this is you are writing many images as thumbnails from a list
+# for i, image in enumerate(thumb_local, start=0):
+#      with open('thumb_{0}.jpg'.format(i), 'wb') as f:
+#         f.write(image)
+
+print("Thumbnail saved to local folder.")
+print()
+
+# Generate a thumbnail from a URL image
+# URL of faces
+remote_image_url_thumb = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/faces.jpg"
+
+print("Generating thumbnail from a URL image...")
+# Returns a Generator object, a thumbnail image binary (list).
+thumb_remote = computervision_client.generate_thumbnail(
+    100, 100, remote_image_url_thumb, True)
+
+# Write the image binary to file
+with open("thumb_remote.png", "wb") as f:
+    for chunk in thumb_remote:
+        f.write(chunk)
+
+print("Thumbnail saved to local folder.")
+
+# Uncomment/use this is you are writing many images as thumbnails from a list
+# for i, image in enumerate(thumb_remote, start=0):
+#      with open('thumb_{0}.jpg'.format(i), 'wb') as f:
+#         f.write(image)
+
+print()
+'''
+END - Generate Thumbnail
+'''
+
+'''
+Batch Read File, recognize handwritten text - local
+This example extracts text from a handwritten local image, then prints results.
+This API call can also recognize printed text (shown in next example, Batch Read File - remote).
+'''
+print("===== Batch Read File - local =====")
 # Get image of handwriting
 local_image_handwritten_path = "resources\\handwritten_text.jpg"
 # Open the image
@@ -651,22 +709,23 @@ if recognize_handwriting_result.status == TextOperationStatusCodes.succeeded:
             print(line.bounding_box)
 print()
 '''
-END - Recognize handwritten text - local
+END - Batch Read File - local
 '''
 
 # <snippet_read_call>
 '''
-Recognize printed text - remote
+Batch Read File, recognize printed text - remote
 This example will extract printed text in an image, then print results, line by line.
 This API call can also recognize handwriting (not shown).
 '''
-print("===== Detect printed text - remote =====")
+print("===== Batch Read File - remote =====")
 # Get an image with printed text
 remote_image_printed_text_url = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/printed_text.jpg"
 
 # Call API with URL and raw response (allows you to get the operation location)
 recognize_printed_results = computervision_client.batch_read_file(remote_image_printed_text_url,  raw=True)
 # </snippet_read_call>
+
 # <snippet_read_response>
 # Get the operation location (URL with an ID at the end) from the response
 operation_location_remote = recognize_printed_results.headers["Operation-Location"]
@@ -689,14 +748,14 @@ if get_printed_text_results.status == TextOperationStatusCodes.succeeded:
 print()
 # </snippet_read_response>
 '''
-END - Recognize printed text - remote
+END - Batch Read File - remote
 '''
 
 '''
-Recognize printed text with OCR - local
+Recognize Printed Text with OCR - local
 This example will extract, using OCR, printed text in an image, then print results line by line.
 '''
-print("===== Detect printed text with OCR - local =====")
+print("===== Detect Printed Text with OCR - local =====")
 # Get an image with printed text
 local_image_printed_text_path = "resources\\printed_text.jpg"
 local_image_printed_text = open(local_image_printed_text_path, "rb")
@@ -711,14 +770,14 @@ for region in ocr_result_local.regions:
         print(s)
 print()
 '''
-END - Recognize printed text with OCR - local
+END - Recognize Printed Text with OCR - local
 '''
 
 '''
-Recognize printed text with OCR - remote
+Recognize Printed Text with OCR - remote
 This example will extract, using OCR, printed text in an image, then print results line by line.
 '''
-print("===== Detect printed text with OCR - remote =====")
+print("===== Detect Printed Text with OCR - remote =====")
 remote_printed_text_image_url = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/printed_text.jpg"
 
 ocr_result_remote = computervision_client.recognize_printed_text(remote_printed_text_image_url)
@@ -731,7 +790,7 @@ for region in ocr_result_remote.regions:
         print(s)
 print()
 '''
-END - Recognize printed text with OCR - remote
+END - Recognize Printed Text with OCR - remote
 '''
 
 print("End of Computer Vision quickstart.")
