@@ -2,11 +2,11 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Azure.CognitiveServices.Language.LUIS.Runtime;
-using Microsoft.Azure.CognitiveServices.Language.LUIS.Runtime.Models;
+using Microsoft.Azure.CognitiveServices.Language.LUIS.Authoring;
+using Microsoft.Azure.CognitiveServices.Language.LUIS.Authoring.Models;
 // </snippet_using>
 
-namespace UsePredictionRuntime
+namespace UseAuthoring
 {
     class Program
     {
@@ -94,6 +94,6 @@ namespace UsePredictionRuntime
                     log: true);
             }
         }
-        // </snippet_maintask>
+        // </snippet_maintask_create_intent>
     }
 }
