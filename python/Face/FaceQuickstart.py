@@ -166,7 +166,7 @@ def getRectangle(faceDictionary):
     return ((left, top), (bottom, right))
 
 # Download the image from the url
-response = requests.get(img_url)
+response = requests.get(single_face_image_url)
 img = Image.open(BytesIO(response.content))
 
 # For each face returned use the face rectangle and draw a red box.
