@@ -2,11 +2,11 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Azure.CognitiveServices.Language.LUIS.Authoring;
-using Microsoft.Azure.CognitiveServices.Language.LUIS.Authoring.Models;
+using Microsoft.Azure.CognitiveServices.Language.LUIS.Runtime;
+using Microsoft.Azure.CognitiveServices.Language.LUIS.Runtime.Models;
 // </snippet_using>
 
-namespace UseAuthoring
+namespace UseRuntime
 {
     class Program
     {
