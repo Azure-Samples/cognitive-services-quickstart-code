@@ -26,9 +26,13 @@ const ApiKeyCredentials = require('@azure/ms-rest-js').ApiKeyCredentials;
  *  - Set your subscription key and endpoint into your environment variables
  *  - The DESCRIBE IMAGE example uses a local image, download and place in your working folder: 
  *    https://moderatorsampleimages.blob.core.windows.net/samples/sample1.png 
+ *  - The BATCH READ FILE example uses a local image, download and place in your working folder:
+ *    https: //github.com/Azure-Samples/cognitive-services-sample-data-files/blob/master/ComputerVision/Images/handwritten_text.jpg
+ * 
  * How to run:
  *  - This quickstart can be run all at once (node ComputerVisionQuickstart.js from the command line) or used to copy/paste sections as needed. 
  *    If sections are extracted, make sure to copy/paste the authenticate section too, as each example relies on it.
+ *
  * Resources:
  *  - Node SDK: https://docs.microsoft.com/en-us/javascript/api/azure-cognitiveservices-computervision/?view=azure-node-latest
  *  - Documentation: https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/
@@ -37,7 +41,7 @@ const ApiKeyCredentials = require('@azure/ms-rest-js').ApiKeyCredentials;
  * Examples included in this quickstart:
  * Authenticate, Describe Image, Detect Faces, Detect Objects, Detect Tags, Detect Type, 
  * Detect Category, Detect Brand, Detect Color Scheme, Detect Domain-specific Content, Detect Adult Content
- * Generate Thumbnail, Recognize Text (OCR), Recognize Printed & Handwritten Text.
+ * Generate Thumbnail, Batch Read File, Recognize Text (OCR), Recognize Printed & Handwritten Text.
  */
 
 // <snippet_vars>
@@ -408,6 +412,104 @@ function computerVision() {
       console.log();
       /**
       * END - Detect Adult Content
+      */
+
+     /**
+       * BATCH READ FILE
+       * This example recognizes both handwritten and printed text with more accurate results than
+       * the RecognizeText API calls.
+       */
+      console.log('-------------------------------------------------');
+      console.log('BATCH READ FILE');
+      console.log();
+      let printedTextBatchUrl = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/printed_text.jpg"
+      let handwrittenBatchImagePath = __dirname + '\\handwritten_text.jpg';
+
+      console.log('\nBatch reading URL image for text in ...', printedTextBatchUrl.split('/').pop());
+      // API call returns a BatchReadFileResponse, grab the operation location (ID) from the response.
+      let operationLocationUrl = await computerVisionClient.batchReadFile(printedTextBatchUrl)
+          .then((response) => {
+            return response.operationLocation;
+          });
+
+      console.log();
+      // From the operation location URL, grab the last element, the operation ID.
+      let operationIdUrl = operationLocationUrl.substring(operationLocationUrl.lastIndexOf('/') + 1);
+
+      // Wait for the read operation to finish, use the operationId to get the result.
+      while(true) {
+        let readOpResult = await computerVisionClient.getReadOperationResult(operationIdUrl)
+            .then((result) => {
+              return result;
+            })
+        console.log('Batch Read status: ' + readOpResult.status)
+        if (readOpResult.status == "Failed") {
+          console.log('The Batch Read File operation has failed.')
+          break;
+        }
+        if (readOpResult.status == "Succeeded") {
+          console.log('The Batch Read File operation was a success.');
+          console.log();
+          console.log('Batch Read File URL image result:');
+          // Print the text captured
+
+          // Looping through: TextRecognitionResult[], then Line[]
+          for (let textRecResult of readOpResult.recognitionResults) {
+            for (let line of textRecResult.lines) {
+                console.log(line.text)
+              }
+          }
+          break;
+        }
+        await sleep(1000);
+      }
+      console.log();
+
+      // With a local image, get the text.
+      console.log('\nBatch reading local image for text in ...', path.basename(handwrittenBatchImagePath));
+
+      // Call API, returns a Promise<Models.BatchReadFileInStreamResponse>
+      let batchStreamResponse = await computerVisionClient.batchReadFileInStream(() => createReadStream(handwrittenBatchImagePath))
+        .then((response) => {
+            return response;
+        });
+
+      console.log();
+      // Get operation location from response, so you can get the operation ID.
+      let operationLocationLocal = batchStreamResponse.operationLocation
+      // Get the operation ID at the end of the URL
+      let operationIdLocal = operationLocationLocal.substring(operationLocationLocal.lastIndexOf('/') + 1);
+
+      // Wait for the read operation to finish, use the operationId to get the result.
+      while (true) {
+        let readOpResult = await computerVisionClient.getReadOperationResult(operationIdLocal)
+          .then((result) => {
+            return result;
+          })
+        console.log('Batch Read status: ' + readOpResult.status)
+        if (readOpResult.status == "Failed") {
+          console.log('The Batch Read File operation has failed.')
+          break;
+        }
+        if (readOpResult.status == "Succeeded") {
+          console.log('The Batch Read File operation was a success.');
+          console.log();
+          console.log('Batch Read File local image result:');
+          // Print the text captured
+
+          // Looping through: TextRecognitionResult[], then Line[]
+          for (let textRecResult of readOpResult.recognitionResults) {
+            for (let line of textRecResult.lines) {
+              console.log(line.text)
+            }
+          }
+          break;
+        }
+        await sleep(1000);
+      }
+      console.log();
+      /**
+      * END - BATCH READ FILE
       */
 
       /**
