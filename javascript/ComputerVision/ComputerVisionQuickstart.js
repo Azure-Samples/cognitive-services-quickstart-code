@@ -511,7 +511,7 @@ function computerVision() {
       /**
       * END - BATCH READ FILE
       */
-        
+
       /**
        * RECOGNIZE TEXT (OCR) 
        * Recognizes text from images using OCR (optical character recognition). 
