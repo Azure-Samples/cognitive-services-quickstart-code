@@ -1,5 +1,12 @@
 # <snippet_imports>
-import asyncio, io, glob, os, sys, time, uuid, requests
+import asyncio
+import io
+import glob
+import os
+import sys
+import time
+import uuid
+import requests
 from urllib.parse import urlparse
 from io import BytesIO
 from PIL import Image, ImageDraw
@@ -24,9 +31,8 @@ Examples include:
 Prerequisites:
     - Python 3+
     - Install Face SDK: pip install azure-cognitiveservices-vision-face
-    - Sample images (download and include in your local root folder):
-      https://github.com/Azure-Samples/cognitive-services-sample-data-files/tree/master/Face/images
-
+    - In your root folder, add all images downloaded from here:
+      https://github.com/Azure-examples/cognitive-services-sample-data-files/tree/master/Face/images
 How to run:
     - Run from command line or an IDE
     - If the Person Group or Large Person Group (or Face List / Large Face List) examples get
@@ -35,7 +41,6 @@ How to run:
       and 'Person Group - Delete' to remove one. The examples have a delete function in them, but at the end.
       Person Group API: https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395244
       Face List API: https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039524d
-
 References:
     - Documentation: https://docs.microsoft.com/en-us/azure/cognitive-services/face/
     - SDK: https://docs.microsoft.com/en-us/python/api/azure-cognitiveservices-vision-face/azure.cognitiveservices.vision.face?view=azure-python
@@ -62,6 +67,7 @@ IMAGE_BASE_URL = 'https://csdx.blob.core.windows.net/resources/Face/Images/'
 # You can call list_person_groups to print a list of preexisting PersonGroups.
 # SOURCE_PERSON_GROUP_ID should be all lowercase and alphanumeric. For example, 'mygroupname' (dashes are OK).
 PERSON_GROUP_ID = 'my-unique-person-group'
+
 # Used for the Snapshot and Delete Person Group examples.
 TARGET_PERSON_GROUP_ID = str(uuid.uuid4()) # assign a random ID (or name it anything)
 # </snippet_persongroupvars>
@@ -74,17 +80,16 @@ These are only used for the snapshot example. Set your environment variables acc
 # Source endpoint, the location/subscription where the original person group is located.
 SOURCE_ENDPOINT = ENDPOINT
 # Source subscription key. Must match the source endpoint region.
-SOURCE_KEY = KEY
-# Source subscription ID (different than  key). From the Azure portal.
+SOURCE_KEY = os.environ['FACE_SUBSCRIPTION_KEY']
+# Source subscription ID. Found in the Azure portal in the Overview page of your Face (or any) resource.
 SOURCE_ID = os.environ['AZURE_SUBSCRIPTION_ID']
 # Person group name that will get created in this quickstart's Person Group Operations example.
 SOURCE_PERSON_GROUP_ID = PERSON_GROUP_ID
-# Target endpoint. A separate Face resource in a different region (or a different subscription with same region).
-TARGET_ENDPOINT = os.environ["FACE_ENDPOINT2"]
-# Target subscription key. Must match the target endpoint region/subscription.
+# Target endpoint. This is your 2nd Face subscription.
+TARGET_ENDPOINT = os.environ['FACE_ENDPOINT2']
+# Target subscription key. Must match the target endpoint region.
 TARGET_KEY = os.environ['FACE_SUBSCRIPTION_KEY2']
-# Target subscription ID. It will be the same as the source ID if created Face resources from the
-# same subscription (but moving from region to region). If they are different subscriptions, add the other target ID here.
+# Target subscription ID. It will be the same as the source ID if created Face resources from the same subscription (but moving from region to region). If they are differnt subscriptions, add the other target ID here.
 TARGET_ID = os.environ['AZURE_SUBSCRIPTION_ID']
 # NOTE: We do not need to specify the target PersonGroup ID here because we generate it with this example.
 # Each new location you transfer a person group to will have a generated, new person group ID for that region.
@@ -103,7 +108,8 @@ END - Authenticate
 '''
 
 '''
-Detect faces in two images
+Detect faces 
+Detect faces in two images (get ID), draw rectangle around a third image.
 '''
 print('-----------------------------')
 print()
@@ -141,9 +147,7 @@ if not detected_faces2:
 else:
     for face in detected_faces2:
         print(face.face_id)
-'''
-END - Detect faces
-'''
+print()
 
 '''
 Print image and draw rectangles around faces
@@ -165,11 +169,13 @@ def getRectangle(faceDictionary):
     right = top + rect.width
     return ((left, top), (bottom, right))
 
+
 # Download the image from the url
-response = requests.get(img_url)
+response = requests.get(single_face_image_url)
 img = Image.open(BytesIO(response.content))
 
 # For each face returned use the face rectangle and draw a red box.
+print('Drawing rectangle around face... see popup for results.')
 draw = ImageDraw.Draw(img)
 for face in detected_faces:
     draw.rectangle(getRectangle(face), outline='red')
@@ -177,8 +183,10 @@ for face in detected_faces:
 # Display the image in the users default image browser.
 img.show()
 # </snippet_frame>
+
+print()
 '''
-END - Draw rectangles
+END - Detect faces
 '''
 
 '''
@@ -204,8 +212,7 @@ if not similar_faces[0]:
 print('Similar faces found in', multi_image_name + ':')
 for face in similar_faces:
 	first_image_face_ID = face.face_id
-	# The similar face IDs of the single face image and the group image do not need to match,
-	# they are only used for identification purposes in each image.
+	# The similar face IDs of the single face image and the group image do not need to match, they are only used for identification purposes in each image.
 	# The similar faces are matched using the Cognitive Services algorithm in find_similar().
 	face_info = next(x for x in detected_faces2 if x.face_id == first_image_face_ID)
 	if face_info:
@@ -216,15 +223,14 @@ for face in similar_faces:
 		print('    Width: ', str(face_info.face_rectangle.width))
 		print('    Height: ', str(face_info.face_rectangle.height))
 # </snippet_findsimilar_print>
+print()
 '''
 END - Find Similar
 '''
 
 '''
 Verify
-The Verify operation takes a face ID from DetectedFace or PersistedFace and either another face ID
-or a Person object and determines whether they belong to the same person. If you pass in a Person object,
-you can optionally pass in a PersonGroup to which that Person belongs to improve performance.
+The Verify operation takes a face ID from DetectedFace or PersistedFace and either another face ID or a Person object and determines whether they belong to the same person. If you pass in a Person object, you can optionally pass in a PersonGroup to which that Person belongs to improve performance.
 '''
 print('-----------------------------')
 print()
@@ -280,6 +286,7 @@ print('Faces from {} & {} are of the same person, with confidence: {}'
     else 'Faces from {} & {} are of a different person, with confidence: {}'
         .format(source_image_file_name2, target_image_file_names[0], verify_result_diff.confidence))
 # </snippet_verify>
+print()
 '''
 END - VERIFY
 '''
@@ -292,6 +299,7 @@ print('-----------------------------')
 print()
 print('PERSON GROUP OPERATIONS')
 print()
+
 # <snippet_persongroup_create>
 '''
 Create the PersonGroup
@@ -357,10 +365,9 @@ while (True):
 '''
 Identify a face against a defined PersonGroup
 '''
-# Reference image for testing against
+# Group image for testing against
 group_photo = 'test-image-person-group.jpg'
 IMAGES_FOLDER = os.path.join(os.path.dirname(os.path.realpath(__file__)))
-
 # Get test image
 test_image_array = glob.glob(os.path.join(IMAGES_FOLDER, group_photo))
 image = open(test_image_array[0], 'r+b')
@@ -375,14 +382,15 @@ for face in faces:
 # <snippet_identify>
 # Identify faces
 results = face_client.face.identify(face_ids, PERSON_GROUP_ID)
-print('Identifying faces in {}')
+print('Identifying faces in {}'.format(os.path.basename(image.name)))
 if not results:
-    print('No person identified in the person group for faces from the {}.'.format(os.path.basename(image.name)))
+    print('No person identified in the person group for faces from {}.'.format(os.path.basename(image.name)))
 for person in results:
     print('Person for face ID {} is identified in {} with a confidence of {}.'.format(person.face_id, os.path.basename(image.name), person.candidates[0].confidence)) # Get topmost confidence score
 # </snippet_identify>
+print()
 '''
-END - Create/Train/Detect/Identify Person Group example
+END - Create/Train/Detect/Identify Person Group
 '''
 
 '''
@@ -465,6 +473,7 @@ print()
 # After testing, delete the large person group, LargePersonGroupPersons also get deleted.
 face_client.large_person_group.delete(LARGE_PERSON_GROUP_ID)
 print("Deleted the large person group.")
+print()
 '''
 END - Create/List/Delete Large Person Group
 '''
@@ -566,9 +575,14 @@ print()
 face_client.large_face_list.train(large_face_list_id=large_face_list_id)
 
 # Get training status
-training_status_list = face_client.large_face_list.get_training_status(large_face_list_id=large_face_list_id)
-if training_status_list.status == TrainingStatusType.failed:
-    raise Exception("Training failed with message {}.".format(training_status_list.message))
+while (True):
+    training_status_list = face_client.large_face_list.get_training_status(large_face_list_id=large_face_list_id)
+    print("Training status: {}.".format(training_status_list.status))
+    if training_status_list.status is TrainingStatusType.failed:
+        raise Exception("Training failed with message {}.".format(training_status_list.message))
+    if (training_status_list.status is TrainingStatusType.succeeded):
+        break
+    time.sleep(5)
 
 # Returns a list[PersistedFace]. Can retrieve data from each face.
 large_face_list_faces = face_client.large_face_list.list_faces(large_face_list_id)
@@ -616,12 +630,15 @@ Snapshot operations in 4 steps
 async def run():
     # STEP 1, take a snapshot of your person group, then track status.
     # This list must include all subscription IDs from which you want to access the snapshot.
-    source_list = [SOURCE_ID, TARGET_ID] # You may have many sources, if transferring from many regions
+    source_list = [SOURCE_ID, TARGET_ID]
+    # You may have many sources, if transferring from many regions
     # remove any duplicates from the list. Passing the same subscription ID more than once causes
     # the Snapshot.take operation to fail.
     source_list = list(dict.fromkeys(source_list))
 
     # Note Snapshot.take is not asynchronous.
+    # For information about Snapshot.take see:
+    # https://github.com/Azure/azure-sdk-for-python/blob/master/azure-cognitiveservices-vision-face/azure/cognitiveservices/vision/face/operations/snapshot_operations.py#L36
     take_snapshot_result = face_client_source.snapshot.take(
         type=SnapshotObjectType.person_group,
         object_id=PERSON_GROUP_ID,
@@ -630,7 +647,8 @@ async def run():
         raw=True
         )
     # Get operation ID from response for tracking
-    # Snapshot.type return value is of type msrest.pipeline.ClientRawResponse.
+    # Snapshot.type return value is of type msrest.pipeline.ClientRawResponse. See:
+    # https://docs.microsoft.com/en-us/python/api/msrest/msrest.pipeline.clientrawresponse?view=azure-python
     take_operation_id = take_snapshot_result.response.headers['Operation-Location'].replace('/operations/', '')
 
     print('Taking snapshot( operation ID:', take_operation_id, ')...')
@@ -650,6 +668,8 @@ async def run():
     # <snippet_snapshot_apply>
     # STEP 3, apply the snapshot to target region(s)
     # Snapshot.apply is not asynchronous.
+    # For information about Snapshot.apply see:
+    # https://github.com/Azure/azure-sdk-for-python/blob/master/azure-cognitiveservices-vision-face/azure/cognitiveservices/vision/face/operations/snapshot_operations.py#L366
     apply_snapshot_result = face_client_target.snapshot.apply(
         snapshot_id=snapshot_id,
         # Generate a new UUID for the target person group ID.
@@ -674,6 +694,8 @@ async def run():
 async def wait_for_operation(client, operation_id):
     # Track progress of taking the snapshot.
     # Note Snapshot.get_operation_status is not asynchronous.
+    # For information about Snapshot.get_operation_status see:
+    # https://github.com/Azure/azure-sdk-for-python/blob/master/azure-cognitiveservices-vision-face/azure/cognitiveservices/vision/face/operations/snapshot_operations.py#L466
     result = client.snapshot.get_operation_status(operation_id=operation_id)
 
     status = result.status.lower()
