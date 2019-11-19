@@ -642,7 +642,7 @@ with open("thumb_local.png", "wb") as f:
     for chunk in thumb_local:
         f.write(chunk)
 
-# Uncomment/use this is you are writing many images as thumbnails from a list
+# Uncomment/use this if you are writing many images as thumbnails from a list
 # for i, image in enumerate(thumb_local, start=0):
 #      with open('thumb_{0}.jpg'.format(i), 'wb') as f:
 #         f.write(image)
@@ -666,7 +666,7 @@ with open("thumb_remote.png", "wb") as f:
 
 print("Thumbnail saved to local folder.")
 
-# Uncomment/use this is you are writing many images as thumbnails from a list
+# Uncomment/use this if you are writing many images as thumbnails from a list
 # for i, image in enumerate(thumb_remote, start=0):
 #      with open('thumb_{0}.jpg'.format(i), 'wb') as f:
 #         f.write(image)
