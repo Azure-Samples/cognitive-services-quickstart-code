@@ -1,9 +1,6 @@
 // <snippet_imports>
 package main
 
-/*  Import the required libraries. If this is your first time running a Go program,
- *  you will need to 'go get' the azure-sdk-for-go and go-autorest packages.
- */
 import (
 	"context"
 	"encoding/json"
@@ -30,8 +27,33 @@ import (
  *  - Detecting image types (clip art/line drawing)
  *  - Detecting objects
  *  - Detecting brands
- *  - Recognizing printed and handwritten text with the batch read API
+ *  - Generate Thumbnail
+ *  - Recognizing printed and handwritten text with the Batch Read API
  *	- Recognizing printed text with OCR
+ *
+ *  Prerequisites:
+ *    Import the required libraries. From the command line, you will need to 'go get' 
+ *    the azure-sdk-for-go and go-autorest packages from Github.
+ *    For example:
+ *	  go get github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v2.0/computervision
+ * 
+ *    Download images faces.jpg, handwritten_text.jpg, objects.jpg, cheese_clipart.png,
+ *    printed_text.jpg, and gray-shirt-logo.jpg, then add to your root folder from here:
+ *    https://github.com/Azure-Samples/cognitive-services-sample-data-files/tree/master/ComputerVision/Images
+ *   
+ *    Add your Azure Computer Vision subscription key and endpoint to your environment variables with names:
+ *    COMPUTER_VISION_SUBSCRIPTION_KEY and COMPUTER_VISION_ENDPOINT
+ *
+ *  How to run:
+ *	  From command line: go run ComptuerVisionQuickstart.go
+ * 
+ *  References:
+ *    - SDK reference: 
+ *      https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v2.0/computervision
+ *    - Computer Vision documentation:
+ * 		https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/index
+ *    - Computer Vision API: 
+ *      https://westus.dev.cognitive.microsoft.com/docs/services/5cd27ec07268f6c679a3e641/operations/56f91f2e778daf14a499f21b
  */
 
  // <snippet_context>
@@ -40,19 +62,54 @@ var computerVisionContext context.Context
 // </snippet_context>
 
 func main() {
-	// <snippet_client>
-	/*  Prerequisites for the Computer Vision client:
-	 *  Set environment variables for COMPUTER_VISION_SUBSCRIPTION_KEY and COMPUTER_VISION_ENDPOINT,
-	 *  then restart your command shell or your IDE for changes to take effect.
+
+	/*
+	 * Local image file I/O
+	 * Store these in your root directory in a "resources" folder.
+	 */ 
+	facesImagePath := "resources\\faces.jpg"
+	brandsImagePath := "resources\\gray-shirt-logo.jpg"
+	objectsImagePath := "resources\\objects.jpg"
+	clipartImagePath := "resources\\cheese_clipart.png"
+	handwritingImagePath := "resources\\handwritten_text.jpg"
+	printedImagePath := "resources\\printed_text.jpg"
+	/*
+	 * END - Local image file I/O
 	 */
-  	computerVisionKey := os.Getenv("COMPUTER_VISION_SUBSCRIPTION_KEY")
-	if (computerVisionKey == null) {
+
+	/*
+	 * URL images
+	 */ 
+	facesImageURL := "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/faces.jpg"
+	// <snippet_analyze_url>
+	landmarkImageURL := "https://github.com/Azure-Samples/cognitive-services-sample-data-files/raw/master/ComputerVision/Images/landmark.jpg"
+	// </snippet_analyze_url>
+	objectsImageURL := "https://moderatorsampleimages.blob.core.windows.net/samples/sample6.png"
+	// <snippet_brand_url>
+	brandsImageURL := "https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/images/gray-shirt-logo.jpg"
+	// </snippet_brand_url>
+	adultRacyImageURL := "https://moderatorsampleimages.blob.core.windows.net/samples/sample3.png"
+	detectTypeImageURL := "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/lion_drawing.png"
+	printedImageURL := "https://moderatorsampleimages.blob.core.windows.net/samples/sample2.jpg"
+	/*
+	 * END - URL images
+	 */
+
+	// <snippet_client>
+	/*  
+	 * Configure the Computer Vision client
+	 * Set environment variables for COMPUTER_VISION_SUBSCRIPTION_KEY and COMPUTER_VISION_ENDPOINT,
+	 * then restart your command shell or your IDE for changes to take effect.
+	 */
+	  computerVisionKey := os.Getenv("COMPUTER_VISION_SUBSCRIPTION_KEY")
+	
+	if (computerVisionKey == "") {
 		log.Fatal("\n\nPlease set a COMPUTER_VISION_SUBSCRIPTION_KEY environment variable.\n" +
 							  "**You may need to restart your shell or IDE after it's set.**\n")
 	}
 
 	endpointURL := os.Getenv("COMPUTER_VISION_ENDPOINT")
-	if (endpointURL == null) {
+	if (endpointURL == "") {
 		log.Fatal("\n\nPlease set a COMPUTER_VISION_ENDPOINT environment variable.\n" +
 							  "**You may need to restart your shell or IDE after it's set.**")
 	}
@@ -61,123 +118,64 @@ func main() {
 	computerVisionClient.Authorizer = autorest.NewCognitiveServicesAuthorizer(computerVisionKey)
 
 	computerVisionContext = context.Background()
-	// END - Configure the Computer Vision client
+	/*
+	 * END - Configure the Computer Vision client
+	 */
 	// </snippet_client>
 
-
-	// Analyze a local image
-	localImagePath := "resources\\faces.jpg"
-	workingDirectory, err := os.Getwd()
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("\nLocal image path:\n%v\n", workingDirectory + "\\" + localImagePath)
-
-	DescribeLocalImage(computerVisionClient, localImagePath)
-	CategorizeLocalImage(computerVisionClient, localImagePath)
-	TagLocalImage(computerVisionClient, localImagePath)
-	DetectFacesLocalImage(computerVisionClient, localImagePath)
-	DetectAdultOrRacyContentLocalImage(computerVisionClient, localImagePath)
-	DetectColorSchemeLocalImage(computerVisionClient, localImagePath)
-	DetectDomainSpecificContentLocalImage(computerVisionClient, localImagePath)
-	DetectImageTypesLocalImage(computerVisionClient, localImagePath)
-	DetectObjectsLocalImage(computerVisionClient, localImagePath)
-	// END - Analyze a local iamge
-
-	// Brand detection on a local image
-	fmt.Println("\nGetting new local image for brand detection ... \n")
-	localImagePath = "resources\\gray-shirt-logo.jpg"
-	workingDirectory, err = os.Getwd()
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("Local image path:\n%v\n", workingDirectory + "\\" + localImagePath)
-
-	DetectBrandsLocalImage(computerVisionClient, localImagePath)
-	// END - Brand detection
-
-
-	// Text recognition on a local image with the Read API
-	fmt.Println("\nGetting new local image for text recognition of handwriting with the Read API... \n")
-	localImagePath = "resources\\handwritten_text.jpg"
-	workingDirectory, err = os.Getwd()
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("Local image path:\n%v\n", workingDirectory + "\\" + localImagePath)
-
-	RecognizeTextReadAPILocalImage(computerVisionClient, localImagePath)
-	// END - Text recognition on a local image with the Read API
-
-	// Text recognition on a local image with OCR
-	fmt.Println("\nGetting new local image for text recognition with OCR... \n")
-	localImagePath = "resources\\printed_text.jpg"
-	workingDirectory, err = os.Getwd()
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("Local image path:\n%v\n", workingDirectory + "\\" + localImagePath)
-	ExtractTextOCRLocalImage(computerVisionClient, localImagePath)
-	// END - Text recognition on a local image with OCR
-
-	// <snippet_analyze_url>
-	// Analyze a remote image
-	remoteImageURL := "https://github.com/Azure-Samples/cognitive-services-sample-data-files/raw/master/ComputerVision/Images/landmark.jpg"
-	fmt.Printf("\nRemote image path: \n%v\n", remoteImageURL)
-	// </snippet_analyze_url>
-
-	// <snippet_brand_url>
-	// Brand detection on a remote image
-	remoteImageBrandsURL = "https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/images/gray-shirt-logo.jpg"
-	fmt.Printf("Remote image path for brands: \n%v\n", remoteImageBrandsURL)
-	// </snippet_brand_url>
+	// Analyze features of an image, local
+	DescribeLocalImage(computerVisionClient, facesImagePath)
+	CategorizeLocalImage(computerVisionClient, facesImagePath)
+	TagLocalImage(computerVisionClient, facesImagePath)
+	DetectFacesLocalImage(computerVisionClient, facesImagePath)
+	DetectObjectsLocalImage(computerVisionClient, objectsImagePath)
+	DetectBrandsLocalImage(computerVisionClient, brandsImagePath)
+	DetectAdultOrRacyContentLocalImage(computerVisionClient, facesImagePath)
+	DetectColorSchemeLocalImage(computerVisionClient, objectsImagePath)
+	DetectDomainSpecificContentLocalImage(computerVisionClient, facesImagePath)
+	DetectImageTypesLocalImage(computerVisionClient, clipartImagePath)
+	GenerateThumbnailLocalImage(computerVisionClient, objectsImagePath)
 
 	// <snippet_analyze>
-	DescribeRemoteImage(computerVisionClient, remoteImageURL)
-	CategorizeRemoteImage(computerVisionClient, remoteImageURL)
-	TagRemoteImage(computerVisionClient, remoteImageURL)
-	DetectObjectsRemoteImage(computerVisionClient, remoteImageURL)
-	DetectBrandsRemoteImage(computerVisionClient, remoteImageURL)
-	DetectFacesRemoteImage(computerVisionClient, remoteImageURL)
-	DetectAdultOrRacyContentRemoteImage(computerVisionClient, remoteImageURL)
-	DetectColorSchemeRemoteImage(computerVisionClient, remoteImageURL)
-	DetectDomainSpecificContentRemoteImage(computerVisionClient, remoteImageURL)
-	DetectImageTypesRemoteImage(computerVisionClient, remoteImageURL)
-	// END - Analyze a remote image
+	// Analyze features of an image, remote
+	DescribeRemoteImage(computerVisionClient, landmarkImageURL)
+	CategorizeRemoteImage(computerVisionClient, landmarkImageURL)
+	TagRemoteImage(computerVisionClient, landmarkImageURL)
+	DetectFacesRemoteImage(computerVisionClient, facesImageURL)
+	DetectObjectsRemoteImage(computerVisionClient, objectsImageURL)
+	DetectBrandsRemoteImage(computerVisionClient, brandsImageURL)
+	DetectAdultOrRacyContentRemoteImage(computerVisionClient, adultRacyImageURL)
+	DetectColorSchemeRemoteImage(computerVisionClient, brandsImageURL)
+	DetectDomainSpecificContentRemoteImage(computerVisionClient, landmarkImageURL)
+	DetectImageTypesRemoteImage(computerVisionClient, detectTypeImageURL)
+	GenerateThumbnailRemoteImage(computerVisionClient, adultRacyImageURL)
 	// </snippet_analyze>
 
+	// Analyze text in an image, local
+	BatchReadFileLocalImage(computerVisionClient, handwritingImagePath)
 	// <snippet_readinmain>
-	// Text recognition on a remote image
-	fmt.Println("\nGetting new remote image for text recognition of printed text with the Read API... \n")
-	remoteImageURL = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/printed_text.jpg"
-	fmt.Printf("Remote image path: \n%v\n", remoteImageURL)
-
-	RecognizeTextReadAPIRemoteImage(computerVisionClient, remoteImageURL)
+	// Analyze text in an image, remote
+	BatchReadFileRemoteImage(computerVisionClient, printedImageURL)
 	// </snippet_readinmain>
-	// END - Text recognition on a remote image
 
-	// Text recognition on a remote image with OCR
-	remoteImageURL = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/printed_text.jpg"
-	ExtractTextOCRRemoteImage(computerVisionClient, remoteImageURL)
-	// END - Text recognition on a remote image with OCR
+	// Analyze printed text in an image, local and remote
+	RecognizePrintedOCRLocalImage(computerVisionClient, printedImagePath)
+	RecognizePrintedOCRRemoteImage(computerVisionClient, printedImageURL)
+
+	fmt.Println("-----------------------------------------")
+	fmt.Println("End of quickstart.")
 }
 
-/*  Describe a local image by:
- *    1. Instantiating a ReadCloser, which is required by AnalyzeImageInStream.
- *    2. Opening the ReadCloser instance for reading.
- *    3. Calling the Computer Vision service's AnalyzeImageInStream with the:
- *       - context
- *       - image
- *	 - the number of descriptions to return
- *       - "" to specify the default language ("en") as the output language
- *    4. Displaying the image captions and their confidence values.
+/*  
+ * Describe Image - local
  */
 func DescribeLocalImage(client computervision.BaseClient, localImagePath string) {
+	fmt.Println("-----------------------------------------")
+	fmt.Println("DESCRIBE IMAGE - local")
+	fmt.Println()
 	var localImage io.ReadCloser
 	localImage, err := os.Open(localImagePath)
-	if err != nil {
-		log.Fatal(err)
-	}
+	if err != nil { log.Fatal(err) }
 
 	maxNumberDescriptionCandidates := new(int32)
 	*maxNumberDescriptionCandidates = 1
@@ -186,35 +184,32 @@ func DescribeLocalImage(client computervision.BaseClient, localImagePath string)
 			computerVisionContext,
 			localImage,
 			maxNumberDescriptionCandidates,
-			"")
-		if err != nil {
-			log.Fatal(err)
-		}
+			"") // language
+	if err != nil { log.Fatal(err) }
 
-		fmt.Println("\nCaptions from local image: ")
-		if len(*localImageDescription.Captions) == 0 {
-			fmt.Println("No captions detected.")
-		} else {
-			for _, caption := range *localImageDescription.Captions {
-				fmt.Printf("'%v' with confidence %.2f%%\n", *caption.Text, *caption.Confidence * 100)
-			}
+	fmt.Println("Captions from local image: ")
+	if len(*localImageDescription.Captions) == 0 {
+		fmt.Println("No captions detected.")
+	} else {
+		for _, caption := range *localImageDescription.Captions {
+			fmt.Printf("'%v' with confidence %.2f%%\n", *caption.Text, *caption.Confidence * 100)
 		}
+	}
+	
+	fmt.Println()
 }
-// END - Describe a local image
+/*
+ * END - Describe Image - local
+ */
 
-/*  Describe a remote image file by:
-*    1. Saving the URL as an ImageURL type for passing to AnalyzeImage.
-*    2. Defining what to extract from the image by initializing an array of VisualFeatureTypes.
-*    3. Calling the Computer Vision service's AnalyzeImage with the:
-*       - context
-*       - image
-*       - features to extract
-*       - an empty slice for the Details enumeration
-*       - "" to specify the default language ("en") as the output language
-*    4. Displaying the image captions and their confidence values.
+/*  
+ * Describe Image - remote
  */
 // <snippet_analyze_describe>
 func DescribeRemoteImage(client computervision.BaseClient, remoteImageURL string) {
+	fmt.Println("-----------------------------------------")
+	fmt.Println("DESCRIBE IMAGE - remote")
+	fmt.Println()
 	var remoteImage computervision.ImageURL
 	remoteImage.URL = &remoteImageURL
 
@@ -225,41 +220,34 @@ func DescribeRemoteImage(client computervision.BaseClient, remoteImageURL string
 			computerVisionContext,
 			remoteImage,
 			maxNumberDescriptionCandidates,
-			"")
-		if err != nil {
-			log.Fatal(err)
-		}
+			"") // language
+		if err != nil { log.Fatal(err) }
 
-		fmt.Println("\nCaptions from remote image: ")
-		if len(*remoteImageDescription.Captions) == 0 {
-			fmt.Println("No captions detected.")
-		} else {
-			for _, caption := range *remoteImageDescription.Captions {
-				fmt.Printf("'%v' with confidence %.2f%%\n", *caption.Text, *caption.Confidence * 100)
-			}
+	fmt.Println("Captions from remote image: ")
+	if len(*remoteImageDescription.Captions) == 0 {
+		fmt.Println("No captions detected.")
+	} else {
+		for _, caption := range *remoteImageDescription.Captions {
+			fmt.Printf("'%v' with confidence %.2f%%\n", *caption.Text, *caption.Confidence * 100)
 		}
+	}
+	fmt.Println()
 }
 // </snippet_analyze_describe>
-// END - Describe a remote image
+/*
+ * END - Describe Image - remote
+ */
 
-/*  Categorize a local image by:
- *    1. Instantiating a ReadCloser, which is required by AnalyzeImageInStream.
- *    2. Opening the ReadCloser instance for reading.
- *    3. Defining what to extract from the image by initializing an array of VisualFeatureTypes.
- *    4. Calling the Computer Vision service's AnalyzeImageInStream with the:
- *       - context
- *       - image
- *       - features to extract
- *       - an empty slice for the Details enumeration
- *       - "" to specify the default language ("en") as the output language
- *    5. Displaying the image categories and their confidence values.
+/*  
+ * Categorize Image - local
  */
 func CategorizeLocalImage(client computervision.BaseClient, localImagePath string) {
+	fmt.Println("-----------------------------------------")
+	fmt.Println("CATEGORIZE IMAGE - local")
+	fmt.Println()
 	var localImage io.ReadCloser
 	localImage, err := os.Open(localImagePath)
-	if err != nil {
-		log.Fatal(err)
-	}
+	if err != nil { log.Fatal(err) }
 
 	features := []computervision.VisualFeatureTypes{computervision.VisualFeatureTypesCategories}
 	imageAnalysis, err := client.AnalyzeImageInStream(
@@ -267,12 +255,10 @@ func CategorizeLocalImage(client computervision.BaseClient, localImagePath strin
 			localImage,
 			features,
 			[]computervision.Details{},
-			"")
-		if err != nil {
-			log.Fatal(err)
-		}
+			"") // language
+	if err != nil { log.Fatal(err) }
 
-	fmt.Println("\nCategories from local image: ")
+	fmt.Println("Categories from local image: ")
 	if len(*imageAnalysis.Categories) == 0 {
 		fmt.Println("No categories detected.")
 	} else {
@@ -280,23 +266,20 @@ func CategorizeLocalImage(client computervision.BaseClient, localImagePath strin
 			fmt.Printf("'%v' with confidence %.2f%%\n", *category.Name, *category.Score * 100)
 		}
 	}
+	fmt.Println()
 }
-// END - Categorize a local image
+/*
+ * END - Categorize Image - local
+ */
 
-
-/*  Categorize a remote image by:
-*    1. Saving the URL as an ImageURL type for passing to AnalyzeImage.
-*    2. Defining what to extract from the image by initializing an array of VisualFeatureTypes.
-*    3. Calling the Computer Vision service's AnalyzeImage with the:
-*       - context
-*       - image
-*       - features to extract
-*       - an empty slice for the Details enumeration
-*       - "" to specify the default language ("en") as the output language
-*    4. Displaying the image categories and their confidence values.
+/*  
+ * Categorize Image - remote
  */
 // <snippet_analyze_categorize>
 func CategorizeRemoteImage(client computervision.BaseClient, remoteImageURL string) {
+	fmt.Println("-----------------------------------------")
+	fmt.Println("CATEGORIZE IMAGE - remote")
+	fmt.Println()
 	var remoteImage computervision.ImageURL
 	remoteImage.URL = &remoteImageURL
 
@@ -307,11 +290,9 @@ func CategorizeRemoteImage(client computervision.BaseClient, remoteImageURL stri
 			features,
 			[]computervision.Details{},
 			"")
-		if err != nil {
-			log.Fatal(err)
-		}
+	if err != nil { log.Fatal(err) }
 
-	fmt.Println("\nCategories from remote image: ")
+	fmt.Println("Categories from remote image: ")
 	if len(*imageAnalysis.Categories) == 0 {
 		fmt.Println("No categories detected.")
 	} else {
@@ -319,57 +300,52 @@ func CategorizeRemoteImage(client computervision.BaseClient, remoteImageURL stri
 			fmt.Printf("'%v' with confidence %.2f%%\n", *category.Name, *category.Score * 100)
 		}
 	}
+	fmt.Println()
 }
 // </snippet_analyze_categorize>
-// END - Categorize a remote image
+/*
+ * END - Categorize Image - remote
+ */
 
-
-/*  Tag a local image by:
- *    1. Instantiating a ReadCloser, which is required by TagImageInStream.
- *    2. Opening the ReadCloser instance for reading.
- *    3. Calling the Computer Vision service's AnalyzeImageInStream with the:
- *       - context
- *       - image
- *       - "" to specify the default language ("en") as the output language
- *    4. Displaying the image categories and their confidence values.
+/*  
+ * Tag Image - local
  */
 func TagLocalImage(client computervision.BaseClient, localImagePath string) {
+	fmt.Println("-----------------------------------------")
+	fmt.Println("TAG IMAGE - local")
+	fmt.Println()
 	var localImage io.ReadCloser
 	localImage, err := os.Open(localImagePath)
-	if err != nil {
-		log.Fatal(err)
-	}
+	if err != nil { log.Fatal(err) }
 
 	localImageTags, err := client.TagImageInStream(
 			computerVisionContext,
 			localImage,
 			"")
-		if err != nil {
-			log.Fatal(err)
-		}
+	if err != nil { log.Fatal(err) }
 
-		fmt.Println("\nTags in the local image: ")
-		if len(*localImageTags.Tags) == 0 {
-			fmt.Println("No tags detected.")
-		} else {
-			for _, tag := range *localImageTags.Tags {
-				fmt.Printf("'%v' with confidence %.2f%%\n", *tag.Name, *tag.Confidence * 100)
-			}
+	fmt.Println("Tags in the local image: ")
+	if len(*localImageTags.Tags) == 0 {
+		fmt.Println("No tags detected.")
+	} else {
+		for _, tag := range *localImageTags.Tags {
+			fmt.Printf("'%v' with confidence %.2f%%\n", *tag.Name, *tag.Confidence * 100)
 		}
 	}
-// END - Tag a local image
+	fmt.Println()
+}
+/*
+ * END - Tag Image - local
+ */
 
-
-/*  Tag a remote image file by:
- *    1. Saving the URL as an ImageURL type for passing to AnalyzeImage.
- *    2. Calling the Computer Vision service's TagImage with the:
- *       - context
- *       - image
- *       - "" to specify the default language ("en") as the output language
- *    3. Displaying the image categories and their confidence values.
+/*  
+ * Tag Image - remote
  */
 // <snippet_tags>
 func TagRemoteImage(client computervision.BaseClient, remoteImageURL string) {
+	fmt.Println("-----------------------------------------")
+	fmt.Println("TAG IMAGE - remote")
+	fmt.Println()
 	var remoteImage computervision.ImageURL
 	remoteImage.URL = &remoteImageURL
 
@@ -377,42 +353,35 @@ func TagRemoteImage(client computervision.BaseClient, remoteImageURL string) {
 			computerVisionContext,
 			remoteImage,
 			"")
-		if err != nil {
-			log.Fatal(err)
-		}
+	if err != nil { log.Fatal(err) }
 
-		fmt.Println("\nTags in the remote image: ")
-		if len(*remoteImageTags.Tags) == 0 {
-			fmt.Println("No tags detected.")
-		} else {
-			for _, tag := range *remoteImageTags.Tags {
-				fmt.Printf("'%v' with confidence %.2f%%\n", *tag.Name, *tag.Confidence * 100)
-			}
+	fmt.Println("Tags in the remote image: ")
+	if len(*remoteImageTags.Tags) == 0 {
+		fmt.Println("No tags detected.")
+	} else {
+		for _, tag := range *remoteImageTags.Tags {
+			fmt.Printf("'%v' with confidence %.2f%%\n", *tag.Name, *tag.Confidence * 100)
 		}
+	}
+	fmt.Println()
 }
 // </snippet_tags>
-// END - Tag a remote image
+/*
+ * END - Tag Image - remote
+ */
 
-
-/*  Detect faces in a local image by:
- *    1. Instantiating a ReadCloser, which is required by AnalyzeImageInStream.
- *    2. Opening the ReadCloser instance for reading.
- *    3. Defining what to extract from the image by initializing an array of VisualFeatureTypes.
- *    4. Calling the Computer Vision service's AnalyzeImageInStream with the:
- *       - context
- *       - image
- *       - features to extract
- *       - an empty slice for the Details enumeration
- *       - "" to specify the default language ("en") as the output language
- *    5. Displaying the faces and their bounding boxes.
+/*  
+ * Detect Faces - local
  */
 func DetectFacesLocalImage(client computervision.BaseClient, localImagePath string) {
+	fmt.Println("-----------------------------------------")
+	fmt.Println("DETECT FACES - local")
+	fmt.Println()
 	var localImage io.ReadCloser
 	localImage, err := os.Open(localImagePath)
-	if err != nil {
-		log.Fatal(err)
-	}
+	if err != nil { log.Fatal(err) }
 
+	// Define the features you want returned with the API call.
 	features := []computervision.VisualFeatureTypes{computervision.VisualFeatureTypesFaces}
 
 	imageAnalysis, err := client.AnalyzeImageInStream(
@@ -420,58 +389,14 @@ func DetectFacesLocalImage(client computervision.BaseClient, localImagePath stri
 			localImage,
 			features,
 			[]computervision.Details{},
-			"")
-		if err != nil {
-			log.Fatal(err)
-		}
+		"")
+	if err != nil { log.Fatal(err) }
 
-		fmt.Println("\nDetecting faces in a local image ...")
-		if len(*imageAnalysis.Faces) == 0 {
-			fmt.Println("No faces detected.")
-		} else {
-			for _, face := range *imageAnalysis.Faces {
-				fmt.Printf("'%v' of age %v at location (%v, %v), (%v, %v)\n",
-					face.Gender, *face.Age,
-					*face.FaceRectangle.Left, *face.FaceRectangle.Top,
-					*face.FaceRectangle.Left + *face.FaceRectangle.Width,
-					*face.FaceRectangle.Top + *face.FaceRectangle.Height)
-			}
-		}
-}
-// END - Detect faces in a local image
-
-
-/*  Detect faces in a remote image file by:
-*    1. Saving the URL as an ImageURL type for passing to AnalyzeImage.
-*    2. Defining what to extract from the image by initializing an array of VisualFeatureTypes.
-*    3. Calling the Computer Vision service's AnalyzeImage with the:
-*       - context
-*       - image
-*       - features to extract
-*       - an empty slice for the Details enumeration
-*       - "" to specify the default language ("en") as the output language
-*    4. Displaying the image categories and their confidence values.
- */
-// <snippet_faces>
-func DetectFacesRemoteImage(client computervision.BaseClient, remoteImageURL string) {
-	var remoteImage computervision.ImageURL
-	remoteImage.URL = &remoteImageURL
-
-	features := []computervision.VisualFeatureTypes{computervision.VisualFeatureTypesFaces}
-	imageAnalysis, err := client.AnalyzeImage(
-			computerVisionContext,
-			remoteImage,
-			features,
-			[]computervision.Details{},
-			"")
-		if err != nil {
-			log.Fatal(err)
-		}
-
-	fmt.Println("\nDetecting faces in a remote image ...")
+	fmt.Println("Detecting faces in a local image ...")
 	if len(*imageAnalysis.Faces) == 0 {
 		fmt.Println("No faces detected.")
 	} else {
+		// Print the bounding box locations of the found faces.
 		for _, face := range *imageAnalysis.Faces {
 			fmt.Printf("'%v' of age %v at location (%v, %v), (%v, %v)\n",
 				face.Gender, *face.Age,
@@ -480,189 +405,205 @@ func DetectFacesRemoteImage(client computervision.BaseClient, remoteImageURL str
 				*face.FaceRectangle.Top + *face.FaceRectangle.Height)
 		}
 	}
+	fmt.Println()
 }
-// </snippet_faces>
-// END - Detect faces in a remote image
-
-
-/*  Detect adult or racy content in a local image by:
- *    1. Instantiating a ReadCloser, which is required by AnalyzeImageInStream.
- *    2. Opening the ReadCloser instance for reading.
- *    3. Defining what to extract from the image by initializing an array of VisualFeatureTypes.
- *    4. Calling the Computer Vision service's AnalyzeImageInStream with the:
- *       - context
- *       - image
- *       - features to extract
- *       - an empty slice for the Details enumeration
- *       - "" to specify the default language ("en") as the output language
- *    5. Displaying the faces and their bounding boxes.
+/*
+ * END - Detect Faces - local
  */
-func DetectAdultOrRacyContentLocalImage(client computervision.BaseClient, localImagePath string) {
-	var localImage io.ReadCloser
-	localImage, err := os.Open(localImagePath)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	features := []computervision.VisualFeatureTypes{computervision.VisualFeatureTypesAdult}
-	imageAnalysis, err := client.AnalyzeImageInStream(
-			computerVisionContext,
-			localImage,
-			features,
-			[]computervision.Details{},
-			"")
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		fmt.Println("\nAnalyzing local image for adult or racy content: ");
-		fmt.Printf("Is adult content: %v with confidence %.2f%%\n", *imageAnalysis.Adult.IsAdultContent, *imageAnalysis.Adult.AdultScore * 100)
-		fmt.Printf("Has racy content: %v with confidence %.2f%%\n", *imageAnalysis.Adult.IsRacyContent, *imageAnalysis.Adult.RacyScore * 100)
-}
-// END - Detect adult or racy content in a local image
-
-
-/*  Detect adult or racy content in a remote image file by:
-*    1. Saving the URL as an ImageURL type for passing to AnalyzeImage.
-*    2. Defining what to extract from the image by initializing an array of VisualFeatureTypes.
-*    3. Calling the Computer Vision service's AnalyzeImage with the:
-*       - context
-*       - image
-*       - features to extract
-*       - an empty slice for the Details enumeration
-*       - "" to specify the default language ("en") as the output language
-*    4. Displaying the image categories and their confidence values.
+ 
+/*  
+ * Detect Faces - remote
  */
-// <snippet_adult>
-func DetectAdultOrRacyContentRemoteImage(client computervision.BaseClient, remoteImageURL string) {
+// <snippet_faces>
+func DetectFacesRemoteImage(client computervision.BaseClient, remoteImageURL string) {
+	fmt.Println("-----------------------------------------")
+	fmt.Println("DETECT FACES - remote")
+	fmt.Println()
 	var remoteImage computervision.ImageURL
 	remoteImage.URL = &remoteImageURL
 
-	features := []computervision.VisualFeatureTypes{computervision.VisualFeatureTypesAdult}
+	// Define the features you want returned with the API call.
+	features := []computervision.VisualFeatureTypes{computervision.VisualFeatureTypesFaces}
 	imageAnalysis, err := client.AnalyzeImage(
 			computerVisionContext,
 			remoteImage,
 			features,
 			[]computervision.Details{},
 			"")
-		if err != nil {
-			log.Fatal(err)
+		if err != nil { log.Fatal(err) }
+
+	fmt.Println("Detecting faces in a remote image ...")
+	if len(*imageAnalysis.Faces) == 0 {
+		fmt.Println("No faces detected.")
+	} else {
+		// Print the bounding box locations of the found faces.
+		for _, face := range *imageAnalysis.Faces {
+			fmt.Printf("'%v' of age %v at location (%v, %v), (%v, %v)\n",
+				face.Gender, *face.Age,
+				*face.FaceRectangle.Left, *face.FaceRectangle.Top,
+				*face.FaceRectangle.Left + *face.FaceRectangle.Width,
+				*face.FaceRectangle.Top + *face.FaceRectangle.Height)
 		}
-
-		fmt.Println("\nAnalyzing remote image for adult or racy content: ");
-		fmt.Printf("Is adult content: %v with confidence %.2f%%\n", *imageAnalysis.Adult.IsAdultContent, *imageAnalysis.Adult.AdultScore * 100)
-		fmt.Printf("Has racy content: %v with confidence %.2f%%\n", *imageAnalysis.Adult.IsRacyContent, *imageAnalysis.Adult.RacyScore * 100)
+	}
+	fmt.Println()
 }
-// </snippet_adult>
-// END - Detect adult or racy content in a remote image
-
-
-/*  Detect the color scheme of a local image by:
- *    1. Instantiating a ReadCloser, which is required by AnalyzeImageInStream.
- *    2. Opening the ReadCloser instance for reading.
- *    3. Defining what to extract from the image by initializing an array of VisualFeatureTypes.
- *    4. Calling the Computer Vision service's AnalyzeImageInStream with the:
- *       - context
- *       - image
- *       - features to extract
- *       - an empty slice for the Details enumeration
- *       - "" to specify the default language ("en") as the output language
- *    5. Displaying the faces and their bounding boxes.
+// </snippet_faces>
+/*
+ * END - Detect Faces - remote
  */
-func DetectColorSchemeLocalImage(client computervision.BaseClient, localImagePath string) {
+/*  
+ * Detect Adult or Racy Content - local
+ */
+func DetectAdultOrRacyContentLocalImage(client computervision.BaseClient, localImagePath string) {
+	fmt.Println("-----------------------------------------")
+	fmt.Println("DETECT ADULT OR RACY CONTENT - local")
+	fmt.Println()
 	var localImage io.ReadCloser
 	localImage, err := os.Open(localImagePath)
-	if err != nil {
-		log.Fatal(err)
-	}
+	if err != nil { log.Fatal(err) }
 
-	features := []computervision.VisualFeatureTypes{computervision.VisualFeatureTypesColor}
+	// Define the features you want returned with the API call.
+	features := []computervision.VisualFeatureTypes{computervision.VisualFeatureTypesAdult}
 	imageAnalysis, err := client.AnalyzeImageInStream(
 			computerVisionContext,
 			localImage,
 			features,
 			[]computervision.Details{},
 			"")
-		if err != nil {
-			log.Fatal(err)
-		}
+	if err != nil { log.Fatal(err) }
 
-	fmt.Println("\nColor scheme of the local image: ");
+	// Print whether or not there is questionable content.
+	// Confidence levels: low means content is OK, high means it's not.
+	fmt.Println("Analyzing local image for adult or racy content: ");
+	fmt.Printf("Is adult content: %v with confidence %.2f%%\n", *imageAnalysis.Adult.IsAdultContent, *imageAnalysis.Adult.AdultScore * 100)
+	fmt.Printf("Has racy content: %v with confidence %.2f%%\n", *imageAnalysis.Adult.IsRacyContent, *imageAnalysis.Adult.RacyScore * 100)
+	fmt.Println()
+}
+/* 
+ * END - Detect Adult or Racy Content - local
+ */
+
+/*  
+ * Detect Adult or Racy Content - remote
+ */
+// <snippet_adult>
+func DetectAdultOrRacyContentRemoteImage(client computervision.BaseClient, remoteImageURL string) {
+	fmt.Println("-----------------------------------------")
+	fmt.Println("DETECT ADULT OR RACY CONTENT - remote")
+	fmt.Println()
+	var remoteImage computervision.ImageURL
+	remoteImage.URL = &remoteImageURL
+
+	// Define the features you want returned from the API call.
+	features := []computervision.VisualFeatureTypes{computervision.VisualFeatureTypesAdult}
+	imageAnalysis, err := client.AnalyzeImage(
+			computerVisionContext,
+			remoteImage,
+			features,
+			[]computervision.Details{},
+			"") // language, English is default
+	if err != nil { log.Fatal(err) }
+
+	// Print whether or not there is questionable content.
+	// Confidence levels: low means content is OK, high means it's not.
+	fmt.Println("Analyzing remote image for adult or racy content: ");
+	fmt.Printf("Is adult content: %v with confidence %.2f%%\n", *imageAnalysis.Adult.IsAdultContent, *imageAnalysis.Adult.AdultScore * 100)
+	fmt.Printf("Has racy content: %v with confidence %.2f%%\n", *imageAnalysis.Adult.IsRacyContent, *imageAnalysis.Adult.RacyScore * 100)
+	fmt.Println()
+}
+// </snippet_adult>
+/* 
+ * END - Detect Adult or Racy Content - remote
+ */ 
+
+
+/*  
+ * Detect Color Scheme - local
+ */
+func DetectColorSchemeLocalImage(client computervision.BaseClient, localImagePath string) {
+	fmt.Println("-----------------------------------------")
+	fmt.Println("DETECT COLOR SCHEME - local")
+	fmt.Println()
+	var localImage io.ReadCloser
+	localImage, err := os.Open(localImagePath)
+	if err != nil { log.Fatal(err) }
+
+	// Define the features you want returned with the API call.
+	features := []computervision.VisualFeatureTypes{computervision.VisualFeatureTypesColor}
+	imageAnalysis, err := client.AnalyzeImageInStream(
+			computerVisionContext,
+			localImage,
+			features,
+			[]computervision.Details{},
+			"") // language, English is default
+	if err != nil { log.Fatal(err) }
+
+	fmt.Println("Color scheme of the local image: ");
 	fmt.Printf("Is black and white: %v\n", *imageAnalysis.Color.IsBWImg)
 	fmt.Printf("Accent color: 0x%v\n", *imageAnalysis.Color.AccentColor)
 	fmt.Printf("Dominant background color: %v\n", *imageAnalysis.Color.DominantColorBackground)
 	fmt.Printf("Dominant foreground color: %v\n", *imageAnalysis.Color.DominantColorForeground)
 	fmt.Printf("Dominant colors: %v\n", strings.Join(*imageAnalysis.Color.DominantColors, ", "))
+	fmt.Println()
 }
-// END - Detect the color scheme of a local image
+/*
+ * END - Detect Color Scheme - local
+ */
 
-
-/*  Detect the color scheme of a remote image file by:
-*    1. Saving the URL as an ImageURL type for passing to AnalyzeImage.
-*    2. Defining what to extract from the image by initializing an array of VisualFeatureTypes.
-*    3. Calling the Computer Vision service's AnalyzeImage with the:
-*       - context
-*       - image
-*       - features to extract
-*       - an empty slice for the Details enumeration
-*       - "" to specify the default language ("en") as the output language
-*    4. Displaying the image categories and their confidence values.
+/*  
+ * Detect Color Scheme - remote
  */
 // <snippet_color>
 func DetectColorSchemeRemoteImage(client computervision.BaseClient, remoteImageURL string) {
+	fmt.Println("-----------------------------------------")
+	fmt.Println("DETECT COLOR SCHEME - remote")
+	fmt.Println()
 	var remoteImage computervision.ImageURL
 	remoteImage.URL = &remoteImageURL
 
+	// Define the features you'd like returned with the result.
 	features := []computervision.VisualFeatureTypes{computervision.VisualFeatureTypesColor}
 	imageAnalysis, err := client.AnalyzeImage(
 			computerVisionContext,
 			remoteImage,
 			features,
 			[]computervision.Details{},
-			"")
-		if err != nil {
-			log.Fatal(err)
-		}
+			"") // language, English is default
+	if err != nil { log.Fatal(err) }
 
-		fmt.Println("\nColor scheme of the remote image: ");
-		fmt.Printf("Is black and white: %v\n", *imageAnalysis.Color.IsBWImg)
-		fmt.Printf("Accent color: 0x%v\n", *imageAnalysis.Color.AccentColor)
-		fmt.Printf("Dominant background color: %v\n", *imageAnalysis.Color.DominantColorBackground)
-		fmt.Printf("Dominant foreground color: %v\n", *imageAnalysis.Color.DominantColorForeground)
-		fmt.Printf("Dominant colors: %v\n", strings.Join(*imageAnalysis.Color.DominantColors, ", "))
+	fmt.Println("Color scheme of the remote image: ");
+	fmt.Printf("Is black and white: %v\n", *imageAnalysis.Color.IsBWImg)
+	fmt.Printf("Accent color: 0x%v\n", *imageAnalysis.Color.AccentColor)
+	fmt.Printf("Dominant background color: %v\n", *imageAnalysis.Color.DominantColorBackground)
+	fmt.Printf("Dominant foreground color: %v\n", *imageAnalysis.Color.DominantColorForeground)
+	fmt.Printf("Dominant colors: %v\n", strings.Join(*imageAnalysis.Color.DominantColors, ", "))
+	fmt.Println()
 }
 // </snippet_color>
-// END - Detect the color scheme of a remote image
+/* 
+ * END - Detect Color Scheme - remote
+ */
 
-
-/*  Detect domain-specific content (celebrities, landmarks) in a local image by:
- *    1. Instantiating a ReadCloser, which is required by AnalyzeImageInStream.
- *    2. Opening the ReadCloser instance for reading.
- *    3. Calling the Computer Vision service's AnalyzeImageByDomainInStream with the:
- *       - context
- *		   - domain-specific content to extract
- *       - image
- *       - "" to specify the default language ("en") as the output language
- *    4. Decoding the data returned from AnalyzeImageByDomainInStream.
- *    5. Displaying the celebrities/landmarks and their bounding boxes.
+/*  
+ * Detect Domain-specific Content - local
+ * Detect domain-specific content (celebrities, landmarks) in a local image.
  */
 func DetectDomainSpecificContentLocalImage(client computervision.BaseClient, localImagePath string) {
+	fmt.Println("-----------------------------------------")
+	fmt.Println("DETECT DOMAIN-SPECIFIC CONTENT - local")
+	fmt.Println()
 	var localImage io.ReadCloser
 	localImage, err := os.Open(localImagePath)
-	if err != nil {
-		log.Fatal(err)
-	}
+	if err != nil { log.Fatal(err) }
 
-	fmt.Println("\nDetecting domain-specific content in the local image ...")
+	fmt.Println("Detecting domain-specific content in the local image ...")
 
 	celebrities, err := client.AnalyzeImageByDomainInStream(
 			computerVisionContext,
 			"celebrities",
 			localImage,
-			"")
-		if err != nil {
-			log.Fatal(err)
-		}
+			"") // language, default is English
+		if err != nil { log.Fatal(err) }
 
 	fmt.Println("\nCelebrities: ")
 
@@ -682,11 +623,9 @@ func DetectDomainSpecificContentLocalImage(client computervision.BaseClient, loc
 
 	// Unmarshal the data.
 	err = json.Unmarshal(data, &celebrityResult)
-	if err != nil {
-		log.Fatal(err)
-	}
+	if err != nil { log.Fatal(err) }
 
-	//	Check if any celebrities detected
+	//	Check if any celebrities detected.
 	if len(celebrityResult.Celebrities) == 0 {
 		fmt.Println("No celebrities detected.")
 	}	else {
@@ -698,18 +637,14 @@ func DetectDomainSpecificContentLocalImage(client computervision.BaseClient, loc
 	fmt.Println("\nLandmarks: ")
 
 	localImage, err = os.Open(localImagePath)
-	if err != nil {
-		log.Fatal(err)
-	}
+	if err != nil { log.Fatal(err) }
 
 	landmarks, err := client.AnalyzeImageByDomainInStream(
 			computerVisionContext,
 			"landmarks",
 			localImage,
 			"")
-		if err != nil {
-			log.Fatal(err)
-		}
+	if err != nil { log.Fatal(err) }
 
 	// Marshal the output from AnalyzeImageByDomainInStream into JSON.
 	data, err = json.MarshalIndent(landmarks.Result, "", "\t")
@@ -720,16 +655,14 @@ func DetectDomainSpecificContentLocalImage(client computervision.BaseClient, loc
 	}
 
 	type LandmarkResult struct {
-		Landmarks	[]Landmarks `json:"landmarks"`
+		Landmarks []Landmarks `json:"landmarks"`
 	}
 
 	var landmarkResult LandmarkResult
 
 	// Unmarshal the data.
 	err = json.Unmarshal(data, &landmarkResult)
-	if err != nil {
-		log.Fatal(err)
-	}
+	if err != nil { log.Fatal(err) }
 
 	//	Check if any landmarks detected
 	if len(landmarkResult.Landmarks) == 0 {
@@ -739,35 +672,32 @@ func DetectDomainSpecificContentLocalImage(client computervision.BaseClient, loc
 			fmt.Printf("name: %v\n", landmark.Name)
 		}
 	}
+	fmt.Println()
 }
-// END - Detect domain-specific content in a local image
+/*
+ * END - Detect Domain-specific Content - local
+ */
 
-
-/*  Detect domain-specific content (celebrities, landmarks) in remote image file by:
-*    1. Saving the URL as an ImageURL type for passing to AnalyzeImage.
-*    2. Calling the Computer Vision service's AnalyzeImageByDomain with the:
-*       - context
-*	- domain-specific content to extract
-*       - image
-*       - "" to specify the default language ("en") as the output language
-*    3. Decoding the data returned from AnalyzeImageByDomain.
-*    4. Displaying the celebrities/landmarks and their bounding boxes.
-*/
+/*  
+ * Detect Domain-specific Content - remote
+ */
 // <snippet_celebs>
 func DetectDomainSpecificContentRemoteImage(client computervision.BaseClient, remoteImageURL string) {
+	fmt.Println("-----------------------------------------")
+	fmt.Println("DETECT DOMAIN-SPECIFIC CONTENT - remote")
+	fmt.Println()
 	var remoteImage computervision.ImageURL
 	remoteImage.URL = &remoteImageURL
 
-	fmt.Println("\nDetecting domain-specific content in the local image ...")
+	fmt.Println("Detecting domain-specific content in the local image ...")
 
+	// Check if there are any celebrities in the image.
 	celebrities, err := client.AnalyzeImageByDomain(
 			computerVisionContext,
 			"celebrities",
 			remoteImage,
-			"")
-		if err != nil {
-			log.Fatal(err)
-		}
+			"") // language, English is default
+	if err != nil { log.Fatal(err) }
 
 	fmt.Println("\nCelebrities: ")
 
@@ -787,11 +717,9 @@ func DetectDomainSpecificContentRemoteImage(client computervision.BaseClient, re
 
 	// Unmarshal the data.
 	err = json.Unmarshal(data, &celebrityResult)
-	if err != nil {
-		log.Fatal(err)
-	}
+	if err != nil { log.Fatal(err) }
 
-	//	Check if any celebrities detected
+	//	Check if any celebrities detected.
 	if len(celebrityResult.Celebrities) == 0 {
 		fmt.Println("No celebrities detected.")
 	}	else {
@@ -804,14 +732,13 @@ func DetectDomainSpecificContentRemoteImage(client computervision.BaseClient, re
 	// <snippet_landmarks>
 	fmt.Println("\nLandmarks: ")
 
+	// Check if there are any landmarks in the image.
 	landmarks, err := client.AnalyzeImageByDomain(
 			computerVisionContext,
 			"landmarks",
 			remoteImage,
 			"")
-		if err != nil {
-			log.Fatal(err)
-		}
+	if err != nil { log.Fatal(err) }
 
 	// Marshal the output from AnalyzeImageByDomain into JSON.
 	data, err = json.MarshalIndent(landmarks.Result, "", "\t")
@@ -829,11 +756,9 @@ func DetectDomainSpecificContentRemoteImage(client computervision.BaseClient, re
 
 	// Unmarshal the data.
 	err = json.Unmarshal(data, &landmarkResult)
-	if err != nil {
-		log.Fatal(err)
-	}
+	if err != nil { log.Fatal(err) }
 
-	// Check if any celebrities detected
+	// Check if any celebrities detected.
 	if len(landmarkResult.Landmarks) == 0 {
 		fmt.Println("No landmarks detected.")
 	}	else {
@@ -841,30 +766,25 @@ func DetectDomainSpecificContentRemoteImage(client computervision.BaseClient, re
 			fmt.Printf("name: %v\n", landmark.Name)
 		}
 	}
+	fmt.Println()
 }
 // </snippet_landmarks>
-// END - Detect domain-specific content in a remote image
+/* 
+ * END - Detect Domain-specific Content - remote
 
 
-/*  Detect the image type (clip art, line drawing) of a local image by:
- *    1. Instantiating a ReadCloser, which is required by AnalyzeImageInStream.
- *    2. Opening the ReadCloser instance for reading.
- *    3. Defining what to extract from the image by initializing an array of VisualFeatureTypes.
- *    4. Calling the Computer Vision service's AnalyzeImageInStream with the:
- *       - context
- *       - image
- *       - features to extract
- *       - an empty slice for the Details enumeration
- *       - "" to specify the default language ("en") as the output language
- *    5. Displaying the faces and their bounding boxes.
+/*  
+ * Detect Image Type - local
  */
 func DetectImageTypesLocalImage(client computervision.BaseClient, localImagePath string) {
+	fmt.Println("-----------------------------------------")
+	fmt.Println("DETECT IMAGE TYPES - local")
+	fmt.Println()
 	var localImage io.ReadCloser
 	localImage, err := os.Open(localImagePath)
-	if err != nil {
-		log.Fatal(err)
-	}
+	if err != nil { log.Fatal(err) }
 
+	// Select the features you want returned in the response.
 	features := []computervision.VisualFeatureTypes{computervision.VisualFeatureTypesImageType}
 
 	imageAnalysis, err := client.AnalyzeImageInStream(
@@ -872,48 +792,44 @@ func DetectImageTypesLocalImage(client computervision.BaseClient, localImagePath
 			localImage,
 			features,
 			[]computervision.Details{},
-			"")
-		if err != nil {
-			log.Fatal(err)
-		}
+			"") // language, default is English
+	if err != nil { log.Fatal(err) }
 
-		fmt.Println("\nImage type of local image:")
+	fmt.Println("Image type of local image:")
 
-		fmt.Println("\nClip art type: ")
-		switch *imageAnalysis.ImageType.ClipArtType {
-		case 0:
-			fmt.Println("Image is not clip art.")
-		case 1:
-			fmt.Println("Image is ambiguously clip art.")
-		case 2:
-			fmt.Println("Image is normal clip art.")
-		case 3:
-			fmt.Println("Image is good clip art.")
-		}
+	fmt.Println("\nClip art type: ")
+	switch *imageAnalysis.ImageType.ClipArtType {
+	case 0:
+		fmt.Println("Image is not clip art.")
+	case 1:
+		fmt.Println("Image is ambiguously clip art.")
+	case 2:
+		fmt.Println("Image is normal clip art.")
+	case 3:
+		fmt.Println("Image is good clip art.")
+	}
 
-		fmt.Println("\nLine drawing type: ")
-		if *imageAnalysis.ImageType.LineDrawingType == 1 {
-			fmt.Println("Image is a line drawing.")
-		}	else {
-			fmt.Println("Image is not a line drawing.")
-		}
+	fmt.Println("\nLine drawing type: ")
+	if *imageAnalysis.ImageType.LineDrawingType == 1 {
+		fmt.Println("Image is a line drawing.")
+	}	else {
+		fmt.Println("Image is not a line drawing.")
+	}
+	fmt.Println()
 }
-// END - Detect image type of a local image
+/*
+ * END - Detect Image Type - local
+ */
 
-
-/*  Detect the image type (clip art, line drawing) of a remote image by:
-*    1. Saving the URL as an ImageURL type for passing to AnalyzeImage.
-*    2. Defining what to extract from the image by initializing an array of VisualFeatureTypes.
-*    3. Calling the Computer Vision service's AnalyzeImage with the:
-*       - context
-*       - image
-*       - features to extract
-*       - an enumeration specifying the domain-specific details to return
-*       - "" to specify the default language ("en") as the output language
-*    4. Displaying the image categories and their confidence values.
+/*  
+ * Detect Image Type - remote
+ * Detect the image type (clip art, line drawing) of a remote image.  
  */
 // <snippet_type>
 func DetectImageTypesRemoteImage(client computervision.BaseClient, remoteImageURL string) {
+	fmt.Println("-----------------------------------------")
+	fmt.Println("DETECT IMAGE TYPES - remote")
+	fmt.Println()
 	var remoteImage computervision.ImageURL
 	remoteImage.URL = &remoteImageURL
 
@@ -925,97 +841,57 @@ func DetectImageTypesRemoteImage(client computervision.BaseClient, remoteImageUR
 			features,
 			[]computervision.Details{},
 			"")
-		if err != nil {
-			log.Fatal(err)
-		}
+	if err != nil { log.Fatal(err) }
 
-		fmt.Println("\nImage type of remote image:")
+	fmt.Println("Image type of remote image:")
 
-		fmt.Println("\nClip art type: ")
-		switch *imageAnalysis.ImageType.ClipArtType {
-		case 0:
-			fmt.Println("Image is not clip art.")
-		case 1:
-			fmt.Println("Image is ambiguously clip art.")
-		case 2:
-			fmt.Println("Image is normal clip art.")
-		case 3:
-			fmt.Println("Image is good clip art.")
-		}
+	fmt.Println("\nClip art type: ")
+	switch *imageAnalysis.ImageType.ClipArtType {
+	case 0:
+		fmt.Println("Image is not clip art.")
+	case 1:
+		fmt.Println("Image is ambiguously clip art.")
+	case 2:
+		fmt.Println("Image is normal clip art.")
+	case 3:
+		fmt.Println("Image is good clip art.")
+	}
 
-		fmt.Println("\nLine drawing type: ")
-		if *imageAnalysis.ImageType.LineDrawingType == 1 {
-			fmt.Println("Image is a line drawing.")
-		}	else {
-			fmt.Println("Image is not a line drawing.")
-		}
+	fmt.Println("\nLine drawing type: ")
+	if *imageAnalysis.ImageType.LineDrawingType == 1 {
+		fmt.Println("Image is a line drawing.")
+	}	else {
+		fmt.Println("Image is not a line drawing.")
+	}
+	fmt.Println()
 }
 // </snippet_type>
-// END - Detect image type of a remote image
+/* 
+ * END - Detect Image Type - remote
+ */
 
-
-/*  Detect objects in a local image by:
- *    1. Instantiating a ReadCloser, which is required by DetectObjectsInStream.
- *    2. Opening the ReadCloser instance for reading.
- *    3. Calling the Computer Vision service's DetectObjectsInStream with the:
- *       - context
- *       - image
- *    4. Displaying the objects and their bounding boxes.
+/*  
+ * Detect Objects - local
  */
 func DetectObjectsLocalImage(client computervision.BaseClient, localImagePath string) {
+	fmt.Println("-----------------------------------------")
+	fmt.Println("DETECT OBJECTS - local")
+	fmt.Println()
 	var localImage io.ReadCloser
 	localImage, err := os.Open(localImagePath)
-	if err != nil {
-		log.Fatal(err)
-	}
+	if err != nil { log.Fatal(err) }
 
 	imageAnalysis, err := client.DetectObjectsInStream(
 			computerVisionContext,
 			localImage,
 			)
-		if err != nil {
-			log.Fatal(err)
-		}
+	if err != nil { log.Fatal(err) }
 
-		fmt.Println("\nDetecting objects in local image: ")
-		if len(*imageAnalysis.Objects) == 0 {
-			fmt.Println("No objects detected.")
-		} else {
-			for _, object := range *imageAnalysis.Objects {
-				fmt.Printf("'%v' with confidence %.2f%% at location (%v, %v), (%v, %v)\n",
-					*object.Object, *object.Confidence * 100,
-					*object.Rectangle.X, *object.Rectangle.X + *object.Rectangle.W,
-					*object.Rectangle.Y, *object.Rectangle.Y + *object.Rectangle.H)
-			}
-		}
-}
-// END - Detect objects in local image
-
-
-/*  Detect objects in a remote image by:
-*    1. Saving the URL as an ImageURL type for passing to DetectObjects.
-*    2. Calling the Computer Vision service's DetectObjects with the:
-*       - context
-*       - image
-*    3. Displaying the objects and their bounding boxes.
- */
-// <snippet_objects>
-func DetectObjectsRemoteImage(client computervision.BaseClient, remoteImageURL string) {
-	var remoteImage computervision.ImageURL
-	remoteImage.URL = &remoteImageURL
-
-	imageAnalysis, err := client.DetectObjects(
-			computerVisionContext,
-			remoteImage,
-	)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println("\nDetecting objects in remote image: ")
+	fmt.Println("Detecting objects in local image: ")
 	if len(*imageAnalysis.Objects) == 0 {
 		fmt.Println("No objects detected.")
 	} else {
+		// Print object names detected and bounding boxes with confidence levels.
 		for _, object := range *imageAnalysis.Objects {
 			fmt.Printf("'%v' with confidence %.2f%% at location (%v, %v), (%v, %v)\n",
 				*object.Object, *object.Confidence * 100,
@@ -1023,30 +899,60 @@ func DetectObjectsRemoteImage(client computervision.BaseClient, remoteImageURL s
 				*object.Rectangle.Y, *object.Rectangle.Y + *object.Rectangle.H)
 		}
 	}
+	fmt.Println()
+}
+/* 
+ * END - Detect Objects - local
+ */
+
+/*  
+ * Detect Objects - remote
+ */
+// <snippet_objects>
+func DetectObjectsRemoteImage(client computervision.BaseClient, remoteImageURL string) {
+	fmt.Println("-----------------------------------------")
+	fmt.Println("DETECT OBJECTS - remote")
+	fmt.Println()
+	var remoteImage computervision.ImageURL
+	remoteImage.URL = &remoteImageURL
+
+	imageAnalysis, err := client.DetectObjects(
+			computerVisionContext,
+			remoteImage,
+	)
+	if err != nil { log.Fatal(err) }
+
+	fmt.Println("Detecting objects in remote image: ")
+	if len(*imageAnalysis.Objects) == 0 {
+		fmt.Println("No objects detected.")
+	} else {
+		// Print the objects found with confidence level and bounding box locations.
+		for _, object := range *imageAnalysis.Objects {
+			fmt.Printf("'%v' with confidence %.2f%% at location (%v, %v), (%v, %v)\n",
+				*object.Object, *object.Confidence * 100,
+				*object.Rectangle.X, *object.Rectangle.X + *object.Rectangle.W,
+				*object.Rectangle.Y, *object.Rectangle.Y + *object.Rectangle.H)
+		}
+	}
+	fmt.Println()
 }
 // </snippet_objects>
-// END - Detect objects in remote image
+/*
+ * END - Detect Objects - remote
+ */
 
-
-/*  Detect brands in a local image by:
- *    1. Instantiating a ReadCloser, which is required by AnalyzeImageInStream.
- *    2. Opening the ReadCloser instance for reading.
- *    3. Defining what to extract from the image by initializing an array of VisualFeatureTypes.
- *    4. Calling the Computer Vision service's AnalyzeImageInStream with the:
- *       - context
- *       - image
- *       - features to extract
- *       - an empty slice for the Details enumeration
- *       - "" to specify the default language ("en") as the output language
- *    5. Displaying the brands, confidence values, and their bounding boxes.
+/*  
+ * Detect Brands - local
  */
 func DetectBrandsLocalImage(client computervision.BaseClient, localImagePath string) {
+	fmt.Println("-----------------------------------------")
+	fmt.Println("DETECT BRANDS - local")
+	fmt.Println()
 	var localImage io.ReadCloser
 	localImage, err := os.Open(localImagePath)
-	if err != nil {
-		log.Fatal(err)
-	}
+	if err != nil { log.Fatal(err) }
 
+	// Define the features you want returned in the response.
 	features := []computervision.VisualFeatureTypes{computervision.VisualFeatureTypesBrands}
 
 	imageAnalysis, err := client.AnalyzeImageInStream(
@@ -1054,42 +960,39 @@ func DetectBrandsLocalImage(client computervision.BaseClient, localImagePath str
 			localImage,
 			features,
 			[]computervision.Details{},
-			"en")
-		if err != nil {
-			log.Fatal(err)
-		}
+			"en") // language
+	if err != nil { log.Fatal(err) }
 
-		fmt.Println("\nDetecting brands in local image: ")
-		if len(*imageAnalysis.Brands) == 0 {
-			fmt.Println("No brands detected.")
-		} else {
-			for _, brand := range *imageAnalysis.Brands {
-				fmt.Printf("'%v' with confidence %.2f%% at location (%v, %v), (%v, %v)\n",
-					*brand.Name, *brand.Confidence * 100,
-		      *brand.Rectangle.X, *brand.Rectangle.X + *brand.Rectangle.W,
-		      *brand.Rectangle.Y, *brand.Rectangle.Y + *brand.Rectangle.H)
-			}
+	fmt.Println("Detecting brands in local image: ")
+	if len(*imageAnalysis.Brands) == 0 {
+		fmt.Println("No brands detected.")
+	} else {
+		// Get the bounding box for each brand and confidence level that it's identified correctly.
+		for _, brand := range *imageAnalysis.Brands {
+			fmt.Printf("'%v' with confidence %.2f%% at location (%v, %v), (%v, %v)\n",
+				*brand.Name, *brand.Confidence * 100,
+			*brand.Rectangle.X, *brand.Rectangle.X + *brand.Rectangle.W,
+			*brand.Rectangle.Y, *brand.Rectangle.Y + *brand.Rectangle.H)
 		}
+	}
+	fmt.Println()
 }
-// END - Detect brands in local image
+/*
+ * END - Detect Brands - local
+ */
 
-
-/*  Detect brands in a remote image by:
-*    1. Saving the URL as an ImageURL type for passing to AnalyzeImage.
-*    2. Defining what to extract from the image by initializing an array of VisualFeatureTypes.
-*    3. Calling the Computer Vision service's AnalyzeImage with the:
-*       - context
-*       - image
-*       - features to extract
-*       - an enumeration specifying the domain-specific details to return
-*       - "" to specify the default language ("en") as the output language
-*    5. Displaying the brands, confidence values, and their bounding boxes.
+/*  
+ * Detect Brands - remote
  */
 // <snippet_brands>
 func DetectBrandsRemoteImage(client computervision.BaseClient, remoteImageURL string) {
+	fmt.Println("-----------------------------------------")
+	fmt.Println("DETECT BRANDS - remote")
+	fmt.Println()
 	var remoteImage computervision.ImageURL
 	remoteImage.URL = &remoteImageURL
 
+	// Define the kinds of features you want returned.
 	features := []computervision.VisualFeatureTypes{computervision.VisualFeatureTypesBrands}
 
 	imageAnalysis, err := client.AnalyzeImage(
@@ -1098,14 +1001,13 @@ func DetectBrandsRemoteImage(client computervision.BaseClient, remoteImageURL st
 		features,
 		[]computervision.Details{},
 		"en")
-	if err != nil {
-	 	log.Fatal(err)
-	}
+	if err != nil { log.Fatal(err) }
 
-	fmt.Println("\nDetecting brands in remote image: ")
+	fmt.Println("Detecting brands in remote image: ")
 	if len(*imageAnalysis.Brands) == 0 {
 		fmt.Println("No brands detected.")
 	} else {
+		// Get bounding box around the brand and confidence level it's correctly identified.
 		for _, brand := range *imageAnalysis.Brands {
 			fmt.Printf("'%v' with confidence %.2f%% at location (%v, %v), (%v, %v)\n",
 				*brand.Name, *brand.Confidence * 100,
@@ -1113,43 +1015,94 @@ func DetectBrandsRemoteImage(client computervision.BaseClient, remoteImageURL st
 				*brand.Rectangle.Y, *brand.Rectangle.Y + *brand.Rectangle.H)
 		}
 	}
+	fmt.Println()
 }
 // </snippet_brands>
-// END - Detect brands in remote image
-
-
-/*  Recognize text with the Read API in a local image by:
- *    1. Instantiating a ReadCloser, which is required by BatchReadFileInStream.
- *    2. Opening the ReadCloser instance for reading.
- *    3. Specifying whether the text to recognize is handwritten or printed.
- *    4. Calling the Computer Vision service's BatchReadFileInStream with the:
- *       - context
- *       - image
- *       - text recognition mode
- *    5. Extracting the Operation-Location URL value from the BatchReadFileInStream
- *       response
- *    6. Waiting for the operation to complete.
- *    7. Displaying the results.
+/*
+ * END - Detect brands in remote image
  */
-func RecognizeTextReadAPILocalImage(client computervision.BaseClient, localImagePath string) {
+
+/*
+ * Generate Thumbnail - local
+ */
+func GenerateThumbnailLocalImage(client computervision.BaseClient, localImagePath string) {
+	fmt.Println("-----------------------------------------")
+	fmt.Println("GENERATE THUMBNAIL - local")
+	fmt.Println()
+
 	var localImage io.ReadCloser
 	localImage, err := os.Open(localImagePath)
-	if err != nil {
-		log.Fatal(err)
-	}
+	if err != nil { log.Fatal(err) }
 
-	textRecognitionMode := computervision.Handwritten
+	// Call API, adjust the thumbnail width/height (pixels) if desired.
+	// SmartCropping is set to true, which means the aspect ratio is allowed to change in order
+	// to frame the thumbnail better.
+	smartCropping := true
+	thumbLocal, err := client.GenerateThumbnailInStream(computerVisionContext, 100, 100, localImage, &smartCropping)
+	if err != nil { log.Fatal(err) }
+
+	// Write the image binary to file
+	file, err := os.Create("resources\\thumb_local.png")
+	if err != nil { log.Fatal(err) }
+	defer file.Close()
+	_, err = io.Copy(file, thumbLocal.Body)
+	if err != nil { log.Fatal(err) }
+
+	fmt.Println("The thunbnail from local has been saved to file.")
+	fmt.Println()
+}
+/*
+ * END - Generate Thumbnail -local
+ */
+
+/*
+ * Generate Thumbnail - remote
+ */
+func GenerateThumbnailRemoteImage(client computervision.BaseClient, remoteImageURL string) {
+	fmt.Println("-----------------------------------------")
+	fmt.Println("GENERATE THUMBNAIL - remote")
+	fmt.Println()
+
+	// Call API, adjust the thumbnail width/height (pixels) if desired.
+	// SmartCropping is set to true, which means the aspect ratio is allowed to change in order
+	// to frame the thumbnail better.
+	smartCropping := true
+	var remoteImage computervision.ImageURL
+	remoteImage.URL = &remoteImageURL
+	thumbLocal, err := client.GenerateThumbnail(computerVisionContext, 100, 100, remoteImage, &smartCropping)
+	if err != nil { log.Fatal(err) }
+
+	// Write the image binary to file
+	file, err := os.Create("resources\\thumb_remote.png")
+	if err != nil { log.Fatal(err) }
+	defer file.Close()
+	_, err = io.Copy(file, thumbLocal.Body)
+	if err != nil { log.Fatal(err) }
+
+	fmt.Println("The thunbnail from remote has been saved to file.")
+	fmt.Println()
+}
+/*
+ * END - Generate Thumbnail -local
+ */
+
+/*  
+ * Batch Read File - local
+ * A new way to recognize text, with more accurate results than the RecognizeText API call.
+ */
+func BatchReadFileLocalImage(client computervision.BaseClient, localImagePath string) {
+	fmt.Println("-----------------------------------------")
+	fmt.Println("BATCH READ FILE - local")
+	fmt.Println()
+	var localImage io.ReadCloser
+	localImage, err := os.Open(localImagePath)
+	if err != nil { log.Fatal(err) }
 
 	//	When you use the Read Document interface, the response contains a field
 	//	called "Operation-Location", which contains the URL to use for your
 	//	GetReadOperationResult to access OCR results.
-	textHeaders, err := client.BatchReadFileInStream(
-		computerVisionContext,
-		localImage,
-		textRecognitionMode)
-	if err != nil {
-		log.Fatal(err)
-	}
+	textHeaders, err := client.BatchReadFileInStream(computerVisionContext, localImage)
+	if err != nil { log.Fatal(err) }
 
 	//	Use ExtractHeader from the autorest library to get the Operation-Location URL
 	operationLocation := autorest.ExtractHeaderValue("Operation-Location", textHeaders.Response)
@@ -1158,15 +1111,13 @@ func RecognizeTextReadAPILocalImage(client computervision.BaseClient, localImage
 	operationId := string(operationLocation[len(operationLocation)-numberOfCharsInOperationId : len(operationLocation)])
 
 	readOperationResult, err := client.GetReadOperationResult(computerVisionContext, operationId)
-	if err != nil {
-		log.Fatal(err)
-	}
+	if err != nil { log.Fatal(err) }
 
 	// Wait for the operation to complete.
 	i := 0
 	maxRetries := 10
 
-	fmt.Println("\nRecognizing text in a local image with the batch Read API ... \n")
+	fmt.Println("Recognizing text in a local image with the batch Read API ...")
 	for readOperationResult.Status != computervision.Failed &&
 			readOperationResult.Status != computervision.Succeeded {
 		if i >= maxRetries {
@@ -1178,9 +1129,7 @@ func RecognizeTextReadAPILocalImage(client computervision.BaseClient, localImage
 		time.Sleep(1 * time.Second)
 
 		readOperationResult, err = client.GetReadOperationResult(computerVisionContext, operationId)
-		if err != nil {
-			log.Fatal(err)
-		}
+		if err != nil { log.Fatal(err) }
 	}
 
 	// Display the results.
@@ -1190,39 +1139,29 @@ func RecognizeTextReadAPILocalImage(client computervision.BaseClient, localImage
 			fmt.Println(*line.Text)
 		}
 	}
+	fmt.Println()
 }
-// END - Recognize text with the Read API in a local image
+/*
+ * END - Recognize text with the Read API in a local image
+ */ 
 
 
-/*  Recognize text with the Read API in a remote image by:
- *    1. Saving the URL as an ImageURL type for passing to BatchReadFile.
- *    2. Specifying whether the text to recognize is handwritten or printed.
- *    3. Calling the Computer Vision service's BatchReadFile with the:
- *       - context
- *       - image
- *       - text recognition mode
- *    4. Extracting the Operation-Location URL value from the BatchReadFile
- *       response
- *    5. Waiting for the operation to complete.
- *    6. Displaying the results.
+/*  
+ * Batch Read File - remote
+ * A new way to recognize text, with more accurate results than the RecognizeText API call.
  */
 // <snippet_read_call>
-func RecognizeTextReadAPIRemoteImage(client computervision.BaseClient, remoteImageURL string) {
+func BatchReadFileRemoteImage(client computervision.BaseClient, remoteImageURL string) {
+	fmt.Println("-----------------------------------------")
+	fmt.Println("BATCH READ FILE - remote")
+	fmt.Println()
 	var remoteImage computervision.ImageURL
 	remoteImage.URL = &remoteImageURL
 
-	textRecognitionMode := computervision.Printed
-
-	// When you use the Read Document interface, the response contains a field
-	// called "Operation-Location", which contains the URL to use for your
-	// GetReadOperationResult to access OCR results.
-	textHeaders, err := client.BatchReadFile(
-		computerVisionContext,
-		remoteImage,
-		textRecognitionMode)
-	if err != nil {
-		log.Fatal(err)
-	}
+	// The response contains a field called "Operation-Location", 
+	// which is a URL with an ID that you'll use for GetReadOperationResult to access OCR results.
+	textHeaders, err := client.BatchReadFile(computerVisionContext, remoteImage)
+	if err != nil { log.Fatal(err) }
 
 	// Use ExtractHeader from the autorest library to get the Operation-Location URL
 	operationLocation := autorest.ExtractHeaderValue("Operation-Location", textHeaders.Response)
@@ -1233,15 +1172,13 @@ func RecognizeTextReadAPIRemoteImage(client computervision.BaseClient, remoteIma
 
 	// <snippet_read_response>
 	readOperationResult, err := client.GetReadOperationResult(computerVisionContext, operationId)
-	if err != nil {
-		log.Fatal(err)
-	}
+	if err != nil { log.Fatal(err) }
 
 	// Wait for the operation to complete.
 	i := 0
 	maxRetries := 10
 
-	fmt.Println("\nRecognizing text in a remote image with the batch Read API ... \n")
+	fmt.Println("Recognizing text in a remote image with the batch Read API ...")
 	for readOperationResult.Status != computervision.Failed &&
 			readOperationResult.Status != computervision.Succeeded {
 		if i >= maxRetries {
@@ -1253,9 +1190,7 @@ func RecognizeTextReadAPIRemoteImage(client computervision.BaseClient, remoteIma
 		time.Sleep(1 * time.Second)
 
 		readOperationResult, err = client.GetReadOperationResult(computerVisionContext, operationId)
-		if err != nil {
-			log.Fatal(err)
-		}
+		if err != nil { log.Fatal(err) }
 	}
 	// </snippet_read_response>
 
@@ -1268,34 +1203,28 @@ func RecognizeTextReadAPIRemoteImage(client computervision.BaseClient, remoteIma
 		}
 	}
 	// </snippet_read_display>
+	fmt.Println()
 }
 
-
-/*  Extract text with OCR from a local image by:
- *    1. Instantiating a ReadCloser, which is required by AnalyzeImageInStream.
- *    2. Opening the ReadCloser instance for reading.
- *    3. Calling the Computer Vision service's RecognizePrintedTextInStream with the:
- *       - context
- *	 - whether to detect the text orientation
- *       - image
- *       - language
- *    4. Displaying the brands, confidence values, and their bounding boxes.
+/*  
+ * Recognize Printed Text with OCR - local
  */
-func ExtractTextOCRLocalImage(client computervision.BaseClient, localImagePath string) {
+func RecognizePrintedOCRLocalImage(client computervision.BaseClient, localImagePath string) {
+	fmt.Println("-----------------------------------------")
+	fmt.Println("RECOGNIZE PRINTED TEXT - local")
+	fmt.Println()
 	var localImage io.ReadCloser
 	localImage, err := os.Open(localImagePath)
-	if err != nil {
-		log.Fatal(err)
-	}
+	if err != nil { log.Fatal(err) }
 
-	fmt.Println("\nRecognizing text in a local image with OCR ... \n")
+	fmt.Println("Recognizing text in a local image with OCR ...")
 	ocrResult, err := client.RecognizePrintedTextInStream(computerVisionContext, true, localImage, computervision.En)
-	if err != nil {
-		log.Fatal(err)
-	}
+	if err != nil { log.Fatal(err) }
 
+	// Get orientation of text.
 	fmt.Printf("Text angle: %.4f\n", *ocrResult.TextAngle)
 
+	// Get bounding boxes for each line of text and print text.
 	for _, region := range *ocrResult.Regions {
 		for _, line := range *region.Lines {
 			fmt.Printf("\nBounding box: %v\n", *line.BoundingBox)
@@ -1303,33 +1232,31 @@ func ExtractTextOCRLocalImage(client computervision.BaseClient, localImagePath s
 			for _, word := range *line.Words {
 				s += *word.Text + " "
 			}
-			fmt.Printf("Text: %v\n", s)
+			fmt.Printf("Text: %v", s)
 		}
 	}
+	fmt.Println()
+	fmt.Println()
 }
 
-
-/*  Extract text with OCR from a local image by:
- *    1. Saving the URL as an ImageURL type for passing to AnalyzeImage.
- *    2. Calling the Computer Vision service's RecognizePrintedTextInStream with the:
- *       - context
- *	 - whether to detect the text orientation
- *       - image
- *       - language
- *    3. Displaying the brands, confidence values, and their bounding boxes.
+/*  
+ *  Recognize Printed Text with OCR - remote
  */
-func ExtractTextOCRRemoteImage(client computervision.BaseClient, remoteImageURL string) {
+func RecognizePrintedOCRRemoteImage(client computervision.BaseClient, remoteImageURL string) {
+	fmt.Println("-----------------------------------------")
+	fmt.Println("RECOGNIZE PRINTED TEXT - remote")
+	fmt.Println()
 	var remoteImage computervision.ImageURL
 	remoteImage.URL = &remoteImageURL
 
-	fmt.Println("\nRecognizing text in a remote image with OCR ... \n")
+	fmt.Println("Recognizing text in a remote image with OCR ...")
 	ocrResult, err := client.RecognizePrintedText(computerVisionContext, true, remoteImage, computervision.En)
-	if err != nil {
-		log.Fatal(err)
-	}
+	if err != nil { log.Fatal(err) }
 
+	// Get orientation of text.
 	fmt.Printf("Text angle: %.4f\n", *ocrResult.TextAngle)
 
+	// Get bounding boxes for each line of text and print text.
 	for _, region := range *ocrResult.Regions {
 		for _, line := range *region.Lines {
 			fmt.Printf("\nBounding box: %v\n", *line.BoundingBox)
@@ -1337,7 +1264,12 @@ func ExtractTextOCRRemoteImage(client computervision.BaseClient, remoteImageURL 
 			for _, word := range *line.Words {
 				s += *word.Text + " "
 			}
-			fmt.Printf("Text: %v\n", s)
+			fmt.Printf("Text: %v", s)
 		}
 	}
+	fmt.Println()
+	fmt.Println()
 }
+/*
+ * END - Recognize Printed Text with OCR 
+ */
