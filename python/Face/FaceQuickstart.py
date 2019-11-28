@@ -165,9 +165,10 @@ def getRectangle(faceDictionary):
     rect = faceDictionary.face_rectangle
     left = rect.left
     top = rect.top
-    bottom = left + rect.height
-    right = top + rect.width
-    return ((left, top), (bottom, right))
+    right = left + rect.width
+    bottom = top + rect.height
+    
+    return ((left, top), (right, bottom))
 
 
 # Download the image from the url
