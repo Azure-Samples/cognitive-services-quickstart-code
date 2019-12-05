@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-/* This sample for the Azure Cognitive Services QnA Maker API shows how to:
+/* This sample for the Azure Cognitive Services LUIS API shows how to:
  * - Create an application.
  * - Add intents to an application.
  * - Add entities to an application.
@@ -24,21 +24,19 @@ import (
  * - List all applications.
  */
  
-/*  Configure the local environment:
-	* Set the LUIS_SUBSCRIPTION_KEY and LUIS_REGION environment variables 
-	* on your local machine using the appropriate method for your preferred shell 
-	* (Bash, PowerShell, Command Prompt, etc.). 
-	*
-	* For LUIS_REGION, use the same region you used to get your subscription keys. 
-	*
-	* If the environment variable is created after the application is launched in a console or with Visual
-	* Studio, the shell (or Visual Studio) needs to be closed and reloaded to take the environment variable into account.
-	*/
-var subscription_key string = os.Getenv("LUIS_SUBSCRIPTION_KEY")
-var region string = os.Getenv("LUIS_REGION")
-
-// Replace this with the endpoint for your subscription key.
-var endpoint string = "https://" + region + ".api.cognitive.microsoft.com"
+/* Configure the local environment:
+* Set the following environment variables on your local machine using the
+* appropriate method for your preferred shell (Bash, PowerShell, Command
+* Prompt, etc.).
+*
+* LUIS_AUTHORING_KEY
+* LUIS_AUTHORING_ENDPOINT
+*
+* If the environment variable is created after the application is launched in a console or with Visual
+* Studio, the shell (or Visual Studio) needs to be closed and reloaded to take the environment variable into account.
+*/
+var authoring_key string = os.Getenv("LUIS_AUTHORING_KEY")
+var authoring_endpoint string = os.Getenv("LUIS_AUTHORING_ENDPOINT")
 //  END - Configure the local environment.
 
 func create_app() (string, string) {
@@ -46,9 +44,9 @@ func create_app() (string, string) {
 	// Get the context, which is required by the SDK methods.
 	ctx := context.Background()
 
-	client := authoring.NewAppsClient(endpoint)
+	client := authoring.NewAppsClient(authoring_endpoint)
 	// Set the subscription key on the client.
-	client.Authorizer = autorest.NewCognitiveServicesAuthorizer(subscription_key)
+	client.Authorizer = autorest.NewCognitiveServicesAuthorizer(authoring_key)
 
 	name := "Contoso " + time.Now().Format("2006-01-02 15:04:05")
 	description := "Flight booking app built with Azure SDK for Go."
@@ -70,9 +68,9 @@ func add_entities (app_id string, app_version string) {
 // Get the context, which is required by the SDK methods.
 	ctx := context.Background()
 
-	client := authoring.NewModelClient(endpoint)
+	client := authoring.NewModelClient(authoring_endpoint)
 	// Set the subscription key on the client.
-	client.Authorizer = autorest.NewCognitiveServicesAuthorizer(subscription_key)
+	client.Authorizer = autorest.NewCognitiveServicesAuthorizer(authoring_key)
 
 	uuid_app_id, err := uuid.FromString(app_id)
     if err != nil {
@@ -104,9 +102,9 @@ func add_entities (app_id string, app_version string) {
 func add_intents(app_id string, app_version string) {
 	ctx := context.Background()
 
-	client := authoring.NewModelClient(endpoint)
+	client := authoring.NewModelClient(authoring_endpoint)
 	// Set the subscription key on the client.
-	client.Authorizer = autorest.NewCognitiveServicesAuthorizer(subscription_key)
+	client.Authorizer = autorest.NewCognitiveServicesAuthorizer(authoring_key)
 
 	uuid_app_id, err := uuid.FromString(app_id)
     if err != nil {
@@ -146,9 +144,9 @@ func create_utterance(intent string, text string, labels map[string]string) auth
 func add_utterances(app_id string, app_version string) {
 	ctx := context.Background()
 
-	client := authoring.NewExamplesClient(endpoint)
+	client := authoring.NewExamplesClient(authoring_endpoint)
 	// Set the subscription key on the client.
-	client.Authorizer = autorest.NewCognitiveServicesAuthorizer(subscription_key)
+	client.Authorizer = autorest.NewCognitiveServicesAuthorizer(authoring_key)
 
 	uuid_app_id, err := uuid.FromString(app_id)
     if err != nil {
@@ -172,9 +170,9 @@ func train_app(app_id string, app_version string) {
 	// Get the context, which is required by the SDK methods.
 	ctx := context.Background()
 
-	client := authoring.NewTrainClient(endpoint)
+	client := authoring.NewTrainClient(authoring_endpoint)
 	// Set the subscription key on the client.
-	client.Authorizer = autorest.NewCognitiveServicesAuthorizer(subscription_key)
+	client.Authorizer = autorest.NewCognitiveServicesAuthorizer(authoring_key)
 
 	uuid_app_id, err := uuid.FromString(app_id)
     if err != nil {
@@ -223,9 +221,9 @@ func publish_app(app_id string, app_version string) {
 	// Get the context, which is required by the SDK methods.
 	ctx := context.Background()
 
-	client := authoring.NewAppsClient(endpoint)
+	client := authoring.NewAppsClient(authoring_endpoint)
 	// Set the subscription key on the client.
-	client.Authorizer = autorest.NewCognitiveServicesAuthorizer(subscription_key)
+	client.Authorizer = autorest.NewCognitiveServicesAuthorizer(authoring_key)
 
 	uuid_app_id, err := uuid.FromString(app_id)
     if err != nil {
@@ -244,9 +242,9 @@ func delete_app(app_id string, app_version string) {
 	// Get the context, which is required by the SDK methods.
 	ctx := context.Background()
 
-	client := authoring.NewAppsClient(endpoint)
+	client := authoring.NewAppsClient(authoring_endpoint)
 	// Set the subscription key on the client.
-	client.Authorizer = autorest.NewCognitiveServicesAuthorizer(subscription_key)
+	client.Authorizer = autorest.NewCognitiveServicesAuthorizer(authoring_key)
 
 	uuid_app_id, err := uuid.FromString(app_id)
     if err != nil {
@@ -265,9 +263,9 @@ func list_apps() {
 	// Get the context, which is required by the SDK methods.
 	ctx := context.Background()
 
-	client := authoring.NewAppsClient(endpoint)
+	client := authoring.NewAppsClient(authoring_endpoint)
 	// Set the subscription key on the client.
-	client.Authorizer = autorest.NewCognitiveServicesAuthorizer(subscription_key)
+	client.Authorizer = autorest.NewCognitiveServicesAuthorizer(authoring_key)
 
 	var skip int32 = 0
 	var max int32 = 100
