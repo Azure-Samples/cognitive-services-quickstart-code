@@ -223,6 +223,12 @@ func train_app(app_id string, app_version string) {
 }
 
 func publish_app(app_id string, app_version string) {
+    // Get the context, which is required by the SDK methods.
+    ctx := context.Background()
+    client := authoring.NewAppsClient(authoring_endpoint)
+	
+    // Set the subscription key on the client.
+    client.Authorizer = autorest.NewCognitiveServicesAuthorizer(authoring_key)
     uuid_app_id, err := uuid.FromString(app_id)
     if err != nil {
 	log.Fatal(err)
