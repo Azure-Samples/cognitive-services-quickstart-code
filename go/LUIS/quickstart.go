@@ -25,17 +25,17 @@ import (
  */
  
 /* Install libraries from command line:
- *    go get github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v2.0/luis/authoring
- *    go get github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v3.0/luis/runtime
- *    go get github.com/Azure/go-autorest/autorest
- *    go get github.com/satori/go.uuid
+ *   go get github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v2.0/luis/authoring
+ *   go get github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v3.0/luis/runtime
+ *   go get github.com/Azure/go-autorest/autorest
+ *   go get github.com/satori/go.uuid
  *
  * Configure the local environment:
- *    Set the following environment variables on your local machine using the
- *    appropriate method for your preferred shell (Bash, PowerShell, Command Prompt, etc.).
+ *   Set the following environment variables on your local machine using the
+ *   appropriate method for your preferred shell (Bash, PowerShell, Command Prompt, etc.).
  *
- *    LUIS_AUTHORING_KEY
- *    LUIS_AUTHORING_ENDPOINT
+ *   LUIS_AUTHORING_KEY
+ *   LUIS_AUTHORING_ENDPOINT
  *
  * If the environment variable is created after the application is launched in a console or with Visual
  * Studio, the shell (or Visual Studio) needs to be closed and reloaded for the environment variable to take effect.
@@ -223,12 +223,6 @@ func train_app(app_id string, app_version string) {
 }
 
 func publish_app(app_id string, app_version string) {
-    // Get the context, which is required by the SDK methods.
-    ctx := context.Background()
-    client := authoring.NewAppsClient(authoring_endpoint)
-	
-    // Set the subscription key on the client.
-    client.Authorizer = autorest.NewCognitiveServicesAuthorizer(authoring_key)
     uuid_app_id, err := uuid.FromString(app_id)
     if err != nil {
 	log.Fatal(err)
