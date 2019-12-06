@@ -19,9 +19,13 @@ import java.net.*;
  * - List all applications.
  */
 
-/* To compile and run, enter the following at a command prompt:
+/* To collect the Maven libraries needed, enter this at the command prompt:
+ * mvn clean dependency:copy-dependencies
+ * 
+ * To compile and run, enter the following at a command prompt:
  * javac Quickstart.java -cp .;lib\*
  * java -cp .;lib\* Quickstart
+ * 
  * This presumes your libraries are stored in a folder named "lib"
  * directly under the current folder. If not, please adjust the
  * -classpath/-cp value accordingly.
