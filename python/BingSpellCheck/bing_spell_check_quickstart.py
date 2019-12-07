@@ -25,11 +25,14 @@ client = SpellCheckAPI(CognitiveServicesCredentials(SUBSCRIPTION_KEY))
 try:
     # Original query
     query = 'bill gtaes was ehre toody'
-
+    print('Original query:\n', query)
+    print()
     # Check the query for misspellings
-    result = client.spell_checker(query, mode='proof') # mode can be 'proof' or 'spell'
+    # mode can be 'proof' or 'spell'
+    result = client.spell_checker(query, mode='proof')
 
     # Print the suggested corrections
+    print('Suggested correction:')
     for token in result.flagged_tokens:
         for suggestion_object in token.suggestions:
             print(suggestion_object.suggestion)
