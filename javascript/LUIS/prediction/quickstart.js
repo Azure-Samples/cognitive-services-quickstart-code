@@ -52,16 +52,7 @@ const authoring_client = new authoring.LUISAuthoringClient(authoring_creds, auth
 const runtime_creds = new msRest.ApiKeyCredentials({ inHeader: { 'Ocp-Apim-Subscription-Key': runtime_key } });
 const runtime_client = new runtime.LUISRuntimeClient(runtime_creds, runtime_endpoint);
 
-class AppInfo {
-    id: string;
-    version: string;
-    constructor(id: string, version: string) {
-        this.id = id;
-        this.version = version;
-    }
-}
-
-function create_app(): Promise<AppInfo> {
+function create_app() {
     var create_app_payload = {
         domainName: "HomeAutomation",
         culture: "en-us"
@@ -74,7 +65,7 @@ function create_app(): Promise<AppInfo> {
     });
 }
 
-function wait_for_operation(app_info: AppInfo) {
+function wait_for_operation(app_info) {
     return authoring_client.train.getStatus(app_info.id, app_info.version).then(function (result) {
         // GetStatus returns a list of training statuses, one for each model.
         // Loop through them and make sure all are done.
@@ -103,7 +94,7 @@ function wait_for_operation(app_info: AppInfo) {
     });
 }
 
-function train_app(app_info: AppInfo) {
+function train_app(app_info) {
     return authoring_client.train.trainVersion(app_info.id, app_info.version).then((result) => {
         // Wait for the train operation to finish.
         console.log("Waiting for train operation to finish...");
@@ -113,7 +104,7 @@ function train_app(app_info: AppInfo) {
     });
 }
 
-function publish_app(app_info: AppInfo): Promise<void> {
+function publish_app(app_info) {
     return authoring_client.apps.publish(app_info.id, { versionId: app_info.version, isStaging: true }).then((result) => {
         console.log("Application published. Endpoint URL: " + result.endpointUrl);    
     }).catch(error => {
@@ -121,7 +112,7 @@ function publish_app(app_info: AppInfo): Promise<void> {
     });
 }
 
-function predict(app_info: AppInfo): Promise<void> {
+function predict(app_info) {
     var ops = new runtime.PredictionOperations(runtime_client);
 // Note be sure to specify, using the slotName parameter, whether your application is in staging or production.
 // By default, applications are created in staging.
@@ -134,7 +125,7 @@ function predict(app_info: AppInfo): Promise<void> {
     })
 }
 
-function delete_app(app_info: AppInfo): Promise<void> {
+function delete_app(app_info) {
     return authoring_client.apps.deleteMethod(app_info.id).then((result) => {
         console.log("Application with ID " + app_info.id + " deleted. Operation result: " + result.message);
     }).catch(error => {
