@@ -15,8 +15,8 @@ namespace UseRuntime
         // to create authentication credentials
         private static string predictionKey = Environment.GetEnvironmentVariable("LUIS_PREDICTION_KEY");
 
-        // Endpoint URL example value = "https://westus.api.cognitive.microsoft.com"
-        private static string predictionEndpoint = Environment.GetEnvironmentVariable("LUIS_ENDPOINT");
+        // Endpoint URL example value = "https://YOUR-RESOURCE-NAME.api.cognitive.microsoft.com"
+        private static string predictionEndpoint = Environment.GetEnvironmentVariable("LUIS_ENDPOINT_NAME");
 
         // App Id example value = "df67dcdb-c37d-46af-88e1-8b97951ca1c2"
         private static string appId = Environment.GetEnvironmentVariable("LUIS_APP_ID");
