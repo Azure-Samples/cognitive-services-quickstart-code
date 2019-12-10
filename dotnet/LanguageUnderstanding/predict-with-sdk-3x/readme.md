@@ -5,7 +5,7 @@ The .Net Core file queries a public Language Understanding (LUIS) app and prints
 1. Add your own LUIS prediction key, endpoint URL, and app id in the environment variables:
 
     * LUIS_PREDICTION_KEY
-    * LUIS_ENDPOINT
+    * LUIS_ENDPOINT_NAME
     * LUIS_APP_ID 
     
 1. Run `dotnet build` to build the file.
