@@ -7,7 +7,8 @@ The samples included in this Go file are:
 * **Authenticate**: authenticates using your Azure portal subscription key and endpoint to authorize a client.
 * **Detect faces in two images**: detects faces from input images using the recognition model 01 for the purpose of extracting facial features. 
 * **Find a similar face**: using a query image, it finds a similar face in a list of detected faces from other very similar face images.
-* **PersonGroupOperations**: Creates a person group from similar-faced images, then uses a group image for identifying who in the image is from an established person group.
+* **Verify**: Compares one face with another to check if they are from the same person.
+* **PersonGroupOperations**: creates a person group from similar-faced images, then uses a group image for identifying who in the image is from an established person group.
 * **Snapshot**: takes a snapshot of an existing person group in one region and copies it to another region.
 * **Delete**: deletes a person group from a specific region.
 
