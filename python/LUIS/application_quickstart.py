@@ -30,11 +30,10 @@ if not key_var_name in os.environ:
 	raise Exception('Please set/export the environment variable: {}'.format(key_var_name))
 authoring_key = os.environ[key_var_name]
 
-region_var_name = 'LUIS_REGION'
-if not region_var_name in os.environ:
-	raise Exception('Please set/export the environment variable: {}'.format(region_var_name))
-region = os.environ[region_var_name]
-endpoint = "https://{}.api.cognitive.microsoft.com".format(region)
+endpoint_var_name = 'LUIS_AUTHORING_ENDPOINT'
+if not endpoint_var_name in os.environ:
+	raise Exception('Please set/export the environment variable: {}'.format(endpoint_var_name))
+endpoint = os.environ[endpoint_var_name]
 # </AuthorizationVariables>
 
 # <Client>
@@ -74,23 +73,14 @@ def create_app():
 # <addEntities>
 def add_entities(app_id, app_version):
 
-	locationEntityId = client.model.add_entity(app_id, app_version, "Location")
-	print("locationEntityId {} added.".format(locationEntityId)) 
-
-	originRoleId = client.model.create_entity_role(app_id, app_version, locationEntityId, "Origin")
-	print("originRoleId {} added.".format(originRoleId)) 
-
-	destinationRoleId = client.model.create_entity_role(app_id, app_version, locationEntityId, "Destination")
-	print("destinationRoleId {} added.".format(destinationRoleId)) 
+	destinationEntityId = client.model.add_entity(app_id, app_version, name="Destination")
+	print("destinationEntityId {} added.".format(destinationEntityId))
 
 	classEntityId = client.model.add_entity(app_id, app_version, name="Class")
 	print("classEntityId {} added.".format(classEntityId)) 
 
-	client.model.add_prebuilt(app_id, app_version, prebuilt_extractor_names=["number", "datetimeV2", "geographyV2", "ordinal"])
-
-	compositeEntityId = client.model.add_composite_entity(app_id, app_version, name="Flight",
-									  children=["Location", "Class", "number", "datetimeV2", "geographyV2", "ordinal"])
-	print("compositeEntityId {} added.".format(compositeEntityId)) 
+	flightEntityId = client.model.add_entity(app_id, app_version, name="Flight")
+	print("flightEntityId {} added.".format(flightEntityId)) 
 
 # </addEntities>
 
@@ -138,18 +128,17 @@ def add_utterances(app_id, app_version):
 	# Now define the utterances
 	utterances = [create_utterance("FindFlights", "find flights in economy to Madrid",
 							("Flight", "economy to Madrid"),
-							("Location", "Madrid"),
+							("Destination", "Madrid"),
 							("Class", "economy")),
 
 				  create_utterance("FindFlights", "find flights to London in first class",
 							("Flight", "London in first class"),
-							("Location", "London"),
+							("Destination", "London"),
 							("Class", "first")),
 
 				  create_utterance("FindFlights", "find flights from seattle to London in first class",
 							("Flight", "flights from seattle to London in first class"),
-							("Location", "London"),
-							("Location", "Seattle"),
+							("Destination", "London"),
 							("Class", "first"))]
 
 	# Add the utterances in batch. You may add any number of example utterances
