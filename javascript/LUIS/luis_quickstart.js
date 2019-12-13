@@ -19,19 +19,19 @@ const msRest = require ("@azure/ms-rest-js");
 const LUIS = require ("@azure/cognitiveservices-luis-authoring");
 
 /*  Configure the local environment:
- * Set the LUIS_SUBSCRIPTION_KEY and LUIS_ENDPOINT environment variables 
+ * Set the LUIS_AUTHORING_KEY and LUIS_AUTHORING_ENDPOINT environment variables 
  * on your local machine using the appropriate method for your preferred shell 
  * (Bash, PowerShell, Command Prompt, etc.). 
  *
  * If the environment variable is created after the application is launched in a console or with Visual
  * Studio, the shell (or Visual Studio) needs to be closed and reloaded for changes to take effect.
  */
-const key = process.env['LUIS_SUBSCRIPTION_KEY'];
+const key = process.env['LUIS_AUTHORING_KEY'];
 if (!key) {
     throw new Error('Set/export your LUIS subscription key as an environment variable.');
 }
 
-const endpoint = process.env['LUIS_ENDPOINT'];
+const endpoint = process.env['LUIS_AUTHORING_ENDPOINT'];
 if (!endpoint) {
     throw new Error('Set/export your LUIS endpoint as an environment variable.');
 }
@@ -61,17 +61,19 @@ function create_app() {
 }
 
 function add_entities(app_info) {
-    var entity_name = "Destination";
-    return client.model.addEntity(app_info.id, app_info.version, { name: entity_name }).then((result) => {
-        var h_entity_name = "Class";
-        var h_entity_children = ["First", "Business", "Economy"];
-        return client.model.addHierarchicalEntity(app_info.id, app_info.version, { name: h_entity_name, children: h_entity_children }).then((result) => {
-            var c_entity_name = "Flight"
-            var c_entity_children = ["Class", "Destination"];
-            return client.model.addCompositeEntity(app_info.id, app_info.version, { name: c_entity_name, children: c_entity_children }).then((result) => {
-                console.log("Entities Destination, Class, Flight created.");
-            });
-        });
+    return client.model.addEntity(app_info.id, app_info.version, { name: "Destination" }).then((result) => {
+		console.log("Entity Destination created.");
+		return client.model.addEntity(app_info.id, app_info.version, { name: "Class" }).then((result) => {
+			console.log("Entity Class created.");
+			return client.model.addEntity(app_info.id, app_info.version, { name: "Flight" }).then((result) => {
+				console.log("Entity Flight created.");
+
+			}).catch(error => {
+				throw error;
+			});
+		}).catch(error => {
+			throw error;
+		});
     }).catch(error => {
         throw error;
     });
@@ -107,8 +109,9 @@ function create_utterance(intent, text, labels) {
 function add_utterances(app_info) {
     var utterance_1 = create_utterance("FindFlights", "find flights in economy to Madrid", new Map([["Flight", "economy to Madrid"], ["Destination", "Madrid"], ["Class", "economy"]]));
     var utterance_2 = create_utterance("FindFlights", "find flights to London in first class", new Map([["Flight", "London in first class"], ["Destination", "London"], ["Class", "first"]]));
+	var utterance_3 = create_utterance("FindFlights", "find flights from seattle to London in first class", new Map([["Flight", "flights from seattle to London in first class"], ["Location", "London"], ["Location", "Seattle"],["Class", "first"]]));
 
-    return client.examples.batch(app_info.id, app_info.version, [utterance_1, utterance_2]).then((result) => {
+    return client.examples.batch(app_info.id, app_info.version, [utterance_1, utterance_2, utterance_3]).then((result) => {
         console.log("Example utterances added.");
     }).catch(error => {
         throw error;
