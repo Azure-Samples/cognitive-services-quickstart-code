@@ -211,7 +211,7 @@ async function main() {
     console.log("---------------------------------")
     console.log("PERSON GROUP")
     // Create empty Person Group. Returns a Promise<RestResponse>. 
-    await client.personGroup.create(PERSON_GROUP_ID, { 'name': PERSON_GROUP_ID, 'recognitionModel': 'recognition_01' })
+    await client.personGroup.create(PERSON_GROUP_ID, { 'name': PERSON_GROUP_ID })
         .then(() => {
         }).catch((err) => {
             console.log(err)
