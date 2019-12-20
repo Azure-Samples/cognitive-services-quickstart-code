@@ -1,4 +1,5 @@
-﻿using System;
+﻿// <snippet_using>
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -7,32 +8,30 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-// NOTE: Install the Newtonsoft.Json NuGet package.
-using Newtonsoft.Json;
 
-namespace QnaQuickstartCreateKnowledgebase
+// NOTE: Install the Newtonsoft.Json NuGet package.
+// > dotnet add package Newtonsoft.Json
+using Newtonsoft.Json;
+// </snippet_using>
+
+namespace QnaMakerRestDotnet
 {
     class Program
     {
-        private const string authoringKeyVar = "QNA_MAKER_SUBSCRIPTION_KEY";
-        private const string authoringEndpointVar = "QNA_MAKER_authoringEndpoint";
 
-        private static readonly string authoringKey = "a67a3224522f450ca24f9eb2f2dd3d0c";//Environment.GetEnvironmentVariable(authoringKeyVar);
-        private static readonly string authoringEndpoint = "https://westus.api.cognitive.microsoft.com";//Environment.GetEnvironmentVariable(authoringEndpointVar);
+        // <snippet_variables>
+        // 36 character key from Azure portal for QnA Maker resource
+        static string authoringKey = Environment.GetEnvironmentVariable("QNA_MAKER_AUTHORING_RESOURCE_KEY");
 
-        // Represents the various elements used to create HTTP request URIs
-        // for QnA Maker operations.
+        // example://https://YOUR-RESOURCE_NAME.cognitiveservices.azure.com with NO trailing forward slash
+        static string authoringEndpoint = Environment.GetEnvironmentVariable("QNA_MAKER_AUTHORING_RESOURCE_ENDPOINT");
+        static string resourceName = Environment.GetEnvironmentVariable("QNA_MAKER_AUTHORING_RESOURCE_NAME");
+
         static string service = "/qnamaker/v4.0";
+        // </snippet_variables>
 
 
-        private const string resourceName = "diberry-qna-maker-central-us";
-
-        /// <summary>
-        /// Defines the data source used to create the knowledge base.
-        /// The data source includes a QnA pair, with metadata,
-        /// the URL for the QnA Maker FAQ article, and
-        /// the URL for the Azure Bot Service FAQ article.
-        /// </summary>
+        // <snippet_knowledge_base_json>
         static string kb = @"
 {
   'name': 'QnA Maker FAQ',
@@ -58,10 +57,10 @@ namespace QnaQuickstartCreateKnowledgebase
   'files': []
 }
 ";
+        // </snippet_knowledge_base_json>
 
-        /// <summary>
+        // <snippet_response_structure>
         /// Represents the HTTP response returned by an HTTP request.
-        /// </summary>
         public struct Response
         {
             public HttpResponseHeaders headers;
@@ -76,24 +75,16 @@ namespace QnaQuickstartCreateKnowledgebase
                 this.statusCode = responseMessage.StatusCode.ToString();
             }
         }
+        // </snippet_response_structure>
 
-        /// <summary>
-        /// Formats and indents JSON for display.
-        /// </summary>
-        /// <param name="s">The JSON to format and indent.</param>
-        /// <returns>A string containing formatted and indented JSON.</returns>
+        // <snippet_pretty_print>
         static string PrettyPrint(string s)
         {
             return JsonConvert.SerializeObject(JsonConvert.DeserializeObject(s), Formatting.Indented);
         }
+        // </snippet_pretty_print>
 
-        /// <summary>
-        /// Asynchronously sends a POST HTTP request.
-        /// </summary>
-        /// <param name="uri">The URI of the HTTP request.</param>
-        /// <param name="body">The body of the HTTP request.</param>
-        /// <returns>A <see cref="System.Threading.Tasks.Task{TResult}(QnAMaker.Program.Response)"/>
-        /// object that represents the HTTP response."</returns>
+        // <snippet_post>
         async static Task<Response> Post(string uri, string key, string body, Boolean authoringAuthorizationHeader=true)
         {
             using (var client = new HttpClient())
@@ -102,59 +93,30 @@ namespace QnaQuickstartCreateKnowledgebase
                 request.Method = HttpMethod.Post;
                 request.RequestUri = new Uri(uri);
 
+                Console.WriteLine($"uri = {uri}");
+                Console.WriteLine($"body = {body}");
+
                 if (!String.IsNullOrEmpty(body))
                 {
                     request.Content = new StringContent(body, Encoding.UTF8, "application/json");
                 }
 
-                //if(authoringAuthorizationHeader){
-                //    Console.WriteLine($"Ocp-Apim-Subscription-Key {key}");
+                if(authoringAuthorizationHeader){
+                    Console.WriteLine($"Ocp-Apim-Subscription-Key {key}");
                     request.Headers.Add("Ocp-Apim-Subscription-Key", key);
-                //} else {
-                //    Console.WriteLine($"Authorization Endpoint {key}");
-                //    request.Headers.Add("Authorization", $"Endpoint {key}");
-                //}
-
-                var response = await client.SendAsync(request);
-                var responseBody = await response.Content.ReadAsStringAsync();
-                return new Response(response, response.Headers, responseBody);
-            }
-        }
-
-        async static Task<Response> QueryPost(string uri, string key, string body, Boolean authoringAuthorizationHeader=true)
-        {
-            using (var client = new HttpClient())
-            using (var request = new HttpRequestMessage())
-            {
-                request.Method = HttpMethod.Post;
-                request.RequestUri = new Uri(uri);
-
-                if (!String.IsNullOrEmpty(body))
-                {
-                    request.Content = new StringContent(body, Encoding.UTF8, "application/json");
+                } else {
+                    Console.WriteLine($"Authorization EndpointKey {key}");
+                    request.Headers.Add("Authorization", $"EndpointKey {key}");
                 }
 
-                //if(authoringAuthorizationHeader){
-                //    Console.WriteLine($"Ocp-Apim-Subscription-Key {key}");
-                    //request.Headers.Add("Ocp-Apim-Subscription-Key", key);
-                //} else {
-                //    Console.WriteLine($"Authorization Endpoint {key}");
-                    request.Headers.Add("Authorization", $"EndpointKey {key}");
-                //}
-
-                //request.Headers.Add("Content-type", "application/json");
                 var response = await client.SendAsync(request);
                 var responseBody = await response.Content.ReadAsStringAsync();
                 return new Response(response, response.Headers, responseBody);
             }
         }
+        // </snippet_post>
 
-        /// <summary>
-        /// Asynchronously sends a GET HTTP request.
-        /// </summary>
-        /// <param name="uri">The URI of the HTTP request.</param>
-        /// <returns>A <see cref="System.Threading.Tasks.Task{TResult}(QnAMaker.Program.Response)"/>
-        /// object that represents the HTTP response."</returns>
+        // <snippet_get>
         async static Task<Response> Get(string uri, string key)
         {
                 using (var client = new HttpClient())
@@ -171,16 +133,9 @@ namespace QnaQuickstartCreateKnowledgebase
                 }
 
         }
+        // </snippet_get>
 
-        /// <summary>
-        /// Gets the status of the specified QnA Maker operation.
-        /// </summary>
-        /// <param name="operation">The QnA Maker operation to check.</param>
-        /// <returns>A <see cref="System.Threading.Tasks.Task{TResult}(QnAMaker.Program.Response)"/>
-        /// object that represents the HTTP response."</returns>
-        /// <remarks>The method constructs the URI to get the status of a QnA Maker operation, and
-        /// then asynchronously invokes the <see cref="QnAMaker.Program.Get(string)"/> method
-        /// to send the HTTP request.</remarks>
+        // <snippet_get_status>
         async static Task<String> GetStatus(string operation)
         {
 
@@ -230,15 +185,12 @@ namespace QnaQuickstartCreateKnowledgebase
 
 
         }
+        // </snippet_get_status>
 
-        /// <summary>
-        /// Creates a knowledge base, periodically checking status
-        /// until the knowledge base is created.
-        /// </summary>
+        // <snippet_create_kb>
         async static Task<String> CreateKB()
         {
-            string method = "/knowledgebases/create";
-            string uri = authoringEndpoint + service + method;
+            string uri = authoringEndpoint + service + "/knowledgebases/create";
 
             // Starts the QnA Maker operation to create the knowledge base.
             var response = await Post(uri, authoringKey, kb);
@@ -247,65 +199,73 @@ namespace QnaQuickstartCreateKnowledgebase
             // checked periodically.
             var operation = response.headers.GetValues("Location").First();
 
-            var knowledgeBaseID = await GetStatus(operation);
-            Console.WriteLine($"knowledge base is {knowledgeBaseID}");
-            return knowledgeBaseID;
+            return await GetStatus(operation);
         }
+        // </snippet_create_kb>
 
+        // <snippet_publish_kb>
         async static Task<Response> PublishKB(string knowledgeBaseID)
         {
-
             string uri = authoringEndpoint + service + $"/knowledgebases/{knowledgeBaseID}";
 
-            Console.WriteLine($"uri is {uri}");
             var response = await Post(uri, authoringKey, null);
 
             Console.WriteLine($"KB published successfully? {(response.statusCode == "NoContent" ? "Yes" : "No")}");
 
             return response;
         }
+        // </snippet_publish_kb>
 
+        // <snippet_get_endpoint_key>
         async static Task<String> GetEndpointKey()
         {
 
             string uri = authoringEndpoint + service + "/endpointkeys";
 
-            Console.WriteLine($"uri is {uri}");
             var response = await Get(uri, authoringKey);
+
             var fields = JsonConvert.DeserializeObject<Dictionary<string, string>>(response.response);
 
             var endpointKey = fields["primaryEndpointKey"];
 
             return endpointKey;
         }
+        // </snippet_get_endpoint_key>
 
+        // <snippet_query>
         async static Task<string> Query(string endpointKey, string  knowledgeBaseID){
-            string queryEndpoint = $"https://{resourceName}.azurewebsites.net";
-            var uri =  $"{queryEndpoint}/qnamaker/knowledgebases/{knowledgeBaseID}/generateAnswer";
+
+            var uri =  $"https://{resourceName}.azurewebsites.net/qnamaker/knowledgebases/{knowledgeBaseID}/generateAnswer";
+
             string question = @"{'question': 'Is the QnA Maker Service free?','top': 3}";
 
-            Console.WriteLine($"query uri = {uri}");
-            Console.WriteLine($"query endpointKey = {endpointKey}");
-
-            var response = await QueryPost(uri, endpointKey, question, false);
+            var response = await Post(uri, endpointKey, question, false);
 
             return response.response;
 
         }
+        // </snippet_query>
 
+        // <snippet_main>
         static void Main(string[] args)
         {
-            // Invoke the CreateKB() method to create a knowledge base, periodically
-            // checking the status of the QnA Maker operation until the
-            // knowledge base is created.
+            // Create knowledge base - get ID
             var knowledgeBaseID = CreateKB().Result;
             Console.WriteLine($"knowledge base is {knowledgeBaseID}");
+
+            // publish
             var result = PublishKB(knowledgeBaseID).Result;
+
+            // get endpoint key after publish
             var endpointKey = GetEndpointKey().Result;
             Console.WriteLine($"endpointKey = {endpointKey}");
+
+            // query endpoint
             var queryResponse = Query(endpointKey, knowledgeBaseID).Result;
 
+            // print results
             Console.Write(PrettyPrint(queryResponse));
         }
+        // </snippet_main>
     }
 }
