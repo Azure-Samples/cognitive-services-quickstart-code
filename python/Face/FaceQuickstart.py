@@ -89,7 +89,8 @@ SOURCE_PERSON_GROUP_ID = PERSON_GROUP_ID
 TARGET_ENDPOINT = os.environ['FACE_ENDPOINT2']
 # Target subscription key. Must match the target endpoint region.
 TARGET_KEY = os.environ['FACE_SUBSCRIPTION_KEY2']
-# Target subscription ID. It will be the same as the source ID if created Face resources from the same subscription (but moving from region to region). If they are differnt subscriptions, add the other target ID here.
+# Target subscription ID. It will be the same as the source ID if created Face resources from the same 
+# subscription (but moving from region to region). If they are differnt subscriptions, add the other target ID here.
 TARGET_ID = os.environ['AZURE_SUBSCRIPTION_ID']
 # NOTE: We do not need to specify the target PersonGroup ID here because we generate it with this example.
 # Each new location you transfer a person group to will have a generated, new person group ID for that region.
@@ -213,7 +214,8 @@ if not similar_faces[0]:
 print('Similar faces found in', multi_image_name + ':')
 for face in similar_faces:
 	first_image_face_ID = face.face_id
-	# The similar face IDs of the single face image and the group image do not need to match, they are only used for identification purposes in each image.
+	# The similar face IDs of the single face image and the group image do not need to match, 
+	# they are only used for identification purposes in each image.
 	# The similar faces are matched using the Cognitive Services algorithm in find_similar().
 	face_info = next(x for x in detected_faces2 if x.face_id == first_image_face_ID)
 	if face_info:
@@ -231,7 +233,9 @@ END - Find Similar
 
 '''
 Verify
-The Verify operation takes a face ID from DetectedFace or PersistedFace and either another face ID or a Person object and determines whether they belong to the same person. If you pass in a Person object, you can optionally pass in a PersonGroup to which that Person belongs to improve performance.
+The Verify operation takes a face ID from DetectedFace or PersistedFace and either another face ID or a Person object 
+and determines whether they belong to the same person. If you pass in a Person object, you can optionally pass in a 
+PersonGroup to which that Person belongs to improve performance.
 '''
 print('-----------------------------')
 print()
