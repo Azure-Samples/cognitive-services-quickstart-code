@@ -29,7 +29,8 @@ The endpoint requirements might change in the future, but these quickstarts use 
 Some services require more complex steps to use the Cognitive Services general authentication, so we omitted examples for Custom Search, Language Understanding (LUIS), Translator Text, and Video Indexer, as they would not be suitable for a brief quickstart.
 
 ## How to use these quickstarts
-1. Install each Cognitive Service library that you want to use, such as: `pip install --upgrade azure-cognitiveservices-vision-face` <br>
+1. Install each Cognitive Service library that you want to use, such as: <br>
+   `pip install --upgrade azure-cognitiveservices-vision-face` <br>
    Each service installation command is at the top of its respective quickstart.
 1. Create an Azure resource for [Cognitive Services](https://docs.microsoft.com/en-us/azure/cognitive-services/cognitive-services-apis-create-account?tabs=multiservice%2Cwindows)
 1. Add the subscription key and endpoint constants to your environment variables with the following naming: <br>
