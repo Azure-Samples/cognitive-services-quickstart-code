@@ -35,6 +35,7 @@ Some services require more complex steps to use the Cognitive Services general a
 1. Create an Azure resource for [Cognitive Services](https://docs.microsoft.com/en-us/azure/cognitive-services/cognitive-services-apis-create-account?tabs=multiservice%2Cwindows)
 1. Add the subscription key and endpoint constants to your environment variables with the following naming: <br>
    COGNITIVE_SERVICES_SUBSCRIPTION_KEY <br>
-   COGNITIVE_SERVICES_ENDPOINT
+   COGNITIVE_SERVICES_ENDPOINT <br>
+   NOTE: some services only use a subscription key
 1. Run from the command line or your favorite IDE.
 
