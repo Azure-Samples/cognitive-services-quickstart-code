@@ -6,9 +6,11 @@ This Speech quickstart displays text captured from an audio file.
 
 Prerequisites:
   - Add your Cognitive Services or Speech subscription key to your environment variables.
+  - Replace the service region from either the Cognitive Services or Speech endpoint, 
+    (key and region must be from the same service).
   - Install the Speech SDK module:
     pip install azure.cognitiveservices.speech 
-  - Use your own .wav file, or download a sample one from here:
+  - Use your own .wav file or download a sample one from here:
     https://github.com/Azure-Samples/cognitive-services-sample-data-files
   - Place audio file in your root folder.
 
