@@ -10,7 +10,7 @@ Prerequisites:
     pip install azure.cognitiveservices.speech 
   - Use your own .wav file, or download a sample one from here:
     https://github.com/Azure-Samples/cognitive-services-sample-data-files
-  - Place audio file in your ropot folder.
+  - Place audio file in your root folder.
 
 Python SDK: https://docs.microsoft.com/en-us/python/api/azure-cognitiveservices-speech/?view=azure-python
 '''
