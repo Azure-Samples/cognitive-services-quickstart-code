@@ -1,0 +1,18 @@
+{
+  "name": "qnamaker_quickstart",
+  "version": "1.0.0",
+  "description": "",
+  "main": "qnamaker_quickstart.js",
+  "scripts": {
+    "start": "node qnamaker_quickstart.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@azure/cognitiveservices-qnamaker": "^2.0.0",
+    "@azure/ms-rest-js": "^2.0.4",
+    "dotenv": "^8.0.0"
+  }
+}
