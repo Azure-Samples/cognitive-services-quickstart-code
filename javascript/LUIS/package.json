@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node luis_authoring_quickstart.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write \"*.js\" "
   },
