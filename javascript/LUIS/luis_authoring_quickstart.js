@@ -180,6 +180,7 @@ const add_utterances = async app_info => {
 };
 // </AuthoringBatchAddUtterancesForIntent>
 
+// <AuthoringWaitForOperation>
 const wait_for_operation = async app_info => {
   let operationResult = null;
   let modelUniqueStatus = ["InProgress"];
@@ -204,6 +205,7 @@ const wait_for_operation = async app_info => {
 
   return operationResult;
 };
+// </AuthoringWaitForOperation>
 
 // <AuthoringTrainVersion>
 const train_app = async app_info => {
