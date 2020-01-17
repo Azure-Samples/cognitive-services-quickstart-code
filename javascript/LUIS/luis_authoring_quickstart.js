@@ -81,7 +81,7 @@ const create_app = async () => {
     id: createAppResult.body,
     version: create_app_payload.initialVersionId
   };
-};
+}
 // </AuthoringCreateApplication>
 
 // <AuthoringAddEntities>
@@ -106,7 +106,7 @@ const add_entities = async app_info => {
     { name: "Flight" }
   );
   console.log("Entity Flight created.");
-};
+}
 // </AuthoringAddEntities>
 
 // <AuthoringAddIntents>
@@ -140,7 +140,7 @@ const create_utterance = (intent, text, labels) => {
   console.log(`Created ${entityLabels.length} entity labels.`);
 
   return { text: text, entityLabels: entityLabels, intentName: intent };
-};
+}
 
 const add_utterances = async app_info => {
   const utterance_1 = create_utterance(
@@ -178,7 +178,7 @@ const add_utterances = async app_info => {
     [utterance_1, utterance_2, utterance_3]
   );
   console.log("Example utterances added.");
-};
+}
 // </AuthoringBatchAddUtterancesForIntent>
 
 // <AuthoringWaitForOperation>
@@ -205,7 +205,7 @@ const wait_for_operation = async app_info => {
   }
 
   return operationResult;
-};
+}
 // </AuthoringWaitForOperation>
 
 // <AuthoringTrainVersion>
@@ -218,7 +218,7 @@ const train_app = async app_info => {
   console.log("Waiting for train operation to finish...");
 
   const operationResult = await wait_for_operation(app_info);
-};
+}
 // </AuthoringTrainVersion>
 
 // <AuthoringPublishVersion>
@@ -231,7 +231,7 @@ const publish_app = async app_info => {
   console.log(
     `Application published. Endpoint URL: ${publishResult.endpointUrl}`
   );
-};
+}
 // </AuthoringPublishVersion>
 
 // <AuthoringDeleteApp>
@@ -241,7 +241,7 @@ const delete_app = async app_info => {
   console.log(
     `Application with ID ${app_info.id} deleted. Operation result: ${deleteResult.message}`
   );
-};
+}
 // </AuthoringDeleteApp>
 
 // <AuthoringListApps>
@@ -251,7 +251,7 @@ const list_apps = async () => {
   for (let app of apps) {
     console.log(`ID ${app.id}, NAME ${app.name}`);
   }
-};
+}
 // </AuthoringListApps>
 
 // <Main>
@@ -264,7 +264,7 @@ const quickstart = async () => {
   await train_app(app_info);
   await publish_app(app_info);
   await delete_app(app_info);
-};
+}
 
 try {
   quickstart();
