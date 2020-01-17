@@ -18,8 +18,9 @@
 // <Dependencies>
 const msRest = require("@azure/ms-rest-js");
 const LUIS = require("@azure/cognitiveservices-luis-authoring");
-require("dotenv").config();
 // </Dependencies>
+
+require("dotenv").config();
 
 /*  Configure the local environment:
  * Set the LUIS_AUTHORING_KEY and LUIS_AUTHORING_ENDPOINT environment variables
