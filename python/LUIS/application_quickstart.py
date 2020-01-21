@@ -33,12 +33,12 @@ authoring_key = os.environ[key_var_name]
 endpoint_var_name = 'LUIS_AUTHORING_ENDPOINT'
 if not endpoint_var_name in os.environ:
 	raise Exception('Please set/export the environment variable: {}'.format(endpoint_var_name))
-endpoint = os.environ[endpoint_var_name]
+authoring_endpoint = os.environ[endpoint_var_name]
 # </AuthorizationVariables>
 
 # <Client>
 # Instantiate a LUIS client
-client = LUISAuthoringClient(endpoint, CognitiveServicesCredentials(authoring_key))
+client = LUISAuthoringClient(authoring_endpoint, CognitiveServicesCredentials(authoring_key))
 # </Client>
 
 # <createApp>
@@ -77,10 +77,10 @@ def add_entities(app_id, app_version):
 	print("destinationEntityId {} added.".format(destinationEntityId))
 
 	classEntityId = client.model.add_entity(app_id, app_version, name="Class")
-	print("classEntityId {} added.".format(classEntityId)) 
+	print("classEntityId {} added.".format(classEntityId))
 
 	flightEntityId = client.model.add_entity(app_id, app_version, name="Flight")
-	print("flightEntityId {} added.".format(flightEntityId)) 
+	print("flightEntityId {} added.".format(flightEntityId))
 
 # </addEntities>
 
@@ -163,10 +163,26 @@ def train_app(app_id, app_version):
 
 # <publish>
 def publish_app(app_id, app_version):
-	response = client.apps.publish(app_id, app_version, is_staging=True)
-	print("Application published. Endpoint URL: " + response.endpoint_url)
+	responseEndpointInfo = client.apps.publish(app_id, app_version, is_staging=True)
+	print("Application published. Endpoint URL: " + responseEndpointInfo.endpoint_url)
 # </publish>
 
+# <predict>
+def predict(app_id, publishInfo, slot_name):
+
+	request = { "query" : "Find flight to seattle" }
+
+	# Note be sure to specify, using the slot_name parameter, whether your application is in staging or production.
+	response = clientRuntime.prediction.get_slot_prediction(app_id=app_id, slot_name=slot_name, prediction_request=request)
+
+	print("Top intent: {}".format(response.prediction.top_intent))
+	print("Sentiment: {}".format (response.prediction.sentiment))
+	print("Intents: ")
+
+	for intent in response.prediction.intents:
+		print("\t{}".format (json.dumps (intent)))
+	print("Entities: {}".format (response.prediction.entities))
+# </predict>
 
 print("Creating application...")
 app_id, app_version = create_app()
