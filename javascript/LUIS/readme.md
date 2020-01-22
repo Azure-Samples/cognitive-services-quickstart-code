@@ -1,27 +1,23 @@
 # Create, train, publish, delete a Language understanding app
 
-## To use this sample
-
-1. Create Language understanding authoring resource in Azure portal.
-1. Get resource's key and host.
-1. Copy `.env.sample` into `.env`.
-1. Edit values for your key and host into `.env`.
-1. Install dependencies with `npm install`.
-1. Run sample with `npm start`.
-
-# Install
+## Install
 
 ```javascript
 npm install
 ```
 
-## Run
+## Run app creation and management
+
+Set environment variables:
+
+* LUIS_AUTHORING_KEY
+* LUIS_AUTHORING_ENDPOINT
 
 ```javascript
-npm start
+node luis_authoring_quickstart.js
 ```
 
-## Sample output
+### Sample output
 
 ```console
 Created LUIS app with ID e137a439-b3e0-4e16-a7a8-a9746e0715f7
@@ -43,3 +39,25 @@ Application published. Endpoint URL: https://westus.api.cognitive.microsoft.com/
 Application with ID e137a439-b3e0-4e16-a7a8-a9746e0715f7 deleted. Operation result: Operation Successful
 ```
 
+## Query runtime to get prediction results
+
+This quickstart uses the public IoT app.
+
+Set environment variables:
+
+* LUIS_RUNTIME_KEY
+* LUIS_RUNTIME_ENDPOINT
+* LUIS_APP_ID = df67dcdb-c37d-46af-88e1-8b97951ca1c2
+* LUIS_APP_SLOT_NAME = production
+
+```javascript
+node luis_prediction.js
+```
+
+### Sample output
+
+The prediction result returns a JSON object:
+
+```console
+{"query":"turn on all lights","prediction":{"topIntent":"HomeAutomation.TurnOn","intents":{"HomeAutomation.TurnOn":{"score":0.5375382},"None":{"score":0.08687421},"HomeAutomation.TurnOff":{"score":0.0207554}},"entities":{"HomeAutomation.Operation":["on"],"$instance":{"HomeAutomation.Operation":[{"type":"HomeAutomation.Operation","text":"on","startIndex":5,"length":2,"score":0.724984169,"modelTypeId":-1,"modelType":"Unknown","recognitionSources":["model"]}]}}}}
+```
