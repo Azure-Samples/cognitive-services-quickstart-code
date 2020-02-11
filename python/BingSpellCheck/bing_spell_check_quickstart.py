@@ -1,7 +1,7 @@
+import os
+
 from azure.cognitiveservices.language.spellcheck import SpellCheckAPI
 from msrest.authentication import CognitiveServicesCredentials
-
-import os
 
 '''
 This Bing Spell Check quickstart checks some misspelled words and suggests corrections.
