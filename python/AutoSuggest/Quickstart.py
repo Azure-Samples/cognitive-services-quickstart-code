@@ -1,24 +1,20 @@
-from azure.cognitiveservices.search.autosuggest import AutoSuggestSearchAPI
-from msrest.authentication import CognitiveServicesCredentials
-
 import json, os, sys
+
+from azure.cognitiveservices.search.autosuggest import AutoSuggestClient
+from msrest.authentication import CognitiveServicesCredentials
 
 '''
 Microsoft Azure Cognitive Services Bing Autosuggest - Get Search Suggestions
 
-This script requires the Cognitive Services Bing Autosuggest module:
+Install the Bing Autosuggest module:
   python -m pip install azure-cognitiveservices-search_autosuggest
-
-This script runs under Python 3.4 or later.
 '''
 
 subscription_key = os.environ['AUTOSUGGEST_SUBSCRIPTION_KEY']
-if not subscription_key:
-    raise Exception(
-        'Please set/export the environment variable: {}'.format(subscription_key))
+endpoint = os.environ['BING_AUTOSUGGEST_ENDPOINT']
 
 # Instantiate a Bing Autosuggest client
-client = AutoSuggestSearchAPI(CognitiveServicesCredentials(subscription_key))
+client = AutoSuggestClient(endpoint, CognitiveServicesCredentials(subscription_key))
 
 # Returns from the Suggestions class
 result = client.auto_suggest('sail')
