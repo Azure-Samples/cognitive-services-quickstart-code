@@ -1,4 +1,3 @@
-# Python Imaging Library (PIL)
 import glob
 from io import BytesIO
 import os
