@@ -17,11 +17,11 @@ around the text you want to crop, then show the image.
 Prerequisites:
 1. Install the Computer Vision SDK:
 `pip install --upgrade azure-cognitiveservices-vision-computervision`
-1. Create and add an Images and CroppedImages folders to your working directory. 
+2. Create and add an Images and CroppedImages folders to your working directory. 
 Add the images you want to crop into the Images folder. Once the script runs, cropped images will
 automatically be added to your CroppedImages folder.
-1. Make sure your images are either JPG or PNG, change the file extension in the code if needed.
-1. Add your Azure Computer Vision key and endpoint to your environment variables with the names:
+3. Make sure your images are either JPG or PNG, change the file extension in the code if needed.
+4. Add your Azure Computer Vision key and endpoint to your environment variables with the names:
 `COMPUTER_VISION_SUBSCRIPTION_KEY` and `COMPUTER_VISION_ENDPOINT`.
 
 Computer Vision SDK: https://docs.microsoft.com/en-us/python/api/azure-cognitiveservices-vision-computervision/azure.cognitiveservices.vision.computervision?view=azure-python
