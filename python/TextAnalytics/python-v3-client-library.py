@@ -1,3 +1,6 @@
+key = "<paste-your-text-analytics-key-here>"
+endpoint = "<paste-your-text-analytics-endpoint-here>"
+
 from azure.ai.textanalytics import TextAnalyticsClient, TextAnalyticsApiKeyCredential
 
 def authenticate_client():
