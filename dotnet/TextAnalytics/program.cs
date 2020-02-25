@@ -1,7 +1,8 @@
 using System;
+using System.Globalization;
 using Azure.AI.TextAnalytics;
 
-namespace tav3quickstart
+namespace quickstart
 {
     class Program
     {
@@ -28,7 +29,6 @@ namespace tav3quickstart
             Console.WriteLine($"Document sentiment: {documentSentiment.Sentiment}\n");
 
             var si = new StringInfo(inputText);
-            //var si = new System.Globalization.StringInfo(inputText);
             foreach (var sentence in documentSentiment.Sentences)
             {
                 Console.WriteLine($"\tSentence [offset {sentence.Offset}, length {sentence.Length}]");
