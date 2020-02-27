@@ -8,6 +8,16 @@ from azure.cognitiveservices.vision.face.models import TrainingStatusType
 from msrest.authentication import CognitiveServicesCredentials
 
 '''
+This sample shows a mixed-use case for Person Group, Person Group Person, Detect, and Identify Face API calls.
+It starts by creating a Person Group with a few images of the same person.     
+It then uses different test images to try to identify if they are found in the person group or not.
+Finally, for all images NOT found in the person group, a new Person object is made of each unique image
+and added to the existing person group.        
+
+Install the Face SDK library:
+pip install --upgrade azure-cognitiveservices-vision-face
+
+'''
 Create and train a person group and add a person group person to it.
 '''
 def build_person_group(client, person_group_id, pgp_name):
