@@ -5,12 +5,30 @@ from azure.cognitiveservices.vision.computervision.models import TextRecognition
 from azure.cognitiveservices.vision.computervision.models import TextOperationStatusCodes
 
 '''
-Extract Text - Comptuper Vision API
-This sample will extract printed and handwritten text from an image.
+Extract Text PDF - Computer Vision API
+This sample will extract printed and handwritten text from images in a PDF.
+The images include both printed and handwritten text, including signatures.        
+
+Download the sample PDF here: 
+https://github.com/Azure-Samples/cognitive-services-sample-data-files/blob/master/ComputerVision/Images/printed_handwritten.pdf
+
+Place the PDF in your root folder.
+
+Install the Computer Vision SDK:
+
+
 Steps:
    - Authenticate
    - Read and extract from PDF
    - Display extracted text results in console
+
+References: 
+Computer Vision Batch Read File documentation: 
+https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/concept-recognizing-text
+SDK: 
+https://docs.microsoft.com/en-us/python/api/azure-cognitiveservices-vision-computervision/azure.cognitiveservices.vision.computervision?view=azure-python
+API: 
+https://westus.dev.cognitive.microsoft.com/docs/services/5cd27ec07268f6c679a3e641/operations/56f91f2e778daf14a499f21b 
 '''
 
 '''
