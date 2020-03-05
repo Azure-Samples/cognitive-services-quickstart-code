@@ -15,7 +15,7 @@ https://github.com/Azure-Samples/cognitive-services-sample-data-files/blob/maste
 Place the PDF in your root folder.
 
 Install the Computer Vision SDK:
-
+pip install --upgrade azure-cognitiveservices-vision-computervision
 
 Steps:
    - Authenticate
