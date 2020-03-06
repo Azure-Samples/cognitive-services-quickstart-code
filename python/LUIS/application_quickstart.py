@@ -21,7 +21,7 @@
 from azure.cognitiveservices.language.luis.authoring import LUISAuthoringClient
 from msrest.authentication import CognitiveServicesCredentials
 
-import datetime, json, os, time
+import datetime, json, os, sys, time
 # </Dependencies>
 
 # <AuthorizationVariables>
@@ -60,28 +60,34 @@ def create_app():
 
 # Declare entities:
 #
-#   Destination - A simple entity that will hold the flight destination
+#   Location - A simple entity that can have one of two roles (Origin, Destination)
 #
-#   Class - A hierarchical entity that will hold the flight class
-#           (First, Business, or Economy)
+#   Class - A simple entity that represents the flight class
 #
-#   Flight - A composite entity represeting the flight (including
-#               class and destination)
+#	Prebuilt entities - These further describe the flight
 #
 # Creating an entity (or other LUIS object) returns its ID.
 # We don't use IDs further in this script, so we don't keep the return value.
 # <addEntities>
 def add_entities(app_id, app_version):
 
-	destinationEntityId = client.model.add_entity(app_id, app_version, name="Destination")
-	print("destinationEntityId {} added.".format(destinationEntityId))
+	flightEntityId = client.model.add_entity(app_id, app_version, name="Flight")
+	print("flightEntityId {} added.".format(flightEntityId))
+
+	locationEntityId = client.model.add_entity(app_id, app_version, name="Location")
+	print("locationEntityId {} added.".format(locationEntityId))
+
+	client.model.create_entity_role(app_id, app_version, locationEntityId, name="Origin")
+	print("'Origin' role added to location entity.")
+
+	client.model.create_entity_role(app_id, app_version, locationEntityId, name="Destination")
+	print("'Destination' role added to location entity.")
 
 	classEntityId = client.model.add_entity(app_id, app_version, name="Class")
 	print("classEntityId {} added.".format(classEntityId))
 
-	flightEntityId = client.model.add_entity(app_id, app_version, name="Flight")
-	print("flightEntityId {} added.".format(flightEntityId))
-
+	client.model.add_prebuilt(app_id, app_version, ["number", "datetimeV2", "geographyV2", "ordinal"])
+	print("Prebuilt entities 'number', 'datetimeV2', 'geographyV2', 'ordinal' added.")
 # </addEntities>
 
 # Declare an intent, FindFlights, that recognizes a user's Flight request
@@ -128,23 +134,32 @@ def add_utterances(app_id, app_version):
 	# Now define the utterances
 	utterances = [create_utterance("FindFlights", "find flights in economy to Madrid",
 							("Flight", "economy to Madrid"),
-							("Destination", "Madrid"),
+							("Location", "Madrid"),
 							("Class", "economy")),
 
 				  create_utterance("FindFlights", "find flights to London in first class",
 							("Flight", "London in first class"),
-							("Destination", "London"),
+							("Location", "London"),
 							("Class", "first")),
 
-				  create_utterance("FindFlights", "find flights from seattle to London in first class",
+				  create_utterance("FindFlights", "find flights from Seattle to London in first class",
 							("Flight", "flights from seattle to London in first class"),
-							("Destination", "London"),
+							("Location", "Seattle"),
+							("Location", "London"),
 							("Class", "first"))]
 
 	# Add the utterances in batch. You may add any number of example utterances
 	# for any number of intents in one call.
-	client.examples.batch(app_id, app_version, utterances)
-	print("{} example utterance(s) added.".format(len(utterances)))
+	info = client.examples.batch(app_id, app_version, utterances)
+	failed = filter(lambda x: x.has_error, info)
+	if any(failed):
+		print ("Adding utterances failed. Results:")
+		for x in list(failed):
+			print (x.error.message)
+			print ()
+			sys.exit(0)
+	else:
+		print("{} example utterance(s) added.".format(len(utterances)))
 # </addUtterances>
 
 # <train>
@@ -153,12 +168,22 @@ def train_app(app_id, app_version):
 	waiting = True
 	while waiting:
 		info = client.train.get_status(app_id, app_version)
-
 		# get_status returns a list of training statuses, one for each model. Loop through them and make sure all are done.
-		waiting = any(map(lambda x: 'Queued' == x.details.status or 'InProgress' == x.details.status, info))
+		waiting = any(map(lambda x: 'queued' in x.details.status.casefold() or 'inprogress' in x.details.status.casefold(), info))
 		if waiting:
 			print ("Waiting 10 seconds for training to complete...")
 			time.sleep(10)
+		else:
+			if any(filter(lambda x: 'fail' in x.details.status.casefold(), info)):
+				print ("Training failed. Results:")
+# Do not loop through the result of filter(lambda x: 'fail' in x.details.status.casefold(), info),
+# because for some reason that loses the first item in the list.
+				for x in info:
+					if 'fail' in x.details.status.casefold():
+						print ("Model ID: " + x.model_id)
+						print ("Reason: " + x.details.failure_reason)
+						print ()
+				sys.exit(0)
 # </train>
 
 # <publish>
