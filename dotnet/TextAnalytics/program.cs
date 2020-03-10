@@ -7,7 +7,7 @@ namespace quickstart
     class Program
     {
         private static readonly TextAnalyticsApiKeyCredential credentials = new TextAnalyticsApiKeyCredential("<replace-with-your-text-analytics-key-here>");
-        private static readonly Uri endpoint = new Uri("<replace-with-your-text-analytics-key-here>");
+        private static readonly Uri endpoint = new Uri("<replace-with-your-text-analytics-endpoint-here>");
         static void Main(string[] args)
         {
             var client = new TextAnalyticsClient(endpoint, credentials);
