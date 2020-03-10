@@ -78,7 +78,7 @@ def text_from_image(image):
             if word.text.lower() == state_name.lower():
                 # Read license number from 2nd line of text
                 plate_number = result.lines[1].words[0]
-                plate_found = 'The plate number for the state of ' + state_name + ' is ' + plate_number.text
+                plate_found = 'The plate number for the state of ' + state_name + ' is ' + plate_number.text + '.'
                 print(plate_found)
                 return plate_found
     
@@ -129,8 +129,8 @@ def get_number(plates, chosen_state):
                     return True
 
 def request_state(image_plates):
-    print()
     while True:
+        print()
         # User types a state they want a license plate number for
         your_state = 'Type the state abbreviation you\'re looking for: AK, IL, MI, PA, or AZ.'
         print(your_state)
