@@ -11,10 +11,12 @@ This sample uses the Computer Vision and Speech Service SDKs from Cognitive Serv
 With local images of license plates, a user can enter a state abbreviation into the command line,
 and get back the plate number from that state. There are spoken (text-To-Speech) prompts along the way.
 
-
 Install the SDKs for both Computer Vision and Speech Service:
   pip install --upgrade azure-cognitiveservices-vision-computervision
   pip install --upgrade azure-cognitiveservices-speech
+  
+Download the license plate images and create a folder for them called 'License Plates':
+https://github.com/Azure-Samples/cognitive-services-sample-data-files/tree/master/Multi-service
 
 References:
 Computer Vision SDK: https://docs.microsoft.com/en-us/python/api/azure-cognitiveservices-vision-computervision/?view=azure-python
