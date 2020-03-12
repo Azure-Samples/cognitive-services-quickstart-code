@@ -54,7 +54,7 @@ namespace quickstart
             foreach (var entity in response.Value)
             {
                 Console.WriteLine($"\tText: {entity.Text},\tCategory: {entity.Category},\tSub-Category: {entity.SubCategory}");
-                Console.WriteLine($"\t\tOffset: {entity.Offset},\tLength: {entity.Length},\tScore: {entity.Score:F3}\n");
+                Console.WriteLine($"\t\tLength: {entity.GraphemeLength},\tScore: {entity.ConfidenceScore:F2}\n");
             }
         }
 
@@ -66,7 +66,7 @@ namespace quickstart
             foreach (var entity in response.Value)
             {
                 Console.WriteLine($"\tText: {entity.Text},\tCategory: {entity.Category},\tSub-Category: {entity.SubCategory}");
-                Console.WriteLine($"\t\tOffset: {entity.Offset},\tLength: {entity.Length},\tScore: {entity.Score:F3}\n");
+                Console.WriteLine($"\t\tLength: {entity.GraphemeLength},\tScore: {entity.ConfidenceScore:F2}\n");
             }
         }
 
@@ -81,12 +81,12 @@ namespace quickstart
             Console.WriteLine("Linked Entities:");
             foreach (var entity in response.Value)
             {
-                Console.WriteLine($"\tName: {entity.Name},\tID: {entity.Id},\tURL: {entity.Url}\tData Source: {entity.DataSource}");
+                Console.WriteLine($"\tName: {entity.Name},\tID: {entity.DataSourceEntityId},\tURL: {entity.Url}\tData Source: {entity.DataSource}");
                 Console.WriteLine("\tMatches:");
                 foreach (var match in entity.Matches)
                 {
                     Console.WriteLine($"\t\tText: {match.Text}");
-                    Console.WriteLine($"\t\tOffset: {match.Offset},\tLength: {match.Length},\tScore: {match.Score:F3}\n");
+                    Console.WriteLine($"\t\tLength: {match.GraphemeLength},\tScore: {match.ConfidenceScore:F2}\n");
                 }
             }
         }
