@@ -1,7 +1,9 @@
 # Microsoft Azure Language Understanding (LUIS) - Build App
 #
-# This script builds a LUIS app, entities, and intents using the Python
-# LUIS SDK.  A separate sample trains and publishes the app.
+# This script builds a LUIS application using the Azure SDK for Python.
+# It adds entities, intents, and utterances to the application.
+# Finally it trains and publishes the application, and prints the
+# application endpoint that you can use for predictions.
 #
 # This script requires the Cognitive Services LUIS Python module:
 #     python -m pip install azure-cognitiveservices-language-luis
@@ -71,9 +73,6 @@ def create_app():
 # <addEntities>
 def add_entities(app_id, app_version):
 
-	flightEntityId = client.model.add_entity(app_id, app_version, name="Flight")
-	print("flightEntityId {} added.".format(flightEntityId))
-
 	locationEntityId = client.model.add_entity(app_id, app_version, name="Location")
 	print("locationEntityId {} added.".format(locationEntityId))
 
@@ -88,6 +87,22 @@ def add_entities(app_id, app_version):
 
 	client.model.add_prebuilt(app_id, app_version, ["number", "datetimeV2", "geographyV2", "ordinal"])
 	print("Prebuilt entities 'number', 'datetimeV2', 'geographyV2', 'ordinal' added.")
+
+# Notes
+# - A child entity cannot have the name of an entity that already exists (for example, "Location.")
+# - A child entity cannot have the name of a prebuilt entity (for example, "number.")
+# - If a child entity has an instanceOf property, the value must be the name of a prebuilt entity (for example, "number.")
+# - For a non child entity, the instanceOf property value can be the name of a prebuilt entity or an entity we created (for example, "Location.")
+# - If an instanceOf property value has the name of a prebuilt entity, we must have already added that prebuilt entity to the application with model.add_prebuilt().
+	flightEntityId = client.model.add_entity(app_id, app_version, name="Flight", children=[
+		dict(name="Flight_Number", instanceOf="number"),
+		dict(name="Departure_DateTime", instanceOf="datetimeV2"),
+		dict(name="Arrival_DateTime", instanceOf="datetimeV2"),
+		dict(name="Origin_Location", instanceOf="geographyV2"),
+		dict(name="Destination_Location", instanceOf="geographyV2"),
+		dict(name="Takeoff_Order", instanceOf="ordinal")
+	])
+	print("flightEntityId {} added.".format(flightEntityId))
 # </addEntities>
 
 # Declare an intent, FindFlights, that recognizes a user's Flight request
