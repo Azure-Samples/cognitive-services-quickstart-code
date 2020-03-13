@@ -1,13 +1,14 @@
+using Azure.AI.TextAnalytics;
 using System;
 using System.Globalization;
-using Azure.AI.TextAnalytics;
 
-namespace quickstart
+namespace TextAnalyticsQuickstart
 {
     class Program
     {
-        private static readonly TextAnalyticsApiKeyCredential credentials = new TextAnalyticsApiKeyCredential("<replace-with-your-text-analytics-key-here>");
-        private static readonly Uri endpoint = new Uri("<replace-with-your-text-analytics-endpoint-here>");
+        private static readonly TextAnalyticsApiKeyCredential credentials = 
+            new TextAnalyticsApiKeyCredential(Environment.GetEnvironmentVariable("TEXT_ANALYTICS_SUBSCRIPTION_KEY"));
+        private static readonly Uri endpoint = new Uri(Environment.GetEnvironmentVariable("TEXT_ANALYTICS_ENDPOINT"));
         static void Main(string[] args)
         {
             var client = new TextAnalyticsClient(endpoint, credentials);
@@ -29,14 +30,14 @@ namespace quickstart
             Console.WriteLine($"Document sentiment: {documentSentiment.Sentiment}\n");
 
             var si = new StringInfo(inputText);
-            foreach (var sentence in documentSentiment.Sentences)
+            foreach (var sentence in documentSentiment.Sentences) // SentenceSentiment struct
             {
-                Console.WriteLine($"\tSentence [offset {sentence.Offset}, length {sentence.Length}]");
-                Console.WriteLine($"\tText: \"{si.SubstringByTextElements(sentence.Offset, sentence.Length)}\"");
+                Console.WriteLine($"\tSentence [offset {sentence.GraphemeOffset}, length {sentence.GraphemeLength}]");
+                Console.WriteLine($"\tText: \"{si.SubstringByTextElements(sentence.GraphemeOffset, sentence.GraphemeLength)}\"");
                 Console.WriteLine($"\tSentence sentiment: {sentence.Sentiment}");
-                Console.WriteLine($"\tPositive score: {sentence.SentimentScores.Positive:0.00}");
-                Console.WriteLine($"\tNegative score: {sentence.SentimentScores.Negative:0.00}");
-                Console.WriteLine($"\tNeutral score: {sentence.SentimentScores.Neutral:0.00}\n");
+                Console.WriteLine($"\tPositive score: {sentence.ConfidenceScores.Positive:0.00}");
+                Console.WriteLine($"\tNegative score: {sentence.ConfidenceScores.Negative:0.00}");
+                Console.WriteLine($"\tNeutral score: {sentence.ConfidenceScores.Neutral:0.00}\n");
             }
         }
 
@@ -54,7 +55,7 @@ namespace quickstart
             foreach (var entity in response.Value)
             {
                 Console.WriteLine($"\tText: {entity.Text},\tCategory: {entity.Category},\tSub-Category: {entity.SubCategory}");
-                Console.WriteLine($"\t\tLength: {entity.GraphemeLength},\tScore: {entity.ConfidenceScore:F2}\n");
+                Console.WriteLine($"\t\tOffset: {entity.GraphemeOffset},\tLength: {entity.GraphemeLength},\tScore: {entity.ConfidenceScore:F3}\n");
             }
         }
 
@@ -66,7 +67,7 @@ namespace quickstart
             foreach (var entity in response.Value)
             {
                 Console.WriteLine($"\tText: {entity.Text},\tCategory: {entity.Category},\tSub-Category: {entity.SubCategory}");
-                Console.WriteLine($"\t\tLength: {entity.GraphemeLength},\tScore: {entity.ConfidenceScore:F2}\n");
+                Console.WriteLine($"\t\tOffset: {entity.GraphemeOffset},\tLength: {entity.GraphemeLength},\tScore: {entity.ConfidenceScore:F3}\n");
             }
         }
 
@@ -86,7 +87,7 @@ namespace quickstart
                 foreach (var match in entity.Matches)
                 {
                     Console.WriteLine($"\t\tText: {match.Text}");
-                    Console.WriteLine($"\t\tLength: {match.GraphemeLength},\tScore: {match.ConfidenceScore:F2}\n");
+                    Console.WriteLine($"\t\tOffset: {match.GraphemeOffset},\tLength: {match.GraphemeLength},\tScore: {match.ConfidenceScore:F3}\n");
                 }
             }
         }
@@ -103,6 +104,5 @@ namespace quickstart
                 Console.WriteLine($"\t{keyphrase}");
             }
         }
-
     }
 }
