@@ -33,19 +33,19 @@ public class TextAnalyticsSamples {
 
         DocumentSentiment documentSentiment = client.analyzeSentiment(text);
         System.out.printf(
-                "Recognized document sentiment: %s, positive score: %.2f, neutral score: %.2f, negative score: %.2f.%n",
-                documentSentiment.getSentiment(),
-                documentSentiment.getSentimentScores().getPositive(),
-                documentSentiment.getSentimentScores().getNeutral(),
-                documentSentiment.getSentimentScores().getNegative());
+            "Recognized document sentiment: %s, positive score: %s, neutral score: %s, negative score: %s.%n",
+            documentSentiment.getSentiment(),
+            documentSentiment.getConfidenceScores().getPositive(),
+            documentSentiment.getConfidenceScores().getNeutral(),
+            documentSentiment.getConfidenceScores().getNegative());
 
         for (SentenceSentiment sentenceSentiment : documentSentiment.getSentences()) {
             System.out.printf(
-                    "Recognized sentence sentiment: %s, positive score: %.2f, neutral score: %.2f, negative score: %.2f.%n",
-                    sentenceSentiment.getSentiment(),
-                    sentenceSentiment.getSentimentScores().getPositive(),
-                    sentenceSentiment.getSentimentScores().getNeutral(),
-                    sentenceSentiment.getSentimentScores().getNegative());
+                "Recognized sentence sentiment: %s, positive score: %s, neutral score: %s, negative score: %s.%n",
+                sentenceSentiment.getSentiment(),
+                sentenceSentiment.getConfidenceScores().getPositive(),
+                sentenceSentiment.getConfidenceScores().getNeutral(),
+                sentenceSentiment.getConfidenceScores().getNegative());
         }
     }
 
@@ -56,9 +56,9 @@ public class TextAnalyticsSamples {
 
         DetectedLanguage detectedLanguage = client.detectLanguage(text);
         System.out.printf("Detected primary language: %s, ISO 6391 name: %s, score: %.2f.%n",
-                detectedLanguage.getName(),
-                detectedLanguage.getIso6391Name(),
-                detectedLanguage.getScore());
+            detectedLanguage.getName(),
+            detectedLanguage.getIso6391Name(),
+            detectedLanguage.getScore());
     }
 
     static void recognizeEntitiesExample(TextAnalyticsClient client)
@@ -68,13 +68,11 @@ public class TextAnalyticsSamples {
 
         for (CategorizedEntity entity : client.recognizeEntities(text)) {
             System.out.printf(
-                    "Recognized entity: %s, entity category: %s, entity sub-category: %s, offset: %s, length: %s, score: %.2f.%n",
-                    entity.getText(),
-                    entity.getCategory(),
-                    entity.getSubCategory() == null || entity.getSubCategory().isEmpty() ? "N/A" : entity.getSubCategory(),
-                    entity.getOffset(),
-                    entity.getLength(),
-                    entity.getScore());
+                "Recognized entity: %s, entity category: %s, entity sub-category: %s, score: %s.%n",
+                entity.getText(),
+                entity.getCategory(),
+                entity.getSubCategory(),
+                entity.getConfidenceScore());
         }
     }
 
@@ -85,13 +83,11 @@ public class TextAnalyticsSamples {
 
         for (PiiEntity entity : client.recognizePiiEntities(text)) {
             System.out.printf(
-                    "Recognized personal identifiable information entity: %s, entity category: %s, entity sub-category: %s, offset: %s, length: %s, score: %.2f.%n",
-                    entity.getText(),
-                    entity.getCategory(),
-                    entity.getSubCategory() == null || entity.getSubCategory().isEmpty() ? "N/A" : entity.getSubCategory(),
-                    entity.getOffset(),
-                    entity.getLength(),
-                    entity.getScore());
+                "Recognized personal identifiable information entity: %s, entity category: %s, %nentity sub-category: %s, score: %s.%n",
+                entity.getText(),
+                entity.getCategory(),
+                entity.getSubCategory(),
+                entity.getConfidenceScore());
         }
     }
 
@@ -108,16 +104,14 @@ public class TextAnalyticsSamples {
         for (LinkedEntity linkedEntity : client.recognizeLinkedEntities(text)) {
             System.out.printf("Name: %s, ID: %s, URL: %s, Data Source: %s.%n",
                     linkedEntity.getName(),
-                    linkedEntity.getId(),
+                    linkedEntity.getDataSourceEntityId(),
                     linkedEntity.getUrl(),
                     linkedEntity.getDataSource());
             System.out.printf("Matches:%n");
             for (LinkedEntityMatch linkedEntityMatch : linkedEntity.getLinkedEntityMatches()) {
-                System.out.printf("Text: %s, Offset: %s, Length: %s, Score: %.2f.%n",
+                System.out.printf("Text: %s, Score: %.2f%n",
                         linkedEntityMatch.getText(),
-                        linkedEntityMatch.getOffset(),
-                        linkedEntityMatch.getLength(),
-                        linkedEntityMatch.getScore());
+                        linkedEntityMatch.getConfidenceScore());
             }
         }
     }
