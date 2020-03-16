@@ -10,17 +10,14 @@ import (
 )
 
 func main() {
-	// Add your Bing Custom Search subscription key to your environment variables.
-	if "" == os.Getenv("BING_CUSTOM_SEARCH_SUBSCRIPTION_KEY") {
-		log.Fatal("Please set/export the environment variable BING_CUSTOM_SEARCH_SUBSCRIPTION_KEY.")
+	if "" == os.Getenv("CUSTOM_SEARCH_SUBSCRIPTION_KEY") {
+		log.Fatal("Please set/export the environment variable CUSTOM_SEARCH_SUBSCRIPTION_KEY.")
 	}
-	var subscription_key string = os.Getenv("BING_CUSTOM_SEARCH_SUBSCRIPTION_KEY")
-	
-	// Add your Bing Custom Search instance ID to your environment variables.
-	if "" == os.Getenv("BING_CUSTOM_SEARCH_INSTANCE_ID") {
-		log.Fatal("Please set/export the environment variable BING_CUSTOM_SEARCH_INSTANCE_ID.")
+	var subscription_key string = os.Getenv("CUSTOM_SEARCH_SUBSCRIPTION_KEY")
+	if "" == os.Getenv("CUSTOM_SEARCH_INSTANCE_ID") {
+		log.Fatal("Please set/export the environment variable CUSTOM_SEARCH_INSTANCE_ID.")
 	}
-	var search_instance_id string = os.Getenv("BING_CUSTOM_SEARCH_INSTANCE_ID")
+	var search_instance_id string = os.Getenv("CUSTOM_SEARCH_INSTANCE_ID")
 
 	// Get the context, which is required by the SDK methods.
 	ctx := context.Background()
@@ -38,8 +35,11 @@ func main() {
 	fmt.Printf("Estimated total results: %d.\n", *web_pages.TotalEstimatedMatches)
 	var results = *web_pages.Value
 	if len(results) > 0 {
-		fmt.Println("First result:")
-		fmt.Println("Title: " + *results[0].Name)
-		fmt.Println("URL: " + *results[0].URL)
+		fmt.Println("First 10 results follow.\n")
+		for i := 0; i < 10 && i < len(results); i++ {
+		fmt.Println("Title: " + *results[i].Name)
+		fmt.Println("URL: " + *results[i].URL)
+		fmt.Println()
+		}
 	}
 }
