@@ -7,13 +7,13 @@
 var LocalSearch = require ("@azure/cognitiveservices-localsearch");
 var msRest = require ("@azure/ms-rest-js");
 
-const key_var = 'BING_LOCAL_SUBSCRIPTION_KEY';
+const key_var = 'BING_SEARCH_V7_SUBSCRIPTION_KEY';
 if (!process.env[key_var]) {
     throw new Error('please set/export the following environment variable: ' + key_var);
 }
 const subscription_key = process.env[key_var];
 
-const endpoint_var = 'BING_LOCAL_ENDPOINT';
+const endpoint_var = 'BING_SEARCH_V7_ENDPOINT';
 if (!process.env[endpoint_var]) {
     throw new Error('please set/export the following environment variable: ' + endpoint_var);
 }
