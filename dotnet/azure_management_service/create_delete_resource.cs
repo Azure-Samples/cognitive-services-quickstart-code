@@ -80,24 +80,26 @@ namespace ConsoleApp1
         {
             Console.WriteLine("Resources in resource group: " + resource_group_name);
             var result = client.Accounts.ListByResourceGroup(resource_group_name);
-            foreach (var x in result)  {
+            foreach (var x in result)
+            {
                 Console.WriteLine("ID: " + x.Id);
                 Console.WriteLine("Name: " + x.Name);
                 Console.WriteLine("Type: " + x.Type);
-                Console.WriteLine("Provisioning state: " + x.ProvisioningState);
+                Console.WriteLine("Kind: " + x.Kind);
                 Console.WriteLine();
             }
         }
 
-        static void create_resource(CognitiveServicesManagementClient client, string resource_name, string kind, string sku_name, string location)
+        static void create_resource(CognitiveServicesManagementClient client, string resource_name, string kind, string account_tier, string location)
         {
             Console.WriteLine("Creating resource: " + resource_name + "...");
             // The parameter "properties" must be an empty object.
-            var parameters = new CognitiveServicesAccountCreateParameters(new Sku(sku_name), kind, location, new object());
-            var result = client.Accounts.Create(resource_group_name, resource_name, parameters);
+            CognitiveServicesAccount parameters = 
+                new CognitiveServicesAccount(null, null, kind, location, account_tier, new CognitiveServicesAccountProperties(), new Sku(account_tier));
+            var result = client.Accounts.Create(resource_group_name, account_tier, parameters);
             Console.WriteLine("Resource created.");
             Console.WriteLine("ID: " + result.Id);
-            Console.WriteLine("Provisioning state: " + result.ProvisioningState);
+            Console.WriteLine("Kind: " + result.Kind);
             Console.WriteLine();
         }
 
@@ -129,9 +131,9 @@ namespace ConsoleApp1
 
             // Uncomment this to list all available resource kinds, SKUs, and locations for your Azure account.
             //list_resources(client);
-
-            // Create a resource with kind Text Translation, SKU F0 (free tier), location global.
-            create_resource (client, "test_resource", "TextTranslation", "F0", "Global");
+        
+            // Create a resource with kind Text Translation, F0 (free tier), location global.
+            create_resource(client, "test_resource", "TextTranslation", "F0", "Global");
 
             // Delete the resource.
             delete_resource(client, "test_resource");
