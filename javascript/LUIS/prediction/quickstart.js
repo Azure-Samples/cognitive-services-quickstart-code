@@ -58,8 +58,12 @@ function create_app() {
         culture: "en-us"
     };
     return authoring_client.apps.addCustomPrebuiltDomain(create_app_payload).then((result) => {
-        console.log("Created LUIS app with ID " + result.body);
-        return new AppInfo(result.body, "0.1");
+        console.log("Created LUIS app with ID " + result.body)
+        let app_info = { 
+            id : result.body, 
+            version : "0.1" 
+        }
+        return app_info
     }).catch(error => {
         throw error;
     });
