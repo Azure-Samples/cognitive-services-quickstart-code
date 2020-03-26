@@ -95,7 +95,7 @@ namespace ConsoleApp1
             Console.WriteLine("Creating resource: " + resource_name + "...");
             // The parameter "properties" must be an empty object.
             CognitiveServicesAccount parameters = 
-                new CognitiveServicesAccount(null, null, kind, location, account_tier, new CognitiveServicesAccountProperties(), new Sku(account_tier));
+                new CognitiveServicesAccount(null, null, kind, location, resource_name, new CognitiveServicesAccountProperties(), new Sku(account_tier));
             var result = client.Accounts.Create(resource_group_name, account_tier, parameters);
             Console.WriteLine("Resource created.");
             Console.WriteLine("ID: " + result.Id);
