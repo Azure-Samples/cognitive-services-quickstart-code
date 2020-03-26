@@ -67,15 +67,22 @@ async function list_resources (client) {
 	});
 }
 
-async function create_resource (client, resource_name, kind, sku_name, location) {
+function create_resource (client, resource_name, kind, sku_name, location) {
 	console.log ("Creating resource: " + resource_name + "...");
-// The parameter "properties" must be an empty object.
+	// The parameter "properties" must be an empty object.
 	var parameters = { sku : { name: sku_name }, kind : kind, location : location, properties : {} };
-	var result = await client.create (resource_group_name, resource_name, parameters);
-	console.log ("Resource created.");
-	console.log ("ID: " + result.id);
-	console.log ("Provisioning state: " + result.provisioningState);
-	console.log ();
+
+    return client.create(resource_group_name, resource_name, parameters)
+        .then((result) => {
+		console.log("Resource created.");
+		print();
+		console.log("ID: " + result.id);
+		console.log("Kind: " + result.kind);
+		console.log();
+        })
+        .catch((err) =>{ 
+            	console.log(err)
+        })
 }
 
 async function delete_resource (client, resource_name) {
@@ -88,20 +95,20 @@ async function delete_resource (client, resource_name) {
 async function quickstart() {
 	const credentials = await msRestNodeAuth.loginWithServicePrincipalSecret (service_principal_application_id, service_principal_secret, tenant_id);
 	const client = new Arm.CognitiveServicesManagementClient (credentials, subscription_id);
-// Note Azure resources are also sometimes referred to as accounts.
+	// Note Azure resources are also sometimes referred to as accounts.
 	const accounts_client = new Arm.Accounts (client);
 	const resource_skus_client = new Arm.ResourceSkus (client);
 
-// Uncomment this to list all resources for your Azure account.
-//	list_resources (accounts_client);
+	// Uncomment this to list all resources for your Azure account.
+	//	list_resources (accounts_client);
 
-// Uncomment this to list all available resource kinds, SKUs, and locations for your Azure account.
-//	list_available_kinds_skus_locations (resource_skus_client);
+	// Uncomment this to list all available resource kinds, SKUs, and locations for your Azure account.
+	//	list_available_kinds_skus_locations (resource_skus_client);
 
-// Create a resource with kind Text Translation, SKU F0 (free tier), location global.
-	create_resource (accounts_client, "test_resource", "TextTranslation", "F0", "Global");
+	// Create a resource with kind Text Translation, SKU F0 (free tier), location global.
+	await create_resource (accounts_client, "test_resource", "TextTranslation", "F0", "Global");
 
-// Delete the resource.
+	// Delete the resource.
 	delete_resource (accounts_client, "test_resource");
 }
 
