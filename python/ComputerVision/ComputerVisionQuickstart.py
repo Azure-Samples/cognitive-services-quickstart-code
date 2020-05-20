@@ -723,7 +723,7 @@ print("===== Batch Read File - remote =====")
 remote_image_printed_text_url = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/printed_text.jpg"
 
 # Call API with URL and raw response (allows you to get the operation location)
-recognize_printed_results = computervision_client.batch_read_file(remote_image_printed_text_url,  raw=True)
+recognize_printed_results = computervision_client.read(remote_image_printed_text_url, language='en',  raw=True)
 # </snippet_read_call>
 
 # <snippet_read_response>
@@ -734,7 +734,7 @@ operation_id = operation_location_remote.split("/")[-1]
 
 # Call the "GET" API and wait for it to retrieve the results 
 while True:
-    get_printed_text_results = computervision_client.get_read_operation_result(operation_id)
+    get_printed_text_results = computervision_client.get_read_result(operation_id)
     if get_printed_text_results.status not in ['NotStarted', 'Running']:
         break
     time.sleep(1)
