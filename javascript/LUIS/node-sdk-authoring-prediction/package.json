@@ -1,0 +1,28 @@
+{
+  "name": "cognitive-services-quickstart-code-luis-auhoring",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node luis_authoring_quickstart.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write \"*.js\" "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diberry/cognitive-services-quickstart-code.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/diberry/cognitive-services-quickstart-code/issues"
+  },
+  "homepage": "https://github.com/diberry/cognitive-services-quickstart-code#readme",
+  "dependencies": {
+    "@azure/cognitiveservices-luis-authoring": "^4.0.0-preview.1",
+    "@azure/cognitiveservices-luis-runtime": "^5.0.0",
+    "@azure/ms-rest-js": "^2.0.5",
+    "dotenv": "^8.2.0",
+    "prettier": "^1.19.1"
+  }
+}
