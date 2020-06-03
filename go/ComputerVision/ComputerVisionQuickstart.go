@@ -90,7 +90,7 @@ func main() {
 	// </snippet_brand_url>
 	adultRacyImageURL := "https://moderatorsampleimages.blob.core.windows.net/samples/sample3.png"
 	detectTypeImageURL := "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/lion_drawing.png"
-	printedImageURL := "https://moderatorsampleimages.blob.core.windows.net/samples/sample2.jpg"
+	printedImageURL := "https://raw.githubusercontent.com/MicrosoftDocs/azure-docs/master/articles/cognitive-services/Computer-vision/Images/readsample.jpg"
 	/*
 	 * END - URL images
 	 */
