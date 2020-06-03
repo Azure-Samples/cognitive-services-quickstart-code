@@ -73,10 +73,10 @@ namespace ComputerVisionQuickstart
         private const string DETECT_DOMAIN_SPECIFIC_URL = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/landmark.jpg";
         // URL image for extracting text (Image of motivational meme).
         // <snippet_extracttext_url>
-        private const string EXTRACT_TEXT_URL_IMAGE = "https://moderatorsampleimages.blob.core.windows.net/samples/sample2.jpg";
-        // URL image for OCR (optical character recognition). (Image of motivational meme).
+        private const string EXTRACT_TEXT_URL_IMAGE = "https://raw.githubusercontent.com/MicrosoftDocs/azure-docs/master/articles/cognitive-services/Computer-vision/Images/readsample.jpg";
+        // URL image for OCR (optical character recognition).
         // </snippet_extracttext_url>
-        private const string OCR_URL = "https://moderatorsampleimages.blob.core.windows.net/samples/sample2.jpg";
+        private const string OCR_URL = "https://raw.githubusercontent.com/MicrosoftDocs/azure-docs/master/articles/cognitive-services/Computer-vision/Images/readsample.jpg";
 
         static void Main(string[] args)
         {
