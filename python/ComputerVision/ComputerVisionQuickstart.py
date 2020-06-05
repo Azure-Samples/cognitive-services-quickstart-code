@@ -723,7 +723,7 @@ print("===== Batch Read File - remote =====")
 remote_image_handw_text_url = "https://raw.githubusercontent.com/MicrosoftDocs/azure-docs/master/articles/cognitive-services/Computer-vision/Images/readsample.jpg"
 
 # Call API with URL and raw response (allows you to get the operation location)
-recognize_handw_results = computervision_client.read(remote_image_handw_text_url, language='en',  raw=True)
+recognize_handw_results = computervision_client.read(remote_image_handw_text_url,  raw=True)
 # </snippet_read_call>
 
 # <snippet_read_response>
