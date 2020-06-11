@@ -32,14 +32,8 @@ namespace Knowledgebase_Quickstart
         // <Main>
         static void Main(string[] args)
         {
-            // <Resourcevalues>
-            String key = "REPLACE-WITH-QNA-MAKER-KEY";
-            String resource_name = "REPLACE-WITH-RESOURCE-NAME";
-            String endpoint_url = $"https://{resource_name}.cognitiveservices.azure.com";
-            // </Resourcevalues>
-
             // <Authorization>
-            var client = new QnAMakerClient(new ApiKeyServiceClientCredentials(key)) { Endpoint = endpoint_url };
+            var client = new QnAMakerClient(new ApiKeyServiceClientCredentials("REPLACE-WITH-QNA-MAKER-KEY")) { Endpoint = $"https://REPLACE-WITH-RESOURCE-NAME.cognitiveservices.azure.com" };
             // </Authorization>
 
 
