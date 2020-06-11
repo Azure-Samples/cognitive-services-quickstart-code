@@ -32,11 +32,11 @@ namespace Knowledgebase_Quickstart
         // <Main>
         static void Main(string[] args)
         {
-            // <Resource values>
+            // <Resourcevalues>
             String key = "REPLACE-WITH-QNA-MAKER-KEY";
             String resource_name = "REPLACE-WITH-RESOURCE-NAME";
             String endpoint_url = $"https://{resource_name}.cognitiveservices.azure.com";
-            // </Resource values>
+            // </Resourcevalues>
 
             // <Authorization>
             var client = new QnAMakerClient(new ApiKeyServiceClientCredentials(key)) { Endpoint = endpoint_url };
@@ -98,7 +98,7 @@ namespace Knowledgebase_Quickstart
         // </GetPredictionEndpointKey>
 
 
-        // <UpdateKB>
+        // <UpdateKBMethod>
         private static async Task UpdateKB(IQnAMakerClient client, string kbId)
         {
             // Update kb
@@ -113,9 +113,9 @@ namespace Knowledgebase_Quickstart
             // Loop while operation is success
             updateOp = await MonitorOperation(client, updateOp);
         }
-        // </UpdateKB>
+        // </UpdateKBMethod>
 
-        // <CreateKB>
+        // <CreateKBMethod>
         private static async Task<string> CreateSampleKb(IQnAMakerClient client)
         {
             var qna1 = new QnADTO
@@ -151,7 +151,7 @@ namespace Knowledgebase_Quickstart
 
             return createOp.ResourceLocation.Replace("/knowledgebases/", string.Empty);
         }
-        // </CreateKB>
+        // </CreateKBMethod>
 
         // <MonitorOperation>
         private static async Task<Operation> MonitorOperation(IQnAMakerClient client, Operation operation)
