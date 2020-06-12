@@ -32,65 +32,36 @@ namespace Knowledgebase_Quickstart
         // <Main>
         static void Main(string[] args)
         {
-            // <Authorization>
-            var client = new QnAMakerClient(new ApiKeyServiceClientCredentials("REPLACE-WITH-QNA-MAKER-KEY")) { Endpoint = $"https://REPLACE-WITH-RESOURCE-NAME.cognitiveservices.azure.com" };
-            // </Authorization>
+            var authoringKey = "REPLACE-WITH-YOUR-QNA-MAKER-KEY";
+            var resourceName = "REPLACE-WITH-YOUR-RESOURCE-NAME";
 
+            // <AuthorizationAuthoring>
+            var client = new QnAMakerClient(new ApiKeyServiceClientCredentials(authoringKey)) { Endpoint = $"https://{resourceName}.cognitiveservices.azure.com" };
+            // </AuthorizationAuthoring>
 
-            // Create a KB
-            Console.WriteLine("Creating KB...");
             var kbId = CreateSampleKb(client).Result;
-            Console.WriteLine("Created KB with ID : {0}", kbId);
-
-            // Update the KB
-            Console.WriteLine("Updating KB...");
             UpdateKB(client, kbId).Wait();
-            Console.WriteLine("KB Updated.");
-
-            // <PublishKB>
-            Console.Write("Publishing KB...");
-            client.Knowledgebase.PublishAsync(kbId).Wait();
-            Console.WriteLine("KB Published.");
-            // </PublishKB>
-
-            // <EndpointKey>
+            PublishKb(client, kbId).Wait();
+            DownloadKb(client, kbId).Wait();
             var primaryPredictionEndpointKey = GetPredictionEndpointKey(client).Result;
-            var runtimeClient = new QnAMakerRuntimeClient(new EndpointKeyServiceClientCredentials(primaryPredictionEndpointKey)) { RuntimeEndpoint = $"https://{resource_name}.azurewebsites.net" };
-            // </EndpointKey>
 
-            // <DownloadKB>
-            Console.Write("Downloading KB...");
-            var kbData = client.Knowledgebase.DownloadAsync(kbId, EnvironmentType.Prod).Result;
-            Console.WriteLine("KB Downloaded. It has {0} QnAs.", kbData.QnaDocuments.Count);
-            // </DownloadKB>
+            // <AuthorizationPrediction>
+            var runtimeClient = new QnAMakerRuntimeClient(new EndpointKeyServiceClientCredentials(primaryPredictionEndpointKey)) { RuntimeEndpoint = $"https://{resourceName}.azurewebsites.net" };
+            // </AuthorizationPrediction>
 
-
-            // <GenerateAnswer>
-            Console.Write("Querying Endpoint...");
-            var response = runtimeClient.Runtime.GenerateAnswerAsync(kbId, new QueryDTO { Question = "How do I manage my knowledgebase?" }).Result;
-            Console.WriteLine("Endpoint Response: {0}.", response.Answers[0].Answer);
-            // </GenerateAnswer>
-
-
-            // <DeleteKB>
-            Console.Write("Deleting KB...");
-            client.Knowledgebase.DeleteAsync(kbId).Wait();
-            Console.WriteLine("KB Deleted.");
-            // </DeleteKB>
+            GenerateAnswer(runtimeClient, kbId).Wait();
+            DeleteKB(client, kbId).Wait();
         }
         // </Main>
 
         // <GetPredictionEndpointKey>
         private static async Task<String> GetPredictionEndpointKey(IQnAMakerClient client)
         {
-            // Get prediction runtime key
             var endpointKeysObject = await client.EndpointKeys.GetKeysAsync();
 
             return endpointKeysObject.PrimaryEndpointKey;
-
         }
         // </GetPredictionEndpointKey>
-
 
         // <UpdateKBMethod>
         private static async Task UpdateKB(IQnAMakerClient client, string kbId)
@@ -121,11 +92,10 @@ namespace Knowledgebase_Quickstart
 
             var file1 = new FileDTO
             {
-                FileName="myFileName",
-                FileUri="https://mydomain/myfile.md"
+                FileName = "myFileName",
+                FileUri = "https://mydomain/myfile.md"
 
             };
-
 
             var urls = new List<string> {
                 "https://docs.microsoft.com/en-in/azure/cognitive-services/QnAMaker/troubleshooting"
@@ -146,6 +116,40 @@ namespace Knowledgebase_Quickstart
             return createOp.ResourceLocation.Replace("/knowledgebases/", string.Empty);
         }
         // </CreateKBMethod>
+
+        // <PublishKB>
+        private static async Task PublishKb(IQnAMakerClient client, string kbId)
+        {
+            await client.Knowledgebase.PublishAsync(kbId);
+        }
+        // </PublishKB>
+
+        // <DownloadKB>
+        private static async Task DownloadKb(IQnAMakerClient client, string kbId)
+        {
+            var kbData = await client.Knowledgebase.DownloadAsync(kbId, EnvironmentType.Prod);
+            Console.WriteLine("KB Downloaded. It has {0} QnAs.", kbData.QnaDocuments.Count);
+
+            // Do something meaningful with data
+        }
+        // </DownloadKB>
+
+        // <GenerateAnswer>
+        private static async Task GenerateAnswer(IQnAMakerRuntimeClient runtimeClient, string kbId)
+        {
+            var response = await runtimeClient.Runtime.GenerateAnswerAsync(kbId, new QueryDTO { Question = "How do I manage my knowledgebase?" });
+            Console.WriteLine("Endpoint Response: {0}.", response.Answers[0].Answer);
+
+            // Do something meaningful with answer
+        }
+        // </GenerateAnswer>
+
+        // <DeleteKB>
+        private static async Task DeleteKB(IQnAMakerClient client, string kbId)
+        {
+            await client.Knowledgebase.DeleteAsync(kbId);
+        }
+        // </DeleteKB>
 
         // <MonitorOperation>
         private static async Task<Operation> MonitorOperation(IQnAMakerClient client, Operation operation)
