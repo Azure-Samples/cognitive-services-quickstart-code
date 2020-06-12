@@ -5,7 +5,7 @@
  * Create a knowledgebase
  * Update a knowledgebase
  * Publish a knowledgebase, waiting for publishing to complete
- * Get prediction runtime endpoint key
+ * Get Query runtime endpoint key
  * Download a knowledgebase
  * Delete a knowledgebase
 
@@ -32,48 +32,114 @@ namespace Knowledgebase_Quickstart
         // <Main>
         static void Main(string[] args)
         {
+            // <Resourcevariables>
             var authoringKey = "REPLACE-WITH-YOUR-QNA-MAKER-KEY";
             var resourceName = "REPLACE-WITH-YOUR-RESOURCE-NAME";
 
-            // <AuthorizationAuthoring>
-            var client = new QnAMakerClient(new ApiKeyServiceClientCredentials(authoringKey)) { Endpoint = $"https://{resourceName}.cognitiveservices.azure.com" };
-            // </AuthorizationAuthoring>
+            var authoringURL = $"https://{resourceName}.cognitiveservices.azure.com";
+            var queryingURL = $"https://{resourceName}.azurewebsites.net";
+            // <Resourcevariables>
+
+
+            // <AuthorizationAuthor>
+            var client = new QnAMakerClient(new ApiKeyServiceClientCredentials(authoringKey))
+            { Endpoint = authoringURL };
+            // </AuthorizationAuthor>
 
             var kbId = CreateSampleKb(client).Result;
             UpdateKB(client, kbId).Wait();
             PublishKb(client, kbId).Wait();
             DownloadKb(client, kbId).Wait();
-            var primaryPredictionEndpointKey = GetPredictionEndpointKey(client).Result;
+            var primaryQueryEndpointKey = GetQueryEndpointKey(client).Result;
 
-            // <AuthorizationPrediction>
-            var runtimeClient = new QnAMakerRuntimeClient(new EndpointKeyServiceClientCredentials(primaryPredictionEndpointKey)) { RuntimeEndpoint = $"https://{resourceName}.azurewebsites.net" };
-            // </AuthorizationPrediction>
+            // <AuthorizationQuery>
+            var runtimeClient = new QnAMakerRuntimeClient(new EndpointKeyServiceClientCredentials(primaryQueryEndpointKey))
+            { RuntimeEndpoint = queryingURL };
+            // </AuthorizationQuery>
 
             GenerateAnswer(runtimeClient, kbId).Wait();
             DeleteKB(client, kbId).Wait();
         }
         // </Main>
 
-        // <GetPredictionEndpointKey>
-        private static async Task<String> GetPredictionEndpointKey(IQnAMakerClient client)
+        // <GetQueryEndpointKey>
+        private static async Task<String> GetQueryEndpointKey(IQnAMakerClient client)
         {
             var endpointKeysObject = await client.EndpointKeys.GetKeysAsync();
 
             return endpointKeysObject.PrimaryEndpointKey;
         }
-        // </GetPredictionEndpointKey>
+        // </GetQueryEndpointKey>
 
         // <UpdateKBMethod>
         private static async Task UpdateKB(IQnAMakerClient client, string kbId)
         {
-            // Update kb
+
+            var urls = new List<string> {
+                "https://docs.microsoft.com/en-in/azure/cognitive-services/QnAMaker/troubleshooting"
+            };
+
             var updateOp = await client.Knowledgebase.UpdateAsync(kbId, new UpdateKbOperationDTO
             {
                 // Create JSON of changes
-                Add = new UpdateKbOperationDTOAdd { QnaList = new List<QnADTO> { new QnADTO { Questions = new List<string> { "bye" }, Answer = "goodbye" } } },
+                Add = new UpdateKbOperationDTOAdd
+                {
+                    QnaList = new List<QnADTO> {
+                        new QnADTO {
+                            Questions = new List<string> {
+                                "bye",
+                                "end",
+                                "stop",
+                                "quit",
+                                "done"
+                            },
+                            Answer = "goodbye",
+                            Metadata = new List<MetadataDTO> {
+                                new MetadataDTO {
+                                    Name = "Chitchat", Value = "end"
+                                }
+                            }
+                        },
+                        new QnADTO {
+                            Questions = new List<string> {
+                                "hello",
+                                "hi",
+                                "start"
+                            },
+                            Answer = "Hello, please select from the list of questions or enter a new question to continue.",
+                            Metadata = new List<MetadataDTO> {
+                                new MetadataDTO {
+                                    Name = "Chitchat", Value = "begin"
+                                }
+                            },
+                            Context = new QnADTOContext
+                            {
+                                IsContextOnly = false,
+                                Prompts = new List<PromptDTO>
+                                {
+                                    new PromptDTO
+                                    {
+                                        DisplayOrder =1,
+                                        DisplayText= "Use REST",
+                                        QnaId=1
+
+                                    },
+                                    new PromptDTO
+                                    {
+                                        DisplayOrder =2,
+                                        DisplayText= "Use .NET NuGet package",
+                                        QnaId=2
+
+                                    },
+                                }
+                            }
+                        },
+                    },
+                    Urls = urls
+                },
                 Update = null,
                 Delete = null
-            });
+            }); ;
 
             // Loop while operation is success
             updateOp = await MonitorOperation(client, updateOp);
@@ -87,7 +153,19 @@ namespace Knowledgebase_Quickstart
             {
                 Answer = "You can use our REST APIs to manage your knowledge base.",
                 Questions = new List<string> { "How do I manage my knowledgebase?" },
-                Metadata = new List<MetadataDTO> { new MetadataDTO { Name = "Category", Value = "api" } }
+                Metadata = new List<MetadataDTO> { new MetadataDTO {
+                    Name = "Category", Value = "api"
+                }},
+
+            };
+
+            var qna2 = new QnADTO
+            {
+                Answer = "You, can use our .NET SDK to manage your knowledge base.",
+                Questions = new List<string> { "Can I use a .NET NuGet package to create the KB?" },
+                Metadata = new List<MetadataDTO> { new MetadataDTO {
+                    Name = "Category", Value = "api"
+                }}
             };
 
             var file1 = new FileDTO
@@ -97,16 +175,11 @@ namespace Knowledgebase_Quickstart
 
             };
 
-            var urls = new List<string> {
-                "https://docs.microsoft.com/en-in/azure/cognitive-services/QnAMaker/troubleshooting"
-            };
-
             var createKbDto = new CreateKbDTO
             {
                 Name = "QnA Maker .NET SDK Quickstart",
-                QnaList = new List<QnADTO> { qna1 },
-                //Files = new List<FileDTO> { file1 },
-                Urls = urls
+                QnaList = new List<QnADTO> { qna1, qna2 },
+                //Files = new List<FileDTO> { file1 }
 
             };
 
