@@ -58,9 +58,39 @@ namespace Knowledgebase_Quickstart
             // </AuthorizationQuery>
 
             GenerateAnswer(runtimeClient, kbId).Wait();
+            GetDetails(client, kbId).Wait();
+            GetListOfKBs(client).Wait();
             DeleteKB(client, kbId).Wait();
         }
         // </Main>
+
+        // <GetDetails>
+        private static async Task GetDetails(IQnAMakerClient client, string kbId)
+        {
+            var result = await client.Knowledgebase.GetDetailsAsync(kbId);
+            Console.WriteLine("Name {0}", result.Name);
+            Console.WriteLine("Last accessed {0}", result.LastAccessedTimestamp);
+            Console.WriteLine("Last changed {0}", result.LastChangedTimestamp);
+            Console.WriteLine("Last published {0}", result.LastPublishedTimestamp);
+        }
+        // </GetDetails>
+
+        // <GetListOfKBs>
+        private static async Task GetListOfKBs(IQnAMakerClient client)
+        {
+            var result = await client.Knowledgebase.ListAllAsync();
+
+            foreach (KnowledgebaseDTO kb in result.Knowledgebases) {
+                Console.WriteLine("Name {0}", kb.Name);
+                Console.WriteLine("ID {0}", kb.Id);
+                Console.WriteLine("HostName {0}", kb.HostName);
+                Console.WriteLine("Last accessed {0}", kb.LastAccessedTimestamp);
+                Console.WriteLine("Last changed {0}", kb.LastChangedTimestamp);
+                Console.WriteLine("Last published {0}", kb.LastPublishedTimestamp);
+            }
+        }
+        // </GetListOfKBs>
+
 
         // <GetQueryEndpointKey>
         private static async Task<String> GetQueryEndpointKey(IQnAMakerClient client)
@@ -153,19 +183,20 @@ namespace Knowledgebase_Quickstart
             {
                 Answer = "You can use our REST APIs to manage your knowledge base.",
                 Questions = new List<string> { "How do I manage my knowledgebase?" },
-                Metadata = new List<MetadataDTO> { new MetadataDTO {
-                    Name = "Category", Value = "api"
-                }},
-
+                Metadata = new List<MetadataDTO> {
+                    new MetadataDTO { Name = "Category", Value = "api" },
+                    new MetadataDTO { Name = "ExternalId", Value = "23zycm" }
+                }
             };
 
             var qna2 = new QnADTO
             {
                 Answer = "You, can use our .NET SDK to manage your knowledge base.",
                 Questions = new List<string> { "Can I use a .NET NuGet package to create the KB?" },
-                Metadata = new List<MetadataDTO> { new MetadataDTO {
-                    Name = "Category", Value = "api"
-                }}
+                Metadata = new List<MetadataDTO> {
+                    new MetadataDTO { Name = "Category", Value = "api" },
+                    new MetadataDTO { Name = "ExternalId", Value = "23verm" }
+                }
             };
 
             var file1 = new FileDTO
