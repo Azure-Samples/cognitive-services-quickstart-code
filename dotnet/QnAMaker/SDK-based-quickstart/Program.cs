@@ -38,7 +38,7 @@ namespace Knowledgebase_Quickstart
 
             var authoringURL = $"https://{resourceName}.cognitiveservices.azure.com";
             var queryingURL = $"https://{resourceName}.azurewebsites.net";
-            // <Resourcevariables>
+            // </Resourcevariables>
 
 
             // <AuthorizationAuthor>
