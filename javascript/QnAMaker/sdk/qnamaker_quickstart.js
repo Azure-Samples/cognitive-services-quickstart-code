@@ -1,87 +1,109 @@
 "use strict";
 
-/* This sample does the following tasks.
+/*
+ * ==========================================
+   Tasks Included
+ * ==========================================
  * - Create a knowledge base
  * - Update a knowledge base
  * - Publish a knowledge base
  * - Get published endpoint key
  * - Delete a knowledge base
+ * Get Query runtime endpoint key
+ * Download a knowledgebase
+
+ * ==========================================
+   Further reading
+ * General documentation: https://docs.microsoft.com/azure/cognitive-services/QnAMaker
+ * Reference documentation: https://docs.microsoft.com/en-in/dotnet/api/microsoft.azure.cognitiveservices.knowledge.qnamaker?view=azure-dotnet
+ * ==========================================
+
+To run this sample, install the following modules.
+    npm install @azure/ms-rest-js
+    npm install @azure/cognitiveservices-qnamaker
+    npm install @azure/cognitiveservices-qnamaker-runtime
  */
 
-exports.__esModule = true;
-
-/* To run this sample, install the following modules.
- * npm install @azure/ms-rest-js
- * npm install @azure/cognitiveservices-qnamaker
- */
-// <dependencies>
+// <Dependencies>
 const msRest = require("@azure/ms-rest-js");
 const qnamaker = require("@azure/cognitiveservices-qnamaker");
-require('dotenv').config();
-// </dependencies>
+const qnamaker_runtime = require("@azure/cognitiveservices-qnamaker-runtime");
+// </Dependencies>
+
+// <Resourcevariables>
+const authoringKey = "REPLACE-WITH-YOUR-QNA-MAKER-KEY";
+const resourceName = "REPLACE-WITH-YOUR-RESOURCE-NAME";
+
+const authoringURL = `https://${resourceName}.cognitiveservices.azure.com`;
+const queryingURL = `https://${resourceName}.azurewebsites.net`;
+// </Resourcevariables>
 
 
-// <resourceSettings>
-// Get environment values key and endpoint for your QnA Maker resource - found in the Azure portal for that resource
-if (!process.env.QNAMAKER_AUTHORING_KEY) {
-    throw new Error('please set/export the following environment variable: QNAMAKER_AUTHORING_KEY');
+// <GetQueryEndpointKey>
+const getEndpointKeys = async (qnaClient) => {
+
+    const runtimeKeysClient = await qnaClient.endpointKeys;
+    const results = await runtimeKeysClient.getKeys()
+
+    if (!results._response.status.toString().indexOf("2", 0) == -1) {
+        console.log(`GetEndpointKeys request failed - HTTP status ${results._response.status}`)
+        return null
+    }
+
+    console.log(`GetEndpointKeys request succeeded - HTTP status ${results._response.status} - primary key ${results.primaryEndpointKey}`)
+
+    return results.primaryEndpointKey
 }
-const authoringKey = process.env.QNAMAKER_AUTHORING_KEY;
+// </GetQueryEndpointKey>
 
-if (!process.env.QNAMAKER_ENDPOINT) {
-    throw new Error('please set/export the following environment variable: QNAMAKER_ENDPOINT');
-}
-const endpoint = process.env.QNAMAKER_ENDPOINT;
-// </resourceSettings>
+// <ListKnowledgeBases>
+const listKnowledgeBasesInResource = async (KBclient) => {
 
-// Create client.
-/*
- * Use key and endpoint to create client.
- * https://docs.microsoft.com/javascript/api/@azure/cognitiveservices-qnamaker/qnamakerclient?view=azure-node-latest
- */
+    const result = await KBclient.listAll()
 
- // <authorization>
-const creds = new msRest.ApiKeyCredentials({ inHeader: { 'Ocp-Apim-Subscription-Key': authoringKey } });
-const qnaMakerClient = new qnamaker.QnAMakerClient(creds, endpoint);
-const knowledgeBaseClient = new qnamaker.Knowledgebase(qnaMakerClient);
-// </authorization>
-
-// <utilForQuickstartOnlyToSimulateAsyncOperation >
-const delayTimer = async (timeInMs)=>{
-    return await new Promise((resolve) => {
-        setTimeout(resolve, timeInMs);
-    });
-}
-// </utilForQuickstartOnlyToSimulateAsyncOperation >
-
-
-/*
- * list all knowledge bases
- * https://docs.microsoft.com/javascript/api/@azure/cognitiveservices-qnamaker/knowledgebase?view=azure-node-latest#listall-servicecallback-knowledgebasesdto--
- */
-// <listKnowledgeBases>
-const listKnowledgeBases = async() => {
-
-    const result = await knowledgeBaseClient.listAll()
-
-    for (const item of result.knowledgebases){
+    for (const item of result.knowledgebases) {
         console.log(`${item.name} stored in ${item.language} language with ${item.sources.length} sources, last updated ${item.lastChangedTimestamp}`);
     }
     return result.knowledgebases;
 }
-// </listKnowledgeBases>
+// </ListKnowledgeBases>
 
+// <GenerateAnswer>
+const generateAnswer = async (runtimeClient, runtimeKey, kb_id) => {
 
-/*
- * delete knowledge base
- * https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/cognitiveservices/cognitiveservices-qnamaker/src/operations/knowledgebase.ts#L81
- */
-// <deleteKnowledgeBase>
-const deleteKnowledgeBase = async (kb_id) => {
+    const customHeaders = { Authorization: `EndpointKey ${runtimeKey}` };
 
-    const results = await knowledgeBaseClient.deleteMethod(kb_id)
+    const requestQuery = await runtimeClient.runtime.generateAnswer(
+        kb_id,
+        {
+            question: "How do I manage my knowledgebase?",
+            top: 1,
+            strictFilters: [
+                { name: "Category", value: "api" }
+            ]
+        },
+        { customHeaders }
+    );
+    console.log(JSON.stringify(requestQuery));
 
-    if(results._response.status.toString().indexOf("2",0)==-1) {
+}
+// </GenerateAnswer>
+
+// <DownloadKB>
+const downloadKnowledgeBase = async (KBclient, kb_id) => {
+    var kbData = await KBclient.download(kb_id, "Prod");
+    console.log(`KB Downloaded. It has ${kbData.qnaDocuments.length} QnAs.`);
+
+    // Do something meaningful with data
+}
+// </DownloadKB>
+
+// <DeleteKB>
+const deleteKnowledgeBase = async (KBclient, kb_id) => {
+
+    const results = await KBclient.deleteMethod(kb_id)
+
+    if (results._response.status.toString().indexOf("2", 0) == -1) {
         console.log(`Delete operation state failed - HTTP status ${results._response.status}`)
         return false
     }
@@ -89,21 +111,18 @@ const deleteKnowledgeBase = async (kb_id) => {
     console.log(`Delete operation state succeeded - HTTP status ${results._response.status}`)
     return true
 }
-// </deleteKnowledgeBase>
+// </DeleteKB>
 
-/*
- * Monitor long-running operation
- * https://docs.microsoft.com/javascript/api/@azure/cognitiveservices-qnamaker/operations?view=azure-node-latest#getdetails-string--servicecallback-operation--
- */
-// <monitorOperation>
-const wait_for_operation = async (operation_id) => {
+
+// <MonitorOperation>
+const wait_for_operation = async (qnaClient, operation_id) => {
 
     let state = "NotStarted"
     let operationResult = undefined
 
-    while("Running" === state || "NotStarted" === state){
+    while ("Running" === state || "NotStarted" === state) {
 
-        operationResult = await qnaMakerClient.operations.getDetails(operation_id)
+        operationResult = await qnaClient.operations.getDetails(operation_id)
         state = operationResult.operationState;
 
         console.log(`Operation state - ${state}`)
@@ -113,95 +132,158 @@ const wait_for_operation = async (operation_id) => {
 
     return operationResult;
 }
-// </monitorOperation>
+const delayTimer = async (timeInMs) => {
+    return await new Promise((resolve) => {
+        setTimeout(resolve, timeInMs);
+    });
+}
+// </MonitorOperation>
 
 
-// Main functions.
+// <CreateKBMethod>
+const createKnowledgeBase = async (qnaClient, kbclient) => {
 
-
-/*
-* Create knowledge base from JSON object
-* https://docs.microsoft.com/javascript/api/@azure/cognitiveservices-qnamaker/knowledgebase?view=azure-node-latest#create-createkbdto--requestoptionsbase--servicecallback-operation--
-*/
-// <createKnowledgeBase>
-const createKnowledgeBase = async () => {
-
-    const answer = "You can use our REST APIs to manage your Knowledge Base. See here for details: https://westus.dev.cognitive.microsoft.com/docs/services/58994a073d9e04097c7ba6fe/operations/58994a073d9e041ad42d9baa";
-    const source = "Custom Editorial";
-    const questions = ["How do I programmatically update my Knowledge Base?"];
-    const metadata = [{ Name: "category", Value: "api" }];
-    const qna_list = [{ id: 0, answer: answer, Source: source, questions: questions, Metadata: metadata }];
-    const create_kb_payload = {
-        name: 'QnA Maker FAQ',
-        qnaList: qna_list,
-        urls: [],
-        files: []
+    const qna1 = {
+        answer: "Yes, You can use our [REST APIs](https://docs.microsoft.com/rest/api/cognitiveservices/qnamaker/knowledgebase) to manage your knowledge base.",
+        questions: ["How do I manage my knowledgebase?"],
+        metadata: [
+            { name: "Category", value: "api" },
+            { name: "Language", value: "REST" }
+        ]
     };
 
-    const results = await knowledgeBaseClient.create(create_kb_payload)
+    const qna2 = {
+        answer: "Yes, You can use our JS SDK on NPM for [authoring](https://www.npmjs.com/package/@azure/cognitiveservices-qnamaker), [query runtime](https://www.npmjs.com/package/@azure/cognitiveservices-qnamaker-runtime), and [the reference docs](https://docs.microsoft.com/en-us/javascript/api/@azure/cognitiveservices-qnamaker/?view=azure-node-latest) to manage your knowledge base.",
+        questions: ["How do I manage my knowledgebase?"],
+        metadata: [
+            { name: "Category", value: "api" },
+            { name: "Language", value: "JavaScript" }
+        ]
+    };
 
-    if(results._response.status.toString().indexOf("2",0)==-1) {
+    const create_kb_payload = {
+        name: 'QnA Maker JavaScript SDK Quickstart',
+        qnaList: [
+            qna1,
+            qna2
+        ],
+        urls: [],
+        files: [
+            /*{
+                fileName: "myfile.md",
+                fileUri: "https://mydomain/myfile.md"
+            }*/
+        ],
+        defaultAnswerUsedForExtraction: "No answer found.",
+        enableHierarchicalExtraction: true,
+        language: "English"
+    };
+
+    const results = await kbclient.create(create_kb_payload)
+
+    if (results._response.status.toString().indexOf("2", 0) == -1) {
         console.log(`Create request failed - HTTP status ${results._response.status}`)
         return
     }
 
-    const operationResult = await wait_for_operation( results.operationId)
+    const operationResult = await wait_for_operation(qnaClient, results.operationId)
 
-    if(!operationResult || !operationResult.operationState ||  !(operationResult.operationState= "Succeeded") || !operationResult.resourceLocation) {
+    if (!operationResult || !operationResult.operationState || !(operationResult.operationState = "Succeeded") || !operationResult.resourceLocation) {
         console.log(`Create operation state failed - HTTP status ${operationResult._response.status}`)
         return
     }
 
     // parse resourceLocation for KB ID
-   const kbID = operationResult.resourceLocation.replace("/knowledgebases/","");
+    const kbID = operationResult.resourceLocation.replace("/knowledgebases/", "");
 
-   console.log(`Create operation ${operationResult._response.status}, KB ID ${kbID}`)
-   return kbID;
+    return kbID;
 }
-// </createKnowledgeBase>
+// </CreateKBMethod>
 
-/*
- * Update knowledge base - can be used to completely replace knowledge base question and answer sets
- * https://docs.microsoft.com/javascript/api/@azure/cognitiveservices-qnamaker/knowledgebase?view=azure-node-latest#update-string--updatekboperationdto--servicecallback-operation--
- */
-// <updateKnowledgeBase>
-const updateKnowledgeBase = async(kb_id) => {
+// <UpdateKBMethod>
+const updateKnowledgeBase = async (qnaClient, kbclient, kb_id) => {
+
+    const urls = [
+        "https://docs.microsoft.com/azure/cognitive-services/QnAMaker/troubleshooting"
+    ]
+
+    const qna3 = {
+        answer: "goodbye",
+        questions: [
+            "bye",
+            "end",
+            "stop",
+            "quit",
+            "done"
+        ],
+        metadata: [
+            { name: "Category", value: "Chitchat" },
+            { name: "Chitchat", value: "end" }
+        ]
+    };
+
+    const qna4 = {
+        answer: "Hello, please select from the list of questions or enter a new question to continue.",
+        questions: [
+            "hello",
+            "hi",
+            "start"
+        ],
+        metadata: [
+            { name: "Category", value: "Chitchat" },
+            { name: "Chitchat", value: "begin" }
+        ],
+        context: {
+            isContextOnly: false,
+            prompts: [
+                {
+                    displayOrder: 1,
+                    displayText: "Use REST",
+                    qna: null,
+                    qnaId: 1
+                },
+                {
+                    displayOrder: 2,
+                    displayText: "Use JS NPM package",
+                    qna: null,
+                    qnaId: 2
+                },
+            ]
+        }
+    };
+
+    console.log(JSON.stringify(qna4))
 
     // Add new Q&A lists, URLs, and files to the KB.
-    const answer = "You can change the default message if you use the QnAMakerDialog. See this for details: https://docs.botframework.com/en-us/azure-bot-service/templates/qnamaker/#navtitle";
-    const source = "Custom Editorial";
-    const questions = ["How can I change the default message from QnA Maker?"];
-    const metadata = [{ Name: "category", Value: "api" }];
-    const qna_list = [{ id: 1, answer: answer, Source: source, questions: questions, Metadata: metadata }];
-    const update_kb_add_payload = { qnaList: qna_list, urls: [], files: [] };
-
-
-    // Update the KB name.
-    const name = "New KB name";
-    const update_kb_update_payload = { name: name };
-
-    // Delete the QnaList with ID 0.
-    const ids = [0];
-    const update_kb_delete_payload = { ids: ids };
+    const kb_add_payload = {
+        qnaList: [
+            qna3,
+            qna4
+        ],
+        urls: urls,
+        files: []
+    };
 
     // Bundle the add, update, and delete requests.
     const update_kb_payload = {
-        add: update_kb_add_payload,
-        update: update_kb_update_payload,
-        deleteProperty:
-        update_kb_delete_payload
+        add: kb_add_payload,
+        update: null,
+        delete: null,
+        defaultAnswerUsedForExtraction: "No answer found. Please rephrase your question."
     };
 
-    const results = await knowledgeBaseClient.update(kb_id, update_kb_payload)
+    console.log(JSON.stringify(update_kb_payload))
 
-    if(!results._response.status.toString().indexOf("2",0)==-1) {
+    const results = await kbclient.update(kb_id, update_kb_payload)
+
+    if (!results._response.status.toString().indexOf("2", 0) == -1) {
         console.log(`Update request failed - HTTP status ${results._response.status}`)
         return false
     }
 
-    const operationResult = await wait_for_operation( results.operationId)
+    const operationResult = await wait_for_operation(qnaClient, results.operationId)
 
-    if(operationResult.operationState != "Succeeded") {
+    if (operationResult.operationState != "Succeeded") {
         console.log(`Update operation state failed - HTTP status ${operationResult._response.status}`)
         return false
     }
@@ -209,18 +291,14 @@ const updateKnowledgeBase = async(kb_id) => {
     console.log(`Update operation state ${operationResult._response.status} - HTTP status ${operationResult._response.status}`)
     return true
 }
-// </updateKnowledgeBase>
+// </UpdateKBMethod>
 
-/*
- * Publish knowledge base to use query prediction runtime
- * https://docs.microsoft.com/javascript/api/@azure/cognitiveservices-qnamaker/knowledgebase?view=azure-node-latest#publish-string--requestoptionsbase--servicecallback-void--
- *  */
-// <publishKnowledgeBase>
-const publishKnowledgeBase = async(kb_id) => {
+// <PublishKB>
+const publishKnowledgeBase = async (kbclient, kb_id) => {
 
-    const results = await knowledgeBaseClient.publish(kb_id)
+    const results = await kbclient.publish(kb_id)
 
-    if(!results._response.status.toString().indexOf("2",0)==-1) {
+    if (!results._response.status.toString().indexOf("2", 0) == -1) {
         console.log(`Publish request failed - HTTP status ${results._response.status}`)
         return false
     }
@@ -229,50 +307,37 @@ const publishKnowledgeBase = async(kb_id) => {
 
     return true
 }
-// </publishKnowledgeBase>
+// </PublishKB>
 
-/*
- * Get Endpoint Keys - use this key to get answer from knowledge base using query prediction runtime
- * https://docs.microsoft.com/javascript/api/@azure/cognitiveservices-qnamaker/endpointkeys?view=azure-node-latest
- */
-// <getEndpointKeys>
-const getEndpointKeys = async () => {
+// <Main>
+const main = async () => {
 
-    const endpointKeysClient = new qnamaker.EndpointKeys(qnaMakerClient);
+    // <AuthorizationAuthor>
+    const creds = new msRest.ApiKeyCredentials({ inHeader: { 'Ocp-Apim-Subscription-Key': authoringKey } });
+    const qnaMakerClient = new qnamaker.QnAMakerClient(creds, authoringURL);
+    const knowledgeBaseClient = new qnamaker.Knowledgebase(qnaMakerClient);
+    // </AuthorizationAuthor>
 
-    const results = await endpointKeysClient.getKeys();
+    const knowledgeBaseID = await createKnowledgeBase(qnaMakerClient, knowledgeBaseClient);
+    await updateKnowledgeBase(qnaMakerClient, knowledgeBaseClient, knowledgeBaseID);
+    await publishKnowledgeBase(knowledgeBaseClient, knowledgeBaseID);
+    await downloadKnowledgeBase(knowledgeBaseClient, knowledgeBaseID)
+    const primaryQueryRuntimeKey = await getEndpointKeys(qnaMakerClient);
 
-    if(!results._response.status.toString().indexOf("2",0)==-1) {
-        console.log(`GetEndpointKeys request failed - HTTP status ${results._response.status}`)
-        return null
-    }
+    await listKnowledgeBasesInResource(knowledgeBaseClient)
 
-    console.log(`GetEndpointKeys request succeeded - HTTP status ${results._response.status} - primary key ${results.primaryEndpointKey}`)
+    // <AuthorizationQuery>
+    const queryRutimeCredentials = new msRest.ApiKeyCredentials({ inHeader: { 'Ocp-Apim-Subscription-Key': primaryQueryRuntimeKey } });
+    const runtimeClient = new qnamaker_runtime.QnAMakerRuntimeClient(queryRutimeCredentials, queryingURL);
+    // </AuthorizationQuery>
 
-    return results.primaryEndpointKey
+    await generateAnswer(runtimeClient, primaryQueryRuntimeKey, knowledgeBaseID)
+    await deleteKnowledgeBase(knowledgeBaseClient, knowledgeBaseID)
 }
-// </getEndpointKeys>
-
-// <main>
-const quickstart = async () => {
-
-    const knowledgeBaseID = await createKnowledgeBase();
-
-    await updateKnowledgeBase(knowledgeBaseID);
-
-    await publishKnowledgeBase(knowledgeBaseID);
-
-    const primaryEndpointKey = await getEndpointKeys();
-
-    await listKnowledgeBases()
-
-    await deleteKnowledgeBase(knowledgeBaseID)
-
-}
-// <main>
+// </Main>
 
 // <mainCall>
-quickstart()
-.then(()=> console.log("done"))
-.catch(error => console.log(error));
+main()
+    .then(() => console.log("done"))
+    .catch(error => console.log(error));
 // </mainCall>
