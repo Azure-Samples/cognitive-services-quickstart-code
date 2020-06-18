@@ -2,6 +2,11 @@
 
 /*
  * ==========================================
+   Install QnA Maker package with commands
+ * ==========================================
+    npm install
+
+ * ==========================================
    Tasks Included
  * ==========================================
  * - Create a knowledge base
@@ -9,19 +14,16 @@
  * - Publish a knowledge base
  * - Get published endpoint key
  * - Delete a knowledge base
- * Get Query runtime endpoint key
- * Download a knowledgebase
+ * - Get Query runtime endpoint key
+ * - Download a knowledgebase
 
  * ==========================================
    Further reading
  * General documentation: https://docs.microsoft.com/azure/cognitive-services/QnAMaker
- * Reference documentation: https://docs.microsoft.com/en-in/dotnet/api/microsoft.azure.cognitiveservices.knowledge.qnamaker?view=azure-dotnet
+ * Reference documentation: https://docs.microsoft.com/dotnet/api/microsoft.azure.cognitiveservices.knowledge.qnamaker?view=azure-dotnet
  * ==========================================
 
-To run this sample, install the following modules.
-    npm install @azure/ms-rest-js
-    npm install @azure/cognitiveservices-qnamaker
-    npm install @azure/cognitiveservices-qnamaker-runtime
+
  */
 
 // <Dependencies>

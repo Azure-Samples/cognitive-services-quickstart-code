@@ -1,5 +1,5 @@
 {
-  "name": "qnamaker_quickstart",
+  "name": "qnamaker_quickstart-sdk",
   "version": "1.0.0",
   "description": "",
   "main": "qnamaker_quickstart.js",
@@ -13,7 +13,6 @@
   "dependencies": {
     "@azure/cognitiveservices-qnamaker": "^2.0.0",
     "@azure/cognitiveservices-qnamaker-runtime": "^1.0.0",
-    "@azure/ms-rest-js": "^2.0.4",
-    "dotenv": "^8.0.0"
+    "@azure/ms-rest-js": "^2.0.4"
   }
 }
