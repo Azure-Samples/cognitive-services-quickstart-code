@@ -7,6 +7,7 @@
  * Publish a knowledgebase, waiting for publishing to complete
  * Get Query runtime endpoint key
  * Download a knowledgebase
+ * Get answer
  * Delete a knowledgebase
 
  * ==========================================
@@ -76,7 +77,7 @@ namespace Knowledgebase_Quickstart
         {
 
             var urls = new List<string> {
-                "https://docs.microsoft.com/en-in/azure/cognitive-services/QnAMaker/troubleshooting"
+                "https://docs.microsoft.com/azure/cognitive-services/QnAMaker/troubleshooting"
             };
 
             var updateOp = await client.Knowledgebase.UpdateAsync(kbId, new UpdateKbOperationDTO
@@ -96,6 +97,7 @@ namespace Knowledgebase_Quickstart
                             Answer = "goodbye",
                             Metadata = new List<MetadataDTO> {
                                 new MetadataDTO {
+                                    Name = "Category", Value="Chitchat",
                                     Name = "Chitchat", Value = "end"
                                 }
                             }
@@ -109,6 +111,7 @@ namespace Knowledgebase_Quickstart
                             Answer = "Hello, please select from the list of questions or enter a new question to continue.",
                             Metadata = new List<MetadataDTO> {
                                 new MetadataDTO {
+                                    Name = "Category", Value="Chitchat",
                                     Name = "Chitchat", Value = "begin"
                                 }
                             },
@@ -151,26 +154,28 @@ namespace Knowledgebase_Quickstart
         {
             var qna1 = new QnADTO
             {
-                Answer = "You can use our REST APIs to manage your knowledge base.",
+                Answer = "Yes, You can use our [REST APIs](https://docs.microsoft.com/rest/api/cognitiveservices/qnamaker/knowledgebase) to manage your knowledge base.",
                 Questions = new List<string> { "How do I manage my knowledgebase?" },
                 Metadata = new List<MetadataDTO> { new MetadataDTO {
-                    Name = "Category", Value = "api"
+                    Name = "Category", Value = "api",
+                    Name = "Language", Value = "REST"
                 }},
 
             };
 
             var qna2 = new QnADTO
             {
-                Answer = "You, can use our .NET SDK to manage your knowledge base.",
-                Questions = new List<string> { "Can I use a .NET NuGet package to create the KB?" },
+                Answer = "Yes, You can use our [.NET SDK](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Knowledge.QnAMaker) with the [.NET Reference Docs](https://docs.microsoft.com/dotnet/api/microsoft.azure.cognitiveservices.knowledge.qnamaker?view=azure-dotnet) to manage your knowledge base.",
+                Questions = new List<string> { "Can I program with C#?" },
                 Metadata = new List<MetadataDTO> { new MetadataDTO {
-                    Name = "Category", Value = "api"
+                    Name = "Category", Value = "api",
+                    Name = "Language", Value = ".NET"
                 }}
             };
 
             var file1 = new FileDTO
             {
-                FileName = "myFileName",
+                FileName = "myfile.md",
                 FileUri = "https://mydomain/myfile.md"
 
             };
