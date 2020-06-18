@@ -7,6 +7,7 @@
  * Publish a knowledgebase, waiting for publishing to complete
  * Get Query runtime endpoint key
  * Download a knowledgebase
+ * Get answer
  * Delete a knowledgebase
 
  * ==========================================

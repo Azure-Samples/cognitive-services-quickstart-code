@@ -1,6 +1,9 @@
 # install with command:
 # py -m pip install azure-cognitiveservices-knowledge-qnamaker==0.2.0
 
+# ==========================================
+# Tasks Included
+# ==========================================
 # This sample does the following tasks.
 # - Create a knowledge base.
 # - Update a knowledge base.
@@ -10,13 +13,20 @@
 # - Get answer
 # - Delete a knowledge base.
 
+# ==========================================
+# Further reading
+#
+# General documentation: https://docs.microsoft.com/azure/cognitive-services/QnAMaker
+# Reference documentation: https://docs.microsoft.com/en-us/python/api/overview/azure/cognitiveservices/qnamaker?view=azure-python
+# ==========================================
+
 # <Dependencies>
 import os
 import time
 
 from azure.cognitiveservices.knowledge.qnamaker.authoring import QnAMakerClient
 from azure.cognitiveservices.knowledge.qnamaker.runtime import QnAMakerRuntimeClient
-from azure.cognitiveservices.knowledge.qnamaker.authoring.models import QnADTO, MetadataDTO, CreateKbDTO, OperationStateType, UpdateKbOperationDTO, UpdateKbOperationDTOAdd, EndpointKeysDTO, QnADTOContext
+from azure.cognitiveservices.knowledge.qnamaker.authoring.models import QnADTO, MetadataDTO, CreateKbDTO, OperationStateType, UpdateKbOperationDTO, UpdateKbOperationDTOAdd, EndpointKeysDTO, QnADTOContext, PromptDTO
 from azure.cognitiveservices.knowledge.qnamaker.runtime.models import QueryDTO
 from msrest.authentication import CognitiveServicesCredentials
 # </Dependencies>
@@ -71,10 +81,13 @@ def create_kb(client):
 
     create_kb_dto = CreateKbDTO(
         name="QnA Maker Python SDK Quickstart",
-        qna_list=[qna],
+        qna_list=[
+            qna1,
+            qna2
+        ],
         urls=urls,
         files=[],
-        enable_hierarchical_extraction=true,
+        enable_hierarchical_extraction=True,
         default_answer_used_for_extraction="No answer found.",
         language="English"
     )
@@ -120,7 +133,7 @@ def update_kb(client, kb_id):
         ],
         context = QnADTOContext(
 
-            is_context_only = false,
+            is_context_only = False,
             prompts = [
 
                 PromptDTO(
@@ -134,7 +147,8 @@ def update_kb(client, kb_id):
                     display_text= "Use .NET NuGet package",
                     qna_id=2
                 ),
-            }
+            ]
+        )
 
     )
 
@@ -194,8 +208,12 @@ def generate_answer(client, kb_id, runtimeKey):
 
     authHeaderValue = "EndpointKey " + runtimeKey
 
-    answer = client.runtime.generate_answer(kb_id, QueryDTO(question = "How do I manage my knowledgebase?"), dict(Authorization=authHeaderValue))
-    print(f"{answer}.")
+    listSearchResults = client.runtime.generate_answer(kb_id, QueryDTO(question = "How do I manage my knowledgebase?"), dict(Authorization=authHeaderValue))
+
+    for i in listSearchResults.answers:
+        print(f"answer: {i.id}.")
+        print(f"answer: {i.answer}.")
+        print(f"score: {i.score}.")
 # </GenerateAnswer>
 
 # <Main>
@@ -211,9 +229,11 @@ download_kb (client=client, kb_id=kb_id)
 
 queryRuntimeKey = getEndpointKeys_kb(client=client)
 
+# <AuthorizationQuery>
 runtimeClient = QnAMakerRuntimeClient(runtime_endpoint=queryingURL, credentials=CognitiveServicesCredentials(queryRuntimeKey))
-generate_answer(client=runtimeClient,kb_id=kb_id,runtimeKey=queryRuntimeKey)
+# </AuthorizationQuery>
 
+generate_answer(client=runtimeClient,kb_id=kb_id,runtimeKey=queryRuntimeKey)
 delete_kb (client=client, kb_id=kb_id)
 
 # </Main>
