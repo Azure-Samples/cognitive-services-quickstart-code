@@ -1,5 +1,8 @@
-# install with command:
+# install QnA Maker package on Windows with command:
 # py -m pip install azure-cognitiveservices-knowledge-qnamaker==0.2.0
+
+# install QnA Maker package on Mac/Linx with command:
+# pip install azure-cognitiveservices-knowledge-qnamaker==0.2.0
 
 # ==========================================
 # Tasks Included

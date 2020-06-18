@@ -1,5 +1,11 @@
 ﻿/*
  * ==========================================
+   Install QnA Maker package with command
+ * ==========================================
+ *
+ * dotnet add package Microsoft.Azure.CognitiveServices.Knowledge.QnAMaker --version 2.0.0-preview.1
+ *
+ * ==========================================
    Tasks Included
  * ==========================================
  * Create a knowledgebase
