@@ -102,10 +102,8 @@ namespace Knowledgebase_Quickstart
                             },
                             Answer = "goodbye",
                             Metadata = new List<MetadataDTO> {
-                                new MetadataDTO {
-                                    Name = "Category", Value="Chitchat",
-                                    Name = "Chitchat", Value = "end"
-                                }
+                                new MetadataDTO { Name = "Category", Value="Chitchat" },
+                                new MetadataDTO { Name = "Chitchat", Value = "end" },
                             }
                         },
                         new QnADTO {
@@ -116,10 +114,8 @@ namespace Knowledgebase_Quickstart
                             },
                             Answer = "Hello, please select from the list of questions or enter a new question to continue.",
                             Metadata = new List<MetadataDTO> {
-                                new MetadataDTO {
-                                    Name = "Category", Value="Chitchat",
-                                    Name = "Chitchat", Value = "begin"
-                                }
+                                new MetadataDTO { Name = "Category", Value="Chitchat" },
+                                new MetadataDTO { Name = "Chitchat", Value = "begin" }
                             },
                             Context = new QnADTOContext
                             {
@@ -162,10 +158,10 @@ namespace Knowledgebase_Quickstart
             {
                 Answer = "Yes, You can use our [REST APIs](https://docs.microsoft.com/rest/api/cognitiveservices/qnamaker/knowledgebase) to manage your knowledge base.",
                 Questions = new List<string> { "How do I manage my knowledgebase?" },
-                Metadata = new List<MetadataDTO> { new MetadataDTO {
-                    Name = "Category", Value = "api",
-                    Name = "Language", Value = "REST"
-                }},
+                Metadata = new List<MetadataDTO> {
+                    new MetadataDTO { Name = "Category", Value = "api" },
+                    new MetadataDTO { Name = "Language", Value = "REST" }
+                },
 
             };
 
@@ -173,10 +169,10 @@ namespace Knowledgebase_Quickstart
             {
                 Answer = "Yes, You can use our [.NET SDK](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Knowledge.QnAMaker) with the [.NET Reference Docs](https://docs.microsoft.com/dotnet/api/microsoft.azure.cognitiveservices.knowledge.qnamaker?view=azure-dotnet) to manage your knowledge base.",
                 Questions = new List<string> { "Can I program with C#?" },
-                Metadata = new List<MetadataDTO> { new MetadataDTO {
-                    Name = "Category", Value = "api",
-                    Name = "Language", Value = ".NET"
-                }}
+                Metadata = new List<MetadataDTO> {
+                    new MetadataDTO { Name = "Category", Value = "api" },
+                    new MetadataDTO { Name = "Language", Value = ".NET" }
+                }
             };
 
             var file1 = new FileDTO
