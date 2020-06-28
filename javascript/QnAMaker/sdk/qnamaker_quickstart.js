@@ -329,8 +329,8 @@ const main = async () => {
     await listKnowledgeBasesInResource(knowledgeBaseClient)
 
     // <AuthorizationQuery>
-    const queryRutimeCredentials = new msRest.ApiKeyCredentials({ inHeader: { 'Ocp-Apim-Subscription-Key': primaryQueryRuntimeKey } });
-    const runtimeClient = new qnamaker_runtime.QnAMakerRuntimeClient(queryRutimeCredentials, queryingURL);
+    const queryRuntimeCredentials = new msRest.ApiKeyCredentials({ inHeader: { 'Ocp-Apim-Subscription-Key': primaryQueryRuntimeKey } });
+    const runtimeClient = new qnamaker_runtime.QnAMakerRuntimeClient(queryRuntimeCredentials, queryingURL);
     // </AuthorizationQuery>
 
     await generateAnswer(runtimeClient, primaryQueryRuntimeKey, knowledgeBaseID)
