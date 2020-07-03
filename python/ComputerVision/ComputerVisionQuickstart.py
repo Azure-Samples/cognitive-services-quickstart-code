@@ -1,7 +1,6 @@
 # <snippet_imports>
 from azure.cognitiveservices.vision.computervision import ComputerVisionClient
 from azure.cognitiveservices.vision.computervision.models import OperationStatusCodes
-from azure.cognitiveservices.vision.computervision.models import TextRecognitionMode
 from azure.cognitiveservices.vision.computervision.models import VisualFeatureTypes
 from msrest.authentication import CognitiveServicesCredentials
 
@@ -703,7 +702,7 @@ while True:
 
 # Print results, line by line
 if recognize_handwriting_result.status == OperationStatusCodes.succeeded:
-    for text_result in recognize_handwriting_result.recognition_results:
+    for text_result in recognize_handwriting_result.read_results:
         for line in text_result.lines:
             print(line.text)
             print(line.bounding_box)
@@ -741,7 +740,7 @@ while True:
 
 # Print the detected text, line by line
 if get_handw_text_results.status == OperationStatusCodes.succeeded:
-    for text_result in get_handw_text_results.recognition_results:
+    for text_result in get_handw_text_results.read_results:
         for line in text_result.lines:
             print(line.text)
             print(line.bounding_box)
