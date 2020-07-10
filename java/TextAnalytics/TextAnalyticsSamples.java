@@ -1,3 +1,4 @@
+import com.azure.core.credential.AzureKeyCredential;
 import com.azure.ai.textanalytics.models.*;
 import com.azure.ai.textanalytics.TextAnalyticsClientBuilder;
 import com.azure.ai.textanalytics.TextAnalyticsClient;
@@ -14,16 +15,15 @@ public class TextAnalyticsSamples {
         sentimentAnalysisExample(client);
         detectLanguageExample(client);
         recognizeEntitiesExample(client);
-        recognizePIIEntitiesExample(client);
         recognizeLinkedEntitiesExample(client);
         extractKeyPhrasesExample(client);
     }
 
     static TextAnalyticsClient authenticateClient(String key, String endpoint) {
         return new TextAnalyticsClientBuilder()
-                .apiKey(new TextAnalyticsApiKeyCredential(key))
-                .endpoint(endpoint)
-                .buildClient();
+            .credential(new AzureKeyCredential(key))
+            .endpoint(endpoint)
+            .buildClient();
     }
 
     static void sentimentAnalysisExample(TextAnalyticsClient client)
@@ -46,8 +46,8 @@ public class TextAnalyticsSamples {
                 sentenceSentiment.getConfidenceScores().getPositive(),
                 sentenceSentiment.getConfidenceScores().getNeutral(),
                 sentenceSentiment.getConfidenceScores().getNegative());
+            }
         }
-    }
 
     static void detectLanguageExample(TextAnalyticsClient client)
     {
@@ -58,7 +58,7 @@ public class TextAnalyticsSamples {
         System.out.printf("Detected primary language: %s, ISO 6391 name: %s, score: %.2f.%n",
             detectedLanguage.getName(),
             detectedLanguage.getIso6391Name(),
-            detectedLanguage.getScore());
+            detectedLanguage.getConfidenceScore());
     }
 
     static void recognizeEntitiesExample(TextAnalyticsClient client)
@@ -71,22 +71,7 @@ public class TextAnalyticsSamples {
                 "Recognized entity: %s, entity category: %s, entity sub-category: %s, score: %s.%n",
                 entity.getText(),
                 entity.getCategory(),
-                entity.getSubCategory(),
-                entity.getConfidenceScore());
-        }
-    }
-
-    static void recognizePIIEntitiesExample(TextAnalyticsClient client)
-    {
-        // The text that need be analyzed.
-        String text = "Insurance policy for SSN on file 123-12-1234 is here by approved.";
-
-        for (PiiEntity entity : client.recognizePiiEntities(text)) {
-            System.out.printf(
-                "Recognized personal identifiable information entity: %s, entity category: %s, %nentity sub-category: %s, score: %s.%n",
-                entity.getText(),
-                entity.getCategory(),
-                entity.getSubCategory(),
+                entity.getSubcategory(),
                 entity.getConfidenceScore());
         }
     }
@@ -95,23 +80,23 @@ public class TextAnalyticsSamples {
     {
         // The text that need be analyzed.
         String text = "Microsoft was founded by Bill Gates and Paul Allen on April 4, 1975, " +
-                "to develop and sell BASIC interpreters for the Altair 8800. " +
-                "During his career at Microsoft, Gates held the positions of chairman, " +
-                "chief executive officer, president and chief software architect, " +
-                "while also being the largest individual shareholder until May 2014.";
+            "to develop and sell BASIC interpreters for the Altair 8800. " +
+            "During his career at Microsoft, Gates held the positions of chairman, " +
+            "chief executive officer, president and chief software architect, " +
+            "while also being the largest individual shareholder until May 2014.";
 
         System.out.printf("Linked Entities:%n");
         for (LinkedEntity linkedEntity : client.recognizeLinkedEntities(text)) {
             System.out.printf("Name: %s, ID: %s, URL: %s, Data Source: %s.%n",
-                    linkedEntity.getName(),
-                    linkedEntity.getDataSourceEntityId(),
-                    linkedEntity.getUrl(),
-                    linkedEntity.getDataSource());
+                linkedEntity.getName(),
+                linkedEntity.getDataSourceEntityId(),
+                linkedEntity.getUrl(),
+                linkedEntity.getDataSource());
             System.out.printf("Matches:%n");
-            for (LinkedEntityMatch linkedEntityMatch : linkedEntity.getLinkedEntityMatches()) {
+            for (LinkedEntityMatch linkedEntityMatch : linkedEntity.getMatches()) {
                 System.out.printf("Text: %s, Score: %.2f%n",
-                        linkedEntityMatch.getText(),
-                        linkedEntityMatch.getConfidenceScore());
+                linkedEntityMatch.getText(),
+                linkedEntityMatch.getConfidenceScore());
             }
         }
     }
