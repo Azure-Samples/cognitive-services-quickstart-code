@@ -71,11 +71,13 @@ namespace ComputerVisionQuickstart
         private const string DETECT_URL_IMAGE = "https://moderatorsampleimages.blob.core.windows.net/samples/sample9.png";
         // URL image for detecting domain-specific content (image of ancient ruins)
         private const string DETECT_DOMAIN_SPECIFIC_URL = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/landmark.jpg";
-        // URL image for extracting text (Image of motivational meme).
+        // URL image for extracting handwritten text.
         // <snippet_extracttext_url>
-        private const string EXTRACT_TEXT_URL_IMAGE = "https://raw.githubusercontent.com/MicrosoftDocs/azure-docs/master/articles/cognitive-services/Computer-vision/Images/readsample.jpg";
-        // URL image for OCR (optical character recognition).
+        private const string EXTRACT_TEXT_URL_HANDW = "https://raw.githubusercontent.com/MicrosoftDocs/azure-docs/master/articles/cognitive-services/Computer-vision/Images/readsample.jpg";
+        // URL image for extracting printed text.
+        private const string EXTRACT_TEXT_URL_PRINT = "https://intelligentkioskstore.blob.core.windows.net/visionapi/suggestedphotos/3.png";
         // </snippet_extracttext_url>
+        // URL image for OCR (optical character recognition).
         private const string OCR_URL = "https://raw.githubusercontent.com/MicrosoftDocs/azure-docs/master/articles/cognitive-services/Computer-vision/Images/readsample.jpg";
 
         static void Main(string[] args)
@@ -106,7 +108,7 @@ namespace ComputerVisionQuickstart
 
             // <snippet_extracttextinmain>
             // Read the batch text from an image (handwriting and/or printed).
-            BatchReadFileUrl(client, EXTRACT_TEXT_URL_IMAGE).Wait();
+            BatchReadFileUrl(client, EXTRACT_TEXT_URL_HANDW).Wait();
             BatchReadFileLocal(client, EXTRACT_TEXT_LOCAL_IMAGE).Wait();
             // </snippet_extracttextinmain>
 
@@ -594,7 +596,7 @@ namespace ComputerVisionQuickstart
             Console.WriteLine();
 
             // Read text from URL
-            BatchReadFileHeaders textHeaders = await client.BatchReadFileAsync(urlImage);
+            var textHeaders = await client.ReadAsync(urlImage, language: "en");
             // After the request, get the operation location (operation ID)
             string operationLocation = textHeaders.OperationLocation;
             // </snippet_extract_call>
@@ -614,13 +616,13 @@ namespace ComputerVisionQuickstart
             Console.WriteLine();
             do
             {
-                results = await client.GetReadOperationResultAsync(operationId);
+                results = await client.GetReadResultAsync(operationId);
                 Console.WriteLine("Server status: {0}, waiting {1} seconds...", results.Status, i);
                 await Task.Delay(1000);
                 if (i == 9) 
-		{ 
-		    Console.WriteLine("Server timed out."); 
-		}
+                { 
+                    Console.WriteLine("Server timed out."); 
+                }
             }
             while ((results.Status == TextOperationStatusCodes.Running ||
                 results.Status == TextOperationStatusCodes.NotStarted) && i++ < maxRetries);
