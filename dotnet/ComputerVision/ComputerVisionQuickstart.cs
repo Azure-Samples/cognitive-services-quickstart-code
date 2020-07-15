@@ -109,8 +109,9 @@ namespace ComputerVisionQuickstart
             // <snippet_extracttextinmain>
             // Read the batch text from an image (handwriting and/or printed).
             BatchReadFileUrl(client, EXTRACT_TEXT_URL_HANDW).Wait();
-            BatchReadFileLocal(client, EXTRACT_TEXT_LOCAL_IMAGE).Wait();
             // </snippet_extracttextinmain>
+
+            BatchReadFileLocal(client, EXTRACT_TEXT_LOCAL_IMAGE).Wait();
 
             // Recognize text using the OCR (optical character recognition) method.
             RecognizePrintedTextUrl(client, OCR_URL).Wait();
