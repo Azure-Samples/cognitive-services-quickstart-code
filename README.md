@@ -59,5 +59,5 @@ We offer samples for each language here:
 ## Resources
 
 - Project page for Cognitive Services offerings and demos: <https://azure.microsoft.com/en-us/services/cognitive-services/>
-- Free trial access key link: <https://azure.microsoft.com/en-us/try/cognitive-services/>
+- Free trial access key link: <https://azure.microsoft.com/free/cognitive-services/>
 - Support channels: [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-cognitive-services) or [Azure Support](https://azure.microsoft.com/en-us/support/options/)
