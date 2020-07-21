@@ -7,7 +7,7 @@ If you don't have an Azure subscription, create a [free account](https://azure.m
 ## Prerequisites
 
 - You must have [Ruby](https://www.ruby-lang.org/en/downloads/) 2.4.x or later installed.
-- You must have a subscription key for Computer Vision. You can get a free trial key from [Try Cognitive Services](https://azure.microsoft.com/try/cognitive-services/?api=computer-vision). Or, follow the instructions in [Create a Cognitive Services account](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account) to subscribe to Computer Vision and get your key.
+- You must have a subscription key for Computer Vision. You can visit [the Microsoft Cognitive Services Web site](https://azure.microsoft.com/free/cognitive-services/), create a new Azure account, and try Cognitive Services for free. Or, follow the instructions in [Create a Cognitive Services account](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account) to subscribe to Computer Vision and get your key.
 
 ## Create and run the sample
 
