@@ -33,7 +33,7 @@ const qnamaker_runtime = require("@azure/cognitiveservices-qnamaker-runtime");
 // </Dependencies>
 
 // <Resourcevariables>
-const authoringKey = "REPLACE-WITH-YOUR-QNA-MAKER-KEY";
+let authoringKey = process.env['QNAMAKER_AUTHORING_KEY'];
 const resourceName = "REPLACE-WITH-YOUR-RESOURCE-NAME";
 
 const authoringURL = `https://${resourceName}.cognitiveservices.azure.com`;
