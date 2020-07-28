@@ -8,10 +8,11 @@ npm install
 
 ## Run app creation and management
 
-Set environment variables:
-
-* LUIS_AUTHORING_KEY
-* LUIS_AUTHORING_ENDPOINT
+* In Azure portal, create authoring resource for Language Understanding
+* In LUIS portal, assign keys to app
+* In code files: 
+    * For authoring, set key and endpoint
+* Run code file from command line or terminal window with following command.
 
 ```javascript
 node luis_authoring_quickstart.js
@@ -43,12 +44,11 @@ Application with ID e137a439-b3e0-4e16-a7a8-a9746e0715f7 deleted. Operation resu
 
 This quickstart uses the public IoT app.
 
-Set environment variables:
-
-* LUIS_RUNTIME_KEY
-* LUIS_RUNTIME_ENDPOINT
-* LUIS_APP_ID = df67dcdb-c37d-46af-88e1-8b97951ca1c2
-* LUIS_APP_SLOT_NAME = production
+* In Azure portal, create prediction resource for Language Understanding
+* In LUIS portal, assign keys to app
+* In code files: 
+    * For prediction, set key, endpoint, app ID, and slot name
+* Run code file from command line or terminal window with following command.
 
 ```javascript
 node luis_prediction.js
