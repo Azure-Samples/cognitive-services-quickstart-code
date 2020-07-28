@@ -20,28 +20,10 @@ const msRest = require("@azure/ms-rest-js");
 const LUIS = require("@azure/cognitiveservices-luis-authoring");
 // </Dependencies>
 
-require("dotenv").config();
-
-/*  Configure the local environment:
- * Set the LUIS_AUTHORING_KEY and LUIS_AUTHORING_ENDPOINT environment variables
- * on your local machine using the appropriate method for your preferred shell
- * (Bash, PowerShell, Command Prompt, etc.).
- *
- * If the environment variable is created after the application is launched in a console or with Visual
- * Studio, the shell (or Visual Studio) needs to be closed and reloaded for changes to take effect.
- */
 // <Variables>
-const key = process.env["LUIS_AUTHORING_KEY"];
-if (!key) {
-  throw new Error(
-    "Set/export your LUIS subscription key as an environment variable."
-  );
-}
+const key = 'REPLACE-WITH-YOUR-ASSIGNED-AUTHORING-KEY';
 
-const endpoint = process.env["LUIS_AUTHORING_ENDPOINT"];
-if (!endpoint) {
-  throw new Error("Set/export your LUIS endpoint as an environment variable.");
-}
+const endpoint = "https://REPLACE-WITH-RESOURCE-NAME.cognitiveservices.azure.com/"
 // </Variables>
 
 // <AuthoringCreateClient>

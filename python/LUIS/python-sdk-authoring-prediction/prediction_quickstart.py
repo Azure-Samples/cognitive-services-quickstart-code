@@ -20,19 +20,11 @@ from msrest.authentication import CognitiveServicesCredentials
 import datetime, json, os, time
 # </Dependencies>
 
-print("luisAppID: {}".format(os.environ))
-
 # <AuthorizationVariables>
-key_var_name = 'LUIS_RUNTIME_KEY'
-if not key_var_name in os.environ:
-	raise Exception('Please set/export the environment variable: {}'.format(key_var_name))
-runtime_key = os.environ[key_var_name]
+runtime_key = 'REPLACE-WITH-YOUR-ASSIGNED-PREDICTION-KEY'
 print("runtime_key: {}".format(runtime_key))
 
-endpoint_var_name = 'LUIS_RUNTIME_ENDPOINT'
-if not endpoint_var_name in os.environ:
-	raise Exception('Please set/export the environment variable: {}'.format(endpoint_var_name))
-runtime_endpoint = os.environ[endpoint_var_name]
+runtime_endpoint = 'https://REPLACE-WITH-YOUR-RESOURCE-NAME.cognitiveservices.azure.com'
 print("runtime_endpoint: {}".format(runtime_endpoint))
 # </AuthorizationVariables>
 
@@ -40,17 +32,11 @@ print("runtime_endpoint: {}".format(runtime_endpoint))
 # Use public app ID or replace with your own trained and published app's ID
 # to query your own app
 # public appID = 'df67dcdb-c37d-46af-88e1-8b97951ca1c2'
-appID_var_name = 'LUIS_APP_ID'
-if not appID_var_name in os.environ:
-	raise Exception('Please set/export the environment variable: {}'.format(appID_var_name))
-luisAppID = os.environ[appID_var_name]
+luisAppID = 'REPLACE-WITH-YOUR-LUIS_APP_ID'
 print("luisAppID: {}".format(luisAppID))
 
-# production or staging
-slot_var_name = 'LUIS_APP_SLOT_NAME'
-if not slot_var_name in os.environ:
-	raise Exception('Please set/export the environment variable: {}'.format(slot_var_name))
-luisSlotName = os.environ[slot_var_name]
+# `production` or `staging`
+luisSlotName = 'production'
 print("luisSlotName: {}".format(luisSlotName))
 # </OtherVariables>
 

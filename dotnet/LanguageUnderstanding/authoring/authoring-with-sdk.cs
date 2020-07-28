@@ -38,7 +38,8 @@ namespace LUIS_CS
     class Program
     {
         // <Variables>
-        private static readonly string authoring_key = "REPLACE-WITH-RESOURCE-KEY";
+        private static readonly string authoring_key = "REPLACE-WITH-ASSIGNED-AUTHORING-KEY";
+        
         private static readonly string authoring_endpoint = "https://REPLACE-WITH-RESOURCE-NAME.cognitiveservices.azure.com/";
         // </Variables>
 

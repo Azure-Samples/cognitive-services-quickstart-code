@@ -22,28 +22,10 @@ const msRest = require("@azure/ms-rest-js");
 const LUIS = require("@azure/cognitiveservices-luis-runtime");
 // </Dependencies>
 
-require("dotenv").config();
-
-/*  Configure the local environment:
- * Set the LUIS_AUTHORING_KEY and LUIS_AUTHORING_ENDPOINT environment variables
- * on your local machine using the appropriate method for your preferred shell
- * (Bash, PowerShell, Command Prompt, etc.).
- *
- * If the environment variable is created after the application is launched in a console or with Visual
- * Studio, the shell (or Visual Studio) needs to be closed and reloaded for changes to take effect.
- */
 // <Variables>
-const key = process.env["LUIS_RUNTIME_KEY"];
-if (!key) {
-    throw new Error(
-        "Set/export your LUIS runtime key as an environment variable."
-    );
-}
+const key = "REPLACE-WITH-YOUR-ASSIGNED-PREDICTION-KEY"
 
-const endpoint = process.env["LUIS_RUNTIME_ENDPOINT"];
-if (!endpoint) {
-    throw new Error("Set/export your LUIS runtime endpoint as an environment variable.");
-}
+const endpoint = "https://REPLACE-WITH-YOUR-RESOURCE-NAME.cognitiveservices.azure.com"
 // </Variables>
 
 // <AuthoringCreateClient>
@@ -60,20 +42,10 @@ const luisRuntimeClient = new LUIS.LUISRuntimeClient(
 // to query your own app
 // public appID = `df67dcdb-c37d-46af-88e1-8b97951ca1c2`
 // with slot of `production`
-const luisAppID = process.env['LUIS_APP_ID'];
-if (!luisAppID) {
-    throw new Error(
-        "Set/export your LUIS app ID as an environment variable."
-    );
-}
+const luisAppID = "REPLACE-WITH-YOUR-LUIS_APP_ID"
 
-// production (or staging)
-const luisSlotName = process.env['LUIS_APP_SLOT_NAME'];
-if (!luisSlotName) {
-    throw new Error(
-        "Set/export your LUIS slot (`production` or `staging`) as an environment variable."
-    );
-}
+// `production` or `staging`
+const luisSlotName = "production"
 // </OtherVariables>
 
 // <predict>

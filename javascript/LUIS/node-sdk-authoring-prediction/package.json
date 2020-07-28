@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node luis_authoring_quickstart.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "prettier --write \"*.js\" "
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -22,7 +21,5 @@
     "@azure/cognitiveservices-luis-authoring": "^4.0.0-preview.1",
     "@azure/cognitiveservices-luis-runtime": "^5.0.0",
     "@azure/ms-rest-js": "^2.0.5",
-    "dotenv": "^8.2.0",
-    "prettier": "^1.19.1"
   }
 }
