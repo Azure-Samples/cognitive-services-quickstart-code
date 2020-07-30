@@ -20,7 +20,7 @@ These samples demonstrate how to use the Form Recognizer client library for C# t
 
 ### Prerequisites
 
-* You need a **subscription key** for the Form Recognizer service to run the samples.  You can get free trial subscription keys from [Try Cognitive Services](https://azure.microsoft.com/try/cognitive-services/).
+* You need a **subscription key** for the Form Recognizer service to run the samples. If you don't have one, you can visit [the Microsoft Cognitive Services Web site](https://azure.microsoft.com/free/cognitive-services/), create a new Azure account, and try Cognitive Services for free.
 * Any edition of [Visual Studio 2017](https://www.visualstudio.com/downloads/).
 
 ### Quickstart
