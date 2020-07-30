@@ -15,7 +15,7 @@ async function main() {
 
   // The endpoint specific to your personalization service instance; 
   // e.g. https://<your-resource-name>.cognitiveservices.azure.com
-  const baseUri = "REPLACE-WITH-YOUR-PERSONALIZER-RESOURCE-NAME.cognitiveservices.azure.com";
+  const baseUri = "https://REPLACE-WITH-YOUR-PERSONALIZER-RESOURCE-NAME.cognitiveservices.azure.com";
   // </AuthorizationVariables>
 
   // <Client>
