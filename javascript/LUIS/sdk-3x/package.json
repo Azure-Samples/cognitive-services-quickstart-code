@@ -1,0 +1,16 @@
+{
+  "name": "luis-sdk-3x",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@azure/cognitiveservices-luis-authoring": "^4.0.0-preview.3",
+    "@azure/cognitiveservices-luis-runtime": "^5.0.0",
+    "@azure/ms-rest-js": "^2.0.5"
+  }
+}
