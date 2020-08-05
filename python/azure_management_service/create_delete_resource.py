@@ -92,7 +92,7 @@ def create_resource (resource_name, kind, sku_name, location):
 	print()
 # </snippet_create>
 
-# </snippet_delete>
+# <snippet_delete>
 def delete_resource(resource_name) :
 	print("Deleting resource: " + resource_name + "...")
 	client.accounts.delete(resource_group_name, resource_name)
