@@ -156,13 +156,13 @@ namespace ComputerVisionQuickstart
 
             // Creating a list that defines the features to be extracted from the image. 
             List<VisualFeatureTypes> features = new List<VisualFeatureTypes>()
-        {
-          VisualFeatureTypes.Categories, VisualFeatureTypes.Description,
-          VisualFeatureTypes.Faces, VisualFeatureTypes.ImageType,
-          VisualFeatureTypes.Tags, VisualFeatureTypes.Adult,
-          VisualFeatureTypes.Color, VisualFeatureTypes.Brands,
-          VisualFeatureTypes.Objects
-        };
+	    {
+		    VisualFeatureTypes.Categories, VisualFeatureTypes.Description,
+		    VisualFeatureTypes.Faces, VisualFeatureTypes.ImageType,
+		    VisualFeatureTypes.Tags, VisualFeatureTypes.Adult,
+		    VisualFeatureTypes.Color, VisualFeatureTypes.Brands,
+		    VisualFeatureTypes.Objects
+	    };
             // </snippet_visualfeatures>
 
             // <snippet_analyze_call>
