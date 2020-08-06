@@ -418,7 +418,7 @@ function computerVision() {
       /**
         *READ API
         *
-        * This example recognizes both handwritten and printed text, and can handle image files (.jpg/.png) and multi-page files (.pdf and .tiff)
+        * This example recognizes both handwritten and printed text, and can handle image files (.jpg/.png/.bmp) and multi-page files (.pdf and .tiff)
         * Please see REST API reference for more information:
         * Read: https://westcentralus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-ga/operations/5d986960601faab4bf452005
         * Get Result Result: https://westcentralus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-ga/operations/5d9869604be85dee480c8750
@@ -533,7 +533,7 @@ function computerVision() {
 
       // <snippet_read_images>
       // URL images containing printed and handwritten text. 
-      // The URL can point to image files (.jpg/.png) or multi-page files (.pdf, .tiff).
+      // The URL can point to image files (.jpg/.png/.bmp) or multi-page files (.pdf, .tiff).
       const printedText = 'https://moderatorsampleimages.blob.core.windows.net/samples/sample2.jpg';
       const handwrittenText = 'https://raw.githubusercontent.com/MicrosoftDocs/azure-docs/master/articles/cognitive-services/Computer-vision/Images/readsample.jpg';
       const multiLingualText = 'MultiLingual.png';
