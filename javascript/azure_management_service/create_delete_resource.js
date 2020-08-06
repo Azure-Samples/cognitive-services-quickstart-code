@@ -1,5 +1,5 @@
+// <snippet_imports>
 "use strict";
-
 /* To run this sample, install the following modules.
  * npm install @azure/arm-cognitiveservices
  * npm install @azure/ms-rest-js
@@ -7,6 +7,7 @@
  */
 var Arm = require("@azure/arm-cognitiveservices");
 var msRestNodeAuth = require("@azure/ms-rest-nodeauth");
+// </snippet_imports>
 
 /*
 The application ID and secret of the service principal you are using to connect to the Azure Management Service.
@@ -35,6 +36,7 @@ Type                  :
 Be sure to use the service pricipal application ID, not simply the ID. 
 */
 
+// <snippet_constants>
 const service_principal_application_id = "TODO_REPLACE";
 const service_principal_secret = "TODO_REPLACE";
 
@@ -47,7 +49,9 @@ const tenant_id = "TODO_REPLACE";
 /* The name of the Azure resource group in which you want to create the resource.
 You can find resource groups in the Azure Dashboard under Home > Resource groups. */
 const resource_group_name = "TODO_REPLACE";
+// </snippet_constants>
 
+// <snippet_list_avail>
 async function list_available_kinds_skus_locations (client) {
 	console.log ("Available SKUs:");
 	var result = await client.list ();
@@ -57,7 +61,9 @@ async function list_available_kinds_skus_locations (client) {
 		console.log(x.kind + "\t" + x.name + "\t" + x.tier + "\t" + locations);
 	});
 }
+// </snippet_list_avail>
 
+// <snippet_list>
 async function list_resources (client) {
 	console.log ("Resources in resource group: " + resource_group_name);
 	var result = await client.listByResourceGroup (resource_group_name);
@@ -66,7 +72,9 @@ async function list_resources (client) {
 		console.log();
 	});
 }
+// </snippet_list>
 
+// <snippet_create>
 function create_resource (client, resource_name, kind, sku_name, location) {
 	console.log ("Creating resource: " + resource_name + "...");
 	// The parameter "properties" must be an empty object.
@@ -84,37 +92,46 @@ function create_resource (client, resource_name, kind, sku_name, location) {
             	console.log(err)
         })
 }
+// </snippet_create>
 
+// <snippet_delete>
 async function delete_resource (client, resource_name) {
 	console.log ("Deleting resource: " + resource_name + "...");
 	await client.deleteMethod (resource_group_name, resource_name)
 	console.log ("Resource deleted.");
 	console.log ();
 }
+// </snippet_delete>
 
+// <snippet_main_auth>
 async function quickstart() {
 	const credentials = await msRestNodeAuth.loginWithServicePrincipalSecret (service_principal_application_id, service_principal_secret, tenant_id);
 	const client = new Arm.CognitiveServicesManagementClient (credentials, subscription_id);
 	// Note Azure resources are also sometimes referred to as accounts.
 	const accounts_client = new Arm.Accounts (client);
 	const resource_skus_client = new Arm.ResourceSkus (client);
+	// </snippet_main_auth>
 
-	// Uncomment this to list all resources for your Azure account.
-	//	list_resources (accounts_client);
-
+	// <snippet_main_calls>
 	// Uncomment this to list all available resource kinds, SKUs, and locations for your Azure account.
-	//	list_available_kinds_skus_locations (resource_skus_client);
+	list_available_kinds_skus_locations (resource_skus_client);
 
 	// Create a resource with kind Text Translation, SKU F0 (free tier), location global.
 	await create_resource (accounts_client, "test_resource", "TextTranslation", "F0", "Global");
 
+	// Uncomment this to list all resources for your Azure account.
+	list_resources (accounts_client);
+
 	// Delete the resource.
 	delete_resource (accounts_client, "test_resource");
 }
+// </snippet_main_calls>
 
+// <snippet_main>
 try {
     quickstart();
 }
 catch (error) {
     console.log(error);
 }
+// </snippet_main>
