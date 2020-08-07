@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Threading;
+using System.Linq;
 // </snippet_using>
 
 /*
@@ -52,16 +54,15 @@ namespace ComputerVisionQuickstart
         // <snippet_vars>
         // Add your Computer Vision subscription key and endpoint to your environment variables. 
         // Close/reopen your project for them to take effect.
-        static string subscriptionKey = Environment.GetEnvironmentVariable("COMPUTER_VISION_SUBSCRIPTION_KEY");
-        static string endpoint = Environment.GetEnvironmentVariable("COMPUTER_VISION_ENDPOINT");
+        static string subscriptionKey = "COMPUTER_VISION_SUBSCRIPTION_KEY";
+        static string endpoint = "COMPUTER_VISION_ENDPOINT";
         // </snippet_vars>
 
         // Download these images (link in prerequisites), or you can use any appropriate image on your local machine.
         private const string ANALYZE_LOCAL_IMAGE = "celebrities.jpg";
         private const string DETECT_LOCAL_IMAGE = "objects.jpg";
         private const string DETECT_DOMAIN_SPECIFIC_LOCAL = "celebrities.jpg";
-        private const string EXTRACT_TEXT_LOCAL_IMAGE = "handwritten_text.jpg";
-        private const string OCR_LOCAL_IMAGE = "printed_text.jpg";
+        private const string READ_TEXT_LOCAL_IMAGE = "print_text.png";
 
         // <snippet_analyze_url>
         // URL image used for analyzing an image (image of puppy)
@@ -71,15 +72,10 @@ namespace ComputerVisionQuickstart
         private const string DETECT_URL_IMAGE = "https://moderatorsampleimages.blob.core.windows.net/samples/sample9.png";
         // URL image for detecting domain-specific content (image of ancient ruins)
         private const string DETECT_DOMAIN_SPECIFIC_URL = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/landmark.jpg";
-        // URL image for extracting handwritten text.
-        // <snippet_extracttext_url>
-        private const string EXTRACT_TEXT_URL_HANDW = "https://raw.githubusercontent.com/MicrosoftDocs/azure-docs/master/articles/cognitive-services/Computer-vision/Images/readsample.jpg";
-        // URL image for extracting printed text.
-        private const string EXTRACT_TEXT_URL_PRINT = "https://intelligentkioskstore.blob.core.windows.net/visionapi/suggestedphotos/3.png";
-        // </snippet_extracttext_url>
-        // URL image for OCR (optical character recognition).
-        private const string OCR_URL = "https://raw.githubusercontent.com/MicrosoftDocs/azure-docs/master/articles/cognitive-services/Computer-vision/Images/readsample.jpg";
-
+        // <snippet_readtext_url>
+        private const string READ_TEXT_URL_IMAGE = "https://intelligentkioskstore.blob.core.windows.net/visionapi/suggestedphotos/3.png";
+        // </snippet_readtext_url>
+       
         static void Main(string[] args)
         {
             Console.WriteLine("Azure Cognitive Services Computer Vision - .NET quickstart example");
@@ -90,6 +86,7 @@ namespace ComputerVisionQuickstart
             ComputerVisionClient client = Authenticate(endpoint, subscriptionKey);
             // </snippet_client>
 
+            
             // <snippet_analyzeinmain>
             // Analyze an image to get features and other properties.
             AnalyzeImageUrl(client, ANALYZE_URL_IMAGE).Wait();
@@ -107,22 +104,18 @@ namespace ComputerVisionQuickstart
             GenerateThumbnail(client, ANALYZE_URL_IMAGE, DETECT_LOCAL_IMAGE).Wait();
 
             // <snippet_extracttextinmain>
-            // Read the batch text from an image (handwriting and/or printed).
-            BatchReadFileUrl(client, EXTRACT_TEXT_URL_HANDW).Wait();
+            // Extract text (OCR) from a URL image using the Read API
+            ReadFileUrl(client, READ_TEXT_URL_IMAGE).Wait();
+            // Extract text (OCR) from a local image using the Read API
+            ReadFileLocal(client, READ_TEXT_LOCAL_IMAGE).Wait();
             // </snippet_extracttextinmain>
-
-            BatchReadFileLocal(client, EXTRACT_TEXT_LOCAL_IMAGE).Wait();
-
-            // Recognize text using the OCR (optical character recognition) method.
-            RecognizePrintedTextUrl(client, OCR_URL).Wait();
-            RecognizePrintedTextLocal(client, OCR_LOCAL_IMAGE).Wait();
 
             Console.WriteLine("----------------------------------------------------------");
             Console.WriteLine();
             Console.WriteLine("Computer Vision quickstart is complete.");
             Console.WriteLine();
             Console.WriteLine("Press enter to exit...");
-            Console.WriteLine();
+            Console.ReadLine();
         }
 
         // <snippet_auth>
@@ -155,14 +148,15 @@ namespace ComputerVisionQuickstart
             Console.WriteLine();
 
             // Creating a list that defines the features to be extracted from the image. 
-            List<VisualFeatureTypes> features = new List<VisualFeatureTypes>()
-	    {
-		    VisualFeatureTypes.Categories, VisualFeatureTypes.Description,
-		    VisualFeatureTypes.Faces, VisualFeatureTypes.ImageType,
-		    VisualFeatureTypes.Tags, VisualFeatureTypes.Adult,
-		    VisualFeatureTypes.Color, VisualFeatureTypes.Brands,
-		    VisualFeatureTypes.Objects
-	    };
+
+            List<VisualFeatureTypes?> features = new List<VisualFeatureTypes?>()
+            {
+                VisualFeatureTypes.Categories, VisualFeatureTypes.Description,
+                VisualFeatureTypes.Faces, VisualFeatureTypes.ImageType,
+                VisualFeatureTypes.Tags, VisualFeatureTypes.Adult,
+                VisualFeatureTypes.Color, VisualFeatureTypes.Brands,
+                VisualFeatureTypes.Objects
+            };
             // </snippet_visualfeatures>
 
             // <snippet_analyze_call>
@@ -328,7 +322,7 @@ namespace ComputerVisionQuickstart
             using (Stream analyzeImageStream = File.OpenRead(localImage))
             {
                 // Analyze the local image.
-                ImageAnalysis results = await client.AnalyzeImageInStreamAsync(analyzeImageStream, features);
+                ImageAnalysis results = await client.AnalyzeImageInStreamAsync(analyzeImageStream);
 
                 // Sunmarizes the image content.
                 Console.WriteLine("Summary:");
@@ -584,22 +578,79 @@ namespace ComputerVisionQuickstart
          * END - GENERATE THUMBNAIL
          */
 
-        // <snippet_extract_call>
+        // <snippet_read_url>
         /*
-         * BATCH READ FILE - URL IMAGE
-         * Recognizes handwritten text. 
-         * This API call offers an improvement of results over the Recognize Text calls.
+         * READ FILE - URL 
+         * Extracts text. 
          */
-        public static async Task BatchReadFileUrl(ComputerVisionClient client, string urlImage)
+        public static async Task ReadFileUrl(ComputerVisionClient client, string urlFile)
         {
             Console.WriteLine("----------------------------------------------------------");
-            Console.WriteLine("BATCH READ FILE - URL IMAGE");
+            Console.WriteLine("READ FILE FROM URL");
             Console.WriteLine();
 
             // Read text from URL
-            var textHeaders = await client.ReadAsync(urlImage, language: "en");
+            var textHeaders = await client.ReadAsync(urlFile, language: "en");
             // After the request, get the operation location (operation ID)
             string operationLocation = textHeaders.OperationLocation;
+            Thread.Sleep(2000);
+            // </snippet_extract_call>
+
+            // <snippet_extract_response>
+            // Retrieve the URI where the extracted text will be stored from the Operation-Location header.
+            // We only need the ID and not the full URL
+            const int numberOfCharsInOperationId = 36;
+            string operationId = operationLocation.Substring(operationLocation.Length - numberOfCharsInOperationId);
+
+            // Extract the text
+            ReadOperationResult results;
+            Console.WriteLine($"Extracting text from URL file {Path.GetFileName(urlFile)}...");
+            Console.WriteLine();
+            do
+            {
+                results = await client.GetReadResultAsync(Guid.Parse(operationId));
+            }
+            while ((results.Status == OperationStatusCodes.Running ||
+                results.Status == OperationStatusCodes.NotStarted));
+            // </snippet_extract_response>
+
+            // <snippet_extract_display>
+            // Display the found text.
+            Console.WriteLine();
+            var textUrlFileResults = results.AnalyzeResult.ReadResults;
+            foreach (ReadResult page in textUrlFileResults)
+            {
+                foreach (Line line in page.Lines)
+                {
+                    Console.WriteLine(line.Text);
+                }
+            }
+            Console.WriteLine();
+        }
+
+
+        // </snippet_read_url>
+        /*
+         * END - READ FILE - URL
+         */
+
+
+        // <snippet_read_local>
+        /*
+         * READ FILE - LOCAL
+         */
+
+        public static async Task ReadFileLocal(ComputerVisionClient client, string localFile)
+        {
+            Console.WriteLine("----------------------------------------------------------");
+            Console.WriteLine("READ FILE FROM LOCAL");
+            Console.WriteLine();
+
+            // Read text from URL
+            var textHeaders = await client.ReadInStreamAsync(File.OpenRead(localFile), language: "en");
+            // After the request, get the operation location (operation ID)
+            string operationLocation = textHeaders.OperationLocation;
+            Thread.Sleep(2000);
             // </snippet_extract_call>
 
             // <snippet_extract_response>
@@ -609,194 +660,35 @@ namespace ComputerVisionQuickstart
             string operationId = operationLocation.Substring(operationLocation.Length - numberOfCharsInOperationId);
 
             // Extract the text
-            // Delay is between iterations and tries a maximum of 10 times.
-            int i = 0;
-            int maxRetries = 10;
             ReadOperationResult results;
-            Console.WriteLine($"Extracting text from URL image {Path.GetFileName(urlImage)}...");
+            Console.WriteLine($"Reading text from local file {Path.GetFileName(localFile)}...");
             Console.WriteLine();
             do
             {
-                results = await client.GetReadResultAsync(operationId);
-                Console.WriteLine("Server status: {0}, waiting {1} seconds...", results.Status, i);
-                await Task.Delay(1000);
-                if (i == 9) 
-                { 
-                    Console.WriteLine("Server timed out."); 
-                }
+                results = await client.GetReadResultAsync(Guid.Parse(operationId));
             }
-            while ((results.Status == TextOperationStatusCodes.Running ||
-                results.Status == TextOperationStatusCodes.NotStarted) && i++ < maxRetries);
+            while ((results.Status == OperationStatusCodes.Running ||
+                results.Status == OperationStatusCodes.NotStarted));
             // </snippet_extract_response>
 
             // <snippet_extract_display>
             // Display the found text.
             Console.WriteLine();
-            var textRecognitionLocalFileResults = results.RecognitionResults;
-            foreach (TextRecognitionResult recResult in textRecognitionLocalFileResults)
+            var textUrlFileResults = results.AnalyzeResult.ReadResults;
+            foreach (ReadResult page in textUrlFileResults)
             {
-                foreach (Line line in recResult.Lines)
+                foreach (Line line in page.Lines)
                 {
-                    Console.WriteLine(line.Text);
-                }
-            }
-            Console.WriteLine();
-        }
-        // </snippet_extract_display>
-        /*
-         * END - BATCH READ FILE - URL IMAGE
-         */
-
-        /*
-         * BATCH READ FILE - LOCAL IMAGE
-         * This API call offers an improvement of results over the Recognize Text calls.
-         */
-        public static async Task BatchReadFileLocal(ComputerVisionClient client, string localImage)
-        {
-            Console.WriteLine("----------------------------------------------------------");
-            Console.WriteLine("BATCH READ FILE - LOCAL IMAGE");
-            Console.WriteLine();
-
-            // Helps calucalte starting index to retrieve operation ID
-            const int numberOfCharsInOperationId = 36;
-
-            Console.WriteLine($"Extracting text from local image {Path.GetFileName(localImage)}...");
-            Console.WriteLine();
-            using (Stream imageStream = File.OpenRead(localImage))
-            {
-                // Read the text from the local image
-                BatchReadFileInStreamHeaders localFileTextHeaders = await client.BatchReadFileInStreamAsync(imageStream);
-                // Get the operation location (operation ID)
-                string operationLocation = localFileTextHeaders.OperationLocation;
-
-                // Retrieve the URI where the recognized text will be stored from the Operation-Location header.
-                string operationId = operationLocation.Substring(operationLocation.Length - numberOfCharsInOperationId);
-
-                // Extract text, wait for it to complete.
-                int i = 0;
-                int maxRetries = 10;
-                ReadOperationResult results;
-                do
-                {
-                    results = await client.GetReadOperationResultAsync(operationId);
-                    Console.WriteLine("Server status: {0}, waiting {1} seconds...", results.Status, i);
-                    await Task.Delay(1000);
-                    if (i == 9)
-                    {
-                        Console.WriteLine("Server timed out.");
-                    }
-                }
-                while ((results.Status == TextOperationStatusCodes.Running ||
-                    results.Status == TextOperationStatusCodes.NotStarted) && i++ < maxRetries);
-
-                // Display the found text.
-                Console.WriteLine();
-                var textRecognitionLocalFileResults = results.RecognitionResults;
-                foreach (TextRecognitionResult recResult in textRecognitionLocalFileResults)
-                {
-                    foreach (Line line in recResult.Lines)
-                    {
                         Console.WriteLine(line.Text);
-                    }
-                }
-                Console.WriteLine();
-            }
-        }
-        /*
-         * END - BATCH READ FILE - LOCAL IMAGE
-         */
-
-        /*
-         * RECOGNIZE PRINTED TEXT - URL IMAGE
-         */
-        public static async Task RecognizePrintedTextUrl(ComputerVisionClient client, string imageUrl)
-        {
-            Console.WriteLine("----------------------------------------------------------");
-            Console.WriteLine("RECOGNIZE PRINTED TEXT - URL IMAGE");
-            Console.WriteLine();
-
-            Console.WriteLine($"Performing OCR on URL image {Path.GetFileName(imageUrl)}...");
-            Console.WriteLine();
-
-            // Perform OCR on image
-            OcrResult remoteOcrResult = await client.RecognizePrintedTextAsync(true, imageUrl);
-
-            // Print the recognized text
-            Console.WriteLine("Text:");
-            Console.WriteLine("Language: " + remoteOcrResult.Language);
-            Console.WriteLine("Text Angle: " + remoteOcrResult.TextAngle);
-            Console.WriteLine("Orientation: " + remoteOcrResult.Orientation);
-            Console.WriteLine();
-            Console.WriteLine("Text regions: ");
-            foreach (var remoteRegion in remoteOcrResult.Regions)
-            {
-                Console.WriteLine("Region bounding box: " + remoteRegion.BoundingBox);
-                foreach (var line in remoteRegion.Lines)
-                {
-                    Console.WriteLine("Line bounding box: " + line.BoundingBox);
-
-                    foreach (var word in line.Words)
-                    {
-                        Console.WriteLine("Word bounding box: " + word.BoundingBox);
-                        Console.WriteLine("Text: " + word.Text);
-                    }
-                    Console.WriteLine();
                 }
             }
-        }
-        /*
-         * END - RECOGNIZE PRINTED TEXT - URL IMAGE
-         */
-
-        /*
-         * RECOGNIZE PRINTED TEXT - LOCAL IMAGE
-         */
-        public static async Task RecognizePrintedTextLocal(ComputerVisionClient client, string localImage)
-        {
-            Console.WriteLine("----------------------------------------------------------");
-            Console.WriteLine("RECOGNIZE PRINTED TEXT - LOCAL IMAGE");
             Console.WriteLine();
-
-            using (Stream stream = File.OpenRead(localImage))
-            {
-                Console.WriteLine($"Performing OCR on local image {Path.GetFileName(localImage)}...");
-                Console.WriteLine();
-                // Get the recognized text
-                OcrResult localFileOcrResult = await client.RecognizePrintedTextInStreamAsync(true, stream);
-
-                // Display text, language, angle, orientation, and regions of text from the results.
-                Console.WriteLine("Text:");
-                Console.WriteLine("Language: " + localFileOcrResult.Language);
-                Console.WriteLine("Text Angle: " + localFileOcrResult.TextAngle);
-                Console.WriteLine("Orientation: " + localFileOcrResult.Orientation);
-                Console.WriteLine();
-                Console.WriteLine("Text regions: ");
-
-                // Getting only one line of text for testing purposes. To see full demonstration, remove the counter & conditional.
-                int counter = 0;
-                foreach (var localRegion in localFileOcrResult.Regions)
-                {
-                    Console.WriteLine("Region bounding box: " + localRegion.BoundingBox);
-                    foreach (var line in localRegion.Lines)
-                    {
-                        Console.WriteLine("Line bounding box: " + line.BoundingBox);
-                        if (counter == 1)
-                        {
-                            Console.WriteLine();
-                            return;
-                        }
-                        counter++;
-                        foreach (var word in line.Words)
-                        {
-                            Console.WriteLine("Word bounding box: " + word.BoundingBox);
-                            Console.WriteLine("Text: " + word.Text);
-                        }
-                    }
-                }
-            }
         }
+        // </snippet_read_url>
         /*
-         * END - RECOGNIZE PRINTED TEXT - LOCAL IMAGE
+         * END - READ FILE - LOCAL
          */
+
+
     }
 }
