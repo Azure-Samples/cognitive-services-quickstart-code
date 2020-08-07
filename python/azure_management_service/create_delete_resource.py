@@ -1,6 +1,8 @@
+# <snippet_imports>
 from msrestazure.azure_active_directory import ServicePrincipalCredentials
 from azure.mgmt.cognitiveservices import CognitiveServicesManagementClient
 from azure.mgmt.cognitiveservices.models import CognitiveServicesAccount, Sku
+# </snippet_imports>
 
 # Microsoft Azure Management
 #
@@ -34,6 +36,7 @@ from azure.mgmt.cognitiveservices.models import CognitiveServicesAccount, Sku
 # Id                    : <ID>
 # Type                  :
 
+# <snippet_constants>
 # Be sure to use the service pricipal application ID, not simply the ID. 
 service_principal_application_id = "MY-SERVICE-PRINCIPAL-APPLICATION-ID"
 service_principal_secret = "MY-SERVICE-PRINCIPAL-SECRET"
@@ -47,10 +50,14 @@ tenant_id = "MY-TENANT-ID"
 # The name of the Azure resource group in which you want to create the resource.
 # You can find resource groups in the Azure Dashboard under Home > Resource groups.
 resource_group_name = "MY-RESOURCE-GROUP"
+# </snippet_constants>
 
+# <snippet_auth>
 credentials = ServicePrincipalCredentials(service_principal_application_id, service_principal_secret, tenant=tenant_id)
 client = CognitiveServicesManagementClient(credentials, subscription_id)
+# </snippet_auth>
 
+# <snippet_list_avail>
 def list_available_kinds_skus_locations():
 	print("Available SKUs:")
 	result = client.resource_skus.list()
@@ -58,16 +65,20 @@ def list_available_kinds_skus_locations():
 	for x in result:
 		locations = ",".join(x.locations)
 		print(x.kind + "\t" + x.name + "\t" + x.tier + "\t" + locations)
+# </snippet_list_avail>
 
 # Note Azure resources are also sometimes referred to as accounts.
 
+# <snippet_list>
 def list_resources():
 	print("Resources in resource group: " + resource_group_name)
 	result = client.accounts.list_by_resource_group(resource_group_name)
 	for x in result:
 		print(x)
 		print()
+# </snippet_list>
 
+# <snippet_create>
 def create_resource (resource_name, kind, sku_name, location):
 	print("Creating resource: " + resource_name + "...")
 # The parameter "properties" must be an empty object.
@@ -79,20 +90,25 @@ def create_resource (resource_name, kind, sku_name, location):
 	print("Name: " + result.name)
 	print("Type: " + result.type)
 	print()
+# </snippet_create>
 
+# <snippet_delete>
 def delete_resource(resource_name) :
 	print("Deleting resource: " + resource_name + "...")
 	client.accounts.delete(resource_group_name, resource_name)
 	print("Resource deleted.")
+# </snippet_delete>
 
-# Uncomment this to list all resources for your Azure account.
-#list_resources()
-
+# <snippet_calls>
 # Uncomment this to list all available resource kinds, SKUs, and locations for your Azure account.
-#list_available_kinds_skus_locations()
+list_available_kinds_skus_locations()
 
 # Create a resource with kind Text Translation, SKU F0 (free tier), location global.
 create_resource("test_resource", "TextTranslation", "F0", "Global")
 
+# Uncomment this to list all resources for your Azure account.
+list_resources()
+
 # Delete the resource.
 delete_resource("test_resource")
+# </snippet_calls>

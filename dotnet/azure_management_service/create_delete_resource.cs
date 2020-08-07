@@ -1,20 +1,21 @@
+// <snippet_using>
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Azure.Management.Fluent;
+using Microsoft.Azure.Management.ResourceManager.Fluent;
+using Microsoft.Azure.Management.ResourceManager.Fluent.Authentication;
+using Microsoft.Azure.Management.CognitiveServices;
+using Microsoft.Azure.Management.CognitiveServices.Models;
+// </snippet_using>
 
 /* Note: Install the following NuGet packages:
 Microsoft.Azure.Management.CognitiveServices 
 Microsoft.Azure.Management.Fluent
 Microsoft.Azure.Management.ResourceManager.Fluent
 */
-
-using Microsoft.Azure.Management.Fluent;
-using Microsoft.Azure.Management.ResourceManager.Fluent;
-using Microsoft.Azure.Management.ResourceManager.Fluent.Authentication;
-using Microsoft.Azure.Management.CognitiveServices;
-using Microsoft.Azure.Management.CognitiveServices.Models;
 
 namespace ConsoleApp1
 {
@@ -44,9 +45,10 @@ namespace ConsoleApp1
         Id                    : <ID>
         Type                  :
 
-        Be sure to use the service pricipal application ID, not simply the ID. 
+        Be sure to use the service principal application ID, not simply the ID. 
         */
 
+        // <snippet_constants>
         const string  service_principal_application_id = "TODO_REPLACE";
         const string  service_principal_secret = "TODO_REPLACE";
 
@@ -59,7 +61,9 @@ namespace ConsoleApp1
         /* The name of the Azure resource group in which you want to create the resource.
         You can find resource groups in the Azure Dashboard under Home > Resource groups. */
         const string  resource_group_name = "TODO_REPLACE";
+        // </snippet_constants>
 
+        // <snippet_list_avail>
         static void list_available_kinds_skus_locations(CognitiveServicesManagementClient client)
         {
 
@@ -75,7 +79,9 @@ namespace ConsoleApp1
                 Console.WriteLine(x.Kind + "\t" + x.Name + "\t" + x.Tier + "\t" + locations);
             };
         }
+        // </snippet_list_avail>
 
+        // <snippet_list>
         static void list_resources(CognitiveServicesManagementClient client)
         {
             Console.WriteLine("Resources in resource group: " + resource_group_name);
@@ -89,7 +95,9 @@ namespace ConsoleApp1
                 Console.WriteLine();
             }
         }
+        // </snippet_list>
 
+        // <snippet_create>
         static void create_resource(CognitiveServicesManagementClient client, string resource_name, string kind, string account_tier, string location)
         {
             Console.WriteLine("Creating resource: " + resource_name + "...");
@@ -102,7 +110,9 @@ namespace ConsoleApp1
             Console.WriteLine("Kind: " + result.Kind);
             Console.WriteLine();
         }
+        // </snippet_create>
 
+        // <snippet_delete>
         static void delete_resource(CognitiveServicesManagementClient client, string resource_name)
         {
             Console.WriteLine("Deleting resource: " + resource_name + "...");
@@ -110,7 +120,8 @@ namespace ConsoleApp1
 
             Console.WriteLine("Resource deleted.");
             Console.WriteLine();
-    }
+        }
+        // </snippet_delete>
 
     static void Main(string[] args)
         {
@@ -118,6 +129,7 @@ namespace ConsoleApp1
              * https://docs.microsoft.com/en-us/dotnet/azure/dotnet-sdk-azure-authenticate?view=azure-dotnet
              */
 
+            // <snippet_assigns>
             var service_principal_credentials = new ServicePrincipalLoginInformation ();
             service_principal_credentials.ClientId = service_principal_application_id;
             service_principal_credentials.ClientSecret = service_principal_secret;
@@ -125,21 +137,24 @@ namespace ConsoleApp1
             var credentials = SdkContext.AzureCredentialsFactory.FromServicePrincipal(service_principal_application_id, service_principal_secret, tenant_id, AzureEnvironment.AzureGlobalCloud);
             var client = new CognitiveServicesManagementClient(credentials);
             client.SubscriptionId = subscription_id;
+            // </snippet_assigns>
 
-            // Uncomment this to list all resources for your Azure account.
-            //list_available_kinds_skus_locations(client);
-
-            // Uncomment this to list all available resource kinds, SKUs, and locations for your Azure account.
-            //list_resources(client);
+            // <snippet_calls>
+            // List all available resource kinds, SKUs, and locations for your Azure account:
+            list_available_kinds_skus_locations(client);
         
-            // Create a resource with kind Text Translation, F0 (free tier), location global.
+            // Create a resource with kind TextTranslation, F0 (free tier), location global.
             create_resource(client, "test_resource", "TextTranslation", "F0", "Global");
+
+            // List all resources for your Azure account:
+            list_resources(client);
 
             // Delete the resource.
             delete_resource(client, "test_resource");
 
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
+            // </snippet_calls>
         }
     }
 }

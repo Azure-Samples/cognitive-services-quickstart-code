@@ -148,6 +148,7 @@ namespace ComputerVisionQuickstart
             Console.WriteLine();
 
             // Creating a list that defines the features to be extracted from the image. 
+
             List<VisualFeatureTypes?> features = new List<VisualFeatureTypes?>()
             {
                 VisualFeatureTypes.Categories, VisualFeatureTypes.Description,
