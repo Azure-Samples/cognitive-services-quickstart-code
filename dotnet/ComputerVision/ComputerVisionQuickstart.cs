@@ -596,7 +596,7 @@ namespace ComputerVisionQuickstart
             Thread.Sleep(2000);
             // </snippet_extract_call>
 
-            // <snippet_extract_response>
+            // <snippet_read_response>
             // Retrieve the URI where the extracted text will be stored from the Operation-Location header.
             // We only need the ID and not the full URL
             const int numberOfCharsInOperationId = 36;
@@ -612,9 +612,9 @@ namespace ComputerVisionQuickstart
             }
             while ((results.Status == OperationStatusCodes.Running ||
                 results.Status == OperationStatusCodes.NotStarted));
-            // </snippet_extract_response>
+            // </snippet_read_response>
 
-            // <snippet_extract_display>
+            // <snippet_read_display>
             // Display the found text.
             Console.WriteLine();
             var textUrlFileResults = results.AnalyzeResult.ReadResults;
@@ -625,6 +625,7 @@ namespace ComputerVisionQuickstart
                     Console.WriteLine(line.Text);
                 }
             }
+	    // </snippet_read_display>
             Console.WriteLine();
         }
 
