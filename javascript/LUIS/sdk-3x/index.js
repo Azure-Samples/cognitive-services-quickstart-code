@@ -78,7 +78,7 @@ const quickstart = async () => {
     // <QueryPredictionEndpoint>
     // Product == slot name
     var response = await luisPredictionClient.prediction.getSlotPrediction(appId, "Production", { query: "I want two small pepperoni pizzas with more salsa" });
-    console.log(JSON.stringify(response.prediction));
+    console.log(JSON.stringify(response.prediction, null, 4 ));
     // </QueryPredictionEndpoint>
 
 }
@@ -164,7 +164,7 @@ const addEntities = async (client, appId, versionId) => {
 
     // <AuthoringAddFeatureToModel>
     // add phrase list as feature to subentity model
-    await client.features.addEntityFeature(appId, versionId, toppingQuantityId, { featureName: "QuantityPhraselistFeature" });
+    await client.features.addEntityFeature(appId, versionId, toppingQuantityId, { featureName: "QuantityPhraselist" });
     // </AuthoringAddFeatureToModel>
 }
 
