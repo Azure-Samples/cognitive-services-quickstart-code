@@ -11,7 +11,7 @@ const LUIS_Prediction = require("@azure/cognitiveservices-luis-runtime");
 const quickstart = async () => {
 
     // <VariablesYouChange>
-    const authoring_key = 'REPLACE-WITH-YOUR-ASSIGNED-AUTHORING-KEY';
+    const authoringKey = 'REPLACE-WITH-YOUR-ASSIGNED-AUTHORING-KEY';
 
     const authoringResourceName = "REPLACE-WITH-YOUR-AUTHORING-RESOURCE-NAME";
     const predictionResourceName = "REPLACE-WITH-YOUR-PREDICTION-RESOURCE-NAME";
@@ -28,7 +28,7 @@ const quickstart = async () => {
 
     // <AuthoringCreateClient>
     const luisAuthoringCredentials = new msRest.ApiKeyCredentials({
-        inHeader: { "Ocp-Apim-Subscription-Key": authoring_key }
+        inHeader: { "Ocp-Apim-Subscription-Key": authoringKey }
     });
     const luisAuthoringClient = new LUIS_Authoring.LUISAuthoringClient(
         luisAuthoringCredentials,
@@ -147,16 +147,16 @@ const addEntities = async (client, appId, versionId) => {
     const phraselistResponse = await client.features.addPhraseList(appId, versionId, {
         enabledForAllModels: false,
         isExchangeable: true,
-        name: "QuantityPhraselistFeature",
+        name: "QuantityPhraselist",
         phrases: "few,more,extra"
     });
     const phraseListId = phraselistResponse.body;
     // </AuthoringCreatePhraselist >
 
     // Get entity and subentities
-    var model = await client.model.getEntity(appId, versionId, mlEntityId);
-    var toppingQuantityId = getModelGrandchild(model, "Toppings", "Quantity");
-    var pizzaQuantityId = getModelGrandchild(model, "Pizza", "Quantity");
+    let model = await client.model.getEntity(appId, versionId, mlEntityId);
+    let toppingQuantityId = getModelGrandchild(model, "Toppings", "Quantity");
+    let pizzaQuantityId = getModelGrandchild(model, "Pizza", "Quantity");
 
     // add model as feature to subentity model
     await client.features.addEntityFeature(appId, versionId, pizzaQuantityId, { modelName: "number", isRequired: true });
@@ -172,7 +172,7 @@ const addEntities = async (client, appId, versionId) => {
 const addLabeledExample = async (client, appId, versionId, intentName) => {
 
     // Define labeled example
-    var labeledExampleUtteranceWithMLEntity =
+    const labeledExampleUtteranceWithMLEntity =
     {
         text: "I want two small seafood pizzas with extra cheese.",
         intentName: intentName,
@@ -224,7 +224,7 @@ const addLabeledExample = async (client, appId, versionId, intentName) => {
         ]
     };
 
-    console.log(JSON.stringify(labeledExampleUtteranceWithMLEntity));
+    console.log("Labeled Example Utterance:", JSON.stringify(labeledExampleUtteranceWithMLEntity, null, 4 ));
 
     // Add an example for the entity.
     // Enable nested children to allow using multiple models with the same name.
