@@ -103,12 +103,10 @@ def create_app(client, appName, versionId):
 
 def add_entities(client, appId, versionId):
 
-	# <AuthoringCreatePrebuiltEntity>
+	# <AuthoringAddEntities>
 	# Add Prebuilt entity
 	client.model.add_prebuilt(appId, versionId, prebuilt_extractor_names=["number"])
-	# </AuthoringCreatePrebuiltEntity>
 
-	# <AuthoringCreateMLEntity>
 	mlEntityDefinition = [
 	{
 		"name": "Pizza",
@@ -128,9 +126,7 @@ def add_entities(client, appId, versionId):
 	]
 
 	modelId = client.model.add_entity(appId, versionId, name="Pizza order", children=mlEntityDefinition)
-	# </AuthoringCreateMLEntity>
 	
-	# <AuthoringCreatePhraselist >
 	# Add phraselist feature
 	phraseList = {
 		"enabledForAllModels": False,
@@ -140,30 +136,24 @@ def add_entities(client, appId, versionId):
 	}
 	
 	phraseListId = client.features.add_phrase_list(appId, versionId, phraseList)
-	# </AuthoringCreatePhraselist >
 	
-	# <AuthoringGetModelObject>
 	# Get entity and subentities
 	modelObject = client.model.get_entity(appId, versionId, modelId)
 	toppingQuantityId = get_grandchild_id(modelObject, "Toppings", "Quantity")
 	pizzaQuantityId = get_grandchild_id(modelObject, "Pizza", "Quantity")
-	# </AuthoringGetModelObject >
 
-	# <AuthoringAddModelAsFeature>
 	# add model as feature to subentity model
 	prebuiltFeatureRequiredDefinition = { "model_name": "number", "is_required": True }
 	client.features.add_entity_feature(appId, versionId, pizzaQuantityId, prebuiltFeatureRequiredDefinition)
-	# </AuthoringAddModelAsFeature>
 	
 	# add model as feature to subentity model
 	prebuiltFeatureNotRequiredDefinition = { "model_name": "number" }
 	client.features.add_entity_feature(appId, versionId, toppingQuantityId, prebuiltFeatureNotRequiredDefinition)
 
-    # <AuthoringAddPhraselistAsFeature>
     # add phrase list as feature to subentity model
 	phraseListFeatureDefinition = { "feature_name": "QuantityPhraselist", "model_name": None }
 	client.features.add_entity_feature(appId, versionId, toppingQuantityId, phraseListFeatureDefinition)
-    # </AuthoringAddPhraselistAsFeature>
+    # </AuthoringAddEntities>
 	
 
 def add_labeled_examples(client, appId, versionId, intentName):

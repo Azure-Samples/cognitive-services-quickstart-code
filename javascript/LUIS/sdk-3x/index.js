@@ -110,12 +110,10 @@ const createApp = async (client, appName, versionId) => {
 
 const addEntities = async (client, appId, versionId) => {
 
-    // <AuthoringCreatePrebuiltEntity>
+    // <AuthoringAddEntities>
     // Add Prebuilt entity
     await client.model.addPrebuilt(appId, versionId, ["number"]);
-    // </AuthoringCreatePrebuiltEntity>
 
-    // <AuthoringCreateMLEntity>
     // Define ml entity with children and grandchildren
     const mlEntityDefinition = {
         name: "Pizza order",
@@ -141,9 +139,7 @@ const addEntities = async (client, appId, versionId) => {
     // Add ML entity 
     const response = await client.model.addEntity(appId, versionId, mlEntityDefinition);
     const mlEntityId = response.body;
-    // </AuthoringCreateMLEntity>
 
-    // <AuthoringCreatePhraselist >
     // Add phraselist feature
     const phraselistResponse = await client.features.addPhraseList(appId, versionId, {
         enabledForAllModels: false,
@@ -152,25 +148,20 @@ const addEntities = async (client, appId, versionId) => {
         phrases: "few,more,extra"
     });
     const phraseListId = phraselistResponse.body;
-    // </AuthoringCreatePhraselist >
 
-    // <AuthoringGetModelObject>
     // Get entity and subentities
     const model = await client.model.getEntity(appId, versionId, mlEntityId);
     const toppingQuantityId = getModelGrandchild(model, "Toppings", "Quantity");
     const pizzaQuantityId = getModelGrandchild(model, "Pizza", "Quantity");
-    // </AuthoringGetModelObject>
 
-    // <AuthoringAddModelAsFeature>
     // add model as feature to subentity model
     await client.features.addEntityFeature(appId, versionId, pizzaQuantityId, { modelName: "number", isRequired: true });
     await client.features.addEntityFeature(appId, versionId, toppingQuantityId, { modelName: "number" });
     // <AuthoringAddModelAsFeature>
 
-    // <AuthoringAddFeatureToModel>
     // add phrase list as feature to subentity model
     await client.features.addEntityFeature(appId, versionId, toppingQuantityId, { featureName: "QuantityPhraselist" });
-    // </AuthoringAddFeatureToModel>
+    // <AuthoringAddEntities>>
 }
 
 
