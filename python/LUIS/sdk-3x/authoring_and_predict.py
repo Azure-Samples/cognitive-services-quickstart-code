@@ -1,3 +1,6 @@
+# To run this sample, install the following modules.
+# pip install azure-cognitiveservices-language-luis
+
 # <Dependencies>
 from azure.cognitiveservices.language.luis.authoring import LUISAuthoringClient
 from azure.cognitiveservices.language.luis.runtime import LUISRuntimeClient
@@ -82,7 +85,7 @@ def quickstart():
 
 def create_app(client, appName, versionId):
 
-    # <createApp>
+    # <AuthoringCreateApplication>
 	appDefinition = {
         "name": appName,
         "initial_version_id": versionId,
@@ -92,7 +95,7 @@ def create_app(client, appName, versionId):
 	app_id = client.apps.add(appDefinition)
 
 	print("Created LUIS app with ID {}".format(app_id))
-	# </createApp>
+	# </AuthoringCreateApplication>
 	
 	return app_id
 	
@@ -101,6 +104,7 @@ def create_app(client, appName, versionId):
 def add_entities(client, appId, versionId):
 
 	# <AuthoringCreatePrebuiltEntity>
+	# Add Prebuilt entity
 	client.model.add_prebuilt(appId, versionId, prebuilt_extractor_names=["number"])
 	# </AuthoringCreatePrebuiltEntity>
 
@@ -127,6 +131,7 @@ def add_entities(client, appId, versionId):
 	# </AuthoringCreateMLEntity>
 	
 	# <AuthoringCreatePhraselist >
+	# Add phraselist feature
 	phraseList = {
 		"enabledForAllModels": False,
 		"isExchangeable": True,
@@ -137,15 +142,15 @@ def add_entities(client, appId, versionId):
 	phraseListId = client.features.add_phrase_list(appId, versionId, phraseList)
 	# </AuthoringCreatePhraselist >
 	
-	# Get entity and subentities
 	# <AuthoringGetModelObject>
+	# Get entity and subentities
 	modelObject = client.model.get_entity(appId, versionId, modelId)
 	toppingQuantityId = get_grandchild_id(modelObject, "Toppings", "Quantity")
 	pizzaQuantityId = get_grandchild_id(modelObject, "Pizza", "Quantity")
 	# </AuthoringGetModelObject >
-	
-	# add model as feature to subentity model
+
 	# <AuthoringAddModelAsFeature>
+	# add model as feature to subentity model
 	prebuiltFeatureRequiredDefinition = { "model_name": "number", "is_required": True }
 	client.features.add_entity_feature(appId, versionId, pizzaQuantityId, prebuiltFeatureRequiredDefinition)
 	# </AuthoringAddModelAsFeature>

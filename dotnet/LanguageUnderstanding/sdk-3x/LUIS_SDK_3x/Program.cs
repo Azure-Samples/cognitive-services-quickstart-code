@@ -1,4 +1,9 @@
-﻿// <Dependencies>
+﻿/* To run this sample, install the following modules.
+ * dotnet add package Microsoft.Azure.CognitiveServices.Language.LUIS.Authoring --version 3.0.0
+ * dotnet add package Microsoft.Azure.CognitiveServices.Language.LUIS.Runtime --version 3.0.0
+ */
+
+// <Dependencies>
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -74,8 +79,9 @@ namespace MlEntitySample
             // </PredictionCreateClient>
             
             // <QueryPredictionEndpoint>
-            // Product == slot name
-            var prediction = await runtimeClient.Prediction.GetSlotPredictionAsync(appId, "Production", new PredictionRequest { Query = "I want two small pepperoni pizzas with more salsa" });
+            // Production == slot name
+            var request = new PredictionRequest { Query = "I want two small pepperoni pizzas with more salsa" };
+            var prediction = await runtimeClient.Prediction.GetSlotPredictionAsync(appId, "Production", request);
             Console.Write(JsonConvert.SerializeObject(prediction, Formatting.Indented));
             // </QueryPredictionEndpoint>
         }
@@ -145,30 +151,34 @@ namespace MlEntitySample
             {
                 EnabledForAllModels = false,
                 IsExchangeable = true,
-                Name = "QuantityPhraselistFeature",
+                Name = "QuantityPhraselist",
                 Phrases = "few,more,extra"
             });
             // </AuthoringCreatePhraselist >
 
+            // <AuthoringGetModelObject>
             // Get entity and subentities
             var model = await client.Model.GetEntityAsync(appId, versionId, mlEntityId);
             var toppingQuantityId = GetModelGrandchild(model, "Toppings", "Quantity");
             var pizzaQuantityId = GetModelGrandchild(model, "Pizza", "Quantity");
+            // </AuthoringGetModelObject>
 
+            // <AuthoringAddModelAsFeature>
             // add model as feature to subentity model
             await client.Features.AddEntityFeatureAsync(appId, versionId, pizzaQuantityId, new ModelFeatureInformation { ModelName = "number", IsRequired = true });
             await client.Features.AddEntityFeatureAsync(appId, versionId, toppingQuantityId, new ModelFeatureInformation { ModelName = "number"});
+            // </AuthoringAddModelAsFeature>
 
             // <AuthoringAddFeatureToModel>
             // add phrase list as feature to subentity model
-            await client.Features.AddEntityFeatureAsync(appId, versionId, toppingQuantityId, new ModelFeatureInformation { FeatureName = "QuantityPhraselistFeature" });
+            await client.Features.AddEntityFeatureAsync(appId, versionId, toppingQuantityId, new ModelFeatureInformation { FeatureName = "QuantityPhraselist" });
             // </AuthoringAddFeatureToModel>
         }
 
-        // </AuthoringAddLabeledExamples>
+        
         async static Task AddLabeledExample(LUISAuthoringClient client, Guid appId, string versionId, string intentName)
         {
-
+            // <AuthoringAddLabeledExamples>
             // Define labeled example
             var labeledExampleUtteranceWithMLEntity = new ExampleLabelObject
             {
@@ -213,12 +223,12 @@ namespace MlEntitySample
 
             // Add an example for the entity.
             // Enable nested children to allow using multiple models with the same name.
+            // The quantity subentity and the phraselist could have the same exact name if this is set to True
             await client.Examples.AddAsync(appId, versionId, labeledExampleUtteranceWithMLEntity, enableNestedChildren: true); 
+            // </AuthoringAddLabeledExamples>
         }
-        // </AuthoringAddLabeledExamples>
 
-
-        // <AuthoringGetGrandchildModel>
+        // <AuthoringSortModelObject>
         static Guid GetModelGrandchild(NDepthEntityExtractor model, string childName, string grandchildName)
         {
             return model.Children.
@@ -226,6 +236,6 @@ namespace MlEntitySample
                 Children.
                 Single(c => c.Name == grandchildName).Id;
         }
-        // </AuthoringGetGrandchildModel>
+        // </AuthoringSortModelObject>
     }
 }
