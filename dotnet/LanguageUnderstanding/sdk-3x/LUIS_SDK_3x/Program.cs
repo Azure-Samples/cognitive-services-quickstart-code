@@ -162,7 +162,7 @@ namespace MlEntitySample
             
             // add phrase list as feature to subentity model
             await client.Features.AddEntityFeatureAsync(appId, versionId, toppingQuantityId, new ModelFeatureInformation { FeatureName = "QuantityPhraselist" });
-            // <AuthoringAddEntities>
+            // </AuthoringAddEntities>
         }
         
 
