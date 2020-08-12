@@ -243,12 +243,7 @@ const addLabeledExample = async (client, appId, versionId, intentName) => {
 // <AuthoringSortModelObject>
 const getModelGrandchild = (model, childName, grandchildName) => {
 
-    const children = model.children.filter(c => c.name == childName)
-    const grandchildren = children[0].children.filter(c => c.name == grandchildName)
-
-    const id = grandchildren[0].id
-
-    return id;
+    return model.children.find(c => c.name == childName).children.find(c => c.name == grandchildName).id
 
 }
 // </AuthoringSortModelObject>
