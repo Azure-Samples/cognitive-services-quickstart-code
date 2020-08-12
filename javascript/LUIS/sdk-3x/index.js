@@ -77,8 +77,8 @@ const quickstart = async () => {
 
     // <QueryPredictionEndpoint>
     // Production == slot name
-    var request = { query: "I want two small pepperoni pizzas with more salsa" };
-    var response = await luisPredictionClient.prediction.getSlotPrediction(appId, "Production", request);
+    const request = { query: "I want two small pepperoni pizzas with more salsa" };
+    const response = await luisPredictionClient.prediction.getSlotPrediction(appId, "Production", request);
     console.log(JSON.stringify(response.prediction, null, 4 ));
     // </QueryPredictionEndpoint>
 
@@ -98,7 +98,7 @@ const createApp = async (client, appName, versionId) => {
         create_app_payload
     );
 
-    var appId = createAppResult.body
+    const appId = createAppResult.body
     // </AuthoringCreateApplication>
 
     console.log(`Created LUIS app with ID ${appId}`);
