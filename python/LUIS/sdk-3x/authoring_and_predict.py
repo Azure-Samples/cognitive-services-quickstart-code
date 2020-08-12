@@ -10,14 +10,9 @@ import datetime, json, os, time
 def quickstart(): 
 
 	# <VariablesYouChange>
-	#authoringKey = 'REPLACE-WITH-YOUR-ASSIGNED-AUTHORING-KEY'
-	#authoringResourceName = "REPLACE-WITH-YOUR-AUTHORING-RESOURCE-NAME";
-	#predictionResourceName = "REPLACE-WITH-YOUR-PREDICTION-RESOURCE-NAME";
-
-
-	authoringKey = '2bb1c3bdf9114996b9b5fff9671a5b3b'
-	authoringResourceName = "diberry-luis-2-Authoring"
-	predictionResourceName = "diberry-luis-2"
+	authoringKey = 'REPLACE-WITH-YOUR-ASSIGNED-AUTHORING-KEY'
+	authoringResourceName = "REPLACE-WITH-YOUR-AUTHORING-RESOURCE-NAME";
+	predictionResourceName = "REPLACE-WITH-YOUR-PREDICTION-RESOURCE-NAME";
 	# </VariablesYouChange>
 
 	# <VariablesYouDontNeedToChangeChange>
@@ -42,8 +37,6 @@ def quickstart():
 	
 	# Add Entities
 	add_entities(client, app_id, versionId)
-
-
 	
 	# Add labeled examples
 	add_labeled_examples(client,app_id, versionId, intentName)
@@ -74,7 +67,7 @@ def quickstart():
     # </PredictionCreateClient>
 
     # <QueryPredictionEndpoint>
-    # Product == slot name
+    # Production == slot name
 	request = { "query" : "I want two small pepperoni pizzas with more salsa" }
 	
 	response = clientRuntime.prediction.get_slot_prediction(app_id, "Production", request)
@@ -87,15 +80,22 @@ def quickstart():
 	print("Entities: {}".format (response.prediction.entities))
     # </QueryPredictionEndpoint>
 
-# <createApp>
 def create_app(client, appName, versionId):
 
-	appDefinition = dict(name=appName,initial_version_id=versionId,culture="en-us")
+    # <createApp>
+	appDefinition = {
+        "name": appName,
+        "initial_version_id": versionId,
+        "culture": "en-us"
+    }
 
 	app_id = client.apps.add(appDefinition)
 
 	print("Created LUIS app with ID {}".format(app_id))
+	# </createApp>
+	
 	return app_id
+	
 # </createApp>
 
 def add_entities(client, appId, versionId):
@@ -138,26 +138,32 @@ def add_entities(client, appId, versionId):
 	# </AuthoringCreatePhraselist >
 	
 	# Get entity and subentities
+	# <AuthoringGetModelObject>
 	modelObject = client.model.get_entity(appId, versionId, modelId)
 	toppingQuantityId = get_grandchild_id(modelObject, "Toppings", "Quantity")
 	pizzaQuantityId = get_grandchild_id(modelObject, "Pizza", "Quantity")
+	# </AuthoringGetModelObject >
 	
 	# add model as feature to subentity model
+	# <AuthoringAddModelAsFeature>
 	prebuiltFeatureRequiredDefinition = { "model_name": "number", "is_required": True }
 	client.features.add_entity_feature(appId, versionId, pizzaQuantityId, prebuiltFeatureRequiredDefinition)
+	# </AuthoringAddModelAsFeature>
 	
+	# add model as feature to subentity model
 	prebuiltFeatureNotRequiredDefinition = { "model_name": "number" }
 	client.features.add_entity_feature(appId, versionId, toppingQuantityId, prebuiltFeatureNotRequiredDefinition)
 
-    # <AuthoringAddFeatureToModel>
+    # <AuthoringAddPhraselistAsFeature>
     # add phrase list as feature to subentity model
 	phraseListFeatureDefinition = { "feature_name": "QuantityPhraselist", "model_name": None }
 	client.features.add_entity_feature(appId, versionId, toppingQuantityId, phraseListFeatureDefinition)
-    # </AuthoringAddFeatureToModel>
+    # </AuthoringAddPhraselistAsFeature>
 	
-# <AuthoringAddLabeledExamples>
+
 def add_labeled_examples(client, appId, versionId, intentName):
 
+	# <AuthoringAddLabeledExamples>
     # Define labeled example
     labeledExampleUtteranceWithMLEntity = {
         "text": "I want two small seafood pizzas with extra cheese.",
@@ -214,15 +220,19 @@ def add_labeled_examples(client, appId, versionId, intentName):
 
     # Add an example for the entity.
     # Enable nested children to allow using multiple models with the same name.
+	# The quantity subentity and the phraselist could have the same exact name if this is set to True
     client.examples.add(appId, versionId, labeledExampleUtteranceWithMLEntity, { "enableNestedChildren": True })
-# </AuthoringAddLabeledExamples>
+	# </AuthoringAddLabeledExamples>
 	
+# <AuthoringSortModelObject>
 def get_grandchild_id(model, childName, grandChildName):
+	
 	theseChildren = next(filter((lambda child: child.name == childName), model.children))
 	theseGrandchildren = next(filter((lambda child: child.name == grandChildName), theseChildren.children))
 	
 	grandChildId = theseGrandchildren.id
 	
 	return grandChildId
-	
+# </AuthoringSortModelObject>
+
 quickstart()
