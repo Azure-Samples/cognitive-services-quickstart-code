@@ -76,8 +76,9 @@ const quickstart = async () => {
     // </PredictionCreateClient>
 
     // <QueryPredictionEndpoint>
-    // Product == slot name
-    var response = await luisPredictionClient.prediction.getSlotPrediction(appId, "Production", { query: "I want two small pepperoni pizzas with more salsa" });
+    // Production == slot name
+    var request = { query: "I want two small pepperoni pizzas with more salsa" };
+    var response = await luisPredictionClient.prediction.getSlotPrediction(appId, "Production", request);
     console.log(JSON.stringify(response.prediction, null, 4 ));
     // </QueryPredictionEndpoint>
 
@@ -104,7 +105,7 @@ const createApp = async (client, appName, versionId) => {
 
     return appId;
 }
-// </AuthoringCreateApplication>
+
 
 
 const addEntities = async (client, appId, versionId) => {
@@ -153,14 +154,18 @@ const addEntities = async (client, appId, versionId) => {
     const phraseListId = phraselistResponse.body;
     // </AuthoringCreatePhraselist >
 
+    // <AuthoringGetModelObject>
     // Get entity and subentities
-    let model = await client.model.getEntity(appId, versionId, mlEntityId);
-    let toppingQuantityId = getModelGrandchild(model, "Toppings", "Quantity");
-    let pizzaQuantityId = getModelGrandchild(model, "Pizza", "Quantity");
+    const model = await client.model.getEntity(appId, versionId, mlEntityId);
+    const toppingQuantityId = getModelGrandchild(model, "Toppings", "Quantity");
+    const pizzaQuantityId = getModelGrandchild(model, "Pizza", "Quantity");
+    // </AuthoringGetModelObject>
 
+    // <AuthoringAddModelAsFeature>
     // add model as feature to subentity model
     await client.features.addEntityFeature(appId, versionId, pizzaQuantityId, { modelName: "number", isRequired: true });
     await client.features.addEntityFeature(appId, versionId, toppingQuantityId, { modelName: "number" });
+    // <AuthoringAddModelAsFeature>
 
     // <AuthoringAddFeatureToModel>
     // add phrase list as feature to subentity model
@@ -168,9 +173,10 @@ const addEntities = async (client, appId, versionId) => {
     // </AuthoringAddFeatureToModel>
 }
 
-// </AuthoringAddLabeledExamples>
+
 const addLabeledExample = async (client, appId, versionId, intentName) => {
 
+    // <AuthoringAddLabeledExamples>
     // Define labeled example
     const labeledExampleUtteranceWithMLEntity =
     {
@@ -228,23 +234,19 @@ const addLabeledExample = async (client, appId, versionId, intentName) => {
 
     // Add an example for the entity.
     // Enable nested children to allow using multiple models with the same name.
+    // The quantity subentity and the phraselist could have the same exact name if this is set to True
     await client.examples.add(appId, versionId, labeledExampleUtteranceWithMLEntity, { enableNestedChildren: true });
+    // </AuthoringAddLabeledExamples>
 }
-// </AuthoringAddLabeledExamples>
 
-// <AuthoringGetGrandchildModel>
+
+// <AuthoringSortModelObject>
 const getModelGrandchild = (model, childName, grandchildName) => {
 
-    const children = model.children.filter(c => c.name == childName)
-
-    const grandchildren = children[0].children.filter(c => c.name == grandchildName)
-
-    const id = grandchildren[0].id
-
-    return id;
+    return model.children.find(c => c.name == childName).children.find(c => c.name == grandchildName).id
 
 }
-// </AuthoringGetGrandchildModel>
+// </AuthoringSortModelObject>
 
 
 quickstart()
