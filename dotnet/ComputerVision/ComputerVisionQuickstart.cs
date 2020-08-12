@@ -685,7 +685,6 @@ namespace ComputerVisionQuickstart
             }
             Console.WriteLine();
         }
-        // </snippet_read_url>
         /*
          * END - READ FILE - LOCAL
          */
