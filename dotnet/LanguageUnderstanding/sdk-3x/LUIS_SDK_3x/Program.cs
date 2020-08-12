@@ -103,16 +103,14 @@ namespace MlEntitySample
             return appId;
         }
 
-
         async static Task AddEntities(LUISAuthoringClient client, Guid appId, string versionId)
         {
 
-            // <AuthoringCreatePrebuiltEntity>
+            // <AuthoringAddEntities>
             // Add Prebuilt entity
             await client.Model.AddPrebuiltAsync(appId, versionId, new[] { "number" });
             // </AuthoringCreatePrebuiltEntity>
 
-            // <AuthoringCreateMLEntity>
             // Define ml entity with children and grandchildren
             var mlEntityDefinition = new EntityModelCreateObject
             {
@@ -143,9 +141,7 @@ namespace MlEntitySample
 
             // Add ML entity 
             var mlEntityId = await client.Model.AddEntityAsync(appId, versionId, mlEntityDefinition); ;
-            // </AuthoringCreateMLEntity>
 
-            // <AuthoringCreatePhraselist >
             // Add phraselist feature
             var phraselistId = await client.Features.AddPhraseListAsync(appId, versionId, new PhraselistCreateObject
             {
@@ -154,26 +150,21 @@ namespace MlEntitySample
                 Name = "QuantityPhraselist",
                 Phrases = "few,more,extra"
             });
-            // </AuthoringCreatePhraselist >
 
-            // <AuthoringGetModelObject>
             // Get entity and subentities
             var model = await client.Model.GetEntityAsync(appId, versionId, mlEntityId);
             var toppingQuantityId = GetModelGrandchild(model, "Toppings", "Quantity");
             var pizzaQuantityId = GetModelGrandchild(model, "Pizza", "Quantity");
-            // </AuthoringGetModelObject>
 
-            // <AuthoringAddModelAsFeature>
             // add model as feature to subentity model
             await client.Features.AddEntityFeatureAsync(appId, versionId, pizzaQuantityId, new ModelFeatureInformation { ModelName = "number", IsRequired = true });
             await client.Features.AddEntityFeatureAsync(appId, versionId, toppingQuantityId, new ModelFeatureInformation { ModelName = "number"});
-            // </AuthoringAddModelAsFeature>
-
-            // <AuthoringAddFeatureToModel>
+            
             // add phrase list as feature to subentity model
             await client.Features.AddEntityFeatureAsync(appId, versionId, toppingQuantityId, new ModelFeatureInformation { FeatureName = "QuantityPhraselist" });
-            // </AuthoringAddFeatureToModel>
+            // <AuthoringAddEntities>
         }
+        
 
         
         async static Task AddLabeledExample(LUISAuthoringClient client, Guid appId, string versionId, string intentName)
