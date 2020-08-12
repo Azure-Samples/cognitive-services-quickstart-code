@@ -161,7 +161,7 @@ const addEntities = async (client, appId, versionId) => {
 
     // add phrase list as feature to subentity model
     await client.features.addEntityFeature(appId, versionId, toppingQuantityId, { featureName: "QuantityPhraselist" });
-    // </AuthoringAddEntities>>
+    // </AuthoringAddEntities>
 }
 
 

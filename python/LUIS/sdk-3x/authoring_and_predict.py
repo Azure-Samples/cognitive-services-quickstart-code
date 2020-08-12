@@ -7,7 +7,7 @@ from azure.cognitiveservices.language.luis.runtime import LUISRuntimeClient
 from msrest.authentication import CognitiveServicesCredentials
 from functools import reduce
 
-import datetime, json, os, time
+import json, time
 # </Dependencies>
 
 def quickstart(): 
@@ -114,16 +114,15 @@ def add_entities(client, appId, versionId):
 			{ "name": "Quantity" },
 			{ "name": "Type" },
 			{ "name": "Size" }
-			]
-			},
-			{
-			"name": "Toppings",
-			"children": [
-				{ "name": "Type" },
-				{ "name": "Quantity" }
-			]
-		}
-	]
+		]
+	},
+	{
+		"name": "Toppings",
+		"children": [
+			{ "name": "Type" },
+			{ "name": "Quantity" }
+		]
+	}]
 
 	modelId = client.model.add_entity(appId, versionId, name="Pizza order", children=mlEntityDefinition)
 	
