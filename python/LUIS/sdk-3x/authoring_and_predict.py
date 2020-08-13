@@ -14,8 +14,8 @@ def quickstart():
 
 	# <VariablesYouChange>
 	authoringKey = 'REPLACE-WITH-YOUR-ASSIGNED-AUTHORING-KEY'
-	authoringResourceName = "REPLACE-WITH-YOUR-AUTHORING-RESOURCE-NAME";
-	predictionResourceName = "REPLACE-WITH-YOUR-PREDICTION-RESOURCE-NAME";
+	authoringResourceName = "REPLACE-WITH-YOUR-AUTHORING-RESOURCE-NAME"
+	predictionResourceName = "REPLACE-WITH-YOUR-PREDICTION-RESOURCE-NAME"
 	# </VariablesYouChange>
 
 	# <VariablesYouDontNeedToChangeChange>
