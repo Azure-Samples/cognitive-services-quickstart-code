@@ -30,17 +30,17 @@ const quickstart = async () => {
     const luisAuthoringCredentials = new msRest.ApiKeyCredentials({
         inHeader: { "Ocp-Apim-Subscription-Key": authoringKey }
     });
-    const luisAuthoringClient = new LUIS_Authoring.LUISAuthoringClient(
+    const client = new LUIS_Authoring.LUISAuthoringClient(
         luisAuthoringCredentials,
         authoringEndpoint
     );
     // </AuthoringCreateClient>
 
     // Create app
-    const appId = await createApp(luisAuthoringClient, appName, versionId);
+    const appId = await createApp(client, appName, versionId);
 
     // <AddIntent>
-    await luisAuthoringClient.model.addIntent(
+    await client.model.addIntent(
         appId,
         versionId,
         { name: intentName }
@@ -48,15 +48,15 @@ const quickstart = async () => {
     // </AddIntent>
 
     // Add Entities
-    await addEntities(luisAuthoringClient, appId, versionId);
+    await addEntities(client, appId, versionId);
     
     // Add Labeled example utterance
-    await addLabeledExample(luisAuthoringClient, appId, versionId, intentName);
+    await addLabeledExample(client, appId, versionId, intentName);
 
     // <TrainAppVersion>
-    await luisAuthoringClient.train.trainVersion(appId, versionId);
+    await client.train.trainVersion(appId, versionId);
     while (true) {
-        const status = await luisAuthoringClient.train.getStatus(appId, versionId);
+        const status = await client.train.getStatus(appId, versionId);
         if (status.every(m => m.details.status == "Success")) {
             // Assumes that we never fail, and that eventually we'll always succeed.
             break;
@@ -65,7 +65,7 @@ const quickstart = async () => {
     // </TrainAppVersion>
 
     // <PublishVersion>
-    await luisAuthoringClient.apps.publish(appId, { versionId: versionId, isStaging: false });
+    await client.apps.publish(appId, { versionId: versionId, isStaging: false });
     // </PublishVersion>
 
     // <PredictionCreateClient>

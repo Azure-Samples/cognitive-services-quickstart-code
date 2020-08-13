@@ -71,29 +71,32 @@ def quickstart():
 
     # <QueryPredictionEndpoint>
     # Production == slot name
-	request = { "query" : "I want two small pepperoni pizzas with more salsa" }
+	predictionRequest = { "query" : "I want two small pepperoni pizzas with more salsa" }
 	
-	response = clientRuntime.prediction.get_slot_prediction(app_id, "Production", request)
-	print("Top intent: {}".format(response.prediction.top_intent))
-	print("Sentiment: {}".format (response.prediction.sentiment))
+	predictionResponse = clientRuntime.prediction.get_slot_prediction(app_id, "Production", predictionRequest)
+	print("Top intent: {}".format(predictionResponse.prediction.top_intent))
+	print("Sentiment: {}".format (predictionResponse.prediction.sentiment))
 	print("Intents: ")
 
-	for intent in response.prediction.intents:
+	for intent in predictionResponse.prediction.intents:
 		print("\t{}".format (json.dumps (intent)))
-	print("Entities: {}".format (response.prediction.entities))
+	print("Entities: {}".format (predictionResponse.prediction.entities))
     # </QueryPredictionEndpoint>
 
 def create_app(client, appName, versionId):
 
     # <AuthoringCreateApplication>
+	# define app basics
 	appDefinition = {
         "name": appName,
         "initial_version_id": versionId,
         "culture": "en-us"
     }
 
+	# create app
 	app_id = client.apps.add(appDefinition)
 
+	# get app id - necessary for all other changes
 	print("Created LUIS app with ID {}".format(app_id))
 	# </AuthoringCreateApplication>
 	
@@ -101,12 +104,13 @@ def create_app(client, appName, versionId):
 	
 # </createApp>
 
-def add_entities(client, appId, versionId):
+def add_entities(client, app_id, versionId):
 
 	# <AuthoringAddEntities>
 	# Add Prebuilt entity
-	client.model.add_prebuilt(appId, versionId, prebuilt_extractor_names=["number"])
+	client.model.add_prebuilt(app_id, versionId, prebuilt_extractor_names=["number"])
 
+	# define machine-learned entity
 	mlEntityDefinition = [
 	{
 		"name": "Pizza",
@@ -124,9 +128,10 @@ def add_entities(client, appId, versionId):
 		]
 	}]
 
-	modelId = client.model.add_entity(appId, versionId, name="Pizza order", children=mlEntityDefinition)
+	# add entity to app
+	modelId = client.model.add_entity(app_id, versionId, name="Pizza order", children=mlEntityDefinition)
 	
-	# Add phraselist feature
+	# define phraselist - add phrases as significant vocabulary to app
 	phraseList = {
 		"enabledForAllModels": False,
 		"isExchangeable": True,
@@ -134,28 +139,29 @@ def add_entities(client, appId, versionId):
 		"phrases": "few,more,extra"
 	}
 	
-	phraseListId = client.features.add_phrase_list(appId, versionId, phraseList)
+	# add phrase list to app
+	phraseListId = client.features.add_phrase_list(app_id, versionId, phraseList)
 	
 	# Get entity and subentities
-	modelObject = client.model.get_entity(appId, versionId, modelId)
+	modelObject = client.model.get_entity(app_id, versionId, modelId)
 	toppingQuantityId = get_grandchild_id(modelObject, "Toppings", "Quantity")
 	pizzaQuantityId = get_grandchild_id(modelObject, "Pizza", "Quantity")
 
 	# add model as feature to subentity model
 	prebuiltFeatureRequiredDefinition = { "model_name": "number", "is_required": True }
-	client.features.add_entity_feature(appId, versionId, pizzaQuantityId, prebuiltFeatureRequiredDefinition)
+	client.features.add_entity_feature(app_id, versionId, pizzaQuantityId, prebuiltFeatureRequiredDefinition)
 	
 	# add model as feature to subentity model
 	prebuiltFeatureNotRequiredDefinition = { "model_name": "number" }
-	client.features.add_entity_feature(appId, versionId, toppingQuantityId, prebuiltFeatureNotRequiredDefinition)
+	client.features.add_entity_feature(app_id, versionId, toppingQuantityId, prebuiltFeatureNotRequiredDefinition)
 
     # add phrase list as feature to subentity model
 	phraseListFeatureDefinition = { "feature_name": "QuantityPhraselist", "model_name": None }
-	client.features.add_entity_feature(appId, versionId, toppingQuantityId, phraseListFeatureDefinition)
+	client.features.add_entity_feature(app_id, versionId, toppingQuantityId, phraseListFeatureDefinition)
     # </AuthoringAddEntities>
 	
 
-def add_labeled_examples(client, appId, versionId, intentName):
+def add_labeled_examples(client, app_id, versionId, intentName):
 
 	# <AuthoringAddLabeledExamples>
     # Define labeled example
@@ -215,7 +221,7 @@ def add_labeled_examples(client, appId, versionId, intentName):
     # Add an example for the entity.
     # Enable nested children to allow using multiple models with the same name.
 	# The quantity subentity and the phraselist could have the same exact name if this is set to True
-    client.examples.add(appId, versionId, labeledExampleUtteranceWithMLEntity, { "enableNestedChildren": True })
+    client.examples.add(app_id, versionId, labeledExampleUtteranceWithMLEntity, { "enableNestedChildren": True })
 	# </AuthoringAddLabeledExamples>
 	
 # <AuthoringSortModelObject>
