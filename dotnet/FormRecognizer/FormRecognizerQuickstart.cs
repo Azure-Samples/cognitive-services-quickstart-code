@@ -61,9 +61,9 @@ class Program {
         Response<FormPageCollection> formPages = await recognizerClient
             .StartRecognizeContentFromUri(new Uri(invoiceUri))
             .WaitForCompletionAsync();
-        // </snippet_getcontet_call>
+        // </snippet_getcontent_call>
 
-        // <snippet_getcontet_print>
+        // <snippet_getcontent_print>
         foreach (FormPage page in formPages.Value)
         {
             Console.WriteLine($"Form Page {page.PageNumber} has {page.Lines.Count}" + 
@@ -90,7 +90,7 @@ class Program {
             }
         }
     }
-    // </snippet_getcontet_print>
+    // </snippet_getcontent_print>
 
     // <snippet_receipt_call>
     private static async Task AnalyzeReceipt(
@@ -223,7 +223,7 @@ class Program {
         Console.WriteLine($"    Requested on: {model.RequestedOn}");
         Console.WriteLine($"    Completed on: {model.CompletedOn}");
         // </snippet_trainlabels>
-        // <snippet_trainlabels-response>
+        // <snippet_trainlabels_response>
         foreach (CustomFormSubmodel submodel in model.Submodels)
         {
             Console.WriteLine($"Submodel Form Type: {submodel.FormType}");
