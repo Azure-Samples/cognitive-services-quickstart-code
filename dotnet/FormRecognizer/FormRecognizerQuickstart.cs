@@ -54,16 +54,16 @@ class Program {
     }
     // </snippet_calls>
 
-    // <snippet_getcontent-call>
+    // <snippet_getcontent_call>
     private static async Task GetContent(
         FormRecognizerClient recognizerClient, string invoiceUri)
         {
         Response<FormPageCollection> formPages = await recognizerClient
             .StartRecognizeContentFromUri(new Uri(invoiceUri))
             .WaitForCompletionAsync();
-        // </snippet_getcontent-call>
+        // </snippet_getcontet_call>
 
-        // <snippet_getcontent-print>
+        // <snippet_getcontet_print>
         foreach (FormPage page in formPages.Value)
         {
             Console.WriteLine($"Form Page {page.PageNumber} has {page.Lines.Count}" + 
@@ -90,9 +90,9 @@ class Program {
             }
         }
     }
-    // </snippet_getcontent-print>
+    // </snippet_getcontet_print>
 
-    // <snippet_receipt-call>
+    // <snippet_receipt_call>
     private static async Task AnalyzeReceipt(
         FormRecognizerClient recognizerClient, string receiptUri)
     {
@@ -122,8 +122,8 @@ class Program {
                 Console.WriteLine($"Transaction Date: '{transactionDate}', with confidence {transactionDateField.Confidence}");
             }
         }
-        // </snippet_receipt-call>
-        // <snippet_receipt-item-print>
+        // </snippet_receipt_call>
+        // <snippet_receipt_item_print>
         FormField itemsField;
         if (receipt.RecognizedForm.Fields.TryGetValue("Items", out itemsField))
         {
@@ -162,8 +162,8 @@ class Program {
                 }
             }
         }
-        // </snippet_receipt-item-print>
-        // <snippet_receipt-total-print>
+        // </snippet_receipt_item_print>
+        // <snippet_receipt_total_print>
         FormField totalField;
         if (receipt.RecognizedForm.Fields.TryGetValue("Total", out totalField))
         {
@@ -175,7 +175,7 @@ class Program {
             }
         }
     }
-    // </snippet_receipt-total-print>
+    // </snippet_receipt_total_print>
 
     // <snippet_train>
     private static async Task<Guid> TrainModel(
@@ -190,7 +190,7 @@ class Program {
         Console.WriteLine($"    Requested on: {model.RequestedOn}");
         Console.WriteLine($"    Completed on: {model.CompletedOn}");
         // </snippet_train>
-        // <snippet_train-response>
+        // <snippet_train_response>
         foreach (CustomFormSubmodel submodel in model.Submodels)
         {
             Console.WriteLine($"Submodel Form Type: {submodel.FormType}");
@@ -204,11 +204,11 @@ class Program {
                 Console.WriteLine("");
             }
         }
-        // </snippet_train-response>
-        // <snippet_train-return>
+        // </snippet_train_response>
+        // <snippet_train_return>
         return model.ModelId;
     }
-    // </snippet_train-return>
+    // </snippet_train_return>
 
     // <snippet_trainlabels>
     private static async Task<Guid> TrainModelWithLabelsAsync(
@@ -239,7 +239,7 @@ class Program {
         }
         return model.ModelId;
     }
-    // </snippet_trainlabels-response>
+    // </snippet_trainlabels_response>
 
     // <snippet_analyze>
     // Analyze PDF form data
@@ -250,7 +250,7 @@ class Program {
             .StartRecognizeCustomFormsFromUri(modelId.ToString(), new Uri(formUrl))
             .WaitForCompletionAsync();
         // </snippet_analyze>
-        // <snippet_analyze-response>
+        // <snippet_analyze_response>
         foreach (RecognizedForm form in forms.Value)
         {
             Console.WriteLine($"Form of type: {form.FormType}");
@@ -268,23 +268,23 @@ class Program {
             }
         }
     }
-    // </snippet_analyze-response>
+    // </snippet_analyze_response>
 
     // <snippet_manage>
     private static async Task ManageModels(
         FormRecognizerClient trainingClient, string trainingFileUrl)
     {
         // </snippet_manage>
-        // <snippet_manage-model-count>
+        // <snippet_manage_model_count>
         // Check number of models in the FormRecognizer account, 
         // and the maximum number of models that can be stored.
         AccountProperties accountProperties = trainingClient.GetAccountProperties();
         Console.WriteLine($"Account has {accountProperties.CustomModelCount} models.");
         Console.WriteLine($"It can have at most {accountProperties.CustomModelLimit}" +
             $" models.");
-        // </snippet_manage-model-count>
+        // </snippet_manage_model_count>
 
-        // <snippet_manage-model-list>
+        // <snippet_manage_model_list>
         // List the first ten or fewer models currently stored in the account.
         Pageable<CustomFormModelInfo> models = trainingClient.GetModelInfos();
         
@@ -296,9 +296,9 @@ class Program {
             Console.WriteLine($"    Created On: {modelInfo.CreatedOn}");
             Console.WriteLine($"    Last Modified: {modelInfo.LastModified}");
         }
-        // </snippet_manage-model-list>
+        // </snippet_manage_model_list>
 
-        // <snippet_manage-model-get>
+        // <snippet_manage_model_get>
         // Create a new model to store in the account
         CustomFormModel model = await trainingClient.StartTrainingAsync(
             new Uri(trainingFileUrl)).WaitForCompletionAsync();
@@ -322,11 +322,11 @@ class Program {
                 Console.WriteLine("");
             }
         }
-        // </snippet_manage-model-get>
+        // </snippet_manage_model_get>
 
-        // <snippet_manage-model-delete>
+        // <snippet_manage_model_delete>
         // Delete the model from the account.
         trainingClient.DeleteModel(model.ModelId);
     }
-    // </snippet_manage-model-delete>
+    // </snippet_manage_model_delete>
 }
