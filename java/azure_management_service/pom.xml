@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Source: https://gist.github.com/statico/547434f630d589651afcbe3f132b91d9
+Run with: mvn clean dependency:copy-dependencies
+-->
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.foo</groupId>
+  <artifactId>bar</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+
+  <dependencies>
+
+	<!-- https://mvnrepository.com/artifact/com.microsoft.azure/azure -->
+	<dependency>
+		<groupId>com.microsoft.azure</groupId>
+		<artifactId>azure</artifactId>
+		<version>1.36.0</version>
+	</dependency>
+
+	<!-- https://mvnrepository.com/artifact/com.microsoft.azure/azure-client-authentication -->
+	<dependency>
+		<groupId>com.microsoft.azure</groupId>
+		<artifactId>azure-client-authentication</artifactId>
+		<version>1.7.6</version>
+		<scope>test</scope>
+	</dependency>
+
+	<!-- https://mvnrepository.com/artifact/com.microsoft.azure/azure-arm-client-runtime -->
+	<dependency>
+		<groupId>com.microsoft.azure</groupId>
+		<artifactId>azure-arm-client-runtime</artifactId>
+		<version>1.7.6</version>
+	</dependency>
+
+	<!--  -->
+	<dependency>
+		<groupId>com.microsoft.azure.cognitiveservices.v2017_04_18</groupId>
+		<artifactId>azure-mgmt-cognitiveservices</artifactId>
+		<version>1.0.0</version>
+	</dependency>
+
+    <!-- This fixes the following runtime warnings:
+    SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+    SLF4J: Defaulting to no-operation (NOP) logger implementation
+    SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+    -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-jdk14</artifactId>
+      <version>1.7.25</version>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <directory>lib</directory>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <configuration>
+          <outputDirectory>
+            ${project.build.directory}
+          </outputDirectory>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
