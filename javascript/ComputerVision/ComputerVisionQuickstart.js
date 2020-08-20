@@ -26,8 +26,8 @@ const ApiKeyCredentials = require('@azure/ms-rest-js').ApiKeyCredentials;
  *  - Set your subscription key and endpoint into your environment variables COMPUTER_VISION_ENDPOINT and COMPUTER_VISION_SUBSCRIPTION_KEY.
  *       An example of COMPUTER_VISION_ENDPOINT will look like:         https://westus2.api.cognitive.microsoft.com
  *       An example of COMPUTER_VISION_SUBSCRIPTION_KEY will look like: 0123456789abcdef0123456789abcdef
- *  - The DESCRIBE IMAGE example uses a local image celebrities.jpg, which is inside this folder.
- *  - The READ (the API for performing Optical Character Recognition or doing text retrieval from PDF) example uses local images and a PDF files, which are inside this folder.
+ *  - The DESCRIBE IMAGE example uses a local image celebrities.jpg, which will be downloaded on demand.
+ *  - The READ (the API for performing Optical Character Recognition or doing text retrieval from PDF) example uses local images and a PDF files, which will be downloaded on demand.
  * 
  * How to run:
  *  - This quickstart can be run all at once (node ComputerVisionQuickstart.js from the command line) or used to copy/paste sections as needed. 
@@ -646,7 +646,7 @@ function computerVision() {
        */
       function downloadFilesToLocal(url, localFileName) {
         return new Promise((resolve, reject) => {
-          console.log('--- Downloading files to local directory: ' + url);
+          console.log('--- Downloading file to local directory from: ' + url);
           const request = https.request(url, (res) => {
             if (res.statusCode !== 200) {
               console.log(`Download sample file failed. Status code: ${res.statusCode}, Message: ${res.statusMessage}`);
