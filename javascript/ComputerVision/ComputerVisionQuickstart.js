@@ -7,6 +7,7 @@
 
 const async = require('async');
 const fs = require('fs');
+const https = require('https');
 const path = require("path");
 const createReadStream = require('fs').createReadStream
 const sleep = require('util').promisify(setTimeout);
@@ -50,7 +51,7 @@ const ApiKeyCredentials = require('@azure/ms-rest-js').ApiKeyCredentials;
  */
 const key = process.env['COMPUTER_VISION_SUBSCRIPTION_KEY'];
 const endpoint = process.env['COMPUTER_VISION_ENDPOINT']
-if (!key) { throw new Error('Set your environment variables for your subscription key and endpoint.'); }
+if (!key) { throw new Error('Set your environment variables for your subscription key in COMPUTER_VISION_SUBSCRIPTION_KEY and endpoint in COMPUTER_VISION_ENDPOINT.'); }
 // </snippet_vars>
 
 // <snippet_client>
@@ -79,7 +80,14 @@ function computerVision() {
       // <snippet_describe_image>
       const describeURL = 'https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/celebrities.jpg';
       // </snippet_describe_image>
+
       const describeImagePath = __dirname + '\\celebrities.jpg';
+      try {
+        await downloadFilesToLocal(describeURL, describeImagePath);
+      } catch {
+        console.log('>>> Download sample file failed. Sample cannot continue');
+        process.exit(1);
+      }
 
       // <snippet_describe>
       // Analyze URL image
@@ -425,18 +433,28 @@ function computerVision() {
         * 
         */
 
-      const STATUS_SUCCEEDED = "succeeded";
+      // Status strings returned from Read API. NOTE: CASING IS SIGNIFICANT.
+      // Before Read 3.0, these are "Succeeded" and "Failed"
+      const STATUS_SUCCEEDED = "succeeded"; 
       const STATUS_FAILED = "failed"
 
       console.log('-------------------------------------------------');
       console.log('READ');
       console.log();
-      const printedTextUrl = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/printed_text.jpg"
-      const handwrittenImagePath = __dirname + '\\handwritten_text.jpg';
+      const printedTextURL = 'https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/printed_text.jpg';
+      const handwrittenTextURL = 'https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/handwritten_text.jpg';
 
-      console.log('\nReading URL image for text in ...', printedTextUrl.split('/').pop());
+      const handwrittenImagePath = __dirname + '\\handwritten_text.jpg';
+      try {
+        await downloadFilesToLocal(handwrittenTextURL, handwrittenImagePath);
+      } catch {
+        console.log('>>> Download sample file failed. Sample cannot continue');
+        process.exit(1);
+      }
+
+      console.log('\nReading URL image for text in ...', printedTextURL.split('/').pop());
       // API call returns a ReadResponse, grab the operation location (ID) from the response.
-      const operationLocationUrl = await computerVisionClient.read(printedTextUrl)
+      const operationLocationUrl = await computerVisionClient.read(printedTextURL)
         .then((response) => {
           return response.operationLocation;
         });
@@ -532,38 +550,39 @@ function computerVision() {
       console.log();
 
       // <snippet_read_images>
-      // URL images containing printed and handwritten text. 
+      // URL images containing printed and/or handwritten text. 
       // The URL can point to image files (.jpg/.png/.bmp) or multi-page files (.pdf, .tiff).
-      const printedText = 'https://moderatorsampleimages.blob.core.windows.net/samples/sample2.jpg';
-      const handwrittenText = 'https://raw.githubusercontent.com/MicrosoftDocs/azure-docs/master/articles/cognitive-services/Computer-vision/Images/readsample.jpg';
-      const multiLingualText = 'MultiLingual.png';
-      const mixedMultiPagePDF = 'MultiPageMixedText.pdf';
+      const printedTextSampleURL = 'https://moderatorsampleimages.blob.core.windows.net/samples/sample2.jpg';
+      const multiLingualTextURL = 'https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/MultiLingual.png';
+      const mixedMultiPagePDFURL = 'https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/MultiPageHandwrittenForm.pdf';
       // </snippet_read_images>
 
       // <snippet_read_call>
-      // Recognize text in printed image
-      console.log('Read printed text...', printedText.split('/').pop());
-      const printedResult = await readTextFromURL(computerVisionClient, printedText);
+      // Recognize text in printed image from a URL
+      console.log('Read printed text from URL...', printedTextSampleURL.split('/').pop());
+      const printedResult = await readTextFromURL(computerVisionClient, printedTextSampleURL);
       printRecText(printedResult);
 
-      // Recognize text in handwritten image
-      console.log('\nRead handwritten text...', handwrittenText.split('/').pop());
-      const handwritingResult = await readTextFromURL(computerVisionClient, handwrittenText);
+      // Recognize text in handwritten image from a local file
+      
+      const handwrittenImageLocalPath = __dirname + '\\handwritten_text.jpg';
+      console.log('\nRead handwritten text from local file...', handwrittenImageLocalPath);
+      const handwritingResult = await readTextFromFile(computerVisionClient, handwrittenImageLocalPath);
       printRecText(handwritingResult);
 
-      // Recognize multi-lingual text in a PNG
-      console.log('\nRead printed multi-lingual text from a PNG...', multiLingualText.split('/').pop());
-      const multiLingualResult = await readTextFromFile(computerVisionClient, multiLingualText);
+      // Recognize multi-lingual text in a PNG from a URL
+      console.log('\nRead printed multi-lingual text in a PNG from URL...', multiLingualTextURL.split('/').pop());
+      const multiLingualResult = await readTextFromURL(computerVisionClient, multiLingualTextURL);
       printRecText(multiLingualResult);
 
-      // Recognize printed text and handwritten text in a PDF
-      console.log('\nRead printed and handwritten text from a PDF...', mixedMultiPagePDF.split('/').pop());
-      const mixedPdfResult = await readTextFromFile(computerVisionClient, mixedMultiPagePDF);
+      // Recognize printed text and handwritten text in a PDF from a URL
+      console.log('\nRead printed and handwritten text from a PDF from URL...', mixedMultiPagePDFURL.split('/').pop());
+      const mixedPdfResult = await readTextFromURL(computerVisionClient, mixedMultiPagePDFURL);
       printRecText(mixedPdfResult);
       // </snippet_read_call>
 
       // <snippet_read_helper>
-      // Perform read and await the result
+      // Perform read and await the result from URL
       async function readTextFromURL(client, url) {
         // To recognize text in a local image, replace client.read() with readTextInStream() as shown:
         let result = await client.read(url);
@@ -576,8 +595,7 @@ function computerVision() {
         return result.analyzeResult.readResults; // Return the first page of result. Replace [0] with the desired page if this is a multi-page file such as .pdf or .tiff.
       }
 
-      // <snippet_read_helper>
-      // Perform read and await the result
+      // Perform read and await the result from local file
       async function readTextFromFile(client, localImagePath) {
         // To recognize text in a local image, replace client.read() with readTextInStream() as shown:
         let result = await client.readInStream(() => createReadStream(localImagePath));
@@ -589,6 +607,8 @@ function computerVision() {
         while (result.status !== STATUS_SUCCEEDED) { await sleep(1000); result = await client.getReadResult(operation); }
         return result.analyzeResult.readResults; // Return the first page of result. Replace [0] with the desired page if this is a multi-page file such as .pdf or .tiff.
       }
+
+      // <snippet_read_helper>
 
       // </snippet_read_helper>
 
@@ -618,6 +638,37 @@ function computerVision() {
       console.log('-------------------------------------------------');
       console.log('End of quickstart.');
       // <snippet_functiondef_end>
+
+      /**
+       * 
+       * Download the specified file in the URL to the current local folder
+       * 
+       */
+      function downloadFilesToLocal(url, localFileName) {
+        return new Promise((resolve, reject) => {
+          console.log('--- Downloading files to local directory: ' + url);
+          const request = https.request(url, (res) => {
+            if (res.statusCode !== 200) {
+              console.log(`Download sample file failed. Status code: ${res.statusCode}, Message: ${res.statusMessage}`);
+              reject();
+            }
+            var data = [];
+            res.on('data', (chunk) => {
+              data.push(chunk);
+            });
+            res.on('end', () => {
+              console.log('   ... Downloaded successfully');
+              fs.writeFileSync(localFileName, Buffer.concat(data));
+              resolve();
+            });
+          });
+          request.on('error', function (e) {
+            console.log(e.message);
+            reject();
+          });
+          request.end();
+        });
+      }
     },
     function () {
       return new Promise((resolve) => {
