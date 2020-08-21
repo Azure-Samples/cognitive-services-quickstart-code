@@ -607,9 +607,6 @@ function computerVision() {
         while (result.status !== STATUS_SUCCEEDED) { await sleep(1000); result = await client.getReadResult(operation); }
         return result.analyzeResult.readResults; // Return the first page of result. Replace [0] with the desired page if this is a multi-page file such as .pdf or .tiff.
       }
-
-      // <snippet_read_helper>
-
       // </snippet_read_helper>
 
       // <snippet_read_print>
@@ -630,15 +627,8 @@ function computerVision() {
         }
       }
       // </snippet_read_print>
-      /**
-       * END - Recognize Printed & Handwritten Text
-       */
 
-      console.log();
-      console.log('-------------------------------------------------');
-      console.log('End of quickstart.');
-      // <snippet_functiondef_end>
-
+      // <snippet_read_download>
       /**
        * 
        * Download the specified file in the URL to the current local folder
@@ -669,6 +659,17 @@ function computerVision() {
           request.end();
         });
       }
+      // </snippet_read_download>
+
+      /**
+       * END - Recognize Printed & Handwritten Text
+       */
+
+      console.log();
+      console.log('-------------------------------------------------');
+      console.log('End of quickstart.');
+      // <snippet_functiondef_end>
+
     },
     function () {
       return new Promise((resolve) => {
