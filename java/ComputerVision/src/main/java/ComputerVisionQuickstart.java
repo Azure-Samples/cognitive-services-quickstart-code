@@ -30,10 +30,6 @@ import java.util.UUID;
 
 public class ComputerVisionQuickstart {
 
-    // <snippet_readtext_url>
-    private static String READ_SAMPLE_URL = "https://intelligentkioskstore.blob.core.windows.net/visionapi/suggestedphotos/3.png";
-    // </snippet_readtext_url>
-    private static String READ_SAMPLE_FILE_RELATIVE_PATH = "src\\main\\resources\\myImage.png";
 
     // <snippet_mainvars>
     public static void main(String[] args) {
@@ -54,16 +50,15 @@ public class ComputerVisionQuickstart {
         // Analyze local and remote images
         AnalyzeLocalImage(compVisClient);
 
-        //<snippet_extracttextinmain>
-        // Read remote image
-        ReadFromUrl(compVisClient, READ_SAMPLE_URL);
         // Read from local file
         ReadFromFile(compVisClient, READ_SAMPLE_FILE_RELATIVE_PATH);
-        // </snippet_extracttextinmain>
+        // </snippet_client>
 
         // Recognize printed text with OCR for a local and remote (URL) image
         RecognizeTextOCRLocal(compVisClient);
-        // </snippet_client>
+
+        // Read remote image
+        ReadFromUrl(compVisClient, READ_SAMPLE_URL);
     }
 
     // <snippet_analyzelocal_refs>
@@ -409,8 +404,9 @@ public class ComputerVisionQuickstart {
      * @param remoteTextImageURL public url from which to perform the read operation against
      */
     
-    private static void ReadFromUrl(ComputerVisionClient client, String remoteTextImageURL) {
+    private static void ReadFromUrl(ComputerVisionClient client) {
         System.out.println("-----------------------------------------------");
+        String remoteTextImageURL = "https://intelligentkioskstore.blob.core.windows.net/visionapi/suggestedphotos/3.png";
         System.out.println("Read with URL: " + remoteTextImageURL);
         try {
             // Cast Computer Vision to its implementation to expose the required methods
@@ -434,15 +430,19 @@ public class ComputerVisionQuickstart {
         }
     }
 
-    // <snippet_read_call>
+    // <snippet_read_setup>
     /**
      * READ : Performs a Read Operation on a local image
      * @param client instantiated vision client
      * @param localFilePath local file path from which to perform the read operation against
      */
-    private static void ReadFromFile(ComputerVisionClient client, String localFilePath) {
+    private static void ReadFromFile(ComputerVisionClient client) {
         System.out.println("-----------------------------------------------");
+        
+        String localFilePath = "src\\main\\resources\\myImage.png";
         System.out.println("Read with local file: " + localFilePath);
+        // </snippet_read_setup>
+        // <snippet_read_call>
 
         try {
             File rawImage = new File(localFilePath);
@@ -458,13 +458,13 @@ public class ComputerVisionQuickstart {
                         .single()
                         .headers();
             // </snippet_read_call>
-            // <snippet_read_response>
+    // <snippet_read_response>
             // Extract the operationLocation from the response header
             String operationLocation = responseHeader.operationLocation();
             System.out.println("Operation Location:" + operationLocation);
 
             getAndPrintReadResult(vision, operationLocation);
-            // </snippet_read_response>
+    // </snippet_read_response>
             // <snippet_read_catch>
 
         } catch (Exception e) {
