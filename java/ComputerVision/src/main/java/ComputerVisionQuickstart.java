@@ -306,7 +306,7 @@ public class ComputerVisionQuickstart {
     // END - Analyze an image from a URL.
     // </snippet_analyzeurl>
 
-    // <snippet_read_call>
+    // <snippet_recognize_call>
     /**
      * RECOGNIZE PRINTED TEXT: Displays text found in image with angle and orientation of
      * the block of text.
@@ -325,9 +325,9 @@ public class ComputerVisionQuickstart {
             // Recognize printed text in local image
             OcrResult ocrResultLocal = client.computerVision().recognizePrintedTextInStream()
                     .withDetectOrientation(true).withImage(localImageBytes).withLanguage(OcrLanguages.EN).execute();
-            // </snippet_read_call>
+            // </snippet_recognize_call>
 
-            // <snippet_read_print>
+            // <snippet_recognize_print>
             // Print results of local image
             System.out.println();
             System.out.println("Recognizing printed text from a local image with OCR ...");
@@ -353,15 +353,15 @@ public class ComputerVisionQuickstart {
                     System.out.println();
                 }
             }
-            // </snippet_read_print>
+            // </snippet_recognize_print>
             
-        // <snippet_read_catch>
+        // <snippet_recognize_catch>
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
     }
-    // </snippet_read_catch>
+    // </snippet_recognize_catch>
 
     private static void RecognizeTextOCRRemote(ComputerVisionClient client, String remoteTextImageURL) {
         System.out.println("-----------------------------------------------");
@@ -408,6 +408,7 @@ public class ComputerVisionQuickstart {
      * @param client instantiated vision client
      * @param remoteTextImageURL public url from which to perform the read operation against
      */
+    
     private static void ReadFromUrl(ComputerVisionClient client, String remoteTextImageURL) {
         System.out.println("-----------------------------------------------");
         System.out.println("Read with URL: " + remoteTextImageURL);
@@ -433,7 +434,7 @@ public class ComputerVisionQuickstart {
         }
     }
 
-    // <snippet_read_local>
+    // <snippet_read_call>
     /**
      * READ : Performs a Read Operation on a local image
      * @param client instantiated vision client
@@ -456,20 +457,24 @@ public class ComputerVisionQuickstart {
                         .toBlocking()
                         .single()
                         .headers();
-
+            // </snippet_read_call>
+            // <snippet_read_response>
             // Extract the operationLocation from the response header
             String operationLocation = responseHeader.operationLocation();
             System.out.println("Operation Location:" + operationLocation);
 
             getAndPrintReadResult(vision, operationLocation);
+            // </snippet_read_response>
+            // <snippet_read_catch>
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
     }
+    // </snippet_read_catch>
 
-    // <snippet_extract_response>
+    // <snippet_opid_extract>
     /**
      * Extracts the OperationId from a Operation-Location returned by the POST Read operation
      * @param operationLocation
@@ -485,7 +490,9 @@ public class ComputerVisionQuickstart {
         }
         throw new IllegalStateException("Something went wrong: Couldn't extract the operation id from the operation location");
     }
+    // </snippet_opid_extract>
 
+    // <snippet_read_result_helper_call>
     /**
      * Polls for Read result and prints results to console
      * @param vision Computer Vision instance
@@ -515,9 +522,9 @@ public class ComputerVisionQuickstart {
                 }
             }
         }
-        // </snippet_extract_response>
-
-        // <snippet_extract_display>
+        // </snippet_read_result_helper_call>
+        
+        // <snippet_read_result_helper_print>
         // Print read results, page per page
         for (ReadResult pageResult : readResults.analyzeResult().readResults()) {
             System.out.println("");
@@ -530,8 +537,7 @@ public class ComputerVisionQuickstart {
             }
 
             System.out.println(builder.toString());
-            // </snippet_extract_display>
         }
     }
-    // </snippet_read_local>
+    // </snippet_read_result_helper_print>
 }
