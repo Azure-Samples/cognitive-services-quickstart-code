@@ -54,16 +54,15 @@ public class ComputerVisionQuickstart {
         // Analyze local and remote images
         AnalyzeLocalImage(compVisClient);
 
-        //<snippet_extracttextinmain>
-        // Read remote image
-        ReadFromUrl(compVisClient, READ_SAMPLE_URL);
         // Read from local file
         ReadFromFile(compVisClient, READ_SAMPLE_FILE_RELATIVE_PATH);
-        // </snippet_extracttextinmain>
+        // </snippet_client>
 
         // Recognize printed text with OCR for a local and remote (URL) image
         RecognizeTextOCRLocal(compVisClient);
-        // </snippet_client>
+
+        // Read remote image
+        ReadFromUrl(compVisClient, READ_SAMPLE_URL);
     }
 
     // <snippet_analyzelocal_refs>
