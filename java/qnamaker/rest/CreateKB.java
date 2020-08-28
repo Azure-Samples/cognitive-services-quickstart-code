@@ -4,9 +4,6 @@ import java.net.*;
 import java.util.*;
 import javax.net.ssl.HttpsURLConnection;
 
-// javac -cp ".;libs/*" CreateKB.java
-// java -cp ".;libs/*" CreateKB
-
 /**
  * Gson: https://github.com/google/gson
  * Maven info:
@@ -23,13 +20,25 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
+// Compile with: javac -cp ".;lib/*" CreateKB.java
+// Run with: java -cp ".;lib/*" CreateKB
+
 public class CreateKB {
 
-    // Replace this with a valid subscription key.
-    static String subscriptionKey = "<your-qna-maker-subscription-key>";
+	/* Configure the local environment:
+	* Set the following environment variables on your local machine using the
+	* appropriate method for your preferred shell (Bash, PowerShell, Command
+	* Prompt, etc.).
+	*
+	* QNA_MAKER_SUBSCRIPTION_KEY
+	* QNA_MAKER_ENDPOINT
+	*
+	* If the environment variable is created after the application is launched in a console or with Visual
+	* Studio, the shell (or Visual Studio) needs to be closed and reloaded to take the environment variable into account.
+	*/
+    private static String authoring_key = System.getenv("QNA_MAKER_SUBSCRIPTION_KEY");
+	private static String authoring_endpoint = System.getenv("QNA_MAKER_ENDPOINT");
 
-    // Replace this with a valid resource name.
-    static String host = "https://<your-resource-name>.api.cognitive.microsoft.com";
     static String service = "/qnamaker/v4.0";
     static String method = "/knowledgebases/create";
 
@@ -74,7 +83,7 @@ public class CreateKB {
         q.metadata = new Metadata[]{md};
 
         kb.qnaList = new Question[]{q};
-        kb.urls = new String[]{"https://docs.microsoft.com/en-in/azure/cognitive-services/qnamaker/faqs",     "https://docs.microsoft.com/en-us/bot-framework/resources-bot-framework-faq"};
+        kb.urls = new String[]{"https://docs.microsoft.com/en-in/azure/cognitive-services/QnAMaker/troubleshooting"};
 
         return kb;
     }
@@ -101,7 +110,7 @@ public class CreateKB {
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setRequestProperty("Content-Length", content.length() + "");
-        connection.setRequestProperty("Ocp-Apim-Subscription-Key", subscriptionKey);
+        connection.setRequestProperty("Ocp-Apim-Subscription-Key", authoring_key);
         connection.setDoOutput(true);
 
         DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
@@ -123,7 +132,7 @@ public class CreateKB {
     public static Response Get (URL url) throws Exception{
         HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
-            connection.setRequestProperty("Ocp-Apim-Subscription-Key", subscriptionKey);
+            connection.setRequestProperty("Ocp-Apim-Subscription-Key", authoring_key);
             connection.setDoOutput(true);
         StringBuilder response = new StringBuilder ();
         BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
@@ -137,14 +146,14 @@ public class CreateKB {
     }
 
     public static Response CreateKB (KB kb) throws Exception {
-        URL url = new URL (host + service + method);
+        URL url = new URL (authoring_endpoint + service + method);
         System.out.println ("Calling " + url.toString() + ".");
         String content = new Gson().toJson(kb);
         return Post(url, content);
     }
 
     public static Response GetStatus (String operation) throws Exception {
-        URL url = new URL (host + service + operation);
+        URL url = new URL (authoring_endpoint + service + operation);
         System.out.println ("Calling " + url.toString() + ".");
         return Get(url);
     }
@@ -172,12 +181,10 @@ public class CreateKB {
 
                 String state = fields.get ("operationState");
 
-                // If the request is still running, the server tells us how
-                // long to wait before checking the status again.
+                // If the request is still running, wait and then check the status again.
                 if (state.equals("Running") || state.equals("NotStarted")) {
-                    String wait = response.Headers.get ("Retry-After").get(0);
-                    System.out.println ("Waiting " + wait + " seconds...");
-                    Thread.sleep (Integer.parseInt(wait) * 1000);
+                    System.out.println ("Waiting 10 seconds...");
+                    Thread.sleep (10000);
                 }
                 else {
                     done = true;
