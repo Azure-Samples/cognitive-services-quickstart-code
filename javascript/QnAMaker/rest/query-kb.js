@@ -1,49 +1,89 @@
 'use strict';
 
-var request = require('request');
-var request_as_promised = require('request-promise');
+// <dependencies>
+/* To install dependencies, run:
+ * npm install requestretry
+ */
+const request = require("requestretry");
 
-// Represents the various elements used to create HTTP request URIs
-// for QnA Maker operations.
-// From Publish Page: HOST
-// Example: https://YOUR-RESOURCE-NAME.azurewebsites.net/qnamaker
-var host = "https://YOUR-RESOURCE-NAME.azurewebsites.net/qnamaker";
+/*
+* Configure the local environment:
+* Set the QNA_MAKER_SUBSCRIPTION_KEY, QNA_MAKER_ENDPOINT,
+* QNA_MAKER_RUNTIME_ENDPOINT, and QNA_MAKER_KB_ID
+* environment variables on your local machine using
+* the appropriate method for your preferred shell (Bash, PowerShell, Command
+* Prompt, etc.). 
+*
+* If the environment variable is created after the application is launched in a
+* console or with Visual Studio, the shell (or Visual Studio) needs to be closed
+* and reloaded to take the environment variable into account.
+*/
+const subscriptionKey = process.env.QNA_MAKER_SUBSCRIPTION_KEY;
+if (! process.env.QNA_MAKER_SUBSCRIPTION_KEY) {
+	throw "Please set/export the environment variable QNA_MAKER_SUBSCRIPTION_KEY.";
+}
 
-// Authorization endpoint key
-// From Publish Page
-var endpoint_key = "YOUR-ENDPOINT-KEY";
+const authoringEndpoint = process.env.QNA_MAKER_ENDPOINT;
+if (! process.env.QNA_MAKER_ENDPOINT) {
+	throw "Please set/export the environment variable QNA_MAKER_ENDPOINT.";
+}
 
-// Management APIs postpend the version to the route
-// From Publish Page, value after POST
-// Example: /knowledgebases/ZZZ15f8c-d01b-4698-a2de-85b0dbf3358c/generateAnswer
-var route = "/knowledgebases/YOUR-KNOWLEDGE-BASE-ID/generateAnswer";
+const runtimeEndpoint = process.env.QNA_MAKER_RUNTIME_ENDPOINT;
+if (! process.env.QNA_MAKER_RUNTIME_ENDPOINT) {
+	throw "Please set/export the environment variable QNA_MAKER_RUNTIME_ENDPOINT.";
+}
 
-// JSON format for passing question to service
-var question = {'question': 'Is the QnA Maker Service free?','top': 3};
+const kbId = process.env.QNA_MAKER_KB_ID;
+if (! process.env.QNA_MAKER_KB_ID) {
+	throw "Please set/export the environment variable QNA_MAKER_KB_ID.";
+}
 
-var getanswer = async () => {
+const getEndpointKeyMethod = "/qnamaker/v4.0/endpointkeys";
 
-    try{
-        // Add an utterance
-        var options = {
-            uri: host + route,
-            method: 'POST',
-            headers: {
-                'Authorization': "EndpointKey " + endpoint_key
-            },
-            json: true,
-            body: question
-        };
-
-        var response = await request_as_promised.post(options);
-
-        console.log(response);
-
-    } catch (err){
-        console.log(err.statusCode);
-        console.log(err.message);
-        console.log(err.error);
-    }
+const getEndpointKey = async () => {
+	var request_params = {
+		uri: authoringEndpoint + getEndpointKeyMethod,
+		method: 'GET',
+		headers: {
+			'Ocp-Apim-Subscription-Key': subscriptionKey
+		}
+	};
+	var response = await request(request_params);
+	var result = JSON.parse (response.body);
+	return result.primaryEndpointKey;
 };
 
-getanswer();
+const getAnswerMethod = "/qnamaker/knowledgebases/" + kbId + "/generateAnswer";
+
+// JSON format for passing question to service
+const question = {'question': 'Is the QnA Maker Service free?','top': 3};
+
+const getAnswer = async (endpointKey) => {
+	var request_params = {
+		uri: runtimeEndpoint + getAnswerMethod,
+		method: 'POST',
+		headers: {
+			'Content-Type' : 'application/json',
+			'Content-Length' : JSON.stringify(question).length,
+// Note this differs from the "Ocp-Apim-Subscription-Key"/<subscription key> used by most Cognitive Services.
+			'Authorization': "EndpointKey " + endpointKey
+		},
+		json: true,
+		body: question
+	};
+	var response = await request(request_params);
+	return response.body;
+};
+
+const main = async()=>{
+	var endpointKey = await getEndpointKey();
+	return await getAnswer(endpointKey);
+}
+
+main()
+.then(answer => {
+    console.log("Answer:")
+	console.log(answer);
+}).catch(err => {
+    console.log(err);
+})
