@@ -5,19 +5,12 @@ import (
     "encoding/json"
     "fmt"
     "io/ioutil"
+	"log"
     "net/http"
+	"os"
     "strconv"
     "time"
 )
-
-var host string = "https://{your-resource-name}.api.cognitive.microsoft.com"
-var service string = "/qnamaker/v4.0"
-var method string = "/knowledgebases/create"
-
-var uri = host + service + method
-
-// Replace this with a valid subscription key.
-var subscriptionKey string = "<your-qna-maker-subscription-key>"
 
 var kb string = `{
 	"name": "QnA Maker FAQ",
@@ -48,9 +41,9 @@ var kb string = `{
 	Body	string
 }
 
-func post(uri string, content string) Response {
+func post(uri string, content string, subscription_key string) Response {
 	req, _ := http.NewRequest("POST", uri, bytes.NewBuffer([]byte(content)))
-	req.Header.Add("Ocp-Apim-Subscription-Key", subscriptionKey)
+	req.Header.Add("Ocp-Apim-Subscription-Key", subscription_key)
 	req.Header.Add("Content-Type", "application/json")
 	req.Header.Add("Content-Length", strconv.Itoa(len(content)))
 	client := &http.Client{}
@@ -65,9 +58,9 @@ func post(uri string, content string) Response {
 	return Response {response.Header, string(body)}
 }
 
-func get(uri string) Response {
+func get(uri string, subscription_key string) Response {
 	req, _ := http.NewRequest("GET", uri, nil)
-	req.Header.Add("Ocp-Apim-Subscription-Key", subscriptionKey)
+	req.Header.Add("Ocp-Apim-Subscription-Key", subscription_key)
 	client := &http.Client{}
 	response, err := client.Do(req)
 	if err != nil {
@@ -82,9 +75,9 @@ func get(uri string) Response {
 	return Response {response.Header, string(body)}
 }
 
-func create_kb(uri string, req string) (string, string) {
+func create_kb(uri string, req string, subscription_key string) (string, string) {
 	fmt.Println("Calling " + uri + ".")
-	result := post(uri, req)
+	result := post(uri, req, subscription_key)
 
 	operationIds, exists := result.Headers["Location"]
 
@@ -96,28 +89,44 @@ func create_kb(uri string, req string) (string, string) {
 	}
 }
 
-func check_status(uri string) (string, string) {
+func check_status(uri string, subscription_key string) (string) {
 	fmt.Println("Calling " + uri + ".")
-	result := get(uri)
-	if retry, success := result.Headers["Retry-After"]; success {
-		return retry[0], result.Body
-	} else {
-// If the response headers did not include a Retry-After value, default to 30 seconds.
-		return "30", result.Body
-	}
+	result := get(uri, subscription_key)
+	return result.Body
 }
 
 func main() {
+/*
+* Configure the local environment:
+* Set the QNA_MAKER_SUBSCRIPTION_KEY and QNA_MAKER_ENDPOINT
+* environment variables on your local machine using
+* the appropriate method for your preferred shell (Bash, PowerShell, Command
+* Prompt, etc.). 
+*
+* If the environment variable is created after the application is launched in a
+* console or with Visual Studio, the shell (or Visual Studio) needs to be closed
+* and reloaded to take the environment variable into account.
+*/
+	if "" == os.Getenv("QNA_MAKER_SUBSCRIPTION_KEY") {
+		log.Fatal("Please set/export the environment variable QNA_MAKER_SUBSCRIPTION_KEY.")
+	}
+	var subscription_key string = os.Getenv("QNA_MAKER_SUBSCRIPTION_KEY")
+	if "" == os.Getenv("QNA_MAKER_ENDPOINT") {
+		log.Fatal("Please set/export the environment variable QNA_MAKER_ENDPOINT.")
+	}
+	var endpoint string = os.Getenv("QNA_MAKER_ENDPOINT")
+
+	var service string = "/qnamaker/v4.0"
+	var method string = "/knowledgebases/create"
+	var uri = endpoint + service + method
 	
-	operation, body := create_kb(uri, kb)
+	operation, body := create_kb(uri, kb, subscription_key)
 	fmt.Printf(body + "\n")
 
 	var done bool = false
-
 	for done == false {
-
-		uri := host + service + operation
-		wait, status := check_status(uri)
+		uri := endpoint + service + operation
+		status := check_status(uri, subscription_key)
 		fmt.Println(status)
 
 		var status_obj map[string]interface{}
@@ -129,9 +138,8 @@ func main() {
         // If the operation isn't finished, wait and query again.
 		if state == "Running" || state == "NotStarted" {
 
-			fmt.Printf ("Waiting " + wait + " seconds...")
-			sec, _ := strconv.Atoi(wait)
-			time.Sleep (time.Duration(sec) * time.Second)
+			fmt.Printf ("Waiting 10 seconds...")
+			time.Sleep (10 * time.Second)
 
 		} else {
 			done = true

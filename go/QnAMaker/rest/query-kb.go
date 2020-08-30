@@ -2,48 +2,81 @@ package main
 
 import (
     "bytes"
+	"encoding/json"
     "fmt"
     "io/ioutil"
+    "log"
     "net/http"
+    "os"
     "strconv"
 )
 
-// 1. Replace variable values with your own from QnA Maker Publish page
-// 2. Compile with: go build get-answer.go
-// 3. Execute with: ./get-answer
+/*
+* Configure the local environment:
+* Set the QNA_MAKER_SUBSCRIPTION_KEY, QNA_MAKER_ENDPOINT,
+* QNA_MAKER_RUNTIME_ENDPOINT, and QNA_MAKER_KB_ID
+* environment variables on your local machine using
+* the appropriate method for your preferred shell (Bash, PowerShell, Command
+* Prompt, etc.). 
+*
+* If the environment variable is created after the application is launched in a
+* console or with Visual Studio, the shell (or Visual Studio) needs to be closed
+* and reloaded to take the environment variable into account.
+*/
 
 func main() {
+    if "" == os.Getenv("QNA_MAKER_ENDPOINT") {
+        log.Fatal("Please set/export the environment variable QNA_MAKER_ENDPOINT.")
+    }
+    var authoring_endpoint string = os.Getenv("QNA_MAKER_ENDPOINT")
 
-	// Represents the various elements used to create HTTP request URIs
-	// for QnA Maker operations.
-	// From Publish Page: HOST
-	// Example: https://YOUR-RESOURCE-NAME.azurewebsites.net/qnamaker
-	var host string = "https://YOUR-RESOURCE-NAME.azurewebsites.net/qnamaker";
+    if "" == os.Getenv("QNA_MAKER_RUNTIME_ENDPOINT") {
+        log.Fatal("Please set/export the environment variable QNA_MAKER_RUNTIME_ENDPOINT.")
+    }
+    var runtime_endpoint string = os.Getenv("QNA_MAKER_RUNTIME_ENDPOINT")
 
-	// Authorization endpoint key
-	// From Publish Page
-	var endpoint_key string = "YOUR-ENDPOINT-KEY";
+    if "" == os.Getenv("QNA_MAKER_SUBSCRIPTION_KEY") {
+        log.Fatal("Please set/export the environment variable QNA_MAKER_SUBSCRIPTION_KEY.")
+    }
+    var subscription_key string = os.Getenv("QNA_MAKER_SUBSCRIPTION_KEY")
 
-	// Management APIs postpend the version to the route
-	// From Publish Page, value after POST
-	// Example: /knowledgebases/ZZZ15f8c-d01b-4698-a2de-85b0dbf3358c/generateAnswer
-	var route string = "/knowledgebases/YOUR-KNOWLEDGE-BASE-ID/generateAnswer";
+    if "" == os.Getenv("QNA_MAKER_KB_ID") {
+        log.Fatal("Please set/export the environment variable QNA_MAKER_KB_ID.")
+    }
+    var knowledge_base_id string = os.Getenv("QNA_MAKER_KB_ID")
 
-	// JSON format for passing question to service
-	var question string = "{'question': 'Is the QnA Maker Service free?','top': 3}";
+	// Get the primary endpoint key for this subscription.
+	var get_runtime_key_uri = authoring_endpoint + "/qnamaker/v4.0/endpointkeys"
+	req, _ := http.NewRequest("GET", get_runtime_key_uri, nil)
+	req.Header.Add("Ocp-Apim-Subscription-Key", subscription_key)
+	client := &http.Client{}
+	response, err := client.Do(req)
+	if err != nil {
+		panic(err)
+	}
+	defer response.Body.Close()
+    body, _ := ioutil.ReadAll(response.Body)
+	var response_body map[string]interface{}
+	json.Unmarshal([]byte(body), &response_body)
+	endpoint_key := response_body["primaryEndpointKey"].(string)
 
-	req, _ := http.NewRequest("POST", host + route, bytes.NewBuffer([]byte(question)))
+    // JSON format for passing question to service
+    var question string = "{'question': 'Is the QnA Maker Service free?','top': 3}"
+
+	// Send the query.
+    var query_kb_uri string = runtime_endpoint + "/qnamaker/knowledgebases/" + knowledge_base_id + "/generateAnswer";
+    req, _ = http.NewRequest("POST", query_kb_uri, bytes.NewBuffer([]byte(question)))
+	// Note this differs from the "Ocp-Apim-Subscription-Key"/<subscription key> used by most Cognitive Services.
     req.Header.Add("Authorization", "EndpointKey " + endpoint_key)
     req.Header.Add("Content-Type", "application/json")
     req.Header.Add("Content-Length", strconv.Itoa(len(question)))
-    client := &http.Client{}
-    response, err := client.Do(req)
+    client = &http.Client{}
+    response, err = client.Do(req)
     if err != nil {
         panic(err)
     }
-
     defer response.Body.Close()
-    body, _ := ioutil.ReadAll(response.Body)
+    body, _ = ioutil.ReadAll(response.Body)
 
     fmt.Printf(string(body) + "\n")
 }
