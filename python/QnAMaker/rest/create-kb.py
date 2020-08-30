@@ -1,17 +1,18 @@
-import http.client, urllib.parse, json, time
+import http.client, json, os, time
+from urllib.parse import urlparse
 
-# Represents the various elements used to create HTTP request path for QnA Maker operations.
-# Replace this with a valid subscription key.
-# User host = '<your-resource-name>.cognitiveservices.azure.com' 
-host = '<your-resource-name>.cognitiveservices.azure.com'
-service = '/qnamaker/v4.0'
-method = '/knowledgebases/create'
+key_var_name = 'QNA_MAKER_SUBSCRIPTION_KEY'
+if not key_var_name in os.environ:
+	raise Exception('Please set/export the environment variable: {}'.format(key_var_name))
+subscription_key = os.environ[key_var_name]
 
-# Builds the path URL.
-path = service + method
+authoring_endpoint_var_name = 'QNA_MAKER_ENDPOINT'
+if not authoring_endpoint_var_name in os.environ:
+	raise Exception('Please set/export the environment variable: {}'.format(authoring_endpoint_var_name))
+# Note http.client.HTTPSConnection wants only the host name, not the protocol (that is, 'https://')
+authoring_endpoint = urlparse(os.environ[authoring_endpoint_var_name]).netloc
 
-# Replace this with a valid subscription key.
-subscriptionKey = '<your-qna-maker-subscription-key>'
+create_kb_method = '/qnamaker/v4.0/knowledgebases/create'
 
 kb_model = {
   "name": "QnA Maker FAQ",
@@ -32,8 +33,7 @@ kb_model = {
     }
   ],
   "urls": [
-    "https://docs.microsoft.com/en-in/azure/cognitive-services/qnamaker/faqs",
-    "https://docs.microsoft.com/en-us/bot-framework/resources-bot-framework-faq"
+    "https://docs.microsoft.com/en-us/azure/cognitive-services/qnamaker/faqs"
   ],
   "files": []
 }
@@ -45,34 +45,33 @@ def pretty_print(content):
   # Note: We convert content to and from an object so we can pretty-print it.
   return json.dumps(json.loads(content), indent=4)
 
-
-def create_kb(path, content):
-  print('Calling ' + host + path + '.')
+def create_kb(create_kb_method, content):
+  print('Calling ' + authoring_endpoint + create_kb_method + '.')
   headers = {
-    'Ocp-Apim-Subscription-Key': subscriptionKey,
+    'Ocp-Apim-Subscription-Key': subscription_key,
     'Content-Type': 'application/json',
     'Content-Length': len (content)
   }
-  conn = http.client.HTTPSConnection(host)
-  conn.request ("POST", path, content, headers)
+  conn = http.client.HTTPSConnection(authoring_endpoint)
+  conn.request ("POST", create_kb_method, content, headers)
   response = conn.getresponse ()
 
   return response.getheader('Location'), response.read ()
 
-def check_status(path):
-  print('Calling ' + host + path + '.')
-  headers = {'Ocp-Apim-Subscription-Key': subscriptionKey}
-  conn = http.client.HTTPSConnection(host)
-  conn.request("GET", path, None, headers)
+def check_status(check_status_method):
+  print('Calling ' + authoring_endpoint + check_status_method + '.')
+  headers = {'Ocp-Apim-Subscription-Key': subscription_key}
+  conn = http.client.HTTPSConnection(authoring_endpoint)
+  conn.request("GET", check_status_method, None, headers)
   response = conn.getresponse ()
-  return response.getheader('Retry-After'), response.read ()
+  return response.read ()
 
 # Call create_kb
-operation, result = create_kb(path, content)
+operation, result = create_kb(create_kb_method, content)
 print(pretty_print(result))
 
 # Add operation ID to URL route
-path = service + operation
+check_status_method = '/qnamaker/v4.0' + operation
 
 # Set done to false
 done = False
@@ -81,7 +80,7 @@ done = False
 while False == done:
 
   # Gets the status of the operation.
-  wait, status = check_status(path)
+  status = check_status(check_status_method)
 
   # Print status checks in JSON with presentable formatting
   print(pretty_print(status))
@@ -91,7 +90,7 @@ while False == done:
 
   # If the operation isn't finished, wait and query again.
   if state == 'Running' or state == 'NotStarted':
-    print('Waiting ' + wait + ' seconds...')
-    time.sleep(int(wait))
+    print('Waiting 10 seconds...')
+    time.sleep(10)
   else:
     done = True # request has been processed, if successful, knowledge base is created

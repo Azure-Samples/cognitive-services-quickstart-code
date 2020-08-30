@@ -1,44 +1,53 @@
-import http.client, urllib.parse, json, time, sys
+import http.client, json, os, sys
+from urllib.parse import urlparse
 
+key_var_name = 'QNA_MAKER_SUBSCRIPTION_KEY'
+if not key_var_name in os.environ:
+	raise Exception('Please set/export the environment variable: {}'.format(key_var_name))
+subscription_key = os.environ[key_var_name]
 
+authoring_endpoint_var_name = 'QNA_MAKER_ENDPOINT'
+if not authoring_endpoint_var_name in os.environ:
+	raise Exception('Please set/export the environment variable: {}'.format(authoring_endpoint_var_name))
+# Note http.client.HTTPSConnection wants only the host name, not the protocol (that is, 'https://')
+authoring_endpoint = urlparse(os.environ[authoring_endpoint_var_name]).netloc
 
-  # Represents the various elements used to create HTTP request URIs
-  # for QnA Maker operations.
-  # From Publish Page
-  # Example: YOUR-RESOURCE-NAME.azurewebsites.net
-  # CAUTION: This is not the exact value of HOST field
-  # HOST trimmed to work with http library
-  host = "YOUR-RESOURCE-NAME.azurewebsites.net";
+runtime_endpoint_var_name = 'QNA_MAKER_RUNTIME_ENDPOINT'
+if not runtime_endpoint_var_name in os.environ:
+	raise Exception('Please set/export the environment variable: {}'.format(runtime_endpoint_var_name))
+runtime_endpoint = urlparse(os.environ[runtime_endpoint_var_name]).netloc
 
-  # Authorization endpoint key
-  # From Publish Page
-  endpoint_key = "YOUR-ENDPOINT-KEY";
+kb_var_name = 'QNA_MAKER_KB_ID'
+if not kb_var_name in os.environ:
+	raise Exception('Please set/export the environment variable: {}'.format(kb_var_name))
+kb_id = os.environ[kb_var_name]
 
-  # Management APIs postpend the version to the route
-  # From Publish Page
-  # Example: /knowledgebases/ZZZ15f8c-d01b-4698-a2de-85b0dbf3358c/generateAnswer
-  # CAUTION: This is not the exact value after POST
-  # Part of HOST is prepended to route to work with http library
-  route = "/qnamaker/knowledgebases/e7015f8c-d01b-4698-a2de-85b0dbf3358c/generateAnswer";
+get_endpoint_key_method = "/qnamaker/v4.0/endpointKeys"
 
-  # JSON format for passing question to service
-  question = "{'question': 'Is the QnA Maker Service free?','top': 3}";
+query_kb_method = "/qnamaker/knowledgebases/" + kb_id + "/generateAnswer";
 
-  headers = {
-    'Authorization': 'EndpointKey ' + endpoint_key,
-    'Content-Type': 'application/json'
-  }
+# JSON format for passing question to service
+question = "{'question': 'Is the QnA Maker Service free?','top': 3}";
 
 try:
-  conn = http.client.HTTPSConnection(host,port=443)
+	authoring_conn = http.client.HTTPSConnection(authoring_endpoint,port=443)
+	headers = {
+		'Ocp-Apim-Subscription-Key': subscription_key
+	}
+	authoring_conn.request ("GET", get_endpoint_key_method, "", headers)
+	response = authoring_conn.getresponse ()
+	endpoint_key = json.loads(response.read())["primaryEndpointKey"]
 
-  conn.request ("POST", route,  question, headers)
-
-  response = conn.getresponse ()
-
-  answer = response.read ()
-
-  print(json.dumps(json.loads(answer), indent=4))
+	runtime_conn = http.client.HTTPSConnection(runtime_endpoint,port=443)
+	headers = {
+		# Note this differs from the "Ocp-Apim-Subscription-Key"/<subscription key> used by most Cognitive Services.
+		'Authorization': 'EndpointKey ' + endpoint_key,
+		'Content-Type': 'application/json'
+	}
+	runtime_conn.request ("POST", query_kb_method, question, headers)
+	response = runtime_conn.getresponse ()
+	answer = response.read ()
+	print(json.dumps(json.loads(answer), indent=4))
 
 except :
     print ("Unexpected error:", sys.exc_info()[0])
