@@ -1,5 +1,6 @@
 package main
 
+// <dependencies>
 import (
     "bytes"
     "fmt"
@@ -7,7 +8,9 @@ import (
     "net/http"
     "os"
 )
+// </dependencies>
 
+// <main>
 func main() {
 /*
 * Configure the local environment:
@@ -53,3 +56,4 @@ func main() {
     // print 204 - success code
     fmt.Println(response.StatusCode)
 }
+// </main>

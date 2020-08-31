@@ -1,5 +1,6 @@
 package main
 
+// <dependencies>
 import (
     "bytes"
 	"encoding/json"
@@ -10,6 +11,7 @@ import (
     "os"
     "strconv"
 )
+// </dependencies>
 
 /*
 * Configure the local environment:
@@ -24,6 +26,7 @@ import (
 * and reloaded to take the environment variable into account.
 */
 
+// <main>
 func main() {
     if "" == os.Getenv("QNA_MAKER_ENDPOINT") {
         log.Fatal("Please set/export the environment variable QNA_MAKER_ENDPOINT.")
@@ -80,3 +83,4 @@ func main() {
 
     fmt.Printf(string(body) + "\n")
 }
+// </main>

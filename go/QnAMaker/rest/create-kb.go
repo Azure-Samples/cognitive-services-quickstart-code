@@ -1,5 +1,6 @@
 package main
 
+// <dependencies>
 import (
     "bytes"
     "encoding/json"
@@ -11,7 +12,9 @@ import (
     "strconv"
     "time"
 )
+// </dependencies>
 
+// <model>
 var kb string = `{
 	"name": "QnA Maker FAQ",
 	"qnaList": [
@@ -35,12 +38,16 @@ var kb string = `{
 	],
 	"files": []
   }`;
+// </model>
 
-  type Response struct {
+// <response>
+type Response struct {
 	Headers	map[string][]string
 	Body	string
 }
+// </response>
 
+// <post>
 func post(uri string, content string, subscription_key string) Response {
 	req, _ := http.NewRequest("POST", uri, bytes.NewBuffer([]byte(content)))
 	req.Header.Add("Ocp-Apim-Subscription-Key", subscription_key)
@@ -57,7 +64,9 @@ func post(uri string, content string, subscription_key string) Response {
 
 	return Response {response.Header, string(body)}
 }
+// </post>
 
+// <get>
 func get(uri string, subscription_key string) Response {
 	req, _ := http.NewRequest("GET", uri, nil)
 	req.Header.Add("Ocp-Apim-Subscription-Key", subscription_key)
@@ -74,7 +83,9 @@ func get(uri string, subscription_key string) Response {
 	fmt.Println(response.Header)
 	return Response {response.Header, string(body)}
 }
+// </get>
 
+// <create_kb>
 func create_kb(uri string, req string, subscription_key string) (string, string) {
 	fmt.Println("Calling " + uri + ".")
 	result := post(uri, req, subscription_key)
@@ -88,13 +99,17 @@ func create_kb(uri string, req string, subscription_key string) (string, string)
 		return "", result.Body
 	}
 }
+// </create_kb>
 
+// <get_status>
 func check_status(uri string, subscription_key string) (string) {
 	fmt.Println("Calling " + uri + ".")
 	result := get(uri, subscription_key)
 	return result.Body
 }
+// </get_status>
 
+// <main>
 func main() {
 /*
 * Configure the local environment:
@@ -146,3 +161,4 @@ func main() {
 		}
 	}
 }
+// </main>
