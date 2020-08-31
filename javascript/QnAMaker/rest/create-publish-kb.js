@@ -45,7 +45,6 @@ if (! process.env.QNA_MAKER_ENDPOINT) {
 }
 // </authorization>
 
-
 // <utility>
 // Formats and indents JSON for display.
 const pretty_print = (s) => {
@@ -136,7 +135,7 @@ const deleteKb = async (kbId) => {
 }
 // </deleteKb>
 
-// <download>
+// <downloadKb>
 const downloadKb = async (kbId) => {
 
     try{
@@ -160,7 +159,7 @@ const downloadKb = async (kbId) => {
         throw err;
     }
 }
- // </download>
+ // </downloadKb>
 
 // <replaceKb>
 const replaceKb = async (kbId) => {
@@ -205,7 +204,7 @@ const replaceKb = async (kbId) => {
 }      
 // </replaceKb>
 
-// <publish>
+// <publishKb>
 var publishKb = async (kbId) => {
 
     try{
@@ -225,7 +224,7 @@ var publishKb = async (kbId) => {
         throw err;
     }
 };
-// </publish>
+// </publishKb>
 
 // <operationDetails>
 const getOperationStatus = async (result) => {
@@ -295,13 +294,10 @@ const main = async()=>{
         throw err;
     }
 }
-// </main>
 
-// <promise>
 main()
 .then(kbID => {
     console.log("KBID = " + kbID);
 }).catch(err => {
     console.log(JSON.stringify(err));
 })
-// </promise>

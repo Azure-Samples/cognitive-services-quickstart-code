@@ -5,6 +5,7 @@
  * npm install requestretry
  */
 const request = require("requestretry");
+// </dependencies>
 
 /*
 * Configure the local environment:
@@ -18,6 +19,7 @@ const request = require("requestretry");
 * console or with Visual Studio, the shell (or Visual Studio) needs to be closed
 * and reloaded to take the environment variable into account.
 */
+// <constants>
 const subscriptionKey = process.env.QNA_MAKER_SUBSCRIPTION_KEY;
 if (! process.env.QNA_MAKER_SUBSCRIPTION_KEY) {
 	throw "Please set/export the environment variable QNA_MAKER_SUBSCRIPTION_KEY.";
@@ -39,7 +41,9 @@ if (! process.env.QNA_MAKER_KB_ID) {
 }
 
 const getEndpointKeyMethod = "/qnamaker/v4.0/endpointkeys";
+// </constants>
 
+// <query>
 const getEndpointKey = async () => {
 	var request_params = {
 		uri: authoringEndpoint + getEndpointKeyMethod,
@@ -87,3 +91,4 @@ main()
 }).catch(err => {
     console.log(err);
 })
+// </query>
