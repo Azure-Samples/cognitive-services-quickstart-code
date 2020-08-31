@@ -33,7 +33,7 @@ const sleep = (waitTimeInMs) => new Promise(resolve => setTimeout(resolve, waitT
 * console or with Visual Studio, the shell (or Visual Studio) needs to be closed
 * and reloaded to take the environment variable into account.
 */
-//<authorization>
+// <authorization>
 const resourceKey = process.env.QNA_MAKER_SUBSCRIPTION_KEY;
 if (! process.env.QNA_MAKER_SUBSCRIPTION_KEY) {
 	throw "Please set/export the environment variable QNA_MAKER_SUBSCRIPTION_KEY.";
@@ -57,7 +57,6 @@ const createKb = async () => {
 
     try{
   
-        // <model>
         // Dictionary that holds the knowledge base.
         // The data source includes a QnA pair with metadata, the URL for the
         // QnA Maker FAQ article, and the URL for the Azure Bot Service FAQ article.
@@ -301,3 +300,4 @@ main()
 }).catch(err => {
     console.log(JSON.stringify(err));
 })
+// </main>
