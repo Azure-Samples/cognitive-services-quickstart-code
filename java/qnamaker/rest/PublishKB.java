@@ -1,3 +1,4 @@
+// <dependencies>
 import java.io.*;
 import java.lang.reflect.Type;
 import java.net.*;
@@ -19,12 +20,12 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
+// </dependencies>
 
 // Compile with: javac -cp ".;lib/*" PublishKB.java
 // Run with: java -cp ".;lib/*" PublishKB
 
 public class PublishKB {
-
 	/* Configure the local environment:
 	* Set the following environment variables on your local machine using the
 	* appropriate method for your preferred shell (Bash, PowerShell, Command
@@ -37,13 +38,16 @@ public class PublishKB {
 	* If the environment variable is created after the application is launched in a console or with Visual
 	* Studio, the shell (or Visual Studio) needs to be closed and reloaded to take the environment variable into account.
 	*/
+// <constants>
     private static String authoring_key = System.getenv("QNA_MAKER_SUBSCRIPTION_KEY");
 	private static String authoring_endpoint = System.getenv("QNA_MAKER_ENDPOINT");
 	private static String knowledge_base_id = System.getenv("QNA_MAKER_KB_ID");
 
     static String service = "/qnamaker/v4.0";
     static String method = "/knowledgebases/" + knowledge_base_id;
+// </constants>
 
+// <post>
     public static class Response {
         Map<String, List<String>> Headers;
 		int Status;
@@ -102,4 +106,5 @@ public class PublishKB {
             System.out.println(e.getMessage());
         }
     }
+// </post>
 }

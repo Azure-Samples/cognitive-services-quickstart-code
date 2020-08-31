@@ -1,3 +1,4 @@
+// <dependencies>
 import java.io.*;
 import java.lang.reflect.Type;
 import java.net.*;
@@ -19,12 +20,13 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
+// </dependencies>
 
 // Compile with: javac -cp ".;lib/*" CreateKB.java
 // Run with: java -cp ".;lib/*" CreateKB
 
 public class CreateKB {
-
+// <constants>
 	/* Configure the local environment:
 	* Set the following environment variables on your local machine using the
 	* appropriate method for your preferred shell (Bash, PowerShell, Command
@@ -41,7 +43,9 @@ public class CreateKB {
 
     static String service = "/qnamaker/v4.0";
     static String method = "/knowledgebases/create";
+// </constants>
 
+// <model>
     public static class KB {
         String name;
         Question[] qnaList;
@@ -87,14 +91,18 @@ public class CreateKB {
 
         return kb;
     }
+// </model>
 
+// <pretty>
     public static String PrettyPrint (String json_text) {
         JsonParser parser = new JsonParser();
         JsonElement json = parser.parse(json_text);
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         return gson.toJson(json);
     }
+// </pretty>
 
+// <response>
     public static class Response {
         Map<String, List<String>> Headers;
         String Response;
@@ -104,7 +112,9 @@ public class CreateKB {
             this.Response = response;
         }
     }
+// </response>
 
+// <post>
     public static Response Post (URL url, String content) throws Exception{
         HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
         connection.setRequestMethod("POST");
@@ -128,7 +138,9 @@ public class CreateKB {
         in.close();
         return new Response (connection.getHeaderFields(), response.toString());
     }
+// </post>
 
+// <get>
     public static Response Get (URL url) throws Exception{
         HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
@@ -144,20 +156,26 @@ public class CreateKB {
         in.close();
         return new Response (connection.getHeaderFields(), response.toString());
     }
+// </get>
 
+// <create_kb>
     public static Response CreateKB (KB kb) throws Exception {
         URL url = new URL (authoring_endpoint + service + method);
         System.out.println ("Calling " + url.toString() + ".");
         String content = new Gson().toJson(kb);
         return Post(url, content);
     }
+// </create_kb>
 
+// <get_status>
     public static Response GetStatus (String operation) throws Exception {
         URL url = new URL (authoring_endpoint + service + operation);
         System.out.println ("Calling " + url.toString() + ".");
         return Get(url);
     }
+// </get_status>
 
+// <main>
     public static void main(String[] args) {
         try {
             // Send the request to create the knowledge base.
@@ -194,5 +212,5 @@ public class CreateKB {
             System.out.println (e);
         }
     }
-
+// </main>
 }

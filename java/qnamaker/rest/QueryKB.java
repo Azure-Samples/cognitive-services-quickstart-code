@@ -1,3 +1,4 @@
+// <dependencies>
 import java.io.*;
 import java.lang.reflect.Type;
 import java.net.*;
@@ -19,6 +20,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
+// </dependencies>
 
 // Compile with: javac -cp ".;lib/*" QueryKB.java
 // Run with: java -cp ".;lib/*" QueryKB
@@ -38,6 +40,7 @@ public class QueryKB {
 	* If the environment variable is created after the application is launched in a console or with Visual
 	* Studio, the shell (or Visual Studio) needs to be closed and reloaded to take the environment variable into account.
 	*/
+// <constants>
     private static String authoring_key = System.getenv("QNA_MAKER_SUBSCRIPTION_KEY");
 	private static String authoring_endpoint = System.getenv("QNA_MAKER_ENDPOINT");
 	private static String runtime_endpoint = System.getenv("QNA_MAKER_RUNTIME_ENDPOINT");
@@ -47,7 +50,9 @@ public class QueryKB {
 	static String get_runtime_key_method = "/endpointkeys";
 	static String runtime_service = "/qnamaker/";
     static String query_kb_method = "/knowledgebases/" + knowledge_base_id + "/generateAnswer";
+// </constants>
 
+// <post>
     public static String PrettyPrint (String json_text) {
         JsonParser parser = new JsonParser();
         JsonElement json = parser.parse(json_text);
@@ -143,4 +148,5 @@ public class QueryKB {
             System.out.println(e.getMessage());
         }
     }
+// </post>
 }
