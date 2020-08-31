@@ -1,6 +1,9 @@
+# <dependencies>
 import http.client, json, os, time
 from urllib.parse import urlparse
+# </dependencies>
 
+# <constants>
 key_var_name = 'QNA_MAKER_SUBSCRIPTION_KEY'
 if not key_var_name in os.environ:
 	raise Exception('Please set/export the environment variable: {}'.format(key_var_name))
@@ -13,7 +16,9 @@ if not authoring_endpoint_var_name in os.environ:
 authoring_endpoint = urlparse(os.environ[authoring_endpoint_var_name]).netloc
 
 create_kb_method = '/qnamaker/v4.0/knowledgebases/create'
+# </constants>
 
+# <model>
 kb_model = {
   "name": "QnA Maker FAQ",
   "qnaList": [
@@ -40,11 +45,15 @@ kb_model = {
 
 # Convert the request to a string.
 content = json.dumps(kb_model)
+# </model>
 
+# <pretty>
 def pretty_print(content):
   # Note: We convert content to and from an object so we can pretty-print it.
   return json.dumps(json.loads(content), indent=4)
+# </pretty>
 
+# <create_kb>
 def create_kb(create_kb_method, content):
   print('Calling ' + authoring_endpoint + create_kb_method + '.')
   headers = {
@@ -57,7 +66,9 @@ def create_kb(create_kb_method, content):
   response = conn.getresponse ()
 
   return response.getheader('Location'), response.read ()
+# </create_kb>
 
+# <get_status>
 def check_status(check_status_method):
   print('Calling ' + authoring_endpoint + check_status_method + '.')
   headers = {'Ocp-Apim-Subscription-Key': subscription_key}
@@ -65,7 +76,9 @@ def check_status(check_status_method):
   conn.request("GET", check_status_method, None, headers)
   response = conn.getresponse ()
   return response.read ()
+# </get_status>
 
+# <main>
 # Call create_kb
 operation, result = create_kb(create_kb_method, content)
 print(pretty_print(result))
@@ -94,3 +107,4 @@ while False == done:
     time.sleep(10)
   else:
     done = True # request has been processed, if successful, knowledge base is created
+# </main>

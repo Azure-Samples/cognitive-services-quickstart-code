@@ -1,6 +1,9 @@
+# <dependencies>
 import http.client, json, os, sys
 from urllib.parse import urlparse
+# </dependencies>
 
+# <constants>
 key_var_name = 'QNA_MAKER_SUBSCRIPTION_KEY'
 if not key_var_name in os.environ:
 	raise Exception('Please set/export the environment variable: {}'.format(key_var_name))
@@ -28,7 +31,9 @@ query_kb_method = "/qnamaker/knowledgebases/" + kb_id + "/generateAnswer";
 
 # JSON format for passing question to service
 question = "{'question': 'Is the QnA Maker Service free?','top': 3}";
+# <constants>
 
+# <main>
 try:
 	authoring_conn = http.client.HTTPSConnection(authoring_endpoint,port=443)
 	headers = {
@@ -52,3 +57,4 @@ try:
 except :
     print ("Unexpected error:", sys.exc_info()[0])
     print ("Unexpected error:", sys.exc_info()[1])
+# </main>

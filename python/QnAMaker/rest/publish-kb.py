@@ -1,6 +1,9 @@
+# <dependencies>
 import http.client, os
 from urllib.parse import urlparse
+# </dependencies>
 
+# <constants>
 key_var_name = 'QNA_MAKER_SUBSCRIPTION_KEY'
 if not key_var_name in os.environ:
 	raise Exception('Please set/export the environment variable: {}'.format(key_var_name))
@@ -18,7 +21,9 @@ if not kb_var_name in os.environ:
 kb_id = os.environ[kb_var_name]
 
 publish_kb_method = '/qnamaker/v4.0/knowledgebases/' + kb_id
+# </constants>
 
+# <main>
 try:
   headers = {
     'Ocp-Apim-Subscription-Key': subscription_key
@@ -35,3 +40,4 @@ try:
 except :
     print ("Unexpected error:", sys.exc_info()[0])
     print ("Unexpected error:", sys.exc_info()[1])
+# </main>
