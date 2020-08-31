@@ -1,3 +1,4 @@
+// <dependencies>
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,13 @@ using System.Threading.Tasks;
 
 // NOTE: Install the Newtonsoft.Json NuGet package.
 using Newtonsoft.Json;
+// </dependencies>
 
 namespace QnaQuickstartCreateKnowledgebase
 {
     class Program
     {
+// <constants>
         private const string subscriptionKeyVar = "QNA_MAKER_SUBSCRIPTION_KEY";
         private const string endpointVar = "QNA_MAKER_ENDPOINT";
 
@@ -24,7 +27,9 @@ namespace QnaQuickstartCreateKnowledgebase
         // for QnA Maker operations.
         static string service = "/qnamaker/v4.0";
         static string method = "/knowledgebases/create";
+// </constants>
 
+// <kb>
         /// <summary>
         /// Defines the data source used to create the knowledge base.
         /// The data source includes a QnA pair, with metadata, 
@@ -56,7 +61,9 @@ namespace QnaQuickstartCreateKnowledgebase
   'files': []
 }
 ";
+// </kb>
 
+// <support>
         /// <summary>
         /// Static constuctor. Verifies that we found the subscription key and
         /// endpoint in the environment variables.
@@ -97,7 +104,9 @@ namespace QnaQuickstartCreateKnowledgebase
         {
             return JsonConvert.SerializeObject(JsonConvert.DeserializeObject(s), Formatting.Indented);
         }
+// </support>
 
+// <post>
         /// <summary>
         /// Asynchronously sends a POST HTTP request.
         /// </summary>
@@ -120,7 +129,9 @@ namespace QnaQuickstartCreateKnowledgebase
                 return new Response(response.Headers, responseBody);
             }
         }
+// </post>
 
+// <get>
         /// <summary>
         /// Asynchronously sends a GET HTTP request.
         /// </summary>
@@ -141,7 +152,9 @@ namespace QnaQuickstartCreateKnowledgebase
                 return new Response(response.Headers, responseBody);
             }
         }
+// </get>
 
+// <create_kb>
         /// <summary>
         /// Creates a knowledge base.
         /// </summary>
@@ -252,7 +265,9 @@ namespace QnaQuickstartCreateKnowledgebase
             }
 
         }
+// </create_kb>
 
+// <main>
         static void Main(string[] args)
         {
             // Invoke the CreateKB() method to create a knowledge base, periodically 
@@ -263,5 +278,6 @@ namespace QnaQuickstartCreateKnowledgebase
             // The console waits for a key to be pressed before closing.
             Console.ReadKey();
         }
+// </main>
     }
 }
