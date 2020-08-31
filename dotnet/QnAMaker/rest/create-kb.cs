@@ -154,7 +154,7 @@ namespace QnaQuickstartCreateKnowledgebase
         }
 // </get>
 
-// <create_kb>
+// <post_create_kb>
         /// <summary>
         /// Creates a knowledge base.
         /// </summary>
@@ -176,7 +176,9 @@ namespace QnaQuickstartCreateKnowledgebase
             // HTTP request URI and the specified data source.
             return await Post(uri, kb);
         }
+// </post_create_kb>
 
+// <get_status>
         /// <summary>
         /// Gets the status of the specified QnA Maker operation.
         /// </summary>
@@ -198,7 +200,9 @@ namespace QnaQuickstartCreateKnowledgebase
             // HTTP request URI.
             return await Get(uri);
         }
+// </get_status>
 
+// <create_kb>
         /// <summary>
         /// Creates a knowledge base, periodically checking status 
         /// until the knowledge base is created.
