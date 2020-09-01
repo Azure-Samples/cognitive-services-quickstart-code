@@ -31,7 +31,7 @@ query_kb_method = "/qnamaker/knowledgebases/" + kb_id + "/generateAnswer";
 
 # JSON format for passing question to service
 question = "{'question': 'Is the QnA Maker Service free?','top': 3}";
-# <constants>
+# </constants>
 
 # <main>
 try:
