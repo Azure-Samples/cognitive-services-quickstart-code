@@ -104,6 +104,42 @@ func get_runtime_endpoint_key () string {
 }
 // </get_runtime_endpoint_key>
 
+// <wait_for_operation>
+func wait_for_operation (operation_id string) string {
+	// Get the context, which is required by the SDK methods.
+	ctx := context.Background()
+
+	ops_client := qnamaker.NewOperationsClient(endpoint)
+	// Set the subscription key on the client.
+	ops_client.Authorizer = autorest.NewCognitiveServicesAuthorizer(subscription_key)
+
+	result := ""
+	done := false
+	for done == false {
+		op_result, op_err := ops_client.GetDetails (ctx, operation_id)
+		if op_err != nil {
+			log.Fatal(op_err)
+		}
+		// If the operation isn't finished, wait and query again.
+		if op_result.OperationState == "Running" || op_result.OperationState == "NotStarted" {
+			fmt.Println ("Operation is not finished. Waiting 10 seconds...")
+			time.Sleep (time.Duration(10) * time.Second)
+		} else {
+			done = true
+			fmt.Print ("Operation result: " + op_result.OperationState)
+			fmt.Println ()
+			if op_result.OperationState == "Failed" {
+				handle_error (op_result)
+				log.Fatal()
+			} else {
+				result = strings.ReplaceAll(*op_result.ResourceLocation, "/knowledgebases/", "")
+			}
+		}
+	}
+	return result
+}
+// </wait_for_operation>
+
 // <create_kb>
 // Create a knowledge base.
 func create_kb () string {
@@ -113,11 +149,6 @@ func create_kb () string {
 	client := qnamaker.NewKnowledgebaseClient(endpoint)
 	// Set the subscription key on the client.
 	client.Authorizer = autorest.NewCognitiveServicesAuthorizer(subscription_key)
-
-	// We use this to check on the status of the create KB request.
-	ops_client := qnamaker.NewOperationsClient(endpoint)
-	// Set the subscription key on the client.
-	ops_client.Authorizer = autorest.NewCognitiveServicesAuthorizer(subscription_key)
 
 	name := "QnA Maker FAQ"
 
@@ -157,31 +188,7 @@ func create_kb () string {
 	// Wait for the KB create operation to finish.
 	fmt.Println ("Waiting for KB create operation to finish...")
 	// Operation.OperationID is a pointer, so we need to dereference it.
-	operation_id := *kb_result.OperationID
-	kb_id := ""
-	done := false
-	for done == false {
-		op_result, op_err := ops_client.GetDetails (ctx, operation_id)
-		if op_err != nil {
-			log.Fatal(op_err)
-		}
-		// If the operation isn't finished, wait and query again.
-		if op_result.OperationState == "Running" || op_result.OperationState == "NotStarted" {
-			fmt.Println ("Operation is not finished. Waiting 10 seconds...")
-			time.Sleep (time.Duration(10) * time.Second)
-		} else {
-			done = true
-			fmt.Print ("Operation result: " + op_result.OperationState)
-			fmt.Println ()
-			if op_result.OperationState == "Failed" {
-				handle_error (op_result)
-				log.Fatal()
-			} else {
-				kb_id = strings.ReplaceAll(*op_result.ResourceLocation, "/knowledgebases/", "")
-			}
-		}
-	}
-	return kb_id
+	return wait_for_operation (*kb_result.OperationID)
 }
 // </create_kb>
 
@@ -219,11 +226,6 @@ func update_kb (kb_id string) {
 	client := qnamaker.NewKnowledgebaseClient(endpoint)
 	// Set the subscription key on the client.
 	client.Authorizer = autorest.NewCognitiveServicesAuthorizer(subscription_key)
-
-	// We use this to check on the status of the update KB request.
-	ops_client := qnamaker.NewOperationsClient(endpoint)
-	// Set the subscription key on the client.
-	ops_client.Authorizer = autorest.NewCognitiveServicesAuthorizer(subscription_key)
 
 	// Add new Q&A lists, URLs, and files to the KB.
 	/*
@@ -276,26 +278,7 @@ func update_kb (kb_id string) {
 	// Wait for the KB update operation to finish.
 	fmt.Println ("Waiting for KB update operation to finish...")
 	// Operation.OperationID is a pointer, so we need to dereference it.
-	operation_id := *kb_result.OperationID
-	done := false
-	for done == false {
-		op_result, op_err := ops_client.GetDetails (ctx, operation_id)
-		if op_err != nil {
-			log.Fatal(op_err)
-		}
-		// If the operation isn't finished, wait and query again.
-		if op_result.OperationState == "Running" || op_result.OperationState == "NotStarted" {
-			fmt.Println ("Operation is not finished. Waiting 10 seconds...")
-			time.Sleep (time.Duration(10) * time.Second)
-		} else {
-			done = true
-			fmt.Print ("Operation result: " + op_result.OperationState)
-			fmt.Println ()
-			if op_result.OperationState == "Failed" {
-				handle_error (op_result)
-			}
-		}
-	}
+	wait_for_operation (*kb_result.OperationID)
 }
 // </update_kb>
 
