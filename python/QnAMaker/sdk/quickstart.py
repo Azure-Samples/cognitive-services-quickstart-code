@@ -1,8 +1,8 @@
 # install QnA Maker package on Windows with command:
-# py -m pip install azure-cognitiveservices-knowledge-qnamaker==0.2.0
+# py -m pip install azure-cognitiveservices-knowledge-qnamaker
 
-# install QnA Maker package on Mac/Linx with command:
-# pip install azure-cognitiveservices-knowledge-qnamaker==0.2.0
+# install QnA Maker package on Mac/Linux with command:
+# pip install azure-cognitiveservices-knowledge-qnamaker
 
 # ==========================================
 # Tasks Included
@@ -11,9 +11,9 @@
 # - Create a knowledge base.
 # - Update a knowledge base.
 # - Publish a knowledge base.
-# - Get Query runtime endpoint key
 # - Download a knowledge base.
-# - Get answer
+# - Get runtime endpoint key.
+# - Query a knowledge base.
 # - Delete a knowledge base.
 
 # ==========================================
@@ -35,11 +35,20 @@ from msrest.authentication import CognitiveServicesCredentials
 # </Dependencies>
 
 # <Resourcevariables>
-authoring_key = 'REPLACE-WITH-YOUR-QNA-MAKER-KEY'
-resource_name = "REPLACE-WITH-YOUR-RESOURCE-NAME"
+key_var_name = 'QNA_MAKER_SUBSCRIPTION_KEY'
+if not key_var_name in os.environ:
+    raise Exception('Please set/export the environment variable: {}'.format(key_var_name))
+subscription_key = os.environ[key_var_name]
 
-authoringURL = f"https://{resource_name}.cognitiveservices.azure.com"
-queryingURL = f"https://{resource_name}.azurewebsites.net"
+endpoint_var_name = 'QNA_MAKER_ENDPOINT'
+if not endpoint_var_name in os.environ:
+    raise Exception('Please set/export the environment variable: {}'.format(endpoint_var_name))
+endpoint = os.environ[endpoint_var_name]
+
+runtime_endpoint_var_name = 'QNA_MAKER_RUNTIME_ENDPOINT'
+if not runtime_endpoint_var_name in os.environ:
+    raise Exception('Please set/export the environment variable: {}'.format(runtime_endpoint_var_name))
+runtime_endpoint = os.environ[runtime_endpoint_var_name]
 # </Resourcevariables>
 
 # <MonitorOperation>
@@ -60,6 +69,7 @@ def _monitor_operation(client, operation):
 
 # <CreateKBMethod>
 def create_kb(client):
+    print ("Creating knowledge base...")
 
     qna1 = QnADTO(
         answer="Yes, You can use our [REST APIs](https://docs.microsoft.com/rest/api/cognitiveservices/qnamaker/knowledgebase) to manage your knowledge base.",
@@ -107,6 +117,7 @@ def create_kb(client):
 
 # <UpdateKBMethod>
 def update_kb(client, kb_id):
+    print ("Updating knowledge base...")
 
     qna3 = QnADTO(
         answer="goodbye",
@@ -175,54 +186,59 @@ def update_kb(client, kb_id):
     )
     update_op = client.knowledgebase.update(kb_id=kb_id, update_kb=update_kb_operation_dto)
     _monitor_operation(client=client, operation=update_op)
-    print("Updated.")
+    print("Updated knowledge base.")
 
 # </UpdateKBMethod>
 
 # <PublishKB>
 def publish_kb(client, kb_id):
-	client.knowledgebase.publish(kb_id=kb_id)
-	print("Published.")
+    print("Publishing knowledge base...")
+    client.knowledgebase.publish(kb_id=kb_id)
+    print("Published knowledge base.")
 # </PublishKB>
 
 # <DownloadKB>
 def download_kb(client, kb_id):
-	kb_data = client.knowledgebase.download(kb_id=kb_id, environment="Prod")
-	print("Downloaded. It has {} QnAs.".format(len(kb_data.qna_documents)))
+    print("Downloading knowledge base...")
+    kb_data = client.knowledgebase.download(kb_id=kb_id, environment="Prod")
+    print("Downloaded knowledge base. It has {} QnAs.".format(len(kb_data.qna_documents)))
 # </DownloadKB>
 
 # <DeleteKB>
 def delete_kb(client, kb_id):
-	client.knowledgebase.delete(kb_id=kb_id)
-	print("Deleted.")
+    print("Deleting knowledge base...")
+    client.knowledgebase.delete(kb_id=kb_id)
+    print("Deleted knowledge base.")
 # </DeleteKB>
 
 # <GetQueryEndpointKey>
 def getEndpointKeys_kb(client):
-	keys = client.endpoint_keys.get_keys()
-	print("Query knowledge base with prediction runtime key {}.".format(keys.primary_endpoint_key))
+    print("Getting runtime endpoint keys...")
+    keys = client.endpoint_keys.get_keys()
+    print("Primary runtime endpoint key: {}.".format(keys.primary_endpoint_key))
 
-	return keys.primary_endpoint_key
+    return keys.primary_endpoint_key
 
 # </GetQueryEndpointKey>
 
 # <GenerateAnswer>
 def generate_answer(client, kb_id, runtimeKey):
+    print ("Querying knowledge base...")
 
     authHeaderValue = "EndpointKey " + runtimeKey
 
     listSearchResults = client.runtime.generate_answer(kb_id, QueryDTO(question = "How do I manage my knowledgebase?"), dict(Authorization=authHeaderValue))
 
     for i in listSearchResults.answers:
-        print(f"answer: {i.id}.")
-        print(f"answer: {i.answer}.")
-        print(f"score: {i.score}.")
+        print(f"Answer ID: {i.id}.")
+        print(f"Answer: {i.answer}.")
+        print(f"Answer score: {i.score}.")
 # </GenerateAnswer>
 
 # <Main>
 
 # <AuthorizationAuthor>
-client = QnAMakerClient(endpoint=authoringURL, credentials=CognitiveServicesCredentials(authoring_key))
+client = QnAMakerClient(endpoint=endpoint, credentials=CognitiveServicesCredentials(subscription_key))
 # </AuthorizationAuthor>
 
 kb_id = create_kb(client=client)
@@ -233,7 +249,7 @@ download_kb (client=client, kb_id=kb_id)
 queryRuntimeKey = getEndpointKeys_kb(client=client)
 
 # <AuthorizationQuery>
-runtimeClient = QnAMakerRuntimeClient(runtime_endpoint=queryingURL, credentials=CognitiveServicesCredentials(queryRuntimeKey))
+runtimeClient = QnAMakerRuntimeClient(runtime_endpoint=runtime_endpoint, credentials=CognitiveServicesCredentials(queryRuntimeKey))
 # </AuthorizationQuery>
 
 generate_answer(client=runtimeClient,kb_id=kb_id,runtimeKey=queryRuntimeKey)
