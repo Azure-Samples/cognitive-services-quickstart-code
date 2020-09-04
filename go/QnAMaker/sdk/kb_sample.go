@@ -1,5 +1,6 @@
 package main
 
+// <dependencies>
 import (
 	"context"
 	"fmt"
@@ -11,6 +12,7 @@ import (
 	"strings"
 	"time"
 )
+// </dependencies>
 
 /* This sample for the Azure Cognitive Services QnA Maker API shows how to:
  * - Create a knowledge base
@@ -21,6 +23,7 @@ import (
  * - Delete a knowledge base
  */
 
+// <error_handling>
 // Helper function to handle errors.
 func print_inner_error (error qnamaker.InnerErrorModel) {
 	if error.Code != nil {
@@ -64,6 +67,7 @@ func handle_error (result qnamaker.Operation) {
 		}
 	}
 }
+// </error_handling>
 
 /*  Configure the local environment:
 * Set the QNA_MAKER_SUBSCRIPTION_KEY, QNA_MAKER_ENDPOINT, and
@@ -75,10 +79,13 @@ func handle_error (result qnamaker.Operation) {
 * console or with Visual Studio, the shell (or Visual Studio) needs to be closed
 * and reloaded to take the environment variable into account.
 */
+// <environment>
 var subscription_key string = os.Getenv("QNA_MAKER_SUBSCRIPTION_KEY")
 var endpoint string = os.Getenv("QNA_MAKER_ENDPOINT")
 var runtime_endpoint string = os.Getenv("QNA_MAKER_RUNTIME_ENDPOINT")
+// </environment>
 
+// <get_runtime_endpoint_key>
 // Get runtime endpoint key.
 func get_runtime_endpoint_key () string {
 	// Get the context, which is required by the SDK methods.
@@ -95,7 +102,9 @@ func get_runtime_endpoint_key () string {
 
 	return *result.PrimaryEndpointKey
 }
+// </get_runtime_endpoint_key>
 
+// <create_kb>
 // Create a knowledge base.
 func create_kb () string {
 	// Get the context, which is required by the SDK methods.
@@ -174,7 +183,9 @@ func create_kb () string {
 	}
 	return kb_id
 }
+// </create_kb>
 
+// <list_kbs>
 // List all knowledge bases.
 func list_kbs () {
 	// Get the context, which is required by the SDK methods.
@@ -197,7 +208,9 @@ func list_kbs () {
 		fmt.Println ()
 	}
 }
+// </list_kbs>
 
+// <update_kb>
 // Update a knowledge base.
 func update_kb (kb_id string) {
 	// Get the context, which is required by the SDK methods.
@@ -284,7 +297,9 @@ func update_kb (kb_id string) {
 		}
 	}
 }
+// </update_kb>
 
+// <publish_kb>
 // Publish a knowledge base.
 func publish_kb (kb_id string) {
 	// Get the context, which is required by the SDK methods.
@@ -300,7 +315,9 @@ func publish_kb (kb_id string) {
 	}
 	fmt.Println ("KB " + kb_id + " published.")
 }
+// </publish_kb>
 
+// <query_kb>
 // Send a query to a knowledge base.
 func query_kb (kb_id string) {
 	// Get the context, which is required by the SDK methods.
@@ -337,7 +354,9 @@ func query_kb (kb_id string) {
 		fmt.Printf ("Score: %f\n", *answer.Score)
 	}
 }
+// </query_kb>
 
+// <delete_kb>
 // Delete a knowledge base.
 func delete_kb (kb_id string) {
 	// Get the context, which is required by the SDK methods.
@@ -353,7 +372,9 @@ func delete_kb (kb_id string) {
 	}
 	fmt.Println ("KB " + kb_id + " delete.")
 }
+// </delete_kb>
 
+// <main>
 func main() {
 	fmt.Println ("Creating KB...")
 	kb_id := create_kb()
@@ -378,3 +399,4 @@ func main() {
 	delete_kb (kb_id)
 	fmt.Println ()
 }
+// </main>
