@@ -22,6 +22,7 @@ import java.net.*;
 
 /* This sample does the following tasks.
  * Create a knowledge base.
+ * Update a knowledge base.
  * Publish a knowledge base.
  * Download a knowledge base.
  * Query a knowledge base.
@@ -134,6 +135,21 @@ public class Quickstart {
 	}
 	// </createKb>
 
+	// <updateKb>
+	public void update_kb (String kb_id) throws Exception {
+		System.out.println("Updating KB...");
+
+		var update = new UpdateKbOperationDTOUpdate().withName ("New KB name");
+
+		var payload = new UpdateKbOperationDTO().withUpdate((UpdateKbOperationDTOUpdate)update);
+
+		var result = kb_client.update(kb_id, payload);
+		wait_for_operation(result);
+
+		System.out.println("Updated KB.");
+	}
+	// </updateKb>
+
 	// <publishKb>
 	public void publish_kb(String kb_id) {
 		System.out.println("Publishing KB...");
@@ -183,6 +199,7 @@ public class Quickstart {
 			Quickstart quickstart = new Quickstart();
 			String kb_id = quickstart.create_kb();
 //			quickstart.list_kbs();
+			quickstart.update_kb(kb_id);
 			quickstart.publish_kb(kb_id);
 			quickstart.download_kb(kb_id);
 			quickstart.query_kb(kb_id);
