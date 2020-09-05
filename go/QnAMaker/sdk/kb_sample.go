@@ -300,6 +300,24 @@ func publish_kb (kb_id string) {
 }
 // </publish_kb>
 
+// <download_kb>
+// Download a knowledge base.
+func download_kb (kb_id string) {
+	// Get the context, which is required by the SDK methods.
+	ctx := context.Background()
+
+	client := qnamaker.NewKnowledgebaseClient(endpoint)
+	// Set the subscription key on the client.
+	client.Authorizer = autorest.NewCognitiveServicesAuthorizer(subscription_key)
+
+	result, kb_err := client.Download (ctx, kb_id, "Prod")
+	if kb_err != nil {
+		log.Fatal(kb_err)
+	}
+	fmt.Println ("KB " + kb_id + " downloaded. It contains " + string (len(*result.QnaDocuments)) + " question/answer sets.")
+}
+// </download_kb>
+
 // <query_kb>
 // Send a query to a knowledge base.
 func query_kb (kb_id string) {
@@ -372,6 +390,10 @@ func main() {
 
 	fmt.Println ("Publishing KB...")
 	publish_kb (kb_id)
+	fmt.Println ()
+
+	fmt.Println ("Downloading KB...")
+	download_kb (kb_id)
 	fmt.Println ()
 
 	fmt.Println ("Querying KB...")
