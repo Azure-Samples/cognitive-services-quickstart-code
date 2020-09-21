@@ -6,19 +6,14 @@
 <!-- <script_include> -->
 <script type="text/javascript">
     function processImage() {
-        // Replace <Subscription Key> with your valid subscription key.
-        var subscriptionKey = "<Subscription Key>";
-    
+        var subscriptionKey = "TODO_INSERT_YOUR_FACE_SUBSCRIPTION_KEY_HERE";
         var uriBase =
-            "https://<My Endpoint String>.com/face/v1.0/detect";
+            "TODO_INSERT_YOUR_FACE_ENDPOINT_HERE/face/v1.0/detect";
     
         // Request parameters.
         var params = {
-            "returnFaceId": "true",
-            "returnFaceLandmarks": "false",
-            "returnFaceAttributes":
-                "age,gender,headPose,smile,facialHair,glasses,emotion," +
-                "hair,makeup,occlusion,accessories,blur,exposure,noise"
+			"detectionModel": "detection_02",
+            "returnFaceId": "true"
         };
     
         // Display the image.

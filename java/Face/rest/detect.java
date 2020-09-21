@@ -17,18 +17,17 @@ import org.json.JSONObject;
 // </dependencies>
 
 // <environment>
-public class Main {
-    // Replace <Subscription Key> with your valid subscription key.
-    private static final String subscriptionKey = "<Subscription Key>";
-
-    private static final String uriBase =
-        "https://<My Endpoint String>.com/face/v1.0/detect";
+/*
+ * To compile and run, enter the following at a command prompt:
+ *   javac Detect.java -cp .;lib\*
+ *   java -cp .;lib\* Detect
+ */
+public class Detect {
+	private static final String subscriptionKey = System.getenv("FACE_SUBSCRIPTION_KEY");
+	private static final String endpoint = System.getenv("FACE_ENDPOINT");
 
     private static final String imageWithFaces =
         "{\"url\":\"https://upload.wikimedia.org/wikipedia/commons/c/c3/RH_Louise_Lillian_Gish.jpg\"}";
-
-    private static final String faceAttributes =
-        "age,gender,headPose,smile,facialHair,glasses,emotion,hair,makeup,occlusion,accessories,blur,exposure,noise";
 // </environment>
 
 // <main>
@@ -37,12 +36,11 @@ public class Main {
 
         try
         {
-            URIBuilder builder = new URIBuilder(uriBase);
+            URIBuilder builder = new URIBuilder(endpoint + "/face/v1.0/detect");
 
             // Request parameters. All of them are optional.
+			builder.setParameter("detectionModel", "detection_02");
             builder.setParameter("returnFaceId", "true");
-            builder.setParameter("returnFaceLandmarks", "false");
-            builder.setParameter("returnFaceAttributes", faceAttributes);
 
             // Prepare the URI for the REST API call.
             URI uri = builder.build();

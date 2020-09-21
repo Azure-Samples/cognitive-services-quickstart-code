@@ -1,12 +1,9 @@
 <?php
-// Replace <Subscription Key> with a valid subscription key.
-$ocpApimSubscriptionKey = '<Subscription Key>';
-
-// Replace <My Endpoint String> with the string in your endpoint URL.
-$uriBase = 'https:/<My Endpoint String>.com/face/v1.0/';
+$ocpApimSubscriptionKey = getenv('FACE_SUBSCRIPTION_KEY');
+$uriBase = getenv('FACE_ENDPOINT') . '/face/v1.0/';
 
 $imageUrl =
-    'https://upload.wikimedia.org/wikipedia/commons/3/37/Dagestani_man_and_woman.jpg';
+    'https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/faces.jpg';
 
 // This sample uses the PHP5 HTTP_Request2 package
 // (https://pear.php.net/package/HTTP_Request2).
@@ -24,10 +21,8 @@ $request->setHeader($headers);
 
 $parameters = array(
     // Request parameters
-    'returnFaceId' => 'true',
-    'returnFaceLandmarks' => 'false',
-    'returnFaceAttributes' => 'age,gender,headPose,smile,facialHair,glasses,' .
-        'emotion,hair,makeup,occlusion,accessories,blur,exposure,noise');
+	'detectionModel' => 'detection_02',
+    'returnFaceId' => 'true');
 $url->setQueryVariables($parameters);
 
 $request->setMethod(HTTP_Request2::METHOD_POST);
