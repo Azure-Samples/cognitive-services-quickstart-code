@@ -9,6 +9,8 @@ import uuid
 import requests
 from urllib.parse import urlparse
 from io import BytesIO
+# To install this module, run:
+# python -m pip install Pillow
 from PIL import Image, ImageDraw
 from azure.cognitiveservices.vision.face import FaceClient
 from msrest.authentication import CognitiveServicesCredentials
@@ -66,7 +68,7 @@ IMAGE_BASE_URL = 'https://csdx.blob.core.windows.net/resources/Face/Images/'
 # Used in the Person Group Operations,  Snapshot Operations, and Delete Person Group examples.
 # You can call list_person_groups to print a list of preexisting PersonGroups.
 # SOURCE_PERSON_GROUP_ID should be all lowercase and alphanumeric. For example, 'mygroupname' (dashes are OK).
-PERSON_GROUP_ID = 'my-unique-person-group'
+PERSON_GROUP_ID = str(uuid.uuid4()) # assign a random ID (or name it anything)
 
 # Used for the Snapshot and Delete Person Group examples.
 TARGET_PERSON_GROUP_ID = str(uuid.uuid4()) # assign a random ID (or name it anything)
@@ -120,7 +122,8 @@ print()
 # Detect a face in an image that contains a single face
 single_face_image_url = 'https://www.biography.com/.image/t_share/MTQ1MzAyNzYzOTgxNTE0NTEz/john-f-kennedy---mini-biography.jpg'
 single_image_name = os.path.basename(single_face_image_url)
-detected_faces = face_client.face.detect_with_url(url=single_face_image_url)
+# We use detection model 2 because we are not retrieving attributes.
+detected_faces = face_client.face.detect_with_url(url=single_face_image_url, detectionModel='detection_02')
 if not detected_faces:
 	raise Exception('No face detected from image {}'.format(single_image_name))
 
@@ -139,7 +142,8 @@ first_image_face_ID = detected_faces[0].face_id
 # Each detected face gets assigned a new ID
 multi_face_image_url = "http://www.historyplace.com/kennedy/president-family-portrait-closeup.jpg"
 multi_image_name = os.path.basename(multi_face_image_url)
-detected_faces2 = face_client.face.detect_with_url(url=multi_face_image_url)
+# We use detection model 2 because we are not retrieving attributes.
+detected_faces2 = face_client.face.detect_with_url(url=multi_face_image_url, detectionModel='detection_02')
 # </snippet_detectgroup>
 
 print('Detected face IDs from', multi_image_name, ':')
@@ -157,7 +161,8 @@ Print image and draw rectangles around faces
 # Detect a face in an image that contains a single face
 single_face_image_url = 'https://raw.githubusercontent.com/Microsoft/Cognitive-Face-Windows/master/Data/detection1.jpg'
 single_image_name = os.path.basename(single_face_image_url)
-detected_faces = face_client.face.detect_with_url(url=single_face_image_url)
+# We use detection model 2 because we are not retrieving attributes.
+detected_faces = face_client.face.detect_with_url(url=single_face_image_url, detectionModel='detection_02')
 if not detected_faces:
 	raise Exception('No face detected from image {}'.format(single_image_name))
 
@@ -251,13 +256,14 @@ source_image_file_name2 = 'Family1-Son1.jpg'
 
 # <snippet_verify_detect>
 # Detect face(s) from source image 1, returns a list[DetectedFaces]
-detected_faces1 = face_client.face.detect_with_url(IMAGE_BASE_URL + source_image_file_name1)
+# We use detection model 2 because we are not retrieving attributes.
+detected_faces1 = face_client.face.detect_with_url(IMAGE_BASE_URL + source_image_file_name1, detectionModel='detection_02')
 # Add the returned face's face ID
 source_image1_id = detected_faces1[0].face_id
 print('{} face(s) detected from image {}.'.format(len(detected_faces1), source_image_file_name1))
 
 # Detect face(s) from source image 2, returns a list[DetectedFaces]
-detected_faces2 = face_client.face.detect_with_url(IMAGE_BASE_URL + source_image_file_name2)
+detected_faces2 = face_client.face.detect_with_url(IMAGE_BASE_URL + source_image_file_name2, detectionModel='detection_02')
 # Add the returned face's face ID
 source_image2_id = detected_faces2[0].face_id
 print('{} face(s) detected from image {}.'.format(len(detected_faces2), source_image_file_name2))
@@ -266,7 +272,8 @@ print('{} face(s) detected from image {}.'.format(len(detected_faces2), source_i
 detected_faces_ids = []
 # Detect faces from target image url list, returns a list[DetectedFaces]
 for image_file_name in target_image_file_names:
-    detected_faces = face_client.face.detect_with_url(IMAGE_BASE_URL + image_file_name)
+	# We use detection model 2 because we are not retrieving attributes.
+    detected_faces = face_client.face.detect_with_url(IMAGE_BASE_URL + image_file_name, detectionModel='detection_02')
     # Add the returned face's face ID
     detected_faces_ids.append(detected_faces[0].face_id)
     print('{} face(s) detected from image {}.'.format(len(detected_faces), image_file_name))
@@ -326,9 +333,9 @@ child = face_client.person_group_person.create(PERSON_GROUP_ID, "Child")
 Detect faces and register to correct person
 '''
 # Find all jpeg images of friends in working directory
-woman_images = [file for file in glob.glob('*.jpg') if file.startswith("woman")]
-man_images = [file for file in glob.glob('*.jpg') if file.startswith("man")]
-child_images = [file for file in glob.glob('*.jpg') if file.startswith("child")]
+woman_images = [file for file in glob.glob('*.jpg') if file.startswith("w")]
+man_images = [file for file in glob.glob('*.jpg') if file.startswith("m")]
+child_images = [file for file in glob.glob('*.jpg') if file.startswith("ch")]
 
 # Add to a woman person
 for image in woman_images:
@@ -371,15 +378,16 @@ while (True):
 Identify a face against a defined PersonGroup
 '''
 # Group image for testing against
-group_photo = 'test-image-person-group.jpg'
-IMAGES_FOLDER = os.path.join(os.path.dirname(os.path.realpath(__file__)))
-# Get test image
-test_image_array = glob.glob(os.path.join(IMAGES_FOLDER, group_photo))
+test_image_array = glob.glob('test-image-person-group.jpg')
 image = open(test_image_array[0], 'r+b')
+
+print('Pausing for 60 seconds to avoid triggering rate limit on free account...')
+time.sleep (60)
 
 # Detect faces
 face_ids = []
-faces = face_client.face.detect_with_stream(image)
+# We use detection model 2 because we are not retrieving attributes.
+faces = face_client.face.detect_with_stream(image, detectionModel='detection_02')
 for face in faces:
     face_ids.append(face.face_id)
 # </snippet_identify_testimage>
@@ -391,7 +399,10 @@ print('Identifying faces in {}'.format(os.path.basename(image.name)))
 if not results:
     print('No person identified in the person group for faces from {}.'.format(os.path.basename(image.name)))
 for person in results:
-    print('Person for face ID {} is identified in {} with a confidence of {}.'.format(person.face_id, os.path.basename(image.name), person.candidates[0].confidence)) # Get topmost confidence score
+	if len(person.candidates) > 0:
+		print('Person for face ID {} is identified in {} with a confidence of {}.'.format(person.face_id, os.path.basename(image.name), person.candidates[0].confidence)) # Get topmost confidence score
+	else:
+		print('No person identified for face ID {} in {}.'.format(person.face_id, os.path.basename(image.name)))
 # </snippet_identify>
 print()
 '''
@@ -409,7 +420,7 @@ print('LARGE PERSON GROUP OPERATIONS')
 print()
 
 # Large Person Group ID, should be all lowercase and alphanumeric. For example, 'mygroupname' (dashes are OK).
-LARGE_PERSON_GROUP_ID = 'my-unique-large-person-group'
+LARGE_PERSON_GROUP_ID = str(uuid.uuid4()) # assign a random ID (or name it anything)
 
 # Create empty Large Person Group. Person Group ID must be lower case, alphanumeric, and/or with '-', '_'.
 # The name and the ID can be either the same or different
@@ -427,9 +438,9 @@ child = face_client.large_person_group_person.create(LARGE_PERSON_GROUP_ID, "Chi
 Detect faces and register to correct person
 '''
 # Find all jpeg images of friends in working directory
-woman_images = [file for file in glob.glob('*.jpg') if file.startswith("woman")]
-man_images = [file for file in glob.glob('*.jpg') if file.startswith("man")]
-child_images = [file for file in glob.glob('*.jpg') if file.startswith("child")]
+woman_images = [file for file in glob.glob('*.jpg') if file.startswith("w")]
+man_images = [file for file in glob.glob('*.jpg') if file.startswith("m")]
+child_images = [file for file in glob.glob('*.jpg') if file.startswith("ch")]
 
 # Add to a woman person
 for image in woman_images:
@@ -733,8 +744,9 @@ def list_snapshots(client):
         print ("Snapshot type: " + x.type)
         print ()
 
+# 20200923 Temporarily disabling this section due to an issue with taking snapshots.
 # Run the snapshot example
-asyncio.run(run())
+# asyncio.run(run())
 '''
 END - SNAPSHOT OPERATIONS
 '''
@@ -757,11 +769,14 @@ print("Deleted the person group {} from the source location.".format(PERSON_GROU
 print()
 # </snippet_deletegroup>
 
+# Temporarily disabling this section due to an issue with taking snapshots.
+'''
 # <snippet_deletetargetgroup>
 # Delete the person group in the target region.
 face_client_target.person_group.delete(TARGET_PERSON_GROUP_ID)
 print("Deleted the person group {} from the target location.".format(TARGET_PERSON_GROUP_ID))
 # </snippet_deletetargetgroup>
+'''
 print()
 print('-----------------------------')
 print()
