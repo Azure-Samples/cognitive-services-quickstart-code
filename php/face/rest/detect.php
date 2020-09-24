@@ -21,7 +21,7 @@ $request->setHeader($headers);
 
 $parameters = array(
     // Request parameters
-	'detectionModel' => 'detection_02',
+    'detectionModel' => 'detection_02',
     'returnFaceId' => 'true');
 $url->setQueryVariables($parameters);
 

@@ -28,12 +28,7 @@ axios({
     console.log('Status text: ' + response.status)
     console.log('Status text: ' + response.statusText)
     console.log()
-    //console.log(response.data)
-    response.data.forEach((face) => {
-      console.log('Face ID: ' + face.faceId)
-      console.log('Face rectangle: ' + face.faceRectangle.top + ', ' + face.faceRectangle.left + ', ' + face.faceRectangle.width + ', ' + face.faceRectangle.height)
-      console.log()
-    });
+    console.log(response.data)
 }).catch(function (error) {
     console.log(error)
 });
