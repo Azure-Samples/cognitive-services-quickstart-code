@@ -583,20 +583,17 @@ namespace ComputerVisionQuickstart
          * READ FILE - URL 
          * Extracts text. 
          */
-        public static async Task ReadFileUrl(ComputerVisionClient client, string urlFile)
-        {
-            Console.WriteLine("----------------------------------------------------------");
-            Console.WriteLine("READ FILE FROM URL");
-            Console.WriteLine();
+        public async Task ReadFileUrl(ComputerVisionClient client, string urlFile){
+	    Console.WriteLine("----------------------------------------------------------");
+	    Console.WriteLine("READ FILE FROM URL");
+	    Console.WriteLine();
 
             // Read text from URL
-            var textHeaders = await client.ReadAsync(urlFile, language: "en");
+            var textHeaders = await client.BatchReadFileAsync(urlFile);
             // After the request, get the operation location (operation ID)
             string operationLocation = textHeaders.OperationLocation;
             Thread.Sleep(2000);
-            // </snippet_extract_call>
 
-            // <snippet_read_response>
             // Retrieve the URI where the extracted text will be stored from the Operation-Location header.
             // We only need the ID and not the full URL
             const int numberOfCharsInOperationId = 36;
@@ -608,24 +605,21 @@ namespace ComputerVisionQuickstart
             Console.WriteLine();
             do
             {
-                results = await client.GetReadResultAsync(Guid.Parse(operationId));
+                results = await client.GetReadOperationResultAsync(operationId);
             }
-            while ((results.Status == OperationStatusCodes.Running ||
-                results.Status == OperationStatusCodes.NotStarted));
-            // </snippet_read_response>
+            while ((results.Status == TextOperationStatusCodes.Running ||
+                results.Status == TextOperationStatusCodes.NotStarted));
 
-            // <snippet_read_display>
             // Display the found text.
             Console.WriteLine();
-            var textUrlFileResults = results.AnalyzeResult.ReadResults;
-            foreach (ReadResult page in textUrlFileResults)
+            var textUrlFileResults = results.RecognitionResults;
+            foreach (TextRecognitionResult page in textUrlFileResults)
             {
                 foreach (Line line in page.Lines)
                 {
                     Console.WriteLine(line.Text);
                 }
             }
-	    // </snippet_read_display>
             Console.WriteLine();
         }
 
