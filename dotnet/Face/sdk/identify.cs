@@ -21,7 +21,7 @@ namespace ConsoleApp1
 
             // <person>
             // Create an empty PersonGroup
-            string personGroupId = "myfriends";
+            string personGroupId = new Guid().ToString();
             await faceClient.PersonGroup.CreateAsync(personGroupId, "My Friends");
 
             // Define Anna
@@ -36,17 +36,11 @@ namespace ConsoleApp1
             // </person>
 
             // <add_face>
-            // Directory contains image files of Anna
-            const string friend1ImageDir = @"D:\Pictures\MyFriends\Anna\";
-
-            foreach (string imagePath in Directory.GetFiles(friend1ImageDir, "*.jpg"))
+            foreach (string url in new[] { "https://github.com/microsoft/Cognitive-Face-Windows/raw/master/Data/PersonGroup/Family2-Lady/Family2-Lady1.jpg", "https://github.com/microsoft/Cognitive-Face-Windows/raw/master/Data/PersonGroup/Family2-Lady/Family2-Lady2.jpg" })
             {
-                using (Stream s = File.OpenRead(imagePath))
-                {
-                    // Detect faces in the image and add to Anna
-                    await faceClient.PersonGroupPerson.AddFaceFromStreamAsync(
-                        personGroupId:personGroupId, personId:friend1.PersonId, image:s, detectionModel:DetectionModel.Detection02);
-                }
+                // Detect faces in the image and add to Anna
+                await faceClient.PersonGroupPerson.AddFaceFromUrlAsync(
+                    personGroupId:personGroupId, personId:friend1.PersonId, url:url, detectionModel:DetectionModel.Detection02);
             }
             // Do the same for Bill and Clare
             // </add_face>
@@ -71,28 +65,25 @@ namespace ConsoleApp1
             // </train2>
 
             // <main>
-            string testImageFile = @"D:\Pictures\test_img1.jpg";
+            string testImageFile = "https://github.com/microsoft/Cognitive-Face-Windows/raw/master/Data/PersonGroup/Family2-Lady/Family2-Lady3.jpg";
 
-            using (Stream s = File.OpenRead(testImageFile))
+            var faces = await faceClient.Face.DetectWithUrlAsync(url:testImageFile, detectionModel:DetectionModel.Detection02);
+            Guid?[] faceIds = faces.Select(face => face.FaceId).ToArray();
+
+            var results = await faceClient.Face.IdentifyAsync(faceIds:faceIds, personGroupId:personGroupId);
+            foreach (var identifyResult in results)
             {
-                var faces = await faceClient.Face.DetectWithStreamAsync(image:s, detectionModel:DetectionModel.Detection02);
-                Guid?[] faceIds = faces.Select(face => face.FaceId).ToArray();
-
-                var results = await faceClient.Face.IdentifyAsync(faceIds:faceIds, personGroupId:personGroupId);
-                foreach (var identifyResult in results)
+                Console.WriteLine("Result of face: {0}", identifyResult.FaceId);
+                if (identifyResult.Candidates.Count == 0)
                 {
-                    Console.WriteLine("Result of face: {0}", identifyResult.FaceId);
-                    if (identifyResult.Candidates.Count == 0)
-                    {
-                        Console.WriteLine("No one identified");
-                    }
-                    else
-                    {
-                        // Get top 1 among all candidates returned
-                        var candidateId = identifyResult.Candidates[0].PersonId;
-                        var person = await faceClient.PersonGroupPerson.GetAsync(personGroupId:personGroupId, personId:candidateId);
-                        Console.WriteLine("Identified as {0}", person.Name);
-                    }
+                    Console.WriteLine("No one identified");
+                }
+                else
+                {
+                    // Get top 1 among all candidates returned
+                    var candidateId = identifyResult.Candidates[0].PersonId;
+                    var person = await faceClient.PersonGroupPerson.GetAsync(personGroupId:personGroupId, personId:candidateId);
+                    Console.WriteLine("Identified as {0}", person.Name);
                 }
             }
             // </main>
@@ -101,6 +92,8 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             Quickstart();
+            Console.WriteLine("Press any key to exit.");
+            Console.ReadKey();
         }
     }
 }

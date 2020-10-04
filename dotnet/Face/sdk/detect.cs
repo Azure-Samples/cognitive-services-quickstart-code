@@ -36,7 +36,8 @@ namespace ConsoleApp1
             // </basic2>
 
             // <landmarks1>
-            IList<DetectedFace> faces2 = await faceClient.Face.DetectWithUrlAsync(url: imageUrl, returnFaceId: true, returnFaceLandmarks: true, detectionModel: DetectionModel.Detection02);
+            // Note DetectionModel.Detection02 cannot be used with returnFaceLandmarks.
+            IList<DetectedFace> faces2 = await faceClient.Face.DetectWithUrlAsync(url: imageUrl, returnFaceId: true, returnFaceLandmarks: true, detectionModel: DetectionModel.Detection01);
             // </landmarks1>
 
             // <landmarks2>
@@ -86,7 +87,7 @@ namespace ConsoleApp1
                 FaceAttributeType.Emotion
             };
             // Note DetectionModel.Detection02 cannot be used with returnFaceAttributes.
-            var faces3 = await faceClient.Face.DetectWithUrlAsync(url: imageUrl, returnFaceId: true, returnFaceAttributes: requiredFaceAttributes);
+            var faces3 = await faceClient.Face.DetectWithUrlAsync(url: imageUrl, returnFaceId: true, returnFaceAttributes: requiredFaceAttributes, detectionModel: DetectionModel.Detection01);
             // </attributes1>
 
             // <attributes2>
@@ -107,6 +108,8 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             Quickstart();
+            Console.WriteLine("Press any key to exit.");
+            Console.ReadKey();
         }
     }
 }
