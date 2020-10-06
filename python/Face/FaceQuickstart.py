@@ -14,7 +14,7 @@ from io import BytesIO
 from PIL import Image, ImageDraw
 from azure.cognitiveservices.vision.face import FaceClient
 from msrest.authentication import CognitiveServicesCredentials
-from azure.cognitiveservices.vision.face.models import TrainingStatusType, Person, SnapshotObjectType, OperationStatusType
+from azure.cognitiveservices.vision.face.models import TrainingStatusType, Person
 # </snippet_imports>
 
 '''
@@ -28,7 +28,6 @@ Examples include:
     - Large Person Group: similar to person group, but with different API calls to handle scale.
     - Face List: creates a list of single-faced images, then gets data from list.
     - Large Face List: creates a large list for single-faced images, trains it, then gets data.
-    - Snapshot: copies a person group from one region to another, or from one Azure subscription to another.
 
 Prerequisites:
     - Python 3+
@@ -65,42 +64,18 @@ IMAGE_BASE_URL = 'https://csdx.blob.core.windows.net/resources/Face/Images/'
 # </snippet_verify_baseurl>
 
 # <snippet_persongroupvars>
-# Used in the Person Group Operations,  Snapshot Operations, and Delete Person Group examples.
+# Used in the Person Group Operations and Delete Person Group examples.
 # You can call list_person_groups to print a list of preexisting PersonGroups.
 # SOURCE_PERSON_GROUP_ID should be all lowercase and alphanumeric. For example, 'mygroupname' (dashes are OK).
 PERSON_GROUP_ID = str(uuid.uuid4()) # assign a random ID (or name it anything)
 
-# Used for the Snapshot and Delete Person Group examples.
+# Used for the Delete Person Group example.
 TARGET_PERSON_GROUP_ID = str(uuid.uuid4()) # assign a random ID (or name it anything)
 # </snippet_persongroupvars>
 
-# <snippet_snapshotvars>
-'''
-Snapshot operations variables
-These are only used for the snapshot example. Set your environment variables accordingly.
-'''
-# Source endpoint, the location/subscription where the original person group is located.
-SOURCE_ENDPOINT = ENDPOINT
-# Source subscription key. Must match the source endpoint region.
-SOURCE_KEY = os.environ['FACE_SUBSCRIPTION_KEY']
-# Source subscription ID. Found in the Azure portal in the Overview page of your Face (or any) resource.
-SOURCE_ID = os.environ['AZURE_SUBSCRIPTION_ID']
-# Person group name that will get created in this quickstart's Person Group Operations example.
-SOURCE_PERSON_GROUP_ID = PERSON_GROUP_ID
-# Target endpoint. This is your 2nd Face subscription.
-TARGET_ENDPOINT = os.environ['FACE_ENDPOINT2']
-# Target subscription key. Must match the target endpoint region.
-TARGET_KEY = os.environ['FACE_SUBSCRIPTION_KEY2']
-# Target subscription ID. It will be the same as the source ID if created Face resources from the same 
-# subscription (but moving from region to region). If they are differnt subscriptions, add the other target ID here.
-TARGET_ID = os.environ['AZURE_SUBSCRIPTION_ID']
-# NOTE: We do not need to specify the target PersonGroup ID here because we generate it with this example.
-# Each new location you transfer a person group to will have a generated, new person group ID for that region.
-# </snippet_snapshotvars>
-
 '''
 Authenticate
-All examples use the same client, except for Snapshot Operations.
+All examples use the same client.
 '''
 # <snippet_auth>
 # Create an authenticated FaceClient.
@@ -619,142 +594,8 @@ END - LARGE FACELIST
 '''
 
 '''
-Snapshot Operations
-This example transfers a person group from one region to another region.
-You can also transfer it to another subscription (change the target subscription key).
-It uses the same client as the above examples for its source client.
-'''
-print('-----------------------------')
-print()
-print('SNAPSHOT OPERATIONS')
-print()
-
-# <snippet_snapshot_auth>
-'''
-Authenticate
-'''
-# Use your source client already created (it has the person group ID you need in it).
-face_client_source = face_client
-# Create a new FaceClient instance for your target with authentication.
-face_client_target = FaceClient(TARGET_ENDPOINT, CognitiveServicesCredentials(TARGET_KEY))
-# </snippet_snapshot_auth>
-
-# <snippet_snapshot_take>
-'''
-Snapshot operations in 4 steps
-'''
-async def run():
-    # STEP 1, take a snapshot of your person group, then track status.
-    # This list must include all subscription IDs from which you want to access the snapshot.
-    source_list = [SOURCE_ID, TARGET_ID]
-    # You may have many sources, if transferring from many regions
-    # remove any duplicates from the list. Passing the same subscription ID more than once causes
-    # the Snapshot.take operation to fail.
-    source_list = list(dict.fromkeys(source_list))
-
-    # Note Snapshot.take is not asynchronous.
-    # For information about Snapshot.take see:
-    # https://github.com/Azure/azure-sdk-for-python/blob/master/azure-cognitiveservices-vision-face/azure/cognitiveservices/vision/face/operations/snapshot_operations.py#L36
-    take_snapshot_result = face_client_source.snapshot.take(
-        type=SnapshotObjectType.person_group,
-        object_id=PERSON_GROUP_ID,
-        apply_scope=source_list,
-        # Set this to tell Snapshot.take to return the response; otherwise it returns None.
-        raw=True
-        )
-    # Get operation ID from response for tracking
-    # Snapshot.type return value is of type msrest.pipeline.ClientRawResponse. See:
-    # https://docs.microsoft.com/en-us/python/api/msrest/msrest.pipeline.clientrawresponse?view=azure-python
-    take_operation_id = take_snapshot_result.response.headers['Operation-Location'].replace('/operations/', '')
-
-    print('Taking snapshot( operation ID:', take_operation_id, ')...')
-    # </snippet_snapshot_take>
-
-    # <snippet_snapshot_wait>
-    # STEP 2, Wait for snapshot taking to complete.
-    take_status = await wait_for_operation(face_client_source, take_operation_id)
-
-    # Get snapshot id from response.
-    snapshot_id = take_status.resource_location.replace ('/snapshots/', '')
-
-    print('Snapshot ID:', snapshot_id)
-    print('Taking snapshot... Done\n')
-    # </snippet_snapshot_wait>
-
-    # <snippet_snapshot_apply>
-    # STEP 3, apply the snapshot to target region(s)
-    # Snapshot.apply is not asynchronous.
-    # For information about Snapshot.apply see:
-    # https://github.com/Azure/azure-sdk-for-python/blob/master/azure-cognitiveservices-vision-face/azure/cognitiveservices/vision/face/operations/snapshot_operations.py#L366
-    apply_snapshot_result = face_client_target.snapshot.apply(
-        snapshot_id=snapshot_id,
-        # Generate a new UUID for the target person group ID.
-        object_id=TARGET_PERSON_GROUP_ID,
-        # Set this to tell Snapshot.apply to return the response; otherwise it returns None.
-        raw=True
-        )
-    apply_operation_id = apply_snapshot_result.response.headers['Operation-Location'].replace('/operations/', '')
-    print('Applying snapshot( operation ID:', apply_operation_id, ')...')
-    # </snippet_snapshot_apply>
-
-    # <snippet_snapshot_wait2>
-    # STEP 4, wait for applying snapshot process to complete.
-    await wait_for_operation(face_client_target, apply_operation_id)
-    print('Applying snapshot... Done\n')
-    print('End of transfer.')
-    print()
-    # </snippet_snapshot_wait2>
-
-# <snippet_waitforop>
-# Helper function that waits and checks status of API call processing.
-async def wait_for_operation(client, operation_id):
-    # Track progress of taking the snapshot.
-    # Note Snapshot.get_operation_status is not asynchronous.
-    # For information about Snapshot.get_operation_status see:
-    # https://github.com/Azure/azure-sdk-for-python/blob/master/azure-cognitiveservices-vision-face/azure/cognitiveservices/vision/face/operations/snapshot_operations.py#L466
-    result = client.snapshot.get_operation_status(operation_id=operation_id)
-
-    status = result.status.lower()
-    print('Operation status:', status)
-    if ('notstarted' == status or 'running' == status):
-        print("Waiting 10 seconds...")
-        await asyncio.sleep(10)
-        result = await wait_for_operation(client, operation_id)
-    elif ('failed' == status):
-        raise Exception("Operation failed. Reason:" + result.message)
-    return result
-# </snippet_waitforop>
-
-'''
-Nice-to-have List API calls
-Use these to programmatically list your person groups or snapshots from your Azure account.
-These are not used in this quickstart.
-'''
-# OPTIONAL Prints a list of existing person groups.
-def list_person_groups(client):
-    # Note PersonGroup.list is not asynchronous.
-    ids = list(map(lambda x: x.PERSON_GROUP_ID, client.person_group.list()))
-    for x in ids: print (x)
-
-# OPTIONAL: Prints a list of existing snapshots.
-def list_snapshots(client):
-    snapshots = client.snapshot.list()
-    for x in snapshots:
-        print ("Snapshot ID: " + x.id)
-        print ("Snapshot type: " + x.type)
-        print ()
-
-# 20200923 Temporarily disabling this section due to an issue with taking snapshots.
-# Run the snapshot example
-# asyncio.run(run())
-'''
-END - SNAPSHOT OPERATIONS
-'''
-
-'''
 Delete Person Group
-For testing purposes, delete the person group made in the Person Group Operations,
-and the target person group from the Snapshot Operations (uses a different client).
+For testing purposes, delete the person group made in the Person Group Operations.
 List the person groups in your account through the online testing console to check:
 https://westus2.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395248
 '''
@@ -769,14 +610,6 @@ print("Deleted the person group {} from the source location.".format(PERSON_GROU
 print()
 # </snippet_deletegroup>
 
-# Temporarily disabling this section due to an issue with taking snapshots.
-'''
-# <snippet_deletetargetgroup>
-# Delete the person group in the target region.
-face_client_target.person_group.delete(TARGET_PERSON_GROUP_ID)
-print("Deleted the person group {} from the target location.".format(TARGET_PERSON_GROUP_ID))
-# </snippet_deletetargetgroup>
-'''
 print()
 print('-----------------------------')
 print()
