@@ -1,11 +1,14 @@
+// <dependencies>
 using System;
 using System.Net.Http;
 using System.Text;
+// </dependencies>
 
 namespace QnAMakerAnswerQuestion
 {
     class Program
     {
+// <constants>
         private const string endpointVar = "QNA_MAKER_RESOURCE_ENDPOINT";
         private const string endpointKeyVar = "QNA_MAKER_ENDPOINT_KEY";
         private const string kbIdVar = "QNA_MAKER_KB_ID";
@@ -39,9 +42,11 @@ namespace QnAMakerAnswerQuestion
                 throw new Exception("Please set/export the environment variable: " + kbIdVar);
             }
         }
+// </constants>
 
         static void Main(string[] args)
         {
+// <post>
             var uri = endpoint + "/qnamaker/v4.0/knowledgebases/" + kbId + "/generateAnswer";
 
             // JSON format for passing question to service
@@ -73,6 +78,7 @@ namespace QnAMakerAnswerQuestion
                 Console.WriteLine("Press any key to continue.");
                 Console.ReadKey();
             }
+// </post>
         }
     }
 }

@@ -1,6 +1,9 @@
 'use strict';
 
 // <dependencies>
+/* To install dependencies, run:
+ * npm install requestretry
+ */
 const request = require("requestretry");
 
 // time delay between requests
@@ -19,17 +22,28 @@ var retryStrategy = function (err, response, body) {
 const sleep = (waitTimeInMs) => new Promise(resolve => setTimeout(resolve, waitTimeInMs));
 // </dependencies>  
 
-// **********************************************
-// *** Update or verify the following values. ***
-// **********************************************
+/*
+* Configure the local environment:
+* Set the QNA_MAKER_SUBSCRIPTION_KEY and QNA_MAKER_ENDPOINT
+* environment variables on your local machine using
+* the appropriate method for your preferred shell (Bash, PowerShell, Command
+* Prompt, etc.). 
+*
+* If the environment variable is created after the application is launched in a
+* console or with Visual Studio, the shell (or Visual Studio) needs to be closed
+* and reloaded to take the environment variable into account.
+*/
+// <authorization>
+const resourceKey = process.env.QNA_MAKER_SUBSCRIPTION_KEY;
+if (! process.env.QNA_MAKER_SUBSCRIPTION_KEY) {
+	throw "Please set/export the environment variable QNA_MAKER_SUBSCRIPTION_KEY.";
+}
 
-//<authorization>
-const resourceKey = process.env.QNAMAKER_RESOURCE_KEY;
-
-// "https://{your-resource-name}.api.cognitive.microsoft.com/qnamaker/v4.0"
-const resourceAuthoringEndpoint = process.env.QNAMAKER_AUTHORING_ENDPOINT;
+const resourceAuthoringEndpoint = process.env.QNA_MAKER_ENDPOINT + "/qnamaker/v4.0";
+if (! process.env.QNA_MAKER_ENDPOINT) {
+	throw "Please set/export the environment variable QNA_MAKER_ENDPOINT.";
+}
 // </authorization>
-
 
 // <utility>
 // Formats and indents JSON for display.
@@ -43,7 +57,6 @@ const createKb = async () => {
 
     try{
   
-        // <model>
         // Dictionary that holds the knowledge base.
         // The data source includes a QnA pair with metadata, the URL for the
         // QnA Maker FAQ article, and the URL for the Azure Bot Service FAQ article.
@@ -76,7 +89,7 @@ const createKb = async () => {
             uri: resourceAuthoringEndpoint + "/knowledgebases/create",
             headers: {
                 'Content-Type': 'application/json',
-                'Content-Length': kb_model.length,
+                'Content-Length': JSON.stringify(kb_model).length,
                 'Ocp-Apim-Subscription-Key': resourceKey
             },
             body: kb_model,
@@ -121,7 +134,7 @@ const deleteKb = async (kbId) => {
 }
 // </deleteKb>
 
-// <download>
+// <downloadKb>
 const downloadKb = async (kbId) => {
 
     try{
@@ -145,7 +158,7 @@ const downloadKb = async (kbId) => {
         throw err;
     }
 }
- // </download>
+ // </downloadKb>
 
 // <replaceKb>
 const replaceKb = async (kbId) => {
@@ -190,7 +203,7 @@ const replaceKb = async (kbId) => {
 }      
 // </replaceKb>
 
-// <publish>
+// <publishKb>
 var publishKb = async (kbId) => {
 
     try{
@@ -210,7 +223,7 @@ var publishKb = async (kbId) => {
         throw err;
     }
 };
-// </publish>
+// </publishKb>
 
 // <operationDetails>
 const getOperationStatus = async (result) => {
@@ -235,8 +248,9 @@ const getOperationStatus = async (result) => {
             response = JSON.parse(responseFull.body);
             state = response.operationState;
 
+			console.log ("Waiting 10 seconds...")
             // artificial retry
-            await sleep(3000);
+            await sleep(10000);
         }
 
         return response;
@@ -279,13 +293,11 @@ const main = async()=>{
         throw err;
     }
 }
-// </main>
 
-// <promise>
 main()
 .then(kbID => {
     console.log("KBID = " + kbID);
 }).catch(err => {
     console.log(JSON.stringify(err));
 })
-// </promise>
+// </main>
