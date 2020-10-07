@@ -1,4 +1,6 @@
-﻿// <snippet_using>
+﻿// This code sample uses an earlier version of the Form Recognizer SDK.
+
+// <snippet_using>
 using Microsoft.Azure.CognitiveServices.FormRecognizer;
 using Microsoft.Azure.CognitiveServices.FormRecognizer.Models;
 
