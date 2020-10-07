@@ -9,10 +9,12 @@ import uuid
 import requests
 from urllib.parse import urlparse
 from io import BytesIO
+# To install this module, run:
+# python -m pip install Pillow
 from PIL import Image, ImageDraw
 from azure.cognitiveservices.vision.face import FaceClient
 from msrest.authentication import CognitiveServicesCredentials
-from azure.cognitiveservices.vision.face.models import TrainingStatusType, Person, SnapshotObjectType, OperationStatusType
+from azure.cognitiveservices.vision.face.models import TrainingStatusType, Person
 # </snippet_imports>
 
 '''
@@ -26,7 +28,6 @@ Examples include:
     - Large Person Group: similar to person group, but with different API calls to handle scale.
     - Face List: creates a list of single-faced images, then gets data from list.
     - Large Face List: creates a large list for single-faced images, trains it, then gets data.
-    - Snapshot: copies a person group from one region to another, or from one Azure subscription to another.
 
 Prerequisites:
     - Python 3+
@@ -63,42 +64,18 @@ IMAGE_BASE_URL = 'https://csdx.blob.core.windows.net/resources/Face/Images/'
 # </snippet_verify_baseurl>
 
 # <snippet_persongroupvars>
-# Used in the Person Group Operations,  Snapshot Operations, and Delete Person Group examples.
+# Used in the Person Group Operations and Delete Person Group examples.
 # You can call list_person_groups to print a list of preexisting PersonGroups.
 # SOURCE_PERSON_GROUP_ID should be all lowercase and alphanumeric. For example, 'mygroupname' (dashes are OK).
-PERSON_GROUP_ID = 'my-unique-person-group'
+PERSON_GROUP_ID = str(uuid.uuid4()) # assign a random ID (or name it anything)
 
-# Used for the Snapshot and Delete Person Group examples.
+# Used for the Delete Person Group example.
 TARGET_PERSON_GROUP_ID = str(uuid.uuid4()) # assign a random ID (or name it anything)
 # </snippet_persongroupvars>
 
-# <snippet_snapshotvars>
-'''
-Snapshot operations variables
-These are only used for the snapshot example. Set your environment variables accordingly.
-'''
-# Source endpoint, the location/subscription where the original person group is located.
-SOURCE_ENDPOINT = ENDPOINT
-# Source subscription key. Must match the source endpoint region.
-SOURCE_KEY = os.environ['FACE_SUBSCRIPTION_KEY']
-# Source subscription ID. Found in the Azure portal in the Overview page of your Face (or any) resource.
-SOURCE_ID = os.environ['AZURE_SUBSCRIPTION_ID']
-# Person group name that will get created in this quickstart's Person Group Operations example.
-SOURCE_PERSON_GROUP_ID = PERSON_GROUP_ID
-# Target endpoint. This is your 2nd Face subscription.
-TARGET_ENDPOINT = os.environ['FACE_ENDPOINT2']
-# Target subscription key. Must match the target endpoint region.
-TARGET_KEY = os.environ['FACE_SUBSCRIPTION_KEY2']
-# Target subscription ID. It will be the same as the source ID if created Face resources from the same 
-# subscription (but moving from region to region). If they are differnt subscriptions, add the other target ID here.
-TARGET_ID = os.environ['AZURE_SUBSCRIPTION_ID']
-# NOTE: We do not need to specify the target PersonGroup ID here because we generate it with this example.
-# Each new location you transfer a person group to will have a generated, new person group ID for that region.
-# </snippet_snapshotvars>
-
 '''
 Authenticate
-All examples use the same client, except for Snapshot Operations.
+All examples use the same client.
 '''
 # <snippet_auth>
 # Create an authenticated FaceClient.
@@ -120,7 +97,8 @@ print()
 # Detect a face in an image that contains a single face
 single_face_image_url = 'https://www.biography.com/.image/t_share/MTQ1MzAyNzYzOTgxNTE0NTEz/john-f-kennedy---mini-biography.jpg'
 single_image_name = os.path.basename(single_face_image_url)
-detected_faces = face_client.face.detect_with_url(url=single_face_image_url)
+# We use detection model 2 because we are not retrieving attributes.
+detected_faces = face_client.face.detect_with_url(url=single_face_image_url, detectionModel='detection_02')
 if not detected_faces:
 	raise Exception('No face detected from image {}'.format(single_image_name))
 
@@ -139,7 +117,8 @@ first_image_face_ID = detected_faces[0].face_id
 # Each detected face gets assigned a new ID
 multi_face_image_url = "http://www.historyplace.com/kennedy/president-family-portrait-closeup.jpg"
 multi_image_name = os.path.basename(multi_face_image_url)
-detected_faces2 = face_client.face.detect_with_url(url=multi_face_image_url)
+# We use detection model 2 because we are not retrieving attributes.
+detected_faces2 = face_client.face.detect_with_url(url=multi_face_image_url, detectionModel='detection_02')
 # </snippet_detectgroup>
 
 print('Detected face IDs from', multi_image_name, ':')
@@ -157,7 +136,8 @@ Print image and draw rectangles around faces
 # Detect a face in an image that contains a single face
 single_face_image_url = 'https://raw.githubusercontent.com/Microsoft/Cognitive-Face-Windows/master/Data/detection1.jpg'
 single_image_name = os.path.basename(single_face_image_url)
-detected_faces = face_client.face.detect_with_url(url=single_face_image_url)
+# We use detection model 2 because we are not retrieving attributes.
+detected_faces = face_client.face.detect_with_url(url=single_face_image_url, detectionModel='detection_02')
 if not detected_faces:
 	raise Exception('No face detected from image {}'.format(single_image_name))
 
@@ -251,13 +231,14 @@ source_image_file_name2 = 'Family1-Son1.jpg'
 
 # <snippet_verify_detect>
 # Detect face(s) from source image 1, returns a list[DetectedFaces]
-detected_faces1 = face_client.face.detect_with_url(IMAGE_BASE_URL + source_image_file_name1)
+# We use detection model 2 because we are not retrieving attributes.
+detected_faces1 = face_client.face.detect_with_url(IMAGE_BASE_URL + source_image_file_name1, detectionModel='detection_02')
 # Add the returned face's face ID
 source_image1_id = detected_faces1[0].face_id
 print('{} face(s) detected from image {}.'.format(len(detected_faces1), source_image_file_name1))
 
 # Detect face(s) from source image 2, returns a list[DetectedFaces]
-detected_faces2 = face_client.face.detect_with_url(IMAGE_BASE_URL + source_image_file_name2)
+detected_faces2 = face_client.face.detect_with_url(IMAGE_BASE_URL + source_image_file_name2, detectionModel='detection_02')
 # Add the returned face's face ID
 source_image2_id = detected_faces2[0].face_id
 print('{} face(s) detected from image {}.'.format(len(detected_faces2), source_image_file_name2))
@@ -266,7 +247,8 @@ print('{} face(s) detected from image {}.'.format(len(detected_faces2), source_i
 detected_faces_ids = []
 # Detect faces from target image url list, returns a list[DetectedFaces]
 for image_file_name in target_image_file_names:
-    detected_faces = face_client.face.detect_with_url(IMAGE_BASE_URL + image_file_name)
+	# We use detection model 2 because we are not retrieving attributes.
+    detected_faces = face_client.face.detect_with_url(IMAGE_BASE_URL + image_file_name, detectionModel='detection_02')
     # Add the returned face's face ID
     detected_faces_ids.append(detected_faces[0].face_id)
     print('{} face(s) detected from image {}.'.format(len(detected_faces), image_file_name))
@@ -326,9 +308,9 @@ child = face_client.person_group_person.create(PERSON_GROUP_ID, "Child")
 Detect faces and register to correct person
 '''
 # Find all jpeg images of friends in working directory
-woman_images = [file for file in glob.glob('*.jpg') if file.startswith("woman")]
-man_images = [file for file in glob.glob('*.jpg') if file.startswith("man")]
-child_images = [file for file in glob.glob('*.jpg') if file.startswith("child")]
+woman_images = [file for file in glob.glob('*.jpg') if file.startswith("w")]
+man_images = [file for file in glob.glob('*.jpg') if file.startswith("m")]
+child_images = [file for file in glob.glob('*.jpg') if file.startswith("ch")]
 
 # Add to a woman person
 for image in woman_images:
@@ -371,15 +353,16 @@ while (True):
 Identify a face against a defined PersonGroup
 '''
 # Group image for testing against
-group_photo = 'test-image-person-group.jpg'
-IMAGES_FOLDER = os.path.join(os.path.dirname(os.path.realpath(__file__)))
-# Get test image
-test_image_array = glob.glob(os.path.join(IMAGES_FOLDER, group_photo))
+test_image_array = glob.glob('test-image-person-group.jpg')
 image = open(test_image_array[0], 'r+b')
+
+print('Pausing for 60 seconds to avoid triggering rate limit on free account...')
+time.sleep (60)
 
 # Detect faces
 face_ids = []
-faces = face_client.face.detect_with_stream(image)
+# We use detection model 2 because we are not retrieving attributes.
+faces = face_client.face.detect_with_stream(image, detectionModel='detection_02')
 for face in faces:
     face_ids.append(face.face_id)
 # </snippet_identify_testimage>
@@ -391,7 +374,10 @@ print('Identifying faces in {}'.format(os.path.basename(image.name)))
 if not results:
     print('No person identified in the person group for faces from {}.'.format(os.path.basename(image.name)))
 for person in results:
-    print('Person for face ID {} is identified in {} with a confidence of {}.'.format(person.face_id, os.path.basename(image.name), person.candidates[0].confidence)) # Get topmost confidence score
+	if len(person.candidates) > 0:
+		print('Person for face ID {} is identified in {} with a confidence of {}.'.format(person.face_id, os.path.basename(image.name), person.candidates[0].confidence)) # Get topmost confidence score
+	else:
+		print('No person identified for face ID {} in {}.'.format(person.face_id, os.path.basename(image.name)))
 # </snippet_identify>
 print()
 '''
@@ -409,7 +395,7 @@ print('LARGE PERSON GROUP OPERATIONS')
 print()
 
 # Large Person Group ID, should be all lowercase and alphanumeric. For example, 'mygroupname' (dashes are OK).
-LARGE_PERSON_GROUP_ID = 'my-unique-large-person-group'
+LARGE_PERSON_GROUP_ID = str(uuid.uuid4()) # assign a random ID (or name it anything)
 
 # Create empty Large Person Group. Person Group ID must be lower case, alphanumeric, and/or with '-', '_'.
 # The name and the ID can be either the same or different
@@ -427,9 +413,9 @@ child = face_client.large_person_group_person.create(LARGE_PERSON_GROUP_ID, "Chi
 Detect faces and register to correct person
 '''
 # Find all jpeg images of friends in working directory
-woman_images = [file for file in glob.glob('*.jpg') if file.startswith("woman")]
-man_images = [file for file in glob.glob('*.jpg') if file.startswith("man")]
-child_images = [file for file in glob.glob('*.jpg') if file.startswith("child")]
+woman_images = [file for file in glob.glob('*.jpg') if file.startswith("w")]
+man_images = [file for file in glob.glob('*.jpg') if file.startswith("m")]
+child_images = [file for file in glob.glob('*.jpg') if file.startswith("ch")]
 
 # Add to a woman person
 for image in woman_images:
@@ -608,141 +594,8 @@ END - LARGE FACELIST
 '''
 
 '''
-Snapshot Operations
-This example transfers a person group from one region to another region.
-You can also transfer it to another subscription (change the target subscription key).
-It uses the same client as the above examples for its source client.
-'''
-print('-----------------------------')
-print()
-print('SNAPSHOT OPERATIONS')
-print()
-
-# <snippet_snapshot_auth>
-'''
-Authenticate
-'''
-# Use your source client already created (it has the person group ID you need in it).
-face_client_source = face_client
-# Create a new FaceClient instance for your target with authentication.
-face_client_target = FaceClient(TARGET_ENDPOINT, CognitiveServicesCredentials(TARGET_KEY))
-# </snippet_snapshot_auth>
-
-# <snippet_snapshot_take>
-'''
-Snapshot operations in 4 steps
-'''
-async def run():
-    # STEP 1, take a snapshot of your person group, then track status.
-    # This list must include all subscription IDs from which you want to access the snapshot.
-    source_list = [SOURCE_ID, TARGET_ID]
-    # You may have many sources, if transferring from many regions
-    # remove any duplicates from the list. Passing the same subscription ID more than once causes
-    # the Snapshot.take operation to fail.
-    source_list = list(dict.fromkeys(source_list))
-
-    # Note Snapshot.take is not asynchronous.
-    # For information about Snapshot.take see:
-    # https://github.com/Azure/azure-sdk-for-python/blob/master/azure-cognitiveservices-vision-face/azure/cognitiveservices/vision/face/operations/snapshot_operations.py#L36
-    take_snapshot_result = face_client_source.snapshot.take(
-        type=SnapshotObjectType.person_group,
-        object_id=PERSON_GROUP_ID,
-        apply_scope=source_list,
-        # Set this to tell Snapshot.take to return the response; otherwise it returns None.
-        raw=True
-        )
-    # Get operation ID from response for tracking
-    # Snapshot.type return value is of type msrest.pipeline.ClientRawResponse. See:
-    # https://docs.microsoft.com/en-us/python/api/msrest/msrest.pipeline.clientrawresponse?view=azure-python
-    take_operation_id = take_snapshot_result.response.headers['Operation-Location'].replace('/operations/', '')
-
-    print('Taking snapshot( operation ID:', take_operation_id, ')...')
-    # </snippet_snapshot_take>
-
-    # <snippet_snapshot_wait>
-    # STEP 2, Wait for snapshot taking to complete.
-    take_status = await wait_for_operation(face_client_source, take_operation_id)
-
-    # Get snapshot id from response.
-    snapshot_id = take_status.resource_location.replace ('/snapshots/', '')
-
-    print('Snapshot ID:', snapshot_id)
-    print('Taking snapshot... Done\n')
-    # </snippet_snapshot_wait>
-
-    # <snippet_snapshot_apply>
-    # STEP 3, apply the snapshot to target region(s)
-    # Snapshot.apply is not asynchronous.
-    # For information about Snapshot.apply see:
-    # https://github.com/Azure/azure-sdk-for-python/blob/master/azure-cognitiveservices-vision-face/azure/cognitiveservices/vision/face/operations/snapshot_operations.py#L366
-    apply_snapshot_result = face_client_target.snapshot.apply(
-        snapshot_id=snapshot_id,
-        # Generate a new UUID for the target person group ID.
-        object_id=TARGET_PERSON_GROUP_ID,
-        # Set this to tell Snapshot.apply to return the response; otherwise it returns None.
-        raw=True
-        )
-    apply_operation_id = apply_snapshot_result.response.headers['Operation-Location'].replace('/operations/', '')
-    print('Applying snapshot( operation ID:', apply_operation_id, ')...')
-    # </snippet_snapshot_apply>
-
-    # <snippet_snapshot_wait2>
-    # STEP 4, wait for applying snapshot process to complete.
-    await wait_for_operation(face_client_target, apply_operation_id)
-    print('Applying snapshot... Done\n')
-    print('End of transfer.')
-    print()
-    # </snippet_snapshot_wait2>
-
-# <snippet_waitforop>
-# Helper function that waits and checks status of API call processing.
-async def wait_for_operation(client, operation_id):
-    # Track progress of taking the snapshot.
-    # Note Snapshot.get_operation_status is not asynchronous.
-    # For information about Snapshot.get_operation_status see:
-    # https://github.com/Azure/azure-sdk-for-python/blob/master/azure-cognitiveservices-vision-face/azure/cognitiveservices/vision/face/operations/snapshot_operations.py#L466
-    result = client.snapshot.get_operation_status(operation_id=operation_id)
-
-    status = result.status.lower()
-    print('Operation status:', status)
-    if ('notstarted' == status or 'running' == status):
-        print("Waiting 10 seconds...")
-        await asyncio.sleep(10)
-        result = await wait_for_operation(client, operation_id)
-    elif ('failed' == status):
-        raise Exception("Operation failed. Reason:" + result.message)
-    return result
-# </snippet_waitforop>
-
-'''
-Nice-to-have List API calls
-Use these to programmatically list your person groups or snapshots from your Azure account.
-These are not used in this quickstart.
-'''
-# OPTIONAL Prints a list of existing person groups.
-def list_person_groups(client):
-    # Note PersonGroup.list is not asynchronous.
-    ids = list(map(lambda x: x.PERSON_GROUP_ID, client.person_group.list()))
-    for x in ids: print (x)
-
-# OPTIONAL: Prints a list of existing snapshots.
-def list_snapshots(client):
-    snapshots = client.snapshot.list()
-    for x in snapshots:
-        print ("Snapshot ID: " + x.id)
-        print ("Snapshot type: " + x.type)
-        print ()
-
-# Run the snapshot example
-asyncio.run(run())
-'''
-END - SNAPSHOT OPERATIONS
-'''
-
-'''
 Delete Person Group
-For testing purposes, delete the person group made in the Person Group Operations,
-and the target person group from the Snapshot Operations (uses a different client).
+For testing purposes, delete the person group made in the Person Group Operations.
 List the person groups in your account through the online testing console to check:
 https://westus2.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395248
 '''
@@ -757,11 +610,6 @@ print("Deleted the person group {} from the source location.".format(PERSON_GROU
 print()
 # </snippet_deletegroup>
 
-# <snippet_deletetargetgroup>
-# Delete the person group in the target region.
-face_client_target.person_group.delete(TARGET_PERSON_GROUP_ID)
-print("Deleted the person group {} from the target location.".format(TARGET_PERSON_GROUP_ID))
-# </snippet_deletetargetgroup>
 print()
 print('-----------------------------')
 print()

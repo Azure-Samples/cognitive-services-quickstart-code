@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading.Tasks;
 // </dependencies>
 
 // <environment>
@@ -12,15 +13,11 @@ namespace DetectFace
 {
     class Program
     {
-        // Replace <Subscription Key> with your valid subscription key.
-        const string subscriptionKey = "<Subscription Key>";
+        static string subscriptionKey = Environment.GetEnvironmentVariable("FACE_SUBSCRIPTION_KEY");
+        static string endpoint = Environment.GetEnvironmentVariable("FACE_ENDPOINT");
+        // </environment>
 
-        // replace <myresourcename> with the string found in your endpoint URL
-        const string uriBase =
-            "https://<myresourcename>.cognitiveservices.azure.com/face/v1.0/detect";
-// </environment>
-
-// <main>
+        // <main>
         static void Main(string[] args)
         {
             // Get the path and filename to process from the user.
@@ -33,25 +30,24 @@ namespace DetectFace
             {
                 try
                 {
-                    MakeAnalysisRequest(imageFilePath);
                     Console.WriteLine("\nWait a moment for the results to appear.\n");
+                    MakeAnalysisRequest(imageFilePath).Wait();
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("\n" + e.Message + "\nPress Enter to exit...\n");
+                    Console.WriteLine("\n" + e.Message + "\n");
                 }
             }
             else
             {
-                Console.WriteLine("\nInvalid file path.\nPress Enter to exit...\n");
+                Console.WriteLine("\nInvalid file path.\n");
             }
-            Console.ReadLine();
         }
-// </main>
+        // </main>
 
-// <request>
+        // <request>
         // Gets the analysis of the specified image by using the Face REST API.
-        static async void MakeAnalysisRequest(string imageFilePath)
+        static async Task MakeAnalysisRequest(string imageFilePath)
         {
             HttpClient client = new HttpClient();
 
@@ -60,12 +56,10 @@ namespace DetectFace
                 "Ocp-Apim-Subscription-Key", subscriptionKey);
 
             // Request parameters. A third optional parameter is "details".
-            string requestParameters = "returnFaceId=true&returnFaceLandmarks=false" +
-                "&returnFaceAttributes=age,gender,headPose,smile,facialHair,glasses," +
-                "emotion,hair,makeup,occlusion,accessories,blur,exposure,noise";
+            string requestParameters = "detectionModel=detection_02&returnFaceId=true&returnFaceLandmarks=false";
 
             // Assemble the URI for the REST API Call.
-            string uri = uriBase + "?" + requestParameters;
+            string uri = endpoint + "/face/v1.0/detect?" + requestParameters;
 
             HttpResponseMessage response;
 
@@ -89,12 +83,11 @@ namespace DetectFace
                 // Display the JSON response.
                 Console.WriteLine("\nResponse:\n");
                 Console.WriteLine(JsonPrettyPrint(contentString));
-                Console.WriteLine("\nPress Enter to exit...");
             }
         }
-// </request>
+        // </request>
 
-// <getimage>
+        // <getimage>
         // Returns the contents of the specified file as a byte array.
         static byte[] GetImageAsByteArray(string imageFilePath)
         {
@@ -105,9 +98,9 @@ namespace DetectFace
                 return binaryReader.ReadBytes((int)fileStream.Length);
             }
         }
-// </getimage>
+        // </getimage>
 
-// <print>
+        // <print>
         // Formats the given JSON string by adding line breaks and indents.
         static string JsonPrettyPrint(string json)
         {

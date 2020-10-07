@@ -1,28 +1,26 @@
 package main
 
 import (
+	"crypto/tls"
     "encoding/json"
     "fmt"
     "io/ioutil"
     "net/http"
+	"os"
     "strings"
     "time"
 )
 
 func main() {
-    const subscriptionKey = "<Subscription Key>"
+	// Add FACE_SUBSCRIPTION_KEY and FACE_ENDPOINT to your environment variables.
+	subscriptionKey := os.Getenv("FACE_SUBSCRIPTION_KEY")
+	endpoint := os.Getenv("FACE_ENDPOINT")
 
-    // You must use the same location in your REST call as you used to get your
-    // subscription keys. For example, if you got your subscription keys from
-    // westus, replace "westcentralus" in the URL below with "westus".
-    const uriBase =
-      "https://<My Endpoint String>.com/face/v1.0/detect"
     const imageUrl =
-      "https://upload.wikimedia.org/wikipedia/commons/3/37/Dagestani_man_and_woman.jpg"
+      "https://upload.wikimedia.org/wikipedia/commons/c/c3/RH_Louise_Lillian_Gish.jpg"
 
-    const params = "?returnFaceAttributes=age,gender,headPose,smile,facialHair," +
-        "glasses,emotion,hair,makeup,occlusion,accessories,blur,exposure,noise"
-    const uri = uriBase + params
+    const params = "?detectionModel=detection_02"
+    uri := endpoint + "/face/v1.0/detect" + params
     const imageUrlEnc = "{\"url\":\"" + imageUrl + "\"}"
 
     reader := strings.NewReader(imageUrlEnc)
