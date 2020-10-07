@@ -29,12 +29,21 @@ class Program
     // <snippet_main>
     static void Main(string[] args)
     {
-        var t1 = RunFormRecognizerClient();
-        Task.WaitAll(t1);
-
         // new code:
-        var analyzeForm = RecognizeContent();
+        var recognizeContent = RecognizeContent(recognizerClient, formUrl);
+        Task.WaitAll(recognizeContent);
+
+        var analyzeReceipt = AnalyzeReceipt(recognizerClient, receiptUrl);
+        Task.WaitAll(analyzeReceipt); 
+
+        var trainModel = TrainModel(trainingClient, trainingDataUrl);
+        Task.WaitAll(trainModel); 
+
+        var analyzeForm = AnalyzePdfForm(recognizerClient, modelId, formUrl);
         Task.WaitAll(analyzeForm);
+        
+        var manageModels = ManageModels(trainingClient, trainingDataUrl);
+        Task.WaitAll(manageModels);
 
     }
     // </snippet_main>
@@ -49,29 +58,6 @@ class Program
         return client;
     }
     // </snippet_auth>
-    static async Task RunFormRecognizerClient()
-    {
-        var trainingClient = new FormTrainingClient(new Uri(endpoint), credential);
-        var recognizerClient = new FormRecognizerClient(new Uri(endpoint), credential);
-
-        // <snippet_calls>
-        // Call Form Recognizer scenarios:
-        Console.WriteLine("Get form content...");
-        await GetContent(recognizerClient, formUrl);
-
-        Console.WriteLine("Analyze receipt...");
-        await AnalyzeReceipt(recognizerClient, receiptUrl);
-
-        Console.WriteLine("Train Model with training data...");
-        Guid modelId = await TrainModel(trainingClient, trainingDataUrl);
-
-        Console.WriteLine("Analyze PDF form...");
-        await AnalyzePdfForm(recognizerClient, modelId, formUrl);
-
-        Console.WriteLine("Manage models...");
-        await ManageModels(trainingClient, trainingDataUrl);
-    }
-    // </snippet_calls>
 
     // <snippet_getcontent_call>
     private static async Task RecognizeContent(FormRecognizerClient recognizerClient)
