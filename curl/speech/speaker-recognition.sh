@@ -80,11 +80,11 @@ curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker/verification/v2.0/t
 }
 # </tdv_verify_response>
 
-# <tii_delete_profile>
+# <tdv_delete_profile>
 curl --location --request DELETE \
 'INSERT_ENDPOINT_HERE/speaker/verification/v2.0/text-dependent/profiles/INSERT_PROFILE_ID_HERE' \
 --header 'Ocp-Apim-Subscription-Key: INSERT_SUBSCRIPTION_KEY_HERE'
-# </tii_delete_profile>
+# </tdv_delete_profile>
 # (No response)
 
 # Text-independent verification
