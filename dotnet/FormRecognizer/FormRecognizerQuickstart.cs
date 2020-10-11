@@ -1,6 +1,6 @@
 // <snippet_using>
 using Azure;
-using Azure.AI.FormRecognizer;
+using Azure.AI.FormRecognizer;  
 using Azure.AI.FormRecognizer.Models;
 using Azure.AI.FormRecognizer.Training;
 
@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 
 class Program
 {
-
     // <snippet_creds>
     private static readonly string endpoint = "<your api endpoint>";
     private static readonly string apiKey = "<your Form Recognizer key>";
@@ -340,4 +339,3 @@ class Program
     }
     // </snippet_manage_model_delete>
 }
-
