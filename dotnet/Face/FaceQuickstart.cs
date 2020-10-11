@@ -56,15 +56,15 @@ namespace FaceQuickstart
         const string IMAGE_BASE_URL = "https://csdx.blob.core.windows.net/resources/Face/Images/";
         // </snippet_image_url>
 
+        // <snippet_creds>
+        // From your Face subscription in the Azure portal, get your subscription key and endpoint.
+        const string SUBSCRIPTION_KEY = "<your subscription key>";
+        const string ENDPOINT = "<your api endpoint>";
+        // </snippet_creds>
+
         static void Main(string[] args)
         {
-            // <snippet_mainvars>
-            // From your Face subscription in the Azure portal, get your subscription key and endpoint.
-            // Set your environment variables using the names below. Close and reopen your project for changes to take effect.
-            string SUBSCRIPTION_KEY = Environment.GetEnvironmentVariable("FACE_SUBSCRIPTION_KEY");
-            string ENDPOINT = Environment.GetEnvironmentVariable("FACE_ENDPOINT");
-            // </snippet_mainvars>
-
+           
             // <snippet_detect_models>
             // Recognition model 3 was released in 2020 May.
             // It is recommended since its overall accuracy is improved
@@ -76,15 +76,13 @@ namespace FaceQuickstart
             const string LargeFaceListId = "mylargefacelistid_001"; // must be lowercase, 0-9, "_" or "-" characters
             const string LargeFaceListName = "MyLargeFaceListName";
 
-            // <snippet_client>
+			// <snippet_maincalls>
             // Authenticate.
             IFaceClient client = Authenticate(ENDPOINT, SUBSCRIPTION_KEY);
             // </snippet_client>
 
-            // <snippet_detect_call>
             // Detect - get features from faces.
             DetectFaceExtract(client, IMAGE_BASE_URL, RECOGNITION_MODEL3).Wait();
-            // </snippet_detect_call>
             // Find Similar - find a similar face from a list of faces.
             FindSimilar(client, IMAGE_BASE_URL, RECOGNITION_MODEL3).Wait();
             // Verify - compare two images if the same person or not.
@@ -97,6 +95,8 @@ namespace FaceQuickstart
             // Group faces - automatically group similar faces.
             Group(client, IMAGE_BASE_URL, RECOGNITION_MODEL3).Wait();
             // FaceList - create a face list, then get data
+            // </snippet_maincalls>
+
             FaceListOperations(client, IMAGE_BASE_URL).Wait();
             // Large FaceList - create a large face list, then get data
             LargeFaceListOperations(client, IMAGE_BASE_URL).Wait();
@@ -364,12 +364,12 @@ namespace FaceQuickstart
 		 * a list of Person objects that each face might belong to. Returned Person objects are wrapped as Candidate objects, 
 		 * which have a prediction confidence value.
 		 */
+		// <snippet_persongroup_files>
         public static async Task IdentifyInPersonGroup(IFaceClient client, string url, string recognitionModel)
         {
             Console.WriteLine("========IDENTIFY FACES========");
             Console.WriteLine();
 
-            // <snippet_persongroup_files>
             // Create a dictionary for all your images, grouping similar ones under the same key.
             Dictionary<string, string[]> personDictionary =
                 new Dictionary<string, string[]>
@@ -420,8 +420,9 @@ namespace FaceQuickstart
                 Console.WriteLine($"Training status: {trainingStatus.Status}.");
                 if (trainingStatus.Status == TrainingStatusType.Succeeded) { break; }
             }
-            // </snippet_persongroup_train>
             Console.WriteLine();
+
+            // </snippet_persongroup_train>
             // <snippet_identify_sources>
             List<Guid?> sourceFaceIds = new List<Guid?>();
             // Detect faces from source image url.
@@ -430,6 +431,7 @@ namespace FaceQuickstart
             // Add detected faceId to sourceFaceIds.
             foreach (var detectedFace in detectedFaces) { sourceFaceIds.Add(detectedFace.FaceId.Value); }
             // </snippet_identify_sources>
+            
             // <snippet_identify>
             // Identify the faces in a person group. 
             var identifyResults = await client.Face.IdentifyAsync(sourceFaceIds, personGroupId);
@@ -441,8 +443,9 @@ namespace FaceQuickstart
                     $" confidence: {identifyResult.Candidates[0].Confidence}.");
             }
             Console.WriteLine();
-            // </snippet_identify>
         }
+        // </snippet_identify>
+
         /*
 		 * END - IDENTIFY FACES
 		 */

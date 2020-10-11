@@ -32,7 +32,6 @@ using System.Linq;
  *   - NuGet library: Microsoft.Azure.CognitiveServices.Vision.ComputerVision
  *   - Azure Computer Vision resource from https://ms.portal.azure.com
  *   - Create a .Net Core console app, then copy/paste this Program.cs file into it. Be sure to update the namespace if it's different.
- *   - At the top of your Program.cs, set your environment variables on your local machine with the suggested names.
  *   - Download local images (celebrities.jpg, objects.jpg, handwritten_text.jpg, and printed_text.jpg)
  *     from the link below then add to your bin/Debug/netcoreapp2.2 folder.
  *     https://github.com/Azure-Samples/cognitive-services-sample-data-files/tree/master/ComputerVision/Images
@@ -52,8 +51,7 @@ namespace ComputerVisionQuickstart
     class Program
     {
         // <snippet_vars>
-        // Add your Computer Vision subscription key and endpoint to your environment variables. 
-        // Close/reopen your project for them to take effect.
+        // Add your Computer Vision subscription key and endpoint
         static string subscriptionKey = "COMPUTER_VISION_SUBSCRIPTION_KEY";
         static string endpoint = "COMPUTER_VISION_ENDPOINT";
         // </snippet_vars>
