@@ -21,19 +21,12 @@ using Microsoft.Azure.CognitiveServices.Vision.Face.Models;
  *  - Group Faces
  *  - FaceList
  *  - Large FaceList
- *  - Snapshot Operations
  * 
  * Prerequisites:
  *  - Visual Studio 2019 (or 2017, but this is app uses .NETCore, not .NET Framework)
  *  - NuGet libraries:
  *    Microsoft.Azure.CognitiveServices.Vision.Face
  *    
- * The Snapshot sample needs a 2nd Face resource in Azure to execute. Create one with a different region than your original Face resource. 
- * For example, Face resource 1: created with the 'westus' region. Face resource 2: created with the 'eastus' region. 
- * For this sample, the 1st region is referred to as the source region, and the 2nd region is referred to as the target region.
- * In the Program.cs file at the top, set your environment variables with your keys, regions, and ID. 
- * Once set, close and reopen the solution file for them to take effect.
- *   
  * How to run:
  *  - Create a new C# Console app in Visual Studio 2019.
  *  - Copy/paste the Program.cs file in the Github quickstart into your own Program.cs file. 
@@ -41,9 +34,6 @@ using Microsoft.Azure.CognitiveServices.Vision.Face.Models;
  * Dependencies within the samples: 
  *  - Authenticate produces a client that's used by all samples.
  *  - Detect Faces is a helper function that is used by several other samples. 
- *  - Snapshot Operations need a person group ID to be executed, so it uses the one created from Identify Faces. 
- *  - The Delete Person Group uses a person group ID, so it uses the one used in the Snapshot example. 
- *    It will delete the person group from both of your Face resources in their respective regions.
  *   
  * References:
  *  - Face Documentation: https://docs.microsoft.com/en-us/azure/cognitive-services/face/
@@ -55,18 +45,13 @@ namespace FaceQuickstart
 {
     class Program
     {
-
+        // Used for the Identify and Delete examples.
         // <snippet_persongroup_declare>
-		// Used for the Identify, Snapshot, and Delete examples.
-        // The same person group is used for both Person Group Operations and Snapshot Operations.
-        static string sourcePersonGroup = null;
+        static string personGroupId = Guid.NewGuid().ToString();
         // </snippet_persongroup_declare>
 
-        // <snippet_snapshot_persongroup>
-        static string targetPersonGroup = null;
-        // </snippet_snapshot_persongroup>
-
         // <snippet_image_url>
+        // Used for all examples.
         // URL for the images.
         const string IMAGE_BASE_URL = "https://csdx.blob.core.windows.net/resources/Face/Images/";
         // </snippet_image_url>
@@ -79,24 +64,12 @@ namespace FaceQuickstart
 
         static void Main(string[] args)
         {
-            // <snippet_snapshot_vars>
-            // The Snapshot example needs its own 2nd client, since it uses two different regions.
-            string TARGET_SUBSCRIPTION_KEY = "<your target subscription key>";
-            string TARGET_ENDPOINT = "<your target api endpoint>";
-            // Grab your subscription ID, from any resource in Azure, from the Overview page (all resources have the same subscription ID). 
-            Guid AZURE_SUBSCRIPTION_ID = "<your Azure subscription ID>";
-            // Target subscription ID. It will be the same as the source ID if created Face resources from the same
-            // subscription (but moving from region to region). If they are different subscriptions, add the other
-            // target ID here.
-            Guid TARGET_AZURE_SUBSCRIPTION_ID = "<your target Azure subscription ID>";
-            // </snippet_snapshot_vars>
-
+           
             // <snippet_detect_models>
-            // Used in the Detect Faces and Verify examples.
-            // Recognition model 3 is used for feature extraction, use 1 to simply recognize/detect a face. 
-            // However, the API calls to Detection that are used with Verify, Find Similar, or Identify must share the same recognition model.
+            // Recognition model 3 was released in 2020 May.
+            // It is recommended since its overall accuracy is improved
+            // compared with models 1 and 2.
             const string RECOGNITION_MODEL3 = RecognitionModel.Recognition03;
-            const string RECOGNITION_MODEL1 = RecognitionModel.Recognition01;
             // </snippet_detect_models>
 
             // Large FaceList variables
@@ -106,31 +79,24 @@ namespace FaceQuickstart
 			// <snippet_maincalls>
             // Authenticate.
             IFaceClient client = Authenticate(ENDPOINT, SUBSCRIPTION_KEY);
-
-            // Authenticate for another region or subscription (used in Snapshot only).
-            IFaceClient clientTarget = Authenticate(TARGET_ENDPOINT, TARGET_SUBSCRIPTION_KEY);
+            // </snippet_client>
 
             // Detect - get features from faces.
             DetectFaceExtract(client, IMAGE_BASE_URL, RECOGNITION_MODEL3).Wait();
-
             // Find Similar - find a similar face from a list of faces.
-            FindSimilar(client, IMAGE_BASE_URL, RECOGNITION_MODEL1).Wait();
+            FindSimilar(client, IMAGE_BASE_URL, RECOGNITION_MODEL3).Wait();
             // Verify - compare two images if the same person or not.
             Verify(client, IMAGE_BASE_URL, RECOGNITION_MODEL3).Wait();
 
             // Identify - recognize a face(s) in a person group (a person group is created in this example).
-            IdentifyInPersonGroup(client, IMAGE_BASE_URL, RECOGNITION_MODEL1).Wait();
+            IdentifyInPersonGroup(client, IMAGE_BASE_URL, RECOGNITION_MODEL3).Wait();
             // LargePersonGroup - create, then get data.
-            LargePersonGroup(client, IMAGE_BASE_URL, RECOGNITION_MODEL1).Wait();
+            LargePersonGroup(client, IMAGE_BASE_URL, RECOGNITION_MODEL3).Wait();
             // Group faces - automatically group similar faces.
-            Group(client, IMAGE_BASE_URL, RECOGNITION_MODEL1).Wait();
-            
-            // Take a snapshot of a person group in one region, move it to the next region.
-            // Can also be used for moving a person group from one Azure subscription to the next.
-            Snapshot(client, clientTarget, sourcePersonGroup, AZURE_SUBSCRIPTION_ID, TARGET_AZURE_SUBSCRIPTION_ID).Wait();
-			// </snippet_maincalls>
+            Group(client, IMAGE_BASE_URL, RECOGNITION_MODEL3).Wait();
+            // FaceList - create a face list, then get data
+            // </snippet_maincalls>
 
-			// FaceList - create a face list, then get data
             FaceListOperations(client, IMAGE_BASE_URL).Wait();
             // Large FaceList - create a large face list, then get data
             LargeFaceListOperations(client, IMAGE_BASE_URL).Wait();
@@ -139,12 +105,8 @@ namespace FaceQuickstart
             // At end, delete person groups in both regions (since testing only)
             Console.WriteLine("========DELETE PERSON GROUP========");
             Console.WriteLine();
-            DeletePersonGroup(client, sourcePersonGroup).Wait();
+            DeletePersonGroup(client, personGroupId).Wait();
             // </snippet_persongroup_delete>
-            // <snippet_target_persongroup_delete>
-            DeletePersonGroup(clientTarget, targetPersonGroup).Wait();
-            Console.WriteLine();
-            // </snippet_target_persongroup_delete>
 
             Console.WriteLine("End of quickstart.");
         }
@@ -194,11 +156,12 @@ namespace FaceQuickstart
                         FaceAttributeType.Blur, FaceAttributeType.Emotion, FaceAttributeType.Exposure, FaceAttributeType.FacialHair,
                         FaceAttributeType.Gender, FaceAttributeType.Glasses, FaceAttributeType.Hair, FaceAttributeType.HeadPose,
                         FaceAttributeType.Makeup, FaceAttributeType.Noise, FaceAttributeType.Occlusion, FaceAttributeType.Smile },
+                        // We specify detection model 1 because we are retrieving attributes.
+                        detectionModel: DetectionModel.Detection01,
                         recognitionModel: recognitionModel);
 
                 Console.WriteLine($"{detectedFaces.Count} face(s) detected from image `{imageFileName}`.");
                 // </snippet_detect>
-
                 // <snippet_detect_parse>
                 // Parse and print all attributes of each detected face.
                 foreach (var face in detectedFaces)
@@ -270,15 +233,16 @@ namespace FaceQuickstart
         }
         // </snippet_detect_parse>
 
-		// <snippet_face_detect_recognize>
         // Detect faces from image url for recognition purpose. This is a helper method for other functions in this quickstart.
         // Parameter `returnFaceId` of `DetectWithUrlAsync` must be set to `true` (by default) for recognition purpose.
         // The field `faceId` in returned `DetectedFace`s will be used in Face - Find Similar, Face - Verify. and Face - Identify.
         // It will expire 24 hours after the detection call.
-        private static async Task<List<DetectedFace>> DetectFaceRecognize(IFaceClient faceClient, string url, string RECOGNITION_MODEL1)
+        // <snippet_face_detect_recognize>
+        private static async Task<List<DetectedFace>> DetectFaceRecognize(IFaceClient faceClient, string url, string recognition_model)
         {
             // Detect faces from image URL. Since only recognizing, use the recognition model 1.
-            IList<DetectedFace> detectedFaces = await faceClient.Face.DetectWithUrlAsync(url, recognitionModel: RECOGNITION_MODEL1);
+            // We use detection model 2 because we are not retrieving attributes.
+            IList<DetectedFace> detectedFaces = await faceClient.Face.DetectWithUrlAsync(url, recognitionModel: recognition_model, detectionModel: DetectionModel.Detection02);
             Console.WriteLine($"{detectedFaces.Count} face(s) detected from image `{Path.GetFileName(url)}`");
             return detectedFaces.ToList();
         }
@@ -292,7 +256,7 @@ namespace FaceQuickstart
 		 * FIND SIMILAR
 		 * This example will take an image and find a similar one to it in another image.
 		 */
-        public static async Task FindSimilar(IFaceClient client, string url, string RECOGNITION_MODEL1)
+        public static async Task FindSimilar(IFaceClient client, string url, string recognition_model)
         {
             Console.WriteLine("========FIND SIMILAR========");
             Console.WriteLine();
@@ -314,13 +278,13 @@ namespace FaceQuickstart
             foreach (var targetImageFileName in targetImageFileNames)
             {
                 // Detect faces from target image url.
-                var faces = await DetectFaceRecognize(client, $"{url}{targetImageFileName}", RECOGNITION_MODEL1);
+                var faces = await DetectFaceRecognize(client, $"{url}{targetImageFileName}", recognition_model);
                 // Add detected faceId to list of GUIDs.
                 targetFaceIds.Add(faces[0].FaceId.Value);
             }
 
             // Detect faces from source image url.
-            IList<DetectedFace> detectedFaces = await DetectFaceRecognize(client, $"{url}{sourceImageFileName}", RECOGNITION_MODEL1);
+            IList<DetectedFace> detectedFaces = await DetectFaceRecognize(client, $"{url}{sourceImageFileName}", recognition_model);
             Console.WriteLine();
 
             // Find a similar face(s) in the list of IDs. Comapring only the first in list for testing purposes.
@@ -422,8 +386,6 @@ namespace FaceQuickstart
 
             // <snippet_persongroup_create>
             // Create a person group. 
-            string personGroupId = Guid.NewGuid().ToString();
-            sourcePersonGroup = personGroupId; // This is solely for the snapshot operations example
             Console.WriteLine($"Create a person group ({personGroupId}).");
             await client.PersonGroup.CreateAsync(personGroupId, personGroupId, recognitionModel: recognitionModel);
             // The similar faces will be grouped into a single person group person.
@@ -459,8 +421,8 @@ namespace FaceQuickstart
                 if (trainingStatus.Status == TrainingStatusType.Succeeded) { break; }
             }
             Console.WriteLine();
-			// </snippet_persongroup_train>
 
+            // </snippet_persongroup_train>
             // <snippet_identify_sources>
             List<Guid?> sourceFaceIds = new List<Guid?>();
             // Detect faces from source image url.
@@ -469,7 +431,7 @@ namespace FaceQuickstart
             // Add detected faceId to sourceFaceIds.
             foreach (var detectedFace in detectedFaces) { sourceFaceIds.Add(detectedFace.FaceId.Value); }
             // </snippet_identify_sources>
-
+            
             // <snippet_identify>
             // Identify the faces in a person group. 
             var identifyResults = await client.Face.IdentifyAsync(sourceFaceIds, personGroupId);
@@ -482,7 +444,7 @@ namespace FaceQuickstart
             }
             Console.WriteLine();
         }
-		// </snippet_identify>
+        // </snippet_identify>
 
         /*
 		 * END - IDENTIFY FACES
@@ -587,7 +549,7 @@ namespace FaceQuickstart
 		 * images, whereas the person group method allows you to define the grouping.
 		 * A single "messyGroup" array contains face IDs for which no similarities were found.
 		 */
-        public static async Task Group(IFaceClient client, string url, string RECOGNITION_MODEL1)
+        public static async Task Group(IFaceClient client, string url, string recognition_model)
         {
             Console.WriteLine("========GROUP FACES========");
             Console.WriteLine();
@@ -610,7 +572,7 @@ namespace FaceQuickstart
             foreach (var imageFileName in imageFileNames)
             {
                 // Detect faces from image url.
-                IList<DetectedFace> detectedFaces = await DetectFaceRecognize(client, $"{url}{imageFileName}", RECOGNITION_MODEL1);
+                IList<DetectedFace> detectedFaces = await DetectFaceRecognize(client, $"{url}{imageFileName}", recognition_model);
                 // Add detected faceId to faceIds and faces.
                 faceIds.Add(detectedFaces[0].FaceId.Value);
                 faces.Add(detectedFaces[0].FaceId.ToString(), imageFileName);
@@ -780,82 +742,6 @@ namespace FaceQuickstart
         /*
 		* END - LARGE FACELIST OPERATIONS
 		*/
-
-        // <snippet_snapshot_take>
-        /*
-		 * SNAPSHOT OPERATIONS
-		 * Copies a person group from one Azure region (or subscription) to another. For example: from the EastUS region to the WestUS.
-		 * The same process can be used for face lists. 
-		 * NOTE: the person group in the target region has a new person group ID, so it no longer associates with the source person group.
-		 */
-        public static async Task Snapshot(IFaceClient clientSource, IFaceClient clientTarget, string personGroupId, Guid azureId, Guid targetAzureId)
-        {
-            Console.WriteLine("========SNAPSHOT OPERATIONS========");
-            Console.WriteLine();
-
-            // Take a snapshot for the person group that was previously created in your source region.
-            var takeSnapshotResult = await clientSource.Snapshot.TakeAsync(SnapshotObjectType.PersonGroup, personGroupId, new Guid?[] { azureId }); // add targetAzureId to this array if your target ID is different from your source ID.
-
-            // Get operation id from response for tracking the progress of snapshot taking.
-            var operationId = Guid.Parse(takeSnapshotResult.OperationLocation.Split('/')[2]);
-            Console.WriteLine($"Taking snapshot(operation ID: {operationId})... Started");
-            // </snippet_snapshot_take>
-            // <snippet_snapshot_take_wait>
-            // Wait for taking the snapshot to complete.
-            OperationStatus operationStatus = null;
-            do
-            {
-                Thread.Sleep(TimeSpan.FromMilliseconds(1000));
-                // Get the status of the operation.
-                operationStatus = await clientSource.Snapshot.GetOperationStatusAsync(operationId);
-                Console.WriteLine($"Operation Status: {operationStatus.Status}");
-            }
-            while (operationStatus.Status != OperationStatusType.Succeeded && operationStatus.Status != OperationStatusType.Failed);
-            // Confirm the location of the resource where the snapshot is taken and its snapshot ID
-            var snapshotId = Guid.Parse(operationStatus.ResourceLocation.Split('/')[2]);
-            Console.WriteLine($"Source region snapshot ID: {snapshotId}");
-            Console.WriteLine($"Taking snapshot of person group: {personGroupId}... Done\n");
-            // </snippet_snapshot_take_wait>
-
-            // <snippet_snapshot_apply>
-            // Apply the snapshot in target region, with a new ID.
-            var newPersonGroupId = Guid.NewGuid().ToString();
-            targetPersonGroup = newPersonGroupId;
-
-            try
-            {
-                var applySnapshotResult = await clientTarget.Snapshot.ApplyAsync(snapshotId, newPersonGroupId);
-
-                // Get operation id from response for tracking the progress of snapshot applying.
-                var applyOperationId = Guid.Parse(applySnapshotResult.OperationLocation.Split('/')[2]);
-                Console.WriteLine($"Applying snapshot(operation ID: {applyOperationId})... Started");
-                // </snippet_snapshot_apply>
-                // <snippet_snapshot_apply_wait>
-                // Wait for applying operation to complete
-                do
-                {
-                    Thread.Sleep(TimeSpan.FromMilliseconds(1000));
-                    // Get the status of the operation.
-                    operationStatus = await clientSource.Snapshot.GetOperationStatusAsync(applyOperationId);
-                    Console.WriteLine($"Operation Status: {operationStatus.Status}");
-                }
-                while (operationStatus.Status != OperationStatusType.Succeeded && operationStatus.Status != OperationStatusType.Failed);
-                // Confirm location of the target resource location, with its ID.
-                Console.WriteLine($"Person group in new region: {newPersonGroupId}");
-                Console.WriteLine("Applying snapshot... Done\n");
-            }
-            // </snippet_snapshot_apply_wait>
-            // <snippet_snapshot_trycatch>
-            catch (Exception e)
-            {
-                throw new ApplicationException("Do you have a second Face resource in Azure? " +
-                    "It's needed to transfer the person group to it for the Snapshot example.", e);
-            }
-        }
-        // </snippet_snapshot_trycatch>
-        /*
-		 * END - SNAPSHOT OPERATIONS 
-		 */
 
         // <snippet_deletepersongroup>
         /*

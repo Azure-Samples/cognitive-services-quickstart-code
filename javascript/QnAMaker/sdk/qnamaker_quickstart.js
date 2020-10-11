@@ -33,21 +33,35 @@ const qnamaker_runtime = require("@azure/cognitiveservices-qnamaker-runtime");
 // </Dependencies>
 
 // <Resourcevariables>
-const authoringKey = "REPLACE-WITH-YOUR-QNA-MAKER-KEY";
-const resourceName = "REPLACE-WITH-YOUR-RESOURCE-NAME";
+var key_var = 'QNA_MAKER_SUBSCRIPTION_KEY';
+if (!process.env[key_var]) {
+    throw new Error('please set/export the following environment variable: ' + key_var);
+}
+var subscription_key = process.env[key_var];
 
-const authoringURL = `https://${resourceName}.cognitiveservices.azure.com`;
-const queryingURL = `https://${resourceName}.azurewebsites.net`;
+var endpoint_var = 'QNA_MAKER_ENDPOINT';
+if (!process.env[endpoint_var]) {
+    throw new Error('please set/export the following environment variable: ' + endpoint_var);
+}
+var endpoint = process.env[endpoint_var];
+
+var runtime_endpoint_var = 'QNA_MAKER_RUNTIME_ENDPOINT';
+if (!process.env[runtime_endpoint_var]) {
+    throw new Error('please set/export the following environment variable: ' + runtime_endpoint_var);
+}
+var runtime_endpoint = process.env[runtime_endpoint_var];
 // </Resourcevariables>
 
 
 // <GetQueryEndpointKey>
 const getEndpointKeys = async (qnaClient) => {
 
+	console.log(`Getting runtime endpoint keys...`)
+
     const runtimeKeysClient = await qnaClient.endpointKeys;
     const results = await runtimeKeysClient.getKeys()
 
-    if (!results._response.status.toString().indexOf("2", 0) == -1) {
+    if ( ! results._response.status.toString().startsWith("2")) {
         console.log(`GetEndpointKeys request failed - HTTP status ${results._response.status}`)
         return null
     }
@@ -73,7 +87,7 @@ const listKnowledgeBasesInResource = async (KBclient) => {
 // <GenerateAnswer>
 const generateAnswer = async (runtimeClient, runtimeKey, kb_id) => {
 
-    const customHeaders = { Authorization: `EndpointKey ${runtimeKey}` };
+	console.log(`Querying knowledge base...`)
 
     const requestQuery = await runtimeClient.runtime.generateAnswer(
         kb_id,
@@ -83,8 +97,7 @@ const generateAnswer = async (runtimeClient, runtimeKey, kb_id) => {
             strictFilters: [
                 { name: "Category", value: "api" }
             ]
-        },
-        { customHeaders }
+        }
     );
     console.log(JSON.stringify(requestQuery));
 
@@ -93,8 +106,11 @@ const generateAnswer = async (runtimeClient, runtimeKey, kb_id) => {
 
 // <DownloadKB>
 const downloadKnowledgeBase = async (KBclient, kb_id) => {
+
+	console.log(`Downloading knowledge base...`)
+
     var kbData = await KBclient.download(kb_id, "Prod");
-    console.log(`KB Downloaded. It has ${kbData.qnaDocuments.length} QnAs.`);
+    console.log(`Knowledge base downloaded. It has ${kbData.qnaDocuments.length} QnAs.`);
 
     // Do something meaningful with data
 }
@@ -103,9 +119,11 @@ const downloadKnowledgeBase = async (KBclient, kb_id) => {
 // <DeleteKB>
 const deleteKnowledgeBase = async (KBclient, kb_id) => {
 
+	console.log(`Deleting knowledge base...`)
+
     const results = await KBclient.deleteMethod(kb_id)
 
-    if (results._response.status.toString().indexOf("2", 0) == -1) {
+    if ( ! results._response.status.toString().startsWith("2")) {
         console.log(`Delete operation state failed - HTTP status ${results._response.status}`)
         return false
     }
@@ -145,6 +163,8 @@ const delayTimer = async (timeInMs) => {
 // <CreateKBMethod>
 const createKnowledgeBase = async (qnaClient, kbclient) => {
 
+	console.log(`Creating knowledge base...`)
+
     const qna1 = {
         answer: "Yes, You can use our [REST APIs](https://docs.microsoft.com/rest/api/cognitiveservices/qnamaker/knowledgebase) to manage your knowledge base.",
         questions: ["How do I manage my knowledgebase?"],
@@ -183,7 +203,7 @@ const createKnowledgeBase = async (qnaClient, kbclient) => {
 
     const results = await kbclient.create(create_kb_payload)
 
-    if (results._response.status.toString().indexOf("2", 0) == -1) {
+    if ( ! results._response.status.toString().startsWith("2")) {
         console.log(`Create request failed - HTTP status ${results._response.status}`)
         return
     }
@@ -204,6 +224,8 @@ const createKnowledgeBase = async (qnaClient, kbclient) => {
 
 // <UpdateKBMethod>
 const updateKnowledgeBase = async (qnaClient, kbclient, kb_id) => {
+
+	console.log(`Updating knowledge base...`)
 
     const urls = [
         "https://docs.microsoft.com/azure/cognitive-services/QnAMaker/troubleshooting"
@@ -278,7 +300,7 @@ const updateKnowledgeBase = async (qnaClient, kbclient, kb_id) => {
 
     const results = await kbclient.update(kb_id, update_kb_payload)
 
-    if (!results._response.status.toString().indexOf("2", 0) == -1) {
+    if ( ! results._response.status.toString().startsWith("2")) {
         console.log(`Update request failed - HTTP status ${results._response.status}`)
         return false
     }
@@ -298,9 +320,11 @@ const updateKnowledgeBase = async (qnaClient, kbclient, kb_id) => {
 // <PublishKB>
 const publishKnowledgeBase = async (kbclient, kb_id) => {
 
+	console.log(`Publishing knowledge base...`)
+
     const results = await kbclient.publish(kb_id)
 
-    if (!results._response.status.toString().indexOf("2", 0) == -1) {
+    if ( ! results._response.status.toString().startsWith("2")) {
         console.log(`Publish request failed - HTTP status ${results._response.status}`)
         return false
     }
@@ -315,8 +339,8 @@ const publishKnowledgeBase = async (kbclient, kb_id) => {
 const main = async () => {
 
     // <AuthorizationAuthor>
-    const creds = new msRest.ApiKeyCredentials({ inHeader: { 'Ocp-Apim-Subscription-Key': authoringKey } });
-    const qnaMakerClient = new qnamaker.QnAMakerClient(creds, authoringURL);
+    const creds = new msRest.ApiKeyCredentials({ inHeader: { 'Ocp-Apim-Subscription-Key': subscription_key } });
+    const qnaMakerClient = new qnamaker.QnAMakerClient(creds, endpoint);
     const knowledgeBaseClient = new qnamaker.Knowledgebase(qnaMakerClient);
     // </AuthorizationAuthor>
 
@@ -329,8 +353,8 @@ const main = async () => {
     await listKnowledgeBasesInResource(knowledgeBaseClient)
 
     // <AuthorizationQuery>
-    const queryRutimeCredentials = new msRest.ApiKeyCredentials({ inHeader: { 'Ocp-Apim-Subscription-Key': primaryQueryRuntimeKey } });
-    const runtimeClient = new qnamaker_runtime.QnAMakerRuntimeClient(queryRutimeCredentials, queryingURL);
+    const queryRutimeCredentials = new msRest.ApiKeyCredentials({ inHeader: { 'Authorization': 'EndpointKey ' + primaryQueryRuntimeKey } });
+    const runtimeClient = new qnamaker_runtime.QnAMakerRuntimeClient(queryRutimeCredentials, runtime_endpoint);
     // </AuthorizationQuery>
 
     await generateAnswer(runtimeClient, primaryQueryRuntimeKey, knowledgeBaseID)
