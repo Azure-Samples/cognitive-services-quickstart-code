@@ -3,7 +3,7 @@
    Install QnA Maker package with command
  * ==========================================
  *
- * dotnet add package Microsoft.Azure.CognitiveServices.Knowledge.QnAMaker --version 2.0.0-preview.1
+ * dotnet add package Microsoft.Azure.CognitiveServices.Knowledge.QnAMaker --version 2.1.0-preview.1
  *
  * ==========================================
    Tasks Included
@@ -47,9 +47,15 @@ namespace Knowledgebase_Quickstart
             var queryingURL = $"https://{resourceName}.azurewebsites.net";
             // </Resourcevariables>
 
+            // <TryPreview>
+            // To be set to 'true' to use QnAMakerV2 Public Preview resources 
+            // Use the package Microsoft.Azure.CognitiveServices.Knowledge.QnAMaker version 2.1.0-preview.1
+            var tryPreview = false;
+            // </TryPreview>
+
 
             // <AuthorizationAuthor>
-            var client = new QnAMakerClient(new ApiKeyServiceClientCredentials(authoringKey))
+            var client = new QnAMakerClient(new ApiKeyServiceClientCredentials(authoringKey), tryPreview)
             { Endpoint = authoringURL };
             // </AuthorizationAuthor>
 
@@ -60,8 +66,17 @@ namespace Knowledgebase_Quickstart
             var primaryQueryEndpointKey = GetQueryEndpointKey(client).Result;
 
             // <AuthorizationQuery>
-            var runtimeClient = new QnAMakerRuntimeClient(new EndpointKeyServiceClientCredentials(primaryQueryEndpointKey))
-            { RuntimeEndpoint = queryingURL };
+            QnAMakerRuntimeClient runtimeClient;
+            if (tryPreview)
+            {
+                runtimeClient = new QnAMakerRuntimeClient(new ApiKeyServiceClientCredentials(authoringKey), tryPreview)
+                { RuntimeEndpoint = authoringURL };
+            }
+            else
+            {
+                runtimeClient = new QnAMakerRuntimeClient(new EndpointKeyServiceClientCredentials(primaryQueryEndpointKey))
+                { RuntimeEndpoint = queryingURL };
+            }
             // </AuthorizationQuery>
 
             GenerateAnswer(runtimeClient, kbId).Wait();
@@ -177,8 +192,8 @@ namespace Knowledgebase_Quickstart
 
             var file1 = new FileDTO
             {
-                FileName = "myfile.md",
-                FileUri = "https://mydomain/myfile.md"
+                FileName = "myfile.tsv",
+                FileUri = "https://mydomain/myfile.tsv"
 
             };
 

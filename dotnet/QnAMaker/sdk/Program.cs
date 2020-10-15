@@ -18,15 +18,32 @@ namespace ConsoleApp1
             string subscriptionKey = Environment.GetEnvironmentVariable("QNA_MAKER_SUBSCRIPTION_KEY");
             string endpoint = Environment.GetEnvironmentVariable("QNA_MAKER_ENDPOINT");
 
-            var authoringClient = new QnAMakerClient(new ApiKeyServiceClientCredentials(subscriptionKey))
+            // set tryPreview to 'true' for QnAMakerV2 resources
+            bool tryPreview = false;  
+
+            var authoringClient = new QnAMakerClient(new ApiKeyServiceClientCredentials(subscriptionKey), tryPreview)
                 { Endpoint = endpoint };
             // </AuthoringAuthorization>
 
             // <RuntimeAuthorization>
             string runtimeEndpoint = Environment.GetEnvironmentVariable("QNA_MAKER_RUNTIME_ENDPOINT");
+            if (tryPreview)
+            {
+                runtimeEndpoint = endpoint;
+            }
+            
             string endpointKey = GetQueryEndpointKey(authoringClient).Result;
-            var runtimeClient = new QnAMakerRuntimeClient(new EndpointKeyServiceClientCredentials(endpointKey))
+            QnAMakerRuntimeClient runtimeClient;
+            if (tryPreview)
+            {
+                runtimeClient = new QnAMakerRuntimeClient(new ApiKeyServiceClientCredentials(subscriptionKey), tryPreview)
                 { RuntimeEndpoint = runtimeEndpoint };
+            }
+            else
+            {
+                runtimeClient = new QnAMakerRuntimeClient(new EndpointKeyServiceClientCredentials(endpointKey))
+                { RuntimeEndpoint = runtimeEndpoint };
+            }
             // </RuntimeAuthorization>
 
             Console.WriteLine("Creating KB...");
