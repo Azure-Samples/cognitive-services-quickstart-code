@@ -28,12 +28,12 @@ namespace ObjectDetection
             CustomVisionTrainingClient TrainingApi = AuthenticateTraining(ENDPOINT, trainingKey);
             CustomVisionPredictionClient predictionApi = AuthenticateTraining(ENDPOINT, predictionKey);
 
-            CreateProject(trainingApi);
-            AddTags(trainingApi);
-            UploadImages(trainingApi);
-            TrainProject(trainingApi);
-            PublishIteration(trainingApi);
-            TestIteration(predictionApi);
+            Project project = CreateProject(trainingApi);
+            AddTags(trainingApi, project);
+            UploadImages(trainingApi, project);
+            TrainProject(trainingApi, project);
+            PublishIteration(trainingApi, project);
+            TestIteration(predictionApi, project);
             // </snippet_maincalls>
 
         }
@@ -60,7 +60,7 @@ namespace ObjectDetection
         // </snippet_auth>
 
         // <snippet_create>
-        private void CreateProject(CustomVisionTrainingClient trainingApi)
+        private Project CreateProject(CustomVisionTrainingClient trainingApi)
         {
             // Find the object detection domain
             var domains = trainingApi.GetDomains();
@@ -68,12 +68,12 @@ namespace ObjectDetection
 
             // Create a new project
             Console.WriteLine("Creating new project:");
-            var project = trainingApi.CreateProject("My New Project", null, objDetectionDomain.Id);
+            project = trainingApi.CreateProject("My New Project", null, objDetectionDomain.Id);
         }
         // </snippet_create>
 
         // <snippet_tags>
-        private void AddTags(CustomVisionTrainingClient trainingApi)
+        private void AddTags(CustomVisionTrainingClient trainingApi, Project project)
         {
             // Make two tags in the new project
             var forkTag = trainingApi.CreateTag(project.Id, "fork");
@@ -155,7 +155,7 @@ namespace ObjectDetection
         // </snippet_upload>
         
         // <snippet_train>
-        private void TrainProject(CustomVisionTrainingClient trainingApi)
+        private void TrainProject(CustomVisionTrainingClient trainingApi, Project project)
         {
 
             // Now there are images with tags start training the project
@@ -174,7 +174,7 @@ namespace ObjectDetection
         // </snippet_train>
 
         // <snippet_publish>
-        private void PublishIteration(CustomVisionTrainingClient trainingApi)
+        private void PublishIteration(CustomVisionTrainingClient trainingApi, Project project)
         {
 
             // The iteration is now trained. Publish it to the prediction end point.
@@ -186,7 +186,7 @@ namespace ObjectDetection
         // </snippet_publish>
 
         // <snippet_prediction>
-        private void TestIteration(CustomVisionPredictionClient predictionApi)
+        private void TestIteration(CustomVisionPredictionClient predictionApi, Project project)
         {
 
             // Make a prediction against the new project
