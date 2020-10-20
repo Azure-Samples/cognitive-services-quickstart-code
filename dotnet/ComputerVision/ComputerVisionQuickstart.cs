@@ -81,11 +81,6 @@ namespace ComputerVisionQuickstart
 
             // <snippet_client>
             // Create a client
-            if (endpoint.IndexOf("http://") != 0 && endpoint.IndexOf("https://") != 0)
-            {
-                Console.WriteLine("Error: Cognitive Services endpoint must be in the form of http://subscriptionKey or https://subscriptionKey");
-                return;
-            }
             ComputerVisionClient client = Authenticate(endpoint, subscriptionKey);
             // </snippet_client>
 
