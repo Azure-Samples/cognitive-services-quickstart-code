@@ -60,7 +60,7 @@ namespace ComputerVisionQuickstart
         private const string ANALYZE_LOCAL_IMAGE = "celebrities.jpg";
         private const string DETECT_LOCAL_IMAGE = "objects.jpg";
         private const string DETECT_DOMAIN_SPECIFIC_LOCAL = "celebrities.jpg";
-        private const string READ_TEXT_LOCAL_IMAGE = "print_text.png";
+        private const string READ_TEXT_LOCAL_IMAGE = "printed_text.jpg";
 
         // <snippet_analyze_url>
         // URL image used for analyzing an image (image of puppy)
@@ -81,6 +81,11 @@ namespace ComputerVisionQuickstart
 
             // <snippet_client>
             // Create a client
+            if (endpoint.IndexOf("http://") != 0 && endpoint.IndexOf("https://") != 0)
+            {
+                Console.WriteLine("Error: Cognitive Services endpoint must be in the form of http://subscriptionKey or https://subscriptionKey");
+                return;
+            }
             ComputerVisionClient client = Authenticate(endpoint, subscriptionKey);
             // </snippet_client>
 
@@ -324,58 +329,79 @@ namespace ComputerVisionQuickstart
 
                 // Sunmarizes the image content.
                 Console.WriteLine("Summary:");
-                foreach (var caption in results.Description.Captions)
+                if (results.Description != null && results.Description.Captions != null)
                 {
-                    Console.WriteLine($"{caption.Text} with confidence {caption.Confidence}");
+                    foreach (var caption in results.Description.Captions)
+                    {
+                        Console.WriteLine($"{caption.Text} with confidence {caption.Confidence}");
+                    }
                 }
                 Console.WriteLine();
 
                 // Display categories the image is divided into.
                 Console.WriteLine("Categories:");
-                foreach (var category in results.Categories)
+                if (results.Categories != null)
                 {
-                    Console.WriteLine($"{category.Name} with confidence {category.Score}");
+                    foreach (var category in results.Categories)
+                    {
+                        Console.WriteLine($"{category.Name} with confidence {category.Score}");
+                    }
                 }
                 Console.WriteLine();
 
                 // Image tags and their confidence score
                 Console.WriteLine("Tags:");
-                foreach (var tag in results.Tags)
+                if (results.Tags != null)
                 {
-                    Console.WriteLine($"{tag.Name} {tag.Confidence}");
+                    foreach (var tag in results.Tags)
+                    {
+                        Console.WriteLine($"{tag.Name} {tag.Confidence}");
+                    }
                 }
                 Console.WriteLine();
 
                 // Objects
                 Console.WriteLine("Objects:");
-                foreach (var obj in results.Objects)
+                if (results.Objects != null)
                 {
-                    Console.WriteLine($"{obj.ObjectProperty} with confidence {obj.Confidence} at location {obj.Rectangle.X}, " +
-                      $"{obj.Rectangle.X + obj.Rectangle.W}, {obj.Rectangle.Y}, {obj.Rectangle.Y + obj.Rectangle.H}");
+                    foreach (var obj in results.Objects)
+                    {
+                        Console.WriteLine($"{obj.ObjectProperty} with confidence {obj.Confidence} at location {obj.Rectangle.X}, " +
+                          $"{obj.Rectangle.X + obj.Rectangle.W}, {obj.Rectangle.Y}, {obj.Rectangle.Y + obj.Rectangle.H}");
+                    }
                 }
                 Console.WriteLine();
 
                 // Detected faces, if any.
                 Console.WriteLine("Faces:");
-                foreach (var face in results.Faces)
+                if (results.Faces != null)
                 {
-                    Console.WriteLine($"A {face.Gender} of age {face.Age} at location {face.FaceRectangle.Left}, {face.FaceRectangle.Top}, " +
-                      $"{face.FaceRectangle.Left + face.FaceRectangle.Width}, {face.FaceRectangle.Top + face.FaceRectangle.Height}");
+                    foreach (var face in results.Faces)
+                    {
+                        Console.WriteLine($"A {face.Gender} of age {face.Age} at location {face.FaceRectangle.Left}, {face.FaceRectangle.Top}, " +
+                          $"{face.FaceRectangle.Left + face.FaceRectangle.Width}, {face.FaceRectangle.Top + face.FaceRectangle.Height}");
+                    }
                 }
                 Console.WriteLine();
 
                 // Adult or racy content, if any.
                 Console.WriteLine("Adult:");
-                Console.WriteLine($"Has adult content: {results.Adult.IsAdultContent} with confidence {results.Adult.AdultScore}");
-                Console.WriteLine($"Has racy content: {results.Adult.IsRacyContent} with confidence {results.Adult.RacyScore}");
+                if (results.Adult != null)
+                {
+                    Console.WriteLine($"Has adult content: {results.Adult.IsAdultContent} with confidence {results.Adult.AdultScore}");
+                    Console.WriteLine($"Has racy content: {results.Adult.IsRacyContent} with confidence {results.Adult.RacyScore}");
+                }
                 Console.WriteLine();
 
                 // Well-known brands, if any.
                 Console.WriteLine("Brands:");
-                foreach (var brand in results.Brands)
+                if (results.Brands != null)
                 {
-                    Console.WriteLine($"Logo of {brand.Name} with confidence {brand.Confidence} at location {brand.Rectangle.X}, " +
-                      $"{brand.Rectangle.X + brand.Rectangle.W}, {brand.Rectangle.Y}, {brand.Rectangle.Y + brand.Rectangle.H}");
+                    foreach (var brand in results.Brands)
+                    {
+                        Console.WriteLine($"Logo of {brand.Name} with confidence {brand.Confidence} at location {brand.Rectangle.X}, " +
+                          $"{brand.Rectangle.X + brand.Rectangle.W}, {brand.Rectangle.Y}, {brand.Rectangle.Y + brand.Rectangle.H}");
+                    }
                 }
                 Console.WriteLine();
 
@@ -410,17 +436,23 @@ namespace ComputerVisionQuickstart
 
                 // Identifies the color scheme.
                 Console.WriteLine("Color Scheme:");
-                Console.WriteLine("Is black and white?: " + results.Color.IsBWImg);
-                Console.WriteLine("Accent color: " + results.Color.AccentColor);
-                Console.WriteLine("Dominant background color: " + results.Color.DominantColorBackground);
-                Console.WriteLine("Dominant foreground color: " + results.Color.DominantColorForeground);
-                Console.WriteLine("Dominant colors: " + string.Join(",", results.Color.DominantColors));
+                if (results.Color != null)
+                {
+                    Console.WriteLine("Is black and white?: " + results.Color.IsBWImg);
+                    Console.WriteLine("Accent color: " + results.Color.AccentColor);
+                    Console.WriteLine("Dominant background color: " + results.Color.DominantColorBackground);
+                    Console.WriteLine("Dominant foreground color: " + results.Color.DominantColorForeground);
+                    Console.WriteLine("Dominant colors: " + string.Join(",", results.Color.DominantColors));
+                }
                 Console.WriteLine();
 
                 // Detects the image types.
                 Console.WriteLine("Image Type:");
-                Console.WriteLine("Clip Art Type: " + results.ImageType.ClipArtType);
-                Console.WriteLine("Line Drawing Type: " + results.ImageType.LineDrawingType);
+                if (results.ImageType != null)
+                {
+                    Console.WriteLine("Clip Art Type: " + results.ImageType.ClipArtType);
+                    Console.WriteLine("Line Drawing Type: " + results.ImageType.LineDrawingType);
+                }
                 Console.WriteLine();
             }
         }
