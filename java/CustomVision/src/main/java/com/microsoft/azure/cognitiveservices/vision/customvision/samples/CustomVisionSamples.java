@@ -63,6 +63,7 @@ public class CustomVisionSamples {
         addTags(trainClient, project);
         uploadImages(trainClient, project);
         trainProject(trainClient, project);
+        publishIteration(trainClient, project);
         testProject(predictor, project);
         // </snippet_maincalls>
 
@@ -71,6 +72,7 @@ public class CustomVisionSamples {
         addTagsOD(trainClient, projectOD);
         uploadImagesOD(trainClient, projectOD);
         trainProjectOD(trainClient, projectOD);
+        publishIterationOD(trainClient, project);
         testProjectOD(predictor, projectOD);
         // </snippet_maincalls_od>
 
@@ -124,6 +126,7 @@ public class CustomVisionSamples {
     // <snippet_train>
     public static void trainProject(CustomVisionTrainingClient trainClient, Project project) {
         System.out.println("Training...");
+        Trainings trainer = trainClient.trainings();
 
         Iteration iteration = trainer.trainProject(project.id(), new TrainProjectOptionalParameter());
 
@@ -170,6 +173,21 @@ public class CustomVisionSamples {
 
     // <snippet_create_od>
     public static Project createProjectOD(CustomVisionTrainingClient trainClient) {
+        Trainings trainer = trainClient.trainings();
+
+        // find the object detection domain to set the project type
+        Domain objectDetectionDomain = null;
+        List<Domain> domains = trainer.getDomains();
+        for (final Domain domain : domains) {
+            if (domain.type() == DomainType.OBJECT_DETECTION) {
+                objectDetectionDomain = domain;
+                break;
+            }
+        }
+
+        if (objectDetectionDomain == null) {
+            System.out.println("Unexpected result; no objects were detected.");
+        }
 
         System.out.println("Creating project...");
         // create an object detection project
@@ -183,6 +201,7 @@ public class CustomVisionSamples {
 
     // <snippet_tags_od>
     public static void addTagsOD(CustomVisionTrainingClient trainClient, Project project) {
+        Trainings trainer = trainClient.trainings();
         // create fork tag
         Tag forkTag = trainer.createTag().withProjectId(project.id()).withName("fork").execute();
 
@@ -249,25 +268,9 @@ public class CustomVisionSamples {
         regionMap.put("fork_20.jpg", new double[] { 0.180147052, 0.239820287, 0.6887255, 0.235294119 });
         // </snippet_od_mapping>
 
-        System.out.println("Object Detection Sample");
+        // <snippet_upload_od>
         Trainings trainer = trainClient.trainings();
 
-        // find the object detection domain to set the project type
-        Domain objectDetectionDomain = null;
-        List<Domain> domains = trainer.getDomains();
-        for (final Domain domain : domains) {
-            if (domain.type() == DomainType.OBJECT_DETECTION) {
-                objectDetectionDomain = domain;
-                break;
-            }
-        }
-
-        if (objectDetectionDomain == null) {
-            System.out.println("Unexpected result; no objects were detected.");
-            return;
-        }
-
-        // <snippet_upload_od>
         System.out.println("Adding images...");
         for (int i = 1; i <= 20; i++) {
             String fileName = "fork_" + i + ".jpg";
@@ -284,7 +287,8 @@ public class CustomVisionSamples {
     // </snippet_upload_od>
 
     // <snippet_train_od>
-    public static void trainProjectOD(CustomVisionTrainingClient trainClient, Project project) {
+    public static String trainProjectOD(CustomVisionTrainingClient trainClient, Project project) {
+        Trainings trainer = trainClient.trainings();
         System.out.println("Training...");
         Iteration iteration = trainer.trainProject(project.id(), new TrainProjectOptionalParameter());
 
@@ -294,13 +298,20 @@ public class CustomVisionSamples {
             iteration = trainer.getIteration(project.id(), iteration.id());
         }
         System.out.println("Training Status: " + iteration.status());
+    }
+    // </snippet_train_od>
+
+    // <snippet_publishOD>
+    public static String publishIterationOD(CustomVisionTrainingClient trainClient, Project project) {
+        Trainings trainer = trainClient.trainings();
 
         // The iteration is now trained. Publish it to the prediction endpoint.
         String publishedModelName = "myModel";
-        String predictionResourceId = System.getenv("AZURE_CUSTOMVISION_PREDICTION_ID");
-        trainer.publishIteration(project.id(), iteration.id(), publishedModelName, predictionResourceId);
+        String predictionID = "<your-prediction-resource-ID>";
+        trainer.publishIteration(project.id(), iteration.id(), publishedModelName, predictionID);
+        return publishedModelName;
     }
-    // </snippet_train_od>
+    // </snippet_publishOD>
 
     // use below for url
     // String url = "some url";
@@ -312,6 +323,7 @@ public class CustomVisionSamples {
 
     // <snippet_predict_od>
     public static void testProjectOD(CustomVisionPredictionClient predictor, Project project) {
+
         // load test image
         byte[] testImage = GetImage("/ObjectTest", "test_image.jpg");
 
