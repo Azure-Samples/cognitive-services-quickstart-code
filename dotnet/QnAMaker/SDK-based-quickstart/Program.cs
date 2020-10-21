@@ -265,10 +265,10 @@ namespace Knowledgebase_Quickstart
                 //},
                 
                 StrictFilters = new List<MetadataDTO>(),
-                
+
                 // RankerType = "QuestionOnly",
 
-                ScoreThreshold = 30,
+                ScoreThreshold = 10,
                 UserId = "SDKUser",
                 
             });
