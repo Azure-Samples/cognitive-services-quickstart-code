@@ -69,14 +69,12 @@ namespace Knowledgebase_Quickstart
             if (tryManagedPreview)
             {
                 GenerateAnswerPreview(client, kbId).Wait();
-
             }
             else
             {
                 var runtimeClient = new QnAMakerRuntimeClient(new EndpointKeyServiceClientCredentials(primaryQueryEndpointKey))
                 { RuntimeEndpoint = queryingURL };
                 GenerateAnswer(runtimeClient, kbId).Wait();
-
             }
             // </AuthorizationQuery>
 
@@ -242,8 +240,41 @@ namespace Knowledgebase_Quickstart
         // <GenerateAnswer>
         private static async Task GenerateAnswerPreview(IQnAMakerClient client, string kbId)
         { 
-            var response = await client.Knowledgebase.GenerateAnswerAsync(kbId, new QueryDTO { Question = "How do I manage my knowledgebase?" });
-            Console.WriteLine("Endpoint Response: {0}.", response.Answers[0].Answer);
+            var response = await client.Knowledgebase.GenerateAnswerAsync(kbId, 
+            new QueryDTO { 
+                Question = "Deleted accidentally. how to recover? ",
+
+                // This can be used to query for short answers 
+                // -- Available with QnA Maker Managed Public Preview resources
+                AnswerSpanRequest = new QueryDTOAnswerSpanRequest
+                {
+                    Enable = true,
+                    ScoreThreshold = 0.0,
+                    TopAnswersWithSpan = 1
+                },
+                IsTest = true,
+                Top = 3,
+                
+                // By providing context of previous user question and qna id, 
+                // get contextually relevant answer for current question
+
+                //Context = new QueryDTOContext
+                //{
+                //   PreviousQnaId = 2,
+                //   PreviousUserQuery = "where is my qnamaker resource?"
+                //},
+                
+                StrictFilters = new List<MetadataDTO>(),
+                
+                // RankerType = "QuestionOnly",
+
+                ScoreThreshold = 30,
+                UserId = "SDKUser",
+                
+            });
+
+            Console.WriteLine("Endpoint Response -- Answer: {0}.", response.Answers[0].Answer);            
+            Console.WriteLine("Endpoint Response -- Short Answer: {0}.", response.Answers[0]?.AnswerSpan?.Text);
 
             // Do something meaningful with answer
         }
