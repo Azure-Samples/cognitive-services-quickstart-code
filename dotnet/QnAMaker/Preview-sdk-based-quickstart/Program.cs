@@ -3,7 +3,7 @@
    Install QnA Maker package with command
  * ==========================================
  *
- * dotnet add package Microsoft.Azure.CognitiveServices.Knowledge.QnAMaker --version 2.0.1
+ * dotnet add package Microsoft.Azure.CognitiveServices.Knowledge.QnAMaker --version 3.0.0-preview.1
  *
  * ==========================================
    Tasks Included
@@ -47,6 +47,12 @@ namespace Knowledgebase_Quickstart
             var queryingURL = $"https://{resourceName}.azurewebsites.net";
             // </Resourcevariables>
 
+            // <TryManagedPreview>
+            // To be set to 'true' to use QnAMakerV2 Public Preview resources 
+            // Use the package Microsoft.Azure.CognitiveServices.Knowledge.QnAMaker version 3.0.0-preview.1
+            var tryManagedPreview = false;
+            // </TryManagedPreview>
+
 
             // <AuthorizationAuthor>
             var client = new QnAMakerClient(new ApiKeyServiceClientCredentials(authoringKey))
@@ -60,11 +66,18 @@ namespace Knowledgebase_Quickstart
             var primaryQueryEndpointKey = GetQueryEndpointKey(client).Result;
 
             // <AuthorizationQuery>
-            var runtimeClient = new QnAMakerRuntimeClient(new EndpointKeyServiceClientCredentials(primaryQueryEndpointKey))
-            { RuntimeEndpoint = queryingURL };
+            if (tryManagedPreview)
+            {
+                GenerateAnswerPreview(client, kbId).Wait();
+            }
+            else
+            {
+                var runtimeClient = new QnAMakerRuntimeClient(new EndpointKeyServiceClientCredentials(primaryQueryEndpointKey))
+                { RuntimeEndpoint = queryingURL };
+                GenerateAnswer(runtimeClient, kbId).Wait();
+            }
             // </AuthorizationQuery>
 
-            GenerateAnswer(runtimeClient, kbId).Wait();
             DeleteKB(client, kbId).Wait();
         }
         // </Main>
@@ -215,10 +228,53 @@ namespace Knowledgebase_Quickstart
         // </DownloadKB>
 
         // <GenerateAnswer>
-        private static async Task GenerateAnswer(IQnAMakerRuntimeClient runtimeClient, string kbId)
+        private static async Task GenerateAnswer(QnAMakerRuntimeClient runtimeClient, string kbId)
         {
             var response = await runtimeClient.Runtime.GenerateAnswerAsync(kbId, new QueryDTO { Question = "How do I manage my knowledgebase?" });
             Console.WriteLine("Endpoint Response: {0}.", response.Answers[0].Answer);
+
+            // Do something meaningful with answer
+        }
+        // </GenerateAnswer>
+
+        // <GenerateAnswer>
+        private static async Task GenerateAnswerPreview(IQnAMakerClient client, string kbId)
+        { 
+            var response = await client.Knowledgebase.GenerateAnswerAsync(kbId, 
+            new QueryDTO { 
+                Question = "Deleted accidentally. how to recover? ",
+
+                // This can be used to query for short answers 
+                // -- Available with QnA Maker Managed Public Preview resources
+                AnswerSpanRequest = new QueryDTOAnswerSpanRequest
+                {
+                    Enable = true,
+                    ScoreThreshold = 0.0,
+                    TopAnswersWithSpan = 1
+                },
+                IsTest = true,
+                Top = 3,
+                
+                // By providing context of previous user question and qna id, 
+                // get contextually relevant answer for current question
+
+                //Context = new QueryDTOContext
+                //{
+                //   PreviousQnaId = 2,
+                //   PreviousUserQuery = "where is my qnamaker resource?"
+                //},
+                
+                StrictFilters = new List<MetadataDTO>(),
+
+                // RankerType = "QuestionOnly",
+
+                ScoreThreshold = 10,
+                UserId = "SDKUser",
+                
+            });
+
+            Console.WriteLine("Endpoint Response -- Answer: {0}.", response.Answers[0].Answer);            
+            Console.WriteLine("Endpoint Response -- Short Answer: {0}.", response.Answers[0]?.AnswerSpan?.Text);
 
             // Do something meaningful with answer
         }
