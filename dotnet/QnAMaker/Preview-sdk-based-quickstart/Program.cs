@@ -237,7 +237,7 @@ namespace Knowledgebase_Quickstart
         }
         // </GenerateAnswer>
 
-        // <GenerateAnswer>
+        // <GenerateAnswerManagedPreview>
         private static async Task GenerateAnswerPreview(IQnAMakerClient client, string kbId)
         { 
             var response = await client.Knowledgebase.GenerateAnswerAsync(kbId, 
@@ -278,7 +278,7 @@ namespace Knowledgebase_Quickstart
 
             // Do something meaningful with answer
         }
-        // </GenerateAnswer>
+        // </GenerateAnswerManagedPreview>
 
         // <DeleteKB>
         private static async Task DeleteKB(IQnAMakerClient client, string kbId)
