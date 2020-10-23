@@ -433,10 +433,12 @@ function computerVision() {
         * 
         */
 
+      // <snippet_statuses>
       // Status strings returned from Read API. NOTE: CASING IS SIGNIFICANT.
       // Before Read 3.0, these are "Succeeded" and "Failed"
-      const STATUS_SUCCEEDED = "succeeded"; 
+      const STATUS_SUCCEEDED = "succeeded";
       const STATUS_FAILED = "failed"
+      // </snippet_statuses>
 
       console.log('-------------------------------------------------');
       console.log('READ');
@@ -556,19 +558,14 @@ function computerVision() {
       const multiLingualTextURL = 'https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/MultiLingual.png';
       const mixedMultiPagePDFURL = 'https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/MultiPageHandwrittenForm.pdf';
       // </snippet_read_images>
+      const handwrittenImageLocalPath = __dirname + '\\handwritten_text.jpg';
+
 
       // <snippet_read_call>
       // Recognize text in printed image from a URL
       console.log('Read printed text from URL...', printedTextSampleURL.split('/').pop());
       const printedResult = await readTextFromURL(computerVisionClient, printedTextSampleURL);
       printRecText(printedResult);
-
-      // Recognize text in handwritten image from a local file
-      
-      const handwrittenImageLocalPath = __dirname + '\\handwritten_text.jpg';
-      console.log('\nRead handwritten text from local file...', handwrittenImageLocalPath);
-      const handwritingResult = await readTextFromFile(computerVisionClient, handwrittenImageLocalPath);
-      printRecText(handwritingResult);
 
       // Recognize multi-lingual text in a PNG from a URL
       console.log('\nRead printed multi-lingual text in a PNG from URL...', multiLingualTextURL.split('/').pop());
@@ -580,6 +577,11 @@ function computerVision() {
       const mixedPdfResult = await readTextFromURL(computerVisionClient, mixedMultiPagePDFURL);
       printRecText(mixedPdfResult);
       // </snippet_read_call>
+
+      // Recognize text in handwritten image from a local file
+      console.log('\nRead handwritten text from local file...', handwrittenImageLocalPath);
+      const handwritingResult = await readTextFromFile(computerVisionClient, handwrittenImageLocalPath);
+      printRecText(handwritingResult);
 
       // <snippet_read_helper>
       // Perform read and await the result from URL
