@@ -30,36 +30,32 @@ import java.util.UUID;
 
 public class ComputerVisionQuickstart {
 
+    // <snippet_creds>
+    static String subscriptionKey = "<your-subscription-key>";
+    static String endpoint = "<your-api-endpoint>";
+    // </snippet_creds>
 
-    // <snippet_mainvars>
+    // <snippet_maincalls>
     public static void main(String[] args) {
-        // Add your Computer Vision subscription key and endpoint to your environment
-        // variables.
-        // After setting, close and then re-open your command shell or project for the
-        // changes to take effect.
-        String subscriptionKey = System.getenv("COMPUTER_VISION_SUBSCRIPTION_KEY");
-        String endpoint = System.getenv("COMPUTER_VISION_ENDPOINT");
-        // </snippet_mainvars>
-
-        // <snippet_client>
-        ComputerVisionClient compVisClient = ComputerVisionManager.authenticate(subscriptionKey).withEndpoint(endpoint);
-        // END - Create an authenticated Computer Vision client.
-
+        
         System.out.println("\nAzure Cognitive Services Computer Vision - Java Quickstart Sample");
+
+        // Create an authenticated Computer Vision client.
+        ComputerVisionClient compVisClient = Authenticate(subscriptionKey, endpoint); 
 
         // Analyze local and remote images
         AnalyzeLocalImage(compVisClient);
 
         // Read from local file
-        ReadFromFile(compVisClient, READ_SAMPLE_FILE_RELATIVE_PATH);
-        // </snippet_client>
-
-        // Recognize printed text with OCR for a local and remote (URL) image
-        RecognizeTextOCRLocal(compVisClient);
-
-        // Read remote image
-        ReadFromUrl(compVisClient, READ_SAMPLE_URL);
+        ReadFromFile(compVisClient);
     }
+    // </snippet_maincalls>
+
+    // <snippet_auth>
+    public static ComputerVisionClient Authenticate(String subscriptionKey, String endpoint){
+        return ComputerVisionManager.authenticate(subscriptionKey).withEndpoint(endpoint);
+    }
+    // </snippet_auth>
 
     // <snippet_analyzelocal_refs>
     public static void AnalyzeLocalImage(ComputerVisionClient compVisClient) {
@@ -301,10 +297,9 @@ public class ComputerVisionQuickstart {
     // END - Analyze an image from a URL.
     // </snippet_analyzeurl>
 
-    // <snippet_recognize_call>
     /**
      * RECOGNIZE PRINTED TEXT: Displays text found in image with angle and orientation of
-     * the block of text.
+     * the block of text. This method is a legacy feature from before the Read API was introduced.
      */
     private static void RecognizeTextOCRLocal(ComputerVisionClient client) {
         System.out.println("-----------------------------------------------");
@@ -320,9 +315,7 @@ public class ComputerVisionQuickstart {
             // Recognize printed text in local image
             OcrResult ocrResultLocal = client.computerVision().recognizePrintedTextInStream()
                     .withDetectOrientation(true).withImage(localImageBytes).withLanguage(OcrLanguages.EN).execute();
-            // </snippet_recognize_call>
 
-            // <snippet_recognize_print>
             // Print results of local image
             System.out.println();
             System.out.println("Recognizing printed text from a local image with OCR ...");
@@ -348,15 +341,12 @@ public class ComputerVisionQuickstart {
                     System.out.println();
                 }
             }
-            // </snippet_recognize_print>
             
-        // <snippet_recognize_catch>
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
     }
-    // </snippet_recognize_catch>
 
     private static void RecognizeTextOCRRemote(ComputerVisionClient client, String remoteTextImageURL) {
         System.out.println("-----------------------------------------------");

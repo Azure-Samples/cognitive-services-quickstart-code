@@ -14,7 +14,7 @@ import com.azure.core.credential.AzureKeyCredential;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.util.Context;
 import com.azure.core.util.polling.SyncPoller;
-// <.snippet_imports>
+// </snippet_imports>
 
 public class FormRecognizer {
 
