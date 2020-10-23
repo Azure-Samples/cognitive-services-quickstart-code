@@ -31,7 +31,7 @@ import com.microsoft.azure.cognitiveservices.vision.customvision.prediction.mode
 import com.microsoft.azure.cognitiveservices.vision.customvision.prediction.CustomVisionPredictionClient;
 import com.microsoft.azure.cognitiveservices.vision.customvision.prediction.CustomVisionPredictionManager;
 import com.microsoft.azure.cognitiveservices.vision.customvision.training.models.Tag;
-// <snippet_imports>
+// </snippet_imports>
 
 public class CustomVisionSamples {
 
@@ -136,13 +136,18 @@ public class CustomVisionSamples {
             iteration = trainer.getIteration(project.id(), iteration.id());
         }
         System.out.println("Training Status: " + iteration.status());
+    }
+    // </snippet_train>
 
+    // <snippet_publish>
+    public static String publishIteration(CustomVisionTrainingClient trainClient, Project project) {
+        Trainings trainer = trainClient.trainings();
         // The iteration is now trained. Publish it to the prediction endpoint.
         String publishedModelName = "myModel";
         String predictionResourceId = System.getenv("AZURE_CUSTOMVISION_PREDICTION_ID");
         trainer.publishIteration(project.id(), iteration.id(), publishedModelName, predictionResourceId);
     }
-    // </snippet_train>
+    // </snippet_publish>
 
     // use below for url
     // String url = "some url";
