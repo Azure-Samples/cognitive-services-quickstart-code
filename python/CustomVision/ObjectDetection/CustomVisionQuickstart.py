@@ -88,7 +88,7 @@ scissors_image_regions = {
 
 # <snippet_upload>
 # Update this with the path to where you downloaded the images.
-base_image_url = "<path to repo directory>/cognitive-services-python-sdk-samples/samples/vision/"
+base_image_location = "<path to repo directory>/cognitive-services-python-sdk-samples/samples/vision/"
 
 # Go through the data table above and create the images
 print ("Adding images...")
@@ -98,14 +98,14 @@ for file_name in fork_image_regions.keys():
     x,y,w,h = fork_image_regions[file_name]
     regions = [ Region(tag_id=fork_tag.id, left=x,top=y,width=w,height=h) ]
 
-    with open(base_image_url + "images/fork/" + file_name + ".jpg", mode="rb") as image_contents:
+    with open(base_image_location + "images/fork/" + file_name + ".jpg", mode="rb") as image_contents:
         tagged_images_with_regions.append(ImageFileCreateEntry(name=file_name, contents=image_contents.read(), regions=regions))
 
 for file_name in scissors_image_regions.keys():
     x,y,w,h = scissors_image_regions[file_name]
     regions = [ Region(tag_id=scissors_tag.id, left=x,top=y,width=w,height=h) ]
 
-    with open(base_image_url + "images/scissors/" + file_name + ".jpg", mode="rb") as image_contents:
+    with open(base_image_location + "images/scissors/" + file_name + ".jpg", mode="rb") as image_contents:
         tagged_images_with_regions.append(ImageFileCreateEntry(name=file_name, contents=image_contents.read(), regions=regions))
 
 upload_result = trainer.create_images_from_files(project.id, ImageFileCreateBatch(images=tagged_images_with_regions))
@@ -135,7 +135,7 @@ print ("Done!")
 # Now there is a trained endpoint that can be used to make a prediction
 
 # Open the sample image and get back the prediction results.
-with open(base_image_url + "images/Test/test_od_image.jpg", mode="rb") as test_data:
+with open(base_image_location + "images/Test/test_od_image.jpg", mode="rb") as test_data:
     results = predictor.detect_image(project.id, publish_iteration_name, test_data)
 
 # Display the results.    
