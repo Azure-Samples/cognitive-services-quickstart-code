@@ -49,9 +49,8 @@ const ApiKeyCredentials = require('@azure/ms-rest-js').ApiKeyCredentials;
  * AUTHENTICATE
  * This single client is used for all examples.
  */
-const key = process.env['COMPUTER_VISION_SUBSCRIPTION_KEY'];
-const endpoint = process.env['COMPUTER_VISION_ENDPOINT']
-if (!key) { throw new Error('Set your environment variables for your subscription key in COMPUTER_VISION_SUBSCRIPTION_KEY and endpoint in COMPUTER_VISION_ENDPOINT.'); }
+const key = '<your subscription key>';
+const endpoint = '<your api endpoint>';
 // </snippet_vars>
 
 // <snippet_client>
