@@ -12,8 +12,8 @@ from msrest.authentication import CognitiveServicesCredentials
 # </snippet_imports>
 
 # <snippet_vars>
-CONTENTMODERATOR_ENDPOINT = os.environ.get("CONTENT_MODERATOR_ENDPOINT")
-subscription_key = os.environ.get("CONTENT_MODERATOR_SUBSCRIPTION_KEY")
+CONTENTMODERATOR_ENDPOINT = "<your API endpoint>"
+subscription_key = "<your subscription key"
 # </snippet_vars>
 
 # <snippet_client>
