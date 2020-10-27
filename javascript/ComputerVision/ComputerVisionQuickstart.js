@@ -595,6 +595,7 @@ function computerVision() {
         while (result.status !== STATUS_SUCCEEDED) { await sleep(1000); result = await client.getReadResult(operation); }
         return result.analyzeResult.readResults; // Return the first page of result. Replace [0] with the desired page if this is a multi-page file such as .pdf or .tiff.
       }
+      // </snippet_read_helper>
 
       // Perform read and await the result from local file
       async function readTextFromFile(client, localImagePath) {
@@ -608,7 +609,6 @@ function computerVision() {
         while (result.status !== STATUS_SUCCEEDED) { await sleep(1000); result = await client.getReadResult(operation); }
         return result.analyzeResult.readResults; // Return the first page of result. Replace [0] with the desired page if this is a multi-page file such as .pdf or .tiff.
       }
-      // </snippet_read_helper>
 
       // <snippet_read_print>
       // Prints all text from Read result
