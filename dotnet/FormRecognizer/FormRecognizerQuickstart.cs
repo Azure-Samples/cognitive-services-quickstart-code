@@ -29,7 +29,7 @@ class Program
     static void Main(string[] args)
     {
         // new code:
-        var recognizeContent = RecognizeContent(recognizerClient, formUrl);
+        var recognizeContent = RecognizeContent(recognizerClient);
         Task.WaitAll(recognizeContent);
 
         var analyzeReceipt = AnalyzeReceipt(recognizerClient, receiptUrl);
