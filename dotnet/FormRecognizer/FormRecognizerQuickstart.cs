@@ -48,7 +48,7 @@ class Program
     // </snippet_main>
 
     // <snippet_auth>
-    static private FormRecognizerClient AuthenticateClient()
+    private static FormRecognizerClient AuthenticateClient()
     {
         string endpoint = "<replace-with-your-form-recognizer-endpoint-here>";
         string apiKey = "<replace-with-your-form-recognizer-key-here>";
