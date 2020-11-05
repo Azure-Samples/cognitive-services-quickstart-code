@@ -5,7 +5,7 @@ const { TextAnalyticsClient, AzureKeyCredential } = require("@azure/ai-text-anal
 const key = '<paste-your-text-analytics-key-here>';
 const endpoint = `<paste-your-text-analytics-endpoint-here>`;
 
-const textAnalyticsClient = new TextAnalyticsClient(endpoint,  new TextAnalyticsApiKeyCredential(key));
+const textAnalyticsClient = new TextAnalyticsClient(endpoint,  new AzureKeyCredential(key));
 
 async function sentimentAnalysis(client){
 
