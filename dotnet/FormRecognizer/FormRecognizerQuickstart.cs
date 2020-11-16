@@ -21,7 +21,7 @@ class Program
     // <snippet_urls>
     string trainingDataUrl = "<SAS-URL-of-your-form-folder-in-blob-storage>";
     string formUrl = "<SAS-URL-of-a-form-in-blob-storage>";
-    string receiptUrl = "https://docs.microsoft.com/azure/cognitive-services/form-recognizer/media"
+    private static string receiptUrl = "https://docs.microsoft.com/azure/cognitive-services/form-recognizer/media"
     + "/contoso-allinone.jpg";
     // </snippet_urls>
 
@@ -176,8 +176,8 @@ class Program
     // </snippet_receipt_print>
 
     // <snippet_train>
-    private static async Task<Guid> TrainModel(
-        FormRecognizerClient trainingClient, string trainingDataUrl)
+    private static async Task<String> TrainModel(
+        FormTrainingClient trainingClient, string trainingDataUrl)
     {
         CustomFormModel model = await trainingClient
         .StartTrainingAsync(new Uri(trainingDataUrl), useTrainingLabels: false)
@@ -243,7 +243,7 @@ class Program
     // <snippet_analyze>
     // Analyze PDF form data
     private static async Task AnalyzePdfForm(
-        FormRecognizerClient recognizerClient, Guid modelId, string formUrl)
+        FormRecognizerClient recognizerClient, String modelId, string formUrl)
     {
         RecognizedFormCollection forms = await recognizerClient
         .StartRecognizeCustomFormsFromUri(modelId, new Uri(invoiceUri))
@@ -266,7 +266,7 @@ class Program
                 Console.WriteLine($"    Confidence: '{field.Confidence}");
             }
             Console.WriteLine("Table data:");
-            foreach (FormPage page in form.Pages.Values)
+            foreach (FormPage page in form.Pages)
             {
                 for (int i = 0; i < page.Tables.Count; i++)
                 {
