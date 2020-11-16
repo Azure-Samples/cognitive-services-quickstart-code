@@ -62,7 +62,7 @@ class Program
     private static async Task RecognizeContent(FormRecognizerClient recognizerClient)
     {
         var invoiceUri = "https://raw.githubusercontent.com/Azure/azure-sdk-for-python/master/sdk/formrecognizer/azure-ai-formrecognizer/tests/sample_forms/forms/Invoice_1.pdf";
-        FormPageCollection formPages = await recognizeClient
+        FormPageCollection formPages = await recognizerClient
             .StartRecognizeContentFromUri(new Uri(invoiceUri))
             .WaitForCompletionAsync();
         // </snippet_getcontent_call>
@@ -95,7 +95,7 @@ class Program
     private static async Task AnalyzeReceipt(
         FormRecognizerClient recognizerClient, string receiptUri)
     {
-        RecognizedFormCollection receipts = await recognizeClient.StartRecognizeReceiptsFromUri(new Uri(receiptUrl)).WaitForCompletionAsync();
+        RecognizedFormCollection receipts = await recognizerClient.StartRecognizeReceiptsFromUri(new Uri(receiptUrl)).WaitForCompletionAsync();
         // </snippet_receipt_call>
 
         // <snippet_receipt_print>
@@ -245,7 +245,7 @@ class Program
     private static async Task AnalyzePdfForm(
         FormRecognizerClient recognizerClient, Guid modelId, string formUrl)
     {
-        RecognizedFormCollection forms = await recognizeClient
+        RecognizedFormCollection forms = await recognizerClient
         .StartRecognizeCustomFormsFromUri(modelId, new Uri(invoiceUri))
         .WaitForCompletionAsync();
         // </snippet_analyze>
