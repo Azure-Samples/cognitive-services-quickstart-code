@@ -19,8 +19,8 @@ class Program
     // </snippet_creds>
 
     // <snippet_urls>
-    string trainingDataUrl = "<SAS-URL-of-your-form-folder-in-blob-storage>";
-    string formUrl = "<SAS-URL-of-a-form-in-blob-storage>";
+    private static string trainingDataUrl = "<SAS-URL-of-your-form-folder-in-blob-storage>";
+    private static string formUrl = "<SAS-URL-of-a-form-in-blob-storage>";
     private static string receiptUrl = "https://docs.microsoft.com/azure/cognitive-services/form-recognizer/media"
     + "/contoso-allinone.jpg";
     // </snippet_urls>
@@ -255,7 +255,7 @@ class Program
         FormRecognizerClient recognizerClient, String modelId, string formUrl)
     {
         RecognizedFormCollection forms = await recognizerClient
-        .StartRecognizeCustomFormsFromUri(modelId, new Uri(invoiceUri))
+        .StartRecognizeCustomFormsFromUri(modelId, new Uri(formUrl))
         .WaitForCompletionAsync();
         // </snippet_analyze>
         // <snippet_analyze_response>
