@@ -40,7 +40,7 @@ class Program
         var trainModel = TrainModel(trainingClient, trainingDataUrl);
         Task.WaitAll(trainModel); 
 
-        var analyzeForm = AnalyzePdfForm(recognizerClient, modelId, formUrl);
+        var analyzeForm = AnalyzePdfForm(recognizerClient, trainModel, formUrl);
         Task.WaitAll(analyzeForm);
         
         var manageModels = ManageModels(trainingClient, trainingDataUrl);
@@ -323,7 +323,7 @@ class Program
             new Uri(trainingFileUrl)).WaitForCompletionAsync();
 
         // Get the model that was just created
-        CustomFormModel modelCopy = trainingClient.GetCustomModel(modelId);
+        CustomFormModel modelCopy = trainingClient.GetCustomModel(model.ModelId);
 
         Console.WriteLine($"Custom Model {modelCopy.ModelId} recognizes the following form types:");
 
