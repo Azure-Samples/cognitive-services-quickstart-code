@@ -28,7 +28,9 @@ class Program
     // <snippet_main>
     static void Main(string[] args)
     {
-        // new code:
+        var recognizerClient = AuthenticateClient();
+        var trainingClient = AuthenticateTrainingClient();
+        
         var recognizeContent = RecognizeContent(recognizerClient);
         Task.WaitAll(recognizeContent);
 
@@ -50,13 +52,20 @@ class Program
     // <snippet_auth>
     static private FormRecognizerClient AuthenticateClient()
     {
-        string endpoint = "<replace-with-your-form-recognizer-endpoint-here>";
-        string apiKey = "<replace-with-your-form-recognizer-key-here>";
         var credential = new AzureKeyCredential(apiKey);
         var client = new FormRecognizerClient(new Uri(endpoint), credential);
         return client;
     }
     // </snippet_auth>
+    
+    // <snippet_auth_training>
+    static private FormTrainingClient AuthenticateTrainingClient()
+    {
+        var credential = new AzureKeyCredential(apiKey);
+        var client = new FormTrainingClient(new Uri(endpoint), credential);
+        return client;
+    }
+    // </snippet_auth_training>
 
     // <snippet_getcontent_call>
     private static async Task RecognizeContent(FormRecognizerClient recognizerClient)
