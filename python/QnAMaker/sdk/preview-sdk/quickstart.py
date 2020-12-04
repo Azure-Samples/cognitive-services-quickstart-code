@@ -12,9 +12,17 @@
 # - Update a knowledge base.
 # - Publish a knowledge base.
 # - Download a knowledge base.
-# - Get runtime endpoint key.
 # - Query a knowledge base.
 # - Delete a knowledge base.
+
+# ==========================================
+# IMPORTANT NOTES
+# This quickstart shows how to query a knowledgebase using the V2 API,
+# which does not require a separate runtime endpoint.
+# Make sure you have package azure-cognitiveservices-knowledge-qnamaker 0.3.0 or later installed.
+# The QnA Maker subscription key and endpoint must be for a QnA Maker Managed resource.
+# When you create your QnA Maker resource in the MS Azure portal, select the "Managed" checkbox.
+# ==========================================
 
 # ==========================================
 # Further reading
@@ -43,19 +51,7 @@ endpoint_var_name = 'QNA_MAKER_ENDPOINT'
 if not endpoint_var_name in os.environ:
     raise Exception('Please set/export the environment variable: {}'.format(endpoint_var_name))
 endpoint = os.environ[endpoint_var_name]
-
-runtime_endpoint_var_name = 'QNA_MAKER_RUNTIME_ENDPOINT'
-if not runtime_endpoint_var_name in os.environ:
-    raise Exception('Please set/export the environment variable: {}'.format(runtime_endpoint_var_name))
-runtime_endpoint = os.environ[runtime_endpoint_var_name]
 # </Resourcevariables>
-
-# <TryManagedPreview>
-# To be set to 'true' to use QnAMakerV2 Public Preview resources 
-# Use the package azure-cognitiveservices-knowledge-qnamaker 0.3.0.
-# NOTE The QnA Maker subscription key and endpoint must be for a QnA Maker Managed resource.
-try_managed_preview = False;
-# </TryManagedPreview>
 
 # <MonitorOperation>
 def _monitor_operation(client, operation):
@@ -217,32 +213,8 @@ def delete_kb(client, kb_id):
     print("Deleted knowledge base.")
 # </DeleteKB>
 
-# <GetQueryEndpointKey>
-def getEndpointKeys_kb(client):
-    print("Getting runtime endpoint keys...")
-    keys = client.endpoint_keys.get_keys()
-    print("Primary runtime endpoint key: {}.".format(keys.primary_endpoint_key))
-
-    return keys.primary_endpoint_key
-
-# </GetQueryEndpointKey>
-
 # <GenerateAnswer>
-def generate_answer(client, kb_id, runtimeKey):
-    print ("Querying knowledge base...")
-
-    authHeaderValue = "EndpointKey " + runtimeKey
-
-    listSearchResults = client.runtime.generate_answer(kb_id, QueryDTO(question = "How do I manage my knowledgebase?"), dict(Authorization=authHeaderValue))
-
-    for i in listSearchResults.answers:
-        print(f"Answer ID: {i.id}.")
-        print(f"Answer: {i.answer}.")
-        print(f"Answer score: {i.score}.")
-# </GenerateAnswer>
-
-# <GenerateAnswerPreview>
-def generate_answer_preview(client, kb_id):
+def generate_answer(client, kb_id):
     print ("Querying knowledge base...")
 
     listSearchResults = client.knowledgebase.generate_answer(kb_id, QueryDTO(question = "How do I manage my knowledgebase?"))
@@ -251,7 +223,7 @@ def generate_answer_preview(client, kb_id):
         print(f"Answer ID: {i.id}.")
         print(f"Answer: {i.answer}.")
         print(f"Answer score: {i.score}.")
-# </GenerateAnswerPreview>
+# </GenerateAnswer>
 
 # <Main>
 
@@ -263,17 +235,7 @@ kb_id = create_kb(client=client)
 update_kb (client=client, kb_id=kb_id)
 publish_kb (client=client, kb_id=kb_id)
 download_kb (client=client, kb_id=kb_id)
-
-queryRuntimeKey = getEndpointKeys_kb(client=client)
-
-if (try_managed_preview):
-	generate_answer_preview(client=client, kb_id=kb_id)
-else:
-	# <AuthorizationQuery>
-	runtimeClient = QnAMakerRuntimeClient(runtime_endpoint=runtime_endpoint, credentials=CognitiveServicesCredentials(queryRuntimeKey))
-	# </AuthorizationQuery>
-	generate_answer(client=runtimeClient,kb_id=kb_id,runtimeKey=queryRuntimeKey)
-
+generate_answer(client=client, kb_id=kb_id)
 delete_kb (client=client, kb_id=kb_id)
 
 # </Main>
