@@ -12,10 +12,18 @@
  * - Create a knowledge base
  * - Update a knowledge base
  * - Publish a knowledge base
- * - Get published endpoint key
- * - Delete a knowledge base
- * - Get Query runtime endpoint key
  * - Download a knowledgebase
+ * - Query a knowledgebase
+ * - Delete a knowledge base
+
+ * ==========================================
+ * IMPORTANT NOTES
+   This quickstart shows how to query a knowledgebase using the V2 API,
+   which does not require a separate runtime endpoint.
+   Make sure you have package @azure/cognitiveservices-qnamaker/v/3.2.0 or later installed.
+   The QnA Maker subscription key and endpoint must be for a QnA Maker Managed resource.
+   When you create your QnA Maker resource in the MS Azure portal, select the "Managed" checkbox.
+ * ==========================================
 
  * ==========================================
    Further reading
@@ -23,13 +31,11 @@
  * Reference documentation: https://docs.microsoft.com/dotnet/api/microsoft.azure.cognitiveservices.knowledge.qnamaker?view=azure-dotnet
  * ==========================================
 
-
  */
 
 // <Dependencies>
 const msRest = require("@azure/ms-rest-js");
 const qnamaker = require("@azure/cognitiveservices-qnamaker");
-const qnamaker_runtime = require("@azure/cognitiveservices-qnamaker-runtime");
 // </Dependencies>
 
 // <Resourcevariables>
@@ -45,38 +51,7 @@ if (!process.env[endpoint_var]) {
 }
 var endpoint = process.env[endpoint_var];
 
-var runtime_endpoint_var = 'QNA_MAKER_RUNTIME_ENDPOINT';
-if (!process.env[runtime_endpoint_var]) {
-    throw new Error('please set/export the following environment variable: ' + runtime_endpoint_var);
-}
-var runtime_endpoint = process.env[runtime_endpoint_var];
 // </Resourcevariables>
-
-// <TryManagedPreview>
-// To be set to 'true' to use QnAMakerV2 Public Preview resources 
-// Use the package @azure/cognitiveservices-qnamaker/v/3.2.0.
-// NOTE The QnA Maker subscription key and endpoint must be for a QnA Maker Managed resource.
-const try_managed_preview = false;
-// </TryManagedPreview>
-
-// <GetQueryEndpointKey>
-const getEndpointKeys = async (qnaClient) => {
-
-	console.log(`Getting runtime endpoint keys...`)
-
-    const runtimeKeysClient = await qnaClient.endpointKeys;
-    const results = await runtimeKeysClient.getKeys()
-
-    if ( ! results._response.status.toString().startsWith("2")) {
-        console.log(`GetEndpointKeys request failed - HTTP status ${results._response.status}`)
-        return null
-    }
-
-    console.log(`GetEndpointKeys request succeeded - HTTP status ${results._response.status} - primary key ${results.primaryEndpointKey}`)
-
-    return results.primaryEndpointKey
-}
-// </GetQueryEndpointKey>
 
 // <ListKnowledgeBases>
 const listKnowledgeBasesInResource = async (KBclient) => {
@@ -90,32 +65,12 @@ const listKnowledgeBasesInResource = async (KBclient) => {
 }
 // </ListKnowledgeBases>
 
-// <GenerateAnswerPreview>
-const generateAnswerPreview = async (KBclient, kb_id) => {
+// <GenerateAnswer>
+const generateAnswer = async (KBclient, kb_id) => {
 
 	console.log(`Querying knowledge base...`)
 
     const requestQuery = await KBclient.generateAnswer(
-        kb_id,
-        {
-            question: "How do I manage my knowledgebase?",
-            top: 1,
-            strictFilters: [
-                { name: "Category", value: "api" }
-            ]
-        }
-    );
-    console.log(JSON.stringify(requestQuery));
-
-}
-// </GenerateAnswerPreview>
-
-// <GenerateAnswer>
-const generateAnswer = async (runtimeClient, runtimeKey, kb_id) => {
-
-	console.log(`Querying knowledge base...`)
-
-    const requestQuery = await runtimeClient.runtime.generateAnswer(
         kb_id,
         {
             question: "How do I manage my knowledgebase?",
@@ -375,19 +330,7 @@ const main = async () => {
     await publishKnowledgeBase(knowledgeBaseClient, knowledgeBaseID);
     await downloadKnowledgeBase(knowledgeBaseClient, knowledgeBaseID)
     await listKnowledgeBasesInResource(knowledgeBaseClient)
-
-	if (try_managed_preview) {
-		await generateAnswerPreview(knowledgeBaseClient, knowledgeBaseID);
-	}
-	else {
-		const primaryQueryRuntimeKey = await getEndpointKeys(qnaMakerClient);
-		// <AuthorizationQuery>
-		const queryRutimeCredentials = new msRest.ApiKeyCredentials({ inHeader: { 'Authorization': 'EndpointKey ' + primaryQueryRuntimeKey } });
-		const runtimeClient = new qnamaker_runtime.QnAMakerRuntimeClient(queryRutimeCredentials, runtime_endpoint);
-		// </AuthorizationQuery>
-		await generateAnswer(runtimeClient, primaryQueryRuntimeKey, knowledgeBaseID);
-	}
-
+	await generateAnswer(knowledgeBaseClient, knowledgeBaseID);
     await deleteKnowledgeBase(knowledgeBaseClient, knowledgeBaseID)
 }
 // </Main>
