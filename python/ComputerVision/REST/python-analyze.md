@@ -154,7 +154,6 @@ A successful response is returned in JSON. The sample webpage parses and display
 
 Next, explore a Python application that uses Computer Vision to perform optical character recognition (OCR); create smart-cropped thumbnails; plus detect, categorize, tag, and describe visual features in images.
 
-> [!div class="nextstepaction"]
-> [Computer Vision API Python Tutorial](https://github.com/Microsoft/Cognitive-Vision-Python)
+* [Computer Vision API Python Tutorial](https://github.com/Microsoft/Cognitive-Vision-Python)
 
 * To rapidly experiment with the Computer Vision API, try the [Open API testing console](https://westcentralus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-1-ga/operations/56f91f2e778daf14a499f21b/console).
