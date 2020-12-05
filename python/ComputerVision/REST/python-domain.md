@@ -3,7 +3,7 @@
 
 In this quickstart, you'll use a domain model to identify landmarks or, optionally, celebrities in a remotely stored image using the Computer Vision REST API. With the [Recognize Domain Specific Content](https://westcentralus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-1-ga/operations/56f91f2e778daf14a499f311) method, you can apply a domain-specific model to recognize content within an image.
 
-You can run this quickstart in a step-by step fashion using a Jupyter notebook on [MyBinder](https://mybinder.org). To launch Binder, select the following button:
+You can run this quickstart in a step-by step fashion using a Jupyter Notebook on [MyBinder](https://mybinder.org). To launch Binder, select the following button:
 
 [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/Microsoft/cognitive-services-notebooks/master?filepath=VisionAPI.ipynb)
 
@@ -30,7 +30,7 @@ To create and run the landmark sample, do the following steps:
 import os
 import sys
 import requests
-# If you are using a Jupyter notebook, uncomment the following line.
+# If you are using a Jupyter Notebook, uncomment the following line.
 # %matplotlib inline
 import matplotlib.pyplot as plt
 from PIL import Image
@@ -112,7 +112,7 @@ To create and run the landmark sample, do the following steps:
 
 ```python
 import requests
-# If you are using a Jupyter notebook, uncomment the following line.
+# If you are using a Jupyter Notebook, uncomment the following line.
 # %matplotlib inline
 import matplotlib.pyplot as plt
 from PIL import Image
