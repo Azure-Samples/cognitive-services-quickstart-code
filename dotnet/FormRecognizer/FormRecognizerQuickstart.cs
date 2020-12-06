@@ -19,16 +19,18 @@ class Program
     // </snippet_creds>
 
     // <snippet_urls>
-    string trainingDataUrl = "<SAS-URL-of-your-form-folder-in-blob-storage>";
-    string formUrl = "<SAS-URL-of-a-form-in-blob-storage>";
-    string receiptUrl = "https://docs.microsoft.com/azure/cognitive-services/form-recognizer/media"
+    private static string trainingDataUrl = "<SAS-URL-of-your-form-folder-in-blob-storage>";
+    private static string formUrl = "<SAS-URL-of-a-form-in-blob-storage>";
+    private static string receiptUrl = "https://docs.microsoft.com/azure/cognitive-services/form-recognizer/media"
     + "/contoso-allinone.jpg";
     // </snippet_urls>
 
     // <snippet_main>
     static void Main(string[] args)
     {
-        // new code:
+        var recognizerClient = AuthenticateClient();
+        var trainingClient = AuthenticateTrainingClient();
+        
         var recognizeContent = RecognizeContent(recognizerClient);
         Task.WaitAll(recognizeContent);
 
@@ -38,7 +40,7 @@ class Program
         var trainModel = TrainModel(trainingClient, trainingDataUrl);
         Task.WaitAll(trainModel); 
 
-        var analyzeForm = AnalyzePdfForm(recognizerClient, modelId, formUrl);
+        var analyzeForm = AnalyzePdfForm(recognizerClient, trainModel, formUrl);
         Task.WaitAll(analyzeForm);
         
         var manageModels = ManageModels(trainingClient, trainingDataUrl);
@@ -50,19 +52,26 @@ class Program
     // <snippet_auth>
     static private FormRecognizerClient AuthenticateClient()
     {
-        string endpoint = "<replace-with-your-form-recognizer-endpoint-here>";
-        string apiKey = "<replace-with-your-form-recognizer-key-here>";
         var credential = new AzureKeyCredential(apiKey);
         var client = new FormRecognizerClient(new Uri(endpoint), credential);
         return client;
     }
     // </snippet_auth>
+    
+    // <snippet_auth_training>
+    static private FormTrainingClient AuthenticateTrainingClient()
+    {
+        var credential = new AzureKeyCredential(apiKey);
+        var client = new FormTrainingClient(new Uri(endpoint), credential);
+        return client;
+    }
+    // </snippet_auth_training>
 
     // <snippet_getcontent_call>
     private static async Task RecognizeContent(FormRecognizerClient recognizerClient)
     {
         var invoiceUri = "https://raw.githubusercontent.com/Azure/azure-sdk-for-python/master/sdk/formrecognizer/azure-ai-formrecognizer/tests/sample_forms/forms/Invoice_1.pdf";
-        FormPageCollection formPages = await recognizeClient
+        FormPageCollection formPages = await recognizerClient
             .StartRecognizeContentFromUri(new Uri(invoiceUri))
             .WaitForCompletionAsync();
         // </snippet_getcontent_call>
@@ -95,7 +104,7 @@ class Program
     private static async Task AnalyzeReceipt(
         FormRecognizerClient recognizerClient, string receiptUri)
     {
-        RecognizedFormCollection receipts = await recognizeClient.StartRecognizeReceiptsFromUri(new Uri(receiptUrl)).WaitForCompletionAsync();
+        RecognizedFormCollection receipts = await recognizerClient.StartRecognizeReceiptsFromUri(new Uri(receiptUrl)).WaitForCompletionAsync();
         // </snippet_receipt_call>
 
         // <snippet_receipt_print>
@@ -176,8 +185,8 @@ class Program
     // </snippet_receipt_print>
 
     // <snippet_train>
-    private static async Task<Guid> TrainModel(
-        FormRecognizerClient trainingClient, string trainingDataUrl)
+    private static async Task<String> TrainModel(
+        FormTrainingClient trainingClient, string trainingDataUrl)
     {
         CustomFormModel model = await trainingClient
         .StartTrainingAsync(new Uri(trainingDataUrl), useTrainingLabels: false)
@@ -243,10 +252,10 @@ class Program
     // <snippet_analyze>
     // Analyze PDF form data
     private static async Task AnalyzePdfForm(
-        FormRecognizerClient recognizerClient, Guid modelId, string formUrl)
+        FormRecognizerClient recognizerClient, String modelId, string formUrl)
     {
-        RecognizedFormCollection forms = await recognizeClient
-        .StartRecognizeCustomFormsFromUri(modelId, new Uri(invoiceUri))
+        RecognizedFormCollection forms = await recognizerClient
+        .StartRecognizeCustomFormsFromUri(modelId, new Uri(formUrl))
         .WaitForCompletionAsync();
         // </snippet_analyze>
         // <snippet_analyze_response>
@@ -266,7 +275,7 @@ class Program
                 Console.WriteLine($"    Confidence: '{field.Confidence}");
             }
             Console.WriteLine("Table data:");
-            foreach (FormPage page in form.Pages.Values)
+            foreach (FormPage page in form.Pages)
             {
                 for (int i = 0; i < page.Tables.Count; i++)
                 {
@@ -314,7 +323,7 @@ class Program
             new Uri(trainingFileUrl)).WaitForCompletionAsync();
 
         // Get the model that was just created
-        CustomFormModel modelCopy = trainingClient.GetCustomModel(modelId);
+        CustomFormModel modelCopy = trainingClient.GetCustomModel(model.ModelId);
 
         Console.WriteLine($"Custom Model {modelCopy.ModelId} recognizes the following form types:");
 
