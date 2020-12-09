@@ -29,17 +29,17 @@ namespace ImageClassification
             CustomVisionTrainingClient TrainingApi = AuthenticateTraining(endpoint, trainingKey);
             CustomVisionPredictionClient predictionApi = AuthenticateTraining(endpoint, predictionKey);
 
-            CreateProject(trainingApi);
-            AddTags(trainingApi);
-            UploadImages(trainingApi);
-            TrainProject(trainingApi);
-            PublishIteration(trainingApi);
-            TestIteration(predictionApi);
+            Project project = CreateProject(trainingApi);
+            AddTags(trainingApi, project);
+            UploadImages(trainingApi, project);
+            TrainProject(trainingApi, project);
+            PublishIteration(trainingApi, project);
+            TestIteration(predictionApi, project);
             // </snippet_maincalls>
         }
 
         // <snippet_auth>
-        private CustomVisionTrainingClient AuthenticateTraining(string endpoint, string trainingKey, string predictionKey)
+        private CustomVisionTrainingClient AuthenticateTraining(string endpoint, string trainingKey)
         {
             // Create the Api, passing in the training key
             CustomVisionTrainingClient trainingApi = new CustomVisionTrainingClient(new Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training.ApiKeyServiceClientCredentials(trainingKey))
@@ -60,7 +60,7 @@ namespace ImageClassification
         // </snippet_auth>
 
         // <snippet_create>
-        private void CreateProject(CustomVisionTrainingClient trainingApi)
+        private void CreateProject(CustomVisionTrainingClient trainingApi, Project project)
         {
             // Create a new project
             Console.WriteLine("Creating new project:");
@@ -68,7 +68,7 @@ namespace ImageClassification
         }
         // </snippet_create>
         // <snippet_addtags>
-        private void AddTags(CustomVisionTrainingClient trainingApi)
+        private void AddTags(CustomVisionTrainingClient trainingApi, Project project)
         {
 
             // Make two tags in the new project
@@ -78,7 +78,7 @@ namespace ImageClassification
         // </snippet_addtags>
 
         // <snippet_upload>
-        private void UploadImages(CustomVisionTrainingClient trainingApi)
+        private void UploadImages(CustomVisionTrainingClient trainingApi, Project project)
         {
             // Add some images to the tags
             Console.WriteLine("\tUploading images");
@@ -101,7 +101,7 @@ namespace ImageClassification
         // </snippet_upload>
 
         // <snippet_train>
-        private void TrainProject(CustomVisionTrainingClient trainingApi)
+        private void TrainProject(CustomVisionTrainingClient trainingApi, Project project)
         {
             // Now there are images with tags start training the project
             Console.WriteLine("\tTraining");
@@ -119,7 +119,7 @@ namespace ImageClassification
         // </snippet_train>
 
         // <snippet_publish>
-        private void PublishIteration(CustomVisionTrainingClient trainingApi)
+        private void PublishIteration(CustomVisionTrainingClient trainingApi, Project project)
         {
 
             // The iteration is now trained. Publish it to the prediction end point.
@@ -133,7 +133,7 @@ namespace ImageClassification
         // </snippet_publish>
 
         // <snippet_test>
-        private void TestIteration(CustomVisionPredictionClient predictionApi)
+        private void TestIteration(CustomVisionPredictionClient predictionApi, Project project)
         {
 
             // Make a prediction against the new project
