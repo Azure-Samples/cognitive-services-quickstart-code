@@ -20,7 +20,7 @@ To create and run the sample, copy the following code into the code editor.
 import os
 import sys
 import requests
-# If you are using a Jupyter notebook, uncomment the following lines.
+# If you are using a Jupyter Notebook, uncomment the following lines.
 # %matplotlib inline
 # import matplotlib.pyplot as plt
 from PIL import Image
@@ -73,7 +73,7 @@ A successful response is returned as binary data which represents the image data
 
 ## Run in Jupyter (optional)
 
-You can optionally run this quickstart in a step-by step fashion using a Jupyter notebook on [MyBinder](https://mybinder.org). To launch Binder, select the following button:
+You can optionally run this quickstart in a step-by step fashion using a Jupyter Notebook on [MyBinder](https://mybinder.org). To launch Binder, select the following button:
 
 [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/Microsoft/cognitive-services-notebooks/master?filepath=VisionAPI.ipynb)
 

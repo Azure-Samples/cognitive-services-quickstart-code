@@ -8,7 +8,7 @@ In this quickstart, you'll extract printed and handwritten text from an image us
 
 ---
 
-You can run this quickstart in a step-by step fashion using a Jupyter notebook on [MyBinder](https://mybinder.org). To launch Binder, select the following button:
+You can run this quickstart in a step-by step fashion using a Jupyter Notebook on [MyBinder](https://mybinder.org). To launch Binder, select the following button:
 
 [![The launch Binder button](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/Microsoft/cognitive-services-notebooks/master?filepath=VisionAPI.ipynb)
 
@@ -37,7 +37,7 @@ import os
 import sys
 import requests
 import time
-# If you are using a Jupyter notebook, uncomment the following line.
+# If you are using a Jupyter Notebook, uncomment the following line.
 # %matplotlib inline
 import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon
