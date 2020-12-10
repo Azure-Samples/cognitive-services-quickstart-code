@@ -449,7 +449,7 @@ print("===== Detect Image Types - local =====")
 local_image_path_type = "resources\\type-image.jpg"
 local_image_type = open(local_image_path_type, "rb")
 # Select visual feature(s) you want
-local_image_features = VisualFeatureTypes.image_type
+local_image_features = [VisualFeatureTypes.image_type]
 # Call API with local image and features
 detect_type_results_local = computervision_client.analyze_image_in_stream(local_image_type, local_image_features)
 
@@ -482,7 +482,7 @@ print("===== Detect Image Types - remote =====")
 # Get URL of an image with a type
 remote_image_url_type = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/type-image.jpg"
 # Select visual feature(s) you want
-remote_image_features = VisualFeatureTypes.image_type
+remote_image_features = [VisualFeatureTypes.image_type]
 # Call API with URL and features
 detect_type_results_remote = computervision_client.analyze_image(remote_image_url_type, remote_image_features)
 
