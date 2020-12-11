@@ -51,11 +51,11 @@ public class CustomVisionSamples {
         // <snippet_auth>
         // Authenticate
         CustomVisionTrainingClient trainClient = CustomVisionTrainingManager
-                .authenticate("https://{Endpoint}/customvision/v3.0/training/", CustomVisionTrainingClientKey)
-                .withEndpoint(Endpoint);
+                .authenticate("https://{endpoint}/customvision/v3.0/training/", trainingApiKey)
+                .withEndpoint(endpoint);
         CustomVisionPredictionClient predictor = CustomVisionPredictionManager
-                .authenticate("https://{Endpoint}/customvision/v3.0/prediction/", predictionApiKey)
-                .withEndpoint(Endpoint);
+                .authenticate("https://{endpoint}/customvision/v3.0/prediction/", predictionApiKey)
+                .withEndpoint(endpoint);
         // </snippet_auth>
 
         // <snippet_maincalls>
