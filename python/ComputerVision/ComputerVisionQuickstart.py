@@ -678,22 +678,22 @@ local_image_handwritten_path = "resources\\handwritten_text.jpg"
 local_image_handwritten = open(local_image_handwritten_path, "rb")
 
 # Call API with image and raw response (allows you to get the operation location)
-recognize_handwriting_results = computervision_client.batch_read_file_in_stream(local_image_handwritten, raw=True)
+read_results = computervision_client.read_in_stream(local_image_handwritten, raw=True)
 # Get the operation location (URL with ID as last appendage)
-operation_location_local = recognize_handwriting_results.headers["Operation-Location"]
+operation_location_local = read_results.headers["Operation-Location"]
 # Take the ID off and use to get results
 operation_id_local = operation_location_local.split("/")[-1]
 
 # Call the "GET" API and wait for the retrieval of the results
 while True:
-    recognize_handwriting_result = computervision_client.get_read_operation_result(operation_id_local)
-    if recognize_handwriting_result.status not in ['notStarted', 'running']:
+    read_result = computervision_client.get_read_result(operation_id_local)
+    if read_result.status not in ['notStarted', 'running']:
         break
     time.sleep(1)
 
 # Print results, line by line
-if recognize_handwriting_result.status == OperationStatusCodes.succeeded:
-    for text_result in recognize_handwriting_result.analyze_result.read_results:
+if read_result.status == OperationStatusCodes.succeeded:
+    for text_result in read_result.analyze_result.read_results:
         for line in text_result.lines:
             print(line.text)
             print(line.bounding_box)
@@ -704,7 +704,7 @@ END - Batch Read File - local
 
 # <snippet_read_call>
 '''
-Batch Read File, recognize handwritten text - remote
+Read File, recognize handwritten text - remote
 This example will extract handwritten text in an image, then print results, line by line.
 This API call can also recognize handwriting (not shown).
 '''
@@ -713,25 +713,25 @@ print("===== Batch Read File - remote =====")
 remote_image_handw_text_url = "https://raw.githubusercontent.com/MicrosoftDocs/azure-docs/master/articles/cognitive-services/Computer-vision/Images/readsample.jpg"
 
 # Call API with URL and raw response (allows you to get the operation location)
-recognize_handw_results = computervision_client.read(remote_image_handw_text_url,  raw=True)
+raw_http_response = computervision_client.read(remote_image_handw_text_url,  raw=True)
 # </snippet_read_call>
 
 # <snippet_read_response>
 # Get the operation location (URL with an ID at the end) from the response
-operation_location_remote = recognize_handw_results.headers["Operation-Location"]
+operation_location_remote = raw_http_response.headers["Operation-Location"]
 # Grab the ID from the URL
 operation_id = operation_location_remote.split("/")[-1]
 
 # Call the "GET" API and wait for it to retrieve the results 
 while True:
-    get_handw_text_results = computervision_client.get_read_result(operation_id)
-    if get_handw_text_results.status not in ['notStarted', 'running']:
+    read_result = computervision_client.get_read_result(operation_id)
+    if read_result.status not in ['notStarted', 'running']:
         break
     time.sleep(1)
 
 # Print the detected text, line by line
-if get_handw_text_results.status == OperationStatusCodes.succeeded:
-    for text_result in get_handw_text_results.analyze_result.read_results:
+if read_result.status == OperationStatusCodes.succeeded:
+    for text_result in read_result.analyze_result.read_results:
         for line in text_result.lines:
             print(line.text)
             print(line.bounding_box)
