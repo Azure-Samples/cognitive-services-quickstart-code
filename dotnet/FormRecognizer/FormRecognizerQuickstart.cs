@@ -70,7 +70,7 @@ class Program
     // <snippet_getcontent_call>
     private static async Task RecognizeContent(FormRecognizerClient recognizerClient)
     {
-        var invoiceUri = "https://raw.githubusercontent.com/Azure/azure-sdk-for-python/master/sdk/formrecognizer/azure-ai-formrecognizer/tests/sample_forms/forms/Invoice_1.pdf";
+        var invoiceUri = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-REST-api-samples/master/curl/form-recognizer/simple-invoice.png";
         FormPageCollection formPages = await recognizerClient
             .StartRecognizeContentFromUri(new Uri(invoiceUri))
             .WaitForCompletionAsync();
