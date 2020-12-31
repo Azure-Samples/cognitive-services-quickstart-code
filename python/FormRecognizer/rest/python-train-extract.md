@@ -47,7 +47,7 @@ To train a Form Recognizer model with the documents in your Azure blob container
 1. Replace `<Blob folder name>` with the path to the folder in blob storage where your forms are located. If your forms are at the root of your container, leave this string empty.
 1. Optionally replace `<your model name>` with the friendly name you'd like to give to your model.
 
-    # [v2.0](#tab/v2-0)
+    #### [v2.0](#tab/v2-0)
     ```python
     ########### Python Form Recognizer Labeled Async Train #############
     import json
@@ -89,7 +89,7 @@ To train a Form Recognizer model with the documents in your Azure blob container
         print("POST model failed:\n%s" % str(e))
         quit() 
     ```    
-    # [v2.1 preview](#tab/v2-1)
+    #### [v2.1 preview](#tab/v2-1)
     ```python
     ########### Python Form Recognizer Labeled Async Train #############
     import json
@@ -252,7 +252,7 @@ Next, you'll use your newly trained model to analyze a document and extract key-
 1. Replace `<file type>` with the file type. Supported types: `application/pdf`, `image/jpeg`, `image/png`, `image/tiff`.
 1. Replace `<subscription key>` with your subscription key.
 
-    # [v2.0](#tab/v2-0)
+    #### [v2.0](#tab/v2-0)
     ```python
     ########### Python Form Recognizer Async Analyze #############
     import json
@@ -288,7 +288,7 @@ Next, you'll use your newly trained model to analyze a document and extract key-
         print("POST analyze failed:\n%s" % str(e))
         quit() 
     ```    
-    # [v2.1 preview](#tab/v2-1)
+    #### [v2.1 preview](#tab/v2-1)
     ```python
     ########### Python Form Recognizer Async Analyze #############
     import json
@@ -375,7 +375,7 @@ When the process is completed, you'll receive a `200 (Success)` response with JS
 
 This sample JSON output has been shortened for simplicity.
 
-# [v2.0](#tab/v2-0)
+#### [v2.0](#tab/v2-0)
 ```JSON
 {
   "status": "succeeded",
@@ -502,7 +502,7 @@ This sample JSON output has been shortened for simplicity.
   }
 }
 ```    
-# [v2.1 preview](#tab/v2-1)    
+#### [v2.1 preview](#tab/v2-1)    
 ```JSON
 {
   "status": "succeeded",

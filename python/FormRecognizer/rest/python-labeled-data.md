@@ -65,7 +65,7 @@ You need OCR result files in order for the service to consider the corresponding
 1. Call the **[Get Analyze Layout Result](https://westus2.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2/operations/GetAnalyzeLayoutResult)** API, using the operation ID from the previous step.
 1. Get the response and write the content to a file. For each source form, the corresponding OCR file should have the original file name appended with `.ocr.json`. The OCR JSON output should have the following format. See the [sample OCR file](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/curl/form-recognizer/Invoice_1.pdf.ocr.json) for a full example. 
 
-    # [v2.0](#tab/v2-0)
+    #### [v2.0](#tab/v2-0)
     ```json
     {
     "status": "succeeded",
@@ -114,7 +114,7 @@ You need OCR result files in order for the service to consider the corresponding
                     },
                     ...
     ```    
-    # [v2.1 preview](#tab/v2-1)
+    #### [v2.1 preview](#tab/v2-1)
     ```json
     {
     "status": "succeeded",
@@ -254,7 +254,7 @@ To train a model with labeled data, call the **[Train Custom Model](https://west
 1. Replace `<SAS URL>` with the Azure Blob storage container's shared access signature (SAS) URL. To retrieve the SAS URL for your custom model training data, go to your storage resource in the Azure portal and select the **Storage Explorer** tab. Navigate to your container, right-click, and select **Get shared access signature**. It's important to get the SAS for your container, not for the storage account itself. Make sure the **Read** and **List** permissions are checked, and click **Create**. Then copy the value in the **URL** section to a temporary location. It should have the form: `https://<storage account>.blob.core.windows.net/<container name>?<SAS value>`.
 1. Replace `<Blob folder name>` with the folder name in your blob container where the input data is located. Or, if your data is at the root, leave this blank and remove the `"prefix"` field from the body of the HTTP request.
 
-# [v2.0](#tab/v2-0)
+#### [v2.0](#tab/v2-0)
 ```python
 ########### Python Form Recognizer Labeled Async Train #############
 import json
@@ -295,7 +295,7 @@ except Exception as e:
     print("POST model failed:\n%s" % str(e))
     quit() 
 ```    
-# [v2.1 preview](#tab/v2-1)    
+#### [v2.1 preview](#tab/v2-1)    
 ```python
 ########### Python Form Recognizer Labeled Async Train #############
 import json
@@ -455,7 +455,7 @@ Next, you'll use your newly trained model to analyze a document and extract key-
 1. Replace `<file type>` with the file type. Supported types: `application/pdf`, `image/jpeg`, `image/png`, `image/tiff`.
 1. Replace `<subscription key>` with your subscription key.
 
-    # [v2.0](#tab/v2-0)
+    #### [v2.0](#tab/v2-0)
     ```python
     ########### Python Form Recognizer Async Analyze #############
     import json
@@ -491,7 +491,7 @@ Next, you'll use your newly trained model to analyze a document and extract key-
         print("POST analyze failed:\n%s" % str(e))
         quit() 
     ```    
-    # [v2.1 preview](#tab/v2-1)
+    #### [v2.1 preview](#tab/v2-1)
     ```python
     ########### Python Form Recognizer Async Analyze #############
     import json
@@ -575,7 +575,7 @@ print("Analyze operation did not complete within the allocated time.")
 
 When the process is completed, you'll receive a `202 (Success)` response with JSON content in the following format. The response has been shortened for simplicity. The main key/value associations are in the `"documentResults"` node. The `"selectionMarks"` node (in v2.1 preview) shows every selection mark (checkbox, radio mark) and whether its status is "selected" or "unselected". The Layout API results (the content and positions of all the text in the document) are in the `"readResults"` node.
 
-# [v2.0](#tab/v2-0)
+#### [v2.0](#tab/v2-0)
 ```json
 {
   "status": "succeeded",
@@ -710,7 +710,7 @@ When the process is completed, you'll receive a `202 (Success)` response with JS
   }
 }
 ```
-# [v 2](#tab/v2-1) 
+#### [v 2](#tab/v2-1) 
 ```json   
 {
   "status": "succeeded",
