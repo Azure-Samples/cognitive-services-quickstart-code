@@ -17,7 +17,7 @@ form_training_client = FormTrainingClient(endpoint, AzureKeyCredential(key))
 # </snippet_auth>
 
 # <snippet_getcontent>
-formUrl = "https://raw.githubusercontent.com/Azure/azure-sdk-for-python/master/sdk/formrecognizer/azure-ai-formrecognizer/tests/sample_forms/forms/Invoice_1.pdf"
+formUrl = "https://raw.githubusercontent.com/Azure/azure-sdk-for-python/master/sdk/formrecognizer/azure-ai-formrecognizer/tests/sample_forms/forms/Form_1.jpg"
 
 poller = form_recognizer_client.begin_recognize_content_from_url(formUrl)
 page = poller.result()

@@ -16,7 +16,7 @@ const client = new FormRecognizerClient(endpoint, new AzureKeyCredential(apiKey)
 
 // <snippet_getcontent>
 async function recognizeContent() {
-    const formUrl = "https://raw.githubusercontent.com/Azure/azure-sdk-for-python/master/sdk/formrecognizer/azure-ai-formrecognizer/tests/sample_forms/forms/Invoice_1.pdf";
+    const formUrl = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-REST-api-samples/master/curl/form-recognizer/simple-invoice.png";
     const poller = await client.beginRecognizeContentFromUrl(formUrl);
     const pages = await poller.pollUntilDone();
 
@@ -184,7 +184,7 @@ trainModelLabels().catch((err) => {
 async function recognizeCustom() {
     // Model ID from when you trained your model.
     const modelId = "<modelId>";
-    const formUrl = "https://raw.githubusercontent.com/Azure/azure-sdk-for-python/master/sdk/formrecognizer/azure-ai-formrecognizer/tests/sample_forms/forms/Invoice_1.pdf";
+    const formUrl = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-REST-api-samples/master/curl/form-recognizer/simple-invoice.png";
 
     const poller = await client.beginRecognizeCustomForms(modelId, formUrl, {
         onProgress: (state) => { console.log(`status: ${state.status}`); }
