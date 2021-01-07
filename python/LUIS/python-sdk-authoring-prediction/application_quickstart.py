@@ -25,9 +25,15 @@ import datetime, json, os, time
 # </Dependencies>
 
 # <AuthorizationVariables>
-authoring_key = 'REPLACE-WITH-YOUR-ASSIGNED-AUTHORING-KEY'
+key_var_name = 'LUIS_AUTHORING_KEY'
+if not key_var_name in os.environ:
+	raise Exception('Please set/export the environment variable: {}'.format(key_var_name))
+authoring_key = os.environ[key_var_name]
 
-authoring_endpoint = "https://REPLACE-WITH-RESOURCE-NAME.cognitiveservices.azure.com/"
+endpoint_var_name = 'LUIS_AUTHORING_ENDPOINT'
+if not endpoint_var_name in os.environ:
+	raise Exception('Please set/export the environment variable: {}'.format(endpoint_var_name))
+authoring_endpoint = os.environ[endpoint_var_name]
 # </AuthorizationVariables>
 
 # <Client>
