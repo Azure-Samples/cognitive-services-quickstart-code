@@ -52,8 +52,8 @@ namespace ComputerVisionQuickstart
     {
         // <snippet_vars>
         // Add your Computer Vision subscription key and endpoint
-        static string subscriptionKey = Environment.GetEnvironmentVariable ("COMPUTER_VISION_SUBSCRIPTION_KEY");
-        static string endpoint = Environment.GetEnvironmentVariable ("COMPUTER_VISION_ENDPOINT");
+        static string subscriptionKey = "COMPUTER_VISION_SUBSCRIPTION_KEY";
+        static string endpoint = "COMPUTER_VISION_ENDPOINT";
         // </snippet_vars>
 
         // Download these images (link in prerequisites), or you can use any appropriate image on your local machine.
