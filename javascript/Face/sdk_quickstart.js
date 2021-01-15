@@ -7,17 +7,8 @@ const uuid = require("uuid/v4");
 // </dependencies>
 
 // <credentials>
-const key_var = 'FACE_SUBSCRIPTION_KEY';
-if (!process.env[key_var]) {
-    throw new Error('please set/export the following environment variable: ' + key_var);
-}
-var subscription_key = process.env[key_var];
-
-const endpoint_var = 'FACE_ENDPOINT';
-if (!process.env[endpoint_var]) {
-    throw new Error('please set/export the following environment variable: ' + endpoint_var);
-}
-var endpoint = process.env[endpoint_var];
+var subscription_key = "<INSERT FACE SUBSCRIPTION KEY>";
+var endpoint = "<INSERT FACE ENDPOINT>";
 
 const credentials = new msRest.ApiKeyCredentials({ inHeader: { 'Ocp-Apim-Subscription-Key': subscription_key } });
 const client = new Face.FaceClient(credentials, endpoint);
