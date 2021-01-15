@@ -1,16 +1,14 @@
-// <dependencies>
 'use strict';
 
 const msRest = require("@azure/ms-rest-js");
 const Face = require("@azure/cognitiveservices-face");
 const uuid = require("uuid/v4");
-// </dependencies>
+
+key = "<paste-your-[product-name]-key-here>"
+endpoint = "<paste-your-[product-name]-endpoint-here>"
 
 // <credentials>
-var subscription_key = "<INSERT FACE SUBSCRIPTION KEY>";
-var endpoint = "<INSERT FACE ENDPOINT>";
-
-const credentials = new msRest.ApiKeyCredentials({ inHeader: { 'Ocp-Apim-Subscription-Key': subscription_key } });
+const credentials = new msRest.ApiKeyCredentials({ inHeader: { 'Ocp-Apim-Subscription-Key': key } });
 const client = new Face.FaceClient(credentials, endpoint);
 // </credentials>
 
