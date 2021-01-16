@@ -1,0 +1,17 @@
+{
+  "name": "speech",
+  "version": "1.0.0",
+  "description": "",
+  "main": "speaker-recognition.js",
+  "type": "module",
+  "scripts": {
+    "start:tts": "node text-to-speech.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "microsoft-cognitiveservices-speech-sdk": "^1.14.1"
+  }
+}
