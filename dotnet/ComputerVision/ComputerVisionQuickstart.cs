@@ -716,7 +716,6 @@ namespace ComputerVisionQuickstart
         /*
          * END - READ FILE - LOCAL
          */
-
-
+        // </snippet_read_local>
     }
 }
