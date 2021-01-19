@@ -104,10 +104,11 @@ namespace ComputerVisionQuickstart
             // <snippet_extracttextinmain>
             // Extract text (OCR) from a URL image using the Read API
             ReadFileUrl(client, READ_TEXT_URL_IMAGE).Wait();
-            // Extract text (OCR) from a local image using the Read API
-            ReadFileLocal(client, READ_TEXT_LOCAL_IMAGE).Wait();
             // </snippet_extracttextinmain>
 
+            // Extract text (OCR) from a local image using the Read API
+            ReadFileLocal(client, READ_TEXT_LOCAL_IMAGE).Wait();
+		
             Console.WriteLine("----------------------------------------------------------");
             Console.WriteLine();
             Console.WriteLine("Computer Vision quickstart is complete.");
