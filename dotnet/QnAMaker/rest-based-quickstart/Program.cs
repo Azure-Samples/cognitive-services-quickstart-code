@@ -21,11 +21,11 @@ namespace QnaMakerRestDotnet
 
         // <snippet_variables>
         // 36 character key from Azure portal for QnA Maker resource
-        static string authoringKey = "QNA_MAKER_AUTHORING_RESOURCE_KEY";
+        static string authoringKey = Environment.GetEnvironmentVariable("QNA_MAKER_AUTHORING_RESOURCE_KEY");
 
         // example://https://YOUR-RESOURCE_NAME.cognitiveservices.azure.com with NO trailing forward slash
-        static string authoringEndpoint = "QNA_MAKER_AUTHORING_RESOURCE_ENDPOINT";
-        static string resourceName = "QNA_MAKER_AUTHORING_RESOURCE_NAME";
+        static string authoringEndpoint = Environment.GetEnvironmentVariable("QNA_MAKER_AUTHORING_RESOURCE_ENDPOINT");
+        static string resourceName = Environment.GetEnvironmentVariable("QNA_MAKER_AUTHORING_RESOURCE_NAME");
 
         static string service = "/qnamaker/v4.0";
         // </snippet_variables>

@@ -40,9 +40,9 @@ namespace Knowledgebase_Quickstart
         static void Main(string[] args)
         {
             // <Resourcevariables>
-            var authoringKey = "QNA_MAKER_SUBSCRIPTION_KEY";
-            var authoringURL = "QNA_MAKER_ENDPOINT";
-            var queryingURL = "QNA_MAKER_RUNTIME_ENDPOINT";
+            var authoringKey = Environment.GetEnvironmentVariable("QNA_MAKER_SUBSCRIPTION_KEY");
+            var authoringURL = Environment.GetEnvironmentVariable("QNA_MAKER_ENDPOINT");
+            var queryingURL = Environment.GetEnvironmentVariable("QNA_MAKER_RUNTIME_ENDPOINT");
             // </Resourcevariables>
 
 
