@@ -1,10 +1,10 @@
 // <imports>
 'use strict'
 
-const fs = require('fs')
+const fs = require('fs');
 const parse = require("csv-parse/lib/sync");
-const AnomalyDetector = require('@azure/cognitiveservices-anomalydetector')
-const msRest = require('@azure/ms-rest-js')
+const { AnomalyDetectorClient } = require('@azure/ai-anomaly-detector');
+const { AzureKeyCredential } = require('@azure/core-auth');
 // </imports>
 
 /**
@@ -14,8 +14,9 @@ const msRest = require('@azure/ms-rest-js')
  * 
  * Prerequisites:
  *   - Install the following modules: 
- *       npm install @azure/ms-rest-js
- *       npm install @azure/cognitiveservices-anomalydetector
+ *       npm install csv-parse
+ *       npm install @azure/core-auth
+ *       npm install @azure/ai-anomaly-detector
  *   - Add your Anomaly Detector subscription key and endpoint to your environment variables
  *   - Add the request-data.csv file to your local root folder
  * 
@@ -27,19 +28,19 @@ const msRest = require('@azure/ms-rest-js')
 
 //<vars>
 // Spreadsheet with 2 columns and n rows.
-let CSV_FILE = './request-data.csv'
+let CSV_FILE = './request-data.csv';
 
 // Authentication variables
 // Add your Anomaly Detector subscription key and endpoint to your environment variables.
-let key = process.env['ANOMALY_DETECTOR_KEY']
-let endpoint = process.env['ANOMALY_DETECTOR_ENDPOINT']
-let credentials = new msRest.ApiKeyCredentials({ inHeader: { 'Ocp-Apim-Subscription-Key': key } })
+let key = process.env['ANOMALY_DETECTOR_KEY'];
+let endpoint = process.env['ANOMALY_DETECTOR_ENDPOINT'];
+
 // Points array for the request body
-let points = []
+let points = [];
 //</vars>
 
 // <authentication>
-let anomalyDetectorClient = new AnomalyDetector.AnomalyDetectorClient(credentials, endpoint)
+let anomalyDetectorClient = new AnomalyDetectorClient(endpoint, new AzureKeyCredential(key));
 // </authentication>
 
 // <readFile>
@@ -58,7 +59,7 @@ async function batchCall() {
     // Create request body for API call
     let body = { series: points, granularity: 'daily' }
     // Make the call to detect anomalies in whole series of points
-    await anomalyDetectorClient.entireDetect(body)
+    await anomalyDetectorClient.detectEntireSeries(body)
         .then((response) => {
             console.log("Batch (entire) anomaly detection):")
             for (let item = 0; item < response.isAnomaly.length; item++) {
@@ -79,7 +80,7 @@ async function lastDetection() {
 
     let body = { series: points, granularity: 'daily' }
     // Make the call to detect anomalies in the latest point of a series
-    await anomalyDetectorClient.lastDetect(body)
+    await anomalyDetectorClient.detectLastPoint(body)
         .then((response) => {
             console.log("Latest point anomaly detection:")
             if (response.isAnomaly) {
@@ -120,3 +121,4 @@ async function changePointDetection() {
         })
 }
 // </changePointDetection>
+changePointDetection();
