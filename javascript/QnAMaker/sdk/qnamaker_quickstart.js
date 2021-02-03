@@ -353,8 +353,8 @@ const main = async () => {
     await listKnowledgeBasesInResource(knowledgeBaseClient)
 
     // <AuthorizationQuery>
-    const queryRutimeCredentials = new msRest.ApiKeyCredentials({ inHeader: { 'Authorization': 'EndpointKey ' + primaryQueryRuntimeKey } });
-    const runtimeClient = new qnamaker_runtime.QnAMakerRuntimeClient(queryRutimeCredentials, runtime_endpoint);
+    const queryRuntimeCredentials = new msRest.ApiKeyCredentials({ inHeader: { 'Authorization': 'EndpointKey ' + primaryQueryRuntimeKey } });
+    const runtimeClient = new qnamaker_runtime.QnAMakerRuntimeClient(queryRuntimeCredentials, runtime_endpoint);
     // </AuthorizationQuery>
 
     await generateAnswer(runtimeClient, primaryQueryRuntimeKey, knowledgeBaseID)
