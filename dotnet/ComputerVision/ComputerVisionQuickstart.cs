@@ -608,6 +608,7 @@ namespace ComputerVisionQuickstart
          */
 
         // <snippet_read_url>
+        // <snippet_readfileurl_1>
         /*
          * READ FILE - URL 
          * Extracts text. 
@@ -623,8 +624,9 @@ namespace ComputerVisionQuickstart
             // After the request, get the operation location (operation ID)
             string operationLocation = textHeaders.OperationLocation;
             Thread.Sleep(2000);
-            // </snippet_extract_call>
 
+            // </snippet_readfileurl_1>
+            // <snippet_readfileurl_2>
             // <snippet_read_response>
             // Retrieve the URI where the extracted text will be stored from the Operation-Location header.
             // We only need the ID and not the full URL
@@ -641,9 +643,11 @@ namespace ComputerVisionQuickstart
             }
             while ((results.Status == OperationStatusCodes.Running ||
                 results.Status == OperationStatusCodes.NotStarted));
+            // </snippet_readfileurl_2>
             // </snippet_read_response>
 
             // <snippet_read_display>
+            // <snippet_readfileurl_3>
             // Display the found text.
             Console.WriteLine();
             var textUrlFileResults = results.AnalyzeResult.ReadResults;
@@ -657,7 +661,7 @@ namespace ComputerVisionQuickstart
             // </snippet_read_display>
             Console.WriteLine();
         }
-
+        // </snippet_readfileurl_3>
 
         // </snippet_read_url>
         /*
@@ -681,7 +685,6 @@ namespace ComputerVisionQuickstart
             // After the request, get the operation location (operation ID)
             string operationLocation = textHeaders.OperationLocation;
             Thread.Sleep(2000);
-            // </snippet_extract_call>
 
             // <snippet_extract_response>
             // Retrieve the URI where the recognized text will be stored from the Operation-Location header.
