@@ -1,21 +1,22 @@
-using Azure.AI.TextAnalytics;
+using Azure;
 using System;
 using System.Globalization;
+using Azure.AI.TextAnalytics;
 
 namespace TextAnalyticsQuickstart
 {
     class Program
     {
-        private static readonly TextAnalyticsApiKeyCredential credentials = 
-            new TextAnalyticsApiKeyCredential(Environment.GetEnvironmentVariable("TEXT_ANALYTICS_SUBSCRIPTION_KEY"));
-        private static readonly Uri endpoint = new Uri(Environment.GetEnvironmentVariable("TEXT_ANALYTICS_ENDPOINT"));
+        private static readonly AzureKeyCredential credentials = new AzureKeyCredential("<replace-with-your-text-analytics-key-here>");
+        private static readonly Uri endpoint = new Uri("<replace-with-your-text-analytics-endpoint-here>");
+
         static void Main(string[] args)
         {
             var client = new TextAnalyticsClient(endpoint, credentials);
+            // You will implement these methods later in the quickstart.
             SentimentAnalysisExample(client);
             LanguageDetectionExample(client);
             EntityRecognitionExample(client);
-            EntityPIIExample(client);
             EntityLinkingExample(client);
             KeyPhraseExtractionExample(client);
 
@@ -29,11 +30,9 @@ namespace TextAnalyticsQuickstart
             DocumentSentiment documentSentiment = client.AnalyzeSentiment(inputText);
             Console.WriteLine($"Document sentiment: {documentSentiment.Sentiment}\n");
 
-            var si = new StringInfo(inputText);
-            foreach (var sentence in documentSentiment.Sentences) // SentenceSentiment struct
+            foreach (var sentence in documentSentiment.Sentences)
             {
-                Console.WriteLine($"\tSentence [offset {sentence.GraphemeOffset}, length {sentence.GraphemeLength}]");
-                Console.WriteLine($"\tText: \"{si.SubstringByTextElements(sentence.GraphemeOffset, sentence.GraphemeLength)}\"");
+                Console.WriteLine($"\tText: \"{sentence.Text}\"");
                 Console.WriteLine($"\tSentence sentiment: {sentence.Sentiment}");
                 Console.WriteLine($"\tPositive score: {sentence.ConfidenceScores.Positive:0.00}");
                 Console.WriteLine($"\tNegative score: {sentence.ConfidenceScores.Negative:0.00}");
@@ -55,19 +54,7 @@ namespace TextAnalyticsQuickstart
             foreach (var entity in response.Value)
             {
                 Console.WriteLine($"\tText: {entity.Text},\tCategory: {entity.Category},\tSub-Category: {entity.SubCategory}");
-                Console.WriteLine($"\t\tOffset: {entity.GraphemeOffset},\tLength: {entity.GraphemeLength},\tScore: {entity.ConfidenceScore:F3}\n");
-            }
-        }
-
-        static void EntityPIIExample(TextAnalyticsClient client)
-        {
-            string inputText = "Insurance policy for SSN on file 123-12-1234 is here by approved.";
-            var response = client.RecognizePiiEntities(inputText);
-            Console.WriteLine("Personally Identifiable Information Entities:");
-            foreach (var entity in response.Value)
-            {
-                Console.WriteLine($"\tText: {entity.Text},\tCategory: {entity.Category},\tSub-Category: {entity.SubCategory}");
-                Console.WriteLine($"\t\tOffset: {entity.GraphemeOffset},\tLength: {entity.GraphemeLength},\tScore: {entity.ConfidenceScore:F3}\n");
+                Console.WriteLine($"\t\tScore: {entity.ConfidenceScore:F2}\n");
             }
         }
 
@@ -87,7 +74,7 @@ namespace TextAnalyticsQuickstart
                 foreach (var match in entity.Matches)
                 {
                     Console.WriteLine($"\t\tText: {match.Text}");
-                    Console.WriteLine($"\t\tOffset: {match.GraphemeOffset},\tLength: {match.GraphemeLength},\tScore: {match.ConfidenceScore:F3}\n");
+                    Console.WriteLine($"\t\tScore: {match.ConfidenceScore:F2}\n");
                 }
             }
         }

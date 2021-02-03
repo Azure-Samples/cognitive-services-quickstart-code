@@ -4,10 +4,7 @@ The Python v3.x files create and query a Language Understanding (LUIS) app, prin
 
 ## Create LUIS app
 
-1. Add your environment variables for LUIS:
-
-    * LUIS_AUTHORING_KEY
-    * LUIS_AUTHORING_ENDPOINT
+1. Add your variables for LUIS as strings.
 
 1. Run `python application_quickstart.py` to run the file.
 
@@ -38,7 +35,7 @@ The Python v3.x files create and query a Language Understanding (LUIS) app, prin
 
 ## Query LUIS app
 
-1. Add your environment variables for LUIS:
+1. Add your variables for LUIS as strings.
 
     * LUIS_RUNTIME_KEY
     * LUIS_RUNTIME_ENDPOINT

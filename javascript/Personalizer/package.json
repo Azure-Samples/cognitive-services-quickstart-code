@@ -1,0 +1,20 @@
+{
+  "name": "personalizer-quickstart",
+  "version": "1.0.0",
+  "description": "Sample code used in quickstart to demonstrate Personalizer's learning loop of calling Rank and Reward",
+  "main": "sample.js",
+  "scripts": {
+    "start": "node sample.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@azure/cognitiveservices-personalizer": "^2.0.1",
+    "@azure/ms-rest-azure-js": "^2.0.1",
+    "@azure/ms-rest-js": "^2.0.8",
+    "readline-sync": "^1.4.10",
+    "uuid": "^8.3.0"
+  }
+}

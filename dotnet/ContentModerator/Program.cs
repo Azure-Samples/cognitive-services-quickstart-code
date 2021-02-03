@@ -22,7 +22,6 @@ using System.Threading;
  *	- Create a C# console app in Visual Studio, then cut/paste this Program.cs file over your own (make sure namespaces match)
  *	- NuGet packages needed: Microsoft.Azure.CognitiveServices.ContentModerator & Newtonsoft.Json
  *	- Add the TextFile.txt and ImageFiles.txt included with this example to your bin/Debug/netcoreapp2.2 folder of your project.
- *	- Create environment variables (see below) for the subscription key, team name, and 2 endpoints
  *	
  * How to Run:
  *  - Select start in Visual Studio
@@ -46,10 +45,10 @@ namespace ContentModeratorQuickstart
 	{
 		// AUTHENTICATION - ALL EXAMPLES
 		// <snippet_creds>
-		// Your Content Moderator subscription key is found in your Azure portal resource on the 'Keys' page. Add to your environment variables.
-		private static readonly string SubscriptionKey = Environment.GetEnvironmentVariable("CONTENT_MODERATOR_SUBSCRIPTION_KEY");
-		// Base endpoint URL. Add this to your environment variables. Found on 'Overview' page in Azure resource. For example: https://westus.api.cognitive.microsoft.com
-		private static readonly string Endpoint = Environment.GetEnvironmentVariable("CONTENT_MODERATOR_ENDPOINT");
+		// Your Content Moderator subscription key is found in your Azure portal resource on the 'Keys' page.
+		private static readonly string SubscriptionKey = "CONTENT_MODERATOR_SUBSCRIPTION_KEY";
+		// Base endpoint URL. Found on 'Overview' page in Azure resource. For example: https://westus.api.cognitive.microsoft.com
+		private static readonly string Endpoint = "CONTENT_MODERATOR_ENDPOINT";
 		// </snippet_creds>
 
 		// <snippet_image_vars>
@@ -77,11 +76,11 @@ namespace ContentModeratorQuickstart
 		// The name of the team to assign the review to. Must be the team name used to create your Content Moderator website account. 
 		// If you do not yet have an account, follow this: https://docs.microsoft.com/en-us/azure/cognitive-services/content-moderator/quick-start
 		// Select the gear symbol (settings)-->Credentials to retrieve it. Your team name is the Id associated with your subscription.
-		private static readonly string TEAM_NAME = Environment.GetEnvironmentVariable("CONTENT_MODERATOR_TEAM_NAME");
-		// The callback endpoint for completed human reviews. Add to your environment variables. 
+		private static readonly string TEAM_NAME = "CONTENT_MODERATOR_TEAM_NAME";
+		// The callback endpoint for completed human reviews.
 		// For example: https://westus.api.cognitive.microsoft.com/contentmoderator/review/v1.0
 		// As reviewers complete reviews, results are sent using an HTTP POST request.
-		private static readonly string ReviewsEndpoint = Environment.GetEnvironmentVariable("CONTENT_MODERATOR_REVIEWS_ENDPOINT");
+		private static readonly string ReviewsEndpoint = "CONTENT_MODERATOR_REVIEWS_ENDPOINT";
 		// </snippet_review_vars>
 
 		static void Main(string[] args)
@@ -122,6 +121,7 @@ namespace ContentModeratorQuickstart
 		 * AUTHENTICATE
 		 * Creates a new client with a validated subscription key and endpoint.
 		 */
+		// <snippet_auth>
 		public static ContentModeratorClient Authenticate(string key, string endpoint)
 		{
 			ContentModeratorClient client = new ContentModeratorClient(new ApiKeyServiceClientCredentials(key));
@@ -129,6 +129,7 @@ namespace ContentModeratorQuickstart
 
 			return client;
 		}
+		// </snippet_auth>
 
 		// <snippet_imagemod_iterate>
 		/*

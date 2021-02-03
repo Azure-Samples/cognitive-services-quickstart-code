@@ -1,28 +1,28 @@
-﻿/*
- * ==========================================
-   Install QnA Maker package with command
- * ==========================================
- *
- * dotnet add package Microsoft.Azure.CognitiveServices.Knowledge.QnAMaker --version 2.0.0-preview.1
- *
- * ==========================================
-   Tasks Included
- * ==========================================
- * Create a knowledgebase
- * Update a knowledgebase
- * Publish a knowledgebase, waiting for publishing to complete
- * Get Query runtime endpoint key
- * Download a knowledgebase
- * Get answer
- * Delete a knowledgebase
+/*
+* ==========================================
+  Install QnA Maker package with command
+* ==========================================
+*
+* dotnet add package Microsoft.Azure.CognitiveServices.Knowledge.QnAMaker --version 2.0.1
+*
+* ==========================================
+  Tasks Included
+* ==========================================
+* Create a knowledgebase
+* Update a knowledgebase
+* Publish a knowledgebase, waiting for publishing to complete
+* Get Query runtime endpoint key
+* Download a knowledgebase
+* Get answer
+* Delete a knowledgebase
 
- * ==========================================
-   Further reading
- * General documentation: https://docs.microsoft.com/azure/cognitive-services/QnAMaker
- * Reference documentation: https://docs.microsoft.com/en-in/dotnet/api/microsoft.azure.cognitiveservices.knowledge.qnamaker?view=azure-dotnet
- * ==========================================
+* ==========================================
+  Further reading
+* General documentation: https://docs.microsoft.com/azure/cognitive-services/QnAMaker
+* Reference documentation: https://docs.microsoft.com/en-in/dotnet/api/microsoft.azure.cognitiveservices.knowledge.qnamaker?view=azure-dotnet
+* ==========================================
 
- */
+*/
 namespace Knowledgebase_Quickstart
 {
     // <Dependencies>
@@ -40,11 +40,9 @@ namespace Knowledgebase_Quickstart
         static void Main(string[] args)
         {
             // <Resourcevariables>
-            var authoringKey = "REPLACE-WITH-YOUR-QNA-MAKER-KEY";
-            var resourceName = "REPLACE-WITH-YOUR-RESOURCE-NAME";
-
-            var authoringURL = $"https://{resourceName}.cognitiveservices.azure.com";
-            var queryingURL = $"https://{resourceName}.azurewebsites.net";
+            var authoringKey = Environment.GetEnvironmentVariable("QNA_MAKER_SUBSCRIPTION_KEY");
+            var authoringURL = Environment.GetEnvironmentVariable("QNA_MAKER_ENDPOINT");
+            var queryingURL = Environment.GetEnvironmentVariable("QNA_MAKER_RUNTIME_ENDPOINT");
             // </Resourcevariables>
 
 
@@ -177,8 +175,8 @@ namespace Knowledgebase_Quickstart
 
             var file1 = new FileDTO
             {
-                FileName = "myfile.md",
-                FileUri = "https://mydomain/myfile.md"
+                FileName = "myfile.tsv",
+                FileUri = "https://mydomain/myfile.tsv"
 
             };
 

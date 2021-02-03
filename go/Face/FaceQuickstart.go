@@ -30,7 +30,6 @@ Face Quickstart
 - Large Face List
 - Person Group Operations
 - Large Person Group Operations
-- Snapshot Operations
 
 Prerequisites:
     - Go 1.12+
@@ -61,8 +60,6 @@ func main() {
 	*/
 	// Add FACE_SUBSCRIPTION_KEY, FACE_ENDPOINT, and AZURE_SUBSCRIPTION_ID to your environment variables.
 	subscriptionKey := os.Getenv("FACE_SUBSCRIPTION_KEY")
-	
-	// This is also known as the 'source' endpoint for the Snapshot example
 	endpoint := os.Getenv("FACE_ENDPOINT")
 
 	// Client used for Detect Faces, Find Similar, and Verify examples.
@@ -72,26 +69,6 @@ func main() {
 	END - Authenticate
 	*/
 	// </snippet_main_client>
-
-
-	/*
-	Authenticate target client
-	*/
-	// <snippet_target_client>
-	// This key should be from another Face resource with a different region. 
-	// Used for the Snapshot example only.
-	targetSubscriptionKey := os.Getenv("FACE_SUBSCRIPTION_KEY2")
-
-	// This should have a different region than your source endpoint. used only in Snapshot.
-	targetEndpoint := os.Getenv("FACE_ENDPOINT2")
-
-	// Get your subscription ID (different than the key) from any Face resource in Azure.
-	azureSubscriptionID, uuidErr := uuid.FromString(os.Getenv("AZURE_SUBSCRIPTION_ID"))
-	// </snippet_target_client>
-	if uuidErr != nil { log.Fatal(uuidErr) }
-	/*
-	END - Authenticate target client
-	*/
 
 	/*
 	DETECT FACES
@@ -105,16 +82,15 @@ func main() {
 	singleFaceImageURL := "https://www.biography.com/.image/t_share/MTQ1MzAyNzYzOTgxNTE0NTEz/john-f-kennedy---mini-biography.jpg" 
 	singleImageURL := face.ImageURL { URL: &singleFaceImageURL } 
 	singleImageName := path.Base(singleFaceImageURL)
-	// Use recognition model 2 for feature extraction. Recognition model 1 is used to simply recogize faces.
-	recognitionModel02 := face.Recognition02
 	// Array types chosen for the attributes of Face
 	attributes := []face.AttributeType {"age", "emotion", "gender"}
 	returnFaceID := true
 	returnRecognitionModel := false
 	returnFaceLandmarks := false
 
-	// API call to detect faces in single-faced image, using recognition model 2
-	detectSingleFaces, dErr := client.DetectWithURL(faceContext, singleImageURL, &returnFaceID, &returnFaceLandmarks, attributes, recognitionModel02, &returnRecognitionModel)
+	// API call to detect faces in single-faced image, using recognition model 3
+	// We specify detection model 1 because we are retrieving attributes.
+	detectSingleFaces, dErr := client.DetectWithURL(faceContext, singleImageURL, &returnFaceID, &returnFaceLandmarks, attributes, face.Recognition03, &returnRecognitionModel, face.Detection01)
 	if dErr != nil { log.Fatal(dErr) }
 
 	// Dereference *[]DetectedFace, in order to loop through it.
@@ -163,8 +139,9 @@ func main() {
 	groupImageName := path.Base(groupImageURL)
 	groupImage := face.ImageURL { URL: &groupImageURL } 
 
-	// API call to detect faces in group image, using recognition model 2. This returns a ListDetectedFace struct.
-	detectedGroupFaces, dgErr := client.DetectWithURL(faceContext, groupImage, &returnFaceID, &returnFaceLandmarks, nil, recognitionModel02, &returnRecognitionModel)
+	// API call to detect faces in group image, using recognition model 3. This returns a ListDetectedFace struct.
+	// We specify detection model 2 because we are not retrieving attributes.
+	detectedGroupFaces, dgErr := client.DetectWithURL(faceContext, groupImage, &returnFaceID, &returnFaceLandmarks, nil, face.Recognition03, &returnRecognitionModel, face.Detection02)
 	if dgErr != nil { log.Fatal(dgErr) }
 	fmt.Println()
 
@@ -247,11 +224,10 @@ func main() {
 	returnFaceIDVerify := true
 	returnFaceLandmarksVerify := false
 	returnRecognitionModelVerify := false
-	// Recognition model 1 is used to rcognise a face, not extract features from it.
-	recognitionModel01 := face.Recognition01
 
 	// Detect face(s) from source image 1, returns a ListDetectedFace struct
-	detectedVerifyFaces1, dErrV1 := client.DetectWithURL(faceContext, url1 , &returnFaceIDVerify, &returnFaceLandmarksVerify, nil, recognitionModel01, &returnRecognitionModelVerify)
+	// We specify detection model 2 because we are not retrieving attributes.
+	detectedVerifyFaces1, dErrV1 := client.DetectWithURL(faceContext, url1 , &returnFaceIDVerify, &returnFaceLandmarksVerify, nil, face.Recognition03, &returnRecognitionModelVerify, face.Detection02)
 	if dErrV1 != nil { log.Fatal(dErrV1) }
 	// Dereference the result, before getting the ID
 	dVFaceIds1 := *detectedVerifyFaces1.Value 
@@ -260,7 +236,8 @@ func main() {
 	fmt.Println(fmt.Sprintf("%v face(s) detected from image: %v", len(dVFaceIds1), sourceImageFileName1))
 
 	// Detect face(s) from source image 2, returns a ListDetectedFace struct
-	detectedVerifyFaces2, dErrV2 := client.DetectWithURL(faceContext, url2 , &returnFaceIDVerify, &returnFaceLandmarksVerify, nil, recognitionModel01, &returnRecognitionModelVerify)
+	// We specify detection model 2 because we are not retrieving attributes.
+	detectedVerifyFaces2, dErrV2 := client.DetectWithURL(faceContext, url2 , &returnFaceIDVerify, &returnFaceLandmarksVerify, nil, face.Recognition03, &returnRecognitionModelVerify, face.Detection02)
 	if dErrV2 != nil { log.Fatal(dErrV2) }
 	// Dereference the result, before getting the ID
 	dVFaceIds2 := *detectedVerifyFaces2.Value 
@@ -276,7 +253,8 @@ func main() {
 	for i, imageFileName := range targetImageFileNames {
 		urlSource := imageBaseURL + imageFileName 
 		url :=  face.ImageURL { URL: &urlSource}
-		detectedVerifyFaces, dErrV := client.DetectWithURL(faceContext, url, &returnFaceIDVerify, &returnFaceLandmarksVerify, nil, recognitionModel01, &returnRecognitionModelVerify)
+		// We specify detection model 2 because we are not retrieving attributes.
+		detectedVerifyFaces, dErrV := client.DetectWithURL(faceContext, url, &returnFaceIDVerify, &returnFaceLandmarksVerify, nil, face.Recognition03, &returnRecognitionModelVerify, face.Detection02)
 		if dErrV != nil { log.Fatal(dErrV) }
 		// Dereference *[]DetectedFace from Value in order to loop through it.
 		dVFaces := *detectedVerifyFaces.Value
@@ -354,8 +332,8 @@ func main() {
 		fmt.Printf("Creating large face list: %v...", faceListID)
 		fmt.Println()
 
-		// Create the metadata for the body of the requset
-		listMetadata := face.MetaDataContract { RecognitionModel: recognitionModel01, Name: &faceListID }
+		// Create the metadata for the body of the request
+		listMetadata := face.MetaDataContract { RecognitionModel: face.Recognition03, Name: &faceListID }
 		// Create the large face list, empty for now
 		faceListClient.Create(faceContext, faceListID, listMetadata)
 
@@ -372,7 +350,7 @@ func main() {
 			listImage := imageBaseURL + listFace
 			listImageURL:= face.ImageURL { URL: &listImage }
 			// Add the slice of faces to our face list
-			oneFace, pFaceErr := faceListClient.AddFaceFromURL(faceContext, faceListID, listImageURL, listUserData, nil)
+			oneFace, pFaceErr := faceListClient.AddFaceFromURL(faceContext, faceListID, listImageURL, listUserData, nil, face.Detection02)
 			if pFaceErr != nil { log.Fatal(pFaceErr) }
 				if (i == 0) {
 					firstFace = *oneFace.PersistedFaceID
@@ -489,21 +467,21 @@ func main() {
 			wfile, err:= os.Open(path)
 			if err != nil { log.Fatal(err) }
 			womanImages.PushBack(wfile)
-			personGroupPersonClient.AddFaceFromStream(faceContext, personGroupID, *womanPerson.PersonID, wfile, "", nil)
+			personGroupPersonClient.AddFaceFromStream(faceContext, personGroupID, *womanPerson.PersonID, wfile, "", nil, face.Detection02)
 		}
 		if strings.HasPrefix(f.Name(), "m") {
 			var mfile io.ReadCloser
 			mfile, err:= os.Open(path)
 			if err != nil { log.Fatal(err) }
 			manImages.PushBack(mfile)
-			personGroupPersonClient.AddFaceFromStream(faceContext, personGroupID, *manPerson.PersonID, mfile, "", nil)
+			personGroupPersonClient.AddFaceFromStream(faceContext, personGroupID, *manPerson.PersonID, mfile, "", nil, face.Detection02)
 		}
 		if strings.HasPrefix(f.Name(), "ch") {
 			var chfile io.ReadCloser
 			chfile, err:= os.Open(path)
 			if err != nil { log.Fatal(err) }
 			childImages.PushBack(chfile)
-			personGroupPersonClient.AddFaceFromStream(faceContext, personGroupID, *childPerson.PersonID, chfile, "", nil)
+			personGroupPersonClient.AddFaceFromStream(faceContext, personGroupID, *childPerson.PersonID, chfile, "", nil, face.Detection02)
 		}
 	}
 	// </snippet_pgp_assign>
@@ -608,21 +586,21 @@ func main() {
 			wfileL, errL:= os.Open(path)
 			if errL != nil { log.Fatal(errL) }
 			womanImagesL.PushBack(wfileL)
-			personGroupPersonClientL.AddFaceFromStream(faceContext, largePersonGroupID, *womanPersonL.PersonID, wfileL, "", nil)
+			personGroupPersonClientL.AddFaceFromStream(faceContext, largePersonGroupID, *womanPersonL.PersonID, wfileL, "", nil, face.Detection02)
 		}
 		if strings.HasPrefix(f.Name(), "m") {
 			var mfileL io.ReadCloser
 			mfileL, errL:= os.Open(path)
 			if errL != nil { log.Fatal(errL) }
 			manImagesL.PushBack(mfileL)
-			personGroupPersonClientL.AddFaceFromStream(faceContext, largePersonGroupID, *manPersonL.PersonID, mfileL, "", nil)
+			personGroupPersonClientL.AddFaceFromStream(faceContext, largePersonGroupID, *manPersonL.PersonID, mfileL, "", nil, face.Detection02)
 		}
 		if strings.HasPrefix(f.Name(), "ch") {
 			var chfileL io.ReadCloser
 			chfileL, errL:= os.Open(path)
 			if errL != nil { log.Fatal(errL) }
 			childImagesL.PushBack(chfileL)
-			personGroupPersonClientL.AddFaceFromStream(faceContext, largePersonGroupID, *childPersonL.PersonID, chfileL, "", nil)
+			personGroupPersonClientL.AddFaceFromStream(faceContext, largePersonGroupID, *childPersonL.PersonID, chfileL, "", nil, face.Detection02)
 		}
 	}
 	
@@ -671,7 +649,9 @@ func main() {
 	// Detect faces in group test image, using recognition model 1 (default)
 	returnIdentifyFaceID := true
 	// Returns a ListDetectedFaces
-	detectedTestImageFaces, dErr := client.DetectWithStream(faceContext, personGroupTestImage, &returnIdentifyFaceID, nil, nil, face.Recognition01, nil)
+	// Recognition03 is not compatible.
+	// We specify detection model 2 because we are not retrieving attributes.
+	detectedTestImageFaces, dErr := client.DetectWithStream(faceContext, personGroupTestImage, &returnIdentifyFaceID, nil, nil, face.Recognition01, nil, face.Detection02)
 	if dErr != nil { log.Fatal(dErr) }
 
 	// Make list of face IDs from the detection. 
@@ -704,103 +684,6 @@ func main() {
 	*/
 
 	/*
-	SNAPSHOT OPERATIONS
-	This example moves a person group from one region to another. The person group created in Person Group Operations will be used.
-	You must have 2 Face resources created in Azure with 2 different regions, for example 'westus' and 'eastus'. Any region will work.
-	Snapshot requires its own special authenticated client.
-	*/
-	fmt.Println()
-	fmt.Println("------------------------------")
-	fmt.Println("SNAPSHOT OPERATIONS")
-
-	// <snippet_snap_target_id>
-	// Add your Azure subscription ID(s) to a UUID array.
-	numberOfSubKeys := 1 
-	targetUUIDArray := make([]uuid.UUID, numberOfSubKeys)
-	for i := range targetUUIDArray {
-		targetUUIDArray[i] = azureSubscriptionID
-	}
-	// </snippet_snap_target_id>
-
-	// <snippet_snap_target_auth>
-	// Create a client from your source region, where your person group exists. Use for taking the snapshot.
-	snapshotSourceClient := face.NewSnapshotClient(endpoint)
-	snapshotSourceClient.Authorizer = autorest.NewCognitiveServicesAuthorizer(subscriptionKey)
-	// Create a client for your target region. Use for applying the snapshot.
-	snapshotTargetClient := face.NewSnapshotClient(targetEndpoint)
-	snapshotTargetClient.Authorizer = autorest.NewCognitiveServicesAuthorizer(targetSubscriptionKey)
-	// </snippet_snap_target_auth>
-
-
-
-	// <snippet_snap_take>
-	// Take snapshot
-	takeBody := face.TakeSnapshotRequest { Type: face.SnapshotObjectTypePersonGroup, ObjectID: &personGroupID, ApplyScope: &targetUUIDArray }
-	takeSnapshotResult, takeErr := snapshotSourceClient.Take(faceContext, takeBody)
-	if takeErr != nil { log.Fatal(takeErr) }
-	// Get the operations ID
-	strTakeOperation := strings.ReplaceAll(takeSnapshotResult.Header.Get("Operation-Location"), "/operations/", "")
-	fmt.Println("Taking snapshot (operations ID: " + strTakeOperation + ")... started")
-	// Convert string operation ID to UUID
-	takeOperationID, uuidErr := uuid.FromString(strTakeOperation)
-	if uuidErr != nil { log.Fatal(uuidErr) }
-	// </snippet_snap_take>
-
-	// <snippet_snap_query>
-	// Wait for the snapshot taking to finish
-	var strSnapshotID string
-	for {
-		takeSnapshotStatus, tErr := snapshotSourceClient.GetOperationStatus(faceContext, takeOperationID)
-		if tErr != nil { log.Fatal(tErr) }
-		
-		if takeSnapshotStatus.Status == "succeeded" {
-			fmt.Println("Taking snapshot operation status: ", takeSnapshotStatus.Status)
-			strSnapshotID = strings.ReplaceAll(*takeSnapshotStatus.ResourceLocation, "/snapshots/", "")
-			break
-		}
-		time.Sleep(2)
-	}
-
-	// Convert string snapshot to UUID
-	snapshotID, uuidErr := uuid.FromString(strSnapshotID)
-	if uuidErr != nil { log.Fatal(uuidErr) }
-	// </snippet_snap_query>
-	
-	// <snippet_snap_apply>
-	// Creates a new snapshot instance in your target region. 
-	// Make sure not to create a new snapshot in your target region with the same name as another one.
-	applyBody := face.ApplySnapshotRequest { ObjectID: &personGroupID }
-	applySnapshotResult, applyErr := snapshotTargetClient.Apply(faceContext, snapshotID, applyBody)
-	if applyErr != nil { log.Fatal(applyErr) }
-	
-	// Get operation ID from response to track the progress of applying a snapshot.
-	strApplyOperation := strings.ReplaceAll(applySnapshotResult.Header.Get("Operation-Location"), "/operations/", "")
-	fmt.Println("Applying snapshot (operations ID: " + strApplyOperation + ")... started")
-	// Convert operation ID to GUID
-	applyOperationID, guidErr := uuid.FromString(strApplyOperation)
-	if guidErr != nil { log.Fatal(guidErr) }
-	// </snippet_snap_apply>
-	
-	// <snippet_snap_apply_query>
-	// Wait for the snapshot applying to finish
-	for {
-		applySnapshotStatus, aErr := snapshotTargetClient.GetOperationStatus(faceContext, applyOperationID)
-		if aErr != nil { log.Fatal(aErr) }
-		
-		if applySnapshotStatus.Status == "succeeded" {
-			fmt.Println("Taking snapshot operation status: ", applySnapshotStatus.Status)
-			break
-		}
-		time.Sleep(2)
-	}
-	// </snippet_snap_apply_query>
-
-	fmt.Println("Applying snapshot... Done")
-	/*
-	END - Snapshot
-	*/
-
-	/*
 	DELETE PERSON GROUP
 	Delete once example is complete. This deletes a person group, since we are only testing. 
 	If not deleted, rerunning this sample will recreate a Person Group with the same name, which will cause an error.
@@ -809,13 +692,6 @@ func main() {
 	fmt.Println("------------------------------")
 	fmt.Println("DELETED PERSON GROUP (source region): " + personGroupID)
 	personGroupClient.Delete(faceContext, personGroupID)
-
-	// Delete Person Group in new region, too. First create a Person Group client for target region.
-	personGroupTargetClient := face.NewPersonGroupClient(targetEndpoint)
-	personGroupTargetClient.Authorizer = autorest.NewCognitiveServicesAuthorizer(targetSubscriptionKey)
-
-	fmt.Println("DELETED PERSON GROUP (target region): " + personGroupID)
-	personGroupTargetClient.Delete(faceContext, personGroupID)
 	/*
 	END - Delete Person Group
 	*/

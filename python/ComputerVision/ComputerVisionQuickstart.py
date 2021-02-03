@@ -1,7 +1,6 @@
 # <snippet_imports>
 from azure.cognitiveservices.vision.computervision import ComputerVisionClient
-from azure.cognitiveservices.vision.computervision.models import TextOperationStatusCodes
-from azure.cognitiveservices.vision.computervision.models import TextRecognitionMode
+from azure.cognitiveservices.vision.computervision.models import OperationStatusCodes
 from azure.cognitiveservices.vision.computervision.models import VisualFeatureTypes
 from msrest.authentication import CognitiveServicesCredentials
 
@@ -68,18 +67,9 @@ Authenticate
 Authenticates your credentials and creates a client.
 '''
 # <snippet_vars>
-# Add your Computer Vision subscription key to your environment variables.
-if 'COMPUTER_VISION_SUBSCRIPTION_KEY' in os.environ:
-    subscription_key = os.environ['COMPUTER_VISION_SUBSCRIPTION_KEY']
-else:
-    print("\nSet the COMPUTER_VISION_SUBSCRIPTION_KEY environment variable.\n**Restart your shell or IDE for changes to take effect.**")
-    sys.exit()
-# Add your Computer Vision endpoint to your environment variables.
-if 'COMPUTER_VISION_ENDPOINT' in os.environ:
-    endpoint = os.environ['COMPUTER_VISION_ENDPOINT']
-else:
-    print("\nSet the COMPUTER_VISION_ENDPOINT environment variable.\n**Restart your shell or IDE for changes to take effect.**")
-    sys.exit()
+subscription_key = "<your subscription key>"
+endpoint = "<your API endpoint>"
+
 # </snippet_vars>
 
 # <snippet_client>
@@ -459,7 +449,7 @@ print("===== Detect Image Types - local =====")
 local_image_path_type = "resources\\type-image.jpg"
 local_image_type = open(local_image_path_type, "rb")
 # Select visual feature(s) you want
-local_image_features = VisualFeatureTypes.image_type
+local_image_features = [VisualFeatureTypes.image_type]
 # Call API with local image and features
 detect_type_results_local = computervision_client.analyze_image_in_stream(local_image_type, local_image_features)
 
@@ -492,7 +482,7 @@ print("===== Detect Image Types - remote =====")
 # Get URL of an image with a type
 remote_image_url_type = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/type-image.jpg"
 # Select visual feature(s) you want
-remote_image_features = VisualFeatureTypes.image_type
+remote_image_features = [VisualFeatureTypes.image_type]
 # Call API with URL and features
 detect_type_results_remote = computervision_client.analyze_image(remote_image_url_type, remote_image_features)
 
@@ -697,13 +687,13 @@ operation_id_local = operation_location_local.split("/")[-1]
 # Call the "GET" API and wait for the retrieval of the results
 while True:
     recognize_handwriting_result = computervision_client.get_read_operation_result(operation_id_local)
-    if recognize_handwriting_result.status not in ['NotStarted', 'Running']:
+    if recognize_handwriting_result.status not in ['notStarted', 'running']:
         break
     time.sleep(1)
 
 # Print results, line by line
-if recognize_handwriting_result.status == TextOperationStatusCodes.succeeded:
-    for text_result in recognize_handwriting_result.recognition_results:
+if recognize_handwriting_result.status == OperationStatusCodes.succeeded:
+    for text_result in recognize_handwriting_result.analyze_result.read_results:
         for line in text_result.lines:
             print(line.text)
             print(line.bounding_box)
@@ -735,13 +725,13 @@ operation_id = operation_location_remote.split("/")[-1]
 # Call the "GET" API and wait for it to retrieve the results 
 while True:
     get_handw_text_results = computervision_client.get_read_result(operation_id)
-    if get_handw_text_results.status not in ['NotStarted', 'Running']:
+    if get_handw_text_results.status not in ['notStarted', 'running']:
         break
     time.sleep(1)
 
 # Print the detected text, line by line
-if get_handw_text_results.status == TextOperationStatusCodes.succeeded:
-    for text_result in get_handw_text_results.recognition_results:
+if get_handw_text_results.status == OperationStatusCodes.succeeded:
+    for text_result in get_handw_text_results.analyze_result.read_results:
         for line in text_result.lines:
             print(line.text)
             print(line.bounding_box)

@@ -1,14 +1,15 @@
 
 // <snippet_imports>
 import com.microsoft.azure.cognitiveservices.vision.computervision.*;
+import com.microsoft.azure.cognitiveservices.vision.computervision.implementation.ComputerVisionImpl;
 import com.microsoft.azure.cognitiveservices.vision.computervision.models.*;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.nio.file.Files;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 // </snippet_imports>
 
 /*  This Quickstart for the Azure Cognitive Services Computer Vision API shows how to analyze
@@ -29,29 +30,32 @@ import java.util.List;
 
 public class ComputerVisionQuickstart {
 
-    // <snippet_mainvars>
+    // <snippet_creds>
+    static String subscriptionKey = "<your-subscription-key>";
+    static String endpoint = "<your-api-endpoint>";
+    // </snippet_creds>
+
+    // <snippet_maincalls>
     public static void main(String[] args) {
-        // Add your Computer Vision subscription key and endpoint to your environment
-        // variables.
-        // After setting, close and then re-open your command shell or project for the
-        // changes to take effect.
-        String subscriptionKey = System.getenv("COMPUTER_VISION_SUBSCRIPTION_KEY");
-        String endpoint = System.getenv("COMPUTER_VISION_ENDPOINT");
-        // </snippet_mainvars>
-
-        // <snippet_client>
-        ComputerVisionClient compVisClient = ComputerVisionManager.authenticate(subscriptionKey).withEndpoint(endpoint);
-        // END - Create an authenticated Computer Vision client.
-
+        
         System.out.println("\nAzure Cognitive Services Computer Vision - Java Quickstart Sample");
+
+        // Create an authenticated Computer Vision client.
+        ComputerVisionClient compVisClient = Authenticate(subscriptionKey, endpoint); 
 
         // Analyze local and remote images
         AnalyzeLocalImage(compVisClient);
 
-        // Recognize printed text with OCR for a local and remote (URL) image
-        RecognizeTextOCRLocal(compVisClient);
-        // </snippet_client>
+        // Read from local file
+        ReadFromFile(compVisClient);
     }
+    // </snippet_maincalls>
+
+    // <snippet_auth>
+    public static ComputerVisionClient Authenticate(String subscriptionKey, String endpoint){
+        return ComputerVisionManager.authenticate(subscriptionKey).withEndpoint(endpoint);
+    }
+    // </snippet_auth>
 
     // <snippet_analyzelocal_refs>
     public static void AnalyzeLocalImage(ComputerVisionClient compVisClient) {
@@ -61,7 +65,7 @@ public class ComputerVisionQuickstart {
          * Set a string variable equal to the path of a local image. The image path
          * below is a relative path.
          */
-        String pathToLocalImage = "src\\main\\resources\\myImage.jpg";
+        String pathToLocalImage = "src\\main\\resources\\myImage.png";
         // </snippet_analyzelocal_refs>
 
         // <snippet_analyzelocal_features>
@@ -293,17 +297,16 @@ public class ComputerVisionQuickstart {
     // END - Analyze an image from a URL.
     // </snippet_analyzeurl>
 
-    // <snippet_read_call>
     /**
      * RECOGNIZE PRINTED TEXT: Displays text found in image with angle and orientation of
-     * the block of text.
+     * the block of text. This method is a legacy feature from before the Read API was introduced.
      */
     private static void RecognizeTextOCRLocal(ComputerVisionClient client) {
         System.out.println("-----------------------------------------------");
         System.out.println("RECOGNIZE PRINTED TEXT");
         
         // Replace this string with the path to your own image.
-        String localTextImagePath = "<local image path>";
+        String localTextImagePath = "src\\main\\resources\\myImage.png";
         
         try {
             File rawImage = new File(localTextImagePath);
@@ -312,9 +315,7 @@ public class ComputerVisionQuickstart {
             // Recognize printed text in local image
             OcrResult ocrResultLocal = client.computerVision().recognizePrintedTextInStream()
                     .withDetectOrientation(true).withImage(localImageBytes).withLanguage(OcrLanguages.EN).execute();
-            // </snippet_read_call>
 
-            // <snippet_read_print>
             // Print results of local image
             System.out.println();
             System.out.println("Recognizing printed text from a local image with OCR ...");
@@ -340,15 +341,12 @@ public class ComputerVisionQuickstart {
                     System.out.println();
                 }
             }
-            // </snippet_read_print>
             
-        // <snippet_read_catch>
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
     }
-    // </snippet_read_catch>
 
     private static void RecognizeTextOCRRemote(ComputerVisionClient client, String remoteTextImageURL) {
         System.out.println("-----------------------------------------------");
@@ -389,4 +387,147 @@ public class ComputerVisionQuickstart {
             e.printStackTrace();
         }
     }
+
+    /**
+     * READ : Performs a Read Operation on a remote image
+     * @param client instantiated vision client
+     * @param remoteTextImageURL public url from which to perform the read operation against
+     */
+    
+    private static void ReadFromUrl(ComputerVisionClient client) {
+        System.out.println("-----------------------------------------------");
+        String remoteTextImageURL = "https://intelligentkioskstore.blob.core.windows.net/visionapi/suggestedphotos/3.png";
+        System.out.println("Read with URL: " + remoteTextImageURL);
+        try {
+            // Cast Computer Vision to its implementation to expose the required methods
+            ComputerVisionImpl vision = (ComputerVisionImpl) client.computerVision();
+
+            // Read in remote image and response header
+            ReadHeaders responseHeader = vision.readWithServiceResponseAsync(remoteTextImageURL, OcrDetectionLanguage.FR)
+                    .toBlocking()
+                    .single()
+                    .headers();
+
+            // Extract the operation Id from the operationLocation header
+            String operationLocation = responseHeader.operationLocation();
+            System.out.println("Operation Location:" + operationLocation);
+
+            getAndPrintReadResult(vision, operationLocation);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    // <snippet_read_setup>
+    /**
+     * READ : Performs a Read Operation on a local image
+     * @param client instantiated vision client
+     * @param localFilePath local file path from which to perform the read operation against
+     */
+    private static void ReadFromFile(ComputerVisionClient client) {
+        System.out.println("-----------------------------------------------");
+        
+        String localFilePath = "src\\main\\resources\\myImage.png";
+        System.out.println("Read with local file: " + localFilePath);
+        // </snippet_read_setup>
+        // <snippet_read_call>
+
+        try {
+            File rawImage = new File(localFilePath);
+            byte[] localImageBytes = Files.readAllBytes(rawImage.toPath());
+
+            // Cast Computer Vision to its implementation to expose the required methods
+            ComputerVisionImpl vision = (ComputerVisionImpl) client.computerVision();
+
+            // Read in remote image and response header
+            ReadInStreamHeaders responseHeader =
+                    vision.readInStreamWithServiceResponseAsync(localImageBytes, OcrDetectionLanguage.FR)
+                        .toBlocking()
+                        .single()
+                        .headers();
+            // </snippet_read_call>
+    // <snippet_read_response>
+            // Extract the operationLocation from the response header
+            String operationLocation = responseHeader.operationLocation();
+            System.out.println("Operation Location:" + operationLocation);
+
+            getAndPrintReadResult(vision, operationLocation);
+    // </snippet_read_response>
+            // <snippet_read_catch>
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    // </snippet_read_catch>
+
+    // <snippet_opid_extract>
+    /**
+     * Extracts the OperationId from a Operation-Location returned by the POST Read operation
+     * @param operationLocation
+     * @return operationId
+     */
+    private static String extractOperationIdFromOpLocation(String operationLocation) {
+        if (operationLocation != null && !operationLocation.isEmpty()) {
+            String[] splits = operationLocation.split("/");
+
+            if (splits != null && splits.length > 0) {
+                return splits[splits.length - 1];
+            }
+        }
+        throw new IllegalStateException("Something went wrong: Couldn't extract the operation id from the operation location");
+    }
+    // </snippet_opid_extract>
+
+    // <snippet_read_result_helper_call>
+    /**
+     * Polls for Read result and prints results to console
+     * @param vision Computer Vision instance
+     * @return operationLocation returned in the POST Read response header
+     */
+    private static void getAndPrintReadResult(ComputerVision vision, String operationLocation) throws InterruptedException {
+        System.out.println("Polling for Read results ...");
+
+        // Extract OperationId from Operation Location
+        String operationId = extractOperationIdFromOpLocation(operationLocation);
+
+        boolean pollForResult = true;
+        ReadOperationResult readResults = null;
+
+        while (pollForResult) {
+            // Poll for result every second
+            Thread.sleep(1000);
+            readResults = vision.getReadResult(UUID.fromString(operationId));
+
+            // The results will no longer be null when the service has finished processing the request.
+            if (readResults != null) {
+                // Get request status
+                OperationStatusCodes status = readResults.status();
+
+                if (status == OperationStatusCodes.FAILED || status == OperationStatusCodes.SUCCEEDED) {
+                    pollForResult = false;
+                }
+            }
+        }
+        // </snippet_read_result_helper_call>
+        
+        // <snippet_read_result_helper_print>
+        // Print read results, page per page
+        for (ReadResult pageResult : readResults.analyzeResult().readResults()) {
+            System.out.println("");
+            System.out.println("Printing Read results for page " + pageResult.page());
+            StringBuilder builder = new StringBuilder();
+
+            for (Line line : pageResult.lines()) {
+                builder.append(line.text());
+                builder.append("\n");
+            }
+
+            System.out.println(builder.toString());
+        }
+    }
+    // </snippet_read_result_helper_print>
 }

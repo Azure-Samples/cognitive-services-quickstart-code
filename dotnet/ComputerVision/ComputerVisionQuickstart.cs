@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Threading;
+using System.Linq;
 // </snippet_using>
 
 /*
@@ -30,7 +32,6 @@ using Newtonsoft.Json.Linq;
  *   - NuGet library: Microsoft.Azure.CognitiveServices.Vision.ComputerVision
  *   - Azure Computer Vision resource from https://ms.portal.azure.com
  *   - Create a .Net Core console app, then copy/paste this Program.cs file into it. Be sure to update the namespace if it's different.
- *   - At the top of your Program.cs, set your environment variables on your local machine with the suggested names.
  *   - Download local images (celebrities.jpg, objects.jpg, handwritten_text.jpg, and printed_text.jpg)
  *     from the link below then add to your bin/Debug/netcoreapp2.2 folder.
  *     https://github.com/Azure-Samples/cognitive-services-sample-data-files/tree/master/ComputerVision/Images
@@ -50,18 +51,16 @@ namespace ComputerVisionQuickstart
     class Program
     {
         // <snippet_vars>
-        // Add your Computer Vision subscription key and endpoint to your environment variables. 
-        // Close/reopen your project for them to take effect.
-        static string subscriptionKey = Environment.GetEnvironmentVariable("COMPUTER_VISION_SUBSCRIPTION_KEY");
-        static string endpoint = Environment.GetEnvironmentVariable("COMPUTER_VISION_ENDPOINT");
+        // Add your Computer Vision subscription key and endpoint
+        static string subscriptionKey = "COMPUTER_VISION_SUBSCRIPTION_KEY";
+        static string endpoint = "COMPUTER_VISION_ENDPOINT";
         // </snippet_vars>
 
         // Download these images (link in prerequisites), or you can use any appropriate image on your local machine.
         private const string ANALYZE_LOCAL_IMAGE = "celebrities.jpg";
         private const string DETECT_LOCAL_IMAGE = "objects.jpg";
         private const string DETECT_DOMAIN_SPECIFIC_LOCAL = "celebrities.jpg";
-        private const string EXTRACT_TEXT_LOCAL_IMAGE = "handwritten_text.jpg";
-        private const string OCR_LOCAL_IMAGE = "printed_text.jpg";
+        private const string READ_TEXT_LOCAL_IMAGE = "printed_text.jpg";
 
         // <snippet_analyze_url>
         // URL image used for analyzing an image (image of puppy)
@@ -71,12 +70,9 @@ namespace ComputerVisionQuickstart
         private const string DETECT_URL_IMAGE = "https://moderatorsampleimages.blob.core.windows.net/samples/sample9.png";
         // URL image for detecting domain-specific content (image of ancient ruins)
         private const string DETECT_DOMAIN_SPECIFIC_URL = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/landmark.jpg";
-        // URL image for extracting text (Image of motivational meme).
-        // <snippet_extracttext_url>
-        private const string EXTRACT_TEXT_URL_IMAGE = "https://raw.githubusercontent.com/MicrosoftDocs/azure-docs/master/articles/cognitive-services/Computer-vision/Images/readsample.jpg";
-        // URL image for OCR (optical character recognition).
-        // </snippet_extracttext_url>
-        private const string OCR_URL = "https://raw.githubusercontent.com/MicrosoftDocs/azure-docs/master/articles/cognitive-services/Computer-vision/Images/readsample.jpg";
+        // <snippet_readtext_url>
+        private const string READ_TEXT_URL_IMAGE = "https://intelligentkioskstore.blob.core.windows.net/visionapi/suggestedphotos/3.png";
+        // </snippet_readtext_url>
 
         static void Main(string[] args)
         {
@@ -87,6 +83,7 @@ namespace ComputerVisionQuickstart
             // Create a client
             ComputerVisionClient client = Authenticate(endpoint, subscriptionKey);
             // </snippet_client>
+
 
             // <snippet_analyzeinmain>
             // Analyze an image to get features and other properties.
@@ -105,21 +102,19 @@ namespace ComputerVisionQuickstart
             GenerateThumbnail(client, ANALYZE_URL_IMAGE, DETECT_LOCAL_IMAGE).Wait();
 
             // <snippet_extracttextinmain>
-            // Read the batch text from an image (handwriting and/or printed).
-            BatchReadFileUrl(client, EXTRACT_TEXT_URL_IMAGE).Wait();
-            BatchReadFileLocal(client, EXTRACT_TEXT_LOCAL_IMAGE).Wait();
+            // Extract text (OCR) from a URL image using the Read API
+            ReadFileUrl(client, READ_TEXT_URL_IMAGE).Wait();
             // </snippet_extracttextinmain>
 
-            // Recognize text using the OCR (optical character recognition) method.
-            RecognizePrintedTextUrl(client, OCR_URL).Wait();
-            RecognizePrintedTextLocal(client, OCR_LOCAL_IMAGE).Wait();
-
+            // Extract text (OCR) from a local image using the Read API
+            ReadFileLocal(client, READ_TEXT_LOCAL_IMAGE).Wait();
+		
             Console.WriteLine("----------------------------------------------------------");
             Console.WriteLine();
             Console.WriteLine("Computer Vision quickstart is complete.");
             Console.WriteLine();
             Console.WriteLine("Press enter to exit...");
-            Console.WriteLine();
+            Console.ReadLine();
         }
 
         // <snippet_auth>
@@ -152,14 +147,15 @@ namespace ComputerVisionQuickstart
             Console.WriteLine();
 
             // Creating a list that defines the features to be extracted from the image. 
-            List<VisualFeatureTypes> features = new List<VisualFeatureTypes>()
-        {
-          VisualFeatureTypes.Categories, VisualFeatureTypes.Description,
-          VisualFeatureTypes.Faces, VisualFeatureTypes.ImageType,
-          VisualFeatureTypes.Tags, VisualFeatureTypes.Adult,
-          VisualFeatureTypes.Color, VisualFeatureTypes.Brands,
-          VisualFeatureTypes.Objects
-        };
+
+            List<VisualFeatureTypes?> features = new List<VisualFeatureTypes?>()
+            {
+                VisualFeatureTypes.Categories, VisualFeatureTypes.Description,
+                VisualFeatureTypes.Faces, VisualFeatureTypes.ImageType,
+                VisualFeatureTypes.Tags, VisualFeatureTypes.Adult,
+                VisualFeatureTypes.Color, VisualFeatureTypes.Brands,
+                VisualFeatureTypes.Objects
+            };
             // </snippet_visualfeatures>
 
             // <snippet_analyze_call>
@@ -325,15 +321,18 @@ namespace ComputerVisionQuickstart
             using (Stream analyzeImageStream = File.OpenRead(localImage))
             {
                 // Analyze the local image.
-                ImageAnalysis results = await client.AnalyzeImageInStreamAsync(analyzeImageStream, features);
+                ImageAnalysis results = await client.AnalyzeImageInStreamAsync(analyzeImageStream);
 
                 // Sunmarizes the image content.
-                Console.WriteLine("Summary:");
-                foreach (var caption in results.Description.Captions)
+                if (null != results.Description && null != results.Description.Captions)
                 {
-                    Console.WriteLine($"{caption.Text} with confidence {caption.Confidence}");
+                    Console.WriteLine("Summary:");
+                    foreach (var caption in results.Description.Captions)
+                    {
+                        Console.WriteLine($"{caption.Text} with confidence {caption.Confidence}");
+                    }
+                    Console.WriteLine();
                 }
-                Console.WriteLine();
 
                 // Display categories the image is divided into.
                 Console.WriteLine("Categories:");
@@ -344,89 +343,116 @@ namespace ComputerVisionQuickstart
                 Console.WriteLine();
 
                 // Image tags and their confidence score
-                Console.WriteLine("Tags:");
-                foreach (var tag in results.Tags)
+                if (null != results.Tags)
                 {
-                    Console.WriteLine($"{tag.Name} {tag.Confidence}");
+                    Console.WriteLine("Tags:");
+                    foreach (var tag in results.Tags)
+                    {
+                        Console.WriteLine($"{tag.Name} {tag.Confidence}");
+                    }
+                    Console.WriteLine();
                 }
-                Console.WriteLine();
 
                 // Objects
-                Console.WriteLine("Objects:");
-                foreach (var obj in results.Objects)
+                if (null != results.Objects)
                 {
-                    Console.WriteLine($"{obj.ObjectProperty} with confidence {obj.Confidence} at location {obj.Rectangle.X}, " +
-                      $"{obj.Rectangle.X + obj.Rectangle.W}, {obj.Rectangle.Y}, {obj.Rectangle.Y + obj.Rectangle.H}");
+                    Console.WriteLine("Objects:");
+                    foreach (var obj in results.Objects)
+                    {
+                        Console.WriteLine($"{obj.ObjectProperty} with confidence {obj.Confidence} at location {obj.Rectangle.X}, " +
+                          $"{obj.Rectangle.X + obj.Rectangle.W}, {obj.Rectangle.Y}, {obj.Rectangle.Y + obj.Rectangle.H}");
+                    }
+                    Console.WriteLine();
                 }
-                Console.WriteLine();
 
                 // Detected faces, if any.
-                Console.WriteLine("Faces:");
-                foreach (var face in results.Faces)
+                if (null != results.Faces)
                 {
-                    Console.WriteLine($"A {face.Gender} of age {face.Age} at location {face.FaceRectangle.Left}, {face.FaceRectangle.Top}, " +
-                      $"{face.FaceRectangle.Left + face.FaceRectangle.Width}, {face.FaceRectangle.Top + face.FaceRectangle.Height}");
+                    Console.WriteLine("Faces:");
+                    foreach (var face in results.Faces)
+                    {
+                        Console.WriteLine($"A {face.Gender} of age {face.Age} at location {face.FaceRectangle.Left}, {face.FaceRectangle.Top}, " +
+                          $"{face.FaceRectangle.Left + face.FaceRectangle.Width}, {face.FaceRectangle.Top + face.FaceRectangle.Height}");
+                    }
+                    Console.WriteLine();
                 }
-                Console.WriteLine();
 
                 // Adult or racy content, if any.
-                Console.WriteLine("Adult:");
-                Console.WriteLine($"Has adult content: {results.Adult.IsAdultContent} with confidence {results.Adult.AdultScore}");
-                Console.WriteLine($"Has racy content: {results.Adult.IsRacyContent} with confidence {results.Adult.RacyScore}");
-                Console.WriteLine();
+                if (null != results.Adult)
+                {
+                    Console.WriteLine("Adult:");
+                    Console.WriteLine($"Has adult content: {results.Adult.IsAdultContent} with confidence {results.Adult.AdultScore}");
+                    Console.WriteLine($"Has racy content: {results.Adult.IsRacyContent} with confidence {results.Adult.RacyScore}");
+                    Console.WriteLine();
+                }
 
                 // Well-known brands, if any.
-                Console.WriteLine("Brands:");
-                foreach (var brand in results.Brands)
+                if (null != results.Brands)
                 {
-                    Console.WriteLine($"Logo of {brand.Name} with confidence {brand.Confidence} at location {brand.Rectangle.X}, " +
-                      $"{brand.Rectangle.X + brand.Rectangle.W}, {brand.Rectangle.Y}, {brand.Rectangle.Y + brand.Rectangle.H}");
+                    Console.WriteLine("Brands:");
+                    foreach (var brand in results.Brands)
+                    {
+                        Console.WriteLine($"Logo of {brand.Name} with confidence {brand.Confidence} at location {brand.Rectangle.X}, " +
+                          $"{brand.Rectangle.X + brand.Rectangle.W}, {brand.Rectangle.Y}, {brand.Rectangle.Y + brand.Rectangle.H}");
+                    }
+                    Console.WriteLine();
                 }
-                Console.WriteLine();
 
                 // Celebrities in image, if any.
-                Console.WriteLine("Celebrities:");
-                foreach (var category in results.Categories)
+                if (null != results.Categories)
                 {
-                    if (category.Detail?.Celebrities != null)
+                    Console.WriteLine("Celebrities:");
+                    foreach (var category in results.Categories)
                     {
-                        foreach (var celeb in category.Detail.Celebrities)
+                        if (category.Detail?.Celebrities != null)
                         {
-                            Console.WriteLine($"{celeb.Name} with confidence {celeb.Confidence} at location {celeb.FaceRectangle.Left}, " +
-                              $"{celeb.FaceRectangle.Top},{celeb.FaceRectangle.Height},{celeb.FaceRectangle.Width}");
+                            foreach (var celeb in category.Detail.Celebrities)
+                            {
+                                Console.WriteLine($"{celeb.Name} with confidence {celeb.Confidence} at location {celeb.FaceRectangle.Left}, " +
+                                  $"{celeb.FaceRectangle.Top},{celeb.FaceRectangle.Height},{celeb.FaceRectangle.Width}");
+                            }
                         }
                     }
+                    Console.WriteLine();
                 }
-                Console.WriteLine();
 
                 // Popular landmarks in image, if any.
-                Console.WriteLine("Landmarks:");
-                foreach (var category in results.Categories)
+                if (null != results.Categories)
                 {
-                    if (category.Detail?.Landmarks != null)
+                    Console.WriteLine("Landmarks:");
+                    foreach (var category in results.Categories)
                     {
-                        foreach (var landmark in category.Detail.Landmarks)
+                        if (category.Detail?.Landmarks != null)
                         {
-                            Console.WriteLine($"{landmark.Name} with confidence {landmark.Confidence}");
+                            foreach (var landmark in category.Detail.Landmarks)
+                            {
+                                Console.WriteLine($"{landmark.Name} with confidence {landmark.Confidence}");
+                            }
                         }
                     }
+                    Console.WriteLine();
                 }
-                Console.WriteLine();
 
                 // Identifies the color scheme.
-                Console.WriteLine("Color Scheme:");
-                Console.WriteLine("Is black and white?: " + results.Color.IsBWImg);
-                Console.WriteLine("Accent color: " + results.Color.AccentColor);
-                Console.WriteLine("Dominant background color: " + results.Color.DominantColorBackground);
-                Console.WriteLine("Dominant foreground color: " + results.Color.DominantColorForeground);
-                Console.WriteLine("Dominant colors: " + string.Join(",", results.Color.DominantColors));
-                Console.WriteLine();
+                if (null != results.Color)
+                {
+                    Console.WriteLine("Color Scheme:");
+                    Console.WriteLine("Is black and white?: " + results.Color.IsBWImg);
+                    Console.WriteLine("Accent color: " + results.Color.AccentColor);
+                    Console.WriteLine("Dominant background color: " + results.Color.DominantColorBackground);
+                    Console.WriteLine("Dominant foreground color: " + results.Color.DominantColorForeground);
+                    Console.WriteLine("Dominant colors: " + string.Join(",", results.Color.DominantColors));
+                    Console.WriteLine();
+                }
 
                 // Detects the image types.
-                Console.WriteLine("Image Type:");
-                Console.WriteLine("Clip Art Type: " + results.ImageType.ClipArtType);
-                Console.WriteLine("Line Drawing Type: " + results.ImageType.LineDrawingType);
-                Console.WriteLine();
+                if (null != results.ImageType)
+                {
+                    Console.WriteLine("Image Type:");
+                    Console.WriteLine("Clip Art Type: " + results.ImageType.ClipArtType);
+                    Console.WriteLine("Line Drawing Type: " + results.ImageType.LineDrawingType);
+                    Console.WriteLine();
+                }
             }
         }
         /*
@@ -581,23 +607,78 @@ namespace ComputerVisionQuickstart
          * END - GENERATE THUMBNAIL
          */
 
-        // <snippet_extract_call>
+        // <snippet_readfileurl_1>
         /*
-         * BATCH READ FILE - URL IMAGE
-         * Recognizes handwritten text. 
-         * This API call offers an improvement of results over the Recognize Text calls.
+         * READ FILE - URL 
+         * Extracts text. 
          */
-        public static async Task BatchReadFileUrl(ComputerVisionClient client, string urlImage)
+        public static async Task ReadFileUrl(ComputerVisionClient client, string urlFile)
         {
             Console.WriteLine("----------------------------------------------------------");
-            Console.WriteLine("BATCH READ FILE - URL IMAGE");
+            Console.WriteLine("READ FILE FROM URL");
             Console.WriteLine();
 
             // Read text from URL
-            BatchReadFileHeaders textHeaders = await client.BatchReadFileAsync(urlImage);
+            var textHeaders = await client.ReadAsync(urlFile, language: "en");
             // After the request, get the operation location (operation ID)
             string operationLocation = textHeaders.OperationLocation;
-            // </snippet_extract_call>
+            Thread.Sleep(2000);
+            // </snippet_readfileurl_1>
+		
+            // <snippet_readfileurl_2>
+            // Retrieve the URI where the extracted text will be stored from the Operation-Location header.
+            // We only need the ID and not the full URL
+            const int numberOfCharsInOperationId = 36;
+            string operationId = operationLocation.Substring(operationLocation.Length - numberOfCharsInOperationId);
+
+            // Extract the text
+            ReadOperationResult results;
+            Console.WriteLine($"Extracting text from URL file {Path.GetFileName(urlFile)}...");
+            Console.WriteLine();
+            do
+            {
+                results = await client.GetReadResultAsync(Guid.Parse(operationId));
+            }
+            while ((results.Status == OperationStatusCodes.Running ||
+                results.Status == OperationStatusCodes.NotStarted));
+            // </snippet_readfileurl_2>
+
+            // <snippet_readfileurl_3>
+            // Display the found text.
+            Console.WriteLine();
+            var textUrlFileResults = results.AnalyzeResult.ReadResults;
+            foreach (ReadResult page in textUrlFileResults)
+            {
+                foreach (Line line in page.Lines)
+                {
+                    Console.WriteLine(line.Text);
+                }
+            }
+            Console.WriteLine();
+        }
+        // </snippet_readfileurl_3>
+
+        /*
+         * END - READ FILE - URL
+         */
+
+
+        // <snippet_read_local>
+        /*
+         * READ FILE - LOCAL
+         */
+
+        public static async Task ReadFileLocal(ComputerVisionClient client, string localFile)
+        {
+            Console.WriteLine("----------------------------------------------------------");
+            Console.WriteLine("READ FILE FROM LOCAL");
+            Console.WriteLine();
+
+            // Read text from URL
+            var textHeaders = await client.ReadInStreamAsync(File.OpenRead(localFile), language: "en");
+            // After the request, get the operation location (operation ID)
+            string operationLocation = textHeaders.OperationLocation;
+            Thread.Sleep(2000);
 
             // <snippet_extract_response>
             // Retrieve the URI where the recognized text will be stored from the Operation-Location header.
@@ -606,194 +687,33 @@ namespace ComputerVisionQuickstart
             string operationId = operationLocation.Substring(operationLocation.Length - numberOfCharsInOperationId);
 
             // Extract the text
-            // Delay is between iterations and tries a maximum of 10 times.
-            int i = 0;
-            int maxRetries = 10;
             ReadOperationResult results;
-            Console.WriteLine($"Extracting text from URL image {Path.GetFileName(urlImage)}...");
+            Console.WriteLine($"Reading text from local file {Path.GetFileName(localFile)}...");
             Console.WriteLine();
             do
             {
-                results = await client.GetReadOperationResultAsync(operationId);
-                Console.WriteLine("Server status: {0}, waiting {1} seconds...", results.Status, i);
-                await Task.Delay(1000);
-                if (i == 9) 
-		{ 
-		    Console.WriteLine("Server timed out."); 
-		}
+                results = await client.GetReadResultAsync(Guid.Parse(operationId));
             }
-            while ((results.Status == TextOperationStatusCodes.Running ||
-                results.Status == TextOperationStatusCodes.NotStarted) && i++ < maxRetries);
+            while ((results.Status == OperationStatusCodes.Running ||
+                results.Status == OperationStatusCodes.NotStarted));
             // </snippet_extract_response>
 
             // <snippet_extract_display>
             // Display the found text.
             Console.WriteLine();
-            var textRecognitionLocalFileResults = results.RecognitionResults;
-            foreach (TextRecognitionResult recResult in textRecognitionLocalFileResults)
+            var textUrlFileResults = results.AnalyzeResult.ReadResults;
+            foreach (ReadResult page in textUrlFileResults)
             {
-                foreach (Line line in recResult.Lines)
+                foreach (Line line in page.Lines)
                 {
                     Console.WriteLine(line.Text);
                 }
             }
             Console.WriteLine();
         }
-        // </snippet_extract_display>
         /*
-         * END - BATCH READ FILE - URL IMAGE
+         * END - READ FILE - LOCAL
          */
-
-        /*
-         * BATCH READ FILE - LOCAL IMAGE
-         * This API call offers an improvement of results over the Recognize Text calls.
-         */
-        public static async Task BatchReadFileLocal(ComputerVisionClient client, string localImage)
-        {
-            Console.WriteLine("----------------------------------------------------------");
-            Console.WriteLine("BATCH READ FILE - LOCAL IMAGE");
-            Console.WriteLine();
-
-            // Helps calucalte starting index to retrieve operation ID
-            const int numberOfCharsInOperationId = 36;
-
-            Console.WriteLine($"Extracting text from local image {Path.GetFileName(localImage)}...");
-            Console.WriteLine();
-            using (Stream imageStream = File.OpenRead(localImage))
-            {
-                // Read the text from the local image
-                BatchReadFileInStreamHeaders localFileTextHeaders = await client.BatchReadFileInStreamAsync(imageStream);
-                // Get the operation location (operation ID)
-                string operationLocation = localFileTextHeaders.OperationLocation;
-
-                // Retrieve the URI where the recognized text will be stored from the Operation-Location header.
-                string operationId = operationLocation.Substring(operationLocation.Length - numberOfCharsInOperationId);
-
-                // Extract text, wait for it to complete.
-                int i = 0;
-                int maxRetries = 10;
-                ReadOperationResult results;
-                do
-                {
-                    results = await client.GetReadOperationResultAsync(operationId);
-                    Console.WriteLine("Server status: {0}, waiting {1} seconds...", results.Status, i);
-                    await Task.Delay(1000);
-                    if (i == 9)
-                    {
-                        Console.WriteLine("Server timed out.");
-                    }
-                }
-                while ((results.Status == TextOperationStatusCodes.Running ||
-                    results.Status == TextOperationStatusCodes.NotStarted) && i++ < maxRetries);
-
-                // Display the found text.
-                Console.WriteLine();
-                var textRecognitionLocalFileResults = results.RecognitionResults;
-                foreach (TextRecognitionResult recResult in textRecognitionLocalFileResults)
-                {
-                    foreach (Line line in recResult.Lines)
-                    {
-                        Console.WriteLine(line.Text);
-                    }
-                }
-                Console.WriteLine();
-            }
-        }
-        /*
-         * END - BATCH READ FILE - LOCAL IMAGE
-         */
-
-        /*
-         * RECOGNIZE PRINTED TEXT - URL IMAGE
-         */
-        public static async Task RecognizePrintedTextUrl(ComputerVisionClient client, string imageUrl)
-        {
-            Console.WriteLine("----------------------------------------------------------");
-            Console.WriteLine("RECOGNIZE PRINTED TEXT - URL IMAGE");
-            Console.WriteLine();
-
-            Console.WriteLine($"Performing OCR on URL image {Path.GetFileName(imageUrl)}...");
-            Console.WriteLine();
-
-            // Perform OCR on image
-            OcrResult remoteOcrResult = await client.RecognizePrintedTextAsync(true, imageUrl);
-
-            // Print the recognized text
-            Console.WriteLine("Text:");
-            Console.WriteLine("Language: " + remoteOcrResult.Language);
-            Console.WriteLine("Text Angle: " + remoteOcrResult.TextAngle);
-            Console.WriteLine("Orientation: " + remoteOcrResult.Orientation);
-            Console.WriteLine();
-            Console.WriteLine("Text regions: ");
-            foreach (var remoteRegion in remoteOcrResult.Regions)
-            {
-                Console.WriteLine("Region bounding box: " + remoteRegion.BoundingBox);
-                foreach (var line in remoteRegion.Lines)
-                {
-                    Console.WriteLine("Line bounding box: " + line.BoundingBox);
-
-                    foreach (var word in line.Words)
-                    {
-                        Console.WriteLine("Word bounding box: " + word.BoundingBox);
-                        Console.WriteLine("Text: " + word.Text);
-                    }
-                    Console.WriteLine();
-                }
-            }
-        }
-        /*
-         * END - RECOGNIZE PRINTED TEXT - URL IMAGE
-         */
-
-        /*
-         * RECOGNIZE PRINTED TEXT - LOCAL IMAGE
-         */
-        public static async Task RecognizePrintedTextLocal(ComputerVisionClient client, string localImage)
-        {
-            Console.WriteLine("----------------------------------------------------------");
-            Console.WriteLine("RECOGNIZE PRINTED TEXT - LOCAL IMAGE");
-            Console.WriteLine();
-
-            using (Stream stream = File.OpenRead(localImage))
-            {
-                Console.WriteLine($"Performing OCR on local image {Path.GetFileName(localImage)}...");
-                Console.WriteLine();
-                // Get the recognized text
-                OcrResult localFileOcrResult = await client.RecognizePrintedTextInStreamAsync(true, stream);
-
-                // Display text, language, angle, orientation, and regions of text from the results.
-                Console.WriteLine("Text:");
-                Console.WriteLine("Language: " + localFileOcrResult.Language);
-                Console.WriteLine("Text Angle: " + localFileOcrResult.TextAngle);
-                Console.WriteLine("Orientation: " + localFileOcrResult.Orientation);
-                Console.WriteLine();
-                Console.WriteLine("Text regions: ");
-
-                // Getting only one line of text for testing purposes. To see full demonstration, remove the counter & conditional.
-                int counter = 0;
-                foreach (var localRegion in localFileOcrResult.Regions)
-                {
-                    Console.WriteLine("Region bounding box: " + localRegion.BoundingBox);
-                    foreach (var line in localRegion.Lines)
-                    {
-                        Console.WriteLine("Line bounding box: " + line.BoundingBox);
-                        if (counter == 1)
-                        {
-                            Console.WriteLine();
-                            return;
-                        }
-                        counter++;
-                        foreach (var word in line.Words)
-                        {
-                            Console.WriteLine("Word bounding box: " + word.BoundingBox);
-                            Console.WriteLine("Text: " + word.Text);
-                        }
-                    }
-                }
-            }
-        }
-        /*
-         * END - RECOGNIZE PRINTED TEXT - LOCAL IMAGE
-         */
+        // </snippet_read_local>
     }
 }
