@@ -27,24 +27,27 @@ import com.google.gson.reflect.TypeToken;
 
 public class QueryKB {
 
-	/* Configure the local environment:
-	* Set the following environment variables on your local machine using the
-	* appropriate method for your preferred shell (Bash, PowerShell, Command
-	* Prompt, etc.).
-	*
-	* QNA_MAKER_SUBSCRIPTION_KEY
-	* QNA_MAKER_ENDPOINT
-	* QNA_MAKER_RUNTIME_ENDPOINT
-	* QNA_MAKER_KB_ID
-	*
-	* If the environment variable is created after the application is launched in a console or with Visual
-	* Studio, the shell (or Visual Studio) needs to be closed and reloaded to take the environment variable into account.
-	*/
+/*
+* Set the `authoring_key` and `authoring_endpoint` variables to your
+* QnA Maker authoring subscription key and endpoint.
+*
+* These values can be found in the Azure portal (ms.portal.azure.com/).
+* Look up your QnA Maker resource. Then, in the "Resource management"
+* section, find the "Keys and Endpoint" page.
+*
+* The value of `authoring_endpoint` has the format https://YOUR-RESOURCE-NAME.cognitiveservices.azure.com.
+*
+* Set the `runtime_endpoint` variable to your QnA Maker runtime endpoint.
+* The value of `runtime_endpoint` has the format https://YOUR-RESOURCE-NAME.azurewebsites.net.
+*
+* Set the `knowledge_base_id` variable to the ID of a knowledge base you have
+* previously created.
+*/
 // <constants>
-    private static String authoring_key = System.getenv("QNA_MAKER_SUBSCRIPTION_KEY");
-	private static String authoring_endpoint = System.getenv("QNA_MAKER_ENDPOINT");
-	private static String runtime_endpoint = System.getenv("QNA_MAKER_RUNTIME_ENDPOINT");
-	private static String knowledge_base_id = System.getenv("QNA_MAKER_KB_ID");
+    private static String authoring_key = "PASTE_YOUR_QNA_MAKER_SUBSCRIPTION_KEY_HERE";
+	private static String authoring_endpoint = "PASTE_YOUR_QNA_MAKER_AUTHORING_ENDPOINT_HERE";
+	private static String runtime_endpoint = "PASTE_YOUR_QNA_MAKER_RUNTIME_ENDPOINT_HERE";
+	private static String knowledge_base_id = "PASTE_YOUR_QNA_MAKER_KB_ID_HERE";
 
     static String authoring_service = "/qnamaker/v4.0";
 	static String get_runtime_key_method = "/endpointkeys";
