@@ -52,7 +52,7 @@ from msrest.authentication import CognitiveServicesCredentials
 # <Resourcevariables>
 subscription_key = 'PASTE_YOUR_QNA_MAKER_SUBSCRIPTION_KEY_HERE'
 
-authoring_endpoint = 'PASTE_YOUR_QNA_MAKER_ENDPOINT_HERE'
+authoring_endpoint = 'PASTE_YOUR_QNA_MAKER_AUTHORING_ENDPOINT_HERE'
 
 runtime_endpoint = 'PASTE_YOUR_QNA_MAKER_RUNTIME_ENDPOINT_HERE'
 
