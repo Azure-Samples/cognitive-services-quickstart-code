@@ -45,9 +45,6 @@ from msrest.authentication import CognitiveServicesCredentials
 #
 # Set the `runtime_endpoint` variable to your QnA Maker runtime endpoint.
 # The value of `runtime_endpoint` has the format https://YOUR-RESOURCE-NAME.azurewebsites.net.
-#
-# Set the `kb_id` variable to the ID of a knowledge base you have
-# previously created.
 
 # <Resourcevariables>
 subscription_key = 'PASTE_YOUR_QNA_MAKER_SUBSCRIPTION_KEY_HERE'
@@ -55,8 +52,6 @@ subscription_key = 'PASTE_YOUR_QNA_MAKER_SUBSCRIPTION_KEY_HERE'
 authoring_endpoint = 'PASTE_YOUR_QNA_MAKER_AUTHORING_ENDPOINT_HERE'
 
 runtime_endpoint = 'PASTE_YOUR_QNA_MAKER_RUNTIME_ENDPOINT_HERE'
-
-kb_id = 'PASTE_YOUR_QNA_MAKER_KB_ID_HERE'
 # </Resourcevariables>
 
 # <MonitorOperation>
