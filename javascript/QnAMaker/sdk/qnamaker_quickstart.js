@@ -32,24 +32,23 @@ const qnamaker = require("@azure/cognitiveservices-qnamaker");
 const qnamaker_runtime = require("@azure/cognitiveservices-qnamaker-runtime");
 // </Dependencies>
 
+/*
+* Set the `subscription_key` and `endpoint` variables to your
+* QnA Maker authoring subscription key and endpoint.
+*
+* These values can be found in the Azure portal (ms.portal.azure.com/).
+* Look up your QnA Maker resource. Then, in the "Resource management"
+* section, find the "Keys and Endpoint" page.
+*
+* The value of `endpoint` has the format https://YOUR-RESOURCE-NAME.cognitiveservices.azure.com.
+*
+* Set the `runtime_endpoint` variable to your QnA Maker runtime endpoint.
+* The value of `runtime_endpoint` has the format https://YOUR-RESOURCE-NAME.azurewebsites.net.
+*/
 // <Resourcevariables>
-var key_var = 'QNA_MAKER_SUBSCRIPTION_KEY';
-if (!process.env[key_var]) {
-    throw new Error('please set/export the following environment variable: ' + key_var);
-}
-var subscription_key = process.env[key_var];
-
-var endpoint_var = 'QNA_MAKER_ENDPOINT';
-if (!process.env[endpoint_var]) {
-    throw new Error('please set/export the following environment variable: ' + endpoint_var);
-}
-var endpoint = process.env[endpoint_var];
-
-var runtime_endpoint_var = 'QNA_MAKER_RUNTIME_ENDPOINT';
-if (!process.env[runtime_endpoint_var]) {
-    throw new Error('please set/export the following environment variable: ' + runtime_endpoint_var);
-}
-var runtime_endpoint = process.env[runtime_endpoint_var];
+const subscription_key = "PASTE_YOUR_QNA_MAKER_SUBSCRIPTION_KEY_HERE";
+const endpoint = "PASTE_YOUR_QNA_MAKER_AUTHORING_ENDPOINT_HERE";
+const runtime_endpoint = "PASTE_YOUR_QNA_MAKER_RUNTIME_ENDPOINT_HERE";
 // </Resourcevariables>
 
 

@@ -8,37 +8,26 @@ const request = require("requestretry");
 // </dependencies>
 
 /*
-* Configure the local environment:
-* Set the QNA_MAKER_SUBSCRIPTION_KEY, QNA_MAKER_ENDPOINT,
-* QNA_MAKER_RUNTIME_ENDPOINT, and QNA_MAKER_KB_ID
-* environment variables on your local machine using
-* the appropriate method for your preferred shell (Bash, PowerShell, Command
-* Prompt, etc.). 
+* Set the `subscriptionKey` and `authoringEndpoint` variables to your
+* QnA Maker authoring subscription key and endpoint.
 *
-* If the environment variable is created after the application is launched in a
-* console or with Visual Studio, the shell (or Visual Studio) needs to be closed
-* and reloaded to take the environment variable into account.
+* These values can be found in the Azure portal (ms.portal.azure.com/).
+* Look up your QnA Maker resource. Then, in the "Resource management"
+* section, find the "Keys and Endpoint" page.
+*
+* The value of `authoringEndpoint` has the format https://YOUR-RESOURCE-NAME.cognitiveservices.azure.com.
+*
+* Set the `runtimeEndpoint` variable to your QnA Maker runtime endpoint.
+* The value of `runtimeEndpoint` has the format https://YOUR-RESOURCE-NAME.azurewebsites.net.
+*
+* Set the `kbId` variable to the ID of a knowledge base you have
+* previously created.
 */
 // <constants>
-const subscriptionKey = process.env.QNA_MAKER_SUBSCRIPTION_KEY;
-if (! process.env.QNA_MAKER_SUBSCRIPTION_KEY) {
-	throw "Please set/export the environment variable QNA_MAKER_SUBSCRIPTION_KEY.";
-}
-
-const authoringEndpoint = process.env.QNA_MAKER_ENDPOINT;
-if (! process.env.QNA_MAKER_ENDPOINT) {
-	throw "Please set/export the environment variable QNA_MAKER_ENDPOINT.";
-}
-
-const runtimeEndpoint = process.env.QNA_MAKER_RUNTIME_ENDPOINT;
-if (! process.env.QNA_MAKER_RUNTIME_ENDPOINT) {
-	throw "Please set/export the environment variable QNA_MAKER_RUNTIME_ENDPOINT.";
-}
-
-const kbId = process.env.QNA_MAKER_KB_ID;
-if (! process.env.QNA_MAKER_KB_ID) {
-	throw "Please set/export the environment variable QNA_MAKER_KB_ID.";
-}
+const subscriptionKey = "PASTE_YOUR_QNA_MAKER_SUBSCRIPTION_KEY_HERE";
+const authoringEndpoint = "PASTE_YOUR_QNA_MAKER_AUTHORING_ENDPOINT_HERE";
+const runtimeEndpoint = "PASTE_YOUR_QNA_MAKER_RUNTIME_ENDPOINT_HERE";
+const kbId = "PASTE_YOUR_QNA_MAKER_KB_ID_HERE";
 
 const getEndpointKeyMethod = "/qnamaker/v4.0/endpointkeys";
 // </constants>
