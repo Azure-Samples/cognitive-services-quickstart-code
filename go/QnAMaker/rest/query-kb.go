@@ -3,50 +3,37 @@ package main
 // <dependencies>
 import (
     "bytes"
-	"encoding/json"
+    "encoding/json"
     "fmt"
     "io/ioutil"
-    "log"
     "net/http"
-    "os"
     "strconv"
 )
 // </dependencies>
 
 /*
-* Configure the local environment:
-* Set the QNA_MAKER_SUBSCRIPTION_KEY, QNA_MAKER_ENDPOINT,
-* QNA_MAKER_RUNTIME_ENDPOINT, and QNA_MAKER_KB_ID
-* environment variables on your local machine using
-* the appropriate method for your preferred shell (Bash, PowerShell, Command
-* Prompt, etc.). 
+* Set the `subscription_key` and `authoring_endpoint` variables to your
+* QnA Maker authoring subscription key and endpoint.
 *
-* If the environment variable is created after the application is launched in a
-* console or with Visual Studio, the shell (or Visual Studio) needs to be closed
-* and reloaded to take the environment variable into account.
+* These values can be found in the Azure portal (ms.portal.azure.com/).
+* Look up your QnA Maker resource. Then, in the "Resource management"
+* section, find the "Keys and Endpoint" page.
+*
+* The value of `authoring_endpoint` has the format https://YOUR-RESOURCE-NAME.cognitiveservices.azure.com.
+*
+* Set the `runtime_endpoint` variable to your QnA Maker runtime endpoint.
+* The value of `runtime_endpoint` has the format https://YOUR-RESOURCE-NAME.azurewebsites.net.
+*
+* Set the `kb_id` variable to the ID of a knowledge base you have
+* previously created.
 */
 
 // <main>
 func main() {
-    if "" == os.Getenv("QNA_MAKER_ENDPOINT") {
-        log.Fatal("Please set/export the environment variable QNA_MAKER_ENDPOINT.")
-    }
-    var authoring_endpoint string = os.Getenv("QNA_MAKER_ENDPOINT")
-
-    if "" == os.Getenv("QNA_MAKER_RUNTIME_ENDPOINT") {
-        log.Fatal("Please set/export the environment variable QNA_MAKER_RUNTIME_ENDPOINT.")
-    }
-    var runtime_endpoint string = os.Getenv("QNA_MAKER_RUNTIME_ENDPOINT")
-
-    if "" == os.Getenv("QNA_MAKER_SUBSCRIPTION_KEY") {
-        log.Fatal("Please set/export the environment variable QNA_MAKER_SUBSCRIPTION_KEY.")
-    }
-    var subscription_key string = os.Getenv("QNA_MAKER_SUBSCRIPTION_KEY")
-
-    if "" == os.Getenv("QNA_MAKER_KB_ID") {
-        log.Fatal("Please set/export the environment variable QNA_MAKER_KB_ID.")
-    }
-    var knowledge_base_id string = os.Getenv("QNA_MAKER_KB_ID")
+	var subscription_key string = "PASTE_YOUR_QNA_MAKER_SUBSCRIPTION_KEY_HERE"
+	var authoring_endpoint string = "PASTE_YOUR_QNA_MAKER_AUTHORING_ENDPOINT_HERE"
+	var runtime_endpoint string = "PASTE_YOUR_QNA_MAKER_RUNTIME_ENDPOINT_HERE"
+    var kb_id string = "PASTE_YOUR_QNA_MAKER_KB_ID_HERE"
 
 	// Get the primary endpoint key for this subscription.
 	var get_runtime_key_uri = authoring_endpoint + "/qnamaker/v4.0/endpointkeys"
@@ -67,7 +54,7 @@ func main() {
     var question string = "{'question': 'Is the QnA Maker Service free?','top': 3}"
 
 	// Send the query.
-    var query_kb_uri string = runtime_endpoint + "/qnamaker/knowledgebases/" + knowledge_base_id + "/generateAnswer";
+    var query_kb_uri string = runtime_endpoint + "/qnamaker/knowledgebases/" + kb_id + "/generateAnswer";
     req, _ = http.NewRequest("POST", query_kb_uri, bytes.NewBuffer([]byte(question)))
 	// Note this differs from the "Ocp-Apim-Subscription-Key"/<subscription key> used by most Cognitive Services.
     req.Header.Add("Authorization", "EndpointKey " + endpoint_key)
