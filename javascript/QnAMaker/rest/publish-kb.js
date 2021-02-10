@@ -6,31 +6,21 @@
 const request = require("requestretry");
 
 /*
-* Configure the local environment:
-* Set the QNA_MAKER_SUBSCRIPTION_KEY, QNA_MAKER_ENDPOINT, and QNA_MAKER_KB_ID
-* environment variables on your local machine using
-* the appropriate method for your preferred shell (Bash, PowerShell, Command
-* Prompt, etc.). 
+* Set the `subscriptionKey` and `endpoint` variables to your
+* QnA Maker authoring subscription key and endpoint.
 *
-* If the environment variable is created after the application is launched in a
-* console or with Visual Studio, the shell (or Visual Studio) needs to be closed
-* and reloaded to take the environment variable into account.
+* These values can be found in the Azure portal (ms.portal.azure.com/).
+* Look up your QnA Maker resource. Then, in the "Resource management"
+* section, find the "Keys and Endpoint" page.
+*
+* The value of `endpoint` has the format https://YOUR-RESOURCE-NAME.cognitiveservices.azure.com.
+*
+* Set the `kbId` variable to the ID of a knowledge base you have
+* previously created.
 */
-//<authorization>
-const subscriptionKey = process.env.QNA_MAKER_SUBSCRIPTION_KEY;
-if (! process.env.QNA_MAKER_SUBSCRIPTION_KEY) {
-	throw "Please set/export the environment variable QNA_MAKER_SUBSCRIPTION_KEY.";
-}
-
-const endpoint = process.env.QNA_MAKER_ENDPOINT;
-if (! process.env.QNA_MAKER_ENDPOINT) {
-	throw "Please set/export the environment variable QNA_MAKER_ENDPOINT.";
-}
-
-const kbId = process.env.QNA_MAKER_KB_ID;
-if (! process.env.QNA_MAKER_KB_ID) {
-	throw "Please set/export the environment variable QNA_MAKER_KB_ID.";
-}
+const subscriptionKey = "PASTE_YOUR_QNA_MAKER_SUBSCRIPTION_KEY_HERE";
+const endpoint = "PASTE_YOUR_QNA_MAKER_ENDPOINT_HERE";
+const kbId = "PASTE_YOUR_QNA_MAKER_KB_ID_HERE";
 
 const publishKbMethod = "/qnamaker/v4.0/knowledgebases/" + kbId
 
