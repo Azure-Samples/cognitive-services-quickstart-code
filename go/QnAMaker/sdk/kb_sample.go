@@ -7,8 +7,7 @@ import (
 	"github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v4.0/qnamaker"
 	"github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v4.0/qnamakerruntime"
 	"github.com/Azure/go-autorest/autorest"
-	"log"
-	"os"
+    "log"
 	"strings"
 	"time"
 )
@@ -69,20 +68,23 @@ func handle_error (result qnamaker.Operation) {
 }
 // </error_handling>
 
-/*  Configure the local environment:
-* Set the QNA_MAKER_SUBSCRIPTION_KEY, QNA_MAKER_ENDPOINT, and
-* QNA_MAKER_RUNTIME_ENDPOINT environment variables on your local machine using
-* the appropriate method for your preferred shell (Bash, PowerShell, Command
-* Prompt, etc.). 
+/*
+* Set the `subscription_key` and `authoring_endpoint` variables to your
+* QnA Maker authoring subscription key and endpoint.
 *
-* If the environment variable is created after the application is launched in a
-* console or with Visual Studio, the shell (or Visual Studio) needs to be closed
-* and reloaded to take the environment variable into account.
+* These values can be found in the Azure portal (ms.portal.azure.com/).
+* Look up your QnA Maker resource. Then, in the "Resource management"
+* section, find the "Keys and Endpoint" page.
+*
+* The value of `authoring_endpoint` has the format https://YOUR-RESOURCE-NAME.cognitiveservices.azure.com.
+*
+* Set the `runtime_endpoint` variable to your QnA Maker runtime endpoint.
+* The value of `runtime_endpoint` has the format https://YOUR-RESOURCE-NAME.azurewebsites.net.
 */
 // <environment>
-var subscription_key string = os.Getenv("QNA_MAKER_SUBSCRIPTION_KEY")
-var endpoint string = os.Getenv("QNA_MAKER_ENDPOINT")
-var runtime_endpoint string = os.Getenv("QNA_MAKER_RUNTIME_ENDPOINT")
+var subscription_key string = "PASTE_YOUR_QNA_MAKER_SUBSCRIPTION_KEY_HERE"
+var authoring_endpoint string = "PASTE_YOUR_QNA_MAKER_AUTHORING_ENDPOINT_HERE"
+var runtime_endpoint string = "PASTE_YOUR_QNA_MAKER_RUNTIME_ENDPOINT_HERE"
 // </environment>
 
 // <get_runtime_endpoint_key>
@@ -91,7 +93,7 @@ func get_runtime_endpoint_key () string {
 	// Get the context, which is required by the SDK methods.
 	ctx := context.Background()
 
-	client := qnamaker.NewEndpointKeysClient(endpoint)
+	client := qnamaker.NewEndpointKeysClient(authoring_endpoint)
 	// Set the subscription key on the client.
 	client.Authorizer = autorest.NewCognitiveServicesAuthorizer(subscription_key)
 
@@ -109,7 +111,7 @@ func wait_for_operation (operation_id string) string {
 	// Get the context, which is required by the SDK methods.
 	ctx := context.Background()
 
-	ops_client := qnamaker.NewOperationsClient(endpoint)
+	ops_client := qnamaker.NewOperationsClient(authoring_endpoint)
 	// Set the subscription key on the client.
 	ops_client.Authorizer = autorest.NewCognitiveServicesAuthorizer(subscription_key)
 
@@ -146,7 +148,7 @@ func create_kb () string {
 	// Get the context, which is required by the SDK methods.
 	ctx := context.Background()
 
-	client := qnamaker.NewKnowledgebaseClient(endpoint)
+	client := qnamaker.NewKnowledgebaseClient(authoring_endpoint)
 	// Set the subscription key on the client.
 	client.Authorizer = autorest.NewCognitiveServicesAuthorizer(subscription_key)
 
@@ -198,7 +200,7 @@ func list_kbs () {
 	// Get the context, which is required by the SDK methods.
 	ctx := context.Background()
 
-	client := qnamaker.NewKnowledgebaseClient(endpoint)
+	client := qnamaker.NewKnowledgebaseClient(authoring_endpoint)
 	// Set the subscription key on the client.
 	client.Authorizer = autorest.NewCognitiveServicesAuthorizer(subscription_key)
 
@@ -223,7 +225,7 @@ func update_kb (kb_id string) {
 	// Get the context, which is required by the SDK methods.
 	ctx := context.Background()
 
-	client := qnamaker.NewKnowledgebaseClient(endpoint)
+	client := qnamaker.NewKnowledgebaseClient(authoring_endpoint)
 	// Set the subscription key on the client.
 	client.Authorizer = autorest.NewCognitiveServicesAuthorizer(subscription_key)
 
@@ -288,7 +290,7 @@ func publish_kb (kb_id string) {
 	// Get the context, which is required by the SDK methods.
 	ctx := context.Background()
 
-	client := qnamaker.NewKnowledgebaseClient(endpoint)
+	client := qnamaker.NewKnowledgebaseClient(authoring_endpoint)
 	// Set the subscription key on the client.
 	client.Authorizer = autorest.NewCognitiveServicesAuthorizer(subscription_key)
 
@@ -306,7 +308,7 @@ func download_kb (kb_id string) {
 	// Get the context, which is required by the SDK methods.
 	ctx := context.Background()
 
-	client := qnamaker.NewKnowledgebaseClient(endpoint)
+	client := qnamaker.NewKnowledgebaseClient(authoring_endpoint)
 	// Set the subscription key on the client.
 	client.Authorizer = autorest.NewCognitiveServicesAuthorizer(subscription_key)
 
@@ -363,7 +365,7 @@ func delete_kb (kb_id string) {
 	// Get the context, which is required by the SDK methods.
 	ctx := context.Background()
 
-	client := qnamaker.NewKnowledgebaseClient(endpoint)
+	client := qnamaker.NewKnowledgebaseClient(authoring_endpoint)
 	// Set the subscription key on the client.
 	client.Authorizer = autorest.NewCognitiveServicesAuthorizer(subscription_key)
 
