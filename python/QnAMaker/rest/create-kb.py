@@ -3,17 +3,20 @@ import http.client, json, os, time
 from urllib.parse import urlparse
 # </dependencies>
 
-# <constants>
-key_var_name = 'QNA_MAKER_SUBSCRIPTION_KEY'
-if not key_var_name in os.environ:
-	raise Exception('Please set/export the environment variable: {}'.format(key_var_name))
-subscription_key = os.environ[key_var_name]
+# Set the `subscription_key` and `authoring_endpoint` variables to your
+# QnA Maker authoring subscription key and endpoint.
+#
+# These values can be found in the Azure portal (ms.portal.azure.com/).
+# Look up your QnA Maker resource. Then, in the "Resource management"
+# section, find the "Keys and Endpoint" page.
+#
+# The value of `authoring_endpoint` has the format https://YOUR-RESOURCE-NAME.cognitiveservices.azure.com.
 
-authoring_endpoint_var_name = 'QNA_MAKER_ENDPOINT'
-if not authoring_endpoint_var_name in os.environ:
-	raise Exception('Please set/export the environment variable: {}'.format(authoring_endpoint_var_name))
+# <constants>
+subscription_key = 'PASTE_YOUR_QNA_MAKER_SUBSCRIPTION_KEY_HERE'
+
 # Note http.client.HTTPSConnection wants only the host name, not the protocol (that is, 'https://')
-authoring_endpoint = urlparse(os.environ[authoring_endpoint_var_name]).netloc
+authoring_endpoint = urlparse('PASTE_YOUR_QNA_MAKER_ENDPOINT_HERE').netloc
 
 create_kb_method = '/qnamaker/v4.0/knowledgebases/create'
 # </constants>
