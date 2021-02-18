@@ -4,7 +4,7 @@ import com.microsoft.azure.cognitiveservices.vision.computervision.*;
 import com.microsoft.azure.cognitiveservices.vision.computervision.implementation.ComputerVisionImpl;
 import com.microsoft.azure.cognitiveservices.vision.computervision.models.*;
 
-import java.io.File;
+import java.io.*;
 import java.nio.file.Files;
 
 import java.util.ArrayList;
@@ -28,11 +28,13 @@ import java.util.UUID;
  *  Recognize Printed Text: uses optical character recognition (OCR) to find text in an image.
  */
 
+ // <snippet_classdef_1>
 public class ComputerVisionQuickstart {
+    // </snippet_classdef_1>
 
     // <snippet_creds>
-    static String subscriptionKey = "<your-subscription-key>";
-    static String endpoint = "<your-api-endpoint>";
+    static String subscriptionKey = "your-subscription-key";
+    static String endpoint = "your-api-endpoint";
     // </snippet_creds>
 
     // <snippet_maincalls>
@@ -75,15 +77,16 @@ public class ComputerVisionQuickstart {
         featuresToExtractFromLocalImage.add(VisualFeatureTypes.CATEGORIES);
         featuresToExtractFromLocalImage.add(VisualFeatureTypes.TAGS);
         featuresToExtractFromLocalImage.add(VisualFeatureTypes.FACES);
+        featuresToExtractFromLocalImage.add(VisualFeatureTypes.OBJECTS);
+        featuresToExtractFromLocalImage.add(VisualFeatureTypes.BRANDS);
         featuresToExtractFromLocalImage.add(VisualFeatureTypes.ADULT);
         featuresToExtractFromLocalImage.add(VisualFeatureTypes.COLOR);
         featuresToExtractFromLocalImage.add(VisualFeatureTypes.IMAGE_TYPE);
         // </snippet_analyzelocal_features>
 
         System.out.println("\nAnalyzing local image ...");
-
+        // <snippet_analyzelocal_analyze>
         try {
-            // <snippet_analyzelocal_analyze>
             // Need a byte array for analyzing a local image.
             File rawImage = new File(pathToLocalImage);
             byte[] imageByteArray = Files.readAllBytes(rawImage.toPath());
@@ -128,6 +131,24 @@ public class ComputerVisionQuickstart {
                         face.faceRectangle().top() + face.faceRectangle().height());
             }
             // </snippet_analyzelocal_faces>
+
+            // <snippet_analyzelocal_objects>
+            // Display any objects found in the image.
+            System.out.println("\nObjects: ");
+            for ( DetectedObject object : analysis.objects()) {
+                System.out.printf("Object \'%s\' detected at location (%d, %d)\n", object.objectProperty(),
+                        object.rectangle().x(), object.rectangle().y());
+            }
+            // </snippet_analyzelocal_objects>
+
+            // <snippet_analyzelocal_brands>
+            // Display any brands found in the image.
+            System.out.println("\nBrands: ");
+            for ( DetectedBrand brand : analysis.brands()) {
+                System.out.printf("Brand \'%s\' detected at location (%d, %d)\n", brand.name(),
+                        brand.rectangle().x(), brand.rectangle().y());
+            }
+            // </snippet_analyzelocal_brands>
 
             // <snippet_analyzelocal_adult>
             // Display whether any adult or racy content was detected and the confidence
@@ -182,6 +203,7 @@ public class ComputerVisionQuickstart {
             System.out.println("Clip art type: " + analysis.imageType().clipArtType());
             System.out.println("Line drawing type: " + analysis.imageType().lineDrawingType());
             // </snippet_imagetype>
+            // <snippet_analyze_catch>
         }
 
         catch (Exception e) {
@@ -189,6 +211,8 @@ public class ComputerVisionQuickstart {
             e.printStackTrace();
         }
     }
+    // </snippet_analyze_catch>
+
     // END - Analyze a local image.
 
     // <snippet_analyzeurl>
@@ -530,4 +554,6 @@ public class ComputerVisionQuickstart {
         }
     }
     // </snippet_read_result_helper_print>
+    // <snippet_classdef_2>
 }
+// </snippet_classdef_2>
