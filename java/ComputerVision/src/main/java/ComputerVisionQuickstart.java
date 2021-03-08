@@ -1,17 +1,3 @@
-
-// <snippet_imports>
-import com.microsoft.azure.cognitiveservices.vision.computervision.*;
-import com.microsoft.azure.cognitiveservices.vision.computervision.implementation.ComputerVisionImpl;
-import com.microsoft.azure.cognitiveservices.vision.computervision.models.*;
-
-import java.io.*;
-import java.nio.file.Files;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-// </snippet_imports>
-
 /*  This Quickstart for the Azure Cognitive Services Computer Vision API shows how to analyze
  *  an image and recognize text for both a local and remote (URL) image.
  *
@@ -28,14 +14,29 @@ import java.util.UUID;
  *  Recognize Printed Text: uses optical character recognition (OCR) to find text in an image.
  */
 
- // <snippet_classdef_1>
+// <snippet_imports_and_vars>
+// <snippet_imports>
+import com.microsoft.azure.cognitiveservices.vision.computervision.*;
+import com.microsoft.azure.cognitiveservices.vision.computervision.implementation.ComputerVisionImpl;
+import com.microsoft.azure.cognitiveservices.vision.computervision.models.*;
+
+import java.io.*;
+import java.nio.file.Files;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+// </snippet_imports>
+
+// <snippet_classdef_1>
 public class ComputerVisionQuickstart {
     // </snippet_classdef_1>
 
     // <snippet_creds>
-    static String subscriptionKey = "your-subscription-key";
-    static String endpoint = "your-api-endpoint";
+    static String subscriptionKey = "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE";
+    static String endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE";
     // </snippet_creds>
+    // <snippet_imports_and_vars>
 
     // <snippet_maincalls>
     public static void main(String[] args) {
