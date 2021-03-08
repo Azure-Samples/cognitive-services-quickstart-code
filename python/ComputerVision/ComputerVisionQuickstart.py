@@ -1,16 +1,3 @@
-# <snippet_imports>
-from azure.cognitiveservices.vision.computervision import ComputerVisionClient
-from azure.cognitiveservices.vision.computervision.models import OperationStatusCodes
-from azure.cognitiveservices.vision.computervision.models import VisualFeatureTypes
-from msrest.authentication import CognitiveServicesCredentials
-
-from array import array
-import os
-from PIL import Image
-import sys
-import time
-# </snippet_imports>
-
 '''
 Computer Vision Quickstart for Microsoft Azure Cognitive Services. 
 Uses local and remote images in each example.
@@ -47,6 +34,37 @@ References:
     - API: https://westus.dev.cognitive.microsoft.com/docs/services/5adf991815e1060e6355ad44/operations/56f91f2e778daf14a499e1fa
 '''
 
+# <snippet_imports_and_vars>
+# <snippet_imports>
+from azure.cognitiveservices.vision.computervision import ComputerVisionClient
+from azure.cognitiveservices.vision.computervision.models import OperationStatusCodes
+from azure.cognitiveservices.vision.computervision.models import VisualFeatureTypes
+from msrest.authentication import CognitiveServicesCredentials
+
+from array import array
+import os
+from PIL import Image
+import sys
+import time
+# </snippet_imports>
+
+'''
+Authenticate
+Authenticates your credentials and creates a client.
+'''
+# <snippet_vars>
+subscription_key = "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE"
+endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE"
+# </snippet_vars>
+# </snippet_imports_and_vars>
+
+# <snippet_client>
+computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(subscription_key))
+# </snippet_client>
+'''
+END - Authenticate
+'''
+
 '''
 Quickstart variables
 These variables are shared by several examples
@@ -60,23 +78,6 @@ remote_image_url = "https://raw.githubusercontent.com/Azure-Samples/cognitive-se
 # </snippet_remoteimage>
 '''
 END - Quickstart variables
-'''
-
-'''
-Authenticate
-Authenticates your credentials and creates a client.
-'''
-# <snippet_vars>
-subscription_key = "<your subscription key>"
-endpoint = "<your API endpoint>"
-
-# </snippet_vars>
-
-# <snippet_client>
-computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(subscription_key))
-# </snippet_client>
-'''
-END - Authenticate
 '''
 
 '''
