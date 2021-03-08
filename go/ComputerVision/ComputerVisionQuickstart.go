@@ -1,20 +1,3 @@
-// <snippet_imports>
-package main
-
-import (
-	"context"
-	"encoding/json"
-	"fmt"
-	"github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v2.0/computervision"
-	"github.com/Azure/go-autorest/autorest"
-	"io"
-	"log"
-	"os"
-	"strings"
-	"time"
-)
-// </snippet_imports>
-
 /*  The examples in this quickstart are for the Computer Vision API for Microsoft
  *  Cognitive Services with the following tasks:
  *  - Describing images
@@ -56,13 +39,36 @@ import (
  *      https://westus.dev.cognitive.microsoft.com/docs/services/5cd27ec07268f6c679a3e641/operations/56f91f2e778daf14a499f21b
  */
 
- // <snippet_context>
+// <snippet_imports_and_vars>
+// <snippet_imports>
+package main
+
+import (
+	"context"
+	"encoding/json"
+	"fmt"
+	"github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v2.0/computervision"
+	"github.com/Azure/go-autorest/autorest"
+	"io"
+	"log"
+	"os"
+	"strings"
+	"time"
+)
+// </snippet_imports>
+
+// <snippet_context>
 // Declare global so don't have to pass it to all of the tasks.
 var computerVisionContext context.Context
 // </snippet_context>
 
 func main() {
-
+	// <snippet_vars>
+	computerVisionKey := "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE"
+	endpointURL := "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE"
+	// </snippet_vars>
+	// </snippet_imports_and_vars>
+	
 	/*
 	 * Local image file I/O
 	 * Store these in your root directory in a "resources" folder.
@@ -98,22 +104,7 @@ func main() {
 	// <snippet_client>
 	/*  
 	 * Configure the Computer Vision client
-	 * Set environment variables for COMPUTER_VISION_SUBSCRIPTION_KEY and COMPUTER_VISION_ENDPOINT,
-	 * then restart your command shell or your IDE for changes to take effect.
 	 */
-	  computerVisionKey := os.Getenv("COMPUTER_VISION_SUBSCRIPTION_KEY")
-	
-	if (computerVisionKey == "") {
-		log.Fatal("\n\nPlease set a COMPUTER_VISION_SUBSCRIPTION_KEY environment variable.\n" +
-							  "**You may need to restart your shell or IDE after it's set.**\n")
-	}
-
-	endpointURL := os.Getenv("COMPUTER_VISION_ENDPOINT")
-	if (endpointURL == "") {
-		log.Fatal("\n\nPlease set a COMPUTER_VISION_ENDPOINT environment variable.\n" +
-							  "**You may need to restart your shell or IDE after it's set.**")
-	}
-
 	computerVisionClient := computervision.New(endpointURL);
 	computerVisionClient.Authorizer = autorest.NewCognitiveServicesAuthorizer(computerVisionKey)
 
