@@ -2,18 +2,6 @@
  * Copyright (c) Microsoft Corporation. All rights reserved.
  * Licensed under the MIT License. 
  */
-// <snippet_imports>
-'use strict';
-
-const async = require('async');
-const fs = require('fs');
-const https = require('https');
-const path = require("path");
-const createReadStream = require('fs').createReadStream
-const sleep = require('util').promisify(setTimeout);
-const ComputerVisionClient = require('@azure/cognitiveservices-computervision').ComputerVisionClient;
-const ApiKeyCredentials = require('@azure/ms-rest-js').ApiKeyCredentials;
-// </snippet_imports>
 
 /**
  * Computer Vision example
@@ -44,14 +32,29 @@ const ApiKeyCredentials = require('@azure/ms-rest-js').ApiKeyCredentials;
  * Generate Thumbnail, Recognize Printed & Handwritten Text using Read API.
  */
 
+// <snippet_imports_and_vars>
+// <snippet_imports>
+'use strict';
+
+const async = require('async');
+const fs = require('fs');
+const https = require('https');
+const path = require("path");
+const createReadStream = require('fs').createReadStream
+const sleep = require('util').promisify(setTimeout);
+const ComputerVisionClient = require('@azure/cognitiveservices-computervision').ComputerVisionClient;
+const ApiKeyCredentials = require('@azure/ms-rest-js').ApiKeyCredentials;
+// </snippet_imports>
+
 // <snippet_vars>
 /**
  * AUTHENTICATE
  * This single client is used for all examples.
  */
-const key = '<your subscription key>';
-const endpoint = '<your api endpoint>';
+const key = 'PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE';
+const endpoint = 'PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE';
 // </snippet_vars>
+// </snippet_imports_and_vars>
 
 // <snippet_client>
 const computerVisionClient = new ComputerVisionClient(
