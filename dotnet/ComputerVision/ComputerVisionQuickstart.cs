@@ -1,16 +1,3 @@
-// <snippet_using>
-using System;
-using System.Collections.Generic;
-using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
-using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
-using System.Threading.Tasks;
-using System.IO;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Threading;
-using System.Linq;
-// </snippet_using>
-
 /*
  * Computer Vision SDK QuickStart
  *
@@ -46,15 +33,30 @@ using System.Linq;
  *    - Computer Vision documentation: https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/
  */
 
+// <snippet_using_and_vars>
+// <snippet_using>
+using System;
+using System.Collections.Generic;
+using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
+using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
+using System.Threading.Tasks;
+using System.IO;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Threading;
+using System.Linq;
+// </snippet_using>
+
 namespace ComputerVisionQuickstart
 {
     class Program
     {
         // <snippet_vars>
         // Add your Computer Vision subscription key and endpoint
-        static string subscriptionKey = "COMPUTER_VISION_SUBSCRIPTION_KEY";
-        static string endpoint = "COMPUTER_VISION_ENDPOINT";
+        static string subscriptionKey = "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE";
+        static string endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE";
         // </snippet_vars>
+	// </snippet_using_and_vars>
 
         // Download these images (link in prerequisites), or you can use any appropriate image on your local machine.
         private const string ANALYZE_LOCAL_IMAGE = "celebrities.jpg";
