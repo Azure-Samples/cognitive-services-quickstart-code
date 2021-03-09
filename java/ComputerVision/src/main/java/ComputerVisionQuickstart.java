@@ -36,7 +36,7 @@ public class ComputerVisionQuickstart {
     static String subscriptionKey = "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE";
     static String endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE";
     // </snippet_creds>
-    // <snippet_imports_and_vars>
+    // </snippet_imports_and_vars>
 
     // <snippet_maincalls>
     public static void main(String[] args) {
