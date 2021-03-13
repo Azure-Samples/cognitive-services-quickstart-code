@@ -50,7 +50,7 @@ class Program
     // </snippet_main>
 
     // <snippet_auth>
-    static private FormRecognizerClient AuthenticateClient()
+    private static FormRecognizerClient AuthenticateClient()
     {
         var credential = new AzureKeyCredential(apiKey);
         var client = new FormRecognizerClient(new Uri(endpoint), credential);
