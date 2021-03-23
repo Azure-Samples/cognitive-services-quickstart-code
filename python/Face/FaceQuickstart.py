@@ -50,10 +50,10 @@ References:
 
 # <snippet_subvars>
 # This key will serve all examples in this document.
-KEY = "<your subscription key>"
+KEY = "PASTE_YOUR_FACE_SUBSCRIPTION_KEY_HERE"
 
 # This endpoint will be used in all examples in this quickstart.
-ENDPOINT = "<your api endpoint>"
+ENDPOINT = "PASTE_YOUR_FACE_ENDPOINT_HERE"
 # </snippet_subvars>
 
 # <snippet_verify_baseurl>
