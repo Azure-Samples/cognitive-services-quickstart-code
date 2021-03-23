@@ -4,8 +4,8 @@ from pprint import pprint
 
 import os
 
-subscription_key = "<paste-your-text-analytics-key-here>"
-endpoint = "<paste-your-text-analytics-endpoint-here>"
+subscription_key = "PASTE_YOUR_TEXT_ANALYTICS_SUBSCRIPTION_KEY_HERE"
+endpoint = "PASTE_YOUR_TEXT_ANALYTICS_ENDPOINT_HERE"
 
 language_api_url = endpoint + "/text/analytics/v3.0/languages"
 
