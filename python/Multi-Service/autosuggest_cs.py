@@ -16,9 +16,8 @@ Install the Cognitive Services Bing Autosuggest SDK module:
 Use Python 3.4+
 '''
 
-# Add your Cognitive Services key and endpoint to your environment variables.
-subscription_key = os.environ['COGNITIVE_SERVICES_SUBSCRIPTION_KEY']
-endpoint = os.environ['COGNITIVE_SERVICES_ENDPOINT']
+subscription_key = "PASTE_YOUR_AUTO_SUGGEST_SUBSCRIPTION_KEY_HERE"
+endpoint = "PASTE_YOUR_AUTO_SUGGEST_ENDPOINT_HERE"
 
 '''
 AUTHENTICATE
