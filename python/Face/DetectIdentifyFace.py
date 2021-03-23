@@ -127,9 +127,8 @@ def create_new_person(client, faces_not_found, person_group_id, test_images):
 
 if __name__ == '__main__':
 
-    # Add your Face key and endpoint to your environment variables
-    ENDPOINT = os.environ['FACE_ENDPOINT']
-    KEY = os.environ['FACE_SUBSCRIPTION_KEY']
+    ENDPOINT = "PASTE_YOUR_FACE_ENDPOINT_HERE"
+    KEY = "PASTE_YOUR_FACE_SUBSCRIPTION_KEY_HERE"
     # Create a client
     face_client = FaceClient(ENDPOINT, CognitiveServicesCredentials(KEY))
 
