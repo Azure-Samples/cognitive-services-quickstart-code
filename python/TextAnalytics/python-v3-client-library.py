@@ -1,5 +1,5 @@
-key = "<paste-your-text-analytics-key-here>"
-endpoint = "<paste-your-text-analytics-endpoint-here>"
+key = "PASTE_YOUR_TEXT_ANALYTICS_SUBSCRIPTION_KEY_HERE"
+endpoint = "PASTE_YOUR_TEXT_ANALYTICS_ENDPOINT_HERE"
 
 from azure.ai.textanalytics import TextAnalyticsClient
 from azure.core.credentials import AzureKeyCredential
