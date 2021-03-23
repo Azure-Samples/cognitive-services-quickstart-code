@@ -19,9 +19,8 @@ The Content Moderator SDK:
 https://docs.microsoft.com/en-us/python/api/azure-cognitiveservices-vision-contentmoderator/?view=azure-python
 '''
 
-# Add your Cognitive Services subscription key and endpoint to your environment variables.
-subscription_key = os.environ['COGNITIVE_SERVICES_SUBSCRIPTION_KEY']
-endpoint = os.environ['COGNITIVE_SERVICES_ENDPOINT']
+subscription_key = "PASTE_YOUR_CONTENT_MODERATOR_SUBSCRIPTION_KEY_HERE"
+endpoint = "PASTE_YOUR_CONTENT_MODERATOR_ENDPOINT_HERE"
 
 # List of URL images used to moderate.
 IMAGE_LIST = [
