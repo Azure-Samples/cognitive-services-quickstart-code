@@ -18,9 +18,8 @@ Install the Entity Search SDK from a command prompt or IDE terminal:
   python -m pip install azure-cognitiveservices-search-entitysearch
 '''
 
-# Add your Cognitive Services subscription key and endpoint to your environment variables.
-subscription_key = os.environ['COGNITIVE_SERVICES_SUBSCRIPTION_KEY']
-endpoint = os.environ['COGNITIVE_SERVICES_ENDPOINT']
+subscription_key = 'PASTE_YOUR_BING_SEARCH_SUBSCRIPTION_KEY_HERE'
+endpoint = 'PASTE_YOUR_BING_SEARCH_ENDPOINT_HERE'
 
 # Search queries
 person_query = 'Allan Turing'
