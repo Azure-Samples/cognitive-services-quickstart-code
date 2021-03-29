@@ -5,8 +5,9 @@
 import os
 import time
 
-from azure.ai.textanalytics import single_analyze_sentiment
+from azure.cognitiveservices.language.textanalytics import TextAnalyticsClient
 import azure.cognitiveservices.speech as speechsdk
+from msrest.authentication import CognitiveServicesCredentials
 
 '''
 Azure Speech recognition and Text Analytics sample.
@@ -22,16 +23,21 @@ Text Analytics SDK: https://docs.microsoft.com/en-us/python/api/azure-cognitives
 Text Analytics: https://azuresdkdocs.blob.core.windows.net/$web/python/azure-ai-textanalytics/1.0.0b1/azure.ai.textanalytics.html
 '''
 
-# Add your Azure Cognitive Services key and endpoint to your environment variables.
-subscription_key = os.environ['COGNITIVE_SERVICES_SUBSCRIPTION_KEY']
-endpoint = os.environ['COGNITIVE_SERVICES_ENDPOINT']
+speech_subscription_key = 'PASTE_YOUR_SPEECH_SUBSCRIPTION_KEY_HERE'
+# Set this to the region for your Speech resource (for example, westus, eastus, and so on).
+speech_region = 'westus'
+
+text_analytics_endpoint = 'PASTE_YOUR_TEXT_ANALYTICS_ENDPOINT_HERE'
+text_analytics_subscription_key = 'PASTE_YOUR_TEXT_ANALYTICS_SUBSCRIPTION_KEY_HERE'
 
 # Authenticate, you may need to change the region to your own.
-speech_config = speechsdk.SpeechConfig(subscription=subscription_key, region='westus')
+speech_config = speechsdk.SpeechConfig(subscription=speech_subscription_key, region=speech_region)
 
 # Creates a speech recognizer using a microphone as audio input.
 # The default language is "en-us".
 speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config)
+
+text_analytics_client = TextAnalyticsClient(text_analytics_endpoint, CognitiveServicesCredentials(text_analytics_subscription_key))
 
 # Used to stop the continuous speech to text
 done = False
@@ -51,7 +57,8 @@ def process_results(evt):
         print()
 
         # Text Analytics, analyze the Speech to Text response in terms of sentiment.
-        analytics_response = single_analyze_sentiment(endpoint=endpoint, credential=subscription_key, input_text=evt.result.text)
+        documents = [documents = [{"id": "1", "language": "en", "text": evt.result.text}]
+        analytics_response = text_analytics_client.sentiment(documents)
         print("Document Sentiment: {}".format(analytics_response.sentiment))
         print("Overall scores: positive={0:.3f}; neutral={1:.3f}; negative={2:.3f} \n".format(
             analytics_response.document_scores.positive,
