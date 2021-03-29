@@ -7,8 +7,8 @@ from azure.core.credentials import AzureKeyCredential
 # </snippet_imports>
 
 # <snippet_creds>
-endpoint = "<paste-your-form-recognizer-endpoint-here>"
-key = "<paste-your-form-recognizer-key-here>"  
+endpoint = "PASTE_YOUR_FORM_RECOGNIZER_ENDPOINT_HERE"
+key = "PASTE_YOUR_FORM_RECOGNIZER_SUBSCRIPTION_KEY_HERE"
 # </snippet_creds>
 
 # <snippet_auth>
