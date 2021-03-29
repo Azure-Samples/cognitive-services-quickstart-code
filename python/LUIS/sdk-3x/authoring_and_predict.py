@@ -15,6 +15,7 @@ def quickstart():
 	# <VariablesYouChange>
 	authoringKey = 'PASTE_YOUR_LUIS_AUTHORING_SUBSCRIPTION_KEY_HERE'
 	authoringEndpoint = 'PASTE_YOUR_LUIS_AUTHORING_ENDPOINT_HERE'
+	predictionKey = 'PASTE_YOUR_LUIS_PREDICTION_SUBSCRIPTION_KEY_HERE'
 	predictionEndpoint = 'PASTE_YOUR_LUIS_PREDICTION_ENDPOINT_HERE'
 	# </VariablesYouChange>
 
@@ -62,9 +63,9 @@ def quickstart():
 	# </PublishVersion>
 	
 	# <PredictionCreateClient>
-	runtimeCredentials = CognitiveServicesCredentials(authoringKey)
+	runtimeCredentials = CognitiveServicesCredentials(predictionKey)
 	clientRuntime = LUISRuntimeClient(endpoint=predictionEndpoint, credentials=runtimeCredentials)
-    # </PredictionCreateClient>
+	# </PredictionCreateClient>
 
     # <QueryPredictionEndpoint>
     # Production == slot name
