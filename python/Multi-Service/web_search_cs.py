@@ -25,9 +25,8 @@ query_image_url = "https://raw.githubusercontent.com/Azure-Samples/cognitive-ser
 # The name of the celebrity you want to search for on the web.
 celebrity_name = 'Bern Collaco'
 
-# Add your Cognitive Services subscription key and endpoint to your environment variables.
-subscription_key = os.environ['COGNITIVE_SERVICES_SUBSCRIPTION_KEY']
-endpoint = os.environ['COGNITIVE_SERVICES_ENDPOINT']
+subscription_key = 'PASTE_YOUR_BING_SEARCH_SUBSCRIPTION_KEY_HERE'
+endpoint = 'PASTE_YOUR_BING_SEARCH_ENDPOINT_HERE'
 
 '''
 Authenticate a client. 
