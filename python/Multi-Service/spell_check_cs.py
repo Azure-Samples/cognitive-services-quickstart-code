@@ -7,8 +7,6 @@ from msrest.authentication import CognitiveServicesCredentials
 This Bing Spell Check quickstart checks some misspelled words and suggests corrections.
 
 Prerequisites:
-  - Add your Cognitive Services subscription key and endpoint to your environment variables, using
-        COGNITIVE_SERVICES_SUBSCRIPTION_KEY and COGNITIVE_SERVICES_ENDPOINT as variable names.
   - Install the following modules:
     pip install azure.cognitiveservices.language.spellcheck
     pip install msrest
@@ -16,9 +14,8 @@ Prerequisites:
 Python SDK: https://docs.microsoft.com/en-us/python/api/overview/azure/cognitiveservices/spellcheck?view=azure-python
 '''
 
-# Add your Bing Spell Check subscription key and endpoint to your environment variables.
-SUBSCRIPTION_KEY = os.environ['COGNITIVE_SERVICES_SUBSCRIPTION_KEY']
-ENDPOINT = os.environ['COGNITIVE_SERVICES_ENDPOINT']
+SUBSCRIPTION_KEY = 'PASTE_YOUR_SPELL_CHECK_SUBSCRIPTION_KEY_HERE'
+ENDPOINT = 'PASTE_YOUR_SPELL_CHECK_ENDPOINT_HERE'
 
 # Create a client
 client = SpellCheckAPI(CognitiveServicesCredentials(SUBSCRIPTION_KEY), ENDPOINT + '/bing/v7.0')
