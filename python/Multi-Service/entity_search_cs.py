@@ -1,7 +1,7 @@
 import os
 
 from msrest.authentication import CognitiveServicesCredentials
-from azure.cognitiveservices.search.entitysearch import EntitySearchAPI
+from azure.cognitiveservices.search.entitysearch import EntitySearchClient
 from azure.cognitiveservices.search.entitysearch.models import Place, ErrorResponseException
 
 '''
@@ -29,7 +29,7 @@ restaurant_query = 'Shiro\'s Sushi Seattle'
 AUTHENTICATE
 Create an Entity Search client.
 '''
-entity_search_client = EntitySearchAPI(CognitiveServicesCredentials(subscription_key), endpoint + '/bing/v7.0/')
+entity_search_client = EntitySearchClient(endpoint + '/bing/v7.0/', CognitiveServicesCredentials(subscription_key))
 
 '''
 Bing Entity Search
