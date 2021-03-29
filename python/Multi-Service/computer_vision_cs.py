@@ -27,8 +27,8 @@ Install the Computer Vision SDK from a command prompt or IDE terminal:
 # URL image
 query_image_url = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/faces.jpg"
 
-subscription_key = 'INSERT_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE'
-endpoint = 'INSERT_YOUR_COMPUTER_VISION_ENDPOINT_HERE'
+subscription_key = 'PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE'
+endpoint = 'PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE'
 
 '''
 Authenticate a client. 
