@@ -26,8 +26,8 @@ Install the Face SDK from a command prompt or IDE terminal:
 single_face_image_url = 'https://www.biography.com/.image/t_share/MTQ1MzAyNzYzOTgxNTE0NTEz/john-f-kennedy---mini-biography.jpg'
 multi_face_image_url = "http://www.historyplace.com/kennedy/president-family-portrait-closeup.jpg"
 
-subscription_key = 'INSERT_YOUR_FACE_SUBSCRIPTION_KEY_HERE'
-endpoint = 'INSERT_YOUR_FACE_ENDPOINT_HERE'
+subscription_key = 'PASTE_YOUR_FACE_SUBSCRIPTION_KEY_HERE'
+endpoint = 'PASTE_YOUR_FACE_ENDPOINT_HERE'
 
 '''
 AUTHENTICATE
