@@ -136,8 +136,8 @@ def search_with_answer_count_promote_and_safe_search(client):
 
 
 if __name__ == "__main__":
-    SUBSCRIPTION_KEY = 'INSERT_YOUR_BING_SEARCH_SUBSCRIPTION_KEY_HERE'
-    ENDPOINT = 'INSERT_YOUR_BING_SEARCH_ENDPOINT_HERE'
+    SUBSCRIPTION_KEY = 'PASTE_YOUR_BING_SEARCH_SUBSCRIPTION_KEY_HERE'
+    ENDPOINT = 'PASTE_YOUR_BING_SEARCH_ENDPOINT_HERE'
 
     # Initialize a client
     client = WebSearchClient(endpoint=ENDPOINT, credentials=CognitiveServicesCredentials(SUBSCRIPTION_KEY))
