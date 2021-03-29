@@ -58,7 +58,7 @@ elif result.reason == speechsdk.ResultReason.Canceled:
 print()
 
 # Text Analytics, analyze the Speech to Text response in terms of sentiment.
-documents = [documents = [{"id": "1", "language": "en", "text": result.text}]
+documents = [{"id": "1", "language": "en", "text": result.text}]
 analytics_response = text_analytics_client.sentiment(documents)
 print("Document Sentiment: {}".format(analytics_response.sentiment))
 print("Overall scores: positive={0:.3f}; neutral={1:.3f}; negative={2:.3f} \n".format(
