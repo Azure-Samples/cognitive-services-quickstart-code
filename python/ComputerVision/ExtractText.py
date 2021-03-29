@@ -5,7 +5,7 @@ from PIL import Image, ImageDraw
 import time
 
 from azure.cognitiveservices.vision.computervision import ComputerVisionClient
-from azure.cognitiveservices.vision.computervision.models import TextOperationStatusCodes
+from azure.cognitiveservices.vision.computervision.models import OperationStatusCodes
 from msrest.authentication import CognitiveServicesCredentials
 
 '''
@@ -31,8 +31,8 @@ Computer Vision API: https://westus.dev.cognitive.microsoft.com/docs/services/5c
 '''
 Authenticate Computer Vision client
 '''
-key = os.environ['COMPUTER_VISION_SUBSCRIPTION_KEY']
-endpoint = os.environ['COMPUTER_VISION_ENDPOINT']
+key = 'PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE'
+endpoint = 'PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE'
 
 client = ComputerVisionClient(endpoint=endpoint, credentials=CognitiveServicesCredentials(key))
 
@@ -101,7 +101,7 @@ for cropped_path in cropped_images_path:
 Print results
 '''
 # Print the extracted text, line by line
-if get_printed_text_results.status == TextOperationStatusCodes.succeeded:
+if get_printed_text_results.status == OperationStatusCodes.succeeded:
     for text_result in get_printed_text_results.recognition_results:
         for line in text_result.lines:
             print("Extracted text:")
