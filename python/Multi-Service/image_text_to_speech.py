@@ -30,10 +30,11 @@ Speech API: https://docs.microsoft.com/en-us/azure/cognitive-services/speech-ser
 # Add all license plate images to this local folder
 plates_folder = 'License Plates\\'
 
-# Add your Azure Cognitive Services key and endpoint to your environment variables.
-subscription_key = os.environ['COGNITIVE_SERVICES_SUBSCRIPTION_KEY']
-endpoint = os.environ['COGNITIVE_SERVICES_ENDPOINT']
-region = 'westus' # change to your own region
+computer_vision_subscription_key = 'PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE'
+computer_vision_endpoint = 'PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE'
+
+speech_subscription_key = 'PASTE_YOUR_SPEECH_SUBSCRIPTION_KEY_HERE'
+speech_region = 'westus' # Set this to the region for your Speech endpoint
 
 # List of all 50 states for reference
 # states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming']
@@ -42,11 +43,11 @@ region = 'westus' # change to your own region
 states = {'AK': 'Alaska', 'IL': 'Illinois', 'MI': 'Michigan', 'PA': 'Pennsylvania', 'AZ': 'Arizona'}
 
 # Initialize a Speech client
-speech_config = speechsdk.SpeechConfig(subscription=subscription_key, region=region)
+speech_config = speechsdk.SpeechConfig(subscription=speech_subscription_key, region=speech_region)
 # Creates a speech synthesizer using the default speaker as audio output.
 speech_synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config)
 # Initialize a Computer Vision client
-computer_vision_client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(subscription_key))
+computer_vision_client = ComputerVisionClient(computer_vision_endpoint, CognitiveServicesCredentials(computer_vision_subscription_key))
 
 
 '''
