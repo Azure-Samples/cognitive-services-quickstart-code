@@ -1,8 +1,7 @@
 import time, os
 from azure.cognitiveservices.vision.computervision import ComputerVisionClient
 from msrest.authentication import CognitiveServicesCredentials
-from azure.cognitiveservices.vision.computervision.models import TextRecognitionMode
-from azure.cognitiveservices.vision.computervision.models import TextOperationStatusCodes
+from azure.cognitiveservices.vision.computervision.models import OperationStatusCodes
 
 '''
 Extract Text PDF - Computer Vision API
@@ -34,10 +33,8 @@ https://westus.dev.cognitive.microsoft.com/docs/services/5cd27ec07268f6c679a3e64
 '''
 Authenticate
 '''
-# Set COMPUTER_VISION_SUBSCRIPTION_KEY in your environment variables with your Face key as a value.
-# Set COMPUTER_VISION_REGION in your environment variables.
-key = os.environ['COMPUTER_VISION_SUBSCRIPTION_KEY']
-endpoint = os.environ['COMPUTER_VISION_ENDPOINT']
+key = 'PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE'
+endpoint = 'PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE'
 
 # Set credentials
 credentials = CognitiveServicesCredentials(key)
@@ -76,7 +73,7 @@ Display extracted text and bounding box
 '''
 # Displays text captured and its bounding box (position in the image)
 result = pdf_text()
-if result.status == TextOperationStatusCodes.succeeded:
+if result.status == OperationStatusCodes.succeeded:
     for textResult in result.recognition_results:
         for line in textResult.lines:
             print(line.text)
