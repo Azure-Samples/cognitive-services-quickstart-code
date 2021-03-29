@@ -16,6 +16,7 @@ and added to the existing person group.
 
 Install the Face SDK library:
 pip install --upgrade azure-cognitiveservices-vision-face
+'''
 
 '''
 Create and train a person group and add a person group person to it.
