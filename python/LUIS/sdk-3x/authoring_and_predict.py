@@ -13,15 +13,12 @@ import json, time
 def quickstart(): 
 
 	# <VariablesYouChange>
-	authoringKey = 'REPLACE-WITH-YOUR-ASSIGNED-AUTHORING-KEY'
-	authoringResourceName = "REPLACE-WITH-YOUR-AUTHORING-RESOURCE-NAME"
-	predictionResourceName = "REPLACE-WITH-YOUR-PREDICTION-RESOURCE-NAME"
+	authoringKey = 'PASTE_YOUR_LUIS_AUTHORING_SUBSCRIPTION_KEY_HERE'
+	authoringEndpoint = 'PASTE_YOUR_LUIS_AUTHORING_ENDPOINT_HERE'
+	predictionEndpoint = 'PASTE_YOUR_LUIS_PREDICTION_ENDPOINT_HERE'
 	# </VariablesYouChange>
 
 	# <VariablesYouDontNeedToChangeChange>
-	authoringEndpoint = f'https://{authoringResourceName}.cognitiveservices.azure.com/'
-	predictionEndpoint = f'https://{predictionResourceName}.cognitiveservices.azure.com/'
-
 	appName = "Contoso Pizza Company"
 	versionId = "0.1"
 	intentName = "OrderPizzaIntent"
