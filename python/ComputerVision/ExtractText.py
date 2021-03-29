@@ -21,8 +21,6 @@ pip install --upgrade azure-cognitiveservices-vision-computervision
 Add the images you want to crop into the Images folder. Once the script runs, cropped images will
 automatically be added to your CroppedImages folder.
 3. Make sure your images are either JPG or PNG. Change the file extension in the code if needed.
-4. Add your Azure Computer Vision key and endpoint to your environment variables with the names:
-COMPUTER_VISION_SUBSCRIPTION_KEY and COMPUTER_VISION_ENDPOINT.
 
 Computer Vision SDK: https://docs.microsoft.com/en-us/python/api/azure-cognitiveservices-vision-computervision/azure.cognitiveservices.vision.computervision?view=azure-python
 Computer Vision API: https://westus.dev.cognitive.microsoft.com/docs/services/5cd27ec07268f6c679a3e641/operations/56f91f2e778daf14a499f21b
@@ -70,12 +68,14 @@ for image in images_list:
     # cropped.show()
 
 # Save the cropped images
+# See:
+# https://stackoverflow.com/a/51726283
 for i in range(len(cropped_images_list)):
     # Convert cropped images back to PIL.JpegImagePlugin.JpegImageFile type
     b = BytesIO()
     cropped_images_list[i].save(b, format="jpeg")
-
-b.close()
+    cropped_images_list[i] = Image.open(b)
+    b.close()
 
 '''
 Call the API
