@@ -14,9 +14,9 @@ Azure Speech recognition and Text Analytics sample.
 Performs continuous speech recognition from the default computer microphone and then analyzes that response text.
 To test, run from command line with microphone ready. To stop, let 15 seconds of silence go by.
 
-Inlcude these libraries:
+Install these libraries:
 pip install --upgrade azure-cognitiveservices-speech
-pip install azure-ai-textanalytics
+pip install azure-cognitiveservices-language-textanalytics
 
 Speech SDK: https://docs.microsoft.com/en-us/python/api/azure-cognitiveservices-speech/?view=azure-python
 Text Analytics SDK: https://docs.microsoft.com/en-us/python/api/azure-cognitiveservices-language-textanalytics/?view=azure-python
