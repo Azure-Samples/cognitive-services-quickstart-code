@@ -4,7 +4,7 @@ from PIL import Image, ImageDraw
 import requests
 
 from msrest.authentication import CognitiveServicesCredentials
-from azure.cognitiveservices.search.websearch import WebSearchAPI
+from azure.cognitiveservices.search.websearch import WebSearchClient
 from azure.cognitiveservices.search.websearch.models import AnswerType, SafeSearch
 
 '''
@@ -31,8 +31,8 @@ endpoint = 'PASTE_YOUR_BING_SEARCH_ENDPOINT_HERE'
 '''
 Authenticate a client. 
 '''
-web_search_client = WebSearchAPI(CognitiveServicesCredentials(
-    subscription_key), endpoint + 'bing/v7.0')
+web_search_client = WebSearchClient(endpoint + 'bing/v7.0', CognitiveServicesCredentials(
+    subscription_key))
 
 '''
 Bing Web Search
