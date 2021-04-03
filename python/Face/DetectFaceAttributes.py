@@ -23,13 +23,11 @@ Face API: https://docs.microsoft.com/en-us/azure/cognitive-services/face/apirefe
 '''
 Authenticate the Face service
 '''
-# Set the FACE_SUBSCRIPTION_KEY environment variable with your key as the value.
 # This key will serve all examples in this document.
-KEY = os.environ['FACE_SUBSCRIPTION_KEY']
+KEY = 'PASTE_YOUR_FACE_SUBSCRIPTION_KEY_HERE'
 
-# Set the FACE_ENDPOINT environment variable with the endpoint from your Face service in Azure.
 # This endpoint will be used in all examples in this quickstart.
-ENDPOINT = os.environ['FACE_ENDPOINT']
+ENDPOINT = 'PASTE_YOUR_FACE_ENDPOINT_HERE'
 
 # Create an authenticated FaceClient.
 face_client = FaceClient(ENDPOINT, CognitiveServicesCredentials(KEY))
