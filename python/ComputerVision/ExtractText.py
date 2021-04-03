@@ -42,13 +42,13 @@ working_directory = pathlib.Path (os.path.dirname(__file__))
 os.makedirs(os.path.join (working_directory, 'CroppedImages'), exist_ok=True)
 
 # Create an Image object from each image in a the Images folder.
-for image_path in working_directory.glob('Images\*.jpg'):  # assume all images are jpg
+for image_path in working_directory.glob('Images/*.jpg'):  # assume all images are jpg
     imageObject = Image.open(image_path)
     images_list.append(imageObject)
     cropped_images_paths.append(pathlib.Path (str(image_path).replace('Images', 'CroppedImages')))
 
 # Optional, draw bounding box around desired line of text, show image
-# original_image = Image.open('Images\coffee1.jpg').convert("RGBA")
+# original_image = Image.open('Images/coffee1.jpg').convert("RGBA")
 # draw = ImageDraw.Draw(original_image)
 # draw.rectangle(((110, 540), (425, 630)), outline="red")
 # original_image.show()
