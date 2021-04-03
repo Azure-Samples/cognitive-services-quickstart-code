@@ -23,7 +23,7 @@ Install the Bing Web Search SDK from a command prompt or IDE terminal:
 query_image_url = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/faces.jpg"
 
 # The name of the celebrity you want to search for on the web.
-celebrity_name = 'Bern Collaco'
+celebrity_name = 'Bill Gates'
 
 subscription_key = 'PASTE_YOUR_BING_SEARCH_SUBSCRIPTION_KEY_HERE'
 endpoint = 'PASTE_YOUR_BING_SEARCH_ENDPOINT_HERE'
@@ -31,7 +31,7 @@ endpoint = 'PASTE_YOUR_BING_SEARCH_ENDPOINT_HERE'
 '''
 Authenticate a client. 
 '''
-web_search_client = WebSearchClient(endpoint + 'bing/v7.0', CognitiveServicesCredentials(
+web_search_client = WebSearchClient(endpoint, CognitiveServicesCredentials(
     subscription_key))
 
 '''
@@ -58,7 +58,7 @@ if hasattr(web_data.images, 'value'):
     # Get number of results
     print("Number of images found: {}".format(len(web_image_list)))
     # Display first 5 images found, if have response 200
-    for i in range(5):
+    for i in range(3):
         # Download the query image from the url
         downloaded_found_image = requests.get(web_image_list[i].content_url)
         if downloaded_found_image.status_code == 200:
