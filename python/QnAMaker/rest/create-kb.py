@@ -13,10 +13,10 @@ from urllib.parse import urlparse
 # The value of `authoring_endpoint` has the format https://YOUR-RESOURCE-NAME.cognitiveservices.azure.com.
 
 # <constants>
-subscription_key = 'PASTE_YOUR_QNA_MAKER_SUBSCRIPTION_KEY_HERE'
+subscription_key = 'PASTE_YOUR_QNA_MAKER_AUTHORING_SUBSCRIPTION_KEY_HERE'
 
 # Note http.client.HTTPSConnection wants only the host name, not the protocol (that is, 'https://')
-authoring_endpoint = urlparse('PASTE_YOUR_QNA_MAKER_ENDPOINT_HERE').netloc
+authoring_endpoint = urlparse('PASTE_YOUR_QNA_MAKER_AUTHORING_ENDPOINT_HERE').netloc
 
 create_kb_method = '/qnamaker/v4.0/knowledgebases/create'
 # </constants>
