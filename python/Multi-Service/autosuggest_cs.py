@@ -24,7 +24,7 @@ AUTHENTICATE
 Create an Autosuggest client.
 '''
 credentials = CognitiveServicesCredentials(subscription_key)
-autosuggest_client = AutoSuggestClient(endpoint + 'bing/v7.0', CognitiveServicesCredentials(subscription_key))
+autosuggest_client = AutoSuggestClient(endpoint, CognitiveServicesCredentials(subscription_key))
 
 '''
 AUTOSUGGEST
