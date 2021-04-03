@@ -1,5 +1,5 @@
 # <dependencies>
-import http.client, os
+import http.client, os, sys
 from urllib.parse import urlparse
 # </dependencies>
 
