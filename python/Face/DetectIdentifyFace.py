@@ -46,6 +46,7 @@ def build_person_group(client, person_group_id, pgp_name):
         if (training_status.status is TrainingStatusType.succeeded):
             break
         elif (training_status.status is TrainingStatusType.failed):
+            client.person_group.delete(person_group_id=PERSON_GROUP_ID)
             sys.exit('Training the person group has failed.')
         time.sleep(5)
 
