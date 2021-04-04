@@ -31,10 +31,8 @@ image_features = ['objects', 'tags']
 Authenticate
 Authenticates your credentials and creates a client.
 '''
-# Add your Computer Vision subscription key and endpoiny to your environment variables.
-
-subscription_key = os.environ['COMPUTER_VISION_SUBSCRIPTION_KEY']
-endpoint = os.environ['COMPUTER_VISION_ENDPOINT']
+subscription_key = 'PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE'
+endpoint = 'PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE'
 
 computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(subscription_key))
 
