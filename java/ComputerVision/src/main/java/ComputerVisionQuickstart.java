@@ -160,13 +160,15 @@ public class ComputerVisionQuickstart {
             // </snippet_analyzelocal_brands>
 
             // <snippet_analyzelocal_adult>
-            // Display whether any adult or racy content was detected and the confidence
+            // Display whether any adult/racy/gory content was detected and the confidence
             // values.
             System.out.println("\nAdult: ");
             System.out.printf("Is adult content: %b with confidence %f\n", analysis.adult().isAdultContent(),
                     analysis.adult().adultScore());
             System.out.printf("Has racy content: %b with confidence %f\n", analysis.adult().isRacyContent(),
                     analysis.adult().racyScore());
+            System.out.printf("Has gory content: %b with confidence %f\n", analysis.adult().isGoryContent(),
+                    analysis.adult().goreScore());
             // </snippet_analyzelocal_adult>
 
             // <snippet_analyzelocal_colors>
@@ -436,7 +438,7 @@ public class ComputerVisionQuickstart {
             ComputerVisionImpl vision = (ComputerVisionImpl) client.computerVision();
 
             // Read in remote image and response header
-            ReadHeaders responseHeader = vision.readWithServiceResponseAsync(remoteTextImageURL, OcrDetectionLanguage.FR)
+            ReadHeaders responseHeader = vision.readWithServiceResponseAsync(remoteTextImageURL, OcrDetectionLanguage.FR, null, null)
                     .toBlocking()
                     .single()
                     .headers();
@@ -476,7 +478,7 @@ public class ComputerVisionQuickstart {
 
             // Read in remote image and response header
             ReadInStreamHeaders responseHeader =
-                    vision.readInStreamWithServiceResponseAsync(localImageBytes, OcrDetectionLanguage.FR)
+                    vision.readInStreamWithServiceResponseAsync(localImageBytes, OcrDetectionLanguage.FR, null)
                         .toBlocking()
                         .single()
                         .headers();
