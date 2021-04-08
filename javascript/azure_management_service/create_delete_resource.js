@@ -1,5 +1,6 @@
 // <snippet_imports>
 "use strict";
+
 /* To run this sample, install the following modules.
  * npm install @azure/arm-cognitiveservices
  * npm install @azure/ms-rest-js
@@ -37,20 +38,25 @@ Be sure to use the service pricipal application ID, not simply the ID.
 */
 
 // <snippet_constants>
-const service_principal_application_id = "TODO_REPLACE";
-const service_principal_secret = "TODO_REPLACE";
+const service_principal_application_id = "PASTE_YOUR_SERVICE_PRINCIPAL_APPLICATION_ID_HERE";
+const service_principal_secret = "PASTE_YOUR_SERVICE_PRINCIPAL_SECRET_HERE";
 
 /* The ID of your Azure subscription. You can find this in the Azure Dashboard under Home > Subscriptions. */
-const subscription_id = "TODO_REPLACE";
+const subscription_id = "PASTE_YOUR_SUBSCRIPTION_ID_HERE";
 
 /* The Active Directory tenant ID. You can find this in the Azure Dashboard under Home > Azure Active Directory. */
-const tenant_id = "TODO_REPLACE";
+const tenant_id = "PASTE_YOUR_TENANT_ID_HERE";
 
 /* The name of the Azure resource group in which you want to create the resource.
 You can find resource groups in the Azure Dashboard under Home > Resource groups. */
-const resource_group_name = "TODO_REPLACE";
+const resource_group_name = "PASTE_YOUR_RESOURCE_GROUP_NAME_HERE";
+/* The name of the custom subdomain to use when you create the resource. This is optional.
+For example, if you create a Bing Search v7 resource with the custom subdomain name 'my-search-resource',
+your resource would have the endpoint https://my-search-resource.cognitiveservices.azure.com/.
+Note not all Cognitive Services allow custom subdomain names.
+*/
+const subdomain_name = "PASTE_YOUR_SUBDOMAIN_NAME_HERE";
 // </snippet_constants>
-
 // <snippet_list_avail>
 async function list_available_kinds_skus_locations (client) {
 	console.log ("Available SKUs:");
@@ -75,18 +81,18 @@ async function list_resources (client) {
 // </snippet_list>
 
 // <snippet_create>
-function create_resource (client, resource_name, kind, sku_name, location) {
+async function create_resource (client, resource_name, kind, sku_name, location) {
 	console.log ("Creating resource: " + resource_name + "...");
-	// The parameter "properties" must be an empty object.
-	var parameters = { sku : { name: sku_name }, kind : kind, location : location, properties : {} };
-
+/* NOTE If you do not want to use a custom subdomain name, remove the customSubDomainName
+property from the properties object. */
+	var parameters = { sku : { name: sku_name }, kind : kind, location : location, properties : { customSubDomainName : subdomain_name } };
     return client.create(resource_group_name, resource_name, parameters)
         .then((result) => {
-		console.log("Resource created.");
-		print();
-		console.log("ID: " + result.id);
-		console.log("Kind: " + result.kind);
-		console.log();
+			console.log("Resource created.");
+			print();
+			console.log("ID: " + result.id);
+			console.log("Kind: " + result.kind);
+			console.log();
         })
         .catch((err) =>{ 
             	console.log(err)
@@ -113,17 +119,17 @@ async function quickstart() {
 	// </snippet_main_auth>
 
 	// <snippet_main_calls>
-	// Uncomment this to list all available resource kinds, SKUs, and locations for your Azure account.
-	list_available_kinds_skus_locations (resource_skus_client);
+// Uncomment this to list all available resource kinds, SKUs, and locations for your Azure account.
+//	await list_available_kinds_skus_locations (resource_skus_client);
 
-	// Create a resource with kind Text Translation, SKU F0 (free tier), location global.
+// Create a resource with kind Text Translation, SKU F0 (free tier), location global.
 	await create_resource (accounts_client, "test_resource", "TextTranslation", "F0", "Global");
 
-	// Uncomment this to list all resources for your Azure account.
-	list_resources (accounts_client);
+// List all resources for your Azure account.
+	await list_resources (accounts_client);
 
-	// Delete the resource.
-	delete_resource (accounts_client, "test_resource");
+// Delete the resource.
+	await delete_resource (accounts_client, "test_resource");
 }
 // </snippet_main_calls>
 
