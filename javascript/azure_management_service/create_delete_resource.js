@@ -50,6 +50,7 @@ const tenant_id = "PASTE_YOUR_TENANT_ID_HERE";
 /* The name of the Azure resource group in which you want to create the resource.
 You can find resource groups in the Azure Dashboard under Home > Resource groups. */
 const resource_group_name = "PASTE_YOUR_RESOURCE_GROUP_NAME_HERE";
+
 /* The name of the custom subdomain to use when you create the resource. This is optional.
 For example, if you create a Bing Search v7 resource with the custom subdomain name 'my-search-resource',
 your resource would have the endpoint https://my-search-resource.cognitiveservices.azure.com/.
@@ -57,6 +58,7 @@ Note not all Cognitive Services allow custom subdomain names.
 */
 const subdomain_name = "PASTE_YOUR_SUBDOMAIN_NAME_HERE";
 // </snippet_constants>
+
 // <snippet_list_avail>
 async function list_available_kinds_skus_locations (client) {
 	console.log ("Available SKUs:");
@@ -89,7 +91,7 @@ property from the properties object. */
     return client.create(resource_group_name, resource_name, parameters)
         .then((result) => {
 			console.log("Resource created.");
-			print();
+			console.log();
 			console.log("ID: " + result.id);
 			console.log("Kind: " + result.kind);
 			console.log();
