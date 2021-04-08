@@ -49,18 +49,24 @@ namespace ConsoleApp1
         */
 
         // <snippet_constants>
-        const string  service_principal_application_id = "TODO_REPLACE";
-        const string  service_principal_secret = "TODO_REPLACE";
+        const string  service_principal_application_id = "PASTE_YOUR_SERVICE_PRINCIPAL_APPLICATION_ID_HERE";
+        const string  service_principal_secret = "PASTE_YOUR_SERVICE_PRINCIPAL_SECRET_HERE";
 
         /* The ID of your Azure subscription. You can find this in the Azure Dashboard under Home > Subscriptions. */
-        const string  subscription_id = "TODO_REPLACE";
+        const string  subscription_id = "PASTE_YOUR_SUBSCRIPTION_ID_HERE";
 
         /* The Active Directory tenant ID. You can find this in the Azure Dashboard under Home > Azure Active Directory. */
-        const string  tenant_id = "TODO_REPLACE";
+        const string  tenant_id = "PASTE_YOUR_TENANT_ID_HERE";
 
         /* The name of the Azure resource group in which you want to create the resource.
         You can find resource groups in the Azure Dashboard under Home > Resource groups. */
-        const string  resource_group_name = "TODO_REPLACE";
+        const string  resource_group_name = "PASTE_YOUR_RESOURCE_GROUP_NAME_HERE";
+
+        /* The name of the custom subdomain to use when you create the resource. This is optional.
+        For example, if you create a Bing Search v7 resource with the custom subdomain name 'my-search-resource',
+        your resource would have the endpoint https://my-search-resource.cognitiveservices.azure.com/.
+        Note not all Cognitive Services allow custom subdomain names. */
+        const string subdomain_name = "PASTE_YOUR_SUBDOMAIN_NAME_HERE";
         // </snippet_constants>
 
         // <snippet_list_avail>
@@ -101,9 +107,10 @@ namespace ConsoleApp1
         static void create_resource(CognitiveServicesManagementClient client, string resource_name, string kind, string account_tier, string location)
         {
             Console.WriteLine("Creating resource: " + resource_name + "...");
-            // The parameter "properties" must be an empty object.
+            /* NOTE If you do not want to use a custom subdomain name, remove the customSubDomainName
+            property from CognitiveServicesAccountProperties. */
             CognitiveServicesAccount parameters = 
-                new CognitiveServicesAccount(null, null, kind, location, resource_name, new CognitiveServicesAccountProperties(), new Sku(account_tier));
+                new CognitiveServicesAccount(null, null, kind, location, resource_name, new CognitiveServicesAccountProperties(customSubDomainName : subdomain_name), new Sku(account_tier));
             var result = client.Accounts.Create(resource_group_name, account_tier, parameters);
             Console.WriteLine("Resource created.");
             Console.WriteLine("ID: " + result.Id);
@@ -140,13 +147,13 @@ namespace ConsoleApp1
             // </snippet_assigns>
 
             // <snippet_calls>
-            // List all available resource kinds, SKUs, and locations for your Azure account:
-            list_available_kinds_skus_locations(client);
+            // Uncomment to list all available resource kinds, SKUs, and locations for your Azure account:
+            //list_available_kinds_skus_locations(client);
         
             // Create a resource with kind TextTranslation, F0 (free tier), location global.
             create_resource(client, "test_resource", "TextTranslation", "F0", "Global");
 
-            // List all resources for your Azure account:
+            // List all resources for your Azure account and resource group:
             list_resources(client);
 
             // Delete the resource.
