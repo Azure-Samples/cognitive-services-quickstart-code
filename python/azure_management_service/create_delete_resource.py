@@ -1,5 +1,5 @@
 # <snippet_imports>
-from msrestazure.azure_active_directory import ServicePrincipalCredentials
+from azure.identity import ClientSecretCredential
 from azure.mgmt.cognitiveservices import CognitiveServicesManagementClient
 from azure.mgmt.cognitiveservices.models import CognitiveServicesAccount, Sku
 # </snippet_imports>
@@ -8,7 +8,7 @@ from azure.mgmt.cognitiveservices.models import CognitiveServicesAccount, Sku
 #
 # This script requires the following modules:
 #	python -m pip install azure-mgmt-cognitiveservices
-#	python -m pip install msrestazure
+#	python -m pip install azure.identity
 #
 # SDK: https://docs.microsoft.com/en-us/python/api/azure-mgmt-cognitiveservices/azure.mgmt.cognitiveservices?view=azure-python 
 #
@@ -38,23 +38,29 @@ from azure.mgmt.cognitiveservices.models import CognitiveServicesAccount, Sku
 
 # <snippet_constants>
 # Be sure to use the service pricipal application ID, not simply the ID. 
-service_principal_application_id = "MY-SERVICE-PRINCIPAL-APPLICATION-ID"
-service_principal_secret = "MY-SERVICE-PRINCIPAL-SECRET"
+service_principal_application_id = "PASTE_YOUR_SERVICE_PRINCIPAL_APPLICATION_ID_HERE"
+service_principal_secret = "PASTE_YOUR_SERVICE_PRINCIPAL_SECRET_HERE"
 
 # The ID of your Azure subscription. You can find this in the Azure Dashboard under Home > Subscriptions.
-subscription_id = "MY-SUBSCRIPTION-ID"
+subscription_id = "PASTE_YOUR_SUBSCRIPTION_ID_HERE"
 
 # The Active Directory tenant ID. You can find this in the Azure Dashboard under Home > Azure Active Directory.
-tenant_id = "MY-TENANT-ID"
+tenant_id = "PASTE_YOUR_TENANT_ID_HERE"
 
 # The name of the Azure resource group in which you want to create the resource.
 # You can find resource groups in the Azure Dashboard under Home > Resource groups.
-resource_group_name = "MY-RESOURCE-GROUP"
+resource_group_name = "PASTE_YOUR_RESOURCE_GROUP_NAME_HERE"
+
+# The name of the custom subdomain to use when you create the resource. This is optional.
+# For example, if you create a Bing Search v7 resource with the custom subdomain name 'my-search-resource',
+# your resource would have the endpoint https://my-search-resource.cognitiveservices.azure.com/.
+# Note not all Cognitive Services allow custom subdomain names.
+subdomain_name = "PASTE_YOUR_SUBDOMAIN_NAME_HERE"
 # </snippet_constants>
 
 # <snippet_auth>
-credentials = ServicePrincipalCredentials(service_principal_application_id, service_principal_secret, tenant=tenant_id)
-client = CognitiveServicesManagementClient(credentials, subscription_id)
+credential = ClientSecretCredential(tenant_id, service_principal_application_id, service_principal_secret)
+client = CognitiveServicesManagementClient(credential, subscription_id)
 # </snippet_auth>
 
 # <snippet_list_avail>
@@ -79,10 +85,11 @@ def list_resources():
 # </snippet_list>
 
 # <snippet_create>
-def create_resource (resource_name, kind, sku_name, location):
+def create_resource (resource_name, kind, sku_name, location) :
 	print("Creating resource: " + resource_name + "...")
-# The parameter "properties" must be an empty object.
-	parameters = CognitiveServicesAccount(sku=Sku(name=sku_name), kind=kind, location=location, properties={})
+# NOTE If you do not want to use a custom subdomain name, remove the customSubDomainName
+# property from the properties object.
+	parameters = CognitiveServicesAccount(sku=Sku(name=sku_name), kind=kind, location=location, properties={ 'custom_sub_domain_name' : subdomain_name })
 	result = client.accounts.create(resource_group_name, resource_name, parameters)
 	print("Resource created.")
 	print()
@@ -101,12 +108,12 @@ def delete_resource(resource_name) :
 
 # <snippet_calls>
 # Uncomment this to list all available resource kinds, SKUs, and locations for your Azure account.
-list_available_kinds_skus_locations()
+#list_available_kinds_skus_locations ()
 
 # Create a resource with kind Text Translation, SKU F0 (free tier), location global.
 create_resource("test_resource", "TextTranslation", "F0", "Global")
 
-# Uncomment this to list all resources for your Azure account.
+# List all resources for your Azure account.
 list_resources()
 
 # Delete the resource.
