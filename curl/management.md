@@ -34,8 +34,8 @@ The Azure CLI prints output similar to the following:
 Copy the value of the access token and paste it into the following curl commands in place of <token>. To copy from a command prompt, left click and drag to select the text to copy, then press Enter to copy the text to the clipboard.
 
 To get a list of subscriptions to which your Azure account has access, run the following command.
-- Replace <subscription ID> with your Azure subscription ID. You can find this in the Azure Dashboard under Home > Subscriptions.
-- Replace <token> with your Azure access token.
+- Replace `<subscription ID>` with your Azure subscription ID. You can find this in the Azure Dashboard under Home > Subscriptions.
+- Replace `<token>` with your Azure access token.
 
 ```
 curl https://management.azure.com/subscriptions/<subscription ID>/providers/Microsoft.CognitiveServices/accounts?api-version=2017-04-18 -H "Authorization: Bearer <token>"
