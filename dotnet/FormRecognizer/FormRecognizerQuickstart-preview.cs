@@ -21,10 +21,12 @@ class Program
     // <snippet_urls>
     string trainingDataUrl = "<SAS-URL-of-your-form-folder-in-blob-storage>";
     string formUrl = "<SAS-URL-of-a-form-in-blob-storage>";
-    string receiptUrl = "https://docs.microsoft.com/azure/cognitive-services/form-recognizer/media"
-    + "/contoso-allinone.jpg";
+    string receiptUrl = "https://docs.microsoft.com/azure/cognitive-services/form-recognizer/media" +
+      "/contoso-allinone.jpg";
     string bcUrl = "https://raw.githubusercontent.com/Azure/azure-sdk-for-python/master/sdk/formrecognizer/azure-ai-formrecognizer/samples/sample_forms/business_cards/business-card-english.jpg";
     string invoiceUrl = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-REST-api-samples/master/curl/form-recognizer/simple-invoice.png";
+
+    string idUrl = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-REST-api-samples/master/curl/form-recognizer/id-license.jpg";
 
     // </snippet_urls>
 
@@ -44,7 +46,13 @@ class Program
         var analyzeInvoice = AnalyzeInvoice(recognizerClient, invoiceUrl);
         Task.WaitAll(analyzeInvoice);
 
+        var analyzeId = AnalyzeId(recognizerClient, idUrl);
+        Task.WaitAll(analyzeId);
+
         var trainModel = TrainModel(trainingClient, trainingDataUrl);
+        Task.WaitAll(trainModel);
+
+        var trainModelWithLabels = TrainModelWithLabels(trainingClient, trainingDataUrl);
         Task.WaitAll(trainModel);
 
         var analyzeForm = AnalyzePdfForm(recognizerClient, modelId, formUrl);
@@ -72,8 +80,8 @@ class Program
     {
         var invoiceUri = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-REST-api-samples/master/curl/form-recognizer/simple-invoice.png";
         FormPageCollection formPages = await recognizeClient
-            .StartRecognizeContentFromUri(new Uri(invoiceUri))
-            .WaitForCompletionAsync();
+          .StartRecognizeContentFromUri(new Uri(invoiceUri))
+          .WaitForCompletionAsync();
         // </snippet_getcontent_call>
 
         // <snippet_getcontent_print>
@@ -84,7 +92,7 @@ class Program
             for (int i = 0; i < page.Lines.Count; i++)
             {
                 FormLine line = page.Lines[i];
-                Console.WriteLine($"    Line {i} has {line.Words.Count} word{(line.Words.Count > 1 ? "s" : "")}, and text: '{line.Text}'.");
+                Console.WriteLine($"    Line {i} has {line.Words.Count} word{(line.Words.Count > 1 ? "s " : "")}, and text: '{line.Text}'.");
             }
 
             for (int i = 0; i < page.Tables.Count; i++)
@@ -102,7 +110,7 @@ class Program
 
     // <snippet_receipt_call>
     private static async Task AnalyzeReceipt(
-        FormRecognizerClient recognizerClient, string receiptUri)
+      FormRecognizerClient recognizerClient, string receiptUri)
     {
         RecognizedFormCollection receipts = await recognizeClient.StartRecognizeReceiptsFromUri(new Uri(receiptUrl)).WaitForCompletionAsync();
         // </snippet_receipt_call>
@@ -184,10 +192,9 @@ class Program
     }
     // </snippet_receipt_print>
 
-
     // <snippet_bc_call>
     private static async Task AnalyzeBusinessCard(
-        FormRecognizerClient recognizerClient, string bcUrl)
+      FormRecognizerClient recognizerClient, string bcUrl)
     {
         RecognizedFormCollection businessCards = await recognizerClient.StartRecognizeBusinessCardsFromUriAsync(bcUrl).WaitForCompletionAsync();
         // </snippet_bc_call>
@@ -391,9 +398,12 @@ class Program
 
     // <snippet_invoice_call>
     private static async Task AnalyzeInvoice(
-        FormRecognizerClient recognizerClient, string invoiceUrl)
+      FormRecognizerClient recognizerClient, string invoiceUrl)
     {
-        var options = new RecognizeInvoicesOptions() { Locale = "en-US" };
+        var options = new RecognizeInvoicesOptions()
+        {
+            Locale = "en-US"
+        };
         RecognizedFormCollection invoices = await recognizerClient.StartRecognizeInvoicesFromUriAsync(invoiceUrl, options).WaitForCompletionAsync();
         // </snippet_invoice_call>
         // <snippet_invoice_print>
@@ -489,170 +499,256 @@ class Program
             }
         }
     }
-}
-// </snippet_invoice_print>
 
-// <snippet_train>
-private static async Task<Guid> TrainModel(
-    FormRecognizerClient trainingClient, string trainingDataUrl)
-{
-    CustomFormModel model = await trainingClient
-    .StartTrainingAsync(new Uri(trainingDataUrl), useTrainingLabels: false)
-    .WaitForCompletionAsync();
+    // </snippet_invoice_print>
 
-    Console.WriteLine($"Custom Model Info:");
-    Console.WriteLine($"    Model Id: {model.ModelId}");
-    Console.WriteLine($"    Model Status: {model.Status}");
-    Console.WriteLine($"    Training model started on: {model.TrainingStartedOn}");
-    Console.WriteLine($"    Training model completed on: {model.TrainingCompletedOn}");
-    // </snippet_train>
-    // <snippet_train_response>
-    foreach (CustomFormSubmodel submodel in model.Submodels)
+    // <snippet_id_call>
+    private static async Task AnalyzeId(
+      FormRecognizerClient recognizerClient, string idUrl)
     {
-        Console.WriteLine($"Submodel Form Type: {submodel.FormType}");
-        foreach (CustomFormModelField field in submodel.Fields.Values)
+        RecognizedFormCollection businessCards = await recognizerClient.StartRecognizeIdDocumentsFromUriAsync(idUrl).WaitForCompletionAsync();
+
+        //</snippet_id_call>
+        //<snippet_id_print>
+
+        RecognizedForm idDocument = idDocuments.Single();
+
+        if (idDocument.Fields.TryGetValue("Address", out FormField addressField))
         {
-            Console.Write($"    FieldName: {field.Name}");
-            if (field.Label != null)
+            if (addressField.Value.ValueType == FieldValueType.String)
             {
-                Console.Write($", FieldLabel: {field.Label}");
+                string address = addressField.Value.AsString();
+                Console.WriteLine($"Address: '{address}', with confidence {addressField.Confidence}");
             }
-            Console.WriteLine("");
+        }
+
+        if (idDocument.Fields.TryGetValue("Country", out FormField countryField))
+        {
+            if (countryField.Value.ValueType == FieldValueType.Country)
+            {
+                string country = countryField.Value.AsCountryCode();
+                Console.WriteLine($"Country: '{country}', with confidence {countryField.Confidence}");
+            }
+        }
+
+        if (idDocument.Fields.TryGetValue("DateOfBirth", out FormField dateOfBirthField))
+        {
+            if (dateOfBirthField.Value.ValueType == FieldValueType.Date)
+            {
+                DateTime dateOfBirth = dateOfBirthField.Value.AsDate();
+                Console.WriteLine($"Date Of Birth: '{dateOfBirth}', with confidence {dateOfBirthField.Confidence}");
+            }
+        }
+
+        if (idDocument.Fields.TryGetValue("DateOfExpiration", out FormField dateOfExpirationField))
+        {
+            if (dateOfExpirationField.Value.ValueType == FieldValueType.Date)
+            {
+                DateTime dateOfExpiration = dateOfExpirationField.Value.AsDate();
+                Console.WriteLine($"Date Of Expiration: '{dateOfExpiration}', with confidence {dateOfExpirationField.Confidence}");
+            }
+        }
+
+        if (idDocument.Fields.TryGetValue("DocumentNumber", out FormField documentNumberField))
+        {
+            if (documentNumberField.Value.ValueType == FieldValueType.String)
+            {
+                string documentNumber = documentNumberField.Value.AsString();
+                Console.WriteLine($"Document Number: '{documentNumber}', with confidence {documentNumberField.Confidence}");
+            }
+        }
+
+        if (idDocument.Fields.TryGetValue("FirstName", out FormField firstNameField))
+        {
+            if (firstNameField.Value.ValueType == FieldValueType.String)
+            {
+                string firstName = firstNameField.Value.AsString();
+                Console.WriteLine($"First Name: '{firstName}', with confidence {firstNameField.Confidence}");
+            }
+        }
+
+        if (idDocument.Fields.TryGetValue("LastName", out FormField lastNameField))
+        {
+            if (lastNameField.Value.ValueType == FieldValueType.String)
+            {
+                string lastName = lastNameField.Value.AsString();
+                Console.WriteLine($"Last Name: '{lastName}', with confidence {lastNameField.Confidence}");
+            }
+        }
+
+        if (idDocument.Fields.TryGetValue("Region", out FormField regionfield))
+        {
+            if (regionfield.Value.ValueType == FieldValueType.String)
+            {
+                string region = regionfield.Value.AsString();
+                Console.WriteLine($"Region: '{region}', with confidence {regionfield.Confidence}");
+            }
         }
     }
-    // </snippet_train_response>
-    // <snippet_train_return>
-    return model.ModelId;
-}
-// </snippet_train_return>
+    //</snippet_id_print>
 
-// <snippet_trainlabels>
-private static async Task<Guid> TrainModelWithLabelsAsync(
-    FormRecognizerClient trainingClient, string trainingDataUrl)
-{
-    CustomFormModel model = await trainingClient
-    .StartTrainingAsync(new Uri(trainingDataUrl), useTrainingLabels: true)
-    .WaitForCompletionAsync();
-    Console.WriteLine($"Custom Model Info:");
-    Console.WriteLine($"    Model Id: {model.ModelId}");
-    Console.WriteLine($"    Model Status: {model.Status}");
-    Console.WriteLine($"    Training model started on: {model.TrainingStartedOn}");
-    Console.WriteLine($"    Training model completed on: {model.TrainingCompletedOn}");
-    // </snippet_trainlabels>
-    // <snippet_trainlabels_response>
-    foreach (CustomFormSubmodel submodel in model.Submodels)
+    // <snippet_train>
+    private static async Task<Guid> TrainModel(
+      FormRecognizerClient trainingClient, string trainingDataUrl)
     {
-        Console.WriteLine($"Submodel Form Type: {submodel.FormType}");
-        foreach (CustomFormModelField field in submodel.Fields.Values)
-        {
-            Console.Write($"    FieldName: {field.Name}");
-            if (field.Label != null)
-            {
-                Console.Write($", FieldLabel: {field.Label}");
-            }
-            Console.WriteLine("");
-        }
-    }
-    return model.ModelId;
-}
-// </snippet_trainlabels_response>
+        CustomFormModel model = await trainingClient
+          .StartTrainingAsync(new Uri(trainingDataUrl), useTrainingLabels: false)
+          .WaitForCompletionAsync();
 
-// <snippet_analyze>
-// Analyze PDF form data
-private static async Task AnalyzePdfForm(
-    FormRecognizerClient recognizerClient, Guid modelId, string formUrl)
-{
-    RecognizedFormCollection forms = await recognizeClient
-    .StartRecognizeCustomFormsFromUri(modelId, new Uri(invoiceUri))
-    .WaitForCompletionAsync();
-    // </snippet_analyze>
-    // <snippet_analyze_response>
-    foreach (RecognizedForm form in forms)
-    {
-        Console.WriteLine($"Form of type: {form.FormType}");
-        foreach (FormField field in form.Fields.Values)
-        {
-            Console.WriteLine($"Field '{field.Name}: ");
+        Console.WriteLine($"Custom Model Info:");
+        Console.WriteLine($"    Model Id: {model.ModelId}");
+        Console.WriteLine($"    Model Status: {model.Status}");
+        Console.WriteLine($"    Training model started on: {model.TrainingStartedOn}");
+        Console.WriteLine($"    Training model completed on: {model.TrainingCompletedOn}");
+        // </snippet_train>
 
-            if (field.LabelData != null)
-            {
-                Console.WriteLine($"    Label: '{field.LabelData.Text}");
-            }
-
-            Console.WriteLine($"    Value: '{field.ValueData.Text}");
-            Console.WriteLine($"    Confidence: '{field.Confidence}");
-        }
-        Console.WriteLine("Table data:");
-        foreach (FormPage page in form.Pages.Values)
+        // <snippet_train_response>
+        foreach (CustomFormSubmodel submodel in model.Submodels)
         {
-            for (int i = 0; i < page.Tables.Count; i++)
+            Console.WriteLine($"Submodel Form Type: {submodel.FormType}");
+            foreach (CustomFormModelField field in submodel.Fields.Values)
             {
-                FormTable table = page.Tables[i];
-                Console.WriteLine($"Table {i} has {table.RowCount} rows and {table.ColumnCount} columns.");
-                foreach (FormTableCell cell in table.Cells)
+                Console.Write($"    FieldName: {field.Name}");
+                if (field.Label != null)
                 {
-                    Console.WriteLine($"    Cell ({cell.RowIndex}, {cell.ColumnIndex}) contains {(cell.IsHeader ? "header" : "text")}: '{cell.Text}'");
+                    Console.Write($", FieldLabel: {field.Label}");
+                }
+                Console.WriteLine("");
+            }
+        }
+        // </snippet_train_response>
+        // <snippet_train_return>
+        return model.ModelId;
+    }
+    // </snippet_train_return>
+
+    // <snippet_trainlabels>
+    private static async Task<Guid> TrainModelWithLabels(
+      FormRecognizerClient trainingClient, string trainingDataUrl)
+    {
+        CustomFormModel model = await trainingClient
+          .StartTrainingAsync(new Uri(trainingDataUrl), useTrainingLabels: true)
+          .WaitForCompletionAsync();
+        Console.WriteLine($"Custom Model Info:");
+        Console.WriteLine($"    Model Id: {model.ModelId}");
+        Console.WriteLine($"    Model Status: {model.Status}");
+        Console.WriteLine($"    Training model started on: {model.TrainingStartedOn}");
+        Console.WriteLine($"    Training model completed on: {model.TrainingCompletedOn}");
+        // </snippet_trainlabels>
+        // <snippet_trainlabels_response>
+        foreach (CustomFormSubmodel submodel in model.Submodels)
+        {
+            Console.WriteLine($"Submodel Form Type: {submodel.FormType}");
+            foreach (CustomFormModelField field in submodel.Fields.Values)
+            {
+                Console.Write($"    FieldName: {field.Name}");
+                if (field.Label != null)
+                {
+                    Console.Write($", FieldLabel: {field.Label}");
+                }
+                Console.WriteLine("");
+            }
+        }
+        return model.ModelId;
+    }
+    // </snippet_trainlabels_response>
+
+    // <snippet_analyze>
+    // Analyze PDF form data
+    private static async Task AnalyzePdfForm(
+      FormRecognizerClient recognizerClient, Guid modelId, string formUrl)
+    {
+        RecognizedFormCollection forms = await recognizeClient
+          .StartRecognizeCustomFormsFromUri(modelId, new Uri(invoiceUri))
+          .WaitForCompletionAsync();
+        // </snippet_analyze>
+        // <snippet_analyze_response>
+        foreach (RecognizedForm form in forms)
+        {
+            Console.WriteLine($"Form of type: {form.FormType}");
+            foreach (FormField field in form.Fields.Values)
+            {
+                Console.WriteLine($"Field '{field.Name}: ");
+
+                if (field.LabelData != null)
+                {
+                    Console.WriteLine($"    Label: '{field.LabelData.Text}");
+                }
+
+                Console.WriteLine($"    Value: '{field.ValueData.Text}");
+                Console.WriteLine($"    Confidence: '{field.Confidence}");
+            }
+            Console.WriteLine("Table data:");
+            foreach (FormPage page in form.Pages.Values)
+            {
+                for (int i = 0; i < page.Tables.Count; i++)
+                {
+                    FormTable table = page.Tables[i];
+                    Console.WriteLine($"Table {i} has {table.RowCount} rows and {table.ColumnCount} columns.");
+                    foreach (FormTableCell cell in table.Cells)
+                    {
+                        Console.WriteLine($"    Cell ({cell.RowIndex}, {cell.ColumnIndex}) contains {(cell.IsHeader ? "header " : "text ")}: '{cell.Text}'");
+                    }
                 }
             }
         }
     }
-}
-// </snippet_analyze_response>
+    // </snippet_analyze_response>
 
-// <snippet_manage>
-private static async Task ManageModels(
-    FormRecognizerClient trainingClient, string trainingFileUrl)
-{
-    // </snippet_manage>
-    // <snippet_manage_model_count>
-    // Check number of models in the FormRecognizer account, 
-    // and the maximum number of models that can be stored.
-    AccountProperties accountProperties = trainingClient.GetAccountProperties();
-    Console.WriteLine($"Account has {accountProperties.CustomModelCount} models.");
-    Console.WriteLine($"It can have at most {accountProperties.CustomModelLimit} models.");
-    // </snippet_manage_model_count>
-
-    // <snippet_manage_model_list>
-    Pageable<CustomFormModelInfo> models = trainingClient.GetCustomModels();
-
-    foreach (CustomFormModelInfo modelInfo in models)
+    // <snippet_manage>
+    private static async Task ManageModels(
+      FormRecognizerClient trainingClient, string trainingFileUrl)
     {
-        Console.WriteLine($"Custom Model Info:");
-        Console.WriteLine($"    Model Id: {modelInfo.ModelId}");
-        Console.WriteLine($"    Model Status: {modelInfo.Status}");
-        Console.WriteLine($"    Training model started on: {modelInfo.TrainingStartedOn}");
-        Console.WriteLine($"    Training model completed on: {modelInfo.TrainingCompletedOn}");
-    }
-    // </snippet_manage_model_list>
+        // </snippet_manage>
+        // <snippet_manage_model_count>
+        // Check number of models in the FormRecognizer account, 
+        // and the maximum number of models that can be stored.
+        AccountProperties accountProperties = trainingClient.GetAccountProperties();
+        Console.WriteLine($"Account has {accountProperties.CustomModelCount} models.");
+        Console.WriteLine($"It can have at most {accountProperties.CustomModelLimit} models.");
+        // </snippet_manage_model_count>
 
-    // <snippet_manage_model_get>
-    // Create a new model to store in the account
-    CustomFormModel model = await trainingClient.StartTrainingAsync(
-        new Uri(trainingFileUrl)).WaitForCompletionAsync();
+        // <snippet_manage_model_list>
+        Pageable<CustomFormModelInfo> models = trainingClient.GetCustomModels();
 
-    // Get the model that was just created
-    CustomFormModel modelCopy = trainingClient.GetCustomModel(modelId);
-
-    Console.WriteLine($"Custom Model {modelCopy.ModelId} recognizes the following form types:");
-
-    foreach (CustomFormSubmodel submodel in modelCopy.Submodels)
-    {
-        Console.WriteLine($"Submodel Form Type: {submodel.FormType}");
-        foreach (CustomFormModelField field in submodel.Fields.Values)
+        foreach (CustomFormModelInfo modelInfo in models)
         {
-            Console.Write($"    FieldName: {field.Name}");
-            if (field.Label != null)
-            {
-                Console.Write($", FieldLabel: {field.Label}");
-            }
-            Console.WriteLine("");
+            Console.WriteLine($"Custom Model Info:");
+            Console.WriteLine($"    Model Id: {modelInfo.ModelId}");
+            Console.WriteLine($"    Model Status: {modelInfo.Status}");
+            Console.WriteLine($"    Training model started on: {modelInfo.TrainingStartedOn}");
+            Console.WriteLine($"    Training model completed on: {modelInfo.TrainingCompletedOn}");
         }
-    }
-    // </snippet_manage_model_get>
+        // </snippet_manage_model_list>
 
-    // <snippet_manage_model_delete>
-    // Delete the model from the account.
-    trainingClient.DeleteModel(model.ModelId);
-}
+        // <snippet_manage_model_get>
+        // Create a new model to store in the account
+        CustomFormModel model = await trainingClient.StartTrainingAsync(
+          new Uri(trainingFileUrl)).WaitForCompletionAsync();
+
+        // Get the model that was just created
+        CustomFormModel modelCopy = trainingClient.GetCustomModel(modelId);
+
+        Console.WriteLine($"Custom Model {modelCopy.ModelId} recognizes the following form types:");
+
+        foreach (CustomFormSubmodel submodel in modelCopy.Submodels)
+        {
+            Console.WriteLine($"Submodel Form Type: {submodel.FormType}");
+            foreach (CustomFormModelField field in submodel.Fields.Values)
+            {
+                Console.Write($"    FieldName: {field.Name}");
+                if (field.Label != null)
+                {
+                    Console.Write($", FieldLabel: {field.Label}");
+                }
+                Console.WriteLine("");
+            }
+        }
+        // </snippet_manage_model_get>
+
+        // <snippet_manage_model_delete>
+        // Delete the model from the account.
+        trainingClient.DeleteModel(model.ModelId);
+    }
     // </snippet_manage_model_delete>
 }
