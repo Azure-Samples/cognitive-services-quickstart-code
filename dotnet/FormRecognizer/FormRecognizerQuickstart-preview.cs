@@ -50,7 +50,7 @@ class Program {
     var trainModel = TrainModel(trainingClient, trainingDataUrl);
     Task.WaitAll(trainModel);
 
-    var trainModel = TrainModelWithLabelsAsync(trainingClient, trainingDataUrl);
+    var trainModelWithLabels = TrainModelWithLabels(trainingClient, trainingDataUrl);
     Task.WaitAll(trainModel);
 
     var analyzeForm = AnalyzePdfForm(recognizerClient, modelId, formUrl);
@@ -514,7 +514,7 @@ class Program {
   // </snippet_train_return>
 
   // <snippet_trainlabels>
-  private static async Task < Guid > TrainModelWithLabelsAsync(
+  private static async Task < Guid > TrainModelWithLabels(
     FormRecognizerClient trainingClient, string trainingDataUrl) {
     CustomFormModel model = await trainingClient
       .StartTrainingAsync(new Uri(trainingDataUrl), useTrainingLabels: true)
