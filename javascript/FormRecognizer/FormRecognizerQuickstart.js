@@ -91,7 +91,7 @@ recognizeReceipt().catch((err) => {
 // </snippet_receipts>
 
 //<snippet_bc>
-async function recognizeBusinessCard() {
+async function recognizeBusinessCards() {
     bcUrl = "https://github.com/Azure-Samples/cognitive-services-REST-api-samples/curl/form-recognizer/businessCard.png";
     const poller = await client.beginRecognizeBusinessCardsFromUrl(bcUrl, {
         onProgress: (state) => {
@@ -146,14 +146,14 @@ function printSimpleArrayField(businessCard, fieldName) {
     }
 }
 
-recognizeBusinessCard().catch((err) => {
+recognizeBusinessCards().catch((err) => {
     console.error("The sample encountered an error:", err);
 });
 
 //</snippet_bc >
 
 //<snippet_invoice>
-async function recognizeInvoice() {
+async function recognizeInvoices() {
     invoiceUrl = "https://github.com/Azure-Samples/cognitive-services-REST-api-samples/curl/form-recognizer/invoice_sample.jpg";
 
     const poller = await client.beginRecognizeInvoicesFromUrl(invoiceUrl, {
@@ -217,7 +217,7 @@ async function recognizeInvoice() {
     }
 }
 
-recognizeInvoice().catch((err) => {
+recognizeInvoices().catch((err) => {
     console.error("The sample encountered an error:", err);
 });
 //</snippet_invoice >
