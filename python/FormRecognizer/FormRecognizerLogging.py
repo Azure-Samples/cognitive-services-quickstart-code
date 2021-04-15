@@ -20,5 +20,6 @@ form_recognizer_client = FormRecognizerClient(endpoint, credential, logging_enab
 # </snippet_logging>
 
 # <snippet_example>
-poller = form_recognizer_client.begin_recognize_receipts(receipt, logging_enable=True)
+receiptUrl = "https://raw.githubusercontent.com/Azure/azure-sdk-for-python/master/sdk/formrecognizer/azure-ai-formrecognizer/tests/sample_forms/receipt/contoso-receipt.png"
+poller = form_recognizer_client.begin_recognize_receipts_from_url(receiptUrl, logging_enable=True)
 # </snippet_example>
