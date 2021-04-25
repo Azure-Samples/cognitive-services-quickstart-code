@@ -20,12 +20,10 @@ namespace MlEntitySample
     {
         public static async Task Main()
         {
-            // <EndpointAndKeys>
+            // <AuthoringEndpointAndKeys>
             var authoringKey = "REPLACE-WITH-YOUR-AUTHORING-KEY";
-            var predictionKey = "REPLACE-WITH-YOUR-PREDICTION-KEY";
             var authoringEndpoint = "REPLACE-WITH-YOUR-AUTHORING-ENDPOINT";
-            var predictionEndpoint = "REPLACE-WITH-YOUR-PREDICTION-ENDPOINT";
-            // </EndpointAndKeys>
+            // </AuthoringEndpointAndKeys>
 
             // <ApplicationNameAndVersion>
             var appName = "Contoso Pizza Company";
@@ -74,6 +72,11 @@ namespace MlEntitySample
             await client.Apps.PublishAsync(appId, new ApplicationPublishObject { VersionId = versionId, IsStaging=false});
             // </PublishVersion>
 
+            // <PredictionEndpointAndKeys>
+            var predictionKey = "REPLACE-WITH-YOUR-PREDICTION-KEY";
+            var predictionEndpoint = "REPLACE-WITH-YOUR-PREDICTION-ENDPOINT";
+            // </PredictionEndpointAndKeys>
+                        
             // <PredictionCreateClient>
             var predictionCredentials = new Microsoft.Azure.CognitiveServices.Language.LUIS.Authoring.ApiKeyServiceClientCredentials(predictionKey);
             var runtimeClient = new LUISRuntimeClient(predictionCredentials) { Endpoint = predictionEndpoint };
