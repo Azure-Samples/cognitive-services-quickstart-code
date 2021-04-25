@@ -18,7 +18,7 @@ SUBSCRIPTION_KEY = 'PASTE_YOUR_SPELL_CHECK_SUBSCRIPTION_KEY_HERE'
 ENDPOINT = 'PASTE_YOUR_SPELL_CHECK_ENDPOINT_HERE'
 
 # Create a client
-client = SpellCheckClient(ENDPOINT + '/bing/v7.0', CognitiveServicesCredentials(SUBSCRIPTION_KEY))
+client = SpellCheckClient(ENDPOINT, CognitiveServicesCredentials(SUBSCRIPTION_KEY))
 
 try:
     # Original query
