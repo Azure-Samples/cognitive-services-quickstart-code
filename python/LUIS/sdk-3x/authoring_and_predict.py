@@ -12,12 +12,10 @@ import json, time
 
 def quickstart(): 
 
-	# <EndpointAndKeys>
+	# <AuthoringEndpointAndKeys>
 	authoringKey = 'PASTE_YOUR_LUIS_AUTHORING_SUBSCRIPTION_KEY_HERE'
 	authoringEndpoint = 'PASTE_YOUR_LUIS_AUTHORING_ENDPOINT_HERE'
-	predictionKey = 'PASTE_YOUR_LUIS_PREDICTION_SUBSCRIPTION_KEY_HERE'
-	predictionEndpoint = 'PASTE_YOUR_LUIS_PREDICTION_ENDPOINT_HERE'
-	# </EndpointAndKeys>
+	# </AuthoringEndpointAndKeys>
 
 	# <AuthoringCreateClient>
 	client = LUISAuthoringClient(authoringEndpoint, CognitiveServicesCredentials(authoringKey))
@@ -64,6 +62,11 @@ def quickstart():
 	# <PublishVersion>
 	responseEndpointInfo = client.apps.publish(app_id, versionId, is_staging=False)
 	# </PublishVersion>
+	
+	# <PredictionEndpointAndKeys>
+	predictionKey = 'PASTE_YOUR_LUIS_PREDICTION_SUBSCRIPTION_KEY_HERE'
+	predictionEndpoint = 'PASTE_YOUR_LUIS_PREDICTION_ENDPOINT_HERE'
+	# </PredictionEndpointAndKeys>
 	
 	# <PredictionCreateClient>
 	runtimeCredentials = CognitiveServicesCredentials(predictionKey)
