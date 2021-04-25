@@ -12,26 +12,29 @@ import json, time
 
 def quickstart(): 
 
-	# <VariablesYouChange>
+	# <EndpointAndKeys>
 	authoringKey = 'PASTE_YOUR_LUIS_AUTHORING_SUBSCRIPTION_KEY_HERE'
 	authoringEndpoint = 'PASTE_YOUR_LUIS_AUTHORING_ENDPOINT_HERE'
 	predictionKey = 'PASTE_YOUR_LUIS_PREDICTION_SUBSCRIPTION_KEY_HERE'
 	predictionEndpoint = 'PASTE_YOUR_LUIS_PREDICTION_ENDPOINT_HERE'
-	# </VariablesYouChange>
-
-	# <VariablesYouDontNeedToChangeChange>
-	appName = "Contoso Pizza Company"
-	versionId = "0.1"
-	intentName = "OrderPizzaIntent"
-	# </VariablesYouDontNeedToChangeChange>
+	# </EndpointAndKeys>
 
 	# <AuthoringCreateClient>
 	client = LUISAuthoringClient(authoringEndpoint, CognitiveServicesCredentials(authoringKey))
 	# </AuthoringCreateClient>
 
+	# <ApplicationNameAndVersion>
+	appName = "Contoso Pizza Company"
+	versionId = "0.1"
+	# </ApplicationNameAndVersion>
+	
 	# Create app
 	app_id = create_app(client, appName, versionId)
 
+	# <IntentName>
+	intentName = "OrderPizzaIntent"
+	# </IntentName>
+	
 	# <AddIntent>
 	client.model.add_intent(app_id, versionId, intentName)
 	# </AddIntent>
