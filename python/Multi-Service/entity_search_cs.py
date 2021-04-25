@@ -29,7 +29,7 @@ restaurant_query = 'Shiro\'s Sushi Seattle'
 AUTHENTICATE
 Create an Entity Search client.
 '''
-entity_search_client = EntitySearchClient(endpoint + '/bing/v7.0/', CognitiveServicesCredentials(subscription_key))
+entity_search_client = EntitySearchClient(endpoint, CognitiveServicesCredentials(subscription_key))
 
 '''
 Bing Entity Search
