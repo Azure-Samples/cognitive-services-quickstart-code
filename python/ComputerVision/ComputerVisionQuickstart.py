@@ -5,11 +5,13 @@ Uses local and remote images in each example.
 Prerequisites:
     - Install the Computer Vision SDK:
       pip install --upgrade azure-cognitiveservices-vision-computervision
+    - Install PIL:
+      pip install --upgrade pillow
     - Create folder and collect images: 
-      Create a folder called "resources" in your root folder.
+      Create a folder called "images" in the same folder as this script.
       Go to this website to download images:
         https://github.com/Azure-Samples/cognitive-services-sample-data-files/tree/master/ComputerVision/Images
-      Add the following 7 images (or use your own) to your "resources" folder: 
+      Add the following 7 images (or use your own) to your "images" folder: 
         faces.jpg, gray-shirt-logo.jpg, handwritten_text.jpg, landmark.jpg, 
         objects.jpg, printed_text.jpg and type-image.jpg
 
@@ -25,7 +27,7 @@ Run the entire file to demonstrate the following examples:
     - Detect Objects
     - Detect Brands
     - Generate Thumbnail
-    - Batch Read File (recognize both handwritten and printed text) 
+    - Read File (recognize both handwritten and printed text) 
     - Recognize Printed Text with OCR
 
 References:
@@ -72,7 +74,7 @@ These variables are shared by several examples
 # Images used for the examples: Describe an image, Categorize an image, Tag an image, 
 # Detect faces, Detect adult or racy content, Detect the color scheme, 
 # Detect domain-specific content, Detect image types, Detect objects
-local_image_path = "resources\\faces.jpg"
+images_folder = os.path.join (os.path.dirname(os.path.abspath(__file__)), "images")
 # <snippet_remoteimage>
 remote_image_url = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/landmark.jpg"
 # </snippet_remoteimage>
@@ -86,6 +88,7 @@ This example describes the contents of an image with the confidence score.
 '''
 print("===== Describe an Image - local =====")
 # Open local image file
+local_image_path = os.path.join (images_folder, "faces.jpg")
 local_image = open(local_image_path, "rb")
 
 # Call API
@@ -386,7 +389,7 @@ else:
         print(celeb["name"])
 
 # Open local image file containing a landmark
-local_image_path_landmark = "resources\\landmark.jpg"
+local_image_path_landmark = os.path.join (images_folder, "landmark.jpg")
 local_image_landmark = open(local_image_path_landmark, "rb")
 # Call API with type of content (landmark) and local image
 detect_domain_results_landmark_local = computervision_client.analyze_image_by_domain_in_stream("landmarks", local_image_landmark)
@@ -447,7 +450,7 @@ This example detects an image's type (clip art/line drawing).
 '''
 print("===== Detect Image Types - local =====")
 # Open local image
-local_image_path_type = "resources\\type-image.jpg"
+local_image_path_type = os.path.join (images_folder, "type-image.jpg")
 local_image_type = open(local_image_path_type, "rb")
 # Select visual feature(s) you want
 local_image_features = [VisualFeatureTypes.image_type]
@@ -514,7 +517,7 @@ This example detects different kinds of objects with bounding boxes in a local i
 '''
 print("===== Detect Objects - local =====")
 # Get local image with different objects in it
-local_image_path_objects = "resources\\objects.jpg"
+local_image_path_objects = os.path.join (images_folder, "objects.jpg")
 local_image_objects = open(local_image_path_objects, "rb")
 # Call API with local image
 detect_objects_results_local = computervision_client.detect_objects_in_stream(local_image_objects)
@@ -565,7 +568,7 @@ This example detects common brands like logos and puts a bounding box around the
 '''
 print("===== Detect Brands - local =====")
 # Open image file
-local_image_path_shirt = "resources\\gray-shirt-logo.jpg"
+local_image_path_shirt = os.path.join (images_folder, "gray-shirt-logo.jpg")
 local_image_shirt = open(local_image_path_shirt, "rb")
 # Select the visual feature(s) you want
 local_image_features = ["brands"]
@@ -620,7 +623,7 @@ This example creates a thumbnail from both a local and URL image.
 print("===== Generate Thumbnail =====")
 
 # Generate a thumbnail from a local image
-local_image_path_thumb = "resources\\objects.jpg"
+local_image_path_thumb = os.path.join (images_folder, "objects.jpg")
 local_image_thumb = open(local_image_path_objects, "rb")
 
 print("Generating thumbnail from a local image...")
@@ -668,18 +671,18 @@ END - Generate Thumbnail
 '''
 
 '''
-Batch Read File, recognize handwritten text - local
+Read File, recognize handwritten text - local
 This example extracts text from a handwritten local image, then prints results.
-This API call can also recognize remote image text (shown in next example, Batch Read File - remote).
+This API call can also recognize remote image text (shown in next example, Read File - remote).
 '''
-print("===== Batch Read File - local =====")
+print("===== Read File - local =====")
 # Get image of handwriting
-local_image_handwritten_path = "resources\\handwritten_text.jpg"
+local_image_handwritten_path = os.path.join (images_folder, "handwritten_text.jpg")
 # Open the image
 local_image_handwritten = open(local_image_handwritten_path, "rb")
 
 # Call API with image and raw response (allows you to get the operation location)
-recognize_handwriting_results = computervision_client.batch_read_file_in_stream(local_image_handwritten, raw=True)
+recognize_handwriting_results = computervision_client.read_in_stream(local_image_handwritten, raw=True)
 # Get the operation location (URL with ID as last appendage)
 operation_location_local = recognize_handwriting_results.headers["Operation-Location"]
 # Take the ID off and use to get results
@@ -687,7 +690,7 @@ operation_id_local = operation_location_local.split("/")[-1]
 
 # Call the "GET" API and wait for the retrieval of the results
 while True:
-    recognize_handwriting_result = computervision_client.get_read_operation_result(operation_id_local)
+    recognize_handwriting_result = computervision_client.get_read_result(operation_id_local)
     if recognize_handwriting_result.status not in ['notStarted', 'running']:
         break
     time.sleep(1)
@@ -700,16 +703,16 @@ if recognize_handwriting_result.status == OperationStatusCodes.succeeded:
             print(line.bounding_box)
 print()
 '''
-END - Batch Read File - local
+END - Read File - local
 '''
 
 # <snippet_read_call>
 '''
-Batch Read File, recognize handwritten text - remote
+Read File, recognize handwritten text - remote
 This example will extract handwritten text in an image, then print results, line by line.
 This API call can also recognize handwriting (not shown).
 '''
-print("===== Batch Read File - remote =====")
+print("===== Read File - remote =====")
 # Get an image with handwritten text
 remote_image_handw_text_url = "https://raw.githubusercontent.com/MicrosoftDocs/azure-docs/master/articles/cognitive-services/Computer-vision/Images/readsample.jpg"
 
@@ -739,7 +742,7 @@ if get_handw_text_results.status == OperationStatusCodes.succeeded:
 print()
 # </snippet_read_response>
 '''
-END - Batch Read File - remote
+END - Read File - remote
 '''
 
 '''
@@ -748,7 +751,7 @@ This example will extract, using OCR, printed text in an image, then print resul
 '''
 print("===== Detect Printed Text with OCR - local =====")
 # Get an image with printed text
-local_image_printed_text_path = "resources\\printed_text.jpg"
+local_image_printed_text_path = os.path.join (images_folder, "printed_text.jpg")
 local_image_printed_text = open(local_image_printed_text_path, "rb")
 
 ocr_result_local = computervision_client.recognize_printed_text_in_stream(local_image_printed_text)
