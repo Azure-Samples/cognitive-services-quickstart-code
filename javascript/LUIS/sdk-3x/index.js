@@ -10,21 +10,15 @@ const LUIS_Prediction = require("@azure/cognitiveservices-luis-runtime");
 // <Main>
 const quickstart = async () => {
 
-    // <VariablesYouChange>
-    const authoringKey = 'REPLACE-WITH-YOUR-ASSIGNED-AUTHORING-KEY';
+    // <AuthoringEndpointAndKeys>
+    const authoringKey = 'REPLACE-WITH-YOUR-AUTHORING-KEY';
+    const authoringEndpoint = "REPLACE-WITH-YOUR-AUTHORING-ENDPOINT";
+    // </AuthoringEndpointAndKeys>
 
-    const authoringResourceName = "REPLACE-WITH-YOUR-AUTHORING-RESOURCE-NAME";
-    const predictionResourceName = "REPLACE-WITH-YOUR-PREDICTION-RESOURCE-NAME";
-    // </VariablesYouChange>
-
-    // <VariablesYouDontNeedToChangeChange>
-    const authoringEndpoint = `https://${authoringResourceName}.cognitiveservices.azure.com/`;
-    const predictionEndpoint = `https://${predictionResourceName}.cognitiveservices.azure.com/`;
-
+    // <ApplicationNameAndVersion>
     const appName = "Contoso Pizza Company";
     const versionId = "0.1";
-    const intentName = "OrderPizzaIntent";
-    // </VariablesYouDontNeedToChangeChange>
+    // </ApplicationNameAndVersion>
 
     // <AuthoringCreateClient>
     const luisAuthoringCredentials = new msRest.ApiKeyCredentials({
@@ -39,6 +33,11 @@ const quickstart = async () => {
     // Create app
     const appId = await createApp(client, appName, versionId);
 
+    
+    // <IntentName>
+    const intentName = "OrderPizzaIntent";
+    // </IntentName>
+    
     // <AddIntent>
     await client.model.addIntent(
         appId,
@@ -67,7 +66,13 @@ const quickstart = async () => {
     // <PublishVersion>
     await client.apps.publish(appId, { versionId: versionId, isStaging: false });
     // </PublishVersion>
-
+    
+    // <PredictionEndpointAndKeys>
+    const predictionKey = 'REPLACE-WITH-YOUR-PREDICTION-KEY';
+    const predictionEndpoint = "REPLACE-WITH-YOUR-PREDICTION-ENDPOINT";
+    // </PredictionEndpointAndKeys>
+    
+    
     // <PredictionCreateClient>
     const luisPredictionClient = new LUIS_Prediction.LUISRuntimeClient(
         luisAuthoringCredentials,
