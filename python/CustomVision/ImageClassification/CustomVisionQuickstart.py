@@ -19,7 +19,7 @@ https://github.com/Azure-Samples/cognitive-services-sample-data-files/tree/maste
 
 This sample looks for images in the following paths:
 <your working directory>/Images/Hemlock
-<your working directory>/Images/Japanese Cherry
+<your working directory>/Images/Japanese_Cherry
 <your working directory>/Images/Test
 '''
 
@@ -70,7 +70,7 @@ for image_num in range(1, 11):
 
 for image_num in range(1, 11):
     file_name = "japanese_cherry_{}.jpg".format(image_num)
-    with open(os.path.join (base_image_location, "Japanese Cherry", file_name), "rb") as image_contents:
+    with open(os.path.join (base_image_location, "Japanese_Cherry", file_name), "rb") as image_contents:
         image_list.append(ImageFileCreateEntry(name=file_name, contents=image_contents.read(), tag_ids=[cherry_tag.id]))
 
 upload_result = trainer.create_images_from_files(project.id, ImageFileCreateBatch(images=image_list))
