@@ -17,7 +17,7 @@ axios({
     method: 'post',
     url: endpoint,
     params : {
-		detectionModel: 'detection_02',
+		detectionModel: 'detection_03',
         returnFaceId: true
     },
     data: {

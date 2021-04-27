@@ -88,9 +88,9 @@ func main() {
 	returnRecognitionModel := false
 	returnFaceLandmarks := false
 
-	// API call to detect faces in single-faced image, using recognition model 3
+	// API call to detect faces in single-faced image, using recognition model 4
 	// We specify detection model 1 because we are retrieving attributes.
-	detectSingleFaces, dErr := client.DetectWithURL(faceContext, singleImageURL, &returnFaceID, &returnFaceLandmarks, attributes, face.Recognition03, &returnRecognitionModel, face.Detection01)
+	detectSingleFaces, dErr := client.DetectWithURL(faceContext, singleImageURL, &returnFaceID, &returnFaceLandmarks, attributes, face.Recognition04, &returnRecognitionModel, face.Detection01)
 	if dErr != nil { log.Fatal(dErr) }
 
 	// Dereference *[]DetectedFace, in order to loop through it.
@@ -139,9 +139,9 @@ func main() {
 	groupImageName := path.Base(groupImageURL)
 	groupImage := face.ImageURL { URL: &groupImageURL } 
 
-	// API call to detect faces in group image, using recognition model 3. This returns a ListDetectedFace struct.
-	// We specify detection model 2 because we are not retrieving attributes.
-	detectedGroupFaces, dgErr := client.DetectWithURL(faceContext, groupImage, &returnFaceID, &returnFaceLandmarks, nil, face.Recognition03, &returnRecognitionModel, face.Detection02)
+	// API call to detect faces in group image, using recognition model 4. This returns a ListDetectedFace struct.
+	// We specify detection model 3 because we are not retrieving attributes.
+	detectedGroupFaces, dgErr := client.DetectWithURL(faceContext, groupImage, &returnFaceID, &returnFaceLandmarks, nil, face.Recognition04, &returnRecognitionModel, face.Detection03)
 	if dgErr != nil { log.Fatal(dgErr) }
 	fmt.Println()
 
@@ -226,8 +226,8 @@ func main() {
 	returnRecognitionModelVerify := false
 
 	// Detect face(s) from source image 1, returns a ListDetectedFace struct
-	// We specify detection model 2 because we are not retrieving attributes.
-	detectedVerifyFaces1, dErrV1 := client.DetectWithURL(faceContext, url1 , &returnFaceIDVerify, &returnFaceLandmarksVerify, nil, face.Recognition03, &returnRecognitionModelVerify, face.Detection02)
+	// We specify detection model 3 because we are not retrieving attributes.
+	detectedVerifyFaces1, dErrV1 := client.DetectWithURL(faceContext, url1 , &returnFaceIDVerify, &returnFaceLandmarksVerify, nil, face.Recognition04, &returnRecognitionModelVerify, face.Detection03)
 	if dErrV1 != nil { log.Fatal(dErrV1) }
 	// Dereference the result, before getting the ID
 	dVFaceIds1 := *detectedVerifyFaces1.Value 
@@ -236,8 +236,8 @@ func main() {
 	fmt.Println(fmt.Sprintf("%v face(s) detected from image: %v", len(dVFaceIds1), sourceImageFileName1))
 
 	// Detect face(s) from source image 2, returns a ListDetectedFace struct
-	// We specify detection model 2 because we are not retrieving attributes.
-	detectedVerifyFaces2, dErrV2 := client.DetectWithURL(faceContext, url2 , &returnFaceIDVerify, &returnFaceLandmarksVerify, nil, face.Recognition03, &returnRecognitionModelVerify, face.Detection02)
+	// We specify detection model 3 because we are not retrieving attributes.
+	detectedVerifyFaces2, dErrV2 := client.DetectWithURL(faceContext, url2 , &returnFaceIDVerify, &returnFaceLandmarksVerify, nil, face.Recognition04, &returnRecognitionModelVerify, face.Detection03)
 	if dErrV2 != nil { log.Fatal(dErrV2) }
 	// Dereference the result, before getting the ID
 	dVFaceIds2 := *detectedVerifyFaces2.Value 
@@ -253,8 +253,8 @@ func main() {
 	for i, imageFileName := range targetImageFileNames {
 		urlSource := imageBaseURL + imageFileName 
 		url :=  face.ImageURL { URL: &urlSource}
-		// We specify detection model 2 because we are not retrieving attributes.
-		detectedVerifyFaces, dErrV := client.DetectWithURL(faceContext, url, &returnFaceIDVerify, &returnFaceLandmarksVerify, nil, face.Recognition03, &returnRecognitionModelVerify, face.Detection02)
+		// We specify detection model 3 because we are not retrieving attributes.
+		detectedVerifyFaces, dErrV := client.DetectWithURL(faceContext, url, &returnFaceIDVerify, &returnFaceLandmarksVerify, nil, face.Recognition04, &returnRecognitionModelVerify, face.Detection03)
 		if dErrV != nil { log.Fatal(dErrV) }
 		// Dereference *[]DetectedFace from Value in order to loop through it.
 		dVFaces := *detectedVerifyFaces.Value
@@ -333,7 +333,7 @@ func main() {
 		fmt.Println()
 
 		// Create the metadata for the body of the request
-		listMetadata := face.MetaDataContract { RecognitionModel: face.Recognition03, Name: &faceListID }
+		listMetadata := face.MetaDataContract { RecognitionModel: face.Recognition04, Name: &faceListID }
 		// Create the large face list, empty for now
 		faceListClient.Create(faceContext, faceListID, listMetadata)
 
@@ -350,7 +350,7 @@ func main() {
 			listImage := imageBaseURL + listFace
 			listImageURL:= face.ImageURL { URL: &listImage }
 			// Add the slice of faces to our face list
-			oneFace, pFaceErr := faceListClient.AddFaceFromURL(faceContext, faceListID, listImageURL, listUserData, nil, face.Detection02)
+			oneFace, pFaceErr := faceListClient.AddFaceFromURL(faceContext, faceListID, listImageURL, listUserData, nil, face.Detection03)
 			if pFaceErr != nil { log.Fatal(pFaceErr) }
 				if (i == 0) {
 					firstFace = *oneFace.PersistedFaceID
@@ -467,21 +467,21 @@ func main() {
 			wfile, err:= os.Open(path)
 			if err != nil { log.Fatal(err) }
 			womanImages.PushBack(wfile)
-			personGroupPersonClient.AddFaceFromStream(faceContext, personGroupID, *womanPerson.PersonID, wfile, "", nil, face.Detection02)
+			personGroupPersonClient.AddFaceFromStream(faceContext, personGroupID, *womanPerson.PersonID, wfile, "", nil, face.Detection03)
 		}
 		if strings.HasPrefix(f.Name(), "m") {
 			var mfile io.ReadCloser
 			mfile, err:= os.Open(path)
 			if err != nil { log.Fatal(err) }
 			manImages.PushBack(mfile)
-			personGroupPersonClient.AddFaceFromStream(faceContext, personGroupID, *manPerson.PersonID, mfile, "", nil, face.Detection02)
+			personGroupPersonClient.AddFaceFromStream(faceContext, personGroupID, *manPerson.PersonID, mfile, "", nil, face.Detection03)
 		}
 		if strings.HasPrefix(f.Name(), "ch") {
 			var chfile io.ReadCloser
 			chfile, err:= os.Open(path)
 			if err != nil { log.Fatal(err) }
 			childImages.PushBack(chfile)
-			personGroupPersonClient.AddFaceFromStream(faceContext, personGroupID, *childPerson.PersonID, chfile, "", nil, face.Detection02)
+			personGroupPersonClient.AddFaceFromStream(faceContext, personGroupID, *childPerson.PersonID, chfile, "", nil, face.Detection03)
 		}
 	}
 	// </snippet_pgp_assign>
@@ -586,21 +586,21 @@ func main() {
 			wfileL, errL:= os.Open(path)
 			if errL != nil { log.Fatal(errL) }
 			womanImagesL.PushBack(wfileL)
-			personGroupPersonClientL.AddFaceFromStream(faceContext, largePersonGroupID, *womanPersonL.PersonID, wfileL, "", nil, face.Detection02)
+			personGroupPersonClientL.AddFaceFromStream(faceContext, largePersonGroupID, *womanPersonL.PersonID, wfileL, "", nil, face.Detection03)
 		}
 		if strings.HasPrefix(f.Name(), "m") {
 			var mfileL io.ReadCloser
 			mfileL, errL:= os.Open(path)
 			if errL != nil { log.Fatal(errL) }
 			manImagesL.PushBack(mfileL)
-			personGroupPersonClientL.AddFaceFromStream(faceContext, largePersonGroupID, *manPersonL.PersonID, mfileL, "", nil, face.Detection02)
+			personGroupPersonClientL.AddFaceFromStream(faceContext, largePersonGroupID, *manPersonL.PersonID, mfileL, "", nil, face.Detection03)
 		}
 		if strings.HasPrefix(f.Name(), "ch") {
 			var chfileL io.ReadCloser
 			chfileL, errL:= os.Open(path)
 			if errL != nil { log.Fatal(errL) }
 			childImagesL.PushBack(chfileL)
-			personGroupPersonClientL.AddFaceFromStream(faceContext, largePersonGroupID, *childPersonL.PersonID, chfileL, "", nil, face.Detection02)
+			personGroupPersonClientL.AddFaceFromStream(faceContext, largePersonGroupID, *childPersonL.PersonID, chfileL, "", nil, face.Detection03)
 		}
 	}
 	
@@ -649,9 +649,9 @@ func main() {
 	// Detect faces in group test image, using recognition model 1 (default)
 	returnIdentifyFaceID := true
 	// Returns a ListDetectedFaces
-	// Recognition03 is not compatible.
-	// We specify detection model 2 because we are not retrieving attributes.
-	detectedTestImageFaces, dErr := client.DetectWithStream(faceContext, personGroupTestImage, &returnIdentifyFaceID, nil, nil, face.Recognition01, nil, face.Detection02)
+	// Recognition04 is not compatible.
+	// We specify detection model 3 because we are not retrieving attributes.
+	detectedTestImageFaces, dErr := client.DetectWithStream(faceContext, personGroupTestImage, &returnIdentifyFaceID, nil, nil, face.Recognition01, nil, face.Detection03)
 	if dErr != nil { log.Fatal(dErr) }
 
 	// Make list of face IDs from the detection. 
