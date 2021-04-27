@@ -6,6 +6,23 @@ from msrest.authentication import ApiKeyCredentials
 import os, time, uuid
 # </snippet_imports>
 
+'''
+Prerequisites:
+
+1. Install the Custom Vision SDK. Run:
+pip install --upgrade azure-cognitiveservices-vision-customvision
+
+2. Create an "Images" folder in your working directory.
+
+3. Download the images used by this sample from:
+https://github.com/Azure-Samples/cognitive-services-sample-data-files/tree/master/CustomVision/ImageClassification/Images
+
+This sample looks for images in the following paths:
+<your working directory>/Images/Hemlock
+<your working directory>/Images/Japanese Cherry
+<your working directory>/Images/Test
+'''
+
 # <snippet_creds>
 # Replace with valid values
 ENDPOINT = "PASTE_YOUR_CUSTOM_VISION_TRAINING_ENDPOINT_HERE"
@@ -40,9 +57,7 @@ cherry_tag = trainer.create_tag(project.id, "Japanese Cherry")
 # </snippet_tags>
 
 # <snippet_upload>
-# You can get the images for this sample at:
-# https://github.com/Azure-Samples/cognitive-services-sample-data-files/tree/master/CustomVision/ImageClassification/Images
-base_image_location = 'PASTE_YOUR_LOCAL_IMAGE_DIRECTORY_HERE'
+base_image_location = os.path.join (os.path.dirname(__file__), "Images")
 
 print("Adding images...")
 
