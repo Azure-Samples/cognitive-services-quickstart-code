@@ -6,6 +6,19 @@ from msrest.authentication import ApiKeyCredentials
 import time
 # </snippet_imports>
 
+'''
+Prerequisites:
+1. Install the Custom Vision SDK. Run:
+pip install --upgrade azure-cognitiveservices-vision-customvision
+2. Create an "Images" folder in your working directory.
+3. Download the images used by this sample from:
+https://github.com/Azure-Samples/cognitive-services-sample-data-files/tree/master/CustomVision/ObjectDetection/Images
+This sample looks for images in the following paths:
+<your working directory>/Images/fork
+<your working directory>/Images/scissors
+<your working directory>/Images/test
+'''
+
 # <snippet_creds>
 # Replace with valid values
 ENDPOINT = "PASTE_YOUR_CUSTOM_VISION_TRAINING_ENDPOINT_HERE"
@@ -87,8 +100,7 @@ scissors_image_regions = {
 # </snippet_tagging>
 
 # <snippet_upload>
-# Update this with the path to where you downloaded the images.
-base_image_location = "<path to repo directory>/cognitive-services-python-sdk-samples/samples/vision/"
+base_image_location = os.path.join (os.path.dirname(__file__), "Images")
 
 # Go through the data table above and create the images
 print ("Adding images...")
@@ -98,14 +110,14 @@ for file_name in fork_image_regions.keys():
     x,y,w,h = fork_image_regions[file_name]
     regions = [ Region(tag_id=fork_tag.id, left=x,top=y,width=w,height=h) ]
 
-    with open(base_image_location + "images/fork/" + file_name + ".jpg", mode="rb") as image_contents:
+    with open(os.path.join (base_image_location, "fork", file_name + ".jpg"), mode="rb") as image_contents:
         tagged_images_with_regions.append(ImageFileCreateEntry(name=file_name, contents=image_contents.read(), regions=regions))
 
 for file_name in scissors_image_regions.keys():
     x,y,w,h = scissors_image_regions[file_name]
     regions = [ Region(tag_id=scissors_tag.id, left=x,top=y,width=w,height=h) ]
 
-    with open(base_image_location + "images/scissors/" + file_name + ".jpg", mode="rb") as image_contents:
+    with open(os.path.join (base_image_location, "scissors", file_name + ".jpg"), mode="rb") as image_contents:
         tagged_images_with_regions.append(ImageFileCreateEntry(name=file_name, contents=image_contents.read(), regions=regions))
 
 upload_result = trainer.create_images_from_files(project.id, ImageFileCreateBatch(images=tagged_images_with_regions))
@@ -135,7 +147,7 @@ print ("Done!")
 # Now there is a trained endpoint that can be used to make a prediction
 
 # Open the sample image and get back the prediction results.
-with open(base_image_location + "images/Test/test_od_image.jpg", mode="rb") as test_data:
+with open(os.path.join (base_image_location, "test", "test_od_image.jpg"), mode="rb") as test_data:
     results = predictor.detect_image(project.id, publish_iteration_name, test_data)
 
 # Display the results.    
