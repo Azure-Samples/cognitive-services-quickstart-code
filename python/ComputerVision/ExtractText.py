@@ -7,8 +7,8 @@ from azure.cognitiveservices.vision.computervision.models import OperationStatus
 from msrest.authentication import CognitiveServicesCredentials
 
 '''
-This sample crops an existing image then uses the Computer Vision API 
-Batch Read FIle to extract text from the cropped image. The extracted text is
+This sample crops an existing image then uses the Computer Vision SDK 
+to extract text from the cropped image. The extracted text is
 returned along with bounding boxes. There is an optional feature to draw a rectangle
 around the text you want to crop, then show the image.
 
@@ -75,7 +75,7 @@ for i in range(len(cropped_images_list)):
     cropped_images_list[i] = Image.open(b)
     b.close()
     # Save cropped image to file.
-    cropped_images_list[i].save(cropped_image_paths[i], format="jpeg")
+    cropped_images_list[i].save(cropped_images_paths[i], format="jpeg")
     
 '''
 Call the API
