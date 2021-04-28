@@ -22,7 +22,7 @@ Computer Vision API: https://westus.dev.cognitive.microsoft.com/docs/services/5c
 # Local and remote (URL) images
 # Download the objects image from here (and place in your root folder): 
 # https://github.com/Azure-Samples/cognitive-services-sample-data-files/tree/master/ComputerVision/Images
-local_image = "objects2.jpg"
+local_image = "objects.jpg"
 remote_image = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/objects.jpg"
 # Select visual feature type(s) you want to focus on when analyzing an image
 image_features = ['objects', 'tags']
