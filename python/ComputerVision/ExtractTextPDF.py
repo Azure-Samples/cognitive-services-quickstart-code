@@ -11,7 +11,7 @@ The images include both printed and handwritten text, including signatures.
 Download the sample PDF here: 
 https://github.com/Azure-Samples/cognitive-services-sample-data-files/blob/master/ComputerVision/Images/printed_handwritten.pdf
 
-Place the PDF in your root folder.
+Place the PDF in your working directory.
 
 Install the Computer Vision SDK:
 pip install --upgrade azure-cognitiveservices-vision-computervision
@@ -47,7 +47,7 @@ Read and extract from the image
 '''
 def pdf_text():
     # Images PDF with text
-    filepath = open('TextImages.pdf','rb')
+    filepath = open('printed_handwritten.pdf','rb')
 
     # Async SDK call that "reads" the image
     response = client.batch_read_file_in_stream(filepath, raw=True)
