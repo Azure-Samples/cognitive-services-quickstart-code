@@ -3,7 +3,7 @@ from azure.cognitiveservices.vision.customvision.training import CustomVisionTra
 from azure.cognitiveservices.vision.customvision.prediction import CustomVisionPredictionClient
 from azure.cognitiveservices.vision.customvision.training.models import ImageFileCreateBatch, ImageFileCreateEntry, Region
 from msrest.authentication import ApiKeyCredentials
-import os, time
+import os, time, uuid
 # </snippet_imports>
 
 '''
@@ -46,7 +46,8 @@ obj_detection_domain = next(domain for domain in trainer.get_domains() if domain
 
 # Create a new project
 print ("Creating project...")
-project = trainer.create_project("My Detection Project", domain_id=obj_detection_domain.id)
+# Use uuid to avoid project name collisions.
+project = trainer.create_project(str(uuid.uuid4()), domain_id=obj_detection_domain.id)
 # </snippet_create>
 
 # <snippet_tags>
@@ -158,3 +159,12 @@ with open(os.path.join (base_image_location, "test", "test_image.jpg"), mode="rb
 for prediction in results.predictions:
     print("\t" + prediction.tag_name + ": {0:.2f}% bbox.left = {1:.2f}, bbox.top = {2:.2f}, bbox.width = {3:.2f}, bbox.height = {4:.2f}".format(prediction.probability * 100, prediction.bounding_box.left, prediction.bounding_box.top, prediction.bounding_box.width, prediction.bounding_box.height))
 # </snippet_test>
+
+# <snippet_delete>
+# You cannot delete a project with published iterations, so you must first unpublish them.
+print ("Unpublishing project...")
+trainer.unpublish_iteration(project.id, iteration.id)
+
+print ("Deleting project...")
+trainer.delete_project(project.id)
+# </snippet_delete>
