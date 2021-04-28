@@ -151,7 +151,7 @@ print ("Done!")
 # Now there is a trained endpoint that can be used to make a prediction
 
 # Open the sample image and get back the prediction results.
-with open(os.path.join (base_image_location, "test", "test_od_image.jpg"), mode="rb") as test_data:
+with open(os.path.join (base_image_location, "test", "test_image.jpg"), mode="rb") as test_data:
     results = predictor.detect_image(project.id, publish_iteration_name, test_data)
 
 # Display the results.    
