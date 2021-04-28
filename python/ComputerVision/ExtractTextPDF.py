@@ -50,7 +50,7 @@ def pdf_text():
     filepath = open('printed_handwritten.pdf','rb')
 
     # Async SDK call that "reads" the image
-    response = client.batch_read_file_in_stream(filepath, raw=True)
+    response = client.read_in_stream(filepath, raw=True)
 
     # Don't forget to close the file
     filepath.close()
@@ -61,7 +61,7 @@ def pdf_text():
 
     # SDK call that gets what is read
     while True:
-        result = client.get_read_operation_result(operation_id)
+        result = client.get_read_result(operation_id)
         if result.status not in ['NotStarted', 'Running']:
             break
         time.sleep(1)
