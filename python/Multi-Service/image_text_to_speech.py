@@ -57,7 +57,7 @@ Use Computer Vision to get text from an image
 def text_from_image(image):
     # Call API to get text from image
     plate = open(image, 'rb')
-    rawResponse = computer_vision_client.batch_read_file_in_stream(plate, raw=True)
+    rawResponse = computer_vision_client.read_in_stream(plate, raw=True)
 
     # Get ID from returned headers
     operationLocation = rawResponse.headers["Operation-Location"]
@@ -67,7 +67,7 @@ def text_from_image(image):
     results = None
     while True:
         # Returns a ReadOperationResult
-        results = computer_vision_client.get_read_operation_result(operationId)
+        results = computer_vision_client.get_read_result(operationId)
         if results.status not in ['NotStarted', 'Running']:
             break
         time.sleep(1)
