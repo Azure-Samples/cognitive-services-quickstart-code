@@ -8,11 +8,15 @@ import os, time
 
 '''
 Prerequisites:
+
 1. Install the Custom Vision SDK. Run:
 pip install --upgrade azure-cognitiveservices-vision-customvision
+
 2. Create an "Images" folder in your working directory.
+
 3. Download the images used by this sample from:
 https://github.com/Azure-Samples/cognitive-services-sample-data-files/tree/master/CustomVision/ObjectDetection/Images
+
 This sample looks for images in the following paths:
 <your working directory>/Images/fork
 <your working directory>/Images/scissors
