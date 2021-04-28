@@ -74,7 +74,9 @@ for i in range(len(cropped_images_list)):
     cropped_images_list[i].save(b, format="jpeg")
     cropped_images_list[i] = Image.open(b)
     b.close()
-
+    # Save cropped image to file.
+    cropped_images_list[i].save(cropped_image_paths[i], format="jpeg")
+    
 '''
 Call the API
 '''
