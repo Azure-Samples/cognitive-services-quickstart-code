@@ -1,7 +1,4 @@
-import glob
-import os
-import sys
-import time
+import glob, os, sys, time, uuid
 
 from azure.cognitiveservices.vision.face import FaceClient
 from azure.cognitiveservices.vision.face.models import TrainingStatusType
@@ -135,7 +132,8 @@ if __name__ == '__main__':
     face_client = FaceClient(ENDPOINT, CognitiveServicesCredentials(KEY))
 
     # Name your person group. Must be lowercase, alphanumeric, or using dash or underscore.
-    PERSON_GROUP_ID = 'sample-person-group'
+    # We use a uuid to avoid name collisions.
+    PERSON_GROUP_ID = str(uuid.uuid4())
     # Name your person group person that will be added to our person group.
     pgp_name = 'Woman'
 
