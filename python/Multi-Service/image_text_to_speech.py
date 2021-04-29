@@ -1,4 +1,3 @@
-import glob
 import os
 import time
 
@@ -28,7 +27,7 @@ Speech API: https://docs.microsoft.com/en-us/azure/cognitive-services/speech-ser
 '''
 
 # Add all license plate images to this local folder
-plates_folder = 'License Plates\\'
+plates_folder = 'License_Plates'
 
 computer_vision_subscription_key = 'PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE'
 computer_vision_endpoint = 'PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE'
@@ -156,7 +155,7 @@ def request_state(image_plates):
 
 if __name__ == "__main__":
     # Get all plates from images directory
-    image_plates = [plate for plate in glob.glob(plates_folder + '*')]
+    image_plates = os.listdir(plates_folder)
 
     print('Welcome to the license plate retrieval system.')
 
