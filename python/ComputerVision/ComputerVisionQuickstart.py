@@ -691,9 +691,10 @@ operation_id_local = operation_location_local.split("/")[-1]
 # Call the "GET" API and wait for the retrieval of the results
 while True:
     recognize_handwriting_result = computervision_client.get_read_result(operation_id_local)
-    if recognize_handwriting_result.status not in ['notStarted', 'running']:
+    if recognize_handwriting_result.status.lower () not in ['notstarted', 'running']:
         break
-    time.sleep(1)
+    print ('Waiting for result...')
+    time.sleep(10)
 
 # Print results, line by line
 if recognize_handwriting_result.status == OperationStatusCodes.succeeded:
