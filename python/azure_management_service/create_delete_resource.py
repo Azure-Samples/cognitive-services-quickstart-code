@@ -80,6 +80,7 @@ def list_resources():
 	print("Resources in resource group: " + resource_group_name)
 	result = client.accounts.list_by_resource_group(resource_group_name)
 	for x in result:
+		print(x.name)
 		print(x)
 		print()
 # </snippet_list>
