@@ -75,8 +75,8 @@ Display extracted text and bounding box
 # Displays text captured and its bounding box (position in the image)
 result = pdf_text()
 if result.status == OperationStatusCodes.succeeded:
-    for textResult in result.recognition_results:
-        for line in textResult.lines:
+    for readResult in result.analyze_result.read_results:
+        for line in readResult.lines:
             print(line.text)
             print(line.bounding_box)
         print()
