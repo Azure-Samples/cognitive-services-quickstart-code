@@ -62,9 +62,10 @@ def pdf_text():
     # SDK call that gets what is read
     while True:
         result = client.get_read_result(operation_id)
-        if result.status not in ['NotStarted', 'Running']:
+        if result.status.lower () not in ['notstarted', 'running']:
             break
-        time.sleep(1)
+        print ('Waiting for result...')
+        time.sleep(10)
     return result
 
 
