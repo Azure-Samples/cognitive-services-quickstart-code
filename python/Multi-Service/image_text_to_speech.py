@@ -68,9 +68,10 @@ def text_from_image(image):
     while True:
         # Returns a ReadOperationResult
         results = computer_vision_client.get_read_result(operationId)
-        if results.status not in ['NotStarted', 'Running']:
+        if results.status.lower () not in ['notstarted', 'running']:
             break
-        time.sleep(1)
+        print ('Waiting for read result...')
+        time.sleep(10)
 
     # Get the state from the 1st line of text that's read
     for result in results.recognition_results:
