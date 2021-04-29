@@ -7,10 +7,8 @@ import datetime, json, os, time, uuid
 # </Dependencies>
 
 # <AuthorizationVariables>
-personalizer_key = 'REPLACE-WITH-YOUR-PERSONALIZER-KEY'
-    
-# Replace <your-resource-name>: https://<your-resource-name>.cognitiveservices.azure.com
-personalizer_endpoint = 'https://REPLACE-WITH-YOUR-PERSONALIZER-RESOURCE-NAME.cognitiveservices.azure.com'
+personalizer_key = 'PASTE_YOUR_PERSONALIZER_SUBSCRIPTION_KEY_HERE'
+personalizer_endpoint = 'PASTE_YOUR_PERSONALIZER_ENDPOINT_HERE'
 # </AuthorizationVariables>
 
 # <Client>
