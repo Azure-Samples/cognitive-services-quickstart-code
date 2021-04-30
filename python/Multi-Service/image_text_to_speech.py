@@ -1,5 +1,4 @@
-import os
-import time
+import os, time
 
 import azure.cognitiveservices.speech as speechsdk
 from msrest.authentication import CognitiveServicesCredentials
@@ -26,7 +25,8 @@ Speech SDK documentation: https://docs.microsoft.com/en-us/azure/cognitive-servi
 Speech API: https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/rest-text-to-speech
 '''
 
-# Add all license plate images to this local folder
+# Add all license plate images to this local folder. You can download license plate images from:
+# https://github.com/Azure-Samples/cognitive-services-sample-data-files/tree/master/Multi-service
 plates_folder = 'License_Plates'
 
 computer_vision_subscription_key = 'PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE'
@@ -35,11 +35,8 @@ computer_vision_endpoint = 'PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE'
 speech_subscription_key = 'PASTE_YOUR_SPEECH_SUBSCRIPTION_KEY_HERE'
 speech_region = 'westus' # Set this to the region for your Speech endpoint
 
-# List of all 50 states for reference
-# states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming']
-
 # States we have plates for
-states = {'AK': 'Alaska', 'IL': 'Illinois', 'MI': 'Michigan', 'PA': 'Pennsylvania', 'AZ': 'Arizona'}
+available_states = {'ak': 'Alaska', 'il': 'Illinois', 'mi': 'Michigan', 'pa': 'Pennsylvania', 'az': 'Arizona'}
 
 # Initialize a Speech client
 speech_config = speechsdk.SpeechConfig(subscription=speech_subscription_key, region=speech_region)
@@ -51,116 +48,99 @@ computer_vision_client = ComputerVisionClient(computer_vision_endpoint, Cognitiv
 
 '''
 Use Computer Vision to get text from an image
-'''                         
- # Returns the license plate number               
-def text_from_image(image):
-    # Call API to get text from image
-    plate = open(image, 'rb')
-    rawResponse = computer_vision_client.read_in_stream(plate, raw=True)
+'''						 
+ # Returns the license plate number			   
+def text_from_image(image_path):
+	# Call API to get text from image
+	with open(image_path, 'rb') as f :
+		rawResponse = computer_vision_client.read_in_stream(f, raw=True)
 
-    # Get ID from returned headers
-    operationLocation = rawResponse.headers["Operation-Location"]
-    operationId = os.path.basename(operationLocation)
+	# Get ID from returned headers
+	operationLocation = rawResponse.headers["Operation-Location"]
+	operationId = os.path.basename(operationLocation)
 
-    # SDK call that gets what is read
-    results = None
-    while True:
-        # Returns a ReadOperationResult
-        results = computer_vision_client.get_read_result(operationId)
-        if results.status.lower () not in ['notstarted', 'running']:
-            break
-        print ('Waiting for read result...')
-        time.sleep(10)
+	# SDK call that gets what is read
+	results = None
+	while True:
+		# Returns a ReadOperationResult
+		results = computer_vision_client.get_read_result(operationId)
+		if results.status.lower () not in ['notstarted', 'running']:
+			break
+		print ('Waiting for read result...')
+		time.sleep(10)
 
-    # Get the state from the 1st line of text that's read
-    for result in results.recognition_results:
-        for word in result.lines[0].words:
-            state_name = states[os.path.basename(image[:-4]).upper()] # use abbreviation to get full state name
-            if word.text.lower() == state_name.lower():
-                # Read license number from 2nd line of text
-                plate_number = result.lines[1].words[0]
-                plate_found = 'The plate number for the state of ' + state_name + ' is ' + plate_number.text + '.'
-                print(plate_found)
-                return plate_found
-    
+	# Get the state from the 1st line of text that's read
+	for read_result in results.analyze_result.read_results:
+		for line in read_result.lines:
+			print (line.text)
+	print ()
 
 '''
 Use Speech Service covert text into speech
 '''
 def text_to_speech(text):
-    # Synthesizes the received text to speech.
-    # The synthesized speech is expected to be heard on the speaker with this line executed.
-    result = speech_synthesizer.speak_text_async(text).get()
+# Remove this statement to enable text to speech.
+	return
 
-    # Checks result.
-    if result.reason == speechsdk.ResultReason.SynthesizingAudioCompleted:
-        # Optional -- print message to user upon success
-        print()
-    elif result.reason == speechsdk.ResultReason.Canceled:
-        cancellation_details = result.cancellation_details
-        print("Speech synthesis canceled: {}".format(cancellation_details.reason))
-        if cancellation_details.reason == speechsdk.CancellationReason.Error:
-            if cancellation_details.error_details:
-                print("Error details: {}".format(cancellation_details.error_details))
-        print("Did you update the subscription info?")
+	# Synthesizes the received text to speech.
+	# The synthesized speech is expected to be heard on the speaker with this line executed.
+	result = speech_synthesizer.speak_text_async(text).get()
+
+	# Checks result.
+	if result.reason == speechsdk.ResultReason.SynthesizingAudioCompleted:
+		# Optional -- print message to user upon success
+		print()
+	elif result.reason == speechsdk.ResultReason.Canceled:
+		cancellation_details = result.cancellation_details
+		print("Speech synthesis canceled: {}".format(cancellation_details.reason))
+		if cancellation_details.reason == speechsdk.CancellationReason.Error:
+			if cancellation_details.error_details:
+				print("Error details: {}".format(cancellation_details.error_details))
+		print("Did you update the subscription info?")
 
 
 '''
 Opens the license plate image to get the number
 '''
-def get_number(plates, chosen_state):
-    # Get the license plate number
-    for plate in plates:
-        image_path = plate
-        plate = os.path.basename(plate) # rename to match user input name
-        if (chosen_state + '.jpg') == plate:
-            number_found = text_from_image(image_path)
-            text_to_speech(number_found)
+def get_number(requested_state):
+	current_dir = os.path.dirname(os.path.abspath(__file__))
+	image_path = os.path.join (current_dir, plates_folder, requested_state + '.jpg')
+	number_found = text_from_image(image_path)
+	text_to_speech(number_found)
 
-            while True:
-                # Get another plate number or quit
-                try_again = 'Would you like to find another license plate number? Y or N'
-                print(try_again)
-                text_to_speech(try_again)
-                # User responds
-                answer = input().lower()
-                if answer == 'n':
-                    return False
-                elif answer == 'y':
-                    return True
+def request_state():
+	print()
+	# User types a state they want a license plate number for
+	your_state = 'Type the state abbreviation you\'re looking for: AK, IL, MI, PA, or AZ.'
+	print(your_state)
+	text_to_speech(your_state)
 
-def request_state(image_plates):
-    while True:
-        print()
-        # User types a state they want a license plate number for
-        your_state = 'Type the state abbreviation you\'re looking for: AK, IL, MI, PA, or AZ.'
-        print(your_state)
-        text_to_speech(your_state)
+	# Get the user's state request
+	requested_state = input().lower() 
+	print()
 
-        # Get the user's state request
-        chosen_state = input().lower() 
-        print()
-
-        # Check they typed a state from an existing states list
-        for s in states.keys():
-            s = s.lower()
-            if s == chosen_state:
-                # Find the chosen state (converts to full state name) that matches a plate
-                keep_going = get_number(image_plates, chosen_state) 
-                if not keep_going:
-                    return
-                else:
-                    break
-
+	# Check they typed a state from an existing states list
+	if requested_state in available_states.keys() :
+		# Find the chosen state (converts to full state name) that matches a plate
+		get_number(requested_state) 
+	else :
+		response = 'Sorry, we do not have a license plate for that state.'
+		print(response)
+		text-to-speech(response)
 
 if __name__ == "__main__":
-    # Get all plates from images directory
-    image_plates = os.listdir(plates_folder)
+	print('Welcome to the license plate retrieval system.')
 
-    print('Welcome to the license plate retrieval system.')
+	done = False
+	while not done :
+		request_state()
 
-    request_state(image_plates)
+		try_again = 'Would you like to find another license plate number? Y or N'
+		print(try_again)
+		text_to_speech(try_again)
+		answer = input().lower()
+		if 'y' != answer : done = True
    
-    print()
-    print('Finished.')
-    text_to_speech('Finished')
+	print()
+	print('Finished.')
+	text_to_speech('Finished')
