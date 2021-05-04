@@ -51,7 +51,7 @@ for receipt in result:
 # <snippet_train>
 # To train a model you need an Azure Storage account.
 # Use the SAS URL to access your training files.
-trainingDataUrl = "<SAS-URL-of-your-form-folder-in-blob-storage>"
+trainingDataUrl = "PASTE_YOUR_SAS_URL_OF_YOUR_FORM_FOLDER_IN_BLOB_STORAGE_HERE"
 
 poller = form_training_client.begin_training(trainingDataUrl, use_training_labels=False)
 model = poller.result()
