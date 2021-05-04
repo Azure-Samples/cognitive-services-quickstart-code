@@ -24,7 +24,7 @@ namespace ConsoleApp1
             var imageUrl = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/faces.jpg";
 
             // <basic1>
-            IList<DetectedFace> faces = await faceClient.Face.DetectWithUrlAsync(url: imageUrl, returnFaceId: true, detectionModel: DetectionModel.Detection02);
+            IList<DetectedFace> faces = await faceClient.Face.DetectWithUrlAsync(url: imageUrl, returnFaceId: true, detectionModel: DetectionModel.Detection03);
             // </basic1>
 
             // <basic2>

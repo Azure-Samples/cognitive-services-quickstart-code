@@ -19,7 +19,7 @@ func main() {
     const imageUrl =
       "https://upload.wikimedia.org/wikipedia/commons/c/c3/RH_Louise_Lillian_Gish.jpg"
 
-    const params = "?detectionModel=detection_02"
+    const params = "?detectionModel=detection_03"
     uri := endpoint + "/face/v1.0/detect" + params
     const imageUrlEnc = "{\"url\":\"" + imageUrl + "\"}"
 

@@ -25,7 +25,7 @@ namespace VideoFrameConsoleApplication
             // Define this in Main so it is closed over the client.
             async Task<DetectedFace[]> Detect(VideoFrame frame)
             {
-                return (DetectedFace[])await client.Face.DetectWithStreamAsync(frame.Image.ToMemoryStream(".jpg"), detectionModel:DetectionModel.Detection02);
+                return (DetectedFace[])await client.Face.DetectWithStreamAsync(frame.Image.ToMemoryStream(".jpg"), detectionModel:DetectionModel.Detection03);
             }
 
             // Create grabber, with analysis type Face[]. 

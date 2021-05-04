@@ -9,7 +9,7 @@ image_url = 'https://raw.githubusercontent.com/Azure-Samples/cognitive-services-
 headers = {'Ocp-Apim-Subscription-Key': subscription_key}
 
 params = {
-    'detectionModel': 'detection_02',
+    'detectionModel': 'detection_03',
     'returnFaceId': 'true'
 }
 

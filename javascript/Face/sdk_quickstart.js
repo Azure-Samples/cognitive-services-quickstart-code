@@ -136,12 +136,12 @@ async function DetectFaceExtract() {
 
 // <recognize>
 async function DetectFaceRecognize(url) {
-    // Detect faces from image URL. Since only recognizing, use the recognition model 1.
-    // We use detection model 2 because we are not retrieving attributes.
+    // Detect faces from image URL. Since only recognizing, use the recognition model 4.
+    // We use detection model 3 because we are not retrieving attributes.
     let detected_faces = await client.face.detectWithUrl(url,
 		{
-			detectionModel: "detection_02",
-			recognitionModel: "recognition_03"
+			detectionModel: "detection_03",
+			recognitionModel: "recognition_04"
 		});
     return detected_faces;
 }
@@ -245,7 +245,7 @@ async function IdentifyInPersonGroup() {
 
 	// Create a person group. 
 	console.log("Creating a person group with ID: " + person_group_id);
-	await client.personGroup.create(person_group_id, { name : person_group_id, recognitionModel : "recognition_03" });
+	await client.personGroup.create(person_group_id, { name : person_group_id, recognitionModel : "recognition_04" });
 
 	await AddFacesToPersonGroup(person_dictionary, person_group_id);
 

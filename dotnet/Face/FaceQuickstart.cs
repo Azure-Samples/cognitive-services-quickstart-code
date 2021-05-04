@@ -64,12 +64,14 @@ namespace FaceQuickstart
 
         static void Main(string[] args)
         {
-           
+
             // <snippet_detect_models>
-            // Recognition model 3 was released in 2020 May.
-            // It is recommended since its overall accuracy is improved
-            // compared with models 1 and 2.
-            const string RECOGNITION_MODEL3 = RecognitionModel.Recognition03;
+            // Recognition model 4 was released in 2021 February.
+            // It is recommended since its accuracy is improved
+            // on faces wearing masks compared with model 3,
+            // and its overall accuracy is improved compared
+            // with models 1 and 2.
+            const string RECOGNITION_MODEL4 = RecognitionModel.Recognition04;
             // </snippet_detect_models>
 
             // Large FaceList variables
@@ -82,18 +84,18 @@ namespace FaceQuickstart
             // </snippet_client>
 
             // Detect - get features from faces.
-            DetectFaceExtract(client, IMAGE_BASE_URL, RECOGNITION_MODEL3).Wait();
+            DetectFaceExtract(client, IMAGE_BASE_URL, RECOGNITION_MODEL4).Wait();
             // Find Similar - find a similar face from a list of faces.
-            FindSimilar(client, IMAGE_BASE_URL, RECOGNITION_MODEL3).Wait();
+            FindSimilar(client, IMAGE_BASE_URL, RECOGNITION_MODEL4).Wait();
             // Verify - compare two images if the same person or not.
-            Verify(client, IMAGE_BASE_URL, RECOGNITION_MODEL3).Wait();
+            Verify(client, IMAGE_BASE_URL, RECOGNITION_MODEL4).Wait();
 
             // Identify - recognize a face(s) in a person group (a person group is created in this example).
-            IdentifyInPersonGroup(client, IMAGE_BASE_URL, RECOGNITION_MODEL3).Wait();
+            IdentifyInPersonGroup(client, IMAGE_BASE_URL, RECOGNITION_MODEL4).Wait();
             // LargePersonGroup - create, then get data.
-            LargePersonGroup(client, IMAGE_BASE_URL, RECOGNITION_MODEL3).Wait();
+            LargePersonGroup(client, IMAGE_BASE_URL, RECOGNITION_MODEL4).Wait();
             // Group faces - automatically group similar faces.
-            Group(client, IMAGE_BASE_URL, RECOGNITION_MODEL3).Wait();
+            Group(client, IMAGE_BASE_URL, RECOGNITION_MODEL4).Wait();
             // FaceList - create a face list, then get data
             // </snippet_maincalls>
 
@@ -241,8 +243,8 @@ namespace FaceQuickstart
         private static async Task<List<DetectedFace>> DetectFaceRecognize(IFaceClient faceClient, string url, string recognition_model)
         {
             // Detect faces from image URL. Since only recognizing, use the recognition model 1.
-            // We use detection model 2 because we are not retrieving attributes.
-            IList<DetectedFace> detectedFaces = await faceClient.Face.DetectWithUrlAsync(url, recognitionModel: recognition_model, detectionModel: DetectionModel.Detection02);
+            // We use detection model 3 because we are not retrieving attributes.
+            IList<DetectedFace> detectedFaces = await faceClient.Face.DetectWithUrlAsync(url, recognitionModel: recognition_model, detectionModel: DetectionModel.Detection03);
             Console.WriteLine($"{detectedFaces.Count} face(s) detected from image `{Path.GetFileName(url)}`");
             return detectedFaces.ToList();
         }
