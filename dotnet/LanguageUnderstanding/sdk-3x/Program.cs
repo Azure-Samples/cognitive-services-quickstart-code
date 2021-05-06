@@ -20,25 +20,23 @@ namespace MlEntitySample
     {
         public static async Task Main()
         {
-            // <VariablesYouChange>
-            var key = "REPLACE-WITH-YOUR-AUTHORING-KEY";
+            // <AuthoringEndpointAndKeys>
+            var authoringKey = "REPLACE-WITH-YOUR-AUTHORING-KEY";
+            var authoringEndpoint = "REPLACE-WITH-YOUR-AUTHORING-ENDPOINT";
+            // </AuthoringEndpointAndKeys>
 
-            var authoringResourceName = "REPLACE-WITH-YOUR-AUTHORING-RESOURCE-NAME";
-            var predictionResourceName = "REPLACE-WITH-YOUR-PREDICTION-RESOURCE-NAME";
-            // </VariablesYouChange>
-
-            // <VariablesYouDontNeedToChangeChange>
-            var authoringEndpoint = String.Format("https://{0}.cognitiveservices.azure.com/", authoringResourceName);
-            var predictionEndpoint = String.Format("https://{0}.cognitiveservices.azure.com/", predictionResourceName);
-
+            // <ApplicationNameAndVersion>
             var appName = "Contoso Pizza Company";
             var versionId = "0.1";
+            // </ApplicationNameAndVersion>
+            
+            // <IntentName>
             var intentName = "OrderPizzaIntent";
-            // </VariablesYouDontNeedToChangeChange>
+            // </IntentName>
 
             // <AuthoringCreateClient> 
-            var credentials = new Microsoft.Azure.CognitiveServices.Language.LUIS.Authoring.ApiKeyServiceClientCredentials(key);
-            var client = new LUISAuthoringClient(credentials) { Endpoint = authoringEndpoint };
+            var authoringCredentials = new Microsoft.Azure.CognitiveServices.Language.LUIS.Authoring.ApiKeyServiceClientCredentials(authoringKey);
+            var client = new LUISAuthoringClient(authoringCredentials) { Endpoint = authoringEndpoint };
             // </AuthoringCreateClient>
 
             // Create app
@@ -74,8 +72,14 @@ namespace MlEntitySample
             await client.Apps.PublishAsync(appId, new ApplicationPublishObject { VersionId = versionId, IsStaging=false});
             // </PublishVersion>
 
+            // <PredictionEndpointAndKeys>
+            var predictionKey = "REPLACE-WITH-YOUR-PREDICTION-KEY";
+            var predictionEndpoint = "REPLACE-WITH-YOUR-PREDICTION-ENDPOINT";
+            // </PredictionEndpointAndKeys>
+                        
             // <PredictionCreateClient>
-            var runtimeClient = new LUISRuntimeClient(credentials) { Endpoint = predictionEndpoint };
+            var predictionCredentials = new Microsoft.Azure.CognitiveServices.Language.LUIS.Authoring.ApiKeyServiceClientCredentials(predictionKey);
+            var runtimeClient = new LUISRuntimeClient(predictionCredentials) { Endpoint = predictionEndpoint };
             // </PredictionCreateClient>
             
             // <QueryPredictionEndpoint>
