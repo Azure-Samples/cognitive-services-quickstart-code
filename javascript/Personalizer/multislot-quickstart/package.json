@@ -1,0 +1,16 @@
+{
+  "name": "personalizer-multi-slot-quickstart",
+  "version": "0.0.0",
+  "description": "Sample code used in quickstart to demonstrate Personalizer's multi-slot learning loop of calling Rank and Reward",
+  "main": "sample.js",
+  "author": {
+    "name": ""
+  },
+  "dependencies": {
+    "@azure/ms-rest-azure-js": "^2.1.0",
+    "@azure/ms-rest-js": "^2.2.3",
+    "readline-sync": "^1.4.10",
+    "requests": "^0.3.0",
+    "uuid": "^8.3.2"
+  }
+}
