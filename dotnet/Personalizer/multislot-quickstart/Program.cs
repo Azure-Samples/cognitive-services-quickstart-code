@@ -31,7 +31,7 @@ namespace MultiSlotQuickstart
 
             using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Add("apim-subscription-id", ResourceKey);
+                client.DefaultRequestHeaders.Add("ocp-apim-subscription-key", ResourceKey);
                 int iteration = 1;
                 bool runLoop = true;
                 do
@@ -174,7 +174,7 @@ namespace MultiSlotQuickstart
         {
             string[] deviceFeatures = new string[] { "mobile", "tablet", "desktop" };
 
-            Console.WriteLine("\nWhat time of day is it (enter number)? 1. Mobile 2. Tablet 3. Desktop");
+            Console.WriteLine("\nWhat is the device type (enter number)? 1. Mobile 2. Tablet 3. Desktop");
             if (!int.TryParse(GetKey(), out int deviceIndex) || deviceIndex < 1 || deviceIndex > deviceFeatures.Length)
             {
                 Console.WriteLine("\nEntered value is invalid. Setting feature value to " + deviceFeatures[0] + ".");

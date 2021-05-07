@@ -6,7 +6,7 @@ const ResourceKey = '<REPLACE-WITH-YOUR-PERSONALIZER-KEY>';
 const MultiSlotRankUrl = PersonalizationBaseUrl.concat('personalizer/v1.1-preview.1/multislot/rank');
 const MultiSlotRewardUrlBase = PersonalizationBaseUrl.concat('personalizer/v1.1-preview.1/multislot/events/');
 const Headers = {
-    'apim-subscription-id': ResourceKey,
+    'ocp-apim-subscription-key': ResourceKey,
     'Content-Type': 'application/json'
 };
 
@@ -78,7 +78,7 @@ function getContextFeatures() {
 
     answer = readline.question('\nWhat type of device is the user on (enter number)? 1. mobile 2. tablet 3. desktop\n');
     selection = parseInt(answer);
-    const device = selection >= 1 && selection <= 3 ? deviceFeatures[selection - 1] : tasteFeatures[0];
+    const device = selection >= 1 && selection <= 3 ? deviceFeatures[selection - 1] : deviceFeatures[0];
 
     console.log('Selected features:\n');
     console.log('Time of day: ' + timeOfDay + '\n');

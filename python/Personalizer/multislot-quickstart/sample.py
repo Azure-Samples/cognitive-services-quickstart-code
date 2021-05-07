@@ -8,7 +8,7 @@ RESOURCE_KEY = "<REPLACE-WITH-YOUR-PERSONALIZER-KEY>"
 MULTI_SLOT_RANK_URL = '{0}personalizer/v1.1-preview.1/multislot/rank'.format(PERSONALIZATION_BASE_URL)
 MULTI_SLOT_REWARD_URL_BASE = '{0}personalizer/v1.1-preview.1/multislot/events/'.format(PERSONALIZATION_BASE_URL) #add "{eventId}/reward"
 HEADERS = {
-    'apim-subscription-id': RESOURCE_KEY,
+    'ocp-apim-subscription-key': RESOURCE_KEY,
     'Content-Type': 'application/json'
 }
 
@@ -102,8 +102,8 @@ def get_context_features():
             raise IndexError
         device = device_features[parsed_device-1]
     except (ValueError, IndexError):
-        print("Entered value is invalid. Setting feature value to", taste_features[0]+ ".")
-        device = taste_features[0]
+        print("Entered value is invalid. Setting feature value to", device_features[0]+ ".")
+        device = device_features[0]
 
     return [
         {'time': time_of_day},
