@@ -1,0 +1,22 @@
+[
+	{
+		"id": "BigHeroPosition",
+		"features": [
+			{
+				"size": "large",
+				"position": "left"
+			}
+		],
+		"baselineAction": "Red-Polo-Shirt-432"
+	},
+	{
+		"id": "SmallSidebar",
+		"features": [
+			{
+				"size": "small",
+				"position": "right"
+			}
+		],
+		"baselineAction": "Tennis-Racket-133"
+	}
+]

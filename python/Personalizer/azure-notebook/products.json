@@ -1,0 +1,42 @@
+[
+	{
+		"id": "Red-Polo-Shirt-432",
+		"features": [
+			{
+				"onSale": true,
+				"price": 20,
+				"category": "Clothing"
+			}
+		]
+	},
+	{
+		"id": "Tennis-Racket-133",
+		"features": [
+			{
+				"onSale": false,
+				"price": 70,
+				"category": "Sports"
+			}
+		]
+	},
+	{
+		"id": "31-Inch-Monitor-771",
+		"features": [
+			{
+				"onSale": true,
+				"price": 200,
+				"category": "Electronics"
+			}
+		]
+	},
+	{
+		"id": "XBox-Series X-117",
+		"features": [
+			{
+				"onSale": false,
+				"price": 499,
+				"category": "Electronics"
+			}
+		]
+	}
+]
