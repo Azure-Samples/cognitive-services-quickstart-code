@@ -3,11 +3,12 @@
 
 # <Dependencies>
 from azure.cognitiveservices.language.luis.authoring import LUISAuthoringClient
+from azure.cognitiveservices.language.luis.authoring.models import ApplicationCreateObject
 from azure.cognitiveservices.language.luis.runtime import LUISRuntimeClient
 from msrest.authentication import CognitiveServicesCredentials
 from functools import reduce
 
-import json, time
+import json, time, uuid
 # </Dependencies>
 
 def quickstart(): 
@@ -20,7 +21,8 @@ def quickstart():
 	# </VariablesYouChange>
 
 	# <VariablesYouDontNeedToChangeChange>
-	appName = "Contoso Pizza Company"
+	# We use a UUID to avoid name collisions.
+	appName = "Contoso Pizza Company " + str(uuid.uuid4())
 	versionId = "0.1"
 	intentName = "OrderPizzaIntent"
 	# </VariablesYouDontNeedToChangeChange>
@@ -59,6 +61,11 @@ def quickstart():
 	# </TrainAppVersion>
 	
 	# <PublishVersion>
+	# Mark the app as public so we can query it using any prediction endpoint.
+	# Note: For production scenarios, you should instead assign the app to your own LUIS prediction endpoint. See:
+	# https://docs.microsoft.com/en-gb/azure/cognitive-services/luis/luis-how-to-azure-subscription#assign-a-resource-to-an-app
+	client.apps.update_settings(app_id, is_public=True)
+
 	responseEndpointInfo = client.apps.publish(app_id, versionId, is_staging=False)
 	# </PublishVersion>
 	
@@ -81,15 +88,16 @@ def quickstart():
 	print("Entities: {}".format (predictionResponse.prediction.entities))
     # </QueryPredictionEndpoint>
 
+	# Clean up resources.
+	print ("Deleting app...")
+	client.apps.delete(app_id)
+	print ("App deleted.")
+
 def create_app(client, appName, versionId):
 
     # <AuthoringCreateApplication>
 	# define app basics
-	appDefinition = {
-        "name": appName,
-        "initial_version_id": versionId,
-        "culture": "en-us"
-    }
+	appDefinition = ApplicationCreateObject (name=appName, initial_version_id=versionId, culture='en-us')
 
 	# create app
 	app_id = client.apps.add(appDefinition)
@@ -100,8 +108,6 @@ def create_app(client, appName, versionId):
 	
 	return app_id
 	
-# </createApp>
-
 def add_entities(client, app_id, versionId):
 
 	# <AuthoringAddEntities>
