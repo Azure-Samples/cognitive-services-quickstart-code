@@ -149,19 +149,22 @@ def getRectangle(faceDictionary):
     
     return ((left, top), (right, bottom))
 
-
+def drawFaceRectangles() :
 # Download the image from the url
-response = requests.get(single_face_image_url)
-img = Image.open(BytesIO(response.content))
+    response = requests.get(single_face_image_url)
+    img = Image.open(BytesIO(response.content))
 
 # For each face returned use the face rectangle and draw a red box.
-print('Drawing rectangle around face... see popup for results.')
-draw = ImageDraw.Draw(img)
-for face in detected_faces:
-    draw.rectangle(getRectangle(face), outline='red')
+    print('Drawing rectangle around face... see popup for results.')
+    draw = ImageDraw.Draw(img)
+    for face in detected_faces:
+        draw.rectangle(getRectangle(face), outline='red')
 
-# Display the image in the users default image browser.
-img.show()
+# Display the image in the default image browser.
+    img.show()
+
+# Uncomment this to show the face rectangles.
+#    drawFaceRectangles()
 # </snippet_frame>
 
 print()
