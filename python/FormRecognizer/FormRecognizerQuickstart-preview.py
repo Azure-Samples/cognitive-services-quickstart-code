@@ -152,8 +152,9 @@ trainingDataUrl = "PASTE_YOUR_SAS_URL_OF_YOUR_FORM_FOLDER_IN_BLOB_STORAGE_HERE"
 
 poller = form_training_client.begin_training(trainingDataUrl, use_training_labels=False)
 model = poller.result()
+trained_model_id = model.model_id
 
-print("Model ID: {}".format(model.model_id))
+print("Model ID: {}".format(trained_model_id))
 print("Status: {}".format(model.status))
 print("Training started on: {}".format(model.training_started_on))
 print("Training completed on: {}".format(model.training_completed_on))
@@ -187,8 +188,9 @@ trainingDataUrl = "PASTE_YOUR_SAS_URL_OF_YOUR_FORM_FOLDER_IN_BLOB_STORAGE_HERE"
 
 poller = form_training_client.begin_training(trainingDataUrl, use_training_labels=True)
 model = poller.result()
+trained_with_labels_model_id = model.model_id
 
-print("Model ID: {}".format(model.model_id))
+print("Model ID: {}".format(trained_with_labels_model_id))
 print("Status: {}".format(model.status))
 print("Training started on: {}".format(model.training_started_on))
 print("Training completed on: {}".format(model.training_completed_on))
@@ -216,11 +218,8 @@ for doc in model.training_documents:
 # </snippet_trainlabels>
 
 # <snippet_analyze>
-# Model ID from when you trained your model.
-model_id = "<your custom model id>"
-
 poller = form_recognizer_client.begin_recognize_custom_forms_from_url(
-    model_id=model_id, form_url=formUrl)
+    model_id=trained_model_id, form_url=formUrl)
 result = poller.result()
 
 for recognized_form in result:
@@ -255,9 +254,7 @@ for model in custom_models:
 # </snippet_manage_list>
 
 # <snippet_manage_getmodel>
-model_id = "<model_id from the Train a Model sample>"
-
-custom_model = form_training_client.get_custom_model(model_id=model_id)
+custom_model = form_training_client.get_custom_model(model_id=trained_model_id)
 print("Model ID: {}".format(custom_model.model_id))
 print("Status: {}".format(custom_model.status))
 print("Training started on: {}".format(custom_model.training_started_on))
