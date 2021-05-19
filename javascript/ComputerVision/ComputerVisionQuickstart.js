@@ -24,12 +24,12 @@
  * Resources:
  *  - Node SDK: https://docs.microsoft.com/en-us/javascript/api/azure-cognitiveservices-computervision/?view=azure-node-latest
  *  - Documentation: https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/
- *  - API v3.0: https://westcentralus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-ga/operations/5d986960601faab4bf452005
+ *  - API v3.2: https://westus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-2/operations/5d986960601faab4bf452005
  * 
  * Examples included in this quickstart:
  * Authenticate, Describe Image, Detect Faces, Detect Objects, Detect Tags, Detect Type, 
  * Detect Category, Detect Brand, Detect Color Scheme, Detect Domain-specific Content, Detect Adult Content
- * Generate Thumbnail, Recognize Printed & Handwritten Text using Read API.
+ * Generate Thumbnail, Extract text using Read API.
  */
 
 // <snippet_imports_and_vars>
@@ -426,12 +426,12 @@ function computerVision() {
       */
 
       /**
-        *READ API
+        * OCR: READ API
         *
         * This example recognizes both handwritten and printed text, and can handle image files (.jpg/.png/.bmp) and multi-page files (.pdf and .tiff)
         * Please see REST API reference for more information:
-        * Read: https://westcentralus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-ga/operations/5d986960601faab4bf452005
-        * Get Result Result: https://westcentralus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-ga/operations/5d9869604be85dee480c8750
+        * Read: https://westus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-2/operations/5d986960601faab4bf452005
+        * Get Read Result: https://westus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-2/operations/5d9869604be85dee480c8750
         * 
         */
 
@@ -544,10 +544,8 @@ function computerVision() {
       */
 
       /**
-       * READ PRINTED & HANDWRITTEN TEXT
-       * Recognizes text from images using OCR (optical character recognition).
-       * Recognition is shown for both printed and handwritten text.
-       * Read 3.0 supports the following language: en (English), de (German), es (Spanish), fr (French), it (Italian), nl (Dutch) and pt (Portuguese).
+       * OCR: READ PRINTED & HANDWRITTEN TEXT WITH THE READ API
+       * Extracts text from images using OCR (optical character recognition).
        */
       console.log('-------------------------------------------------');
       console.log('READ PRINTED, HANDWRITTEN TEXT AND PDF');
