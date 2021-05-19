@@ -27,13 +27,13 @@ Run the entire file to demonstrate the following examples:
     - Detect Objects
     - Detect Brands
     - Generate Thumbnail
-    - Read File (recognize both handwritten and printed text) 
-    - Recognize Printed Text with OCR
+    - OCR: Read File using the Read API, extract text - remote
+    - OCR: Read File using the Read API, extract text - local
 
 References:
     - SDK: https://docs.microsoft.com/en-us/python/api/azure-cognitiveservices-vision-computervision/azure.cognitiveservices.vision.computervision?view=azure-python
     - Documentaion: https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/index
-    - API: https://westus.dev.cognitive.microsoft.com/docs/services/5adf991815e1060e6355ad44/operations/56f91f2e778daf14a499e1fa
+    - API: https://westus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-2/operations/5d986960601faab4bf452005
 '''
 
 # <snippet_imports_and_vars>
