@@ -8,11 +8,8 @@
  *  - Detect Objects with an image URL
  *  - Detect Objects with a local file
  *  - Generate Thumbnail from a URL and local image
- *  - Read Batch File recognizes both handwritten and printed text
- *  - Recognize Text from an image URL
- *  - Recognize Text from a a local image
- *  - Recognize Text OCR with an image URL
- *  - Recognize Text OCR with a local image
+ *  - OCR (Read API): Read file from URL
+ #  - OCR (Read API): Read file from local
  *
  *  Prerequisites:
  *   - Visual Studio 2019 (or 2017, but note this is a .Net Core console app, not .Net Framework)
@@ -29,7 +26,7 @@
  *
  *   References:
  *    - .NET SDK: https://docs.microsoft.com/en-us/dotnet/api/overview/azure/cognitiveservices/client/computervision?view=azure-dotnet
- *    - API (testing console): https://westus.dev.cognitive.microsoft.com/docs/services/5adf991815e1060e6355ad44/operations/56f91f2e778daf14a499e1fa
+ *    - API (testing console): https://westus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-2/operations/5d986960601faab4bf452005
  *    - Computer Vision documentation: https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/
  */
 
