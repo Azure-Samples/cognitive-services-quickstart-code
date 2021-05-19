@@ -670,73 +670,36 @@ print()
 END - Generate Thumbnail
 '''
 
-'''
-Read File, recognize handwritten text - local
-This example extracts text from a handwritten local image, then prints results.
-This API call can also recognize remote image text (shown in next example, Read File - remote).
-'''
-print("===== Read File - local =====")
-# Get image of handwriting
-local_image_handwritten_path = os.path.join (images_folder, "handwritten_text.jpg")
-# Open the image
-local_image_handwritten = open(local_image_handwritten_path, "rb")
-
-# Call API with image and raw response (allows you to get the operation location)
-recognize_handwriting_results = computervision_client.read_in_stream(local_image_handwritten, raw=True)
-# Get the operation location (URL with ID as last appendage)
-operation_location_local = recognize_handwriting_results.headers["Operation-Location"]
-# Take the ID off and use to get results
-operation_id_local = operation_location_local.split("/")[-1]
-
-# Call the "GET" API and wait for the retrieval of the results
-while True:
-    recognize_handwriting_result = computervision_client.get_read_result(operation_id_local)
-    if recognize_handwriting_result.status.lower () not in ['notstarted', 'running']:
-        break
-    print ('Waiting for result...')
-    time.sleep(10)
-
-# Print results, line by line
-if recognize_handwriting_result.status == OperationStatusCodes.succeeded:
-    for text_result in recognize_handwriting_result.analyze_result.read_results:
-        for line in text_result.lines:
-            print(line.text)
-            print(line.bounding_box)
-print()
-'''
-END - Read File - local
-'''
-
 # <snippet_read_call>
 '''
-Read File, recognize handwritten text - remote
-This example will extract handwritten text in an image, then print results, line by line.
-This API call can also recognize handwriting (not shown).
+OCR: Read File using the Read API, extract text - remote
+This example will extract text in an image, then print results, line by line.
+This API call can also extract handwriting style text (not shown).
 '''
 print("===== Read File - remote =====")
-# Get an image with handwritten text
-remote_image_handw_text_url = "https://raw.githubusercontent.com/MicrosoftDocs/azure-docs/master/articles/cognitive-services/Computer-vision/Images/readsample.jpg"
+# Get an image with text
+read_image_url = "https://raw.githubusercontent.com/MicrosoftDocs/azure-docs/master/articles/cognitive-services/Computer-vision/Images/readsample.jpg"
 
 # Call API with URL and raw response (allows you to get the operation location)
-recognize_handw_results = computervision_client.read(remote_image_handw_text_url,  raw=True)
+read_response = computervision_client.read(read_image_url,  raw=True)
 # </snippet_read_call>
 
 # <snippet_read_response>
 # Get the operation location (URL with an ID at the end) from the response
-operation_location_remote = recognize_handw_results.headers["Operation-Location"]
+read_operation_location = read_response.headers["Operation-Location"]
 # Grab the ID from the URL
-operation_id = operation_location_remote.split("/")[-1]
+operation_id = read_operation_location.split("/")[-1]
 
 # Call the "GET" API and wait for it to retrieve the results 
 while True:
-    get_handw_text_results = computervision_client.get_read_result(operation_id)
-    if get_handw_text_results.status not in ['notStarted', 'running']:
+    read_result = computervision_client.get_read_result(operation_id)
+    if read_result.status not in ['notStarted', 'running']:
         break
     time.sleep(1)
 
 # Print the detected text, line by line
-if get_handw_text_results.status == OperationStatusCodes.succeeded:
-    for text_result in get_handw_text_results.analyze_result.read_results:
+if read_result.status == OperationStatusCodes.succeeded:
+    for text_result in read_result.analyze_result.read_results:
         for line in text_result.lines:
             print(line.text)
             print(line.bounding_box)
@@ -747,45 +710,40 @@ END - Read File - remote
 '''
 
 '''
-Recognize Printed Text with OCR - local
-This example will extract, using OCR, printed text in an image, then print results line by line.
+OCR: Read File using the Read API, extract text - local
+This example extracts text from a local image, then prints results.
+This API call can also recognize remote image text (shown in next example, Read File - remote).
 '''
-print("===== Detect Printed Text with OCR - local =====")
-# Get an image with printed text
-local_image_printed_text_path = os.path.join (images_folder, "printed_text.jpg")
-local_image_printed_text = open(local_image_printed_text_path, "rb")
+print("===== Read File - local =====")
+# Get image path
+read_image_path = os.path.join (images_folder, "image_with_text.jpg")
+# Open the image
+read_image = open(read_image_path, "rb")
 
-ocr_result_local = computervision_client.recognize_printed_text_in_stream(local_image_printed_text)
-for region in ocr_result_local.regions:
-    for line in region.lines:
-        print("Bounding box: {}".format(line.bounding_box))
-        s = ""
-        for word in line.words:
-            s += word.text + " "
-        print(s)
+# Call API with image and raw response (allows you to get the operation location)
+read_response = computervision_client.read_in_stream(read_image, raw=True)
+# Get the operation location (URL with ID as last appendage)
+read_operation_location = read_response.headers["Operation-Location"]
+# Take the ID off and use to get results
+operation_id = read_operation_location.split("/")[-1]
+
+# Call the "GET" API and wait for the retrieval of the results
+while True:
+    read_result = computervision_client.get_read_result(operation_id)
+    if read_result.status.lower () not in ['notstarted', 'running']:
+        break
+    print ('Waiting for result...')
+    time.sleep(10)
+
+# Print results, line by line
+if read_result.status == OperationStatusCodes.succeeded:
+    for text_result in read_status.analyze_result.read_results:
+        for line in text_result.lines:
+            print(line.text)
+            print(line.bounding_box)
 print()
 '''
-END - Recognize Printed Text with OCR - local
-'''
-
-'''
-Recognize Printed Text with OCR - remote
-This example will extract, using OCR, printed text in an image, then print results line by line.
-'''
-print("===== Detect Printed Text with OCR - remote =====")
-remote_printed_text_image_url = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/printed_text.jpg"
-
-ocr_result_remote = computervision_client.recognize_printed_text(remote_printed_text_image_url)
-for region in ocr_result_remote.regions:
-    for line in region.lines:
-        print("Bounding box: {}".format(line.bounding_box))
-        s = ""
-        for word in line.words:
-            s += word.text + " "
-        print(s)
-print()
-'''
-END - Recognize Printed Text with OCR - remote
+END - Read File - local
 '''
 
 print("End of Computer Vision quickstart.")
