@@ -435,7 +435,7 @@ public class ComputerVisionQuickstart {
             ComputerVisionImpl vision = (ComputerVisionImpl) client.computerVision();
 
             // Read in remote image and response header
-            ReadHeaders responseHeader = vision.readWithServiceResponseAsync(remoteTextImageURL, OcrDetectionLanguage.FR)
+            ReadHeaders responseHeader = vision.readWithServiceResponseAsync(remoteTextImageURL)
                     .toBlocking()
                     .single()
                     .headers();
@@ -475,7 +475,7 @@ public class ComputerVisionQuickstart {
 
             // Read in remote image and response header
             ReadInStreamHeaders responseHeader =
-                    vision.readInStreamWithServiceResponseAsync(localImageBytes, OcrDetectionLanguage.FR)
+                    vision.readInStreamWithServiceResponseAsync(localImageBytes)
                         .toBlocking()
                         .single()
                         .headers();
