@@ -1,7 +1,7 @@
 // <snippet_imports>
-import com.azure.ai.formrecognizer. * ;
-import com.azure.ai.formrecognizer.training. * ;
-import com.azure.ai.formrecognizer.models. * ;
+import com.azure.ai.formrecognizer.* ;
+import com.azure.ai.formrecognizer.training.* ;
+import com.azure.ai.formrecognizer.models.* ;
 import com.azure.ai.formrecognizer.training.models. * ;
 
 import java.util.concurrent.atomic.AtomicReference;
