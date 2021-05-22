@@ -306,4 +306,4 @@ with open(path_to_sample_forms, "rb") as f:
             region = id_document.fields.get("Region")
             if region:
                 print("Region: {} has confidence: {}".format(region.value, region.confidence))
-
+# </snippet_id>
