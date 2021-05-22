@@ -2,7 +2,7 @@
 import com.azure.ai.formrecognizer.* ;
 import com.azure.ai.formrecognizer.training.* ;
 import com.azure.ai.formrecognizer.models.* ;
-import com.azure.ai.formrecognizer.training.models. * ;
+import com.azure.ai.formrecognizer.training.models.* ;
 
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.List;
