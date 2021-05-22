@@ -422,16 +422,17 @@ public class FormRecognizer {
     // </snippet_invoice_print>
 
     //<snippet_id_call>
-    private static void AnalyzeId(FormRecognizerClient recognizerClient, String idUrl) {
-        SyncPoller < FormRecognizerOperationResult, List < RecognizedForm >> analyzeIDDocumentPoller = client.beginRecognizeIdDocumentsFromUrl(idUrl);
+    private static void AnalyzeId(FormRecognizerClient client, String idUrl) {
+        SyncPoller<FormRecognizerOperationResult, List<RecognizedForm>> analyzeIdentityDocumentPoller
+            = client.beginRecognizeIdentityDocumentsFromUrl(licenseDocumentUrl);
 
-        List < RecognizedForm > idDocumentResults = analyzeIDDocumentPoller.getFinalResult();
+        List<RecognizedForm> identityDocumentResults = analyzeIdentityDocumentPoller.getFinalResult();
     //</snippet_id_call>
 
    //<snippet_id_print>
-        for (int i = 0; i < idDocumentResults.size(); i++) {
-            RecognizedForm recognizedForm = idDocumentResults.get(i);
-            Map < String, FormField > recognizedFields = recognizedForm.getFields();
+for (int i = 0; i < identityDocumentResults.size(); i++) {
+            RecognizedForm recognizedForm = identityDocumentResults.get(i);
+            Map<String, FormField> recognizedFields = recognizedForm.getFields();
             System.out.printf("----------- Recognized license info for page %d -----------%n", i);
             FormField addressField = recognizedFields.get("Address");
             if (addressField != null) {
@@ -442,12 +443,12 @@ public class FormRecognizer {
                 }
             }
 
-            FormField countryFormField = recognizedFields.get("Country");
-            if (countryFormField != null) {
-                if (FieldValueType.STRING == countryFormField.getValue().getValueType()) {
-                    String country = countryFormField.getValue().asCountry();
-                    System.out.printf("Country: %s, confidence: %.2f%n",
-                        country, countryFormField.getConfidence());
+            FormField countryRegionFormField = recognizedFields.get("CountryRegion");
+            if (countryRegionFormField != null) {
+                if (FieldValueType.STRING == countryRegionFormField.getValue().getValueType()) {
+                    String countryRegion = countryRegionFormField.getValue().asCountryRegion();
+                    System.out.printf("Country or region: %s, confidence: %.2f%n",
+                        countryRegion, countryRegionFormField.getConfidence());
                 }
             }
 
