@@ -4,39 +4,28 @@ package main
 import (
     "bytes"
     "fmt"
-    "log"
     "net/http"
-    "os"
 )
 // </dependencies>
 
 // <main>
 func main() {
 /*
-* Configure the local environment:
-* Set the QNA_MAKER_SUBSCRIPTION_KEY, QNA_MAKER_ENDPOINT, and QNA_MAKER_KB_ID
-* environment variables on your local machine using
-* the appropriate method for your preferred shell (Bash, PowerShell, Command
-* Prompt, etc.). 
+* Set the `subscription_key` and `endpoint` variables to your
+* QnA Maker authoring subscription key and endpoint.
 *
-* If the environment variable is created after the application is launched in a
-* console or with Visual Studio, the shell (or Visual Studio) needs to be closed
-* and reloaded to take the environment variable into account.
+* These values can be found in the Azure portal (ms.portal.azure.com/).
+* Look up your QnA Maker resource. Then, in the "Resource management"
+* section, find the "Keys and Endpoint" page.
+*
+* The value of `endpoint` has the format https://YOUR-RESOURCE-NAME.cognitiveservices.azure.com.
+*
+* Set the `kb_id` variable to the ID of a knowledge base you have
+* previously created.
 */
-    if "" == os.Getenv("QNA_MAKER_ENDPOINT") {
-        log.Fatal("Please set/export the environment variable QNA_MAKER_ENDPOINT.")
-    }
-    var endpoint string = os.Getenv("QNA_MAKER_ENDPOINT")
-
-    if "" == os.Getenv("QNA_MAKER_SUBSCRIPTION_KEY") {
-        log.Fatal("Please set/export the environment variable QNA_MAKER_SUBSCRIPTION_KEY.")
-    }
-    var subscription_key string = os.Getenv("QNA_MAKER_SUBSCRIPTION_KEY")
-
-    if "" == os.Getenv("QNA_MAKER_KB_ID") {
-        log.Fatal("Please set/export the environment variable QNA_MAKER_KB_ID.")
-    }
-    var kb_id string = os.Getenv("QNA_MAKER_KB_ID")
+	var subscription_key string = "PASTE_YOUR_QNA_MAKER_SUBSCRIPTION_KEY_HERE"
+	var endpoint string = "PASTE_YOUR_QNA_MAKER_ENDPOINT_HERE"
+    var kb_id string = "PASTE_YOUR_QNA_MAKER_KB_ID_HERE"
 
     var service string = "/qnamaker/v4.0"
     var method string = "/knowledgebases/"

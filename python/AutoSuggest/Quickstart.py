@@ -10,8 +10,8 @@ Install the Bing Autosuggest module:
   python -m pip install azure-cognitiveservices-search_autosuggest
 '''
 
-subscription_key = os.environ['AUTOSUGGEST_SUBSCRIPTION_KEY']
-endpoint = os.environ['BING_AUTOSUGGEST_ENDPOINT']
+subscription_key = "PASTE_YOUR_AUTO_SUGGEST_SUBSCRIPTION_KEY_HERE"
+endpoint = "PASTE_YOUR_AUTO_SUGGEST_ENDPOINT_HERE"
 
 # Instantiate a Bing Autosuggest client
 client = AutoSuggestClient(endpoint, CognitiveServicesCredentials(subscription_key))

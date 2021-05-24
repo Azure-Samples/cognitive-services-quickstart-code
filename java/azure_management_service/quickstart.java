@@ -61,34 +61,39 @@ public class Quickstart {
 	/* The name of the Azure resource group in which you want to create the resource.
 	You can find resource groups in the Azure Dashboard under Home > Resource groups. */
 	private static String resourceGroupName = "INSERT RESOURCE GROUP NAME HERE";
+
+	/* The name of the custom subdomain to use when you create the resource. This is optional.
+	For example, if you create a Bing Search v7 resource with the custom subdomain name 'my-search-resource',
+	your resource would have the endpoint https://my-search-resource.cognitiveservices.azure.com/.
+	Note not all Cognitive Services allow custom subdomain names. */
+	private static String subDomainName = "PASTE_YOUR_SUBDOMAIN_NAME_HERE";
 	// </snippet_constants>
 
 	public static void main(String[] args) {
 
 		// <snippet_auth>
-		// auth
-		private static ApplicationTokenCredentials credentials = new ApplicationTokenCredentials(applicationId, tenantId, applicationSecret, AzureEnvironment.AZURE);
+		ApplicationTokenCredentials credentials = new ApplicationTokenCredentials(applicationId, tenantId, applicationSecret, AzureEnvironment.AZURE);
 
 		CognitiveServicesManager client = CognitiveServicesManager.authenticate(credentials, subscriptionId);
 		// </snippet_auth>
 
 		// <snippet_calls>
-		// list all available resource kinds, SKUs, and locations for your Azure account.
-		list_available_kinds_skus_locations (client);
+		// Uncomment to list all available resource kinds, SKUs, and locations for your Azure account.
+		// list_available_kinds_skus_locations (client);
+
+		// Create a resource with kind Text Translation, SKU F0 (free tier), location global.
+		String resourceId = create_resource (client, "test_resource", resourceGroupName, "TextAnalytics", "F0", Region.US_WEST);
 
 		// list all resources for your Azure account.
 		list_resources (client);
 
-		// Create a resource with kind Text Translation, SKU F0 (free tier), location global.
-		String resourceId = create_resource (client, "test_resource", resourceGroupName, "TextAnalytics", "S0", Region.US_WEST);
-
 		// Delete the resource.
 		delete_resource (client, resourceId);
+		// </snippet_calls>
 	}
-	// </snippet_calls>
 
 	// <snippet_list_avail>
-	public void list_available_kinds_skus_locations (CognitiveServicesManager client) {
+	public static void list_available_kinds_skus_locations (CognitiveServicesManager client) {
 		System.out.println ("Available SKUs:");
 		System.out.println("Kind\tSKU Name\tSKU Tier\tLocations");
 		ResourceSkus skus = client.resourceSkus();
@@ -103,14 +108,17 @@ public class Quickstart {
 	// Note: Region values are listed in:
 	// https://github.com/Azure/autorest-clientruntime-for-java/blob/master/azure-arm-client-runtime/src/main/java/com/microsoft/azure/arm/resources/Region.java
 	// <snippet_create>
-	public String create_resource (CognitiveServicesManager client, String resourceName, String resourceGroupName, String kind, String skuName, Region region) {
+	public static String create_resource (CognitiveServicesManager client, String resourceName, String resourceGroupName, String kind, String skuName, Region region) {
 		System.out.println ("Creating resource: " + resourceName + "...");
 
+/* NOTE If you do not want to use a custom subdomain name, remove the withCustomSubDomainName
+setter from the CognitiveServicesAccountProperties object. */
 		CognitiveServicesAccount result = client.accounts().define(resourceName)
 			.withRegion(region)
 			.withExistingResourceGroup(resourceGroupName)
 			.withKind(kind)
 			.withSku(new Sku().withName(skuName))
+			.withProperties(new CognitiveServicesAccountProperties().withCustomSubDomainName(subDomainName))
 			.create();
 
 		System.out.println ("Resource created.");
@@ -123,7 +131,7 @@ public class Quickstart {
 	// </snippet_create>
 
 	// <snippet_list>
-	public void list_resources (CognitiveServicesManager client) {
+	public static void list_resources (CognitiveServicesManager client) {
 		System.out.println ("Resources in resource group: " + resourceGroupName);
 		// Note Azure resources are also sometimes referred to as accounts.
 		Accounts accounts = client.accounts();
@@ -136,7 +144,7 @@ public class Quickstart {
 	// </snippet_list>
 	
 	// <snippet_delete>
-	public void delete_resource (CognitiveServicesManager client, String resourceId) {
+	public static void delete_resource (CognitiveServicesManager client, String resourceId) {
 		System.out.println ("Deleting resource: " + resourceId + "...");
 		client.accounts().deleteByIds (resourceId);
 		System.out.println ("Resource deleted.");

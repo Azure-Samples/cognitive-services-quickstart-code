@@ -1,6 +1,6 @@
 import os
 
-from azure.cognitiveservices.search.autosuggest import AutoSuggestSearchAPI
+from azure.cognitiveservices.search.autosuggest import AutoSuggestClient
 from msrest.authentication import CognitiveServicesCredentials
 
 '''
@@ -16,16 +16,15 @@ Install the Cognitive Services Bing Autosuggest SDK module:
 Use Python 3.4+
 '''
 
-# Add your Cognitive Services key and endpoint to your environment variables.
-subscription_key = os.environ['COGNITIVE_SERVICES_SUBSCRIPTION_KEY']
-endpoint = os.environ['COGNITIVE_SERVICES_ENDPOINT']
+subscription_key = "PASTE_YOUR_AUTO_SUGGEST_SUBSCRIPTION_KEY_HERE"
+endpoint = "PASTE_YOUR_AUTO_SUGGEST_ENDPOINT_HERE"
 
 '''
 AUTHENTICATE
 Create an Autosuggest client.
 '''
 credentials = CognitiveServicesCredentials(subscription_key)
-autosuggest_client = AutoSuggestSearchAPI(CognitiveServicesCredentials(subscription_key), endpoint + 'bing/v7.0')
+autosuggest_client = AutoSuggestClient(endpoint, CognitiveServicesCredentials(subscription_key))
 
 '''
 AUTOSUGGEST

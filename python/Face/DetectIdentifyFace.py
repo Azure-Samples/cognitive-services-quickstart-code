@@ -1,7 +1,4 @@
-import glob
-import os
-import sys
-import time
+import glob, os, sys, time, uuid
 
 from azure.cognitiveservices.vision.face import FaceClient
 from azure.cognitiveservices.vision.face.models import TrainingStatusType
@@ -16,6 +13,7 @@ and added to the existing person group.
 
 Install the Face SDK library:
 pip install --upgrade azure-cognitiveservices-vision-face
+'''
 
 '''
 Create and train a person group and add a person group person to it.
@@ -45,6 +43,7 @@ def build_person_group(client, person_group_id, pgp_name):
         if (training_status.status is TrainingStatusType.succeeded):
             break
         elif (training_status.status is TrainingStatusType.failed):
+            client.person_group.delete(person_group_id=PERSON_GROUP_ID)
             sys.exit('Training the person group has failed.')
         time.sleep(5)
 
@@ -127,14 +126,14 @@ def create_new_person(client, faces_not_found, person_group_id, test_images):
 
 if __name__ == '__main__':
 
-    # Add your Face key and endpoint to your environment variables
-    ENDPOINT = os.environ['FACE_ENDPOINT']
-    KEY = os.environ['FACE_SUBSCRIPTION_KEY']
+    ENDPOINT = "PASTE_YOUR_FACE_ENDPOINT_HERE"
+    KEY = "PASTE_YOUR_FACE_SUBSCRIPTION_KEY_HERE"
     # Create a client
     face_client = FaceClient(ENDPOINT, CognitiveServicesCredentials(KEY))
 
     # Name your person group. Must be lowercase, alphanumeric, or using dash or underscore.
-    PERSON_GROUP_ID = 'sample-person-group'
+    # We use a uuid to avoid name collisions.
+    PERSON_GROUP_ID = str(uuid.uuid4())
     # Name your person group person that will be added to our person group.
     pgp_name = 'Woman'
 

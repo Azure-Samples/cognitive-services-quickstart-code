@@ -18,9 +18,9 @@ Python SDK: https://docs.microsoft.com/en-us/python/api/azure-cognitiveservices-
 '''
 
 # Creates an instance of a speech config with specified subscription key and service region.
-# Add your subscription key to your environment variables
-# Use the region from your Cognitive Services endpoint (e.g., 'westus', 'eastus', etc.)
-speech_key, service_region = os.environ['COGNITIVE_SERVICES_SUBSCRIPTION_KEY'], 'westus'
+speech_key = 'PASTE_YOUR_SPEECH_SUBSCRIPTION_KEY_HERE'
+# Use the region from your Speech endpoint (e.g., 'westus', 'eastus', etc.)
+service_region = 'westus'
 speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=service_region)
 
 # Creates an audio configuration that points to an audio file.

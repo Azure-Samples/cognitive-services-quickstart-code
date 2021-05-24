@@ -1,25 +1,14 @@
-// <dependencies>
 'use strict';
 
 const msRest = require("@azure/ms-rest-js");
 const Face = require("@azure/cognitiveservices-face");
 const uuid = require("uuid/v4");
-// </dependencies>
+
+key = "<paste-your-[product-name]-key-here>"
+endpoint = "<paste-your-[product-name]-endpoint-here>"
 
 // <credentials>
-const key_var = 'FACE_SUBSCRIPTION_KEY';
-if (!process.env[key_var]) {
-    throw new Error('please set/export the following environment variable: ' + key_var);
-}
-var subscription_key = process.env[key_var];
-
-const endpoint_var = 'FACE_ENDPOINT';
-if (!process.env[endpoint_var]) {
-    throw new Error('please set/export the following environment variable: ' + endpoint_var);
-}
-var endpoint = process.env[endpoint_var];
-
-const credentials = new msRest.ApiKeyCredentials({ inHeader: { 'Ocp-Apim-Subscription-Key': subscription_key } });
+const credentials = new msRest.ApiKeyCredentials({ inHeader: { 'Ocp-Apim-Subscription-Key': key } });
 const client = new Face.FaceClient(credentials, endpoint);
 // </credentials>
 
@@ -147,12 +136,12 @@ async function DetectFaceExtract() {
 
 // <recognize>
 async function DetectFaceRecognize(url) {
-    // Detect faces from image URL. Since only recognizing, use the recognition model 1.
-    // We use detection model 2 because we are not retrieving attributes.
+    // Detect faces from image URL. Since only recognizing, use the recognition model 4.
+    // We use detection model 3 because we are not retrieving attributes.
     let detected_faces = await client.face.detectWithUrl(url,
 		{
-			detectionModel: "detection_02",
-			recognitionModel: "recognition_03"
+			detectionModel: "detection_03",
+			recognitionModel: "recognition_04"
 		});
     return detected_faces;
 }
@@ -256,7 +245,7 @@ async function IdentifyInPersonGroup() {
 
 	// Create a person group. 
 	console.log("Creating a person group with ID: " + person_group_id);
-	await client.personGroup.create(person_group_id, { name : person_group_id, recognitionModel : "recognition_03" });
+	await client.personGroup.create(person_group_id, { name : person_group_id, recognitionModel : "recognition_04" });
 
 	await AddFacesToPersonGroup(person_dictionary, person_group_id);
 

@@ -1,17 +1,3 @@
-
-// <snippet_imports>
-import com.microsoft.azure.cognitiveservices.vision.computervision.*;
-import com.microsoft.azure.cognitiveservices.vision.computervision.implementation.ComputerVisionImpl;
-import com.microsoft.azure.cognitiveservices.vision.computervision.models.*;
-
-import java.io.*;
-import java.nio.file.Files;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-// </snippet_imports>
-
 /*  This Quickstart for the Azure Cognitive Services Computer Vision API shows how to analyze
  *  an image and recognize text for both a local and remote (URL) image.
  *
@@ -25,17 +11,32 @@ import java.util.UUID;
  *  - Displaying any celebrities detected in the image and their bounding boxes
  *  - Displaying any landmarks detected in the image and their bounding boxes
  *  - Displaying whether an image is a clip art or line drawing type
- *  Recognize Printed Text: uses optical character recognition (OCR) to find text in an image.
+ *  - Extract Text (OCR) with the new Read API to find text in an image or document.
  */
 
- // <snippet_classdef_1>
+// <snippet_imports_and_vars>
+// <snippet_imports>
+import com.microsoft.azure.cognitiveservices.vision.computervision.*;
+import com.microsoft.azure.cognitiveservices.vision.computervision.implementation.ComputerVisionImpl;
+import com.microsoft.azure.cognitiveservices.vision.computervision.models.*;
+
+import java.io.*;
+import java.nio.file.Files;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+// </snippet_imports>
+
+// <snippet_classdef_1>
 public class ComputerVisionQuickstart {
     // </snippet_classdef_1>
 
     // <snippet_creds>
-    static String subscriptionKey = "your-subscription-key";
-    static String endpoint = "your-api-endpoint";
+    static String subscriptionKey = "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE";
+    static String endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE";
     // </snippet_creds>
+    // </snippet_imports_and_vars>
 
     // <snippet_beginmain>
     public static void main(String[] args) {
@@ -159,13 +160,15 @@ public class ComputerVisionQuickstart {
             // </snippet_analyzelocal_brands>
 
             // <snippet_analyzelocal_adult>
-            // Display whether any adult or racy content was detected and the confidence
+            // Display whether any adult/racy/gory content was detected and the confidence
             // values.
             System.out.println("\nAdult: ");
             System.out.printf("Is adult content: %b with confidence %f\n", analysis.adult().isAdultContent(),
                     analysis.adult().adultScore());
             System.out.printf("Has racy content: %b with confidence %f\n", analysis.adult().isRacyContent(),
                     analysis.adult().racyScore());
+            System.out.printf("Has gory content: %b with confidence %f\n", analysis.adult().isGoryContent(),
+                    analysis.adult().goreScore());
             // </snippet_analyzelocal_adult>
 
             // <snippet_analyzelocal_colors>
@@ -329,99 +332,9 @@ public class ComputerVisionQuickstart {
     // END - Analyze an image from a URL.
     // </snippet_analyzeurl>
 
+    
     /**
-     * RECOGNIZE PRINTED TEXT: Displays text found in image with angle and orientation of
-     * the block of text. This method is a legacy feature from before the Read API was introduced.
-     */
-    private static void RecognizeTextOCRLocal(ComputerVisionClient client) {
-        System.out.println("-----------------------------------------------");
-        System.out.println("RECOGNIZE PRINTED TEXT");
-        
-        // Replace this string with the path to your own image.
-        String localTextImagePath = "src\\main\\resources\\myImage.png";
-        
-        try {
-            File rawImage = new File(localTextImagePath);
-            byte[] localImageBytes = Files.readAllBytes(rawImage.toPath());
-
-            // Recognize printed text in local image
-            OcrResult ocrResultLocal = client.computerVision().recognizePrintedTextInStream()
-                    .withDetectOrientation(true).withImage(localImageBytes).withLanguage(OcrLanguages.EN).execute();
-
-            // Print results of local image
-            System.out.println();
-            System.out.println("Recognizing printed text from a local image with OCR ...");
-            System.out.println("\nLanguage: " + ocrResultLocal.language());
-            System.out.printf("Text angle: %1.3f\n", ocrResultLocal.textAngle());
-            System.out.println("Orientation: " + ocrResultLocal.orientation());
-
-            boolean firstWord = true;
-            // Gets entire region of text block
-            for (OcrRegion reg : ocrResultLocal.regions()) {
-                // Get one line in the text block
-                for (OcrLine line : reg.lines()) {
-                    for (OcrWord word : line.words()) {
-                        // get bounding box of first word recognized (just to demo)
-                        if (firstWord) {
-                            System.out.println("\nFirst word in first line is \"" + word.text()
-                                    + "\" with  bounding box: " + word.boundingBox());
-                            firstWord = false;
-                            System.out.println();
-                        }
-                        System.out.print(word.text() + " ");
-                    }
-                    System.out.println();
-                }
-            }
-            
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-    private static void RecognizeTextOCRRemote(ComputerVisionClient client, String remoteTextImageURL) {
-        System.out.println("-----------------------------------------------");
-        System.out.println("RECOGNIZE PRINTED TEXT");
-        try {
-            // Recognize printed text in remote image
-            OcrResult ocrResultRemote = client.computerVision().recognizePrintedText().withDetectOrientation(true)
-                    .withUrl(remoteTextImageURL).withLanguage(OcrLanguages.EN).execute();
-
-            // Print results of remote image
-            System.out.println();
-            System.out.println("Recognizing text from remote image with OCR ...");
-            System.out.println("\nLanguage: " + ocrResultRemote.language());
-            System.out.printf("Text angle: %1.3f\n", ocrResultRemote.textAngle());
-            System.out.println("Orientation: " + ocrResultRemote.orientation());
-
-            boolean firstWord = true;
-            // Gets entire region of text block
-            for (OcrRegion reg : ocrResultRemote.regions()) {
-                // Get one line in the text block
-                for (OcrLine line : reg.lines()) {
-                    for (OcrWord word : line.words()) {
-                        // get bounding box of first word recognized (just to demo)
-                        if (firstWord) {
-                            System.out.println("\nFirst word in first line is \"" + word.text()
-                                    + "\" with  bounding box: " + word.boundingBox());
-                            firstWord = false;
-                            System.out.println();
-                        }
-                        System.out.print(word.text() + " ");
-                    }
-                    System.out.println();
-                }
-            }
-            
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * READ : Performs a Read Operation on a remote image
+     * OCR with READ : Performs a Read Operation on a remote image
      * @param client instantiated vision client
      * @param remoteTextImageURL public url from which to perform the read operation against
      */
@@ -454,7 +367,7 @@ public class ComputerVisionQuickstart {
 
     // <snippet_read_setup>
     /**
-     * READ : Performs a Read Operation on a local image
+     * OCR with READ : Performs a Read Operation on a local image
      * @param client instantiated vision client
      * @param localFilePath local file path from which to perform the read operation against
      */

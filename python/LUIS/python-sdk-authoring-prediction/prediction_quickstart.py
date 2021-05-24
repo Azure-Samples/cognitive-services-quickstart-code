@@ -21,10 +21,10 @@ import datetime, json, os, time
 # </Dependencies>
 
 # <AuthorizationVariables>
-runtime_key = 'REPLACE-WITH-YOUR-ASSIGNED-PREDICTION-KEY'
+runtime_key = 'PASTE_YOUR_LUIS_PREDICTION_SUBSCRIPTION_KEY_HERE'
 print("runtime_key: {}".format(runtime_key))
 
-runtime_endpoint = 'https://REPLACE-WITH-YOUR-RESOURCE-NAME.cognitiveservices.azure.com'
+runtime_endpoint = 'PASTE_YOUR_LUIS_PREDICTION_ENDPOINT_HERE'
 print("runtime_endpoint: {}".format(runtime_endpoint))
 # </AuthorizationVariables>
 
@@ -32,7 +32,7 @@ print("runtime_endpoint: {}".format(runtime_endpoint))
 # Use public app ID or replace with your own trained and published app's ID
 # to query your own app
 # public appID = 'df67dcdb-c37d-46af-88e1-8b97951ca1c2'
-luisAppID = 'REPLACE-WITH-YOUR-LUIS_APP_ID'
+luisAppID = 'PASTE_YOUR_LUIS_APP_ID_HERE'
 print("luisAppID: {}".format(luisAppID))
 
 # `production` or `staging`

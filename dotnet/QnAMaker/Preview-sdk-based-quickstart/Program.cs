@@ -1,4 +1,4 @@
-﻿/*
+/*
  * ==========================================
    Install QnA Maker package with command
  * ==========================================
@@ -11,7 +11,6 @@
  * Create a knowledgebase
  * Update a knowledgebase
  * Publish a knowledgebase, waiting for publishing to complete
- * Get Query runtime endpoint key
  * Download a knowledgebase
  * Get answer
  * Delete a knowledgebase
@@ -40,19 +39,9 @@ namespace Knowledgebase_Quickstart
         static void Main(string[] args)
         {
             // <Resourcevariables>
-            var authoringKey = "REPLACE-WITH-YOUR-QNA-MAKER-KEY";
-            var resourceName = "REPLACE-WITH-YOUR-RESOURCE-NAME";
-
-            var authoringURL = $"https://{resourceName}.cognitiveservices.azure.com";
-            var queryingURL = $"https://{resourceName}.azurewebsites.net";
+            var authoringKey = "QNA_MAKER_SUBSCRIPTION_KEY";
+            var authoringURL = "QNA_MAKER_ENDPOINT";
             // </Resourcevariables>
-
-            // <TryManagedPreview>
-            // To be set to 'true' to use QnAMakerV2 Public Preview resources 
-            // Use the package Microsoft.Azure.CognitiveServices.Knowledge.QnAMaker version 3.0.0-preview.1
-            var tryManagedPreview = false;
-            // </TryManagedPreview>
-
 
             // <AuthorizationAuthor>
             var client = new QnAMakerClient(new ApiKeyServiceClientCredentials(authoringKey))
@@ -63,33 +52,10 @@ namespace Knowledgebase_Quickstart
             UpdateKB(client, kbId).Wait();
             PublishKb(client, kbId).Wait();
             DownloadKb(client, kbId).Wait();
-            var primaryQueryEndpointKey = GetQueryEndpointKey(client).Result;
-
-            // <AuthorizationQuery>
-            if (tryManagedPreview)
-            {
-                GenerateAnswerPreview(client, kbId).Wait();
-            }
-            else
-            {
-                var runtimeClient = new QnAMakerRuntimeClient(new EndpointKeyServiceClientCredentials(primaryQueryEndpointKey))
-                { RuntimeEndpoint = queryingURL };
-                GenerateAnswer(runtimeClient, kbId).Wait();
-            }
-            // </AuthorizationQuery>
-
+            GenerateAnswer(client, kbId).Wait();
             DeleteKB(client, kbId).Wait();
         }
         // </Main>
-
-        // <GetQueryEndpointKey>
-        private static async Task<String> GetQueryEndpointKey(IQnAMakerClient client)
-        {
-            var endpointKeysObject = await client.EndpointKeys.GetKeysAsync();
-
-            return endpointKeysObject.PrimaryEndpointKey;
-        }
-        // </GetQueryEndpointKey>
 
         // <UpdateKBMethod>
         private static async Task UpdateKB(IQnAMakerClient client, string kbId)
@@ -228,20 +194,11 @@ namespace Knowledgebase_Quickstart
         // </DownloadKB>
 
         // <GenerateAnswer>
-        private static async Task GenerateAnswer(QnAMakerRuntimeClient runtimeClient, string kbId)
+        private static async Task GenerateAnswer(IQnAMakerClient client, string kbId)
         {
-            var response = await runtimeClient.Runtime.GenerateAnswerAsync(kbId, new QueryDTO { Question = "How do I manage my knowledgebase?" });
-            Console.WriteLine("Endpoint Response: {0}.", response.Answers[0].Answer);
-
-            // Do something meaningful with answer
-        }
-        // </GenerateAnswer>
-
-        // <GenerateAnswerPreview>
-        private static async Task GenerateAnswerPreview(IQnAMakerClient client, string kbId)
-        { 
-            var response = await client.Knowledgebase.GenerateAnswerAsync(kbId, 
-            new QueryDTO { 
+            var response = await client.Knowledgebase.GenerateAnswerAsync(kbId,
+            new QueryDTO
+            {
                 Question = "Deleted accidentally. how to recover? ",
 
                 // This can be used to query for short answers 
@@ -254,7 +211,7 @@ namespace Knowledgebase_Quickstart
                 },
                 IsTest = true,
                 Top = 3,
-                
+
                 // By providing context of previous user question and qna id, 
                 // get contextually relevant answer for current question
 
@@ -263,22 +220,22 @@ namespace Knowledgebase_Quickstart
                 //   PreviousQnaId = 2,
                 //   PreviousUserQuery = "where is my qnamaker resource?"
                 //},
-                
+
                 StrictFilters = new List<MetadataDTO>(),
 
                 // RankerType = "QuestionOnly",
 
                 ScoreThreshold = 10,
                 UserId = "SDKUser",
-                
+
             });
 
-            Console.WriteLine("Endpoint Response -- Answer: {0}.", response.Answers[0].Answer);            
+            Console.WriteLine("Endpoint Response -- Answer: {0}.", response.Answers[0].Answer);
             Console.WriteLine("Endpoint Response -- Short Answer: {0}.", response.Answers[0]?.AnswerSpan?.Text);
 
             // Do something meaningful with answer
         }
-        // </GenerateAnswerPreview>
+        // </GenerateAnswer>
 
         // <DeleteKB>
         private static async Task DeleteKB(IQnAMakerClient client, string kbId)

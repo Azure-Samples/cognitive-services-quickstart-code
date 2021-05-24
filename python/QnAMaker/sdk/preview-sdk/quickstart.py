@@ -41,16 +41,18 @@ from azure.cognitiveservices.knowledge.qnamaker.models import QnADTO, MetadataDT
 from msrest.authentication import CognitiveServicesCredentials
 # </Dependencies>
 
-# <Resourcevariables>
-key_var_name = 'QNA_MAKER_SUBSCRIPTION_KEY'
-if not key_var_name in os.environ:
-    raise Exception('Please set/export the environment variable: {}'.format(key_var_name))
-subscription_key = os.environ[key_var_name]
+# Set the `authoring_key` and `endpoint` variables to your
+# QnA Maker authoring subscription key and endpoint.
+#
+# These values can be found in the Azure portal (ms.portal.azure.com/).
+# Look up your QnA Maker resource. Then, in the "Resource management"
+# section, find the "Keys and Endpoint" page.
+#
+# The value of `endpoint` has the format https://YOUR-RESOURCE-NAME.cognitiveservices.azure.com.
 
-endpoint_var_name = 'QNA_MAKER_ENDPOINT'
-if not endpoint_var_name in os.environ:
-    raise Exception('Please set/export the environment variable: {}'.format(endpoint_var_name))
-endpoint = os.environ[endpoint_var_name]
+# <Resourcevariables>
+subscription_key = 'PASTE_YOUR_QNA_MAKER_MANAGED_SUBSCRIPTION_KEY_HERE'
+endpoint = 'PASTE_YOUR_QNA_MAKER_MANAGED_ENDPOINT_HERE'
 # </Resourcevariables>
 
 # <MonitorOperation>

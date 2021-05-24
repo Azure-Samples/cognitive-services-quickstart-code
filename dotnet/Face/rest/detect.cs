@@ -56,7 +56,7 @@ namespace DetectFace
                 "Ocp-Apim-Subscription-Key", subscriptionKey);
 
             // Request parameters. A third optional parameter is "details".
-            string requestParameters = "detectionModel=detection_02&returnFaceId=true&returnFaceLandmarks=false";
+            string requestParameters = "detectionModel=detection_03&returnFaceId=true&returnFaceLandmarks=false";
 
             // Assemble the URI for the REST API Call.
             string uri = endpoint + "/face/v1.0/detect?" + requestParameters;

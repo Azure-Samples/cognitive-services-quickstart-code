@@ -38,19 +38,19 @@ const msRest = require("@azure/ms-rest-js");
 const qnamaker = require("@azure/cognitiveservices-qnamaker");
 // </Dependencies>
 
+/*
+* Set the `subscription_key` and `endpoint` variables to your
+* QnA Maker authoring subscription key and endpoint.
+*
+* These values can be found in the Azure portal (ms.portal.azure.com/).
+* Look up your QnA Maker resource. Then, in the "Resource management"
+* section, find the "Keys and Endpoint" page.
+*
+* The value of `endpoint` has the format https://YOUR-RESOURCE-NAME.cognitiveservices.azure.com.
+*/
 // <Resourcevariables>
-var key_var = 'QNA_MAKER_SUBSCRIPTION_KEY';
-if (!process.env[key_var]) {
-    throw new Error('please set/export the following environment variable: ' + key_var);
-}
-var subscription_key = process.env[key_var];
-
-var endpoint_var = 'QNA_MAKER_ENDPOINT';
-if (!process.env[endpoint_var]) {
-    throw new Error('please set/export the following environment variable: ' + endpoint_var);
-}
-var endpoint = process.env[endpoint_var];
-
+const subscription_key = "PASTE_YOUR_QNA_MAKER_SUBSCRIPTION_KEY_HERE";
+const endpoint = "PASTE_YOUR_QNA_MAKER_AUTHORING_ENDPOINT_HERE";
 // </Resourcevariables>
 
 // <ListKnowledgeBases>

@@ -14,9 +14,8 @@ Install the Text Analytics SDK from a command prompt or IDE terminal:
   pip install --upgrade azure-cognitiveservices-language-textanalytics
 '''
 
-# Add your Cognitive Services key and endpoint to your environment variables.
-subscription_key = os.environ['COGNITIVE_SERVICES_SUBSCRIPTION_KEY']
-endpoint = os.environ['COGNITIVE_SERVICES_ENDPOINT']
+subscription_key = "PASTE_YOUR_TEXT_ANALYTICS_SUBSCRIPTION_KEY_HERE"
+endpoint = "PASTE_YOUR_TEXT_ANALYTICS_ENDPOINT_HERE"
 
 '''
 AUTHENTICATE

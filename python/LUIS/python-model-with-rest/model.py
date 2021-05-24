@@ -12,14 +12,14 @@ try:
     # Values to modify.
 
     # YOUR-APP-ID: The App ID GUID found on the www.luis.ai Application Settings page.
-    appId = "YOUR-APP-ID"
+    appId = "PASTE_YOUR_LUIS_APP_ID_HERE"
 
     # YOUR-AUTHORING-KEY: Your LUIS authoring key, 32 character value.
-    authoring_key = "YOUR-AUTHORING-KEY"
+    authoring_key = "PASTE_YOUR_LUIS_AUTHORING_SUBSCRIPTION_KEY_HERE"
 
     # YOUR-AUTHORING-ENDPOINT: Replace this with your authoring key endpoint.
     # For example, "https://your-resource-name.cognitiveservices.azure.com/"
-    authoring_endpoint = "https://YOUR-AUTHORING-ENDPOINT/"
+    authoring_endpoint = "PASTE_YOUR_LUIS_AUTHORING_ENDPOINT_HERE"
 
     # The version number of your LUIS app
     app_version = "0.1"

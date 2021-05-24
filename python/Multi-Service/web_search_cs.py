@@ -4,7 +4,7 @@ from PIL import Image, ImageDraw
 import requests
 
 from msrest.authentication import CognitiveServicesCredentials
-from azure.cognitiveservices.search.websearch import WebSearchAPI
+from azure.cognitiveservices.search.websearch import WebSearchClient
 from azure.cognitiveservices.search.websearch.models import AnswerType, SafeSearch
 
 '''
@@ -23,17 +23,16 @@ Install the Bing Web Search SDK from a command prompt or IDE terminal:
 query_image_url = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/faces.jpg"
 
 # The name of the celebrity you want to search for on the web.
-celebrity_name = 'Bern Collaco'
+celebrity_name = 'Bill Gates'
 
-# Add your Cognitive Services subscription key and endpoint to your environment variables.
-subscription_key = os.environ['COGNITIVE_SERVICES_SUBSCRIPTION_KEY']
-endpoint = os.environ['COGNITIVE_SERVICES_ENDPOINT']
+subscription_key = 'PASTE_YOUR_BING_SEARCH_SUBSCRIPTION_KEY_HERE'
+endpoint = 'PASTE_YOUR_BING_SEARCH_ENDPOINT_HERE'
 
 '''
 Authenticate a client. 
 '''
-web_search_client = WebSearchAPI(CognitiveServicesCredentials(
-    subscription_key), endpoint + 'bing/v7.0')
+web_search_client = WebSearchClient(endpoint, CognitiveServicesCredentials(
+    subscription_key))
 
 '''
 Bing Web Search
@@ -59,7 +58,7 @@ if hasattr(web_data.images, 'value'):
     # Get number of results
     print("Number of images found: {}".format(len(web_image_list)))
     # Display first 5 images found, if have response 200
-    for i in range(5):
+    for i in range(3):
         # Download the query image from the url
         downloaded_found_image = requests.get(web_image_list[i].content_url)
         if downloaded_found_image.status_code == 200:

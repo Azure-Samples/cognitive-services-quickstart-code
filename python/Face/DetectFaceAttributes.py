@@ -23,13 +23,11 @@ Face API: https://docs.microsoft.com/en-us/azure/cognitive-services/face/apirefe
 '''
 Authenticate the Face service
 '''
-# Set the FACE_SUBSCRIPTION_KEY environment variable with your key as the value.
 # This key will serve all examples in this document.
-KEY = os.environ['FACE_SUBSCRIPTION_KEY']
+KEY = 'PASTE_YOUR_FACE_SUBSCRIPTION_KEY_HERE'
 
-# Set the FACE_ENDPOINT environment variable with the endpoint from your Face service in Azure.
 # This endpoint will be used in all examples in this quickstart.
-ENDPOINT = os.environ['FACE_ENDPOINT']
+ENDPOINT = 'PASTE_YOUR_FACE_ENDPOINT_HERE'
 
 # Create an authenticated FaceClient.
 face_client = FaceClient(ENDPOINT, CognitiveServicesCredentials(KEY))
@@ -69,13 +67,21 @@ for image in url_images:
         # Show all facial attributes from the results
         print()
         print('Facial attributes detected:')
-        print('Age:', face.face_attributes.age)
-        print('Gender:', face.face_attributes.gender)
-        print('Head pose:', face.face_attributes.head_pose)
-        print('Smile:', face.face_attributes.smile)
-        print('Facial hair:', face.face_attributes.facial_hair)
-        print('Glasses:', face.face_attributes.glasses)
-        print('Emotion:', face.face_attributes.emotion)
+        print('Age: ', face.face_attributes.age)
+        print('Gender: ', face.face_attributes.gender)
+        print('Head pose: ', face.face_attributes.head_pose)
+        print('Smile: ', face.face_attributes.smile)
+        print('Facial hair: ', face.face_attributes.facial_hair)
+        print('Glasses: ', face.face_attributes.glasses)
+        print('Emotion: ')
+        print('\tAnger: ', face.face_attributes.emotion.anger)
+        print('\tContempt: ', face.face_attributes.emotion.contempt)
+        print('\tDisgust: ', face.face_attributes.emotion.disgust)
+        print('\tFear: ', face.face_attributes.emotion.fear)
+        print('\tHappiness: ', face.face_attributes.emotion.happiness)
+        print('\tNeutral: ', face.face_attributes.emotion.neutral)
+        print('\tSadness: ', face.face_attributes.emotion.sadness)
+        print('\tSurprise: ', face.face_attributes.emotion.surprise)
         print()
 
     # Convert width height to a point in a rectangle

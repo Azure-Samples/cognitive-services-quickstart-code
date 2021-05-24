@@ -1,16 +1,3 @@
-// <snippet_using>
-using System;
-using System.Collections.Generic;
-using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
-using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
-using System.Threading.Tasks;
-using System.IO;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Threading;
-using System.Linq;
-// </snippet_using>
-
 /*
  * Computer Vision SDK QuickStart
  *
@@ -21,11 +8,8 @@ using System.Linq;
  *  - Detect Objects with an image URL
  *  - Detect Objects with a local file
  *  - Generate Thumbnail from a URL and local image
- *  - Read Batch File recognizes both handwritten and printed text
- *  - Recognize Text from an image URL
- *  - Recognize Text from a a local image
- *  - Recognize Text OCR with an image URL
- *  - Recognize Text OCR with a local image
+ *  - OCR (Read API): Read file from URL
+ #  - OCR (Read API): Read file from local
  *
  *  Prerequisites:
  *   - Visual Studio 2019 (or 2017, but note this is a .Net Core console app, not .Net Framework)
@@ -42,9 +26,23 @@ using System.Linq;
  *
  *   References:
  *    - .NET SDK: https://docs.microsoft.com/en-us/dotnet/api/overview/azure/cognitiveservices/client/computervision?view=azure-dotnet
- *    - API (testing console): https://westus.dev.cognitive.microsoft.com/docs/services/5adf991815e1060e6355ad44/operations/56f91f2e778daf14a499e1fa
+ *    - API (testing console): https://westus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-2/operations/5d986960601faab4bf452005
  *    - Computer Vision documentation: https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/
  */
+
+// <snippet_using_and_vars>
+// <snippet_using>
+using System;
+using System.Collections.Generic;
+using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
+using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
+using System.Threading.Tasks;
+using System.IO;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Threading;
+using System.Linq;
+// </snippet_using>
 
 namespace ComputerVisionQuickstart
 {
@@ -52,15 +50,16 @@ namespace ComputerVisionQuickstart
     {
         // <snippet_vars>
         // Add your Computer Vision subscription key and endpoint
-        static string subscriptionKey = "COMPUTER_VISION_SUBSCRIPTION_KEY";
-        static string endpoint = "COMPUTER_VISION_ENDPOINT";
+        static string subscriptionKey = "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE";
+        static string endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE";
         // </snippet_vars>
+	// </snippet_using_and_vars>
 
         // Download these images (link in prerequisites), or you can use any appropriate image on your local machine.
         private const string ANALYZE_LOCAL_IMAGE = "celebrities.jpg";
         private const string DETECT_LOCAL_IMAGE = "objects.jpg";
         private const string DETECT_DOMAIN_SPECIFIC_LOCAL = "celebrities.jpg";
-        private const string READ_TEXT_LOCAL_IMAGE = "print_text.png";
+        private const string READ_TEXT_LOCAL_IMAGE = "printed_text.jpg";
 
         // <snippet_analyze_url>
         // URL image used for analyzing an image (image of puppy)
@@ -73,7 +72,7 @@ namespace ComputerVisionQuickstart
         // <snippet_readtext_url>
         private const string READ_TEXT_URL_IMAGE = "https://intelligentkioskstore.blob.core.windows.net/visionapi/suggestedphotos/3.png";
         // </snippet_readtext_url>
-       
+
         static void Main(string[] args)
         {
             Console.WriteLine("Azure Cognitive Services Computer Vision - .NET quickstart example");
@@ -84,7 +83,7 @@ namespace ComputerVisionQuickstart
             ComputerVisionClient client = Authenticate(endpoint, subscriptionKey);
             // </snippet_client>
 
-            
+
             // <snippet_analyzeinmain>
             // Analyze an image to get features and other properties.
             AnalyzeImageUrl(client, ANALYZE_URL_IMAGE).Wait();
@@ -104,10 +103,11 @@ namespace ComputerVisionQuickstart
             // <snippet_extracttextinmain>
             // Extract text (OCR) from a URL image using the Read API
             ReadFileUrl(client, READ_TEXT_URL_IMAGE).Wait();
-            // Extract text (OCR) from a local image using the Read API
-            ReadFileLocal(client, READ_TEXT_LOCAL_IMAGE).Wait();
             // </snippet_extracttextinmain>
 
+            // Extract text (OCR) from a local image using the Read API
+            ReadFileLocal(client, READ_TEXT_LOCAL_IMAGE).Wait();
+		
             Console.WriteLine("----------------------------------------------------------");
             Console.WriteLine();
             Console.WriteLine("Computer Vision quickstart is complete.");
@@ -136,7 +136,7 @@ namespace ComputerVisionQuickstart
         // <snippet_visualfeatures>
         /* 
          * ANALYZE IMAGE - URL IMAGE
-         * Analyze URL image. Extracts captions, categories, tags, objects, faces, racy/adult content,
+         * Analyze URL image. Extracts captions, categories, tags, objects, faces, racy/adult/gory content,
          * brands, celebrities, landmarks, color scheme, and image types.
          */
         public static async Task AnalyzeImageUrl(ComputerVisionClient client, string imageUrl)
@@ -161,7 +161,7 @@ namespace ComputerVisionQuickstart
             Console.WriteLine($"Analyzing the image {Path.GetFileName(imageUrl)}...");
             Console.WriteLine();
             // Analyze the URL image 
-            ImageAnalysis results = await client.AnalyzeImageAsync(imageUrl, features);
+            ImageAnalysis results = await client.AnalyzeImageAsync(imageUrl, visualFeatures: features);
             // </snippet_analyze_call>
 
             // <snippet_describe>
@@ -222,6 +222,7 @@ namespace ComputerVisionQuickstart
             Console.WriteLine("Adult:");
             Console.WriteLine($"Has adult content: {results.Adult.IsAdultContent} with confidence {results.Adult.AdultScore}");
             Console.WriteLine($"Has racy content: {results.Adult.IsRacyContent} with confidence {results.Adult.RacyScore}");
+            Console.WriteLine($"Has gory content: {results.Adult.IsGoryContent} with confidence {results.Adult.GoreScore}");
             Console.WriteLine();
             // </snippet_adult>
 
@@ -295,7 +296,7 @@ namespace ComputerVisionQuickstart
 
         /*
        * ANALYZE IMAGE - LOCAL IMAGE
-	     * Analyze local image. Extracts captions, categories, tags, objects, faces, racy/adult content,
+	     * Analyze local image. Extracts captions, categories, tags, objects, faces, racy/adult/gory content,
 	     * brands, celebrities, landmarks, color scheme, and image types.
        */
         public static async Task AnalyzeImageLocal(ComputerVisionClient client, string localImage)
@@ -305,14 +306,14 @@ namespace ComputerVisionQuickstart
             Console.WriteLine();
 
             // Creating a list that defines the features to be extracted from the image. 
-            List<VisualFeatureTypes> features = new List<VisualFeatureTypes>()
-        {
-          VisualFeatureTypes.Categories, VisualFeatureTypes.Description,
-          VisualFeatureTypes.Faces, VisualFeatureTypes.ImageType,
-          VisualFeatureTypes.Tags, VisualFeatureTypes.Adult,
-          VisualFeatureTypes.Color, VisualFeatureTypes.Brands,
-          VisualFeatureTypes.Objects
-        };
+            List<VisualFeatureTypes?> features = new List<VisualFeatureTypes?>()
+            {
+                VisualFeatureTypes.Categories, VisualFeatureTypes.Description,
+                VisualFeatureTypes.Faces, VisualFeatureTypes.ImageType,
+                VisualFeatureTypes.Tags, VisualFeatureTypes.Adult,
+                VisualFeatureTypes.Color, VisualFeatureTypes.Brands,
+                VisualFeatureTypes.Objects
+            };
 
             Console.WriteLine($"Analyzing the local image {Path.GetFileName(localImage)}...");
             Console.WriteLine();
@@ -320,15 +321,18 @@ namespace ComputerVisionQuickstart
             using (Stream analyzeImageStream = File.OpenRead(localImage))
             {
                 // Analyze the local image.
-                ImageAnalysis results = await client.AnalyzeImageInStreamAsync(analyzeImageStream);
+                ImageAnalysis results = await client.AnalyzeImageInStreamAsync(analyzeImageStream, visualFeatures: features);
 
                 // Sunmarizes the image content.
-                Console.WriteLine("Summary:");
-                foreach (var caption in results.Description.Captions)
+                if (null != results.Description && null != results.Description.Captions)
                 {
-                    Console.WriteLine($"{caption.Text} with confidence {caption.Confidence}");
+                    Console.WriteLine("Summary:");
+                    foreach (var caption in results.Description.Captions)
+                    {
+                        Console.WriteLine($"{caption.Text} with confidence {caption.Confidence}");
+                    }
+                    Console.WriteLine();
                 }
-                Console.WriteLine();
 
                 // Display categories the image is divided into.
                 Console.WriteLine("Categories:");
@@ -339,89 +343,117 @@ namespace ComputerVisionQuickstart
                 Console.WriteLine();
 
                 // Image tags and their confidence score
-                Console.WriteLine("Tags:");
-                foreach (var tag in results.Tags)
+                if (null != results.Tags)
                 {
-                    Console.WriteLine($"{tag.Name} {tag.Confidence}");
+                    Console.WriteLine("Tags:");
+                    foreach (var tag in results.Tags)
+                    {
+                        Console.WriteLine($"{tag.Name} {tag.Confidence}");
+                    }
+                    Console.WriteLine();
                 }
-                Console.WriteLine();
 
                 // Objects
-                Console.WriteLine("Objects:");
-                foreach (var obj in results.Objects)
+                if (null != results.Objects)
                 {
-                    Console.WriteLine($"{obj.ObjectProperty} with confidence {obj.Confidence} at location {obj.Rectangle.X}, " +
-                      $"{obj.Rectangle.X + obj.Rectangle.W}, {obj.Rectangle.Y}, {obj.Rectangle.Y + obj.Rectangle.H}");
+                    Console.WriteLine("Objects:");
+                    foreach (var obj in results.Objects)
+                    {
+                        Console.WriteLine($"{obj.ObjectProperty} with confidence {obj.Confidence} at location {obj.Rectangle.X}, " +
+                          $"{obj.Rectangle.X + obj.Rectangle.W}, {obj.Rectangle.Y}, {obj.Rectangle.Y + obj.Rectangle.H}");
+                    }
+                    Console.WriteLine();
                 }
-                Console.WriteLine();
 
                 // Detected faces, if any.
-                Console.WriteLine("Faces:");
-                foreach (var face in results.Faces)
+                if (null != results.Faces)
                 {
-                    Console.WriteLine($"A {face.Gender} of age {face.Age} at location {face.FaceRectangle.Left}, {face.FaceRectangle.Top}, " +
-                      $"{face.FaceRectangle.Left + face.FaceRectangle.Width}, {face.FaceRectangle.Top + face.FaceRectangle.Height}");
+                    Console.WriteLine("Faces:");
+                    foreach (var face in results.Faces)
+                    {
+                        Console.WriteLine($"A {face.Gender} of age {face.Age} at location {face.FaceRectangle.Left}, {face.FaceRectangle.Top}, " +
+                          $"{face.FaceRectangle.Left + face.FaceRectangle.Width}, {face.FaceRectangle.Top + face.FaceRectangle.Height}");
+                    }
+                    Console.WriteLine();
                 }
-                Console.WriteLine();
 
                 // Adult or racy content, if any.
-                Console.WriteLine("Adult:");
-                Console.WriteLine($"Has adult content: {results.Adult.IsAdultContent} with confidence {results.Adult.AdultScore}");
-                Console.WriteLine($"Has racy content: {results.Adult.IsRacyContent} with confidence {results.Adult.RacyScore}");
-                Console.WriteLine();
+                if (null != results.Adult)
+                {
+                    Console.WriteLine("Adult:");
+                    Console.WriteLine($"Has adult content: {results.Adult.IsAdultContent} with confidence {results.Adult.AdultScore}");
+                    Console.WriteLine($"Has racy content: {results.Adult.IsRacyContent} with confidence {results.Adult.RacyScore}");
+                    Console.WriteLine($"Has gory content: {results.Adult.IsGoryContent} with confidence {results.Adult.GoreScore}");
+                    Console.WriteLine();
+                }
 
                 // Well-known brands, if any.
-                Console.WriteLine("Brands:");
-                foreach (var brand in results.Brands)
+                if (null != results.Brands)
                 {
-                    Console.WriteLine($"Logo of {brand.Name} with confidence {brand.Confidence} at location {brand.Rectangle.X}, " +
-                      $"{brand.Rectangle.X + brand.Rectangle.W}, {brand.Rectangle.Y}, {brand.Rectangle.Y + brand.Rectangle.H}");
+                    Console.WriteLine("Brands:");
+                    foreach (var brand in results.Brands)
+                    {
+                        Console.WriteLine($"Logo of {brand.Name} with confidence {brand.Confidence} at location {brand.Rectangle.X}, " +
+                          $"{brand.Rectangle.X + brand.Rectangle.W}, {brand.Rectangle.Y}, {brand.Rectangle.Y + brand.Rectangle.H}");
+                    }
+                    Console.WriteLine();
                 }
-                Console.WriteLine();
 
                 // Celebrities in image, if any.
-                Console.WriteLine("Celebrities:");
-                foreach (var category in results.Categories)
+                if (null != results.Categories)
                 {
-                    if (category.Detail?.Celebrities != null)
+                    Console.WriteLine("Celebrities:");
+                    foreach (var category in results.Categories)
                     {
-                        foreach (var celeb in category.Detail.Celebrities)
+                        if (category.Detail?.Celebrities != null)
                         {
-                            Console.WriteLine($"{celeb.Name} with confidence {celeb.Confidence} at location {celeb.FaceRectangle.Left}, " +
-                              $"{celeb.FaceRectangle.Top},{celeb.FaceRectangle.Height},{celeb.FaceRectangle.Width}");
+                            foreach (var celeb in category.Detail.Celebrities)
+                            {
+                                Console.WriteLine($"{celeb.Name} with confidence {celeb.Confidence} at location {celeb.FaceRectangle.Left}, " +
+                                  $"{celeb.FaceRectangle.Top},{celeb.FaceRectangle.Height},{celeb.FaceRectangle.Width}");
+                            }
                         }
                     }
+                    Console.WriteLine();
                 }
-                Console.WriteLine();
 
                 // Popular landmarks in image, if any.
-                Console.WriteLine("Landmarks:");
-                foreach (var category in results.Categories)
+                if (null != results.Categories)
                 {
-                    if (category.Detail?.Landmarks != null)
+                    Console.WriteLine("Landmarks:");
+                    foreach (var category in results.Categories)
                     {
-                        foreach (var landmark in category.Detail.Landmarks)
+                        if (category.Detail?.Landmarks != null)
                         {
-                            Console.WriteLine($"{landmark.Name} with confidence {landmark.Confidence}");
+                            foreach (var landmark in category.Detail.Landmarks)
+                            {
+                                Console.WriteLine($"{landmark.Name} with confidence {landmark.Confidence}");
+                            }
                         }
                     }
+                    Console.WriteLine();
                 }
-                Console.WriteLine();
 
                 // Identifies the color scheme.
-                Console.WriteLine("Color Scheme:");
-                Console.WriteLine("Is black and white?: " + results.Color.IsBWImg);
-                Console.WriteLine("Accent color: " + results.Color.AccentColor);
-                Console.WriteLine("Dominant background color: " + results.Color.DominantColorBackground);
-                Console.WriteLine("Dominant foreground color: " + results.Color.DominantColorForeground);
-                Console.WriteLine("Dominant colors: " + string.Join(",", results.Color.DominantColors));
-                Console.WriteLine();
+                if (null != results.Color)
+                {
+                    Console.WriteLine("Color Scheme:");
+                    Console.WriteLine("Is black and white?: " + results.Color.IsBWImg);
+                    Console.WriteLine("Accent color: " + results.Color.AccentColor);
+                    Console.WriteLine("Dominant background color: " + results.Color.DominantColorBackground);
+                    Console.WriteLine("Dominant foreground color: " + results.Color.DominantColorForeground);
+                    Console.WriteLine("Dominant colors: " + string.Join(",", results.Color.DominantColors));
+                    Console.WriteLine();
+                }
 
                 // Detects the image types.
-                Console.WriteLine("Image Type:");
-                Console.WriteLine("Clip Art Type: " + results.ImageType.ClipArtType);
-                Console.WriteLine("Line Drawing Type: " + results.ImageType.LineDrawingType);
-                Console.WriteLine();
+                if (null != results.ImageType)
+                {
+                    Console.WriteLine("Image Type:");
+                    Console.WriteLine("Clip Art Type: " + results.ImageType.ClipArtType);
+                    Console.WriteLine("Line Drawing Type: " + results.ImageType.LineDrawingType);
+                    Console.WriteLine();
+                }
             }
         }
         /*
@@ -504,8 +536,11 @@ namespace ComputerVisionQuickstart
 
             var jsonUrl = JsonConvert.SerializeObject(resultsUrl.Result);
             JObject resultJsonUrl = JObject.Parse(jsonUrl);
-            Console.WriteLine($"Landmark detected: {resultJsonUrl["landmarks"][0]["name"]} " +
-              $"with confidence {resultJsonUrl["landmarks"][0]["confidence"]}.");
+            if (resultJsonUrl["landmarks"].Any())
+            {
+                Console.WriteLine($"Landmark detected: {resultJsonUrl["landmarks"][0]["name"]} " +
+                    $"with confidence {resultJsonUrl["landmarks"][0]["confidence"]}.");
+            }
             Console.WriteLine();
 
             // Detect the domain-specific content in a local image.
@@ -517,10 +552,11 @@ namespace ComputerVisionQuickstart
                 // Display results.
                 var jsonLocal = JsonConvert.SerializeObject(resultsLocal.Result);
                 JObject resultJsonLocal = JObject.Parse(jsonLocal);
-                Console.WriteLine($"Celebrity detected: {resultJsonLocal["celebrities"][2]["name"]} " +
-                  $"with confidence {resultJsonLocal["celebrities"][2]["confidence"]}");
-
-                Console.WriteLine(resultJsonLocal);
+                if (resultJsonLocal["celebrities"].Any())
+                {
+                    Console.WriteLine($"Celebrity detected: {resultJsonLocal["celebrities"][0]["name"]} " +
+                      $"with confidence {resultJsonLocal["celebrities"][0]["confidence"]}");
+                }
             }
             Console.WriteLine();
         }
@@ -576,7 +612,7 @@ namespace ComputerVisionQuickstart
          * END - GENERATE THUMBNAIL
          */
 
-        // <snippet_read_url>
+        // <snippet_readfileurl_1>
         /*
          * READ FILE - URL 
          * Extracts text. 
@@ -592,9 +628,9 @@ namespace ComputerVisionQuickstart
             // After the request, get the operation location (operation ID)
             string operationLocation = textHeaders.OperationLocation;
             Thread.Sleep(2000);
-            // </snippet_extract_call>
-
-            // <snippet_read_response>
+            // </snippet_readfileurl_1>
+		
+            // <snippet_readfileurl_2>
             // Retrieve the URI where the extracted text will be stored from the Operation-Location header.
             // We only need the ID and not the full URL
             const int numberOfCharsInOperationId = 36;
@@ -610,9 +646,9 @@ namespace ComputerVisionQuickstart
             }
             while ((results.Status == OperationStatusCodes.Running ||
                 results.Status == OperationStatusCodes.NotStarted));
-            // </snippet_read_response>
+            // </snippet_readfileurl_2>
 
-            // <snippet_read_display>
+            // <snippet_readfileurl_3>
             // Display the found text.
             Console.WriteLine();
             var textUrlFileResults = results.AnalyzeResult.ReadResults;
@@ -623,12 +659,10 @@ namespace ComputerVisionQuickstart
                     Console.WriteLine(line.Text);
                 }
             }
-	    // </snippet_read_display>
             Console.WriteLine();
         }
+        // </snippet_readfileurl_3>
 
-
-        // </snippet_read_url>
         /*
          * END - READ FILE - URL
          */
@@ -650,7 +684,6 @@ namespace ComputerVisionQuickstart
             // After the request, get the operation location (operation ID)
             string operationLocation = textHeaders.OperationLocation;
             Thread.Sleep(2000);
-            // </snippet_extract_call>
 
             // <snippet_extract_response>
             // Retrieve the URI where the recognized text will be stored from the Operation-Location header.
@@ -678,7 +711,7 @@ namespace ComputerVisionQuickstart
             {
                 foreach (Line line in page.Lines)
                 {
-                        Console.WriteLine(line.Text);
+                    Console.WriteLine(line.Text);
                 }
             }
             Console.WriteLine();
@@ -686,7 +719,6 @@ namespace ComputerVisionQuickstart
         /*
          * END - READ FILE - LOCAL
          */
-
-
+        // </snippet_read_local>
     }
 }

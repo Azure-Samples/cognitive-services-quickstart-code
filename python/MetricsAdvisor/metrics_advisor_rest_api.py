@@ -278,9 +278,10 @@ def query_incident_by_detection_config(endpoint, subscription_key, api_key, dete
 
 
 if __name__ == '__main__':
-    endpoint = "https://[placeholder].cognitiveservices.azure.com/metricsadvisor/v1.0"
-    subscription_key = "[your subscription key]"
-    api_key = "[your api key]"
+    # Example endpoint: https://[placeholder].cognitiveservices.azure.com/metricsadvisor/v1.0
+    endpoint = "PASTE_YOUR_METRICS_ADVISOR_ENDPOINT_HERE" + "metricsadvisor/v1.0"
+    subscription_key = "PASTE_YOUR_METRICS_ADVISTOR_SUBSCRIPTION_KEY_HERE"
+    api_key = "PASTE_YOUR_METRICS_ADVISOR_API_KEY_HERE"
 
     '''
     First part

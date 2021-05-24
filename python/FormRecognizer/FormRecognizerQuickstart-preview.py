@@ -7,8 +7,8 @@ from azure.core.credentials import AzureKeyCredential
 # </snippet_imports>
 
 # <snippet_creds>
-endpoint = "<paste-your-form-recognizer-endpoint-here>"
-key = "<paste-your-form-recognizer-key-here>"  
+endpoint = "PASTE_YOUR_FORM_RECOGNIZER_ENDPOINT_HERE"
+key = "PASTE_YOUR_FORM_RECOGNIZER_SUBSCRIPTION_KEY_HERE"
 # </snippet_creds>
 
 # <snippet_auth>
@@ -148,12 +148,13 @@ for idx, invoice in enumerate(invoices):
 # <snippet_train>
 # To train a model you need an Azure Storage account.
 # Use the SAS URL to access your training files.
-trainingDataUrl = "<SAS-URL-of-your-form-folder-in-blob-storage>"
+trainingDataUrl = "PASTE_YOUR_SAS_URL_OF_YOUR_FORM_FOLDER_IN_BLOB_STORAGE_HERE"
 
 poller = form_training_client.begin_training(trainingDataUrl, use_training_labels=False)
 model = poller.result()
+trained_model_id = model.model_id
 
-print("Model ID: {}".format(model.model_id))
+print("Model ID: {}".format(trained_model_id))
 print("Status: {}".format(model.status))
 print("Training started on: {}".format(model.training_started_on))
 print("Training completed on: {}".format(model.training_completed_on))
@@ -183,12 +184,13 @@ for doc in model.training_documents:
 # <snippet_trainlabels>
 # To train a model you need an Azure Storage account.
 # Use the SAS URL to access your training files.
-trainingDataUrl = "<SAS-URL-of-your-form-folder-in-blob-storage>"
+trainingDataUrl = "PASTE_YOUR_SAS_URL_OF_YOUR_FORM_FOLDER_IN_BLOB_STORAGE_HERE"
 
 poller = form_training_client.begin_training(trainingDataUrl, use_training_labels=True)
 model = poller.result()
+trained_with_labels_model_id = model.model_id
 
-print("Model ID: {}".format(model.model_id))
+print("Model ID: {}".format(trained_with_labels_model_id))
 print("Status: {}".format(model.status))
 print("Training started on: {}".format(model.training_started_on))
 print("Training completed on: {}".format(model.training_completed_on))
@@ -216,11 +218,8 @@ for doc in model.training_documents:
 # </snippet_trainlabels>
 
 # <snippet_analyze>
-# Model ID from when you trained your model.
-model_id = "<your custom model id>"
-
 poller = form_recognizer_client.begin_recognize_custom_forms_from_url(
-    model_id=model_id, form_url=formUrl)
+    model_id=trained_model_id, form_url=formUrl)
 result = poller.result()
 
 for recognized_form in result:
@@ -255,9 +254,7 @@ for model in custom_models:
 # </snippet_manage_list>
 
 # <snippet_manage_getmodel>
-model_id = "<model_id from the Train a Model sample>"
-
-custom_model = form_training_client.get_custom_model(model_id=model_id)
+custom_model = form_training_client.get_custom_model(model_id=trained_model_id)
 print("Model ID: {}".format(custom_model.model_id))
 print("Status: {}".format(custom_model.status))
 print("Training started on: {}".format(custom_model.training_started_on))
@@ -272,3 +269,41 @@ try:
 except ResourceNotFoundError:
     print("Successfully deleted model with id {}".format(custom_model.model_id))
 # </snippet_manage_delete>
+
+# <snippet_id>
+idURL = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-REST-api-samples/master/curl/form-recognizer/id-license.jpg"
+
+with open(path_to_sample_forms, "rb") as f:
+            poller = form_recognizer_client.begin_recognize_identity_documents(idURL=f)
+            id_documents = poller.result()
+
+        for idx, id_document in enumerate(id_documents):
+            print("--------Recognizing ID document #{}--------".format(idx+1))
+            first_name = id_document.fields.get("FirstName")
+            if first_name:
+                print("First Name: {} has confidence: {}".format(first_name.value, first_name.confidence))
+            last_name = id_document.fields.get("LastName")
+            if last_name:
+                print("Last Name: {} has confidence: {}".format(last_name.value, last_name.confidence))
+            document_number = id_document.fields.get("DocumentNumber")
+            if document_number:
+                print("Document Number: {} has confidence: {}".format(document_number.value, document_number.confidence))
+            dob = id_document.fields.get("DateOfBirth")
+            if dob:
+                print("Date of Birth: {} has confidence: {}".format(dob.value, dob.confidence))
+            doe = id_document.fields.get("DateOfExpiration")
+            if doe:
+                print("Date of Expiration: {} has confidence: {}".format(doe.value, doe.confidence))
+            sex = id_document.fields.get("Sex")
+            if sex:
+                print("Sex: {} has confidence: {}".format(sex.value, sex.confidence))
+            address = id_document.fields.get("Address")
+            if address:
+                print("Address: {} has confidence: {}".format(address.value, address.confidence))
+            country_region = id_document.fields.get("CountryRegion")
+            if country_region:
+                print("Country/Region: {} has confidence: {}".format(country_region.value, country_region.confidence))
+            region = id_document.fields.get("Region")
+            if region:
+                print("Region: {} has confidence: {}".format(region.value, region.confidence))
+# </snippet_id>

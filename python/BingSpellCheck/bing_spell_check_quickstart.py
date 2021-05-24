@@ -1,6 +1,6 @@
 import os
 
-from azure.cognitiveservices.language.spellcheck import SpellCheckAPI
+from azure.cognitiveservices.language.spellcheck import SpellCheckClient
 from msrest.authentication import CognitiveServicesCredentials
 
 '''
@@ -16,11 +16,11 @@ Prerequisites:
 Python SDK: https://docs.microsoft.com/en-us/python/api/overview/azure/cognitiveservices/spellcheck?view=azure-python
 '''
 
-# Add your Bing Spell Check subscription key to your environment variables.
-SUBSCRIPTION_KEY = os.environ['BING_SPELL_CHECK_SUBSCRIPTION_KEY']
+SUBSCRIPTION_KEY = 'PASTE_YOUR_SPELL_CHECK_SUBSCRIPTION_KEY_HERE'
+ENDPOINT = 'PASTE_YOUR_SPELL_CHECK_ENDPOINT_HERE'
 
 # Create a client
-client = SpellCheckAPI(CognitiveServicesCredentials(SUBSCRIPTION_KEY))
+client = SpellCheckClient(ENDPOINT, CognitiveServicesCredentials(SUBSCRIPTION_KEY))
 
 try:
     # Original query
