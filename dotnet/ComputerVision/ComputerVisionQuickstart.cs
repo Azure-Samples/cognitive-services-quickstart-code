@@ -624,7 +624,7 @@ namespace ComputerVisionQuickstart
             Console.WriteLine();
 
             // Read text from URL
-            var textHeaders = await client.ReadAsync(urlFile, language: "en");
+            var textHeaders = await client.ReadAsync(urlFile);
             // After the request, get the operation location (operation ID)
             string operationLocation = textHeaders.OperationLocation;
             Thread.Sleep(2000);
@@ -680,7 +680,7 @@ namespace ComputerVisionQuickstart
             Console.WriteLine();
 
             // Read text from URL
-            var textHeaders = await client.ReadInStreamAsync(File.OpenRead(localFile), language: "en");
+            var textHeaders = await client.ReadInStreamAsync(File.OpenRead(localFile));
             // After the request, get the operation location (operation ID)
             string operationLocation = textHeaders.OperationLocation;
             Thread.Sleep(2000);
