@@ -200,3 +200,8 @@ print ()
 
 print ("Publishing application...")
 publish_app(app_id, app_version)
+
+# Clean up resources.
+print ("Deleting application...")
+client.apps.delete(app_id)
+print ("Application deleted.")
