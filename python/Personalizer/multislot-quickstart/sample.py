@@ -2,9 +2,9 @@ import datetime, json, os, time, uuid, requests
 
 # The endpoint specific to your personalization service instance;
 # e.g. https://<your-resource-name>.cognitiveservices.azure.com
-PERSONALIZATION_BASE_URL = "https://<REPLACE-WITH-YOUR-PERSONALIZER-ENDPOINT>.cognitiveservices.azure.com/"
+PERSONALIZATION_BASE_URL = "PASTE_YOUR_PERSONALIZER_ENDPOINT_HERE"
 # The key specific to your personalization service instance; e.g. "0123456789abcdef0123456789ABCDEF"
-RESOURCE_KEY = "<REPLACE-WITH-YOUR-PERSONALIZER-KEY>"
+RESOURCE_KEY = "PASTE_YOUR_PERSONALIZER_SUBSCRIPTION_KEY_HERE"
 MULTI_SLOT_RANK_URL = '{0}personalizer/v1.1-preview.1/multislot/rank'.format(PERSONALIZATION_BASE_URL)
 MULTI_SLOT_REWARD_URL_BASE = '{0}personalizer/v1.1-preview.1/multislot/events/'.format(PERSONALIZATION_BASE_URL) #add "{eventId}/reward"
 HEADERS = {
