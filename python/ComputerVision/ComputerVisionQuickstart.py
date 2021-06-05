@@ -716,7 +716,7 @@ This API call can also recognize remote image text (shown in next example, Read 
 '''
 print("===== Read File - local =====")
 # Get image path
-read_image_path = os.path.join (images_folder, "image_with_text.jpg")
+read_image_path = os.path.join (images_folder, "printed_text.jpg")
 # Open the image
 read_image = open(read_image_path, "rb")
 
