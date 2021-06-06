@@ -1,12 +1,18 @@
 # About this Quickstart
 
-This interactive sample takes the time of day and the users's device preference as context, and sends it to an Azure Personalizer instance, which then returns the top personalized item to display in each slot. The user then inputs whether or not Personalizer chose the correct item for each slot, send a reward, which is data used to improve Personalizer's prediction model.
+Multi-slot personalization (Preview) allows you to target content in web layouts, carousels, and lists where more than one action (such as a product or piece of content) is shown to your users. With Personalizer multi-slot APIs, you can have the AI models in Personalizer learn what user contexts and products drive certain behaviors, considering and learning from the placement in your user interface. For example, Personalizer may learn that certain products or content drive more clicks as a sidebar or a footer than as a main highlight on a page.
+
+This sample asks for the time of day and device type to determine which items to display on a retail app/website. You can select if that top choice is what you would pick..
 
 # To try this sample
 
 ## Prerequisites
 
 The solution is a C# .NET Core console app project, so you will need [.NET Core 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1), and [Visual Studio 2019](https://visualstudio.microsoft.com/vs/) or [.NET Core CLI](https://docs.microsoft.com/en-us/dotnet/core/tools/).
+
+## Upgrade Persoanlizer instance to multi-slot
+
+ 1. Configure your Personalizer instance for multi-slot (see [Setting up](https://docs.microsoft.com/en-us/azure/cognitive-services/personalizer/how-to-multi-slot?pivots=programming-language-csharp))
 
 ## Set up the sample
 
@@ -23,7 +29,11 @@ The solution is a C# .NET Core console app project, so you will need [.NET Core 
 
 - Create a Personalizer instance in the Azure portal.
 
-- Set script variables **ApiKey** and **ServiceEndpoint**. These values can be found in your Cognitive Services Quick start tab in the Azure portal. 
+- You can find your key and endpoint in the resource's key and endpoint page, under resource management (Keys and Endpoint).
+
+1. Update PersonalizationBaseUrl value ("<REPLACE-WITH-YOUR-PERSONALIZER-ENDPOINT>") in Program.cs with the endpoint specific to your Personalizer service instance.
+
+1. Update ResourceKey value("<REPLACE-WITH-YOUR-PERSONALIZER-KEY>") in Program.cs with the key specific to your Personalizer service instance.
 
 ## Run the sample
 
