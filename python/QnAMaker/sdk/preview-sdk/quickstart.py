@@ -94,7 +94,12 @@ def create_kb(client):
     )
 
     urls = []
-    files=[]
+    files = [
+        FileDTO(
+            file_name = "structured.docx",
+            file_uri = "https://github.com/Azure-Samples/cognitive-services-sample-data-files/raw/master/qna-maker/data-source-formats/structured.docx"
+        )]
+
 
     create_kb_dto = CreateKbDTO(
         name="QnA Maker Python SDK Quickstart",
