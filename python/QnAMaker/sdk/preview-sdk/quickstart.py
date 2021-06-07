@@ -51,8 +51,8 @@ from msrest.authentication import CognitiveServicesCredentials
 # The value of `endpoint` has the format https://YOUR-RESOURCE-NAME.cognitiveservices.azure.com.
 
 # <Resourcevariables>
-subscription_key = 'PASTE_YOUR_QNA_MAKER_SUBSCRIPTION_KEY_HERE'
-endpoint = 'PASTE_YOUR_QNA_MAKER_ENDPOINT_HERE'
+subscription_key = 'PASTE_YOUR_QNA_MAKER_MANAGED_SUBSCRIPTION_KEY_HERE'
+endpoint = 'PASTE_YOUR_QNA_MAKER_MANAGED_ENDPOINT_HERE'
 # </Resourcevariables>
 
 # <MonitorOperation>
@@ -94,7 +94,12 @@ def create_kb(client):
     )
 
     urls = []
-    files=[]
+    files = [
+        FileDTO(
+            file_name = "structured.docx",
+            file_uri = "https://github.com/Azure-Samples/cognitive-services-sample-data-files/raw/master/qna-maker/data-source-formats/structured.docx"
+        )]
+
 
     create_kb_dto = CreateKbDTO(
         name="QnA Maker Python SDK Quickstart",

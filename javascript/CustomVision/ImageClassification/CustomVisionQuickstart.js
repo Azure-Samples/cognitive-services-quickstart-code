@@ -6,6 +6,24 @@ const PredictionApi = require("@azure/cognitiveservices-customvision-prediction"
 const msRest = require("@azure/ms-rest-js");
 // </snippet_imports>
 
+/*
+Prerequisites:
+
+1. Install the Custom Vision SDK. Run:
+npm install @azure/cognitiveservices-customvision-training
+npm install @azure/cognitiveservices-customvision-prediction
+
+2. Create an "Images" folder in your working directory.
+
+3. Download the images used by this sample from:
+https://github.com/Azure-Samples/cognitive-services-sample-data-files/tree/master/CustomVision/ImageClassification/Images
+
+This sample looks for images in the following paths:
+<your working directory>/Images/Hemlock
+<your working directory>/Images/Japanese_Cherry
+<your working directory>/Images/Test
+*/
+
 // <snippet_creds>
 const trainingKey = "<your training key>";
 const predictionKey = "<your prediction key>";
@@ -48,7 +66,7 @@ const predictor = new PredictionApi.PredictionAPIClient(predictor_credentials, e
         fileUploadPromises.push(trainer.createImagesFromData(sampleProject.id, fs.readFileSync(`${hemlockDir}/${file}`), { tagIds: [hemlockTag.id] }));
     });
 
-    const cherryDir = `${sampleDataRoot}/Japanese Cherry`;
+    const cherryDir = `${sampleDataRoot}/Japanese_Cherry`;
     const japaneseCherryFiles = fs.readdirSync(cherryDir);
     japaneseCherryFiles.forEach(file => {
         fileUploadPromises.push(trainer.createImagesFromData(sampleProject.id, fs.readFileSync(`${cherryDir}/${file}`), { tagIds: [cherryTag.id] }));

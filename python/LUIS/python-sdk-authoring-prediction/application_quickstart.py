@@ -25,9 +25,9 @@ import datetime, json, os, time
 # </Dependencies>
 
 # <AuthorizationVariables>
-authoring_key = 'REPLACE-WITH-YOUR-ASSIGNED-AUTHORING-KEY'
+authoring_key = 'PASTE_YOUR_LUIS_AUTHORING_SUBSCRIPTION_KEY_HERE'
 
-authoring_endpoint = "https://REPLACE-WITH-RESOURCE-NAME.cognitiveservices.azure.com/"
+authoring_endpoint = 'PASTE_YOUR_LUIS_AUTHORING_ENDPOINT_HERE'
 # </AuthorizationVariables>
 
 # <Client>
@@ -200,3 +200,8 @@ print ()
 
 print ("Publishing application...")
 publish_app(app_id, app_version)
+
+# Clean up resources.
+print ("Deleting application...")
+client.apps.delete(app_id)
+print ("Application deleted.")

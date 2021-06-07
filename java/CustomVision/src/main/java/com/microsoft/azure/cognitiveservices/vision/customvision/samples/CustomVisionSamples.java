@@ -117,7 +117,7 @@ public class CustomVisionSamples {
 
         for (int i = 1; i <= 10; i++) {
             String fileName = "japanese_cherry_" + i + ".jpg";
-            byte[] contents = GetImage("/Japanese Cherry", fileName);
+            byte[] contents = GetImage("/Japanese_Cherry", fileName);
             AddImageToProject(trainer, project, fileName, contents, cherryTag.id(), null);
         }
     }

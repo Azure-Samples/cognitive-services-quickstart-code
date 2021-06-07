@@ -15,7 +15,7 @@ endpoint = ENV[endpoint_var_name]
 uri = URI(endpoint + '/face/v1.0/detect')
 uri.query = URI.encode_www_form({
     # Request parameters
-	'detectionModel' => 'detection_02',
+	'detectionModel' => 'detection_03',
     'returnFaceId' => 'true'
 })
 

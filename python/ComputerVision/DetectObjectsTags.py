@@ -22,7 +22,7 @@ Computer Vision API: https://westus.dev.cognitive.microsoft.com/docs/services/5c
 # Local and remote (URL) images
 # Download the objects image from here (and place in your root folder): 
 # https://github.com/Azure-Samples/cognitive-services-sample-data-files/tree/master/ComputerVision/Images
-local_image = "objects2.jpg"
+local_image = "objects.jpg"
 remote_image = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/objects.jpg"
 # Select visual feature type(s) you want to focus on when analyzing an image
 image_features = ['objects', 'tags']
@@ -31,10 +31,8 @@ image_features = ['objects', 'tags']
 Authenticate
 Authenticates your credentials and creates a client.
 '''
-# Add your Computer Vision subscription key and endpoiny to your environment variables.
-
-subscription_key = os.environ['COMPUTER_VISION_SUBSCRIPTION_KEY']
-endpoint = os.environ['COMPUTER_VISION_ENDPOINT']
+subscription_key = 'PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE'
+endpoint = 'PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE'
 
 computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(subscription_key))
 

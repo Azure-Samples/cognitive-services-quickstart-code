@@ -12,14 +12,14 @@ try:
     # Values to modify.
 
     # YOUR-APP-ID: The App ID GUID found on the www.luis.ai Application Settings page.
-    appId = 'YOUR-APP-ID'
+    appId = 'PASTE_YOUR_LUIS_APP_ID_HERE'
 
-    # YOUR-PREDICTION-KEY: Your LUIS authoring key, 32 character value.
-    prediction_key = 'YOUR-PREDICTION-KEY'
+    # YOUR-PREDICTION-KEY: Your LUIS prediction key, 32 character value.
+    prediction_key = 'PASTE_YOUR_LUIS_PREDICTION_SUBSCRIPTION_KEY_HERE'
 
-    # YOUR-PREDICTION-ENDPOINT: Replace with your authoring key endpoint.
+    # YOUR-PREDICTION-ENDPOINT: Replace with your prediction endpoint.
     # For example, "https://westus.api.cognitive.microsoft.com/"
-    prediction_endpoint = 'https://YOUR-PREDICTION-ENDPOINT/'
+    prediction_endpoint = 'PASTE_YOUR_LUIS_PREDICTION_ENDPOINT_HERE'
 
     # The utterance you want to use.
     utterance = 'I want two large pepperoni pizzas on thin crust please'

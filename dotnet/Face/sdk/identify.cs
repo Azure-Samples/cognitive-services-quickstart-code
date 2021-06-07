@@ -40,7 +40,7 @@ namespace ConsoleApp1
             {
                 // Detect faces in the image and add to Anna
                 await faceClient.PersonGroupPerson.AddFaceFromUrlAsync(
-                    personGroupId:personGroupId, personId:friend1.PersonId, url:url, detectionModel:DetectionModel.Detection02);
+                    personGroupId:personGroupId, personId:friend1.PersonId, url:url, detectionModel:DetectionModel.Detection03);
             }
             // Do the same for Bill and Clare
             // </add_face>
@@ -67,7 +67,7 @@ namespace ConsoleApp1
             // <main>
             string testImageFile = "https://github.com/microsoft/Cognitive-Face-Windows/raw/master/Data/PersonGroup/Family2-Lady/Family2-Lady3.jpg";
 
-            var faces = await faceClient.Face.DetectWithUrlAsync(url:testImageFile, detectionModel:DetectionModel.Detection02);
+            var faces = await faceClient.Face.DetectWithUrlAsync(url:testImageFile, detectionModel:DetectionModel.Detection03);
             Guid?[] faceIds = faces.Select(face => face.FaceId).ToArray();
 
             var results = await faceClient.Face.IdentifyAsync(faceIds:faceIds, personGroupId:personGroupId);

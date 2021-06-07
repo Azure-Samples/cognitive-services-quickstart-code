@@ -8,11 +8,8 @@
  *  - Detect Objects with an image URL
  *  - Detect Objects with a local file
  *  - Generate Thumbnail from a URL and local image
- *  - Read Batch File recognizes both handwritten and printed text
- *  - Recognize Text from an image URL
- *  - Recognize Text from a a local image
- *  - Recognize Text OCR with an image URL
- *  - Recognize Text OCR with a local image
+ *  - OCR (Read API): Read file from URL
+ #  - OCR (Read API): Read file from local
  *
  *  Prerequisites:
  *   - Visual Studio 2019 (or 2017, but note this is a .Net Core console app, not .Net Framework)
@@ -29,7 +26,7 @@
  *
  *   References:
  *    - .NET SDK: https://docs.microsoft.com/en-us/dotnet/api/overview/azure/cognitiveservices/client/computervision?view=azure-dotnet
- *    - API (testing console): https://westus.dev.cognitive.microsoft.com/docs/services/5adf991815e1060e6355ad44/operations/56f91f2e778daf14a499e1fa
+ *    - API (testing console): https://westus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-2/operations/5d986960601faab4bf452005
  *    - Computer Vision documentation: https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/
  */
 
@@ -139,7 +136,7 @@ namespace ComputerVisionQuickstart
         // <snippet_visualfeatures>
         /* 
          * ANALYZE IMAGE - URL IMAGE
-         * Analyze URL image. Extracts captions, categories, tags, objects, faces, racy/adult content,
+         * Analyze URL image. Extracts captions, categories, tags, objects, faces, racy/adult/gory content,
          * brands, celebrities, landmarks, color scheme, and image types.
          */
         public static async Task AnalyzeImageUrl(ComputerVisionClient client, string imageUrl)
@@ -164,7 +161,7 @@ namespace ComputerVisionQuickstart
             Console.WriteLine($"Analyzing the image {Path.GetFileName(imageUrl)}...");
             Console.WriteLine();
             // Analyze the URL image 
-            ImageAnalysis results = await client.AnalyzeImageAsync(imageUrl, features);
+            ImageAnalysis results = await client.AnalyzeImageAsync(imageUrl, visualFeatures: features);
             // </snippet_analyze_call>
 
             // <snippet_describe>
@@ -225,6 +222,7 @@ namespace ComputerVisionQuickstart
             Console.WriteLine("Adult:");
             Console.WriteLine($"Has adult content: {results.Adult.IsAdultContent} with confidence {results.Adult.AdultScore}");
             Console.WriteLine($"Has racy content: {results.Adult.IsRacyContent} with confidence {results.Adult.RacyScore}");
+            Console.WriteLine($"Has gory content: {results.Adult.IsGoryContent} with confidence {results.Adult.GoreScore}");
             Console.WriteLine();
             // </snippet_adult>
 
@@ -298,7 +296,7 @@ namespace ComputerVisionQuickstart
 
         /*
        * ANALYZE IMAGE - LOCAL IMAGE
-	     * Analyze local image. Extracts captions, categories, tags, objects, faces, racy/adult content,
+	     * Analyze local image. Extracts captions, categories, tags, objects, faces, racy/adult/gory content,
 	     * brands, celebrities, landmarks, color scheme, and image types.
        */
         public static async Task AnalyzeImageLocal(ComputerVisionClient client, string localImage)
@@ -308,14 +306,14 @@ namespace ComputerVisionQuickstart
             Console.WriteLine();
 
             // Creating a list that defines the features to be extracted from the image. 
-            List<VisualFeatureTypes> features = new List<VisualFeatureTypes>()
-        {
-          VisualFeatureTypes.Categories, VisualFeatureTypes.Description,
-          VisualFeatureTypes.Faces, VisualFeatureTypes.ImageType,
-          VisualFeatureTypes.Tags, VisualFeatureTypes.Adult,
-          VisualFeatureTypes.Color, VisualFeatureTypes.Brands,
-          VisualFeatureTypes.Objects
-        };
+            List<VisualFeatureTypes?> features = new List<VisualFeatureTypes?>()
+            {
+                VisualFeatureTypes.Categories, VisualFeatureTypes.Description,
+                VisualFeatureTypes.Faces, VisualFeatureTypes.ImageType,
+                VisualFeatureTypes.Tags, VisualFeatureTypes.Adult,
+                VisualFeatureTypes.Color, VisualFeatureTypes.Brands,
+                VisualFeatureTypes.Objects
+            };
 
             Console.WriteLine($"Analyzing the local image {Path.GetFileName(localImage)}...");
             Console.WriteLine();
@@ -323,7 +321,7 @@ namespace ComputerVisionQuickstart
             using (Stream analyzeImageStream = File.OpenRead(localImage))
             {
                 // Analyze the local image.
-                ImageAnalysis results = await client.AnalyzeImageInStreamAsync(analyzeImageStream);
+                ImageAnalysis results = await client.AnalyzeImageInStreamAsync(analyzeImageStream, visualFeatures: features);
 
                 // Sunmarizes the image content.
                 if (null != results.Description && null != results.Description.Captions)
@@ -385,6 +383,7 @@ namespace ComputerVisionQuickstart
                     Console.WriteLine("Adult:");
                     Console.WriteLine($"Has adult content: {results.Adult.IsAdultContent} with confidence {results.Adult.AdultScore}");
                     Console.WriteLine($"Has racy content: {results.Adult.IsRacyContent} with confidence {results.Adult.RacyScore}");
+                    Console.WriteLine($"Has gory content: {results.Adult.IsGoryContent} with confidence {results.Adult.GoreScore}");
                     Console.WriteLine();
                 }
 
@@ -537,8 +536,11 @@ namespace ComputerVisionQuickstart
 
             var jsonUrl = JsonConvert.SerializeObject(resultsUrl.Result);
             JObject resultJsonUrl = JObject.Parse(jsonUrl);
-            Console.WriteLine($"Landmark detected: {resultJsonUrl["landmarks"][0]["name"]} " +
-              $"with confidence {resultJsonUrl["landmarks"][0]["confidence"]}.");
+            if (resultJsonUrl["landmarks"].Any())
+            {
+                Console.WriteLine($"Landmark detected: {resultJsonUrl["landmarks"][0]["name"]} " +
+                    $"with confidence {resultJsonUrl["landmarks"][0]["confidence"]}.");
+            }
             Console.WriteLine();
 
             // Detect the domain-specific content in a local image.
@@ -550,10 +552,11 @@ namespace ComputerVisionQuickstart
                 // Display results.
                 var jsonLocal = JsonConvert.SerializeObject(resultsLocal.Result);
                 JObject resultJsonLocal = JObject.Parse(jsonLocal);
-                Console.WriteLine($"Celebrity detected: {resultJsonLocal["celebrities"][2]["name"]} " +
-                  $"with confidence {resultJsonLocal["celebrities"][2]["confidence"]}");
-
-                Console.WriteLine(resultJsonLocal);
+                if (resultJsonLocal["celebrities"].Any())
+                {
+                    Console.WriteLine($"Celebrity detected: {resultJsonLocal["celebrities"][0]["name"]} " +
+                      $"with confidence {resultJsonLocal["celebrities"][0]["confidence"]}");
+                }
             }
             Console.WriteLine();
         }
@@ -621,7 +624,7 @@ namespace ComputerVisionQuickstart
             Console.WriteLine();
 
             // Read text from URL
-            var textHeaders = await client.ReadAsync(urlFile, language: "en");
+            var textHeaders = await client.ReadAsync(urlFile);
             // After the request, get the operation location (operation ID)
             string operationLocation = textHeaders.OperationLocation;
             Thread.Sleep(2000);
@@ -677,7 +680,7 @@ namespace ComputerVisionQuickstart
             Console.WriteLine();
 
             // Read text from URL
-            var textHeaders = await client.ReadInStreamAsync(File.OpenRead(localFile), language: "en");
+            var textHeaders = await client.ReadInStreamAsync(File.OpenRead(localFile));
             // After the request, get the operation location (operation ID)
             string operationLocation = textHeaders.OperationLocation;
             Thread.Sleep(2000);

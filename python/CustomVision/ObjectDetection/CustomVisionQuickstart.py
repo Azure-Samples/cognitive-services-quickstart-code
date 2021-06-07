@@ -3,15 +3,32 @@ from azure.cognitiveservices.vision.customvision.training import CustomVisionTra
 from azure.cognitiveservices.vision.customvision.prediction import CustomVisionPredictionClient
 from azure.cognitiveservices.vision.customvision.training.models import ImageFileCreateBatch, ImageFileCreateEntry, Region
 from msrest.authentication import ApiKeyCredentials
-import time
+import os, time, uuid
 # </snippet_imports>
+
+'''
+Prerequisites:
+
+1. Install the Custom Vision SDK. Run:
+pip install --upgrade azure-cognitiveservices-vision-customvision
+
+2. Create an "Images" folder in your working directory.
+
+3. Download the images used by this sample from:
+https://github.com/Azure-Samples/cognitive-services-sample-data-files/tree/master/CustomVision/ObjectDetection/Images
+
+This sample looks for images in the following paths:
+<your working directory>/Images/fork
+<your working directory>/Images/scissors
+<your working directory>/Images/test
+'''
 
 # <snippet_creds>
 # Replace with valid values
-ENDPOINT = "<your API endpoint>"
-training_key = "<your training key>"
-prediction_key = "<your prediction key>"
-prediction_resource_id = "<your prediction resource id>"
+ENDPOINT = "PASTE_YOUR_CUSTOM_VISION_TRAINING_ENDPOINT_HERE"
+training_key = "PASTE_YOUR_CUSTOM_VISION_TRAINING_SUBSCRIPTION_KEY_HERE"
+prediction_key = "PASTE_YOUR_CUSTOM_VISION_PREDICTION_SUBSCRIPTION_KEY_HERE"
+prediction_resource_id = "PASTE_YOUR_CUSTOM_VISION_PREDICTION_RESOURCE_ID_HERE"
 # </snippet_creds>
 
 # <snippet_auth>
@@ -29,7 +46,8 @@ obj_detection_domain = next(domain for domain in trainer.get_domains() if domain
 
 # Create a new project
 print ("Creating project...")
-project = trainer.create_project("My Detection Project", domain_id=obj_detection_domain.id)
+# Use uuid to avoid project name collisions.
+project = trainer.create_project(str(uuid.uuid4()), domain_id=obj_detection_domain.id)
 # </snippet_create>
 
 # <snippet_tags>
@@ -87,8 +105,7 @@ scissors_image_regions = {
 # </snippet_tagging>
 
 # <snippet_upload>
-# Update this with the path to where you downloaded the images.
-base_image_location = "<path to repo directory>/cognitive-services-python-sdk-samples/samples/vision/"
+base_image_location = os.path.join (os.path.dirname(__file__), "Images")
 
 # Go through the data table above and create the images
 print ("Adding images...")
@@ -98,14 +115,14 @@ for file_name in fork_image_regions.keys():
     x,y,w,h = fork_image_regions[file_name]
     regions = [ Region(tag_id=fork_tag.id, left=x,top=y,width=w,height=h) ]
 
-    with open(base_image_location + "images/fork/" + file_name + ".jpg", mode="rb") as image_contents:
+    with open(os.path.join (base_image_location, "fork", file_name + ".jpg"), mode="rb") as image_contents:
         tagged_images_with_regions.append(ImageFileCreateEntry(name=file_name, contents=image_contents.read(), regions=regions))
 
 for file_name in scissors_image_regions.keys():
     x,y,w,h = scissors_image_regions[file_name]
     regions = [ Region(tag_id=scissors_tag.id, left=x,top=y,width=w,height=h) ]
 
-    with open(base_image_location + "images/scissors/" + file_name + ".jpg", mode="rb") as image_contents:
+    with open(os.path.join (base_image_location, "scissors", file_name + ".jpg"), mode="rb") as image_contents:
         tagged_images_with_regions.append(ImageFileCreateEntry(name=file_name, contents=image_contents.read(), regions=regions))
 
 upload_result = trainer.create_images_from_files(project.id, ImageFileCreateBatch(images=tagged_images_with_regions))
@@ -135,10 +152,19 @@ print ("Done!")
 # Now there is a trained endpoint that can be used to make a prediction
 
 # Open the sample image and get back the prediction results.
-with open(base_image_location + "images/Test/test_od_image.jpg", mode="rb") as test_data:
+with open(os.path.join (base_image_location, "test", "test_image.jpg"), mode="rb") as test_data:
     results = predictor.detect_image(project.id, publish_iteration_name, test_data)
 
 # Display the results.    
 for prediction in results.predictions:
     print("\t" + prediction.tag_name + ": {0:.2f}% bbox.left = {1:.2f}, bbox.top = {2:.2f}, bbox.width = {3:.2f}, bbox.height = {4:.2f}".format(prediction.probability * 100, prediction.bounding_box.left, prediction.bounding_box.top, prediction.bounding_box.width, prediction.bounding_box.height))
 # </snippet_test>
+
+# <snippet_delete>
+# You cannot delete a project with published iterations, so you must first unpublish them.
+print ("Unpublishing project...")
+trainer.unpublish_iteration(project.id, iteration.id)
+
+print ("Deleting project...")
+trainer.delete_project(project.id)
+# </snippet_delete>

@@ -60,10 +60,8 @@ let runLoop = true;
         }
         catch (err) {
             console.log(err);
+            throw err;
         }
-
-
-
     } while (runLoop);
 })()
 

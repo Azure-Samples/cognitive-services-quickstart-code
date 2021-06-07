@@ -206,13 +206,13 @@ namespace MultiSlotQuickstart
         {
             try
             {
-            var rankBuilder = new UriBuilder(new Uri(rankUrl));
-            HttpRequestMessage rankRequest = new HttpRequestMessage(HttpMethod.Post, rankBuilder.Uri);
-            rankRequest.Content = new StringContent(rankRequestBody, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.SendAsync(rankRequest);
-            response.EnsureSuccessStatusCode();
-            MultiSlotRankResponse rankResponse = JsonSerializer.Deserialize<MultiSlotRankResponse>(await response.Content.ReadAsByteArrayAsync());
-            return rankResponse;
+                var rankBuilder = new UriBuilder(new Uri(rankUrl));
+                HttpRequestMessage rankRequest = new HttpRequestMessage(HttpMethod.Post, rankBuilder.Uri);
+                rankRequest.Content = new StringContent(rankRequestBody, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.SendAsync(rankRequest);
+                response.EnsureSuccessStatusCode();
+                MultiSlotRankResponse rankResponse = JsonSerializer.Deserialize<MultiSlotRankResponse>(await response.Content.ReadAsByteArrayAsync());
+                return rankResponse;
             }
             catch (Exception e)
             {

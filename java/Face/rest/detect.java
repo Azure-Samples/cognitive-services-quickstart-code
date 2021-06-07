@@ -39,7 +39,7 @@ public class Detect {
             URIBuilder builder = new URIBuilder(endpoint + "/face/v1.0/detect");
 
             // Request parameters. All of them are optional.
-			builder.setParameter("detectionModel", "detection_02");
+			builder.setParameter("detectionModel", "detection_03");
             builder.setParameter("returnFaceId", "true");
 
             // Prepare the URI for the REST API call.

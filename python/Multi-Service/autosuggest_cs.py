@@ -1,6 +1,6 @@
 import os
 
-from azure.cognitiveservices.search.autosuggest import AutoSuggestSearchAPI
+from azure.cognitiveservices.search.autosuggest import AutoSuggestClient
 from msrest.authentication import CognitiveServicesCredentials
 
 '''
@@ -24,7 +24,7 @@ AUTHENTICATE
 Create an Autosuggest client.
 '''
 credentials = CognitiveServicesCredentials(subscription_key)
-autosuggest_client = AutoSuggestSearchAPI(CognitiveServicesCredentials(subscription_key), endpoint + 'bing/v7.0')
+autosuggest_client = AutoSuggestClient(endpoint, CognitiveServicesCredentials(subscription_key))
 
 '''
 AUTOSUGGEST

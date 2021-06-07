@@ -3,26 +3,26 @@
 
 # <Dependencies>
 from azure.cognitiveservices.language.luis.authoring import LUISAuthoringClient
+from azure.cognitiveservices.language.luis.authoring.models import ApplicationCreateObject
 from azure.cognitiveservices.language.luis.runtime import LUISRuntimeClient
 from msrest.authentication import CognitiveServicesCredentials
 from functools import reduce
 
-import json, time
+import json, time, uuid
 # </Dependencies>
 
 def quickstart(): 
 
 	# <VariablesYouChange>
-	authoringKey = 'REPLACE-WITH-YOUR-ASSIGNED-AUTHORING-KEY'
-	authoringResourceName = "REPLACE-WITH-YOUR-AUTHORING-RESOURCE-NAME"
-	predictionResourceName = "REPLACE-WITH-YOUR-PREDICTION-RESOURCE-NAME"
+	authoringKey = 'PASTE_YOUR_LUIS_AUTHORING_SUBSCRIPTION_KEY_HERE'
+	authoringEndpoint = 'PASTE_YOUR_LUIS_AUTHORING_ENDPOINT_HERE'
+	predictionKey = 'PASTE_YOUR_LUIS_PREDICTION_SUBSCRIPTION_KEY_HERE'
+	predictionEndpoint = 'PASTE_YOUR_LUIS_PREDICTION_ENDPOINT_HERE'
 	# </VariablesYouChange>
 
 	# <VariablesYouDontNeedToChangeChange>
-	authoringEndpoint = f'https://{authoringResourceName}.cognitiveservices.azure.com/'
-	predictionEndpoint = f'https://{predictionResourceName}.cognitiveservices.azure.com/'
-
-	appName = "Contoso Pizza Company"
+	# We use a UUID to avoid name collisions.
+	appName = "Contoso Pizza Company " + str(uuid.uuid4())
 	versionId = "0.1"
 	intentName = "OrderPizzaIntent"
 	# </VariablesYouDontNeedToChangeChange>
@@ -61,13 +61,18 @@ def quickstart():
 	# </TrainAppVersion>
 	
 	# <PublishVersion>
+	# Mark the app as public so we can query it using any prediction endpoint.
+	# Note: For production scenarios, you should instead assign the app to your own LUIS prediction endpoint. See:
+	# https://docs.microsoft.com/en-gb/azure/cognitive-services/luis/luis-how-to-azure-subscription#assign-a-resource-to-an-app
+	client.apps.update_settings(app_id, is_public=True)
+
 	responseEndpointInfo = client.apps.publish(app_id, versionId, is_staging=False)
 	# </PublishVersion>
 	
 	# <PredictionCreateClient>
-	runtimeCredentials = CognitiveServicesCredentials(authoringKey)
+	runtimeCredentials = CognitiveServicesCredentials(predictionKey)
 	clientRuntime = LUISRuntimeClient(endpoint=predictionEndpoint, credentials=runtimeCredentials)
-    # </PredictionCreateClient>
+	# </PredictionCreateClient>
 
     # <QueryPredictionEndpoint>
     # Production == slot name
@@ -83,15 +88,16 @@ def quickstart():
 	print("Entities: {}".format (predictionResponse.prediction.entities))
     # </QueryPredictionEndpoint>
 
+	# Clean up resources.
+	print ("Deleting app...")
+	client.apps.delete(app_id)
+	print ("App deleted.")
+
 def create_app(client, appName, versionId):
 
     # <AuthoringCreateApplication>
 	# define app basics
-	appDefinition = {
-        "name": appName,
-        "initial_version_id": versionId,
-        "culture": "en-us"
-    }
+	appDefinition = ApplicationCreateObject (name=appName, initial_version_id=versionId, culture='en-us')
 
 	# create app
 	app_id = client.apps.add(appDefinition)
@@ -102,8 +108,6 @@ def create_app(client, appName, versionId):
 	
 	return app_id
 	
-# </createApp>
-
 def add_entities(client, app_id, versionId):
 
 	# <AuthoringAddEntities>

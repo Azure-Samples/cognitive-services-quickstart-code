@@ -136,9 +136,8 @@ def search_with_answer_count_promote_and_safe_search(client):
 
 
 if __name__ == "__main__":
-    # Add your Bing Search V7 subscription key to your environment variables.
-    SUBSCRIPTION_KEY = os.environ['BING_SEARCH_V7_SUBSCRIPTION_KEY']
-    ENDPOINT = os.environ['BING_SEARCH_V7_ENDPOINT']
+    SUBSCRIPTION_KEY = 'PASTE_YOUR_BING_SEARCH_SUBSCRIPTION_KEY_HERE'
+    ENDPOINT = 'PASTE_YOUR_BING_SEARCH_ENDPOINT_HERE'
 
     # Initialize a client
     client = WebSearchClient(endpoint=ENDPOINT, credentials=CognitiveServicesCredentials(SUBSCRIPTION_KEY))

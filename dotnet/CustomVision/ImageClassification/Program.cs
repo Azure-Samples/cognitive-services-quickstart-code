@@ -9,10 +9,25 @@ using System.Linq;
 using System.Threading;
 // </snippet_imports>
 
-/* NOTE After compiling this program, but before running it, do the following.
- * 1. Download the contents of https://github.com/Azure-Samples/cognitive-services-sample-data-files/tree/master/CustomVision/ImageClassification. The simplest way to do this is to visit https://github.com/Azure-Samples/cognitive-services-sample-data-files and download the repo as a .zip file, then extract the contents of the CustomVision/ImageClassification folder.
- * 2. Copy the Images folder to the output folder of your Visual Studio project. For example, if your project targets .NET Core 3.1, copy the Images folder to the /bin/Debug/netcoreapp3.1 folder.
- */
+/*
+Prerequisites:
+
+1. Install the Custom Vision SDK. See:
+https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training/
+https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Vision.CustomVision.Prediction/
+
+2. Download the images used by this sample from:
+https://github.com/Azure-Samples/cognitive-services-sample-data-files/tree/master/CustomVision/ImageClassification/Images
+
+3. Copy the Images folder from the Github repo to your project's output directory.
+
+This sample looks for images in the following paths:
+<your project's output directory>/Images/Hemlock
+<your project's output directory>/Images/Japanese_Cherry
+<your project's output directory>/Images/Test
+
+For example, if your project targets .NET Core 3.1 and your build type is Debug, copy the Images folder to <your project directory>/bin/Debug/netcoreapp3.1.
+*/
 
 namespace ImageClassification
 {
@@ -165,8 +180,8 @@ namespace ImageClassification
         {
             // this loads the images to be uploaded from disk into memory
             hemlockImages = Directory.GetFiles(Path.Combine("Images", "Hemlock")).ToList();
-            japaneseCherryImages = Directory.GetFiles(Path.Combine("Images", "Japanese Cherry")).ToList();
-            testImage = new MemoryStream(File.ReadAllBytes(Path.Combine("Images", "Test\\test_image.jpg")));
+            japaneseCherryImages = Directory.GetFiles(Path.Combine("Images", "Japanese_Cherry")).ToList();
+            testImage = new MemoryStream(File.ReadAllBytes(Path.Combine("Images", "Test", "test_image.jpg")));
         }
         // </snippet_loadimages>
         // <snippet_delete>

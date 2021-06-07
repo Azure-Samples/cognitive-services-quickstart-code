@@ -19,7 +19,7 @@ from urllib.parse import urlparse
 # previously created.
 
 # <constants>
-subscription_key = 'PASTE_YOUR_QNA_MAKER_SUBSCRIPTION_KEY_HERE'
+subscription_key = 'PASTE_YOUR_QNA_MAKER_AUTHORING_SUBSCRIPTION_KEY_HERE'
 
 # Note http.client.HTTPSConnection wants only the host name, not the protocol (that is, 'https://')
 authoring_endpoint = urlparse('PASTE_YOUR_QNA_MAKER_AUTHORING_ENDPOINT_HERE').netloc

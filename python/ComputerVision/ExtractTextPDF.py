@@ -1,8 +1,7 @@
 import time, os
 from azure.cognitiveservices.vision.computervision import ComputerVisionClient
 from msrest.authentication import CognitiveServicesCredentials
-from azure.cognitiveservices.vision.computervision.models import TextRecognitionMode
-from azure.cognitiveservices.vision.computervision.models import TextOperationStatusCodes
+from azure.cognitiveservices.vision.computervision.models import OperationStatusCodes
 
 '''
 Extract Text PDF - Computer Vision API
@@ -12,7 +11,7 @@ The images include both printed and handwritten text, including signatures.
 Download the sample PDF here: 
 https://github.com/Azure-Samples/cognitive-services-sample-data-files/blob/master/ComputerVision/Images/printed_handwritten.pdf
 
-Place the PDF in your root folder.
+Place the PDF in your working directory.
 
 Install the Computer Vision SDK:
 pip install --upgrade azure-cognitiveservices-vision-computervision
@@ -34,10 +33,8 @@ https://westus.dev.cognitive.microsoft.com/docs/services/5cd27ec07268f6c679a3e64
 '''
 Authenticate
 '''
-# Set COMPUTER_VISION_SUBSCRIPTION_KEY in your environment variables with your Face key as a value.
-# Set COMPUTER_VISION_REGION in your environment variables.
-key = os.environ['COMPUTER_VISION_SUBSCRIPTION_KEY']
-endpoint = os.environ['COMPUTER_VISION_ENDPOINT']
+key = 'PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE'
+endpoint = 'PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE'
 
 # Set credentials
 credentials = CognitiveServicesCredentials(key)
@@ -50,10 +47,10 @@ Read and extract from the image
 '''
 def pdf_text():
     # Images PDF with text
-    filepath = open('TextImages.pdf','rb')
+    filepath = open('printed_handwritten.pdf','rb')
 
     # Async SDK call that "reads" the image
-    response = client.batch_read_file_in_stream(filepath, raw=True)
+    response = client.read_in_stream(filepath, raw=True)
 
     # Don't forget to close the file
     filepath.close()
@@ -64,10 +61,11 @@ def pdf_text():
 
     # SDK call that gets what is read
     while True:
-        result = client.get_read_operation_result(operation_id)
-        if result.status not in ['NotStarted', 'Running']:
+        result = client.get_read_result(operation_id)
+        if result.status.lower () not in ['notstarted', 'running']:
             break
-        time.sleep(1)
+        print ('Waiting for result...')
+        time.sleep(10)
     return result
 
 
@@ -76,9 +74,9 @@ Display extracted text and bounding box
 '''
 # Displays text captured and its bounding box (position in the image)
 result = pdf_text()
-if result.status == TextOperationStatusCodes.succeeded:
-    for textResult in result.recognition_results:
-        for line in textResult.lines:
+if result.status == OperationStatusCodes.succeeded:
+    for readResult in result.analyze_result.read_results:
+        for line in readResult.lines:
             print(line.text)
             print(line.bounding_box)
         print()
