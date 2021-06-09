@@ -43,7 +43,7 @@ The solution is a [Node.js](https://nodejs.org) app, you will need [NPM](https:/
 
 1. Update PersonalizationBaseUrl value ("<REPLACE-WITH-YOUR-PERSONALIZER-ENDPOINT>") in sample.js with the endpoint specific to your Personalizer service instance.
 
-1. Update ResourceKey value("<REPLACE-WITH-YOUR-PERSONALIZER-KEY>") in sample.js with the key specific to your Personalizer service instance.
+1. Update ResourceKey value ("<REPLACE-WITH-YOUR-PERSONALIZER-KEY>") in sample.js with the key specific to your Personalizer service instance.
 
 ## Run the sample
 

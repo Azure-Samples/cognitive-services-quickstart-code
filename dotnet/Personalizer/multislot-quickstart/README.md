@@ -33,7 +33,7 @@ The solution is a C# .NET Core console app project, so you will need [.NET Core 
 
 1. Update PersonalizationBaseUrl value ("<REPLACE-WITH-YOUR-PERSONALIZER-ENDPOINT>") in Program.cs with the endpoint specific to your Personalizer service instance.
 
-1. Update ResourceKey value("<REPLACE-WITH-YOUR-PERSONALIZER-KEY>") in Program.cs with the key specific to your Personalizer service instance.
+1. Update ResourceKey value ("<REPLACE-WITH-YOUR-PERSONALIZER-KEY>") in Program.cs with the key specific to your Personalizer service instance.
 
 ## Run the sample
 
