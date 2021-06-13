@@ -3,6 +3,8 @@ import http.client, os, sys
 from urllib.parse import urlparse
 # </dependencies>
 
+This will cause a syntax error.
+
 # Set the `subscription_key` and `authoring_endpoint` variables to your
 # QnA Maker authoring subscription key and endpoint.
 #
