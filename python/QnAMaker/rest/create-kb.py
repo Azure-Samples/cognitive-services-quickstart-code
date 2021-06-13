@@ -21,6 +21,8 @@ authoring_endpoint = urlparse('PASTE_YOUR_QNA_MAKER_AUTHORING_ENDPOINT_HERE').ne
 create_kb_method = '/qnamaker/v4.0/knowledgebases/create'
 # </constants>
 
+#
+
 # <model>
 kb_model = {
   "name": "QnA Maker FAQ",
