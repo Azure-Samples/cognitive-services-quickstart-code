@@ -62,15 +62,13 @@ namespace ComputerVisionQuickstart
             Console.WriteLine("Azure Cognitive Services Computer Vision - .NET quickstart example");
             Console.WriteLine();
 
-            // <snippet_client>
-            // Create a client
+            // <snippet_main_calls>
             ComputerVisionClient client = Authenticate(endpoint, subscriptionKey);
-            // </snippet_client>
 
-            // <snippet_extracttextinmain>
             // Extract text (OCR) from a URL image using the Read API
             ReadFileUrl(client, READ_TEXT_URL_IMAGE).Wait();
-            // </snippet_extracttextinmain>
+            // </snippet_main_calls>
+
 
             // Extract text (OCR) from a local image using the Read API
             ReadFileLocal(client, READ_TEXT_LOCAL_IMAGE).Wait();
