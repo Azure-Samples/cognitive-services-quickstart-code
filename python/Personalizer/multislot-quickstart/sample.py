@@ -1,10 +1,12 @@
-import datetime, json, os, time, uuid, requests
+import json, uuid, requests
 
 # The endpoint specific to your personalization service instance;
 # e.g. https://<your-resource-name>.cognitiveservices.azure.com
-PERSONALIZATION_BASE_URL = "PASTE_YOUR_PERSONALIZER_ENDPOINT_HERE"
+PERSONALIZATION_BASE_URL = "<REPLACE-WITH-YOUR-PERSONALIZER-ENDPOINT>"
+
 # The key specific to your personalization service instance; e.g. "0123456789abcdef0123456789ABCDEF"
-RESOURCE_KEY = "PASTE_YOUR_PERSONALIZER_SUBSCRIPTION_KEY_HERE"
+RESOURCE_KEY = "<REPLACE-WITH-YOUR-PERSONALIZER-KEY>"
+
 MULTI_SLOT_RANK_URL = '{0}personalizer/v1.1-preview.1/multislot/rank'.format(PERSONALIZATION_BASE_URL)
 MULTI_SLOT_REWARD_URL_BASE = '{0}personalizer/v1.1-preview.1/multislot/events/'.format(PERSONALIZATION_BASE_URL) #add "{eventId}/reward"
 HEADERS = {
@@ -112,6 +114,8 @@ def get_context_features():
 
 def send_multi_slot_rank(rank_request):
     multi_slot_response = requests.post(MULTI_SLOT_RANK_URL, data=json.dumps(rank_request), headers=HEADERS )
+    if multi_slot_response.status_code != 201:
+        raise Exception(multi_slot_response.text)
     return json.loads(multi_slot_response.text)
 
 def get_reward_for_slot():

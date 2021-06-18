@@ -1,7 +1,10 @@
 const axios = require('axios');
 const { v4: uuidv4 } = require('uuid');
 const readline = require('readline-sync');
-const PersonalizationBaseUrl = 'https://<REPLACE-WITH-YOUR-PERSONALIZER-ENDPOINT>.cognitiveservices.azure.com/';
+// The endpoint specific to your personalization service instance; 
+// e.g. https://<your-resource-name>.cognitiveservices.azure.com
+const PersonalizationBaseUrl = '<REPLACE-WITH-YOUR-PERSONALIZER-ENDPOINT>';
+// The key specific to your personalization service instance; e.g. "0123456789abcdef0123456789ABCDEF"
 const ResourceKey = '<REPLACE-WITH-YOUR-PERSONALIZER-KEY>';
 const MultiSlotRankUrl = PersonalizationBaseUrl.concat('personalizer/v1.1-preview.1/multislot/rank');
 const MultiSlotRewardUrlBase = PersonalizationBaseUrl.concat('personalizer/v1.1-preview.1/multislot/events/');
@@ -31,40 +34,34 @@ let runLoop = true;
 
         multiSlotRankRequest.deferActivation = false;
 
-        //Rank the actions for each slot
         try {
-            var multiSlotRankResponse = await sendMultiSlotRank(multiSlotRankRequest);
-        }
-        catch (err) {
-            console.log(err);
-        }
-
-        let multiSlotrewards = {};
-        multiSlotrewards.reward = [];
-
-        for (i = 0; i < multiSlotRankResponse.slots.length; i++) {
-            console.log('\nPersonalizer service decided you should display: '.concat(multiSlotRankResponse.slots[i].rewardActionId, ' in slot ', multiSlotRankResponse.slots[i].id, '\n'));
-
-            let slotReward = {};
-            slotReward.slotId = multiSlotRankResponse.slots[i].id;
-            // User agrees or disagrees with Personalizer decision for slot
-            slotReward.value = getRewardForSlot();
-            multiSlotrewards.reward.push(slotReward);
-        }
-
-        // Send the rewards for the event
-        try {
+            //Rank the actions for each slot
+            let multiSlotRankResponse = await sendMultiSlotRank(multiSlotRankRequest);
+            let multiSlotrewards = {};
+            multiSlotrewards.reward = [];
+    
+            for (let i = 0; i < multiSlotRankResponse.slots.length; i++) {
+                console.log('\nPersonalizer service decided you should display: '.concat(multiSlotRankResponse.slots[i].rewardActionId, ' in slot ', multiSlotRankResponse.slots[i].id, '\n'));
+    
+                let slotReward = {};
+                slotReward.slotId = multiSlotRankResponse.slots[i].id;
+                // User agrees or disagrees with Personalizer decision for slot
+                slotReward.value = getRewardForSlot();
+                multiSlotrewards.reward.push(slotReward);
+            }
+    
+            // Send the rewards for the event
             await sendMultiSlotReward(multiSlotrewards, multiSlotRankResponse.eventId);
+    
+            let answer = readline.question('\nPress q to break, any other key to continue:\n').toUpperCase();
+            if (answer === 'Q') {
+                runLoop = false;
+            }
         }
         catch (err) {
             console.log(err);
+            throw err;
         }
-
-        let answer = readline.question('\nPress q to break, any other key to continue:\n').toUpperCase();
-        if (answer === 'Q') {
-            runLoop = false;
-        }
-
     } while (runLoop);
 })()
 
@@ -172,7 +169,11 @@ async function sendMultiSlotRank(rankRequest) {
         return response.data;
     }
     catch (err) {
-        console.log(err);
+        if(err.response)
+        {
+            throw err.response.data
+        }
+        console.log(err)
     }
 }
 

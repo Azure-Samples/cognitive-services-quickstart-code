@@ -12,7 +12,7 @@ namespace MultiSlotQuickstart
     class MultiSlotQuickstart
     {
         //Replace 'PersonalizationBaseUrl' and 'ResourceKey' with your valid endpoint values.
-        private const string PersonalizationBaseUrl = "https://<REPLACE-WITH-YOUR-PERSONALIZER-ENDPOINT>.cognitiveservices.azure.com/";
+        private const string PersonalizationBaseUrl = "<REPLACE-WITH-YOUR-PERSONALIZER-ENDPOINT>";
         private const string ResourceKey = "<REPLACE-WITH-YOUR-PERSONALIZER-KEY>";
         private static string MultiSlotRankUrl = string.Concat(PersonalizationBaseUrl, "personalizer/v1.1-preview.1/multislot/rank");
         private static string MultiSlotRewardUrlBase = string.Concat(PersonalizationBaseUrl, "personalizer/v1.1-preview.1/multislot/events/");
@@ -204,13 +204,22 @@ namespace MultiSlotQuickstart
 
         private static async Task<MultiSlotRankResponse> SendMultiSlotRank(HttpClient client, string rankRequestBody, string rankUrl)
         {
-            var rankBuilder = new UriBuilder(new Uri(rankUrl));
-            HttpRequestMessage rankRequest = new HttpRequestMessage(HttpMethod.Post, rankBuilder.Uri);
-            rankRequest.Content = new StringContent(rankRequestBody, Encoding.UTF8, "application/json");
-
-            HttpResponseMessage response = await client.SendAsync(rankRequest);
-            MultiSlotRankResponse rankResponse = JsonSerializer.Deserialize<MultiSlotRankResponse>(await response.Content.ReadAsByteArrayAsync());
-            return rankResponse;
+            try
+            {
+                var rankBuilder = new UriBuilder(new Uri(rankUrl));
+                HttpRequestMessage rankRequest = new HttpRequestMessage(HttpMethod.Post, rankBuilder.Uri);
+                rankRequest.Content = new StringContent(rankRequestBody, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.SendAsync(rankRequest);
+                response.EnsureSuccessStatusCode();
+                MultiSlotRankResponse rankResponse = JsonSerializer.Deserialize<MultiSlotRankResponse>(await response.Content.ReadAsByteArrayAsync());
+                return rankResponse;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("\n" + e.Message);
+                Console.WriteLine("Please make sure multi-slot feature is enabled. To do so, follow multi-slot Personalizer documentation to update your loop settings to enable multi-slot functionality.");
+                throw;
+            }
         }
 
         private static async Task SendMultiSlotReward(HttpClient client, string rewardRequestBody, string rewardUrlBase, string eventId)
