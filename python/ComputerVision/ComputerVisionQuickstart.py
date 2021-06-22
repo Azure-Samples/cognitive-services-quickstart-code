@@ -138,7 +138,7 @@ while True:
 
 # Print results, line by line
 if read_result.status == OperationStatusCodes.succeeded:
-    for text_result in read_status.analyze_result.read_results:
+    for text_result in read_result.analyze_result.read_results:
         for line in text_result.lines:
             print(line.text)
             print(line.bounding_box)
