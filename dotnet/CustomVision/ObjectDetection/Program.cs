@@ -26,7 +26,7 @@ namespace ObjectDetection
 
             // <snippet_maincalls>
             CustomVisionTrainingClient TrainingApi = AuthenticateTraining(ENDPOINT, trainingKey);
-            CustomVisionPredictionClient predictionApi = AuthenticateTraining(ENDPOINT, predictionKey);
+            CustomVisionPredictionClient predictionApi = AuthenticatePrediction(ENDPOINT, predictionKey);
 
             Project project = CreateProject(trainingApi);
             AddTags(trainingApi, project);
