@@ -46,10 +46,10 @@ namespace predict_with_rest
             queryString["query"] = utterance;
 
             // These optional request parameters are set to their default values
-            queryString["verbose"] = "true";
-            queryString["show-all-intents"] = "true";
-            queryString["staging"] = "false";
-            queryString["timezoneOffset"] = "0";
+            // queryString["verbose"] = "true";
+            // queryString["show-all-intents"] = "true";
+            // queryString["staging"] = "false";
+            // queryString["timezoneOffset"] = "0";
 
             var predictionEndpointUri = String.Format("{0}luis/prediction/v3.0/apps/{1}/slots/production/predict?{2}", predictionEndpoint, appId, queryString);
 
