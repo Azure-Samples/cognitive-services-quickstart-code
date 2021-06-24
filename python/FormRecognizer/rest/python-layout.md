@@ -40,6 +40,7 @@ To start analyzing the layout, you call the **[Analyze Layout](https://westus.de
 1. Replace `<subscription key>` with the subscription key you copied from the previous step.
 
 #### [v2.1](#tab/v2-1)
+
     ```python
     ########### Python Form Recognizer Async Layout #############
 
@@ -107,9 +108,8 @@ To start analyzing the layout, you call the **[Analyze Layout](https://westus.de
     except Exception as e:
         print("POST analyze failed:\n%s" % str(e))
         quit()
-    ```
-
-      ---
+```
+---
 
 1. Save the code in a file with a .py extension. For example, *form-recognizer-layout.py*.
 1. Open a command prompt window.
