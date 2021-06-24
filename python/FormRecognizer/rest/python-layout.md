@@ -41,74 +41,75 @@ To start analyzing the layout, you call the **[Analyze Layout](https://westus.de
 
 #### [v2.1](#tab/v2-1)
 
-    ```python
+```python
     ########### Python Form Recognizer Async Layout #############
 
-    import json
-    import time
-    from requests import get, post
+import json
+import time
+from requests import get, post
 
-    # Endpoint URL
-    endpoint = r"<Endpoint>"
-    apim_key = "<Subscription Key>"
-    post_url = endpoint + "/formrecognizer/v2.1/layout/analyze"
-    source = r"<path to your form>"
+# Endpoint URL
+endpoint = r"<Endpoint>"
+apim_key = "<Subscription Key>"
+post_url = endpoint + "/formrecognizer/v2.1/layout/analyze"
+source = r"<path to your form>"
 
-    headers = {
-        # Request headers
-        # Change Content-Type as appropriate
-        'Content-Type': 'application/pdf',
-        'Ocp-Apim-Subscription-Key': apim_key,
-    }
-    with open(source, "rb") as f:
-        data_bytes = f.read()
+headers = {
+    # Request headers
+    # Change Content-Type as appropriate
+    'Content-Type': 'application/pdf',
+    'Ocp-Apim-Subscription-Key': apim_key,
+}
+with open(source, "rb") as f:
+    data_bytes = f.read()
 
-    try:
-        resp = post(url = post_url, data = data_bytes, headers = headers)
-        if resp.status_code != 202:
-            print("POST analyze failed:\n%s" % resp.text)
-            quit()
-        print("POST analyze succeeded:\n%s" % resp.headers)
-        get_url = resp.headers["operation-location"]
-    except Exception as e:
-        print("POST analyze failed:\n%s" % str(e))
+try:
+    resp = post(url = post_url, data = data_bytes, headers = headers)
+    if resp.status_code != 202:
+        print("POST analyze failed:\n%s" % resp.text)
         quit()
-    ```
-
-    #### [v2.0](#tab/v2-0)
-    ```python
-    ########### Python Form Recognizer Async Layout #############
-
-    import json
-    import time
-    from requests import get, post
-
-    # Endpoint URL
-    endpoint = r"<Endpoint>"
-    apim_key = "<Subscription Key>"
-    post_url = endpoint + "/formrecognizer/v2.0/Layout/analyze"
-    source = r"<path to your form>"
-
-    headers = {
-        # Request headers
-        # Change Content-Type as appropriate
-        'Content-Type': 'application/pdf',
-        'Ocp-Apim-Subscription-Key': apim_key,
-    }
-    with open(source, "rb") as f:
-        data_bytes = f.read()
-
-    try:
-        resp = post(url = post_url, data = data_bytes, headers = headers)
-        if resp.status_code != 202:
-            print("POST analyze failed:\n%s" % resp.text)
-            quit()
-        print("POST analyze succeeded:\n%s" % resp.headers)
-        get_url = resp.headers["operation-location"]
-    except Exception as e:
-        print("POST analyze failed:\n%s" % str(e))
-        quit()
+    print("POST analyze succeeded:\n%s" % resp.headers)
+    get_url = resp.headers["operation-location"]
+except Exception as e:
+    print("POST analyze failed:\n%s" % str(e))
+    quit()
 ```
+
+#### [v2.0](#tab/v2-0)
+```python
+    ########### Python Form Recognizer Async Layout #############
+
+import json
+import time
+from requests import get, post
+
+# Endpoint URL
+endpoint = r"<Endpoint>"
+apim_key = "<Subscription Key>"
+post_url = endpoint + "/formrecognizer/v2.0/Layout/analyze"
+source = r"<path to your form>"
+
+headers = {
+    # Request headers
+    # Change Content-Type as appropriate
+    'Content-Type': 'application/pdf',
+    'Ocp-Apim-Subscription-Key': apim_key,
+}
+with open(source, "rb") as f:
+    data_bytes = f.read()
+
+try:
+    resp = post(url = post_url, data = data_bytes, headers = headers)
+    if resp.status_code != 202:
+        print("POST analyze failed:\n%s" % resp.text)
+        quit()
+    print("POST analyze succeeded:\n%s" % resp.headers)
+    get_url = resp.headers["operation-location"]
+except Exception as e:
+    print("POST analyze failed:\n%s" % str(e))
+    quit()
+```
+
 ---
 
 1. Save the code in a file with a .py extension. For example, *form-recognizer-layout.py*.
@@ -140,26 +141,26 @@ n_tries = 10
 n_try = 0
 wait_sec = 6
 while n_try < n_tries:
-    try:
-        resp = get(url = get_url, headers = {"Ocp-Apim-Subscription-Key": apim_key})
-        resp_json = json.loads(resp.text)
-        if resp.status_code != 200:
-            print("GET Layout results failed:\n%s" % resp_json)
-            quit()
-        status = resp_json["status"]
-        if status == "succeeded":
-            print("Layout Analysis succeeded:\n%s" % resp_json)
-            quit()
-        if status == "failed":
-            print("Layout Analysis failed:\n%s" % resp_json)
-            quit()
-        # Analysis still running. Wait and retry.
-        time.sleep(wait_sec)
-        n_try += 1
-    except Exception as e:
-        msg = "GET analyze results failed:\n%s" % str(e)
-        print(msg)
+try:
+    resp = get(url = get_url, headers = {"Ocp-Apim-Subscription-Key": apim_key})
+    resp_json = json.loads(resp.text)
+    if resp.status_code != 200:
+        print("GET Layout results failed:\n%s" % resp_json)
         quit()
+    status = resp_json["status"]
+    if status == "succeeded":
+        print("Layout Analysis succeeded:\n%s" % resp_json)
+        quit()
+    if status == "failed":
+        print("Layout Analysis failed:\n%s" % resp_json)
+        quit()
+    # Analysis still running. Wait and retry.
+    time.sleep(wait_sec)
+    n_try += 1
+except Exception as e:
+    msg = "GET analyze results failed:\n%s" % str(e)
+    print(msg)
+    quit()
 ```
 
 1. Save the script.
@@ -177,102 +178,102 @@ See the following invoice image and its corresponding JSON output. The output ha
 
 ```json
 {
-    "status": "succeeded",
-    "createdDateTime": "2020-08-20T20:36:52Z",
-    "lastUpdatedDateTime": "2020-08-20T20:36:58Z",
-    "analyzeResult": {
-        "version": "2.0.0",
-        "readResults": [
-            {
-                "page": 1,
-                "language": "en",
-                "angle": 0,
-                "width": 8.5,
-                "height": 11,
-                "unit": "inch",
-                "lines": [
-                    {
-                        "boundingBox": [
-                            0.5826,
-                            0.4411,
-                            2.3387,
-                            0.4411,
-                            2.3387,
-                            0.7969,
-                            0.5826,
-                            0.7969
-                        ],
-                        "text": "Contoso, Ltd.",
-                        "words": [
-                            {
-                                "boundingBox": [
-                                    0.5826,
-                                    0.4411,
-                                    1.744,
-                                    0.4411,
-                                    1.744,
-                                    0.7969,
-                                    0.5826,
-                                    0.7969
-                                ],
-                                "text": "Contoso,",
-                                "confidence": 1
-                            },
-                            {
-                                "boundingBox": [
-                                    1.8448,
-                                    0.4446,
-                                    2.3387,
-                                    0.4446,
-                                    2.3387,
-                                    0.7631,
-                                    1.8448,
-                                    0.7631
-                                ],
-                                "text": "Ltd.",
-                                "confidence": 1
-                            }
-                        ]
-                    },
-                    ...
-                ]
-            }
-        ],
-        "pageResults": [
-            {
-                "page": 1,
-                "tables": [
-                    {
-                        "rows": 5,
-                        "columns": 5,
-                        "cells": [
-                            {
-                                "rowIndex": 0,
-                                "columnIndex": 0,
-                                "text": "Training Date",
-                                "boundingBox": [
-                                    0.5133,
-                                    4.2167,
-                                    1.7567,
-                                    4.2167,
-                                    1.7567,
-                                    4.4492,
-                                    0.5133,
-                                    4.4492
-                                ],
-                                "elements": [
-                                    "#/readResults/0/lines/14/words/0",
-                                    "#/readResults/0/lines/14/words/1"
-                                ]
-                            },
-                            ...
-                        ]
-                    },
-                    ...
-                ]
-            }
-        ]
-    }
+"status": "succeeded",
+"createdDateTime": "2020-08-20T20:36:52Z",
+"lastUpdatedDateTime": "2020-08-20T20:36:58Z",
+"analyzeResult": {
+    "version": "2.0.0",
+    "readResults": [
+        {
+            "page": 1,
+            "language": "en",
+            "angle": 0,
+            "width": 8.5,
+            "height": 11,
+            "unit": "inch",
+            "lines": [
+                {
+                    "boundingBox": [
+                        0.5826,
+                        0.4411,
+                        2.3387,
+                        0.4411,
+                        2.3387,
+                        0.7969,
+                        0.5826,
+                        0.7969
+                    ],
+                    "text": "Contoso, Ltd.",
+                    "words": [
+                        {
+                            "boundingBox": [
+                                0.5826,
+                                0.4411,
+                                1.744,
+                                0.4411,
+                                1.744,
+                                0.7969,
+                                0.5826,
+                                0.7969
+                            ],
+                            "text": "Contoso,",
+                            "confidence": 1
+                        },
+                        {
+                            "boundingBox": [
+                                1.8448,
+                                0.4446,
+                                2.3387,
+                                0.4446,
+                                2.3387,
+                                0.7631,
+                                1.8448,
+                                0.7631
+                            ],
+                            "text": "Ltd.",
+                            "confidence": 1
+                        }
+                    ]
+                },
+                ...
+            ]
+        }
+    ],
+    "pageResults": [
+        {
+            "page": 1,
+            "tables": [
+                {
+                    "rows": 5,
+                    "columns": 5,
+                    "cells": [
+                        {
+                            "rowIndex": 0,
+                            "columnIndex": 0,
+                            "text": "Training Date",
+                            "boundingBox": [
+                                0.5133,
+                                4.2167,
+                                1.7567,
+                                4.2167,
+                                1.7567,
+                                4.4492,
+                                0.5133,
+                                4.4492
+                            ],
+                            "elements": [
+                                "#/readResults/0/lines/14/words/0",
+                                "#/readResults/0/lines/14/words/1"
+                            ]
+                        },
+                        ...
+                    ]
+                },
+                ...
+            ]
+        }
+    ]
+}
 }
 ```
 
@@ -280,102 +281,102 @@ See the following invoice image and its corresponding JSON output. The output ha
 
 ```json
 {
-    "status": "succeeded",
-    "createdDateTime": "2020-08-20T20:36:52Z",
-    "lastUpdatedDateTime": "2020-08-20T20:36:58Z",
-    "analyzeResult": {
-        "version": "2.0.0",
-        "readResults": [
-            {
-                "page": 1,
-                "language": "en",
-                "angle": 0,
-                "width": 8.5,
-                "height": 11,
-                "unit": "inch",
-                "lines": [
-                    {
-                        "boundingBox": [
-                            0.5826,
-                            0.4411,
-                            2.3387,
-                            0.4411,
-                            2.3387,
-                            0.7969,
-                            0.5826,
-                            0.7969
-                        ],
-                        "text": "Contoso, Ltd.",
-                        "words": [
-                            {
-                                "boundingBox": [
-                                    0.5826,
-                                    0.4411,
-                                    1.744,
-                                    0.4411,
-                                    1.744,
-                                    0.7969,
-                                    0.5826,
-                                    0.7969
-                                ],
-                                "text": "Contoso,",
-                                "confidence": 1
-                            },
-                            {
-                                "boundingBox": [
-                                    1.8448,
-                                    0.4446,
-                                    2.3387,
-                                    0.4446,
-                                    2.3387,
-                                    0.7631,
-                                    1.8448,
-                                    0.7631
-                                ],
-                                "text": "Ltd.",
-                                "confidence": 1
-                            }
-                        ]
-                    },
-                    ...
-                ]
-            }
-        ],
-        "pageResults": [
-            {
-                "page": 1,
-                "tables": [
-                    {
-                        "rows": 5,
-                        "columns": 5,
-                        "cells": [
-                            {
-                                "rowIndex": 0,
-                                "columnIndex": 0,
-                                "text": "Training Date",
-                                "boundingBox": [
-                                    0.5133,
-                                    4.2167,
-                                    1.7567,
-                                    4.2167,
-                                    1.7567,
-                                    4.4492,
-                                    0.5133,
-                                    4.4492
-                                ],
-                                "elements": [
-                                    "#/readResults/0/lines/14/words/0",
-                                    "#/readResults/0/lines/14/words/1"
-                                ]
-                            },
-                            ...
-                        ]
-                    },
-                    ...
-                ]
-            }
-        ]
-    }
+"status": "succeeded",
+"createdDateTime": "2020-08-20T20:36:52Z",
+"lastUpdatedDateTime": "2020-08-20T20:36:58Z",
+"analyzeResult": {
+    "version": "2.0.0",
+    "readResults": [
+        {
+            "page": 1,
+            "language": "en",
+            "angle": 0,
+            "width": 8.5,
+            "height": 11,
+            "unit": "inch",
+            "lines": [
+                {
+                    "boundingBox": [
+                        0.5826,
+                        0.4411,
+                        2.3387,
+                        0.4411,
+                        2.3387,
+                        0.7969,
+                        0.5826,
+                        0.7969
+                    ],
+                    "text": "Contoso, Ltd.",
+                    "words": [
+                        {
+                            "boundingBox": [
+                                0.5826,
+                                0.4411,
+                                1.744,
+                                0.4411,
+                                1.744,
+                                0.7969,
+                                0.5826,
+                                0.7969
+                            ],
+                            "text": "Contoso,",
+                            "confidence": 1
+                        },
+                        {
+                            "boundingBox": [
+                                1.8448,
+                                0.4446,
+                                2.3387,
+                                0.4446,
+                                2.3387,
+                                0.7631,
+                                1.8448,
+                                0.7631
+                            ],
+                            "text": "Ltd.",
+                            "confidence": 1
+                        }
+                    ]
+                },
+                ...
+            ]
+        }
+    ],
+    "pageResults": [
+        {
+            "page": 1,
+            "tables": [
+                {
+                    "rows": 5,
+                    "columns": 5,
+                    "cells": [
+                        {
+                            "rowIndex": 0,
+                            "columnIndex": 0,
+                            "text": "Training Date",
+                            "boundingBox": [
+                                0.5133,
+                                4.2167,
+                                1.7567,
+                                4.2167,
+                                1.7567,
+                                4.4492,
+                                0.5133,
+                                4.4492
+                            ],
+                            "elements": [
+                                "#/readResults/0/lines/14/words/0",
+                                "#/readResults/0/lines/14/words/1"
+                            ]
+                        },
+                        ...
+                    ]
+                },
+                ...
+            ]
+        }
+    ]
+}
 }
 ```
 
