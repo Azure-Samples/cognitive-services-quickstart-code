@@ -14,7 +14,6 @@ To complete this quickstart, you must have:
 > [!NOTE]
 > This quickstart uses a locally stored document. To use learn how to use remote files accessed by URL, see the [reference documentation](https://westus2.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2/operations/AnalyzeLayoutAsync).
 
-
 ## Create a Form Recognizer resource
 
 Go to the Azure portal and <a href="https://ms.portal.azure.com/#create/Microsoft.CognitiveServicesFormRecognizer" title="Create a new Form Recognizer resource" target="_blank">create a new Form Recognizer resource <span class="docon docon-navigate-external x-hidden-focus"></span></a>. In the **Create** pane, provide the following information:
@@ -31,86 +30,86 @@ Go to the Azure portal and <a href="https://ms.portal.azure.com/#create/Microsof
 > Normally when you create a Cognitive Service resource in the Azure portal, you have the option to create a multi-service subscription key (used across multiple cognitive services) or a single-service subscription key (used only with a specific cognitive service). However currently Form Recognizer is not included in the multi-service subscription.
 
 When your Form Recognizer resource finishes deploying, find and select it from the **All resources** list in the portal. Your key and endpoint will be located on the resource's key and endpoint page, under resource management. Save both of these to a temporary location before going forward.
+
 ## Analyze the form layout
 
-To start analyzing the layout, you call the **[Analyze Layout](https://westus2.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2/operations/AnalyzeLayoutAsync)** API using the Python script below. Before you run the script, make these changes:
+To start analyzing the layout, you call the **[Analyze Layout](https://westus.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2-1/operations/AnalyzeLayoutAsync)** API using the Python script below. Before you run the script, make these changes:
 
 1. Replace `<Endpoint>` with the endpoint that you obtained with your Form Recognizer subscription.
 1. Replace `<path to your form>` with the path to your local form document.
 1. Replace `<subscription key>` with the subscription key you copied from the previous step.
 
-    #### [v2.0](#tab/v2-0) 
+#### [v2.1](#tab/v2-1)
     ```python
     ########### Python Form Recognizer Async Layout #############
-    
+
     import json
     import time
     from requests import get, post
-    
+
+    # Endpoint URL
+    endpoint = r"<Endpoint>"
+    apim_key = "<Subscription Key>"
+    post_url = endpoint + "/formrecognizer/v2.1/layout/analyze"
+    source = r"<path to your form>"
+
+    headers = {
+        # Request headers
+        # Change Content-Type as appropriate
+        'Content-Type': 'application/pdf',
+        'Ocp-Apim-Subscription-Key': apim_key,
+    }
+    with open(source, "rb") as f:
+        data_bytes = f.read()
+
+    try:
+        resp = post(url = post_url, data = data_bytes, headers = headers)
+        if resp.status_code != 202:
+            print("POST analyze failed:\n%s" % resp.text)
+            quit()
+        print("POST analyze succeeded:\n%s" % resp.headers)
+        get_url = resp.headers["operation-location"]
+    except Exception as e:
+        print("POST analyze failed:\n%s" % str(e))
+        quit()
+    ```
+
+    #### [v2.0](#tab/v2-0)
+    ```python
+    ########### Python Form Recognizer Async Layout #############
+
+    import json
+    import time
+    from requests import get, post
+
     # Endpoint URL
     endpoint = r"<Endpoint>"
     apim_key = "<Subscription Key>"
     post_url = endpoint + "/formrecognizer/v2.0/Layout/analyze"
     source = r"<path to your form>"
-    
-    headers = {
-        # Request headers
-        # Change Content-Type as appropriate
-        'Content-Type': 'application/pdf',
-        'Ocp-Apim-Subscription-Key': apim_key,
-    }
-    with open(source, "rb") as f:
-        data_bytes = f.read()
-    
-    try:
-        resp = post(url = post_url, data = data_bytes, headers = headers)
-        if resp.status_code != 202:
-            print("POST analyze failed:\n%s" % resp.text)
-            quit()
-        print("POST analyze succeeded:\n%s" % resp.headers)
-        get_url = resp.headers["operation-location"]
-    except Exception as e:
-        print("POST analyze failed:\n%s" % str(e))
-        quit()
-    ```   
-    #### [v2.1 preview](#tab/v2-1)  
-    ```python
-    ########### Python Form Recognizer Async Layout #############
-    
-    import json
-    import time
-    from requests import get, post
-    
-    # Endpoint URL
-    endpoint = r"<Endpoint>"
-    apim_key = "<Subscription Key>"
-    post_url = endpoint + "/formrecognizer/v2.1-preview.2/Layout/analyze"
-    source = r"<path to your form>"
-    
-    headers = {
-        # Request headers
-        # Change Content-Type as appropriate
-        'Content-Type': 'application/pdf',
-        'Ocp-Apim-Subscription-Key': apim_key,
-    }
-    with open(source, "rb") as f:
-        data_bytes = f.read()
-    
-    try:
-        resp = post(url = post_url, data = data_bytes, headers = headers)
-        if resp.status_code != 202:
-            print("POST analyze failed:\n%s" % resp.text)
-            quit()
-        print("POST analyze succeeded:\n%s" % resp.headers)
-        get_url = resp.headers["operation-location"]
-    except Exception as e:
-        print("POST analyze failed:\n%s" % str(e))
-        quit()
-    ```  
-    
-    
-      ---
 
+    headers = {
+        # Request headers
+        # Change Content-Type as appropriate
+        'Content-Type': 'application/pdf',
+        'Ocp-Apim-Subscription-Key': apim_key,
+    }
+    with open(source, "rb") as f:
+        data_bytes = f.read()
+
+    try:
+        resp = post(url = post_url, data = data_bytes, headers = headers)
+        if resp.status_code != 202:
+            print("POST analyze failed:\n%s" % resp.text)
+            quit()
+        print("POST analyze succeeded:\n%s" % resp.headers)
+        get_url = resp.headers["operation-location"]
+    except Exception as e:
+        print("POST analyze failed:\n%s" % str(e))
+        quit()
+    ```
+
+      ---
 
 1. Save the code in a file with a .py extension. For example, *form-recognizer-layout.py*.
 1. Open a command prompt window.
@@ -118,14 +117,17 @@ To start analyzing the layout, you call the **[Analyze Layout](https://westus2.d
 
 You'll receive a `202 (Success)` response that includes an **Operation-Location** header, which the script will print to the console. This header contains an operation ID that you can use to query the status of the asynchronous operation and get the results. In the following example value, the string after `operations/` is the operation ID.
 
-#### [v2.0](#tab/v2-0)   
+#### [v2.1](#tab/v2-1)
+
+```console
+https://westus.api.cognitive.microsoft.com/formrecognizer/v2.1/layout/analyzeResults/a8b6a240-cb40-4c7f-8332-01d97861ac6e
+```
+
+#### [v2.0](#tab/v2-0)
+
 ```console
 https://cognitiveservice/formrecognizer/v2.0/layout/operations/54f0b076-4e38-43e5-81bd-b85b8835fdfb
-``` 
-#### [v2.1 preview](#tab/v2-1)  
-```console
-https://cognitiveservice/formrecognizer/v2.1-preview.2/layout/operations/54f0b076-4e38-43e5-81bd-b85b8835fdfb
-```  
+```
 
 ---
 
@@ -153,7 +155,7 @@ while n_try < n_tries:
             quit()
         # Analysis still running. Wait and retry.
         time.sleep(wait_sec)
-        n_try += 1     
+        n_try += 1
     except Exception as e:
         msg = "GET analyze results failed:\n%s" % str(e)
         print(msg)
@@ -165,13 +167,14 @@ while n_try < n_tries:
 
 ### Examine the response
 
-The script will print responses to the console until the **Analyze Layout** operation completes. Then, it will print the extracted data in JSON format. The `"readResults"` node contains every line of text with its respective bounding box placement on the page. The `"selectionMarks"` node (in v2.1 preview) shows every selection mark (checkbox, radio mark) and whether its status is "selected" or "unselected". The `"pageResults"` field shows every piece of text within tables, each with its row-column coordinate.
+The script will print responses to the console until the **Analyze Layout** operation completes. Then, it will print the extracted data in JSON format. The `"readResults"` node contains every line of text with its respective bounding box placement on the page. The `"selectionMarks"` node (in v2.1) shows every selection mark (checkbox, radio mark) and whether its status is "selected" or "unselected". The `"pageResults"` field shows every piece of text within tables, each with its row-column coordinate.
 
 See the following invoice image and its corresponding JSON output. The output has been shortened for simplicity.
 
 :::image type="content" source="../media/contoso-invoice.png" alt-text="Contoso project statement document with a table.":::
 
-#### [v2.0](#tab/v2-0)    
+#### [v2.1](#tab/v2-1)
+
 ```json
 {
     "status": "succeeded",
@@ -273,17 +276,19 @@ See the following invoice image and its corresponding JSON output. The output ha
 }
 ```
 
-#### [v2.1 preview](#tab/v2-1)   
+#### [v2.0](#tab/v2-0)
+
 ```json
 {
     "status": "succeeded",
-    "createdDateTime": "2020-08-20T20:40:50Z",
-    "lastUpdatedDateTime": "2020-08-20T20:40:55Z",
+    "createdDateTime": "2020-08-20T20:36:52Z",
+    "lastUpdatedDateTime": "2020-08-20T20:36:58Z",
     "analyzeResult": {
-        "version": "2.1.0",
+        "version": "2.0.0",
         "readResults": [
             {
                 "page": 1,
+                "language": "en",
                 "angle": 0,
                 "width": 8.5,
                 "height": 11,
@@ -333,25 +338,6 @@ See the following invoice image and its corresponding JSON output. The output ha
                         ]
                     },
                     ...
-                        ]
-                    }
-                ],
-                "selectionMarks": [
-                    {
-                        "boundingBox": [
-                            3.9737,
-                            3.7475,
-                            4.1693,
-                            3.7475,
-                            4.1693,
-                            3.9428,
-                            3.9737,
-                            3.9428
-                        ],
-                        "confidence": 0.989,
-                        "state": "selected"
-                    },
-                    ...
                 ]
             }
         ],
@@ -378,8 +364,8 @@ See the following invoice image and its corresponding JSON output. The output ha
                                     4.4492
                                 ],
                                 "elements": [
-                                    "#/readResults/0/lines/12/words/0",
-                                    "#/readResults/0/lines/12/words/1"
+                                    "#/readResults/0/lines/14/words/0",
+                                    "#/readResults/0/lines/14/words/1"
                                 ]
                             },
                             ...
@@ -391,14 +377,12 @@ See the following invoice image and its corresponding JSON output. The output ha
         ]
     }
 }
-``` 
+```
 
 ---
-
-
 
 ## Next steps
 
 In this quickstart, you used the Form Recognizer REST API with Python to extract the text layout of an invoice. Next, see the reference documentation to explore the Form Recognizer API in more depth.
 
-* [REST API reference documentation](https://westus2.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2/operations/AnalyzeLayoutAsync)
+* [REST API reference documentation](https://westus.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2-1/operations/AnalyzeLayoutAsync)
