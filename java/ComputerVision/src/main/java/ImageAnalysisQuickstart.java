@@ -28,7 +28,7 @@ import java.util.UUID;
 // </snippet_imports>
 
 // <snippet_classdef_1>
-public class ComputerVisionQuickstart {
+public class ImageAnalysisQuickstart {
     // </snippet_classdef_1>
 
     // <snippet_creds>
