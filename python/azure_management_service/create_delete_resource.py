@@ -1,7 +1,8 @@
 # <snippet_imports>
+import time
 from azure.identity import ClientSecretCredential
 from azure.mgmt.cognitiveservices import CognitiveServicesManagementClient
-from azure.mgmt.cognitiveservices.models import CognitiveServicesAccount, Sku
+from azure.mgmt.cognitiveservices.models import Account, Sku
 # </snippet_imports>
 
 # Microsoft Azure Management
@@ -56,6 +57,9 @@ resource_group_name = "PASTE_YOUR_RESOURCE_GROUP_NAME_HERE"
 # your resource would have the endpoint https://my-search-resource.cognitiveservices.azure.com/.
 # Note not all Cognitive Services allow custom subdomain names.
 subdomain_name = "PASTE_YOUR_SUBDOMAIN_NAME_HERE"
+
+# How many seconds to wait between checking the status of an async operation.
+wait_time = 10
 # </snippet_constants>
 
 # <snippet_auth>
@@ -88,10 +92,18 @@ def list_resources():
 # <snippet_create>
 def create_resource (resource_name, kind, sku_name, location) :
 	print("Creating resource: " + resource_name + "...")
+
 # NOTE If you do not want to use a custom subdomain name, remove the customSubDomainName
 # property from the properties object.
-	parameters = CognitiveServicesAccount(sku=Sku(name=sku_name), kind=kind, location=location, properties={ 'custom_sub_domain_name' : subdomain_name })
-	result = client.accounts.create(resource_group_name, resource_name, parameters)
+	parameters = Account(sku=Sku(name=sku_name), kind=kind, location=location, properties={ 'custom_sub_domain_name' : subdomain_name })
+
+	poller = client.accounts.begin_create(resource_group_name, resource_name, parameters)
+	while (False == poller.done ()) :
+		print ("Waiting {wait_time} seconds for operation to finish.".format (wait_time = wait_time))
+		time.sleep (wait_time)
+# This will raise an exception if the server responded with an error.
+	result = poller.result ()
+
 	print("Resource created.")
 	print()
 	print("ID: " + result.id)
@@ -103,7 +115,14 @@ def create_resource (resource_name, kind, sku_name, location) :
 # <snippet_delete>
 def delete_resource(resource_name) :
 	print("Deleting resource: " + resource_name + "...")
-	client.accounts.delete(resource_group_name, resource_name)
+
+	poller = client.accounts.begin_delete(resource_group_name, resource_name)
+	while (False == poller.done ()) :
+		print ("Waiting {wait_time} seconds for operation to finish.".format (wait_time = wait_time))
+		time.sleep (wait_time)
+# This will raise an exception if the server responded with an error.
+	result = poller.result ()
+
 	print("Resource deleted.")
 # </snippet_delete>
 
@@ -114,8 +133,8 @@ def delete_resource(resource_name) :
 # Create a resource with kind Text Translation, SKU F0 (free tier), location global.
 create_resource("test_resource", "TextTranslation", "F0", "Global")
 
-# List all resources for your Azure account.
-list_resources()
+# Uncomment this to list all resources for your Azure account.
+#list_resources()
 
 # Delete the resource.
 delete_resource("test_resource")
