@@ -126,16 +126,42 @@ def delete_resource(resource_name) :
 	print("Resource deleted.")
 # </snippet_delete>
 
+# <snippet_purge>
+def purge_resource(resource_name, location) :
+	poller = client.deleted_accounts.begin_purge(location, resource_group_name, resource_name)
+	while (False == poller.done ()) :
+		print ("Waiting {wait_time} seconds for operation to finish.".format (wait_time = wait_time))
+		time.sleep (wait_time)
+# This will raise an exception if the server responded with an error.
+	result = poller.result ()
+
+	print("Resource purged.")
+# </snippet_purge>
+
 # <snippet_calls>
+resource_name = "test_resource"
+resource_kind = "TextTranslation"
+resource_sku = "F0"
+resource_location = "Global"
+
 # Uncomment this to list all available resource kinds, SKUs, and locations for your Azure account.
 #list_available_kinds_skus_locations ()
 
 # Create a resource with kind Text Translation, SKU F0 (free tier), location global.
-create_resource("test_resource", "TextTranslation", "F0", "Global")
+create_resource(resource_name, resource_kind, resource_sku, resource_location)
 
 # Uncomment this to list all resources for your Azure account.
 #list_resources()
 
 # Delete the resource.
-delete_resource("test_resource")
+delete_resource(resource_name)
+
+# NOTE: Deleting a resource only soft-deletes it. To delete it permanently, you must purge it.
+# Otherwise, if you later try to create a resource with the same name, you will receive the following error:
+# azure.core.exceptions.ResourceExistsError: (FlagMustBeSetForRestore) An existing resource with ID '<your resource ID>' has been soft-deleted. To restore the resource, you must specify 'restore' to be 'true' in the property. If you don't want to restore existing resource, please purge it first.
+# Code: FlagMustBeSetForRestore
+
+# Purge the resource.
+purge_resource(resource_name, resource_location)
+
 # </snippet_calls>
