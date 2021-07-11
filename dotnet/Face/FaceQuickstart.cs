@@ -23,14 +23,19 @@ using Microsoft.Azure.CognitiveServices.Vision.Face.Models;
  *  - Large FaceList
  * 
  * Prerequisites:
- *  - Visual Studio 2019 (or 2017, but this is app uses .NETCore, not .NET Framework)
+ * - .NET Core
  *  - NuGet libraries:
  *    Microsoft.Azure.CognitiveServices.Vision.Face
- *    
- * How to run:
- *  - Create a new C# Console app in Visual Studio 2019.
- *  - Copy/paste the Program.cs file in the Github quickstart into your own Program.cs file. 
- *  
+ *
+ * To run this sample:    
+ * - Run the following commands at a command prompt or shell:
+ *     dotnet new console
+ *     dotnet add package Microsoft.Azure.CognitiveServices.Vision.Face --prerelease
+ * - Copy/paste this file over the Program.cs file in the project.
+ * - Run the following commands at a command prompt or shell:
+ *     dotnet build
+ *     dotnet run
+ *
  * Dependencies within the samples: 
  *  - Authenticate produces a client that's used by all samples.
  *  - Detect Faces is a helper function that is used by several other samples. 
@@ -58,8 +63,8 @@ namespace FaceQuickstart
 
         // <snippet_creds>
         // From your Face subscription in the Azure portal, get your subscription key and endpoint.
-        const string SUBSCRIPTION_KEY = "<your subscription key>";
-        const string ENDPOINT = "<your api endpoint>";
+        const string SUBSCRIPTION_KEY = "PASTE_YOUR_FACE_SUBSCRIPTION_KEY_HERE";
+        const string ENDPOINT = "PASTE_YOUR_FACE_ENDPOINT_HERE";
         // </snippet_creds>
 
         static void Main(string[] args)
@@ -73,10 +78,6 @@ namespace FaceQuickstart
             // with models 1 and 2.
             const string RECOGNITION_MODEL4 = RecognitionModel.Recognition04;
             // </snippet_detect_models>
-
-            // Large FaceList variables
-            const string LargeFaceListId = "mylargefacelistid_001"; // must be lowercase, 0-9, "_" or "-" characters
-            const string LargeFaceListName = "MyLargeFaceListName";
 
 			// <snippet_maincalls>
             // Authenticate.
@@ -426,7 +427,7 @@ namespace FaceQuickstart
 
             // </snippet_persongroup_train>
             // <snippet_identify_sources>
-            List<Guid?> sourceFaceIds = new List<Guid?>();
+            List<Guid> sourceFaceIds = new List<Guid>();
             // Detect faces from source image url.
             List<DetectedFace> detectedFaces = await DetectFaceRecognize(client, $"{url}{sourceImageFileName}", recognitionModel);
 
@@ -568,7 +569,7 @@ namespace FaceQuickstart
                               };
             // Create empty dictionary to store the groups
             Dictionary<string, string> faces = new Dictionary<string, string>();
-            List<Guid?> faceIds = new List<Guid?>();
+            List<Guid> faceIds = new List<Guid>();
 
             // First, detect the faces in your images
             foreach (var imageFileName in imageFileNames)
