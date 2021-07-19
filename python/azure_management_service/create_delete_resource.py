@@ -9,7 +9,7 @@ from azure.mgmt.cognitiveservices.models import Account, Sku
 #
 # This script requires the following modules:
 #	python -m pip install azure-mgmt-cognitiveservices
-#	python -m pip install azure.identity
+#	python -m pip install azure-identity
 #
 # SDK: https://docs.microsoft.com/en-us/python/api/azure-mgmt-cognitiveservices/azure.mgmt.cognitiveservices?view=azure-python 
 #
