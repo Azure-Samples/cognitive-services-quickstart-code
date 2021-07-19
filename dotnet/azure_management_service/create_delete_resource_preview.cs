@@ -106,7 +106,7 @@ namespace ConsoleApp1
             /* NOTE If you do not want to use a custom subdomain name, remove the customSubDomainName
             property from AccountProperties. */
 			      Account parameters = new Account(kind: kind, location: location, name: resource_name, sku: new Sku(account_tier), properties: new AccountProperties(customSubDomainName : subdomain_name));
-            var result = client.Accounts.Create(resource_group_name, account_tier, parameters);
+            var result = client.Accounts.Create(resource_group_name, resource_name, parameters);
             Console.WriteLine("Resource created.");
             Console.WriteLine("ID: " + result.Id);
             Console.WriteLine("Kind: " + result.Kind);
