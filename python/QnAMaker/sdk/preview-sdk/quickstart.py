@@ -36,7 +36,7 @@ import os
 import time
 
 from azure.cognitiveservices.knowledge.qnamaker import QnAMakerClient
-from azure.cognitiveservices.knowledge.qnamaker.models import QnADTO, MetadataDTO, CreateKbDTO, OperationStateType, UpdateKbOperationDTO, UpdateKbOperationDTOAdd, EndpointKeysDTO, QnADTOContext, PromptDTO, QueryDTO
+from azure.cognitiveservices.knowledge.qnamaker.models import FileDTO, QnADTO, MetadataDTO, CreateKbDTO, OperationStateType, UpdateKbOperationDTO, UpdateKbOperationDTOAdd, EndpointKeysDTO, QnADTOContext, PromptDTO, QueryDTO
 
 from msrest.authentication import CognitiveServicesCredentials
 # </Dependencies>
