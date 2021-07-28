@@ -293,7 +293,7 @@ class Program
 
     // <snippet_manage>
     private static async Task ManageModels(
-        FormRecognizerClient trainingClient, string trainingFileUrl)
+        FormTrainingClient trainingClient, string trainingFileUrl)
     {
         // </snippet_manage>
         // <snippet_manage_model_count>
