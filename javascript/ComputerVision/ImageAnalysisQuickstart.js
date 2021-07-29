@@ -11,13 +11,11 @@
  *  - Install the Computer Vision SDK: @azure/cognitiveservices-computervision (See https://www.npmjs.com/package/@azure/cognitiveservices-computervision) by running
  *    the following command in this directory:
  *       npm install
- *  - Set your subscription key and endpoint into your environment variables COMPUTER_VISION_ENDPOINT and COMPUTER_VISION_SUBSCRIPTION_KEY.
- *       An example of COMPUTER_VISION_ENDPOINT will look like:         https://westus2.api.cognitive.microsoft.com
- *       An example of COMPUTER_VISION_SUBSCRIPTION_KEY will look like: 0123456789abcdef0123456789abcdef
  *  - The DESCRIBE IMAGE example uses a local image celebrities.jpg, which will be downloaded on demand.
  *  - The READ (the API for performing Optical Character Recognition or doing text retrieval from PDF) example uses local images and a PDF files, which will be downloaded on demand.
  * 
  * How to run:
+ *  - Replace the values of `key` and `endpoint` with your Computer Vision subscription key and endpoint.
  *  - This quickstart can be run all at once (node ComputerVisionQuickstart.js from the command line) or used to copy/paste sections as needed. 
  *    If sections are extracted, make sure to copy/paste the authenticate section too, as each example relies on it.
  *

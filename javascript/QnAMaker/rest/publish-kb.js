@@ -18,8 +18,8 @@ const request = require("requestretry");
 * Set the `kbId` variable to the ID of a knowledge base you have
 * previously created.
 */
-const subscriptionKey = "PASTE_YOUR_QNA_MAKER_SUBSCRIPTION_KEY_HERE";
-const endpoint = "PASTE_YOUR_QNA_MAKER_ENDPOINT_HERE";
+const subscriptionKey = "PASTE_YOUR_QNA_MAKER_AUTHORING_SUBSCRIPTION_KEY_HERE";
+const endpoint = "PASTE_YOUR_QNA_MAKER_AUTHORING_ENDPOINT_HERE";
 const kbId = "PASTE_YOUR_QNA_MAKER_KB_ID_HERE";
 
 const publishKbMethod = "/qnamaker/v4.0/knowledgebases/" + kbId

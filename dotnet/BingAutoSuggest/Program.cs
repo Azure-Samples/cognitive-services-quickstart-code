@@ -10,24 +10,8 @@ namespace Autosuggest_CS
 {
     class Program
     {
-        private const string key_var = "AUTOSUGGEST_SUBSCRIPTION_KEY";
-        private static readonly string subscription_key = Environment.GetEnvironmentVariable(key_var);
-
-        // Note you must use the same region as you used to get your subscription key.
-        private const string endpoint_var = "AUTOSUGGEST_ENDPOINT";
-        private static readonly string endpoint = Environment.GetEnvironmentVariable(endpoint_var);
-
-        static Program()
-        {
-            if (null == subscription_key)
-            {
-                throw new Exception("Please set/export the environment variable: " + key_var);
-            }
-            if (null == endpoint)
-            {
-                throw new Exception("Please set/export the environment variable: " + endpoint_var);
-            }
-        }
+        private static readonly string subscription_key = "PASTE_YOUR_AUTO_SUGGEST_SUBSCRIPTION_KEY_HERE";
+        private static readonly string endpoint = "PASTE_YOUR_AUTO_SUGGEST_ENDPOINT_HERE";
 
         async static Task RunQuickstart()
         {

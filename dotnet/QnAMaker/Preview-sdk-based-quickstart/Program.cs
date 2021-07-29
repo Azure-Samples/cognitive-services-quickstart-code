@@ -39,8 +39,8 @@ namespace Knowledgebase_Quickstart
         static void Main(string[] args)
         {
             // <Resourcevariables>
-            var authoringKey = "QNA_MAKER_SUBSCRIPTION_KEY";
-            var authoringURL = "QNA_MAKER_ENDPOINT";
+            var authoringKey = "PASTE_YOUR_QNA_MAKER_MANAGED_SUBSCRIPTION_KEY_HERE";
+            var authoringURL = "PASTE_YOUR_QNA_MAKER_MANAGED_ENDPOINT_HERE";
             // </Resourcevariables>
 
             // <AuthorizationAuthor>

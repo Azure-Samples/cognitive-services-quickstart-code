@@ -31,9 +31,8 @@ const { AzureKeyCredential } = require('@azure/core-auth');
 let CSV_FILE = './request-data.csv';
 
 // Authentication variables
-// Add your Anomaly Detector subscription key and endpoint to your environment variables.
-let key = process.env['ANOMALY_DETECTOR_KEY'];
-let endpoint = process.env['ANOMALY_DETECTOR_ENDPOINT'];
+let key = 'PASTE_YOUR_ANOMALY_DETECTOR_SUBSCRIPTION_KEY_HERE';
+let endpoint = 'PASTE_YOUR_ANOMALY_DETECTOR_ENDPOINT_HERE';
 
 // Points array for the request body
 let points = [];

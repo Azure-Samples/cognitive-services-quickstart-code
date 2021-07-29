@@ -22,9 +22,6 @@
  *    printed_text.jpg, and gray-shirt-logo.jpg, then add to your root folder from here:
  *    https://github.com/Azure-Samples/cognitive-services-sample-data-files/tree/master/ComputerVision/Images
  *   
- *    Add your Azure Computer Vision subscription key and endpoint to your environment variables with names:
- *    COMPUTER_VISION_SUBSCRIPTION_KEY and COMPUTER_VISION_ENDPOINT
- *
  *  How to run:
  *	  From command line: go run ComptuerVisionQuickstart.go
  * 

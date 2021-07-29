@@ -16,13 +16,13 @@ namespace predict_with_rest
             // Values to modify.
 
             // YOUR-APP-ID: The App ID GUID found on the www.luis.ai Application Settings page.
-            var appId = "YOUR-APP-ID";
+            var appId = "PASTE_YOUR_LUIS_APP_ID_HERE";
 
             // YOUR-PREDICTION-KEY: 32 character key.
-            var predictionKey = "YOUR-PREDICTION-KEY";
+            var predictionKey = "PASTE_YOUR_LUIS_PREDICTION_SUBSCRIPTION_KEY_HERE";
 
             // YOUR-PREDICTION-ENDPOINT: Example is "https://westus.api.cognitive.microsoft.com/"
-            var predictionEndpoint = "https://YOUR-PREDICTION-ENDPOINT/";
+            var predictionEndpoint = "PASTE_YOUR_LUIS_PREDICTION_ENDPOINT_HERE";
 
             // An utterance to test the pizza app.
             var utterance = "I want two large pepperoni pizzas on thin crust please";

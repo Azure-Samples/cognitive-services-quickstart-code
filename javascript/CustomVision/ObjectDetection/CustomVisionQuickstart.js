@@ -7,10 +7,11 @@ const msRest = require("@azure/ms-rest-js");
 // </snippet_imports>
 
 // <snippet_creds>
-const trainingKey = "<your training key>";
-const predictionKey = "<your prediction key>";
-const predictionResourceId = "<your prediction resource id>";
-const endPoint = "https://<my-resource-name>.cognitiveservices.azure.com/"
+const trainingKey = "PASTE_YOUR_CUSTOM_VISION_TRAINING_SUBSCRIPTION_KEY_HERE";
+const trainingEndpoint = "PASTE_YOUR_CUSTOM_VISION_TRAINING_ENDPOINT_HERE";
+const predictionKey = "PASTE_YOUR_CUSTOM_VISION_PREDICTION_SUBSCRIPTION_KEY_HERE";
+const predictionResourceId = "PASTE_YOUR_CUSTOM_VISION_PREDICTION_RESOURCE_ID_HERE";
+const predictionEndpoint = "PASTE_YOUR_CUSTOM_VISION_PREDICTION_ENDPOINT_HERE";
 // </snippet_creds>
 
 // <snippet_vars>
@@ -20,9 +21,9 @@ const setTimeoutPromise = util.promisify(setTimeout);
 
 // <snippet_auth>
 const credentials = new msRest.ApiKeyCredentials({ inHeader: { "Training-key": trainingKey } });
-const trainer = new TrainingApi.TrainingAPIClient(credentials, endPoint);
+const trainer = new TrainingApi.TrainingAPIClient(credentials, trainingEndpoint);
 const predictor_credentials = new msRest.ApiKeyCredentials({ inHeader: { "Prediction-key": predictionKey } });
-const predictor = new PredictionApi.PredictionAPIClient(predictor_credentials, endPoint);
+const predictor = new PredictionApi.PredictionAPIClient(predictor_credentials, predictionEndpoint);
 // </snippet_auth>
 
 // <snippet_helper>

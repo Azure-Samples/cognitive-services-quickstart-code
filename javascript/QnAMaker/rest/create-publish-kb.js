@@ -33,7 +33,7 @@ const sleep = (waitTimeInMs) => new Promise(resolve => setTimeout(resolve, waitT
 * The value of `resourceAuthoringEndpoint` has the format https://YOUR-RESOURCE-NAME.cognitiveservices.azure.com.
 */
 // <authorization>
-const resourceKey = "PASTE_YOUR_QNA_MAKER_SUBSCRIPTION_KEY_HERE";
+const resourceKey = "PASTE_YOUR_QNA_MAKER_AUTHORING_SUBSCRIPTION_KEY_HERE";
 const resourceAuthoringEndpoint = "PASTE_YOUR_QNA_MAKER_AUTHORING_ENDPOINT_HERE" + "/qnamaker/v4.0";
 // </authorization>
 

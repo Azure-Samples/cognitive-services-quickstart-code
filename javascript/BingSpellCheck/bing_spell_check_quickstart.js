@@ -14,15 +14,8 @@
 var SpellCheck = require("@azure/cognitiveservices-spellcheck");
 var msRest = require("@azure/ms-rest-js");
 
-const key = process.env['BING_SPELL_CHECK_SUBSCRIPTION_KEY'];
-if (!key) {
-    throw new Error('Set/export a BING_SPELL_CHECK_SUBSCRIPTION_KEY environment variable.');
-}
-
-const endpoint = process.env['BING_SPELL_CHECK_ENDPOINT'];
-if (!endpoint) {
-    throw new Error('Set/export a BING_SPELL_CHECK_ENDPOINT environment variable.');
-}
+const key = 'PASTE_YOUR_SPELL_CHECK_SUBSCRIPTION_KEY_HERE';
+const endpoint = 'PASTE_YOUR_SPELL_CHECK_ENDPOINT_HERE';
 
 const creds = new msRest.ApiKeyCredentials({ inHeader: { 'Ocp-Apim-Subscription-Key': key } });
 const client = new SpellCheck.SpellCheckClient(creds, { endpoint: endpoint });

@@ -37,7 +37,7 @@ public class CreateKB {
 * The value of `authoring_endpoint` has the format https://YOUR-RESOURCE-NAME.cognitiveservices.azure.com.
 */
 // <constants>
-    private static String authoring_key = "PASTE_YOUR_QNA_MAKER_SUBSCRIPTION_KEY_HERE";
+    private static String authoring_key = "PASTE_YOUR_QNA_MAKER_AUTHORING_SUBSCRIPTION_KEY_HERE";
 	private static String authoring_endpoint = "PASTE_YOUR_QNA_MAKER_AUTHORING_ENDPOINT_HERE";
 
     static String service = "/qnamaker/v4.0";

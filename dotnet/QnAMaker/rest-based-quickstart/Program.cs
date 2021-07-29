@@ -21,15 +21,15 @@ namespace QnaMakerRestDotnet
 
         // <snippet_variables>
         // 36 character key from Azure portal for QnA Maker resource
-        static string authoringKey = "QNA_MAKER_AUTHORING_RESOURCE_KEY";
+        static string authoringKey = "PASTE_YOUR_QNA_MAKER_AUTHORING_SUBSCRIPTION_KEY_HERE";
 
         // example://https://YOUR-RESOURCE_NAME.cognitiveservices.azure.com with NO trailing forward slash
-        static string authoringEndpoint = "QNA_MAKER_AUTHORING_RESOURCE_ENDPOINT";
-        static string resourceName = "QNA_MAKER_AUTHORING_RESOURCE_NAME";
+        static string authoringEndpoint = "PASTE_YOUR_QNA_MAKER_AUTHORING_ENDPOINT_HERE";
+
+        static string runtimeEndpoint = "PASTE_YOUR_QNA_MAKER_RUNTIME_ENDPOINT_HERE";
 
         static string service = "/qnamaker/v4.0";
         // </snippet_variables>
-
 
         // <snippet_knowledge_base_json>
         static string kb = @"
@@ -235,7 +235,7 @@ namespace QnaMakerRestDotnet
         // <snippet_query>
         async static Task<string> Query(string endpointKey, string  knowledgeBaseID){
 
-            var uri =  $"https://{resourceName}.azurewebsites.net/qnamaker/knowledgebases/{knowledgeBaseID}/generateAnswer";
+            var uri =  $"{runtimeEndpoint}/qnamaker/knowledgebases/{knowledgeBaseID}/generateAnswer";
 
             string question = @"{'question': 'Is the QnA Maker Service free?','top': 3}";
 

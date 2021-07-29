@@ -17,8 +17,8 @@ import com.azure.core.util.polling.SyncPoller;
 public class FormRecognizer {
 
 	// <snippet_creds>
-	static final String key = "<replace-with-your-form-recognizer-key>";
-	static final String endpoint = "<replace-with-your-form-recognizer-endpoint>";
+	static final String key = "PASTE_YOUR_FORM_RECOGNIZER_SUBSCRIPTION_KEY_HERE";
+	static final String endpoint = "PASTE_YOUR_FORM_RECOGNIZER_ENDPOINT_HERE";
 	// </snippet_creds>
 	public static void main(String[] args) {
 		// <snippet_auth>
@@ -27,8 +27,8 @@ public class FormRecognizer {
 		FormTrainingClient trainingClient = new FormTrainingClientBuilder().credential(new AzureKeyCredential(key)).endpoint(endpoint).buildClient();
 		// </snippet_auth>
 		// <snippet_mainvars>
-		String trainingDataUrl = "<SAS-URL-of-your-form-folder-in-blob-storage>";
-		String formUrl = "<SAS-URL-of-a-form-in-blob-storage>";
+		String trainingDataUrl = "PASTE_YOUR_SAS_URL_OF_YOUR_FORM_FOLDER_IN_BLOB_STORAGE_HERE";
+		String formUrl = "PASTE_YOUR_FORM_RECOGNIZER_FORM_URL_HERE";
 		String receiptUrl = "https://docs.microsoft.com/azure/cognitive-services/form-recognizer/media" + "/contoso-allinone.jpg";
 		String bcUrl = "https://raw.githubusercontent.com/Azure/azure-sdk-for-python/master/sdk/formrecognizer/azure-ai-formrecognizer/samples/sample_forms/business_cards/business-card-english.jpg";
 		String invoiceUrl = "https://raw.githubusercontent.com/Azure/azure-sdk-for-python/master/sdk/formrecognizer/azure-ai-formrecognizer/samples/sample_forms/forms/Invoice_1.pdf";

@@ -58,9 +58,8 @@ func main() {
 	/*
 	Authenticate
 	*/
-	// Add FACE_SUBSCRIPTION_KEY, FACE_ENDPOINT, and AZURE_SUBSCRIPTION_ID to your environment variables.
-	subscriptionKey := os.Getenv("FACE_SUBSCRIPTION_KEY")
-	endpoint := os.Getenv("FACE_ENDPOINT")
+	subscriptionKey := "PASTE_YOUR_FACE_SUBSCRIPTION_KEY_HERE"
+	endpoint := "PASTE_YOUR_FACE_ENDPOINT_HERE"
 
 	// Client used for Detect Faces, Find Similar, and Verify examples.
 	client := face.NewClient(endpoint)

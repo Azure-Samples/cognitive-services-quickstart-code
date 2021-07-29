@@ -47,7 +47,7 @@ from msrest.authentication import CognitiveServicesCredentials
 # The value of `runtime_endpoint` has the format https://YOUR-RESOURCE-NAME.azurewebsites.net.
 
 # <Resourcevariables>
-subscription_key = 'PASTE_YOUR_QNA_MAKER_SUBSCRIPTION_KEY_HERE'
+subscription_key = 'PASTE_YOUR_QNA_MAKER_AUTHORING_SUBSCRIPTION_KEY_HERE'
 
 authoring_endpoint = 'PASTE_YOUR_QNA_MAKER_AUTHORING_ENDPOINT_HERE'
 

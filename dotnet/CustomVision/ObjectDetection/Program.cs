@@ -16,17 +16,15 @@ namespace ObjectDetection
         static void Main(string[] args)
         {
             // <snippet_creds>
-            // Add your Azure Custom Vision endpoint
-            string ENDPOINT = "CUSTOM_VISION_ENDPOINT";
-
-            // Add your training & prediction key from the settings page of the portal
-            string trainingKey = "CUSTOM_VISION_TRAINING_KEY";
-            string predictionKey = "CUSTOM_VISION_PREDICTION_KEY";
+            string trainingKey = "PASTE_YOUR_CUSTOM_VISION_TRAINING_SUBSCRIPTION_KEY_HERE";
+            string trainingEndpoint = "PASTE_YOUR_CUSTOM_VISION_TRAINING_ENDPOINT_HERE";
+            string predictionKey = "PASTE_YOUR_CUSTOM_VISION_PREDICTION_SUBSCRIPTION_KEY_HERE";
+			string predictionEndpoint = "PASTE_YOUR_CUSTOM_VISION_PREDICTION_ENDPOINT_HERE";
             // </snippet_creds>
 
             // <snippet_maincalls>
-            CustomVisionTrainingClient TrainingApi = AuthenticateTraining(ENDPOINT, trainingKey);
-            CustomVisionPredictionClient predictionApi = AuthenticatePrediction(ENDPOINT, predictionKey);
+            CustomVisionTrainingClient TrainingApi = AuthenticateTraining(trainingEndpoint, trainingKey);
+            CustomVisionPredictionClient predictionApi = AuthenticatePrediction(predictionEndpoint, predictionKey);
 
             Project project = CreateProject(trainingApi);
             AddTags(trainingApi, project);

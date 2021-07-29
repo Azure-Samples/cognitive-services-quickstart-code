@@ -1,8 +1,9 @@
 'use strict';
 
 let https = require ('https');
-subscription_key = "<paste-your-text-analytics-key-here>";
-endpoint = "<paste-your-text-analytics-endpoint-here>";
+
+subscription_key = "PASTE_YOUR_TEXT_ANALYTICS_SUBSCRIPTION_KEY_HERE";
+endpoint = "PASTE_YOUR_TEXT_ANALYTICS_ENDPOINT_HERE";
 
 let path = '/text/analytics/v3.0/languages';
 

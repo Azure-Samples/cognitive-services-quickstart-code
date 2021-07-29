@@ -49,8 +49,8 @@ const qnamaker = require("@azure/cognitiveservices-qnamaker");
 * The value of `endpoint` has the format https://YOUR-RESOURCE-NAME.cognitiveservices.azure.com.
 */
 // <Resourcevariables>
-const subscription_key = "PASTE_YOUR_QNA_MAKER_SUBSCRIPTION_KEY_HERE";
-const endpoint = "PASTE_YOUR_QNA_MAKER_AUTHORING_ENDPOINT_HERE";
+const subscription_key = "PASTE_YOUR_QNA_MAKER_MANAGED_SUBSCRIPTION_KEY_HERE";
+const endpoint = "PASTE_YOUR_QNA_MAKER_MANAGED_ENDPOINT_HERE";
 // </Resourcevariables>
 
 // <ListKnowledgeBases>

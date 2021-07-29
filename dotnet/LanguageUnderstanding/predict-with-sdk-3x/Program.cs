@@ -14,13 +14,13 @@ namespace UseRuntime
         // Use Language Understanding (LUIS) prediction endpoint key
         // to create authentication credentials
         // Prediction key must be assigned in LUIS portal
-        private static string predictionKey = "REPLACE-WITH-YOUR-ASSIGNED-PREDICTION-KEY";
+        private static string predictionKey = "PASTE_YOUR_LUIS_PREDICTION_SUBSCRIPTION_KEY_HERE";
 
         // Endpoint URL example value = "https://YOUR-RESOURCE-NAME.cognitiveservices.azure.com"
-        private static string predictionEndpoint = "https://REPLACE-WITH-YOUR-RESOURCE-NAME.cognitiveservices.azure.com";
+        private static string predictionEndpoint = "PASTE_YOUR_LUIS_PREDICTION_ENDPOINT_HERE";
 
         // App Id example value = "df67dcdb-c37d-46af-88e1-8b97951ca1c2"
-        private static string appId = "REPLACE-WITH-YOUR-LUIS_APP_ID";
+        private static string appId = "PASTE_YOUR_LUIS_APP_ID_HERE";
         // </snippet_variables>
 
         // <snippet_main>

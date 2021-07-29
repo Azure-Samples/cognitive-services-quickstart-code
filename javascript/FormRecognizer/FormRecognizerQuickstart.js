@@ -4,9 +4,8 @@ const fs = require("fs");
 // </snippet_imports>
 
 // <snippet_creds>
-// You will need to set these environment variables or edit the following values
-const endpoint = "<paste-your-form-recognizer-endpoint-here>";
-const apiKey = "<paste-your-form-recognizer-key-here>";
+const apiKey = "PASTE_YOUR_FORM_RECOGNIZER_SUBSCRIPTION_KEY_HERE";
+const endpoint = "PASTE_YOUR_FORM_RECOGNIZER_ENDPOINT_HERE";
 // </snippet_creds>
 
 // <snippet_auth>

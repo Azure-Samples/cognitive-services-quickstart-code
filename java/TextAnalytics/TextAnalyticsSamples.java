@@ -5,8 +5,8 @@ import com.azure.ai.textanalytics.TextAnalyticsClient;
 
 public class TextAnalyticsSamples {
 
-    private static String KEY = "<replace-with-your-text-analytics-key-here>";
-    private static String ENDPOINT = "<replace-with-your-text-analytics-endpoint-here>";
+    private static String KEY = "PASTE_YOUR_TEXT_ANALYTICS_SUBSCRIPTION_KEY_HERE";
+    private static String ENDPOINT = "PASTE_YOUR_TEXT_ANALYTICS_ENDPOINT_HERE";
 
     public static void main(String[] args) {
 

@@ -1,6 +1,6 @@
 <?php
-$ocpApimSubscriptionKey = getenv('FACE_SUBSCRIPTION_KEY');
-$uriBase = getenv('FACE_ENDPOINT') . '/face/v1.0/';
+$ocpApimSubscriptionKey = 'PASTE_YOUR_FACE_SUBSCRIPTION_KEY_HERE';
+$uriBase = 'PASTE_YOUR_FACE_ENDPOINT_HERE' . '/face/v1.0/';
 
 $imageUrl =
     'https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/faces.jpg';

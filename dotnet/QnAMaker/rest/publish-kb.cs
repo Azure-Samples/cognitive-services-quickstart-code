@@ -8,33 +8,9 @@ namespace QnAMakerPublishQuickstart
     class Program
     {
 // <constants>
-        private const string subscriptionKeyVar = "QNA_MAKER_SUBSCRIPTION_KEY";
-        private const string endpointVar = "QNA_MAKER_ENDPOINT";
-        private const string kbIdVar = "QNA_MAKER_KB_ID";
-
-        private static readonly string subscriptionKey = Environment.GetEnvironmentVariable(subscriptionKeyVar);
-        private static readonly string endpoint = Environment.GetEnvironmentVariable(endpointVar);
-        private static readonly string kbId = Environment.GetEnvironmentVariable(kbIdVar);
-
-        /// <summary>
-        /// Static constuctor. Verifies that we found the subscription key and
-        /// endpoint in the environment variables.
-        /// </summary>
-        static Program()
-        {
-            if (null == subscriptionKey)
-            {
-                throw new Exception("Please set/export the environment variable: " + subscriptionKeyVar);
-            }
-            if (null == endpoint)
-            {
-                throw new Exception("Please set/export the environment variable: " + endpointVar);
-            }
-            if (null == kbId)
-            {
-                throw new Exception("Please set/export the environment variable: " + kbIdVar);
-            }
-        }
+        private static readonly string subscriptionKey = "PASTE_YOUR_QNA_MAKER_AUTHORING_SUBSCRIPTION_KEY_HERE";
+        private static readonly string endpoint = "PASTE_YOUR_QNA_MAKER_AUTHORING_ENDPOINT_HERE";
+        private static readonly string kbId = "PASTE_YOUR_QNA_MAKER_KB_ID_HERE";
 // </constants>
 
         static void Main(string[] args)

@@ -19,14 +19,14 @@ func main() {
     // Values to modify.
 
 	// YOUR-APP-ID: The App ID GUID found on the www.luis.ai Application Settings page.
-	var appID = "YOUR-APP-ID"
+	var appID = "PASTE_YOUR_LUIS_APP_ID_HERE"
 
 	// YOUR-AUTHORING-KEY: Your LUIS authoring key, 32 character value.
-	var authoringKey = "YOUR-AUTHORING-KEY"
+	var authoringKey = "PASTE_YOUR_LUIS_AUTHORING_SUBSCRIPTION_KEY_HERE"
 
 	//  YOUR-AUTHORING-ENDPOINT: Replace this with your authoring key endpoint.
     // For example, "https://your-resource-name.cognitiveservices.azure.com/"
-	var endpoint = "https://YOUR-AUTHORING-ENDPOINT/"
+	var endpoint = "PASTE_YOUR_LUIS_AUTHORING_ENDPOINT_HERE"
 
 	// NOTE: Replace this your version number. The Pizza app uses a version number of "0.1".
 	var version = "0.1"
