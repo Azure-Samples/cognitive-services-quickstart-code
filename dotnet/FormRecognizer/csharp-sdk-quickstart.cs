@@ -20,10 +20,9 @@ namespace quickstart {
     static string receiptUrl = "https://docs.microsoft.com/azure/cognitive-services/form-recognizer/media" + "/contoso-allinone.jpg";
     static string bcUrl = "https://raw.githubusercontent.com/Azure/azure-sdk-for-python/master/sdk/formrecognizer/azure-ai-formrecognizer/samples/sample_forms/business_cards/business-card-english.jpg";
     static string invoiceUrl = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-REST-api-samples/master/curl/form-recognizer/simple-invoice.png";
-
     static string idUrl = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-REST-api-samples/master/curl/form-recognizer/id-license.jpg";
+    
     static void Main(string[] args) {
-      Console.WriteLine("Hello World!");
 
       FormRecognizerClient recognizerClient = AuthenticateClient();
 
