@@ -3,9 +3,8 @@
 
 const axios = require('axios').default;
 
-// Add a valid subscription key and endpoint to your environment variables.
-let subscriptionKey = process.env['FACE_SUBSCRIPTION_KEY']
-let endpoint = process.env['FACE_ENDPOINT'] + '/face/v1.0/detect'
+let subscriptionKey = 'PASTE_YOUR_FACE_SUBSCRIPTION_KEY_HERE'
+let endpoint = 'PASTE_YOUR_FACE_ENDPOINT_HERE' + '/face/v1.0/detect'
 
 // Optionally, replace with your own image URL (for example a .jpg or .png URL).
 let imageUrl = 'https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/faces.jpg'

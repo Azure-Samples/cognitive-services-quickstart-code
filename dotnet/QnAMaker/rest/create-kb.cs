@@ -17,11 +17,8 @@ namespace QnaQuickstartCreateKnowledgebase
     class Program
     {
 // <constants>
-        private const string subscriptionKeyVar = "QNA_MAKER_SUBSCRIPTION_KEY";
-        private const string endpointVar = "QNA_MAKER_ENDPOINT";
-
-        private static readonly string subscriptionKey = Environment.GetEnvironmentVariable(subscriptionKeyVar);
-        private static readonly string endpoint = Environment.GetEnvironmentVariable(endpointVar);
+        private const string subscriptionKey = "PASTE_YOUR_QNA_MAKER_AUTHORING_SUBSCRIPTION_KEY_HERE";
+        private const string endpoint = "PASTE_YOUR_QNA_MAKER_AUTHORING_ENDPOINT_HERE";
 
         // Represents the various elements used to create HTTP request URIs
         // for QnA Maker operations.

@@ -44,10 +44,11 @@ const PERSON_GROUP_ID = 'my-unique-person-group'
  * AUTHENTICATE
  * Used for all examples.
  */
-// Set the FACE_SUBSCRIPTION_KEY in your environment variables with your subscription key as a value.
-let credentials = new msRest.ApiKeyCredentials({ inHeader: { 'Ocp-Apim-Subscription-Key': process.env['FACE_SUBSCRIPTION_KEY'] } });
-// Set FACE_REGION in your environment variables with its endpoint region (such as 'westus') as a value.
-let client = new Face.FaceClient(credentials, process.env['FACE_ENDPOINT']);
+let key = 'PASTE_YOUR_FACE_SUBSCRIPTION_KEY_HERE';
+let endpoint = 'PASTE_YOUR_FACE_ENDPOINT_HERE';
+
+let credentials = new msRest.ApiKeyCredentials({ inHeader: { 'Ocp-Apim-Subscription-Key': key } });
+let client = new Face.FaceClient(credentials, endpoint);
 /**
  * END - AUTHENTICATE
  */

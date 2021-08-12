@@ -10,7 +10,6 @@ In this quickstart, you 'll generate a thumbnail from an image using the Compute
 * Once you have your Azure subscription, <a href="https://portal.azure.com/#create/Microsoft.CognitiveServicesComputerVision"  title="Create a Computer Vision resource"  target="_blank">create a Computer Vision resource <span class="docon docon-navigate-external x-hidden-focus"></span></a> in the Azure portal to get your key and endpoint. After it deploys, click **Go to resource**.
     * You will need the key and endpoint from the resource you create to connect your application to the Computer Vision service. You'll paste your key and endpoint into the code below later in the quickstart.
     * You can use the free pricing tier (`F0`) to try the service, and upgrade later to a paid tier for production.
-* [Create environment variables](../../cognitive-services-apis-create-account.md#configure-an-environment-variable-for-authentication) for the key and endpoint URL, named `COMPUTER_VISION_SUBSCRIPTION_KEY` and `COMPUTER_VISION_ENDPOINT`, respectively.
 
 ## Create and run the sample application
 
@@ -42,7 +41,7 @@ To create and run the sample, do the following steps:
    ```
 
 1. Add the rest of the sample code below, beneath the imports (change to your class name if needed).
-1. Add your Computer Vision subscription key and endpoint to your environment variables.
+1. Replace the values of `subscriptionKey` and `endpoint` with your Computer Vision subscription key and endpoint.
 1. Optionally, replace the value of `imageToAnalyze` with the URL of your own image.
 1. Save, then build the Java project.
 1. If you're using an IDE, run `GenerateThumbnail`. Otherwise, run from the command line (commands below).
@@ -64,11 +63,8 @@ To create and run the sample, do the following steps:
 
 public class GenerateThumbnail {
 
-    // Add your Computer Vision subscription key and endpoint to your environment
-    // variables. Then, close and then re-open your command shell or project for the
-    // changes to take effect.
-    private static String subscriptionKey = System.getenv("COMPUTER_VISION_SUBSCRIPTION_KEY");
-    private static String endpoint = System.getenv("COMPUTER_VISION_ENDPOINT");
+    private static String subscriptionKey = "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE";
+    private static String endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE";
     // The endpoint path
     private static final String uriBase = endpoint + "vision/v3.1/generateThumbnail";
     // It's optional if you'd like to use your own image instead of this one.

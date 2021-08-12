@@ -4,8 +4,8 @@
 // ;extension=php_openssl.dll
 // You might need to set the full path, for example:
 // extension="C:\Program Files\Php\ext\php_openssl.dll"
-$subscription_key = "<paste-your-text-analytics-key-here>";
-$endpoint = "<paste-your-text-analytics-endpoint-here>";
+$subscription_key = "PASTE_YOUR_TEXT_ANALYTICS_SUBSCRIPTION_KEY_HERE";
+$endpoint = "PASTE_YOUR_TEXT_ANALYTICS_ENDPOINT_HERE";
 
 $path = '/text/analytics/v3.0/keyPhrases';
 

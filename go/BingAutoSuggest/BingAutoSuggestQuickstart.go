@@ -10,16 +10,8 @@ import (
 )
 
 func main() {
-	// Add your Bing Autosuggest subscription key to your environment variables.
-	if "" == os.Getenv("BING_AUTOSUGGEST_SUBSCRIPTION_KEY") {
-		log.Fatal("Please set/export the environment variable BING_AUTOSUGGEST_SUBSCRIPTION_KEY.")
-	}
-	// Add your Bing Autosuggest endpoint to your environment variables.
-	var subscription_key string = os.Getenv("BING_AUTOSUGGEST_ENDPOINT")
-	if "" == os.Getenv("BING_AUTOSUGGEST_ENDPOINT") {
-		log.Fatal("Please set/export the environment variable BING_AUTOSUGGEST_ENDPOINT.")
-	}
-	var endpoint string = os.Getenv("BING_AUTOSUGGEST_ENDPOINT")
+	var subscription_key string = "PASTE_YOUR_AUTO_SUGGEST_SUBSCRIPTION_KEY_HERE"
+	var endpoint string = "PASTE_YOUR_AUTO_SUGGEST_ENDPOINT_HERE"
 
 	// Get the context, which is required by the SDK methods.
 	ctx := context.Background()

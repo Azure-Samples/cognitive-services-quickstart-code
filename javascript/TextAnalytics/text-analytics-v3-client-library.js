@@ -2,8 +2,8 @@
 
 const { TextAnalyticsClient, AzureKeyCredential } = require("@azure/ai-text-analytics");
 
-const key = '<paste-your-text-analytics-key-here>';
-const endpoint = `<paste-your-text-analytics-endpoint-here>`;
+const key = 'PASTE_YOUR_TEXT_ANALYTICS_SUBSCRIPTION_KEY_HERE';
+const endpoint = 'PASTE_YOUR_TEXT_ANALYTICS_ENDPOINT_HERE';
 
 const textAnalyticsClient = new TextAnalyticsClient(endpoint,  new AzureKeyCredential(key));
 

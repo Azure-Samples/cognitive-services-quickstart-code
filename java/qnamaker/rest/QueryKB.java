@@ -44,7 +44,7 @@ public class QueryKB {
 * previously created.
 */
 // <constants>
-    private static String authoring_key = "PASTE_YOUR_QNA_MAKER_SUBSCRIPTION_KEY_HERE";
+    private static String authoring_key = "PASTE_YOUR_QNA_MAKER_AUTHORING_SUBSCRIPTION_KEY_HERE";
 	private static String authoring_endpoint = "PASTE_YOUR_QNA_MAKER_AUTHORING_ENDPOINT_HERE";
 	private static String runtime_endpoint = "PASTE_YOUR_QNA_MAKER_RUNTIME_ENDPOINT_HERE";
 	private static String knowledge_base_id = "PASTE_YOUR_QNA_MAKER_KB_ID_HERE";

@@ -12,10 +12,10 @@ namespace PersonalizerExample
     {
         // <classVariables>
         // The key specific to your personalizer resource instance; e.g. "0123456789abcdef0123456789ABCDEF"
-        private static readonly string ApiKey = "REPLACE-WITH-YOUR-PERSONALIZER-KEY";
+        private static readonly string ApiKey = "PASTE_YOUR_PERSONALIZER_SUBSCRIPTION_KEY_HERE";
 
         // The endpoint specific to your personalizer resource instance; e.g. https://<your-resource-name>.cognitiveservices.azure.com
-        private static readonly string ServiceEndpoint = "https://REPLACE-WITH-YOUR-PERSONALIZER-RESOURCE-NAME.cognitiveservices.azure.com";
+        private static readonly string ServiceEndpoint = "PASTE_YOUR_PERSONALIZER_ENDPOINT_HERE";
         // </classVariables>
 
         // <mainLoop>

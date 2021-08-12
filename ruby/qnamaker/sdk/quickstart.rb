@@ -22,23 +22,9 @@ include Azure::CognitiveServices::QnamakerRuntime::V4_0::Models
 # </Dependencies>
 
 # <Resourcevariables>
-key_var_name = 'QNA_MAKER_SUBSCRIPTION_KEY'
-if nil == ENV[key_var_name]
-    raise Exception("Please set/export the environment variable: #{key_var_name}\n")
-end
-subscription_key = ENV[key_var_name]
-
-endpoint_var_name = 'QNA_MAKER_ENDPOINT'
-if nil == ENV[endpoint_var_name]
-    raise Exception("Please set/export the environment variable: #{endpoint_var_name}\n")
-end
-endpoint = ENV[endpoint_var_name]
-
-runtime_endpoint_var_name = 'QNA_MAKER_RUNTIME_ENDPOINT'
-if nil == ENV[runtime_endpoint_var_name]
-    raise Exception("Please set/export the environment variable: #{runtime_endpoint_var_name}\n")
-end
-runtime_endpoint = ENV[runtime_endpoint_var_name]
+subscription_key = 'PASTE_YOUR_QNA_MAKER_AUTHORING_SUBSCRIPTION_KEY_HERE'
+endpoint = 'PASTE_YOUR_QNA_MAKER_AUTHORING_ENDPOINT_HERE'
+runtime_endpoint = 'PASTE_YOUR_QNA_MAKER_RUNTIME_ENDPOINT_HERE'
 # </Resourcevariables>
 
 # <MonitorOperation>

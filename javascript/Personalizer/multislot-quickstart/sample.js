@@ -3,9 +3,9 @@ const { v4: uuidv4 } = require('uuid');
 const readline = require('readline-sync');
 // The endpoint specific to your personalization service instance; 
 // e.g. https://<your-resource-name>.cognitiveservices.azure.com
-const PersonalizationBaseUrl = '<REPLACE-WITH-YOUR-PERSONALIZER-ENDPOINT>';
+const PersonalizationBaseUrl = 'PASTE_YOUR_PERSONALIZER_ENDPOINT_HERE';
 // The key specific to your personalization service instance; e.g. "0123456789abcdef0123456789ABCDEF"
-const ResourceKey = '<REPLACE-WITH-YOUR-PERSONALIZER-KEY>';
+const ResourceKey = 'PASTE_YOUR_PERSONALIZER_SUBSCRIPTION_KEY_HERE';
 const MultiSlotRankUrl = PersonalizationBaseUrl.concat('personalizer/v1.1-preview.1/multislot/rank');
 const MultiSlotRewardUrlBase = PersonalizationBaseUrl.concat('personalizer/v1.1-preview.1/multislot/events/');
 const Headers = {

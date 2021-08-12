@@ -11,11 +11,11 @@ async function main() {
 
   // <AuthorizationVariables>
   // The key specific to your personalization service instance; e.g. "0123456789abcdef0123456789ABCDEF"
-  const serviceKey = "REPLACE-WITH-YOUR-PERSONALIZER-KEY";
+  const serviceKey = "PASTE_YOUR_PERSONALIZER_SUBSCRIPTION_KEY_HERE";
 
   // The endpoint specific to your personalization service instance; 
   // e.g. https://<your-resource-name>.cognitiveservices.azure.com
-  const baseUri = "https://REPLACE-WITH-YOUR-PERSONALIZER-RESOURCE-NAME.cognitiveservices.azure.com";
+  const baseUri = "PASTE_YOUR_PERSONALIZER_ENDPOINT_HERE";
   // </AuthorizationVariables>
 
   // <Client>

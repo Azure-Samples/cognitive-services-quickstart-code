@@ -21,9 +21,8 @@ const LUIS = require("@azure/cognitiveservices-luis-authoring");
 // </Dependencies>
 
 // <Variables>
-const key = 'REPLACE-WITH-YOUR-ASSIGNED-AUTHORING-KEY';
-
-const endpoint = "https://REPLACE-WITH-RESOURCE-NAME.cognitiveservices.azure.com/"
+const key = 'PASTE_YOUR_LUIS_AUTHORING_SUBSCRIPTION_KEY_HERE';
+const endpoint = 'PASTE_YOUR_LUIS_AUTHORING_ENDPOINT_HERE';
 // </Variables>
 
 // <AuthoringCreateClient>

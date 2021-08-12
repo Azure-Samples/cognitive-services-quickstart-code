@@ -8,11 +8,7 @@ var msRest = require("@azure/ms-rest-js");
  *     npm install @azure/ms-rest-js
  */
 
- // Add your AUTOSUGGEST_SUBSCRIPTION_KEY to environment variables
-let subscription_key = process.env['AUTOSUGGEST_SUBSCRIPTION_KEY'];
-if (!subscription_key) {
-    throw new Error('please set/export the following environment variable: ' + subscription_key);
-}
+let subscription_key = 'PASTE_YOUR_AUTO_SUGGEST_SUBSCRIPTION_KEY_HERE';
 
 // Create a client
 const creds = new msRest.ApiKeyCredentials({ inHeader: { 'Ocp-Apim-Subscription-Key': subscription_key } });

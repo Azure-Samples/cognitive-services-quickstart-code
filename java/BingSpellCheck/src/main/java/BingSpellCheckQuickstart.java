@@ -16,7 +16,7 @@ public class BingSpellCheckQuickstart {
     public static void main(String[] args) {
         try {
             // Authenticate - create a client
-            final String subscriptionKey = System.getenv("BING_SPELL_CHECK_SUBSCRIPTION_KEY");
+            final String subscriptionKey = "PASTE_YOUR_SPELL_CHECK_SUBSCRIPTION_KEY_HERE";
             BingSpellCheckAPI client = BingSpellCheckManager.authenticate(subscriptionKey);
 
             spellCheck(client);

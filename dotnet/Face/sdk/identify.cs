@@ -13,8 +13,8 @@ namespace ConsoleApp1
         async static void Quickstart()
         {
             // <authenticate>
-            string SUBSCRIPTION_KEY = Environment.GetEnvironmentVariable("FACE_SUBSCRIPTION_KEY");
-            string ENDPOINT = Environment.GetEnvironmentVariable("FACE_ENDPOINT");
+            string SUBSCRIPTION_KEY = "PASTE_YOUR_FACE_SUBSCRIPTION_KEY_HERE";
+            string ENDPOINT = "PASTE_YOUR_FACE_ENDPOINT_HERE";
 
             IFaceClient faceClient = new FaceClient(new ApiKeyServiceClientCredentials(SUBSCRIPTION_KEY)) { Endpoint = ENDPOINT };
             // </authenticate>

@@ -12,8 +12,8 @@ namespace MultiSlotQuickstart
     class MultiSlotQuickstart
     {
         //Replace 'PersonalizationBaseUrl' and 'ResourceKey' with your valid endpoint values.
-        private const string PersonalizationBaseUrl = "<REPLACE-WITH-YOUR-PERSONALIZER-ENDPOINT>";
-        private const string ResourceKey = "<REPLACE-WITH-YOUR-PERSONALIZER-KEY>";
+        private const string PersonalizationBaseUrl = "PASTE_YOUR_PERSONALIZER_ENDPOINT_HERE";
+        private const string ResourceKey = "PASTE_YOUR_PERSONALIZER_SUBSCRIPTION_KEY_HERE";
         private static string MultiSlotRankUrl = string.Concat(PersonalizationBaseUrl, "personalizer/v1.1-preview.1/multislot/rank");
         private static string MultiSlotRewardUrlBase = string.Concat(PersonalizationBaseUrl, "personalizer/v1.1-preview.1/multislot/events/");
 

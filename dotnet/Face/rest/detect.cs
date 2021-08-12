@@ -13,8 +13,8 @@ namespace DetectFace
 {
     class Program
     {
-        static string subscriptionKey = Environment.GetEnvironmentVariable("FACE_SUBSCRIPTION_KEY");
-        static string endpoint = Environment.GetEnvironmentVariable("FACE_ENDPOINT");
+        static string SUBSCRIPTION_KEY = "PASTE_YOUR_FACE_SUBSCRIPTION_KEY_HERE";
+        static string ENDPOINT = "PASTE_YOUR_FACE_ENDPOINT_HERE";
         // </environment>
 
         // <main>

@@ -16,20 +16,9 @@ auto ticks_per_second = 10000000;
 // <get_speech_config>
 shared_ptr<SpeechConfig> GetSpeechConfig()
 {
-	char* subscription_key = nullptr;
-	char* region = nullptr;
-	size_t sz = 0;
-	_dupenv_s(&subscription_key, &sz, "SPEECH_SUBSCRIPTION_KEY");
-	_dupenv_s(&region, &sz, "SPEECH_REGION");
-	if (subscription_key == nullptr) {
-		throw std::invalid_argument("Please set the environment variable SPEECH_SUBSCRIPTION_KEY.");
-	}
-	if (region == nullptr) {
-		throw std::invalid_argument("Please set the environment variable SPEECH_REGION.");
-	}
+	auto subscription_key = 'PASTE_YOUR_SPEECH_SUBSCRIPTION_KEY_HERE';
+	auto region = 'PASTE_YOUR_SPEECH_ENDPOINT_REGION_HERE';
 	auto config = SpeechConfig::FromSubscription(subscription_key, region);
-	free(subscription_key);
-	free(region);
 	return config;
 }
 // </get_speech_config>

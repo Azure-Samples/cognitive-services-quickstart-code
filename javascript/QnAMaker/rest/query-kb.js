@@ -24,7 +24,7 @@ const request = require("requestretry");
 * previously created.
 */
 // <constants>
-const subscriptionKey = "PASTE_YOUR_QNA_MAKER_SUBSCRIPTION_KEY_HERE";
+const subscriptionKey = "PASTE_YOUR_QNA_MAKER_AUTHORING_SUBSCRIPTION_KEY_HERE";
 const authoringEndpoint = "PASTE_YOUR_QNA_MAKER_AUTHORING_ENDPOINT_HERE";
 const runtimeEndpoint = "PASTE_YOUR_QNA_MAKER_RUNTIME_ENDPOINT_HERE";
 const kbId = "PASTE_YOUR_QNA_MAKER_KB_ID_HERE";
