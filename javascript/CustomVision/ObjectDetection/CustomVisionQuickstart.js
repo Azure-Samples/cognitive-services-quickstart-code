@@ -164,6 +164,8 @@ async function asyncForEach(array, callback) {
 
 	// Clean up resources
 	// <snippet_delete>
+	console.log ("Unpublishing iteration ID: " + trainingIteration.id);
+	await trainer.unpublishIteration(sampleProject.id, trainingIteration.id);
 	console.log ("Deleting project ID: " + sampleProject.id);
 	await trainer.deleteProject(sampleProject.id);
 	// </snippet_delete>
