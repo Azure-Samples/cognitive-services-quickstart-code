@@ -56,7 +56,7 @@ const predictor = new PredictionApi.PredictionAPIClient(predictor_credentials, p
     // </snippet_tags>
 
     // <snippet_upload>
-    const sampleDataRoot = "<path to image files>";
+    const sampleDataRoot = "Images";
 
     console.log("Adding images...");
     let fileUploadPromises = [];
