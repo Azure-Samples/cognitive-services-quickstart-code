@@ -45,13 +45,15 @@ async function asyncForEach(array, callback) {
     const sampleProject = await trainer.createProject("Sample Obj Detection Project", { domainId: objDetectDomain.id });
     // </snippet_create>
 
+	console.log ("Sample project ID: " + sampleProject.id);
+
     // <snippet_tags>
     const forkTag = await trainer.createTag(sampleProject.id, "Fork");
     const scissorsTag = await trainer.createTag(sampleProject.id, "Scissors");
     // </snippet_tags>
 
     // <snippet_upload>
-    const sampleDataRoot = "Images";
+    const sampleDataRoot = "/media/data_github/cognitive-services-sample-data-files/CustomVision/ObjectDetection/Images";
 
     const forkImageRegions = {
         "fork_1.jpg": [0.145833328, 0.3509314, 0.5894608, 0.238562092],
@@ -102,7 +104,7 @@ async function asyncForEach(array, callback) {
     console.log("Adding images...");
     let fileUploadPromises = [];
 
-    const forkDir = `${sampleDataRoot}/Fork`;
+    const forkDir = `${sampleDataRoot}/fork`;
     const forkFiles = fs.readdirSync(forkDir);
 
     await asyncForEach(forkFiles, async (file) => {
@@ -114,7 +116,7 @@ async function asyncForEach(array, callback) {
         fileUploadPromises.push(trainer.createImagesFromFiles(sampleProject.id, batch));
     });
 
-    const scissorsDir = `${sampleDataRoot}/Scissors`;
+    const scissorsDir = `${sampleDataRoot}/scissors`;
     const scissorsFiles = fs.readdirSync(scissorsDir);
 
     await asyncForEach(scissorsFiles, async (file) => {
@@ -137,8 +139,8 @@ async function asyncForEach(array, callback) {
     console.log("Training started...");
     while (trainingIteration.status == "Training") {
         console.log("Training status: " + trainingIteration.status);
-        // wait for one second
-        await setTimeoutPromise(1000, null);
+        // wait for ten seconds
+        await setTimeoutPromise(10000, null);
         trainingIteration = await trainer.getIteration(sampleProject.id, trainingIteration.id)
     }
     console.log("Training status: " + trainingIteration.status);
@@ -150,7 +152,7 @@ async function asyncForEach(array, callback) {
     // </snippet_publish>
 
     // <snippet_test>
-    const testFile = fs.readFileSync(`${sampleDataRoot}/Test/test_od_image.jpg`);
+    const testFile = fs.readFileSync(`${sampleDataRoot}/test/test_image.jpg`);
     const results = await predictor.detectImage(sampleProject.id, publishIterationName, testFile)
 
     // Show results
@@ -159,6 +161,12 @@ async function asyncForEach(array, callback) {
         console.log(`\t ${predictedResult.tagName}: ${(predictedResult.probability * 100.0).toFixed(2)}% ${predictedResult.boundingBox.left},${predictedResult.boundingBox.top},${predictedResult.boundingBox.width},${predictedResult.boundingBox.height}`);
     });
     // </snippet_test>
+
+	// Clean up resources
+	// <snippet_delete>
+	console.log ("Deleting project ID: " + sampleProject.id);
+	await trainer.deleteProject(sampleProject.id);
+	// </snippet_delete>
 
     // <snippet_function_close>
 })()
