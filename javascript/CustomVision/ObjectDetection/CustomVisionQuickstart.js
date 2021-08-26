@@ -51,7 +51,7 @@ async function asyncForEach(array, callback) {
     // </snippet_tags>
 
     // <snippet_upload>
-    const sampleDataRoot = "<path to image files>";
+    const sampleDataRoot = "Images";
 
     const forkImageRegions = {
         "fork_1.jpg": [0.145833328, 0.3509314, 0.5894608, 0.238562092],
