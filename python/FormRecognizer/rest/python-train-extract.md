@@ -33,7 +33,10 @@ When your Form Recognizer resource finishes deploying, find and select it from t
 
 ## Train a Form Recognizer model
 
-First, you'll need a set of training data in an Azure Storage blob container. You should have a minimum of five filled-in forms (PDF documents and/or images) of the same type/structure as your main input data. Or, you can use a single empty form with two filled-in forms. The empty form's file name needs to include the word "empty." See [Build a training data set for a custom model](https://docs.microsoft.com/en-us/azure/cognitive-services/form-recognizer/build-training-data-set) for tips and options for putting together your training data.
+First, you'll need a set of training data in an Azure Storage blob container. You should have a minimum of five filled-in forms (PDF documents and/or images) of the same type/structure as your main input data. Or, you can use a single empty form with two filled-in forms. The empty form's file name needs to include the word "empty."
+
+> [!NOTE]
+> See [Custom model input requirements](https://docs.microsoft.com/en-us/azure/applied-ai-services/form-recognizer/build-training-data-set#custom-model-input-requirements) to make sure your training data set follows the input requirements for Form Recognizer.
 
 > [!NOTE]
 > You can use the labeled data feature to manually label some or all of your training data beforehand. This is a more complex process but results in a better trained model. See the [Train with labels](https://docs.microsoft.com/en-us/azure/cognitive-services/form-recognizer/overview#train-with-labels) section of the overview to learn more.
