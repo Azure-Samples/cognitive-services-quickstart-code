@@ -142,6 +142,7 @@ import ntpath
 import sys
 from requests import get, post
 import csv
+from tabulate import tabulate
 
 
 def analyzeInvoice(filename):
@@ -155,7 +156,7 @@ def analyzeInvoice(filename):
     # Endpoint URL
     #endpoint = r"<Endpoint>"
     #apim_key = "<subscription key>"
-    post_url = endpoint + "/formrecognizer/v2.1/prebuilt/invoice/analyzeResults"
+    post_url = endpoint + "/formrecognizer/v2.1/prebuilt/invoice/analyze"
     headers = {
         # Request headers
         'Content-Type': 'application/octet-stream',
@@ -208,20 +209,54 @@ def analyzeInvoice(filename):
             print(msg)
             return None
 
-    return resp_json
+    print("Invoice analyze is not complete after {0} seconds:\n{1}".format(n_try*wait_sec,resp_json))
+    return None
 
 def parseInvoiceResults(resp_json):
     docResults = resp_json["analyzeResult"]["documentResults"]
     invoiceResult = {}
+    lineItems = []
+    lineItemsHeadersOrder = ["Date","ProductCode", "Description", "UnitPrice", "Quantity", "Unit", "Tax", "Amount", "FullText"]
     for docResult in docResults:
         for fieldName, fieldValue in sorted(docResult["fields"].items()):
-            valueFields = list(filter(lambda item: ("value" in item[0]) and ("valueString" not in item[0]), fieldValue.items()))
-            invoiceResult[fieldName] = fieldValue["text"]
-            if len(valueFields) == 1:
-                print("{0:26} : {1:50}      NORMALIZED VALUE: {2}".format(fieldName , fieldValue["text"], valueFields[0][1]))
-                invoiceResult[fieldName + "_normalized"] = valueFields[0][1]
+            if fieldName != "Items":
+                valueFields = list(filter(lambda item: ("value" in item[0]) and ("valueString" not in item[0]), fieldValue.items()))
+                invoiceResult[fieldName] = fieldValue["text"]
+                if len(valueFields) == 1:
+                    print("{0:26} : {1:50}      NORMALIZED VALUE: {2}".format(fieldName , fieldValue["text"], valueFields[0][1]))
+                    invoiceResult[fieldName + "_normalized"] = valueFields[0][1]
+                else:
+                    print("{0:26} : {1}".format(fieldName , fieldValue["text"]))
             else:
-                print("{0:26} : {1}".format(fieldName , fieldValue["text"]))
+                for item in fieldValue["valueArray"]:
+                    itemValue = {}
+                    itemValue["FullText"] = item["text"]
+                    if "valueObject" in item:
+                        for lineDetailName, lineDetailValue in sorted(item["valueObject"].items()):
+                            itemValue[lineDetailName] = lineDetailValue["text"]
+                            
+                    lineItems.append(itemValue)
+                   
+    if lineItems:
+        lineItemsPretty = []
+        presentHeaders = list(set(val for dic in lineItems for val in dic.keys()))
+        sortedheaders = [x for x in lineItemsHeadersOrder if x in presentHeaders]
+        
+        #Fill values with empty values to sort columns correctly by tabulate
+        for item in lineItems:
+            itemValue = {}
+            for header in sortedheaders:
+                if (header in item):
+                    itemValue[header] = item[header]
+                else:
+                    itemValue[header] = ""
+
+            lineItemsPretty.append(itemValue)
+        
+        print("")
+        print("Line Items:")
+        print(tabulate(lineItemsPretty, headers="keys", showindex=True, tablefmt = "pretty"))
+        
     print("")
     return invoiceResult
 
