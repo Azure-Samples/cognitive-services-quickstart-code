@@ -79,7 +79,7 @@ namespace FaceQuickstart
             const string RECOGNITION_MODEL4 = RecognitionModel.Recognition04;
             // </snippet_detect_models>
 
-			// <snippet_maincalls>
+	    // <snippet_maincalls>
             // Authenticate.
             IFaceClient client = Authenticate(ENDPOINT, SUBSCRIPTION_KEY);
             // </snippet_client>
@@ -97,9 +97,9 @@ namespace FaceQuickstart
             LargePersonGroup(client, IMAGE_BASE_URL, RECOGNITION_MODEL4).Wait();
             // Group faces - automatically group similar faces.
             Group(client, IMAGE_BASE_URL, RECOGNITION_MODEL4).Wait();
-            // FaceList - create a face list, then get data
             // </snippet_maincalls>
 
+            // FaceList - create a face list, then get data
             FaceListOperations(client, IMAGE_BASE_URL).Wait();
             // Large FaceList - create a large face list, then get data
             LargeFaceListOperations(client, IMAGE_BASE_URL).Wait();
