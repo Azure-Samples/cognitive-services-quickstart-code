@@ -13,14 +13,14 @@ using System.Threading.Tasks;
 class Program
 {
     // <snippet_creds>
-    private static readonly string endpoint = "<your api endpoint>";
-    private static readonly string apiKey = "<your Form Recognizer key>";
+    private static readonly string endpoint = "PASTE_YOUR_FORM_RECOGNIZER_ENDPOINT_HERE";
+    private static readonly string apiKey = "PASTE_YOUR_FORM_RECOGNIZER_SUBSCRIPTION_KEY_HERE";
     private static readonly AzureKeyCredential credential = new AzureKeyCredential(apiKey);
     // </snippet_creds>
 
     // <snippet_urls>
-    private static string trainingDataUrl = "<SAS-URL-of-your-form-folder-in-blob-storage>";
-    private static string formUrl = "<SAS-URL-of-a-form-in-blob-storage>";
+    private static string trainingDataUrl = "PASTE_YOUR_SAS_URL_OF_YOUR_FORM_FOLDER_IN_BLOB_STORAGE_HERE";
+    private static string formUrl = "PASTE_YOUR_FORM_RECOGNIZER_FORM_URL_HERE";
     private static string receiptUrl = "https://docs.microsoft.com/azure/cognitive-services/form-recognizer/media"
     + "/contoso-allinone.jpg";
     // </snippet_urls>
@@ -50,7 +50,7 @@ class Program
     // </snippet_main>
 
     // <snippet_auth>
-    static private FormRecognizerClient AuthenticateClient()
+    private static FormRecognizerClient AuthenticateClient()
     {
         var credential = new AzureKeyCredential(apiKey);
         var client = new FormRecognizerClient(new Uri(endpoint), credential);
@@ -293,7 +293,7 @@ class Program
 
     // <snippet_manage>
     private static async Task ManageModels(
-        FormRecognizerClient trainingClient, string trainingFileUrl)
+        FormTrainingClient trainingClient, string trainingFileUrl)
     {
         // </snippet_manage>
         // <snippet_manage_model_count>

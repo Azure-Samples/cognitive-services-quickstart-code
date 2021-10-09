@@ -34,14 +34,14 @@ public class Predict {
             // Values to modify.
 
             // YOUR-APP-ID: The App ID GUID found on the www.luis.ai Application Settings page.
-            String AppId = "YOUR-APP-ID";
+            String AppId = "PASTE_YOUR_LUIS_APP_ID_HERE";
 
             // YOUR-PREDICTION-KEY: Your LUIS authoring key, 32 character value.
-            String Key = "YOUR-PREDICTION-KEY";
+            String Key = "PASTE_YOUR_LUIS_PREDICTION_SUBSCRIPTION_KEY_HERE";
 
             // YOUR-PREDICTION-ENDPOINT: Replace this with your authoring key endpoint.
             // For example, "https://westus.api.cognitive.microsoft.com/"
-            String Endpoint = "https://YOUR-PREDICTION-ENDPOINT/";
+            String Endpoint = "PASTE_YOUR_LUIS_PREDICTION_ENDPOINT_HERE";
 
             // The utterance you want to use.
             String Utterance = "I want two large pepperoni pizzas on thin crust please";

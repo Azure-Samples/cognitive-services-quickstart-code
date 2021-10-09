@@ -12,9 +12,8 @@ import (
 )
 
 func main() {
-	// Add FACE_SUBSCRIPTION_KEY and FACE_ENDPOINT to your environment variables.
-	subscriptionKey := os.Getenv("FACE_SUBSCRIPTION_KEY")
-	endpoint := os.Getenv("FACE_ENDPOINT")
+	subscriptionKey := "PASTE_YOUR_FACE_SUBSCRIPTION_KEY_HERE"
+	endpoint := "PASTE_YOUR_FACE_ENDPOINT_HERE"
 
     const imageUrl =
       "https://upload.wikimedia.org/wikipedia/commons/c/c3/RH_Louise_Lillian_Gish.jpg"

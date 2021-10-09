@@ -11,16 +11,13 @@ const LUIS_Prediction = require("@azure/cognitiveservices-luis-runtime");
 const quickstart = async () => {
 
     // <VariablesYouChange>
-    const authoringKey = 'REPLACE-WITH-YOUR-ASSIGNED-AUTHORING-KEY';
+    const authoringKey = 'PASTE_YOUR_LUIS_AUTHORING_SUBSCRIPTION_KEY_HERE';
 
-    const authoringResourceName = "REPLACE-WITH-YOUR-AUTHORING-RESOURCE-NAME";
-    const predictionResourceName = "REPLACE-WITH-YOUR-PREDICTION-RESOURCE-NAME";
+    const authoringEndpoint = "PASTE_YOUR_LUIS_AUTHORING_ENDPOINT_HERE";
+    const predictionEndpoint = "PASTE_YOUR_LUIS_PREDICTION_ENDPOINT_HERE";
     // </VariablesYouChange>
 
     // <VariablesYouDontNeedToChangeChange>
-    const authoringEndpoint = `https://${authoringResourceName}.cognitiveservices.azure.com/`;
-    const predictionEndpoint = `https://${predictionResourceName}.cognitiveservices.azure.com/`;
-
     const appName = "Contoso Pizza Company";
     const versionId = "0.1";
     const intentName = "OrderPizzaIntent";

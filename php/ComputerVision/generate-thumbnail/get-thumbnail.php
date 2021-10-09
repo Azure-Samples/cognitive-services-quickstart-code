@@ -5,12 +5,8 @@
 <body>
 <?php
 // Replace <Subscription Key> with a valid subscription key.
-$ocpApimSubscriptionKey = '<Subscription Key>';
-
-// You must use the same location in your REST call as you used to obtain
-// your subscription keys. For example, if you obtained your subscription keys
-// from westus, replace "westcentralus" in the URL below with "westus".
-$uriBase = 'https://westcentralus.api.cognitive.microsoft.com/vision/v2.0/';
+$ocpApimSubscriptionKey = 'PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE';
+$uriBase = 'PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE' + 'vision/v3.1/';
 
 $imageUrl =
     'https://upload.wikimedia.org/wikipedia/commons/9/94/Bloodhound_Puppy.jpg';

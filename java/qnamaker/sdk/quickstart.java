@@ -52,7 +52,7 @@ public class Quickstart {
 * The value of `runtime_endpoint` has the format https://YOUR-RESOURCE-NAME.azurewebsites.net.
 */
 	// <resourceKeys>
-    private static String authoring_key = "PASTE_YOUR_QNA_MAKER_SUBSCRIPTION_KEY_HERE";
+    private static String authoring_key = "PASTE_YOUR_QNA_MAKER_AUTHORING_SUBSCRIPTION_KEY_HERE";
 	private static String authoring_endpoint = "PASTE_YOUR_QNA_MAKER_AUTHORING_ENDPOINT_HERE";
 	private static String runtime_endpoint = "PASTE_YOUR_QNA_MAKER_RUNTIME_ENDPOINT_HERE";
 	// </resourceKeys>

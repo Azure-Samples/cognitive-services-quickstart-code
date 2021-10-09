@@ -21,14 +21,14 @@ namespace AddUtterances
         // Values to modify.
 
         // YOUR-APP-ID: The App ID GUID found on the www.luis.ai Application Settings page.
-        static string appID = "YOUR-APP-ID";
+        static string appID = "PASTE_YOUR_LUIS_APP_ID_HERE";
 
         // YOUR-AUTHORING-KEY: Your LUIS authoring key, 32 character value.
-        static string authoringKey = "YOUR-AUTHORING-KEY";
+        static string authoringKey = "PASTE_YOUR_LUIS_AUTHORING_SUBSCRIPTION_KEY_HERE";
 
         // YOUR-AUTHORING-ENDPOINT: Replace this endpoint with your authoring key endpoint.
         // For example, "https://your-resource-name.cognitiveservices.azure.com/"
-        static string authoringEndpoint = "https://YOUR-AUTHORING-ENDPOINT/";
+        static string authoringEndpoint = "PASTE_YOUR_LUIS_AUTHORING_ENDPOINT_HERE";
 
         // NOTE: Replace this your version number.
         static string appVersion = "0.1";

@@ -15,8 +15,8 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             // <AuthoringAuthorization>
-            string subscriptionKey = Environment.GetEnvironmentVariable("QNA_MAKER_SUBSCRIPTION_KEY");
-            string endpoint = Environment.GetEnvironmentVariable("QNA_MAKER_ENDPOINT");
+            string subscriptionKey = "PASTE_YOUR_QNA_MAKER_AUTHORING_SUBSCRIPTION_KEY_HERE";
+            string endpoint = "PASTE_YOUR_QNA_MAKER_AUTHORING_ENDPOINT_HERE";
 
             // set tryPreview to 'true' for QnAMakerV2 resources
             bool tryPreview = false;  
@@ -26,7 +26,7 @@ namespace ConsoleApp1
             // </AuthoringAuthorization>
 
             // <RuntimeAuthorization>
-            string runtimeEndpoint = Environment.GetEnvironmentVariable("QNA_MAKER_RUNTIME_ENDPOINT");
+            string runtimeEndpoint = "PASTE_YOUR_QNA_MAKER_RUNTIME_ENDPOINT_HERE";
             if (tryPreview)
             {
                 runtimeEndpoint = endpoint;

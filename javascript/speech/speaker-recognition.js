@@ -21,17 +21,8 @@ https://github.com/Azure-Samples/cognitive-services-speech-sdk/tree/fa6428a08377
 */
 const identify_file = "aboutSpeechSdk.wav";
 
-const key_var = 'SPEECH_SUBSCRIPTION_KEY';
-if (!process.env[key_var]) {
-    throw new Error('please set/export the following environment variable: ' + key_var);
-}
-var subscription_key = process.env[key_var];
-
-const region_var = 'SPEECH_REGION';
-if (!process.env[region_var]) {
-    throw new Error('please set/export the following environment variable: ' + region_var);
-}
-var region = process.env[region_var];
+var subscription_key = 'PASTE_YOUR_SPEECH_SUBSCRIPTION_KEY_HERE';
+var region = 'PASTE_YOUR_SPEECH_ENDPOINT_REGION_HERE';
 
 const ticks_per_second = 10000000;
 // </dependencies>

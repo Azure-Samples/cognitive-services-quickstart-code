@@ -38,12 +38,8 @@ var personalizerContext context.Context
 
 func main() {
 
-	// Add your subscription key to your environment variables
-	personalizerKey := os.Getenv("PERSONALIZER_SUBSCRIPTION_KEY")
-
-	// Add your endpoint to your environment variables
-	// Replace <your-resource-name> in https://<your-resource-name>.api.cognitive.microsoft.com/
-	personalizerEndpoint := os.Getenv("PERSONALIZER_ENDPOINT")
+	personalizerKey := "PASTE_YOUR_PERSONALIZER_SUBSCRIPTION_KEY_HERE"
+	personalizerEndpoint := "PASTE_YOUR_PERSONALIZER_ENDPOINT_HERE"
 
 	personalizerClient := personalizer.New(personalizerEndpoint);
 	personalizerClient.Authorizer = autorest.NewCognitiveServicesAuthorizer(personalizerKey)

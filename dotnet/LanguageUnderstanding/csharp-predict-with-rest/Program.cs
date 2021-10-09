@@ -16,13 +16,13 @@ namespace predict_with_rest
             // Values to modify.
 
             // YOUR-APP-ID: The App ID GUID found on the www.luis.ai Application Settings page.
-            var appId = "YOUR-APP-ID";
+            var appId = "PASTE_YOUR_LUIS_APP_ID_HERE";
 
             // YOUR-PREDICTION-KEY: 32 character key.
-            var predictionKey = "YOUR-PREDICTION-KEY";
+            var predictionKey = "PASTE_YOUR_LUIS_PREDICTION_SUBSCRIPTION_KEY_HERE";
 
             // YOUR-PREDICTION-ENDPOINT: Example is "https://westus.api.cognitive.microsoft.com/"
-            var predictionEndpoint = "https://YOUR-PREDICTION-ENDPOINT/";
+            var predictionEndpoint = "PASTE_YOUR_LUIS_PREDICTION_ENDPOINT_HERE";
 
             // An utterance to test the pizza app.
             var utterance = "I want two large pepperoni pizzas on thin crust please";
@@ -46,10 +46,10 @@ namespace predict_with_rest
             queryString["query"] = utterance;
 
             // These optional request parameters are set to their default values
-            queryString["verbose"] = "true";
-            queryString["show-all-intents"] = "true";
-            queryString["staging"] = "false";
-            queryString["timezoneOffset"] = "0";
+            // queryString["verbose"] = "true";
+            // queryString["show-all-intents"] = "true";
+            // queryString["staging"] = "false";
+            // queryString["timezoneOffset"] = "0";
 
             var predictionEndpointUri = String.Format("{0}luis/prediction/v3.0/apps/{1}/slots/production/predict?{2}", predictionEndpoint, appId, queryString);
 

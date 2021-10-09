@@ -23,9 +23,8 @@ const LUIS = require("@azure/cognitiveservices-luis-runtime");
 // </Dependencies>
 
 // <Variables>
-const key = "REPLACE-WITH-YOUR-ASSIGNED-PREDICTION-KEY"
-
-const endpoint = "https://REPLACE-WITH-YOUR-RESOURCE-NAME.cognitiveservices.azure.com"
+const key = "PASTE_YOUR_LUIS_PREDICTION_SUBSCRIPTION_KEY_HERE"
+const endpoint = "PASTE_YOUR_LUIS_PREDICTION_ENDPOINT_HERE"
 // </Variables>
 
 // <AuthoringCreateClient>

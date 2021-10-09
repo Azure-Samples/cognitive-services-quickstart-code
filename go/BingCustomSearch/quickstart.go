@@ -10,14 +10,8 @@ import (
 )
 
 func main() {
-	if "" == os.Getenv("CUSTOM_SEARCH_SUBSCRIPTION_KEY") {
-		log.Fatal("Please set/export the environment variable CUSTOM_SEARCH_SUBSCRIPTION_KEY.")
-	}
-	var subscription_key string = os.Getenv("CUSTOM_SEARCH_SUBSCRIPTION_KEY")
-	if "" == os.Getenv("CUSTOM_SEARCH_INSTANCE_ID") {
-		log.Fatal("Please set/export the environment variable CUSTOM_SEARCH_INSTANCE_ID.")
-	}
-	var search_instance_id string = os.Getenv("CUSTOM_SEARCH_INSTANCE_ID")
+	var subscription_key string = "PASTE_YOUR_CUSTOM_SEARCH_SUBSCRIPTION_KEY_HERE"
+	var search_instance_id string = "PASTE_YOUR_CUSTOM_SEARCH_INSTANCE_ID_HERE"
 
 	// Get the context, which is required by the SDK methods.
 	ctx := context.Background()

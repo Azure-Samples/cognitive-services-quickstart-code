@@ -22,19 +22,6 @@ import (
  * - Query knowledge base.
  */
 
-/*
- * Configure the local environment:
- *   Set the following environment variables on your local machine using the
- *   appropriate method for your preferred shell (Bash, PowerShell, Command Prompt, etc.).
- *
- *   QNAMAKER_AUTHORING_KEY
- *   QNAMAKER_AUTHORING_ENDPOINT
- *   QNAMAKER_RESOURCE_NAME
- *
- * If the environment variable is created after the application is launched in a console or with Visual
- * Studio, the shell (or Visual Studio) needs to be closed and reloaded for the environment variable to take effect.
- */
-
  // <snippet_response_structure>
  /// Represents the HTTP response returned by an HTTP request.
  type Response struct {
@@ -47,13 +34,11 @@ import (
 // <snippet_main>
 func main() {
 
-	var authoring_key string = os.Getenv("QNAMAKER_AUTHORING_KEY")
+	var authoring_key string = "PASTE_YOUR_QNA_MAKER_AUTHORING_SUBSCRIPTION_KEY_HERE"
 
-	// example - "MY-RESOURCE_NAME"
-	var resource_name string =  os.Getenv("QNAMAKER_RESOURCE_NAME")
+	var authoring_endpoint string = "PASTE_YOUR_QNA_MAKER_AUTHORING_ENDPOINT_HERE"
 
-	// example: "https://MY-RESOURCE_NAME.cognitiveservices.azure.com/"
-	var authoring_endpoint string = os.Getenv("QNAMAKER_AUTHORING_ENDPOINT")
+	var runtimeEndpoint string =  "PASTE_YOUR_QNA_MAKER_RUNTIME_ENDPOINT_HERE"
 
 	var service string = "qnamaker/v4.0"
 
@@ -69,7 +54,7 @@ func main() {
 	fmt.Println("endpointKey = " + endpointKey)
 
 	// 4) Query published knowledge base
-	queryEndpoint(resource_name, endpointKey, knowledgeBaseID)
+	queryEndpoint(runtimeEndpoint, endpointKey, knowledgeBaseID)
 }
 // </snippet_main>
 
@@ -242,10 +227,10 @@ func getPublishedEndpoint(service string, authoring_key string, authoring_endpoi
 
 // <snippet_query>
 // query runtime instead of authoring
-func queryEndpoint(resourceName string, endpoint_key string, knowledgeBaseId string){
+func queryEndpoint(runtimeEndpoint string, endpoint_key string, knowledgeBaseId string){
 
 	var authoring = false
-	var uri string = "https://" + resourceName + ".azurewebsites.net/qnamaker/knowledgebases/" + knowledgeBaseId + "/generateAnswer";
+	var uri string = runtimeEndpoint + "/qnamaker/knowledgebases/" + knowledgeBaseId + "/generateAnswer";
 
 	var question string = `{'question': 'Is the QnA Maker Service free?','top': 3}`;
 

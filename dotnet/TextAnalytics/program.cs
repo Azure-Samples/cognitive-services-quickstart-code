@@ -7,8 +7,8 @@ namespace TextAnalyticsQuickstart
 {
     class Program
     {
-        private static readonly AzureKeyCredential credentials = new AzureKeyCredential("<replace-with-your-text-analytics-key-here>");
-        private static readonly Uri endpoint = new Uri("<replace-with-your-text-analytics-endpoint-here>");
+        private static readonly AzureKeyCredential credentials = new AzureKeyCredential("PASTE_YOUR_TEXT_ANALYTICS_SUBSCRIPTION_KEY_HERE");
+        private static readonly Uri endpoint = new Uri("PASTE_YOUR_TEXT_ANALYTICS_ENDPOINT_HERE");
 
         static void Main(string[] args)
         {

@@ -10,7 +10,6 @@ In this quickstart, you will analyze a locally stored image to extract visual fe
 * Once you have your Azure subscription, <a href="https://portal.azure.com/#create/Microsoft.CognitiveServicesComputerVision"  title="Create a Computer Vision resource"  target="_blank">create a Computer Vision resource <span class="docon docon-navigate-external x-hidden-focus"></span></a> in the Azure portal to get your key and endpoint. After it deploys, click **Go to resource**.
     * You will need the key and endpoint from the resource you create to connect your application to the Computer Vision service. You'll paste your key and endpoint into the code below later in the quickstart.
     * You can use the free pricing tier (`F0`) to try the service, and upgrade later to a paid tier for production.
-* [Create environment variables](../../cognitive-services-apis-create-account.md#configure-an-environment-variable-for-authentication) for the key and endpoint URL, named `COMPUTER_VISION_SUBSCRIPTION_KEY` and `COMPUTER_VISION_ENDPOINT`, respectively.
 
 ## Create and run the sample application
 
@@ -22,6 +21,7 @@ To create the sample in Visual Studio, do the following steps:
     1. Click the **Browse** tab, and in the **Search** box type "Newtonsoft.Json" (if it is not already displayed).
     1. Select **Newtonsoft.Json**, then click the checkbox next to your project name, and **Install**.
 1. Copy/paste the sample code snippet below, into your Program.cs file. Adjust the namespace name if it's different from the one you created.
+1. Replace the values of `subscriptionKey` and `endpoint` with your Computer Vision subscription key and endpoint.
 1. Add an image of your choosing to your bin/debug/netcoreappX.X folder, then add the image name (with extension) to the 'imageFilePath' variable.
 1. Run the program.
 
@@ -37,10 +37,9 @@ namespace CSHttpClientSample
 {
     static class Program
     {
-        // Add your Computer Vision subscription key and endpoint to your environment variables.
-        static string subscriptionKey = Environment.GetEnvironmentVariable("COMPUTER_VISION_SUBSCRIPTION_KEY");
-
-        static string endpoint = Environment.GetEnvironmentVariable("COMPUTER_VISION_ENDPOINT");
+        // Add your Computer Vision subscription key and base endpoint.
+        static string subscriptionKey = "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE";
+        static string endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE";
         
         // the Analyze method endpoint
         static string uriBase = endpoint + "vision/v3.1/analyze";

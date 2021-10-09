@@ -26,9 +26,10 @@ namespace BingSpellCheckQuickstart
 			string query = "bill Gatas was ehre"; // Bill Gates was here
 
 			// Authenticate
-			// Add your subscription key to your environment variables
+			string key = "PASTE_YOUR_SPELL_CHECK_SUBSCRIPTION_KEY_HERE";
+
 			var client = new SpellCheckClient(
-				new ApiKeyServiceClientCredentials(Environment.GetEnvironmentVariable("BING_SPELL_CHECK_SUBSCRIPTION_KEY")));
+				new ApiKeyServiceClientCredentials(key));
 
 			// Call API to check spelling of query
 			checkSpelling(client, query).Wait();

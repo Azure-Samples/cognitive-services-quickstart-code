@@ -21,16 +21,13 @@ namespace MlEntitySample
         public static async Task Main()
         {
             // <VariablesYouChange>
-            var key = "REPLACE-WITH-YOUR-AUTHORING-KEY";
+            var key = "PASTE_YOUR_LUIS_AUTHORING_SUBSCRIPTION_KEY_HERE";
 
-            var authoringResourceName = "REPLACE-WITH-YOUR-AUTHORING-RESOURCE-NAME";
-            var predictionResourceName = "REPLACE-WITH-YOUR-PREDICTION-RESOURCE-NAME";
+            var authoringEndpoint = "PASTE_YOUR_LUIS_AUTHORING_ENDPOINT_HERE";
+            var predictionEndpoint = "PASTE_YOUR_LUIS_PREDICTION_ENDPOINT_HERE";
             // </VariablesYouChange>
 
             // <VariablesYouDontNeedToChangeChange>
-            var authoringEndpoint = String.Format("https://{0}.cognitiveservices.azure.com/", authoringResourceName);
-            var predictionEndpoint = String.Format("https://{0}.cognitiveservices.azure.com/", predictionResourceName);
-
             var appName = "Contoso Pizza Company";
             var versionId = "0.1";
             var intentName = "OrderPizzaIntent";

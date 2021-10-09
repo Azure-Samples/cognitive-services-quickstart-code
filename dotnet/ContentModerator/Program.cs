@@ -46,9 +46,9 @@ namespace ContentModeratorQuickstart
 		// AUTHENTICATION - ALL EXAMPLES
 		// <snippet_creds>
 		// Your Content Moderator subscription key is found in your Azure portal resource on the 'Keys' page.
-		private static readonly string SubscriptionKey = "CONTENT_MODERATOR_SUBSCRIPTION_KEY";
+		private static readonly string SubscriptionKey = "PASTE_YOUR_CONTENT_MODERATOR_SUBSCRIPTION_KEY_HERE";
 		// Base endpoint URL. Found on 'Overview' page in Azure resource. For example: https://westus.api.cognitive.microsoft.com
-		private static readonly string Endpoint = "CONTENT_MODERATOR_ENDPOINT";
+		private static readonly string Endpoint = "PASTE_YOUR_CONTENT_MODERATOR_ENDPOINT_HERE";
 		// </snippet_creds>
 
 		// <snippet_image_vars>

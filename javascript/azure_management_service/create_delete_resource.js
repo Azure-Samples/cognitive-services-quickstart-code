@@ -2,12 +2,10 @@
 "use strict";
 
 /* To run this sample, install the following modules.
- * npm install @azure/arm-cognitiveservices
- * npm install @azure/ms-rest-js
- * npm install @azure/ms-rest-nodeauth
+ * npm install @azure/arm-cognitiveservices @azure/identity
  */
 var Arm = require("@azure/arm-cognitiveservices");
-var msRestNodeAuth = require("@azure/ms-rest-nodeauth");
+var Identity = require("@azure/identity");
 // </snippet_imports>
 
 /*
@@ -83,11 +81,11 @@ async function list_resources (client) {
 // </snippet_list>
 
 // <snippet_create>
-async function create_resource (client, resource_name, kind, sku_name, location) {
+async function create_resource (client, resource_name, resource_kind, resource_sku, resource_region) {
 	console.log ("Creating resource: " + resource_name + "...");
 /* NOTE If you do not want to use a custom subdomain name, remove the customSubDomainName
 property from the properties object. */
-	var parameters = { sku : { name: sku_name }, kind : kind, location : location, properties : { customSubDomainName : subdomain_name } };
+	var parameters = { sku : { name: resource_sku }, kind : resource_kind, location : resource_region, properties : { customSubDomainName : subdomain_name } };
     return client.create(resource_group_name, resource_name, parameters)
         .then((result) => {
 			console.log("Resource created.");
@@ -111,27 +109,51 @@ async function delete_resource (client, resource_name) {
 }
 // </snippet_delete>
 
+// <snippet_purge>
+async function purge_resource (client, resource_name, resource_region) {
+	console.log ("Purging resource: " + resource_name + "...");
+	await client.purge (resource_region, resource_group_name, resource_name)
+	console.log ("Resource purged.");
+	console.log ();
+}
+// </snippet_purge>
+
 // <snippet_main_auth>
 async function quickstart() {
-	const credentials = await msRestNodeAuth.loginWithServicePrincipalSecret (service_principal_application_id, service_principal_secret, tenant_id);
+/* For more information see:
+https://www.npmjs.com/package/@azure/arm-cognitiveservices/v/6.0.0
+https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-a-service-principal-with-a-client-secret
+*/
+	const credentials = new Identity.ClientSecretCredential(tenant_id, service_principal_application_id, service_principal_secret);
 	const client = new Arm.CognitiveServicesManagementClient (credentials, subscription_id);
 	// Note Azure resources are also sometimes referred to as accounts.
 	const accounts_client = new Arm.Accounts (client);
 	const resource_skus_client = new Arm.ResourceSkus (client);
+	const deleted_accounts_client = new Arm.DeletedAccounts (client);
 	// </snippet_main_auth>
 
 	// <snippet_main_calls>
-// Uncomment this to list all available resource kinds, SKUs, and locations for your Azure account.
+	const resource_name = "test_resource";
+	const resource_kind = "TextTranslation";
+	const resource_sku = "F0";
+	const resource_region = "Global";
+
+	// Uncomment to list all available resource kinds, SKUs, and locations for your Azure account.
 //	await list_available_kinds_skus_locations (resource_skus_client);
 
-// Create a resource with kind Text Translation, SKU F0 (free tier), location global.
-	await create_resource (accounts_client, "test_resource", "TextTranslation", "F0", "Global");
+	// Create a resource with kind Text Translation, SKU F0 (free tier), location global.
+	await create_resource (accounts_client, resource_name, resource_kind, resource_sku, resource_region);
 
-// List all resources for your Azure account.
-	await list_resources (accounts_client);
+	// Uncomment to list all resources for your Azure account.
+//	await list_resources (accounts_client);
 
-// Delete the resource.
-	await delete_resource (accounts_client, "test_resource");
+	// Delete the resource.
+	await delete_resource (accounts_client, resource_name);
+
+	/* NOTE: When you delete a resource, it is only soft-deleted. You must also purge it. Otherwise, if you try to create another
+	resource with the same name or custom subdomain, you will receive an error stating that such a resource already exists. */
+	// Purge the resource.
+	await purge_resource(deleted_accounts_client, resource_name, resource_region);
 }
 // </snippet_main_calls>
 

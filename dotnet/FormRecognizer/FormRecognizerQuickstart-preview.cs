@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 // </snippet_using>
 class Program {
   // <snippet_creds>
-  private static readonly string endpoint = "<your api endpoint>";
-  private static readonly string apiKey = "<your Form Recognizer key>";
+  private static readonly string endpoint = "PASTE_YOUR_FORM_RECOGNIZER_ENDPOINT_HERE";
+  private static readonly string apiKey = "PASTE_YOUR_FORM_RECOGNIZER_SUBSCRIPTION_KEY_HERE";
   private static readonly AzureKeyCredential credential = new AzureKeyCredential(apiKey);
   // </snippet_creds>
   // <snippet_urls>
-  string trainingDataUrl = "<SAS-URL-of-your-form-folder-in-blob-storage>";
-  string formUrl = "<SAS-URL-of-a-form-in-blob-storage>";
+  string trainingDataUrl = "PASTE_YOUR_SAS_URL_OF_YOUR_FORM_FOLDER_IN_BLOB_STORAGE_HERE";
+  string formUrl = "PASTE_YOUR_FORM_RECOGNIZER_FORM_URL_HERE";
   string receiptUrl = "https://docs.microsoft.com/azure/cognitive-services/form-recognizer/media" + "/contoso-allinone.jpg";
   string bcUrl = "https://raw.githubusercontent.com/Azure/azure-sdk-for-python/master/sdk/formrecognizer/azure-ai-formrecognizer/samples/sample_forms/business_cards/business-card-english.jpg";
   string invoiceUrl = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-REST-api-samples/master/curl/form-recognizer/simple-invoice.png";

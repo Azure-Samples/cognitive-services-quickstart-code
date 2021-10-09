@@ -15,13 +15,13 @@ namespace FormRecognizerQuickStart
     {
         // <snippet_variables>
         // // Add your Azure Form Recognizer subscription key and endpoint to your environment variables.
-        private static string subscriptionKey = Environment.GetEnvironmentVariable("FORM_RECOGNIZER_SUBSCRIPTION_KEY");
-        private static string formRecognizerEndpoint = Environment.GetEnvironmentVariable("FORM_RECOGNIZER_ENDPOINT");
+        private static string subscriptionKey = "PASTE_YOUR_FORM_RECOGNIZER_SUBSCRIPTION_KEY_HERE";
+        private static string formRecognizerEndpoint = "PASTE_YOUR_FORM_RECOGNIZER_ENDPOINT_HERE";
 
         // SAS Url to Azure Blob Storage container; this used for training the custom model
         // For help using SAS see: 
         // https://docs.microsoft.com/en-us/azure/storage/common/storage-dotnet-shared-access-signature-part-1
-        private const string trainingDataUrl = "<AzureBlobSaS>";
+        private const string trainingDataUrl = "PASTE_YOUR_SAS_URL_OF_YOUR_FORM_FOLDER_IN_BLOB_STORAGE_HERE";
 
         // Local path to a form to be analyzed
         // Any one or all of file formats (pdf,jpg or png)can be used with a trained model. 

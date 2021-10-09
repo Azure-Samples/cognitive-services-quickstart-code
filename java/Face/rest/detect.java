@@ -23,8 +23,8 @@ import org.json.JSONObject;
  *   java -cp .;lib\* Detect
  */
 public class Detect {
-	private static final String subscriptionKey = System.getenv("FACE_SUBSCRIPTION_KEY");
-	private static final String endpoint = System.getenv("FACE_ENDPOINT");
+	private static final String subscriptionKey = "PASTE_YOUR_FACE_SUBSCRIPTION_KEY_HERE";
+	private static final String endpoint = "PASTE_YOUR_FACE_ENDPOINT_HERE";
 
     private static final String imageWithFaces =
         "{\"url\":\"https://upload.wikimedia.org/wikipedia/commons/c/c3/RH_Louise_Lillian_Gish.jpg\"}";

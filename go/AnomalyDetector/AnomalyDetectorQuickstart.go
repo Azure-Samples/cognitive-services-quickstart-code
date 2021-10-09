@@ -36,8 +36,8 @@ References:
 	API: https://westus2.dev.cognitive.microsoft.com/docs/services/AnomalyDetector/operations/post-timeseries-entire-detect
 */
 
-var key  = os.Getenv("ANOMALY_DETECTOR_SUBSCRIPTION_KEY")
-var endpoint = os.Getenv("ANOMALY_DETECTOR_ENDPOINT")
+var key = "PASTE_YOUR_ANOMALY_DETECTOR_SUBSCRIPTION_KEY_HERE"
+var endpoint = "PASTE_YOUR_ANOMALY_DETECTOR_ENDPOINT_HERE"
 // Spreadsheet data that will be converted to a series of points
 var filePath = "./request-data.csv"
 
