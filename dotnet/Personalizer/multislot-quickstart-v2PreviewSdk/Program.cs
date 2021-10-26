@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 
-namespace MultiSlotQuickstartMultiSlotSdkV2
+namespace PersonalizerExampleMultiSlotSdkV2
 {
     class Program
     {

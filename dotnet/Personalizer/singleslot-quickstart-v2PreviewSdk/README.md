@@ -6,7 +6,7 @@ This interactive sample takes the time of day and the users's taste preference a
 
 ## Prerequisites
 
-The solution is a C# .NET Core console app project, so you will need [.NET 5.0](https://dotnet.microsoft.com/download/dotnet/5.0), and [Visual Studio 2019](https://visualstudio.microsoft.com/vs/).
+The solution is a C# .NET console app project, so you will need [.NET 5.0](https://dotnet.microsoft.com/download/dotnet/5.0), and [Visual Studio 2019](https://visualstudio.microsoft.com/vs/).
 
 ## Set up the sample
 
