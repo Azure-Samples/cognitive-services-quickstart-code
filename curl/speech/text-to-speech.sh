@@ -4,7 +4,7 @@ curl --location --request POST 'https://INSERT_REGION_HERE.tts.speech.microsoft.
 --header 'X-Microsoft-OutputFormat: audio-16khz-128kbitrate-mono-mp3' \
 --header 'User-Agent: curl' \
 --data-raw '<speak version='\''1.0'\'' xml:lang='\''en-US'\''>
-    <voice xml:lang='\''en-US'\'' xml:gender='\''Female'\'' name='\''en-US-AriaRUS'\''>
+    <voice xml:lang='\''en-US'\'' xml:gender='\''Female'\'' name='\''en-US-JennyNeural'\''>
         my voice is my passport verify me
     </voice>
-</speak>' > output.wav
+</speak>' > output.mp3
