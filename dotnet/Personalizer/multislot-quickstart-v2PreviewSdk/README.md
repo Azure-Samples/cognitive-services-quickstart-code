@@ -8,7 +8,7 @@ This sample asks for the time of day and device type to determine which items to
 
 ## Prerequisites
 
-The solution is a C# .NET Core console app project, so you will need [.NET Core 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1), and [Visual Studio 2019](https://visualstudio.microsoft.com/vs/) or [.NET Core CLI](https://docs.microsoft.com/en-us/dotnet/core/tools/).
+The solution is a C# .NET console app project, so you will need [.NET 5.0](https://dotnet.microsoft.com/download/dotnet/5.0), and [Visual Studio 2019](https://visualstudio.microsoft.com/vs/).
 
 ## Upgrade Persoanlizer instance to multi-slot
 
@@ -22,7 +22,7 @@ The solution is a C# .NET Core console app project, so you will need [.NET Core 
     git clone https://github.com/Azure-Samples/cognitive-services-quickstart-code.git
     ```
 
-- Navigate to _dotnet/Personalizer/multislot-quickstart_.
+- Navigate to _dotnet/Personalizer/multislot-quickstart-v2PreviewSdk_.
 
 
 ## Set up Azure Personalizer Service
