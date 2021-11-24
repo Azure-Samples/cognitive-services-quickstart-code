@@ -158,7 +158,8 @@ namespace FaceQuickstart
                         returnFaceAttributes: new List<FaceAttributeType> { FaceAttributeType.Accessories, FaceAttributeType.Age,
                         FaceAttributeType.Blur, FaceAttributeType.Emotion, FaceAttributeType.Exposure, FaceAttributeType.FacialHair,
                         FaceAttributeType.Gender, FaceAttributeType.Glasses, FaceAttributeType.Hair, FaceAttributeType.HeadPose,
-                        FaceAttributeType.Makeup, FaceAttributeType.Noise, FaceAttributeType.Occlusion, FaceAttributeType.Smile },
+                        FaceAttributeType.Makeup, FaceAttributeType.Noise, FaceAttributeType.Occlusion, FaceAttributeType.Smile, 
+                        FaceAttributeType.Smile, FaceAttributeType.QualityForRecognition },
                         // We specify detection model 1 because we are retrieving attributes.
                         detectionModel: DetectionModel.Detection01,
                         recognitionModel: recognitionModel);
@@ -230,6 +231,9 @@ namespace FaceQuickstart
                     Console.WriteLine($"Occlusion : {string.Format("EyeOccluded: {0}", face.FaceAttributes.Occlusion.EyeOccluded ? "Yes" : "No")} " +
                         $" {string.Format("ForeheadOccluded: {0}", face.FaceAttributes.Occlusion.ForeheadOccluded ? "Yes" : "No")}   {string.Format("MouthOccluded: {0}", face.FaceAttributes.Occlusion.MouthOccluded ? "Yes" : "No")}");
                     Console.WriteLine($"Smile : {face.FaceAttributes.Smile}");
+                    
+                    // Get quality for recognition attribute
+                    Console.WriteLine($"QualityForRecognition : {face.FaceAttributes.QualityForRecognition}");
                     Console.WriteLine();
                 }
             }
@@ -402,6 +406,25 @@ namespace FaceQuickstart
                 // Add face to the person group person.
                 foreach (var similarImage in personDictionary[groupedFace])
                 {
+                    Console.WriteLine($"Check whether image is of sufficient quality for recognition");
+                    IList<DetectedFace> detectedFaces = await client.Face.DetectWithUrlAsync($"{url}{similarImage}", 
+                        recognitionModel: recognition_model, 
+                        detectionModel: DetectionModel.Detection03,
+                        returnFaceAttributes: new List<FaceAttributeType> { FaceAttributeType.QualityForRecognition });
+                    bool sufficientQuality = true;
+                    foreach (var face in detectedFaces)
+                    {
+                        var faceQualityForRecognition = face.FaceAttributes.QualityForRecognition;
+                        if (faceQualityForRecognition.HasValue && (faceQualityForRecognition.Value != QualityForRecognition.High)){
+                            sufficientQuality = false;
+                            break;
+                        }
+                    }
+
+                    if (!sufficientQuality){
+                        continue;
+                    }
+
                     Console.WriteLine($"Add face to the person group person({groupedFace}) from image `{similarImage}`");
                     PersistedFace face = await client.PersonGroupPerson.AddFaceFromUrlAsync(personGroupId, person.PersonId,
                         $"{url}{similarImage}", similarImage);

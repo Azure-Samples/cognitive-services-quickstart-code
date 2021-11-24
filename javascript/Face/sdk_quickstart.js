@@ -42,7 +42,7 @@ async function DetectFaceExtract() {
 	await Promise.all (image_file_names.map (async function (image_file_name) {
         let detected_faces = await client.face.detectWithUrl(image_base_url + image_file_name,
 			{
-				returnFaceAttributes: ["Accessories","Age","Blur","Emotion","Exposure","FacialHair","Gender","Glasses","Hair","HeadPose","Makeup","Noise","Occlusion","Smile"],
+				returnFaceAttributes: ["Accessories","Age","Blur","Emotion","Exposure","FacialHair","Gender","Glasses","Hair","HeadPose","Makeup","Noise","Occlusion","Smile","QualityForRecognition"],
 				// We specify detection model 1 because we are retrieving attributes.
 				detectionModel: "detection_01"
 			});
@@ -128,6 +128,8 @@ async function DetectFaceExtract() {
 			console.log("  Mouth occluded: " + (face.faceAttributes.occlusion.mouthOccluded ? "Yes" : "No"));
 
 			console.log("Smile: " + face.faceAttributes.smile);
+
+			console.log("QualityForRecognition: " + face.faceAttributes.qualityForRecognition)
 			console.log();
 		});
 	}));
