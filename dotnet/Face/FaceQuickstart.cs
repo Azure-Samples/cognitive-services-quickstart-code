@@ -415,6 +415,7 @@ namespace FaceQuickstart
                     foreach (var face in detectedFaces)
                     {
                         var faceQualityForRecognition = face.FaceAttributes.QualityForRecognition;
+                        //  Only "high" quality images are recommended for person enrollment
                         if (faceQualityForRecognition.HasValue && (faceQualityForRecognition.Value != QualityForRecognition.High)){
                             sufficientQuality = false;
                             break;
@@ -424,6 +425,7 @@ namespace FaceQuickstart
                     if (!sufficientQuality){
                         continue;
                     }
+
 
                     Console.WriteLine($"Add face to the person group person({groupedFace}) from image `{similarImage}`");
                     PersistedFace face = await client.PersonGroupPerson.AddFaceFromUrlAsync(personGroupId, person.PersonId,
