@@ -34,7 +34,7 @@ curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker/verification/v2.0/t
 curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker/verification/v2.0/text-dependent/profiles/INSERT_PROFILE_ID_HERE/enrollments' \
 --header 'Ocp-Apim-Subscription-Key: INSERT_SUBSCRIPTION_KEY_HERE' \
 --header 'Content-Type: audio/wav' \
---data-binary 'INSERT_FILE_PATH_HERE'
+--data-binary @'INSERT_FILE_PATH_HERE'
 # </tdv_enroll>
 
 # <tdv_enroll_response_1>
@@ -70,7 +70,7 @@ curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker/verification/v2.0/t
 curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker/verification/v2.0/text-dependent/profiles/INSERT_PROFILE_ID_HERE/verify' \
 --header 'Ocp-Apim-Subscription-Key: INSERT_SUBSCRIPTION_KEY_HERE' \
 --header 'Content-Type: audio/wav' \
---data-binary 'INSERT_FILE_PATH_HERE'
+--data-binary @'INSERT_FILE_PATH_HERE'
 # </tdv_verify>
 
 # <tdv_verify_response>
@@ -117,7 +117,7 @@ curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker/verification/v2.0/t
 curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker/verification/v2.0/text-independent/profiles/INSERT_PROFILE_ID_HERE/enrollments' \
 --header 'Ocp-Apim-Subscription-Key: INSERT_SUBSCRIPTION_KEY_HERE' \
 --header 'Content-Type: audio/wav' \
---data-binary 'INSERT_FILE_PATH_HERE'
+--data-binary @'INSERT_FILE_PATH_HERE'
 # </tiv_enroll>
 
 # <tiv_enroll_response>
@@ -137,7 +137,7 @@ curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker/verification/v2.0/t
 curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker/verification/v2.0/text-independent/profiles/INSERT_PROFILE_ID_HERE/verify' \
 --header 'Ocp-Apim-Subscription-Key: INSERT_SUBSCRIPTION_KEY_HERE' \
 --header 'Content-Type: audio/wav' \
---data-binary 'INSERT_FILE_PATH_HERE'
+--data-binary @'INSERT_FILE_PATH_HERE'
 # </tiv_verify>
 
 # <tiv_verify_response>
@@ -184,7 +184,7 @@ curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker/identification/v2.0
 curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker/identification/v2.0/text-independent/profiles/INSERT_PROFILE_ID_HERE/enrollments' \
 --header 'Ocp-Apim-Subscription-Key: INSERT_SUBSCRIPTION_KEY_HERE' \
 --header 'Content-Type: audio/wav' \
---data-binary 'INSERT_FILE_PATH_HERE'
+--data-binary @'INSERT_FILE_PATH_HERE'
 # </tii_enroll>
 
 # <tii_enroll_response_1>
@@ -239,7 +239,7 @@ curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker/identification/v2.0
 curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker/identification/v2.0/text-independent/profiles/identifySingleSpeaker?profileIds=INSERT_PROFILE_ID_HERE' \
 --header 'Ocp-Apim-Subscription-Key: INSERT_SUBSCRIPTION_KEY_HERE' \
 --header 'Content-Type: audio/wav' \
---data-binary 'INSERT_FILE_PATH_HERE'
+--data-binary @'INSERT_FILE_PATH_HERE'
 # </tii_identify>
 
 # <tii_identify_response_not_enrolled>
