@@ -44,7 +44,8 @@ async function DetectFaceExtract() {
 			{
 				returnFaceAttributes: ["Accessories","Age","Blur","Emotion","Exposure","FacialHair","Gender","Glasses","Hair","HeadPose","Makeup","Noise","Occlusion","Smile","QualityForRecognition"],
 				// We specify detection model 1 because we are retrieving attributes.
-				detectionModel: "detection_01"
+				detectionModel: "detection_01",
+                recognitionModel: "recognition_03"
 			});
         console.log (detected_faces.length + " face(s) detected from image " + image_file_name + ".");
 		console.log("Face attributes for face(s) in " + image_file_name + ":");
@@ -201,8 +202,25 @@ async function AddFacesToPersonGroup(person_dictionary, person_group_id) {
 
 		// Add faces to the person group person.
 		await Promise.all (value.map (async function (similar_image) {
-			console.log("Add face to the person group person: (" + key + ") from image: " + similar_image + ".");
-			await client.personGroupPerson.addFaceFromUrl(person_group_id, person.personId, image_base_url + similar_image);
+			// Check if the image is of sufficent quality for recognition.
+			let sufficientQuality = true;
+			let detected_faces = await client.face.detectWithUrl(image_base_url + similar_image,
+				{
+					returnFaceAttributes: ["QualityForRecognition"],
+					detectionModel: "detection_03",
+					recognitionModel: "recognition_03"
+				});
+			detected_faces.forEach(detected_face => {
+				if (detected_face.faceAttributes.qualityForRecognition != 'high'){
+					sufficientQuality = false;
+				}
+			});
+
+			// Quality is sufficent, add to group.
+			if (sufficientQuality){
+				console.log("Add face to the person group person: (" + key + ") from image: " + similar_image + ".");
+				await client.personGroupPerson.addFaceFromUrl(person_group_id, person.personId, image_base_url + similar_image);
+			}
 		}));
 	}));
 
