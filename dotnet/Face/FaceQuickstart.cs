@@ -242,6 +242,9 @@ namespace FaceQuickstart
 
         // Detect faces from image url for recognition purpose. This is a helper method for other functions in this quickstart.
         // Parameter `returnFaceId` of `DetectWithUrlAsync` must be set to `true` (by default) for recognition purpose.
+        // Parameter `FaceAttributes` is set to include the QualityForRecognition attribute. 
+        // Recognition model must be set to recognition_03 or recognition_04 as a result.
+        // Result faces with insufficient quality for recognition are filtered out. 
         // The field `faceId` in returned `DetectedFace`s will be used in Face - Find Similar, Face - Verify. and Face - Identify.
         // It will expire 24 hours after the detection call.
         // <snippet_face_detect_recognize>
@@ -249,9 +252,17 @@ namespace FaceQuickstart
         {
             // Detect faces from image URL. Since only recognizing, use the recognition model 1.
             // We use detection model 3 because we are not retrieving attributes.
-            IList<DetectedFace> detectedFaces = await faceClient.Face.DetectWithUrlAsync(url, recognitionModel: recognition_model, detectionModel: DetectionModel.Detection03);
-            Console.WriteLine($"{detectedFaces.Count} face(s) detected from image `{Path.GetFileName(url)}`");
-            return detectedFaces.ToList();
+            IList<DetectedFace> detectedFaces = await faceClient.Face.DetectWithUrlAsync(url, recognitionModel: recognition_model, detectionModel: DetectionModel.Detection03, FaceAttributes: new List<FaceAttributeType> { FaceAttributeType.QualityForRecognition });
+            List<DetectedFace> sufficientQualityFaces = new List<DetectedFace>();
+            foreach (DetectedFace detectedFace in detectedFaces){
+                var faceQualityForRecognition = detectedFace.FaceAttributes.QualityForRecognition;
+                if (faceQualityForRecognition.HasValue && (faceQualityForRecognition.Value >= QualityForRecognition.Medium)){
+                    sufficientQualityFaces.Add(detectedFace);
+                }
+            }
+            Console.WriteLine($"{detectedFaces.Count} face(s) with {sufficientQualityFaces.Count} having sufficient quality for recognition detected from image `{Path.GetFileName(url)}`");
+
+            return sufficientQualityFaces.ToList();
         }
         // </snippet_face_detect_recognize>
         /*

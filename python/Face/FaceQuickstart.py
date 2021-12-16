@@ -388,10 +388,12 @@ time.sleep (60)
 
 # Detect faces
 face_ids = []
-# We use detection model 3 to get better performance.
-faces = face_client.face.detect_with_stream(image, detection_model='detection_03')
+# We use detection model 3 to get better performance, recognition model 4 to support quality for recognition attribute.
+faces = face_client.face.detect_with_stream(image, detection_model='detection_03', recognition_model='recognition_04', return_face_attributes=['qualityForRecognition'])
 for face in faces:
-    face_ids.append(face.face_id)
+    # Only take the face if it is of sufficient quality.
+    if face.face_attributes.quality_for_recognition == QualityForRecognition.high or face.face_attributes.quality_for_recognition == QualityForRecognition.medium:
+        face_ids.append(face.face_id)
 # </snippet_identify_testimage>
 
 # <snippet_identify>

@@ -140,13 +140,15 @@ async function DetectFaceExtract() {
 // <recognize>
 async function DetectFaceRecognize(url) {
     // Detect faces from image URL. Since only recognizing, use the recognition model 4.
-    // We use detection model 3 because we are not retrieving attributes.
+    // We use detection model 3 because we are only retrieving the qualityForRecognition attribute.
+	// Result faces with quality for recognition lower than "medium" are filtered out.
     let detected_faces = await client.face.detectWithUrl(url,
 		{
 			detectionModel: "detection_03",
-			recognitionModel: "recognition_04"
+			recognitionModel: "recognition_04",
+            returnFaceAttributes: ["QualityForRecognition"]
 		});
-    return detected_faces;
+    return detected_faces.filter(face => face.faceAttributes.qualityForRecognition == 'high' || face.faceAttributes.qualityForRecognition == 'medium');
 }
 // </recognize>
 
@@ -277,10 +279,9 @@ async function IdentifyInPersonGroup() {
 	await WaitForPersonGroupTraining(person_group_id);
 	console.log();
 
-	// Detect faces from source image url.
+	// Detect faces from source image url and only take those with sufficient quality for recognition.
 	let face_ids = (await DetectFaceRecognize(image_base_url + source_image_file_name)).map (face => face.faceId);
-
-// Identify the faces in a person group.
+	// Identify the faces in a person group.
     let results = await client.face.identify(face_ids, { personGroupId : person_group_id});
 	await Promise.all (results.map (async function (result) {
         let person = await client.personGroupPerson.get(person_group_id, result.candidates[0].personId);
