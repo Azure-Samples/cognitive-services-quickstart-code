@@ -1,11 +1,13 @@
 ﻿// This code sample uses an earlier version of the Form Recognizer SDK.
 
 // <snippet_using>
-using Microsoft.Azure.CognitiveServices.FormRecognizer;
-using Microsoft.Azure.CognitiveServices.FormRecognizer.Models;
-
+using Azure;
+using Azure.AI.FormRecognizer;
+using Azure.AI.FormRecognizer.Models;
+using Azure.AI.FormRecognizer.Training;
 using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 // </snippet_using>
 
@@ -45,104 +47,62 @@ namespace FormRecognizerQuickStart
 
         // <snippet_maintask>
         static async Task RunFormRecognizerClient()
-        { 
+        {
             // Create form client object with Form Recognizer subscription key
-            IFormRecognizerClient formClient = new FormRecognizerClient(
-                new ApiKeyServiceClientCredentials(subscriptionKey))
-            {
-                Endpoint = formRecognizerEndpoint
-            };
+            FormTrainingClient formTrainingClient = new FormTrainingClient(new Uri(formRecognizerEndpoint), new AzureKeyCredential(subscriptionKey));
 
             Console.WriteLine("Train Model with training data...");
-            Guid modelId = await TrainModelAsync(formClient, trainingDataUrl);
-
-            Console.WriteLine("Get list of extracted keys...");
-            await GetListOfExtractedKeys(formClient, modelId);
+            string modelId = await TrainModelAsync(formTrainingClient, trainingDataUrl);
 
             // Choose any of the following three Analyze tasks:
 
             Console.WriteLine("Analyze PDF form...");
-            await AnalyzePdfForm(formClient, modelId, pdfFormFile);
+            await AnalyzePdfForm(formTrainingClient, modelId, pdfFormFile);
 
-            //Console.WriteLine("Analyze JPEG form...");
-            //await AnalyzeJpgForm(formClient, modelId, jpgFormFile);
+            Console.WriteLine("Analyze JPEG form...");
+            await AnalyzeJpgForm(formTrainingClient, modelId, jpgFormFile);
 
-            //Console.WriteLine("Analyze PNG form...");
-            //await AnalyzePngForm(formClient, modelId, pngFormFile);
-
-
+            Console.WriteLine("Analyze PNG form...");
+            await AnalyzePngForm(formTrainingClient, modelId, pngFormFile);
+            
             Console.WriteLine("Get list of trained models ...");
-            await GetListOfModels(formClient);
+            GetListOfModels(formTrainingClient);
 
             Console.WriteLine("Delete Model...");
-            await DeleteModel(formClient, modelId);
+            await DeleteModel(formTrainingClient, modelId);
         }
         // </snippet_maintask>
 
         // <snippet_train>
         // Train model using training form data (pdf, jpg, png files)
-        private static async Task<Guid> TrainModelAsync(
-            IFormRecognizerClient formClient, string trainingDataUrl)
+        private static async Task<string> TrainModelAsync(
+            FormTrainingClient formTrainingClient, string trainingDataUrl)
         {
             if (!Uri.IsWellFormedUriString(trainingDataUrl, UriKind.Absolute))
             {
                 Console.WriteLine("\nInvalid trainingDataUrl:\n{0} \n", trainingDataUrl);
-                return Guid.Empty;
+                return null;
             }
 
             try
             {
-                TrainResult result = await formClient.TrainCustomModelAsync(new TrainRequest(trainingDataUrl));
-
-                ModelResult model = await formClient.GetCustomModelAsync(result.ModelId);
-                DisplayModelStatus(model);
+                CustomFormModel result = await formTrainingClient.StartTrainingAsync(new Uri(trainingDataUrl), useTrainingLabels: false).WaitForCompletionAsync();
+                
+                DisplayModelStatus(result);
 
                 return result.ModelId;
             }
-            catch (ErrorResponseException e)
+            catch (RequestFailedException e)
             {
                 Console.WriteLine("Train Model : " + e.Message);
-                return Guid.Empty;
+                return null;
             }
         }
-        // </snippet_train>
-
-        // <snippet_getkeys>
-        // Get and display list of extracted keys for training data 
-        // provided to train the model
-        private static async Task GetListOfExtractedKeys(
-            IFormRecognizerClient formClient, Guid modelId)
-        {
-            if (modelId == Guid.Empty)
-            {
-                Console.WriteLine("\nInvalid model Id.");
-                return;
-            }
-
-            try
-            {
-                KeysResult kr = await formClient.GetExtractedKeysAsync(modelId);
-                var clusters = kr.Clusters;
-                foreach (var kvp in clusters)
-                {
-                    Console.WriteLine("  Cluster: " + kvp.Key + ""); 
-                    foreach (var v in kvp.Value)
-                    {
-                        Console.WriteLine("\t" + v);
-                    }
-                }
-            }
-            catch (ErrorResponseException e)
-            {
-                Console.WriteLine("Get list of extracted keys : " + e.Message);
-            }
-        }
-        // </snippet_getkeys>
-
+        
         // <snippet_analyzepdf>
         // Analyze PDF form data
         private static async Task AnalyzePdfForm(
-            IFormRecognizerClient formClient, Guid modelId, string pdfFormFile)
+            FormTrainingClient formTrainingClient, string modelId, string pdfFormFile)
         {
             if (string.IsNullOrEmpty(pdfFormFile))
             {
@@ -154,17 +114,13 @@ namespace FormRecognizerQuickStart
             {
                 using (FileStream stream = new FileStream(pdfFormFile, FileMode.Open))
                 {
-                    AnalyzeResult result = await formClient.AnalyzeWithCustomModelAsync(modelId, stream, contentType: "application/pdf");
+                    RecognizedFormCollection result = await formTrainingClient.GetFormRecognizerClient().StartRecognizeCustomFormsAsync(modelId, stream).WaitForCompletionAsync();
 
                     Console.WriteLine("\nExtracted data from:" + pdfFormFile);
                     DisplayAnalyzeResult(result);
                 }
             }
-            catch (ErrorResponseException e)
-            {
-                Console.WriteLine("Analyze PDF form : " + e.Message);
-            }
-            catch (Exception ex)
+            catch (RequestFailedException ex)
             {
                 Console.WriteLine("Analyze PDF form : " + ex.Message);
             }
@@ -173,7 +129,7 @@ namespace FormRecognizerQuickStart
 
         // Analyze JPEG form data
         private static async Task AnalyzeJpgForm(
-            IFormRecognizerClient formClient, Guid modelId, string jpgFormFile)
+            FormTrainingClient formTrainingClient, string modelId, string jpgFormFile)
         {
             if (string.IsNullOrEmpty(jpgFormFile))
             {
@@ -185,17 +141,13 @@ namespace FormRecognizerQuickStart
             {
                 using (FileStream stream = new FileStream(jpgFormFile, FileMode.Open))
                 {
-                    AnalyzeResult result = await formClient.AnalyzeWithCustomModelAsync(modelId, stream, contentType: "image/jpeg");
+                    RecognizedFormCollection result = await formTrainingClient.GetFormRecognizerClient().StartRecognizeCustomFormsAsync(modelId, stream).WaitForCompletionAsync();
 
                     Console.WriteLine("\nExtracted data from:" + jpgFormFile);
                     DisplayAnalyzeResult(result);
                 }
             }
-            catch (ErrorResponseException e)
-            {
-                Console.WriteLine("Analyze JPG form  : " + e.Message);
-            }
-            catch (Exception ex)
+            catch (RequestFailedException ex)
             {
                 Console.WriteLine("Analyze JPG form  : " + ex.Message);
             }
@@ -203,7 +155,7 @@ namespace FormRecognizerQuickStart
 
         // Analyze PNG form data
         private static async Task AnalyzePngForm(
-            IFormRecognizerClient formClient, Guid modelId, string pngFormFile)
+            FormTrainingClient formTrainingClient, string modelId, string pngFormFile)
         {
             if (string.IsNullOrEmpty(pngFormFile))
             {
@@ -215,17 +167,13 @@ namespace FormRecognizerQuickStart
             {
                 using (FileStream stream = new FileStream(pngFormFile, FileMode.Open))
                 {
-                    AnalyzeResult result = await formClient.AnalyzeWithCustomModelAsync(modelId, stream, contentType: "image/png");
+                    RecognizedFormCollection result = await formTrainingClient.GetFormRecognizerClient().StartRecognizeCustomFormsAsync(modelId, stream).WaitForCompletionAsync();
 
                     Console.WriteLine("\nExtracted data from:" + pngFormFile);
                     DisplayAnalyzeResult(result);
                 }
             }
-            catch (ErrorResponseException e)
-            {
-                Console.WriteLine("Analyze PNG form  " + e.Message);
-            }
-            catch (Exception ex)
+            catch (RequestFailedException ex)
             {
                 Console.WriteLine("Analyze PNG  form  : " + ex.Message);
             }
@@ -233,19 +181,19 @@ namespace FormRecognizerQuickStart
 
         // <snippet_getmodellist>
         // Get and display list of trained the models
-        private static async Task GetListOfModels(
-            IFormRecognizerClient formClient)
+        private static void GetListOfModels(
+            FormTrainingClient formTrainingClient)
         {
             try
             {
-                ModelsResult models = await formClient.GetCustomModelsAsync();
-                foreach (ModelResult m in models.ModelsProperty)
+                Pageable<CustomFormModelInfo> models = formTrainingClient.GetCustomModels();
+                foreach (CustomFormModelInfo m in models)
                 {
-                    Console.WriteLine(m.ModelId + " " + m.Status + " " + m.CreatedDateTime + " " + m.LastUpdatedDateTime);
+                    Console.WriteLine(m.ModelId + " " + m.Status + " " + m.TrainingStartedOn + " " + m.TrainingCompletedOn);
                 }
                 Console.WriteLine();
             }
-            catch (ErrorResponseException e)
+            catch (RequestFailedException e)
             {
                 Console.WriteLine("Get list of models : " + e.Message);
             }
@@ -255,54 +203,48 @@ namespace FormRecognizerQuickStart
         // <snippet_deletemodel>
         // Delete a model
         private static async Task DeleteModel(
-            IFormRecognizerClient formClient, Guid modelId)
+            FormTrainingClient formTrainingClient, string modelId)
         {
             try
             {
                 Console.Write("Deleting model: {0}...", modelId.ToString());
-                await formClient.DeleteCustomModelAsync(modelId);
+                await formTrainingClient.DeleteModelAsync(modelId);
                 Console.WriteLine("done.\n");
             }
-            catch (ErrorResponseException e)
+            catch (RequestFailedException e)
             {
                 Console.WriteLine("Delete model : " + e.Message);
             }
+            Console.ReadLine();
         }
         // </snippet_deletemodel>
 
         // <snippet_displayanalyze>
         // Display analyze status
-        private static void DisplayAnalyzeResult(AnalyzeResult result)
+        private static void DisplayAnalyzeResult(RecognizedFormCollection result)
         {
-            foreach (var page in result.Pages)
+            foreach (var page in result)
             {
-                Console.WriteLine("\tPage#: " + page.Number);
-                Console.WriteLine("\tCluster Id: " + page.ClusterId);
-                foreach (var kv in page.KeyValuePairs)
+                Console.WriteLine("\tPage#: " + page.Pages.Count);
+                Console.WriteLine("\tModelId Id: " + page.ModelId);
+                foreach (var kv in page.Fields)
                 {
-                    if (kv.Key.Count > 0)
-                        Console.Write(kv.Key[0].Text);
+                    if (kv.Key != null)
+                        Console.Write(kv.Value.LabelData.Text);
 
-                    if (kv.Value.Count > 0)
-                        Console.Write(" - " + kv.Value[0].Text);
+                    if (kv.Value != null)
+                        Console.Write(" - " + kv.Value.ValueData.Text);
 
                     Console.WriteLine();
                 }
                 Console.WriteLine();
 
-                foreach (var t in page.Tables)
+                foreach (var t in page.Pages.First().Tables)
                 {
-                    Console.WriteLine("Table id: " + t.Id);
-                    foreach (var c in t.Columns)
+                    Console.WriteLine("Page Number: " + t.PageNumber);
+                    foreach (var c in t.Cells)
                     {
-                        foreach (var h in c.Header)
-                            Console.Write(h.Text + "\t");
-
-                        foreach (var e in c.Entries)
-                        {
-                            foreach (var ee in e)
-                                Console.Write(ee.Text + "\t");
-                        }
+                        Console.Write(c.Text + "\t");
                         Console.WriteLine();
                     }
                     Console.WriteLine();
@@ -313,17 +255,15 @@ namespace FormRecognizerQuickStart
 
         // <snippet_displaymodel>
         // Display model status
-        private static void DisplayModelStatus(ModelResult model)
+        private static void DisplayModelStatus(CustomFormModel model)
         {
             Console.WriteLine("\nModel :");
             Console.WriteLine("\tModel id: " + model.ModelId);
             Console.WriteLine("\tStatus:  " + model.Status);
-            Console.WriteLine("\tCreated: " + model.CreatedDateTime);
-            Console.WriteLine("\tUpdated: " + model.LastUpdatedDateTime);
+            Console.WriteLine("\tTraining model started on: " + model.TrainingStartedOn);
+            Console.WriteLine("\tTraining model completed on: " + model.TrainingCompletedOn);
         }
         // </snippet_displaymodel>
-
-       
     }
 }
 

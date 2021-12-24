@@ -6,7 +6,7 @@ author:
 
 # Cognitive Services Form Recognizer C# SDK quickstart samples
 
-This repository provides the latest sample code for Cognitive Services Form Recognizer SDK quickstarts. These samples target the [Microsoft.Azure.CognitiveServices.Vision.FormRecognizer 0.8.0-preview](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Vision.FormRecognizer/0.8.0-preview) client library.
+This repository provides the latest sample code for Cognitive Services Form Recognizer SDK quickstarts. These samples target the [Azure.AI.FormRecognizer](https://www.nuget.org/packages/Azure.AI.FormRecognizer/3.1.1) client library.
 
 ## Features
 
@@ -31,8 +31,8 @@ These samples demonstrate how to use the Form Recognizer client library for C# t
 1. Install the Form Recognizer client library NuGet package.
    1. On the top menu, click **Tools**, select **NuGet Package Manager**, then **Manage NuGet Packages for Solution**.
    1. Click the **Browse** tab and then select **Include prerelease**.
-   1. In the **Search** box type "Microsoft.Azure.CognitiveServices.FormRecognizer".
-   1. Select **Microsoft.Azure.CognitiveServices.FormRecognizer** when it displays, then click the checkbox next to your project name, and **Install**.
+   1. In the **Search** box type "Azure.AI.FormRecognizer".
+   1. Select **Azure.AI.FormRecognizer** when it displays, then click the checkbox next to your project name, and **Install**.
 1. Open *Program.cs*.
 1. Replace `<Subscription Key>` with your valid subscription key.
 1. Change `formRecognizerEndpoint` to the Azure region associated with your subscription keys, if necessary.
@@ -43,4 +43,4 @@ These samples demonstrate how to use the Form Recognizer client library for C# t
 
 * [Form Recognizer service documentation](https://docs.microsoft.com/en-us/azure/cognitive-services/form-recognizer/)
 * [Form Recognizer API](https://westus2.dev.cognitive.microsoft.com/docs/services/form-recognizer-api)
-* [Microsoft.Azure.CognitiveServices.Vision.FormRecognizer 0.8.0-preview](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Vision.FormRecognizer/0.8.0-preview) NuGet package
+* [Azure.AI.FormRecognizer](https://www.nuget.org/packages/Azure.AI.FormRecognizer/3.1.1) NuGet package
