@@ -27,11 +27,20 @@ shared_ptr<SpeechConfig> GetSpeechConfig()
 void AddEnrollmentsToTextDependentProfile(shared_ptr<VoiceProfileClient> client, shared_ptr<VoiceProfile> profile)
 {
 	shared_ptr<VoiceProfileEnrollmentResult> enroll_result = nullptr;
+	auto phraseResult = client->GetActivationPhrasesAsync(profile->GetType(), profile_locale).get();
+    auto phrases = phraseResult->GetPhrases();
 	while (enroll_result == nullptr || enroll_result->GetEnrollmentInfo(EnrollmentInfoType::RemainingEnrollmentsCount) > 0)
 	{
-		std::cout << "Please say the passphrase, \"My voice is my passport, verify me.\"\n";
-		enroll_result = client->EnrollProfileAsync(profile, audio_config).get();
-		std::cout << "Remaining enrollments needed: " << enroll_result->GetEnrollmentInfo(EnrollmentInfoType::RemainingEnrollmentsCount) << ".\n";
+		if (phrases != nullptr && phrases->size() > 0)
+		{
+			std::cout << "Please say the passphrase, \"" << phrases->at(0) << "\"\n";
+			enroll_result = client->EnrollProfileAsync(profile, audio_config).get();
+			std::cout << "Remaining enrollments needed: " << enroll_result->GetEnrollmentInfo(EnrollmentInfoType::RemainingEnrollmentsCount) << ".\n";
+		}
+		else
+		{
+			std::cout << "No passphrases received, enrollment not attempted.\n\n";
+		}
 	}
 	std::cout << "Enrollment completed.\n\n";
 }
@@ -41,11 +50,20 @@ void AddEnrollmentsToTextDependentProfile(shared_ptr<VoiceProfileClient> client,
 void AddEnrollmentsToTextIndependentProfile(shared_ptr<VoiceProfileClient> client, shared_ptr<VoiceProfile> profile)
 {
 	shared_ptr<VoiceProfileEnrollmentResult> enroll_result = nullptr;
+	auto phraseResult = client->GetActivationPhrasesAsync(profile->GetType(), profile_locale).get();
+    auto phrases = phraseResult->GetPhrases();
 	while (enroll_result == nullptr || enroll_result->GetEnrollmentInfo(EnrollmentInfoType::RemainingEnrollmentsSpeechLength) > 0)
 	{
-		std::cout << "Continue speaking to add to the profile enrollment sample.\n";
-		enroll_result = client->EnrollProfileAsync(profile, audio_config).get();
-		std::cout << "Remaining audio time needed: " << enroll_result->GetEnrollmentInfo(EnrollmentInfoType::RemainingEnrollmentsSpeechLength) / ticks_per_second << " seconds.\n";
+		if (phrases != nullptr && phrases->size() > 0)
+		{
+			std::cout << "Please say the activation phrase, \"" << phrases->at(0) << "\"\n";
+			enroll_result = client->EnrollProfileAsync(profile, audio_config).get();
+			std::cout << "Remaining audio time needed: " << enroll_result->GetEnrollmentInfo(EnrollmentInfoType::RemainingEnrollmentsSpeechLength) / ticks_per_second << " seconds.\n";
+		}
+		else
+		{
+			std::cout << "No activation phrases received, enrollment not attempted.\n\n";
+		}
 	}
 	std::cout << "Enrollment completed.\n\n";
 }
