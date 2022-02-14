@@ -14,7 +14,7 @@ from io import BytesIO
 from PIL import Image, ImageDraw
 from azure.cognitiveservices.vision.face import FaceClient
 from msrest.authentication import CognitiveServicesCredentials
-from azure.cognitiveservices.vision.face.models import TrainingStatusType, Person
+from azure.cognitiveservices.vision.face.models import TrainingStatusType, Person, QualityForRecognition
 # </snippet_imports>
 
 '''
@@ -317,16 +317,40 @@ child_images = [file for file in glob.glob('*.jpg') if file.startswith("ch")]
 # Add to a woman person
 for image in woman_images:
     w = open(image, 'r+b')
+	# Check if the image is of sufficent quality for recognition.
+    sufficientQuality = True
+    detected_faces = face_client.face.detect_with_url(url=single_face_image_url, detection_model='detection_03', recognition_model='recognition_04', return_face_attributes=['qualityForRecognition'])
+    for face in detected_faces:
+        if face.face_attributes.quality_for_recognition != QualityForRecognition.high:
+            sufficientQuality = False
+            break
+    if not sufficientQuality: continue
     face_client.person_group_person.add_face_from_stream(PERSON_GROUP_ID, woman.person_id, w)
 
 # Add to a man person
 for image in man_images:
     m = open(image, 'r+b')
+	# Check if the image is of sufficent quality for recognition.
+    sufficientQuality = True
+    detected_faces = face_client.face.detect_with_url(url=single_face_image_url, detection_model='detection_03', recognition_model='recognition_04', return_face_attributes=['qualityForRecognition'])
+    for face in detected_faces:
+        if face.face_attributes.quality_for_recognition != QualityForRecognition.high:
+            sufficientQuality = False
+            break
+    if not sufficientQuality: continue
     face_client.person_group_person.add_face_from_stream(PERSON_GROUP_ID, man.person_id, m)
 
 # Add to a child person
 for image in child_images:
     ch = open(image, 'r+b')
+	# Check if the image is of sufficent quality for recognition.
+    sufficientQuality = True
+    detected_faces = face_client.face.detect_with_url(url=single_face_image_url, detection_model='detection_03', recognition_model='recognition_04', return_face_attributes=['qualityForRecognition'])
+    for face in detected_faces:
+        if face.face_attributes.quality_for_recognition != QualityForRecognition.high:
+            sufficientQuality = False
+            break
+    if not sufficientQuality: continue
     face_client.person_group_person.add_face_from_stream(PERSON_GROUP_ID, child.person_id, ch)
 # </snippet_persongroup_assign>
 
@@ -364,10 +388,12 @@ time.sleep (60)
 
 # Detect faces
 face_ids = []
-# We use detection model 3 to get better performance.
-faces = face_client.face.detect_with_stream(image, detection_model='detection_03')
+# We use detection model 3 to get better performance, recognition model 4 to support quality for recognition attribute.
+faces = face_client.face.detect_with_stream(image, detection_model='detection_03', recognition_model='recognition_04', return_face_attributes=['qualityForRecognition'])
 for face in faces:
-    face_ids.append(face.face_id)
+    # Only take the face if it is of sufficient quality.
+    if face.face_attributes.quality_for_recognition == QualityForRecognition.high or face.face_attributes.quality_for_recognition == QualityForRecognition.medium:
+        face_ids.append(face.face_id)
 # </snippet_identify_testimage>
 
 # <snippet_identify>
