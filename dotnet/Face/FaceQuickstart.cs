@@ -157,7 +157,7 @@ namespace FaceQuickstart
                 detectedFaces = await client.Face.DetectWithUrlAsync($"{url}{imageFileName}",
                         returnFaceAttributes: new List<FaceAttributeType> { FaceAttributeType.Accessories, FaceAttributeType.Age,
                         FaceAttributeType.Blur, FaceAttributeType.Emotion, FaceAttributeType.Exposure, FaceAttributeType.FacialHair,
-                        FaceAttributeType.Gender, FaceAttributeType.Glasses, FaceAttributeType.Hair, FaceAttributeType.HeadPose,
+                        FaceAttributeType.Glasses, FaceAttributeType.Hair, FaceAttributeType.HeadPose,
                         FaceAttributeType.Makeup, FaceAttributeType.Noise, FaceAttributeType.Occlusion, FaceAttributeType.Smile, 
                         FaceAttributeType.Smile, FaceAttributeType.QualityForRecognition },
                         // We specify detection model 1 because we are retrieving attributes.
@@ -208,7 +208,6 @@ namespace FaceQuickstart
                     // Get more face attributes
                     Console.WriteLine($"Exposure : {face.FaceAttributes.Exposure.ExposureLevel}");
                     Console.WriteLine($"FacialHair : {string.Format("{0}", face.FaceAttributes.FacialHair.Moustache + face.FaceAttributes.FacialHair.Beard + face.FaceAttributes.FacialHair.Sideburns > 0 ? "Yes" : "No")}");
-                    Console.WriteLine($"Gender : {face.FaceAttributes.Gender}");
                     Console.WriteLine($"Glasses : {face.FaceAttributes.Glasses}");
 
                     // Get hair color
