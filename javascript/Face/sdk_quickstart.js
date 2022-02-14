@@ -42,7 +42,7 @@ async function DetectFaceExtract() {
 	await Promise.all (image_file_names.map (async function (image_file_name) {
         let detected_faces = await client.face.detectWithUrl(image_base_url + image_file_name,
 			{
-				returnFaceAttributes: ["Accessories","Age","Blur","Emotion","Exposure","FacialHair","Gender","Glasses","Hair","HeadPose","Makeup","Noise","Occlusion","Smile"],
+				returnFaceAttributes: ["Accessories","Age","Blur","Emotion","Exposure","FacialHair","Glasses","Hair","HeadPose","Makeup","Noise","Occlusion","Smile"],
 				// We specify detection model 1 because we are retrieving attributes.
 				detectionModel: "detection_01"
 			});
@@ -93,7 +93,6 @@ async function DetectFaceExtract() {
 			else {
 				console.log("FacialHair: No");
 			}
-			console.log("Gender: " + face.faceAttributes.gender);
 			console.log("Glasses: " + face.faceAttributes.glasses);
 
 			// Get hair color
