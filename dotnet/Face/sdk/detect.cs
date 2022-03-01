@@ -84,10 +84,11 @@ namespace ConsoleApp1
                 FaceAttributeType.FacialHair,
                 FaceAttributeType.HeadPose,
                 FaceAttributeType.Glasses,
-                FaceAttributeType.Emotion
+                FaceAttributeType.Emotion,
+                FaceAttributeType.QualityForRecognition
             };
             // Note DetectionModel.Detection02 cannot be used with returnFaceAttributes.
-            var faces3 = await faceClient.Face.DetectWithUrlAsync(url: imageUrl, returnFaceId: true, returnFaceAttributes: requiredFaceAttributes, detectionModel: DetectionModel.Detection01);
+            var faces3 = await faceClient.Face.DetectWithUrlAsync(url: imageUrl, returnFaceId: true, returnFaceAttributes: requiredFaceAttributes, detectionModel: DetectionModel.Detection01, recognitionModel: RecognitionModel.Recognition04);
             // </attributes1>
 
             // <attributes2>
@@ -101,6 +102,7 @@ namespace ConsoleApp1
                 var headPose = attributes.HeadPose;
                 var glasses = attributes.Glasses;
                 var emotion = attributes.Emotion;
+                var qualityForRecognition = attributes.QualityForRecognition;
             }
             // </attributes2>
         }
