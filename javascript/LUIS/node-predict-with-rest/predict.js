@@ -12,14 +12,14 @@ getPrediction = async () => {
     // Values to modify.
 
     // YOUR-APP-ID: The App ID GUID found on the www.luis.ai Application Settings page.
-    const LUIS_appId = "YOUR-APP-ID";
+    const LUIS_appId = "PASTE_YOUR_LUIS_APP_ID_HERE";
 
     // YOUR-PREDICTION-KEY: Your LUIS authoring key, 32 character value.
-    const LUIS_predictionKey = "YOUR-PREDICTION-KEY";
+    const LUIS_predictionKey = "PASTE_YOUR_LUIS_PREDICTION_SUBSCRIPTION_KEY_HERE";
 
     // YOUR-PREDICTION-ENDPOINT: Replace this with your authoring key endpoint.
     // For example, "https://westus.api.cognitive.microsoft.com/"
-    const LUIS_endpoint = "https://YOUR-PREDICTION-ENDPOINT/";
+    const LUIS_endpoint = "PASTE_YOUR_LUIS_PREDICTION_ENDPOINT_HERE";
 
     // The utterance you want to use.
     const utterance = "I want two large pepperoni pizzas on thin crust please";

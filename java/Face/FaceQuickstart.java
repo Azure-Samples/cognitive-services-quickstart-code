@@ -63,12 +63,11 @@ public class FaceQuickstart {
         /**
          * Authenticate
          */
-        // Add FACE_SUBSCRIPTION_KEY to your environment variables with your key as the value.
-        final String key = System.getenv("FACE_SUBSCRIPTION_KEY");
+        final String KEY = "PASTE_YOUR_FACE_SUBSCRIPTION_KEY_HERE";
 
         // Add your region of your Face subscription, for example 'westus', 'eastus', etc.
         // List of Azure Regions: https://docs.microsoft.com/en-us/java/api/com.microsoft.azure.cognitiveservices.vision.faceapi.models.azureregions?view=azure-java-stable
-        final AzureRegions myRegion = AzureRegions.WESTUS;
+        final AzureRegions REGION = AzureRegions.WESTUS;
 
         // Create Face client
         FaceAPI client = FaceAPIManager.authenticate(REGION, KEY);

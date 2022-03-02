@@ -14,7 +14,6 @@ Bing Spell Check Quickstart
 Checks the spelling of each word in a query, then suggests correction(s).
 
 Prerequisites:
-  - Get your Bing Spell Check subscription key and add it as BING_SPELL_CHECK_SUBSCRIPTION_KEY to your environment variables. Close and reopen your project/CLI or IDE for changes to take effect.
   - Install the Bing Spell Check SDK and Autorest libraries:
 	  go get github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v1.0/spellcheck
 	  go get github.com/Azure/go-autorest/autorest
@@ -30,7 +29,7 @@ Resources:
 
 func main() {
     // Authenticate
-    subscriptionKey := os.Getenv("BING_SPELL_CHECK_SUBSCRIPTION_KEY")
+    subscriptionKey := "PASTE_YOUR_SPELL_CHECK_SUBSCRIPTION_KEY_HERE"
     spellCheckClient := spellcheck.New() //BaseClient class
     csAuthorizer := autorest.NewCognitiveServicesAuthorizer(subscriptionKey)
     spellCheckClient.Authorizer = csAuthorizer

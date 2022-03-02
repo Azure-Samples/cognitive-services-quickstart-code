@@ -13,20 +13,20 @@ In this quickstart, you'll extract printed and handwritten text from an image us
 * Once you have your Azure subscription, <a href="https://portal.azure.com/#create/Microsoft.CognitiveServicesComputerVision"  title="Create a Computer Vision resource"  target="_blank">create a Computer Vision resource <span class="docon docon-navigate-external x-hidden-focus"></span></a> in the Azure portal to get your key and endpoint. After it deploys, click **Go to resource**.
     * You will need the key and endpoint from the resource you create to connect your application to the Computer Vision service. You'll paste your key and endpoint into the code below later in the quickstart.
     * You can use the free pricing tier (`F0`) to try the service, and upgrade later to a paid tier for production.
-* [Create environment variables](../../cognitive-services-apis-create-account.md#configure-an-environment-variable-for-authentication) for the key and endpoint URL, named `COMPUTER_VISION_SUBSCRIPTION_KEY` and `COMPUTER_VISION_ENDPOINT`, respectively.
 
 ## Create and run the sample application
 
 To create the sample in Visual Studio:
 
 1. Create a new Visual Studio solution in Visual Studio, using the Visual C# Console App template.
-2. Install the Newtonsoft.Json NuGet package.
+1. Install the Newtonsoft.Json NuGet package.
     1. On the menu, click **Tools**, select **NuGet Package Manager**, then **Manage NuGet Packages for Solution**.
-    2. Click the **Browse** tab, and in the **Search** box type "Newtonsoft.Json".
-    3. Select **Newtonsoft.Json** when it displays, then click the checkbox next to your project name, and **Install**.
-3. Copy and paste the code below into the Program.cs file in your solution.
+    1. Click the **Browse** tab, and in the **Search** box type "Newtonsoft.Json".
+    1. Select **Newtonsoft.Json** when it displays, then click the checkbox next to your project name, and **Install**.
+1. Copy and paste the code below into the Program.cs file in your solution.
+1. Replace the values of `subscriptionKey` and `endpoint` with your Computer Vision subscription key and endpoint.
 1. Set `imageFilePath` to the path of your own image. You can download a [sample image](https://raw.githubusercontent.com/MicrosoftDocs/azure-docs/master/articles/cognitive-services/Computer-vision/Images/readsample.jpg) to use.
-4. Run the program.
+1. Run the program.
 
 ```csharp
 using Newtonsoft.Json.Linq;
@@ -42,11 +42,9 @@ namespace CSHttpClientSample
 {
     static class Program
     {
-        // Add your Computer Vision subscription key and endpoint to your environment variables.
-        static string subscriptionKey = Environment.GetEnvironmentVariable("COMPUTER_VISION_SUBSCRIPTION_KEY");
-
-        // An endpoint should have a format like "https://westus.api.cognitive.microsoft.com"
-        static string endpoint = Environment.GetEnvironmentVariable("COMPUTER_VISION_ENDPOINT");
+        // Add your Computer Vision subscription key and base endpoint.
+        static string subscriptionKey = "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE";
+        static string endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE";
 
         // the Batch Read method endpoint
         static string uriBase = endpoint + "/vision/v3.1/read/analyze";

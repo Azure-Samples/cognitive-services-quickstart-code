@@ -36,9 +36,11 @@ import com.microsoft.azure.cognitiveservices.vision.customvision.training.models
 public class CustomVisionSamples {
 
     // <snippet_creds>
-    final static String trainingApiKey = "<your-training-subscription-key>";
-    final static String predictionApiKey = "<your-prediction-subscription-key>";
-    final static String endpoint = "<your API endpoint>";
+    final static String trainingApiKey = "PASTE_YOUR_CUSTOM_VISION_TRAINING_SUBSCRIPTION_KEY_HERE";
+    final static String trainingEndpoint = "PASTE_YOUR_CUSTOM_VISION_TRAINING_ENDPOINT_HERE";
+    final static String predictionApiKey = "PASTE_YOUR_CUSTOM_VISION_PREDICTION_SUBSCRIPTION_KEY_HERE";
+	final static String predictionEndpoint = "PASTE_YOUR_CUSTOM_VISION_PREDICTION_ENDPOINT_HERE";
+    final static String predictionResourceId = "PASTE_YOUR_CUSTOM_VISION_PREDICTION_RESOURCE_ID_HERE";
     // </snippet_creds>
 
     /**
@@ -51,11 +53,11 @@ public class CustomVisionSamples {
         // <snippet_auth>
         // Authenticate
         CustomVisionTrainingClient trainClient = CustomVisionTrainingManager
-                .authenticate("https://{endpoint}/customvision/v3.0/training/", trainingApiKey)
-                .withEndpoint(endpoint);
+                .authenticate(trainingEndpoint, trainingApiKey)
+                .withEndpoint(trainingEndpoint);
         CustomVisionPredictionClient predictor = CustomVisionPredictionManager
-                .authenticate("https://{endpoint}/customvision/v3.0/prediction/", predictionApiKey)
-                .withEndpoint(endpoint);
+                .authenticate(predictionEndpoint, predictionApiKey)
+                .withEndpoint(predictionEndpoint);
         // </snippet_auth>
 
         // <snippet_maincalls>
@@ -144,7 +146,6 @@ public class CustomVisionSamples {
         Trainings trainer = trainClient.trainings();
         // The iteration is now trained. Publish it to the prediction endpoint.
         String publishedModelName = "myModel";
-        String predictionResourceId = System.getenv("AZURE_CUSTOMVISION_PREDICTION_ID");
         trainer.publishIteration(project.id(), iteration.id(), publishedModelName, predictionResourceId);
     }
     // </snippet_publish>

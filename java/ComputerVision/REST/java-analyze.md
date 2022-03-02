@@ -11,7 +11,6 @@ In this quickstart, you'll analyze a remotely stored image to extract visual fea
 * Once you have your Azure subscription, <a href="https://portal.azure.com/#create/Microsoft.CognitiveServicesComputerVision"  title="Create a Computer Vision resource"  target="_blank">create a Computer Vision resource <span class="docon docon-navigate-external x-hidden-focus"></span></a> in the Azure portal to get your key and endpoint. After it deploys, click **Go to resource**.
     * You will need the key and endpoint from the resource you create to connect your application to the Computer Vision service. You'll paste your key and endpoint into the code below later in the quickstart.
     * You can use the free pricing tier (`F0`) to try the service, and upgrade later to a paid tier for production.
-* [Create environment variables](../../cognitive-services-apis-create-account.md#configure-an-environment-variable-for-authentication) for the key and endpoint URL, named `COMPUTER_VISION_SUBSCRIPTION_KEY` and `COMPUTER_VISION_ENDPOINT`, respectively.
 
 ## Create and run the sample application
 
@@ -38,6 +37,7 @@ To create and run the sample, do the following steps:
    ```
 
 1. Replace the `AnalyzeImage` public class with the following code.
+1. Replace the values of `subscriptionKey` and `endpoint` with your Computer Vision subscription key and endpoint.
 1. Optionally, replace the value of `imageToAnalyze` with the URL of a different image that you want to analyze.
 
 ```java
@@ -46,10 +46,8 @@ public class AnalyzeImage {
     // *** Update or verify the following values. ***
     // **********************************************
 
-    // Add your Computer Vision subscription key and endpoint to your environment variables.
-    // After setting, close and then re-open your command shell or project for the changes to take effect.
-    private static String subscriptionKey = System.getenv("COMPUTER_VISION_SUBSCRIPTION_KEY");
-    private static String endpoint = System.getenv("COMPUTER_VISION_ENDPOINT");
+    private static String subscriptionKey = "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE";
+    private static String endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE";
 
     private static final String uriBase = endpoint + "vision/v3.1/analyze";
     private static final String imageToAnalyze =

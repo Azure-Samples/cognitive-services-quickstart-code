@@ -30,7 +30,7 @@ import (
 
 // <main>
 func main() {
-	var subscription_key string = "PASTE_YOUR_QNA_MAKER_SUBSCRIPTION_KEY_HERE"
+	var subscription_key string = "PASTE_YOUR_QNA_MAKER_AUTHORING_SUBSCRIPTION_KEY_HERE"
 	var authoring_endpoint string = "PASTE_YOUR_QNA_MAKER_AUTHORING_ENDPOINT_HERE"
 	var runtime_endpoint string = "PASTE_YOUR_QNA_MAKER_RUNTIME_ENDPOINT_HERE"
     var kb_id string = "PASTE_YOUR_QNA_MAKER_KB_ID_HERE"

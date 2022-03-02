@@ -82,7 +82,7 @@ func handle_error (result qnamaker.Operation) {
 * The value of `runtime_endpoint` has the format https://YOUR-RESOURCE-NAME.azurewebsites.net.
 */
 // <environment>
-var subscription_key string = "PASTE_YOUR_QNA_MAKER_SUBSCRIPTION_KEY_HERE"
+var subscription_key string = "PASTE_YOUR_QNA_MAKER_AUTHORING_SUBSCRIPTION_KEY_HERE"
 var authoring_endpoint string = "PASTE_YOUR_QNA_MAKER_AUTHORING_ENDPOINT_HERE"
 var runtime_endpoint string = "PASTE_YOUR_QNA_MAKER_RUNTIME_ENDPOINT_HERE"
 // </environment>

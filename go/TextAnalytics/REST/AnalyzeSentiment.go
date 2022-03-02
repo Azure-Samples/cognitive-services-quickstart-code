@@ -12,8 +12,8 @@ import (
 )
 
 func main() {
-    var subscriptionKey string = "<paste-your-text-analytics-key-here>"
-    var endpoint string = "<paste-your-text-analytics-endpoint-here>"
+    var subscriptionKey string = "PASTE_YOUR_TEXT_ANALYTICS_SUBSCRIPTION_KEY_HERE"
+    var endpoint string = "PASTE_YOUR_TEXT_ANALYTICS_ENDPOINT_HERE"
 
     const uriPath = "/text/analytics/v3.0/sentiment"
 

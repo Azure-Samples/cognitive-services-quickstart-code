@@ -17,8 +17,8 @@ import (
 func main() {
 	// Note In your Bing Search resource, select pricing tier S10 to access Bing Local.
 	// See https://azure.microsoft.com/en-us/pricing/details/cognitive-services/search-api/.
-	var subscriptionKey string = os.Getenv("BING_SEARCH_V7_SUBSCRIPTION_KEY")
-	var endpoint string = os.Getenv("BING_SEARCH_V7_ENDPOINT")
+	var subscriptionKey string = "PASTE_YOUR_BING_SEARCH_SUBSCRIPTION_KEY_HERE"
+	var endpoint string = "PASTE_YOUR_BING_SEARCH_ENDPOINT"
 
 	// Get the context, which is required by the SDK methods.
 	ctx := context.Background()

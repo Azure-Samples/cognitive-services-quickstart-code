@@ -21,15 +21,7 @@ import java.net.*;
  */
 
 public class Quickstart {
-	/**
-	 * Configure the local environment: Set the AUTOSUGGEST_SUBSCRIPTION_KEY 
-	 * in your environment variables for your preferred shell (Bash, PowerShell, Command Prompt, etc.)
-	 *
-	 * If the environment variable is created after the application is launched in a
-	 * console or with Visual Studio (Code), they need to be closed then reloaded 
-	 * for the environment variable to work.
-	 */
-	private static String subscription_key = System.getenv("AUTOSUGGEST_SUBSCRIPTION_KEY");
+	private static String subscription_key = "PASTE_YOUR_AUTO_SUGGEST_SUBSCRIPTION_KEY_HERE";
 
 	BingAutoSuggestSearchAPI client = BingAutoSuggestSearchManager.authenticate(subscription_key);
 

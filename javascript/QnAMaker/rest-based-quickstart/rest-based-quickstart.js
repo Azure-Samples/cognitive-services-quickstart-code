@@ -6,12 +6,12 @@ const request = require('requestretry');
 
 // <snippet_variables>
 // 36 character key from Azure portal for QnA Maker resource
-const authoringKey = process.ENV["QNA_MAKER_AUTHORING_RESOURCE_KEY"];
-
-const resourceName = process.ENV["QNA_MAKER_AUTHORING_RESOURCE_NAME"];
+const authoringKey = 'PASTE_YOUR_QNA_MAKER_AUTHORING_SUBSCRIPTION_KEY_HERE';
 
 // example://https://YOUR-RESOURCE_NAME.cognitiveservices.azure.com with NO trailing forward slash
-const authoringEndpoint = process.ENV["QNA_MAKER_AUTHORING_RESOURCE_ENDPOINT"];
+const authoringEndpoint = 'PASTE_YOUR_QNA_MAKER_AUTHORING_ENDPOINT_HERE';
+
+const runtimeEndpoint = 'PASTE_YOUR_QNA_MAKER_RUNTIME_ENDPOINT_HERE';
 
 const service = "/qnamaker/v4.0";
 // </snippet_variables>
@@ -152,7 +152,7 @@ const get_endpoint_key = async() => {
 // <snippet_query>
 const query = async(endpointKey, knowledgeBaseID)=>{
 
-  const uri =  `https://${resourceName}.azurewebsites.net/qnamaker/knowledgebases/${knowledgeBaseID}/generateAnswer`;
+  const uri = runtimeEndpoint + '/qnamaker/knowledgebases/${knowledgeBaseID}/generateAnswer';
 
   const question = {'question': 'Is the QnA Maker Service free?','top': 3};
 

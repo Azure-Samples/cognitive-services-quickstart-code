@@ -111,7 +111,7 @@ namespace ConsoleApp1
             property from CognitiveServicesAccountProperties. */
             CognitiveServicesAccount parameters = 
                 new CognitiveServicesAccount(null, null, kind, location, resource_name, new CognitiveServicesAccountProperties(customSubDomainName : subdomain_name), new Sku(account_tier));
-            var result = client.Accounts.Create(resource_group_name, account_tier, parameters);
+            var result = client.Accounts.Create(resource_group_name, resource_name, parameters);
             Console.WriteLine("Resource created.");
             Console.WriteLine("ID: " + result.Id);
             Console.WriteLine("Kind: " + result.Kind);

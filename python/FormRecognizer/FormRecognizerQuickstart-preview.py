@@ -273,9 +273,6 @@ except ResourceNotFoundError:
 # <snippet_id>
 idURL = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-REST-api-samples/master/curl/form-recognizer/id-license.jpg"
 
-poller = form_recognizer_client.begin_recognize_id_documents(idURL)
-id_documents = poller.result()
-
 for idx, id_document in enumerate(id_documents):
     print("--------Recognizing ID document #{}--------".format(idx+1))
     first_name = id_document.fields.get("FirstName")
@@ -299,9 +296,9 @@ for idx, id_document in enumerate(id_documents):
     address = id_document.fields.get("Address")
     if address:
         print("Address: {} has confidence: {}".format(address.value, address.confidence))
-    country = id_document.fields.get("Country")
-    if country:
-        print("Country: {} has confidence: {}".format(country.value, country.confidence))
+    country_region = id_document.fields.get("CountryRegion")
+    if country_region:
+        print("Country/Region: {} has confidence: {}".format(country_region.value, country_region.confidence))
     region = id_document.fields.get("Region")
     if region:
         print("Region: {} has confidence: {}".format(region.value, region.confidence))

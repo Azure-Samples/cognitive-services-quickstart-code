@@ -1,16 +1,7 @@
 require 'net/http'
 
-key_var_name = 'FACE_SUBSCRIPTION_KEY'
-if nil == ENV[key_var_name]
-    raise Exception("Please set/export the environment variable: #{key_var_name}\n")
-end
-subscription_key = ENV[key_var_name]
-
-endpoint_var_name = 'FACE_ENDPOINT'
-if nil == ENV[endpoint_var_name]
-    raise Exception("Please set/export the environment variable: #{endpoint_var_name}\n")
-end
-endpoint = ENV[endpoint_var_name]
+subscription_key = 'PASTE_YOUR_FACE_SUBSCRIPTION_KEY_HERE'
+endpoint = 'PASTE_YOUR_FACE_ENDPOINT_HERE'
 
 uri = URI(endpoint + '/face/v1.0/detect')
 uri.query = URI.encode_www_form({

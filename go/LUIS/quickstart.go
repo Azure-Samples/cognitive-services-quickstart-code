@@ -26,23 +26,12 @@ import (
  
 /* Install libraries from command line:
  *   go get github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v2.0/luis/authoring
- *   go get github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v3.0/luis/runtime
  *   go get github.com/Azure/go-autorest/autorest
  *   go get github.com/satori/go.uuid
- *
- * Configure the local environment:
- *   Set the following environment variables on your local machine using the
- *   appropriate method for your preferred shell (Bash, PowerShell, Command Prompt, etc.).
- *
- *   LUIS_AUTHORING_KEY
- *   LUIS_AUTHORING_ENDPOINT
- *
- * If the environment variable is created after the application is launched in a console or with Visual
- * Studio, the shell (or Visual Studio) needs to be closed and reloaded for the environment variable to take effect.
  */
 
-var authoring_key string = os.Getenv("LUIS_AUTHORING_KEY")
-var authoring_endpoint string = os.Getenv("LUIS_AUTHORING_ENDPOINT")
+var authoring_key string = "PASTE_YOUR_LUIS_AUTHORING_SUBSCRIPTION_KEY_HERE"
+var authoring_endpoint string = "PASTE_YOUR_LUIS_AUTHORING_ENDPOINT_HERE"
 //  END - Configure the local environment.
 
 func create_app() (string, string) {

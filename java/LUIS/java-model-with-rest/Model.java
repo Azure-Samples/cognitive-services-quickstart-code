@@ -34,14 +34,14 @@ public class Model
             // Values to modify.
 
             // YOUR-APP-ID: The App ID GUID found on the www.luis.ai Application Settings page.
-            String AppId = "YOUR-APP-ID";
+            String AppId = "PASTE_YOUR_LUIS_APP_ID_HERE";
 
             // YOUR-AUTHORING-KEY: Your LUIS authoring key, 32 character value.
-            String Key = "YOUR-AUTHORING-KEY";
+            String Key = "PASTE_YOUR_LUIS_AUTHORING_SUBSCRIPTION_KEY_HERE";
 
             // YOUR-AUTHORING-ENDPOINT: Replace this with your authoring key endpoint.
             // For example, "https://your-resource-name.cognitiveservices.azure.com/"
-            String Endpoint = "https://YOUR-AUTHORING-ENDPOINT/";
+            String Endpoint = "PASTE_YOUR_LUIS_AUTHORING_ENDPOINT_HERE";
 
             // NOTE: Replace this your version number. The Pizza app uses a version number of "0.1".
             String Version = "0.1";

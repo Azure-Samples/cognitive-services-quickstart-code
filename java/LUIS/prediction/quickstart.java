@@ -24,23 +24,10 @@ import java.net.*;
  */
 
 public class Quickstart {
-	/* Configure the local environment:
-	* Set the following environment variables on your local machine using the
-	* appropriate method for your preferred shell (Bash, PowerShell, Command
-	* Prompt, etc.).
-	*
-	* LUIS_AUTHORING_KEY
-	* LUIS_AUTHORING_ENDPOINT
-	* LUIS_RUNTIME_KEY
-	* LUIS_RUNTIME_ENDPOINT
-	*
-	* If the environment variable is created after the application is launched in a console or with Visual
-	* Studio, the shell (or Visual Studio) needs to be closed and reloaded to take the environment variable into account.
-	*/
-    private static String authoring_key = System.getenv("LUIS_AUTHORING_KEY");
-	private static String s_authoring_endpoint = System.getenv("LUIS_AUTHORING_ENDPOINT");
-    private static String runtime_key = System.getenv("LUIS_RUNTIME_KEY");
-	private static String s_runtime_endpoint = System.getenv("LUIS_RUNTIME_ENDPOINT");
+    private static String authoring_key = "PASTE_YOUR_LUIS_AUTHORING_SUBSCRIPTION_KEY_HERE";
+	private static String s_authoring_endpoint = "PASTE_YOUR_LUIS_AUTHORING_ENDPOINT_HERE";
+    private static String runtime_key = "PASTE_YOUR_LUIS_PREDICTION_SUBSCRIPTION_KEY_HERE";
+	private static String s_runtime_endpoint = "PASTE_YOUR_LUIS_PREDICTION_ENDPOINT_HERE";
 
 // Note EndpointAPI.fromString cannot parse a URL that begins with "https://", so we remove it.
 	private static com.microsoft.azure.cognitiveservices.language.luis.authoring.EndpointAPI authoring_endpoint = com.microsoft.azure.cognitiveservices.language.luis.authoring.EndpointAPI.fromString(s_authoring_endpoint.replace ("https://", ""));

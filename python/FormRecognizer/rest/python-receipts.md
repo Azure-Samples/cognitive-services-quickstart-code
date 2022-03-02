@@ -1,5 +1,3 @@
-
-
 # Quickstart: Extract receipt data using the Form Recognizer REST API with Python
 
 In this quickstart, you'll use the Azure Form Recognizer REST API with Python to extract and identify relevant information in USA sales receipts.
@@ -9,8 +7,9 @@ If you don't have an Azure subscription, create a [free account](https://azure.m
 ## Prerequisites
 
 To complete this quickstart, you must have:
-- [Python](https://www.python.org/downloads/) installed (if you want to run the sample locally).
-- An image of a receipt. You can use a [sample image](https://raw.githubusercontent.com/Azure-Samples/cognitive-services-REST-api-samples/master/curl/form-recognizer/contoso-allinone.jpg) for this quickstart.
+
+* [Python](https://www.python.org/downloads/) installed (if you want to run the sample locally).
+* An image of a receipt. You can use a [sample image](https://raw.githubusercontent.com/Azure-Samples/cognitive-services-REST-api-samples/master/curl/form-recognizer/contoso-allinone.jpg) for this quickstart.
 
 > [!NOTE]
 > This quickstart uses a local file. To use a receipt image accessed by URL instead, see the [reference documentation](https://westus2.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2/operations/AnalyzeReceiptAsync).
@@ -34,80 +33,43 @@ When your Form Recognizer resource finishes deploying, find and select it from t
 
 ## Analyze a receipt
 
-To start analyzing a receipt, you call the **[Analyze Receipt](https://westus2.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2/operations/AnalyzeReceiptAsync)** API using the Python script below. Before you run the script, make these changes:
+Azure Form Recognizer can analyze and extract information from sales receipts using its prebuilt receipt model. It combines our powerful Optical Character Recognition (OCR) capabilities with deep learning models to extract key information.
+
+#### [v2.1](#tab/v2-1)
+
+To start analyzing a receipt, you call the **[Analyze Receipt](https://westus.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2-1/operations/AnalyzeReceiptAsync)** API using the Python script below. Before you run the script, make these changes:
 
 1. Replace `<Endpoint>` with the endpoint that you obtained with your Form Recognizer subscription.
 1. Replace `<path to your receipt>` with the path to your local form document.
 1. Replace `<subscription key>` with the subscription key you copied from the previous step.
 
-#### [v2.0](#tab/v2-0)
-
 ```python
     ########### Python Form Recognizer Async Receipt #############
 
     import json
     import time
     from requests import get, post
-    
-    # Endpoint URL
-    endpoint = r"<Endpoint>"
-    apim_key = "<subscription key>"
-    post_url = endpoint + "/formrecognizer/v2.0/prebuilt/receipt/analyze"
-    source = r"<path to your receipt>"
-    
-    headers = {
-        # Request headers
-        'Content-Type': '<file type>',
-        'Ocp-Apim-Subscription-Key': apim_key,
-    }
-    
-    params = {
-        "includeTextDetails": True
-    }
-    
-    with open(source, "rb") as f:
-        data_bytes = f.read()
-    
-    try:
-        resp = post(url = post_url, data = data_bytes, headers = headers, params = params)
-        if resp.status_code != 202:
-            print("POST analyze failed:\n%s" % resp.text)
-            quit()
-        print("POST analyze succeeded:\n%s" % resp.headers)
-        get_url = resp.headers["operation-location"]
-    except Exception as e:
-        print("POST analyze failed:\n%s" % str(e))
-        quit()
-```
-    
-#### [v2.1-preview.2](#tab/v2-1)    
-```python
-    ########### Python Form Recognizer Async Receipt #############
 
-    import json
-    import time
-    from requests import get, post
-    
     # Endpoint URL
     endpoint = r"<Endpoint>"
     apim_key = "<subscription key>"
-    post_url = endpoint + "/formrecognizer/v2.1-preview.2/prebuilt/receipt/analyze"
+    post_url = endpoint + "/formrecognizer/v2.1/prebuilt/receipt/analyze"
     source = r"<path to your receipt>"
-    
+
     headers = {
         # Request headers
         'Content-Type': '<file type>',
         'Ocp-Apim-Subscription-Key': apim_key,
     }
-    
+
     params = {
         "includeTextDetails": True
         "locale": "en-US"
     }
-    
+
     with open(source, "rb") as f:
         data_bytes = f.read()
-    
+
     try:
         resp = post(url = post_url, data = data_bytes, headers = headers, params = params)
         if resp.status_code != 202:
@@ -123,7 +85,53 @@ To start analyzing a receipt, you call the **[Analyze Receipt](https://westus2.d
 > [!NOTE]
 > **Language input**
 >
-> The Analzye Receipt 2.1 release operation has an optional request parameter for language, locale of the receipt. Supported locales include: en-AU, en-CA, en-GB, en-IN, en-US. 
+> The Analzye Receipt 2.1 release operation has an optional request parameter for language, locale of the receipt. Supported locales include: en-AU, en-CA, en-GB, en-IN, en-US.
+
+#### [v2.0](#tab/v2-0)
+
+To start analyzing a receipt, you call the **[Analyze Receipt](https://westus2.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2/operations/AnalyzeReceiptAsync)** API using the Python script below. Before you run the script, make these changes:
+
+1. Replace `<Endpoint>` with the endpoint that you obtained with your Form Recognizer subscription.
+1. Replace `<path to your receipt>` with the path to your local form document.
+1. Replace `<subscription key>` with the subscription key you copied from the previous step.
+
+```python
+    ########### Python Form Recognizer Async Receipt #############
+
+    import json
+    import time
+    from requests import get, post
+
+    # Endpoint URL
+    endpoint = r"<Endpoint>"
+    apim_key = "<subscription key>"
+    post_url = endpoint + "/formrecognizer/v2.0/prebuilt/receipt/analyze"
+    source = r"<path to your receipt>"
+
+    headers = {
+        # Request headers
+        'Content-Type': '<file type>',
+        'Ocp-Apim-Subscription-Key': apim_key,
+    }
+
+    params = {
+        "includeTextDetails": True
+    }
+
+    with open(source, "rb") as f:
+        data_bytes = f.read()
+
+    try:
+        resp = post(url = post_url, data = data_bytes, headers = headers, params = params)
+        if resp.status_code != 202:
+            print("POST analyze failed:\n%s" % resp.text)
+            quit()
+        print("POST analyze succeeded:\n%s" % resp.headers)
+        get_url = resp.headers["operation-location"]
+    except Exception as e:
+        print("POST analyze failed:\n%s" % str(e))
+        quit()
+```
 
 ---
 
@@ -133,14 +141,18 @@ To start analyzing a receipt, you call the **[Analyze Receipt](https://westus2.d
 
 You'll receive a `202 (Success)` response that includes an **Operation-Location** header, which the script will print to the console. This header contains an operation ID that you can use to query the status of the asynchronous operation and get the results. In the following example value, the string after `operations/` is the operation ID.
 
-#### [v2.0](#tab/v2-0)    
+#### [v2.0](#tab/v2-0)
+
+```console
+https://westus.api.cognitive.microsoft.com/formrecognizer/v2.1/prebuilt/receipt/analyzeResults/acdd38aa-80e8-4671-a0fb-6260ce2c198a
+```
+
+#### [v2.1](#tab/v2-1)
+
 ```console
 https://cognitiveservice/formrecognizer/v2.0/prebuilt/receipt/operations/54f0b076-4e38-43e5-81bd-b85b8835fdfb
 ```
-#### [v2.1-preview.2](#tab/v2-1)    
-```console
-https://cognitiveservice/formrecognizer/v2.1-preview.2/prebuilt/receipt/operations/54f0b076-4e38-43e5-81bd-b85b8835fdfb
-```
+
 ---
 
 ## Get the receipt results
@@ -167,7 +179,7 @@ while n_try < n_tries:
             quit()
         # Analysis still running. Wait and retry.
         time.sleep(wait_sec)
-        n_try += 1     
+        n_try += 1
     except Exception as e:
         msg = "GET analyze results failed:\n%s" % str(e)
         print(msg)
@@ -186,24 +198,24 @@ See the following sample JSON output. The output has been shortened for readabil
 The `"readResults"` node contains all of the recognized text. Text is organized by page, then by line, then by individual words. The `"documentResults"` node contains the receipt-specific values that the model discovered. This is where you'll find useful key/value pairs like the tax, total, merchant address, and so on.
 
 ```json
-{ 
+{
   "status":"succeeded",
   "createdDateTime":"2019-12-17T04:11:24Z",
   "lastUpdatedDateTime":"2019-12-17T04:11:32Z",
-  "analyzeResult":{ 
+  "analyzeResult":{
     "version":"2.0.0",
-    "readResults":[ 
-      { 
+    "readResults":[
+      {
         "page":1,
         "angle":0.6893,
         "width":1688,
         "height":3000,
         "unit":"pixel",
         "language":"en",
-        "lines":[ 
-          { 
+        "lines":[
+          {
             "text":"Contoso",
-            "boundingBox":[ 
+            "boundingBox":[
               635,
               510,
               1086,
@@ -213,10 +225,10 @@ The `"readResults"` node contains all of the recognized text. Text is organized 
               643,
               604
             ],
-            "words":[ 
-              { 
+            "words":[
+              {
                 "text":"Contoso",
-                "boundingBox":[ 
+                "boundingBox":[
                   639,
                   510,
                   1087,
@@ -234,24 +246,24 @@ The `"readResults"` node contains all of the recognized text. Text is organized 
         ]
       }
     ],
-    "documentResults":[ 
-      { 
+    "documentResults":[
+      {
         "docType":"prebuilt:receipt",
-        "pageRange":[ 
+        "pageRange":[
           1,
           1
         ],
-        "fields":{ 
-          "ReceiptType":{ 
+        "fields":{
+          "ReceiptType":{
             "type":"string",
             "valueString":"Itemized",
             "confidence":0.692
           },
-          "MerchantName":{ 
+          "MerchantName":{
             "type":"string",
             "valueString":"Contoso Contoso",
             "text":"Contoso Contoso",
-            "boundingBox":[ 
+            "boundingBox":[
               378.2,
               292.4,
               1117.7,
@@ -263,16 +275,16 @@ The `"readResults"` node contains all of the recognized text. Text is organized 
             ],
             "page":1,
             "confidence":0.613,
-            "elements":[ 
+            "elements":[
               "#/readResults/0/lines/0/words/0",
               "#/readResults/0/lines/1/words/0"
             ]
           },
-          "MerchantAddress":{ 
+          "MerchantAddress":{
             "type":"string",
             "valueString":"123 Main Street Redmond, WA 98052",
             "text":"123 Main Street Redmond, WA 98052",
-            "boundingBox":[ 
+            "boundingBox":[
               302,
               675.8,
               848.1,
@@ -284,7 +296,7 @@ The `"readResults"` node contains all of the recognized text. Text is organized 
             ],
             "page":1,
             "confidence":0.99,
-            "elements":[ 
+            "elements":[
               "#/readResults/0/lines/2/words/0",
               "#/readResults/0/lines/2/words/1",
               "#/readResults/0/lines/2/words/2",
@@ -293,11 +305,11 @@ The `"readResults"` node contains all of the recognized text. Text is organized 
               "#/readResults/0/lines/3/words/2"
             ]
           },
-          "MerchantPhoneNumber":{ 
+          "MerchantPhoneNumber":{
             "type":"phoneNumber",
             "valuePhoneNumber":"+19876543210",
             "text":"987-654-3210",
-            "boundingBox":[ 
+            "boundingBox":[
               278,
               1004,
               656.3,
@@ -309,15 +321,15 @@ The `"readResults"` node contains all of the recognized text. Text is organized 
             ],
             "page":1,
             "confidence":0.99,
-            "elements":[ 
+            "elements":[
               "#/readResults/0/lines/4/words/0"
             ]
           },
-          "TransactionDate":{ 
+          "TransactionDate":{
             "type":"date",
             "valueDate":"2019-06-10",
             "text":"6/10/2019",
-            "boundingBox":[ 
+            "boundingBox":[
               265.1,
               1228.4,
               525,
@@ -329,15 +341,15 @@ The `"readResults"` node contains all of the recognized text. Text is organized 
             ],
             "page":1,
             "confidence":0.99,
-            "elements":[ 
+            "elements":[
               "#/readResults/0/lines/5/words/0"
             ]
           },
-          "TransactionTime":{ 
+          "TransactionTime":{
             "type":"time",
             "valueTime":"13:59:00",
             "text":"13:59",
-            "boundingBox":[ 
+            "boundingBox":[
               541,
               1248,
               677.3,
@@ -349,20 +361,20 @@ The `"readResults"` node contains all of the recognized text. Text is organized 
             ],
             "page":1,
             "confidence":0.977,
-            "elements":[ 
+            "elements":[
               "#/readResults/0/lines/5/words/1"
             ]
           },
-          "Items":{ 
+          "Items":{
             "type":"array",
-            "valueArray":[ 
-              { 
+            "valueArray":[
+              {
                 "type":"object",
-                "valueObject":{ 
-                  "Quantity":{ 
+                "valueObject":{
+                  "Quantity":{
                     "type":"number",
                     "text":"1",
-                    "boundingBox":[ 
+                    "boundingBox":[
                       245.1,
                       1581.5,
                       300.9,
@@ -374,15 +386,15 @@ The `"readResults"` node contains all of the recognized text. Text is organized 
                     ],
                     "page":1,
                     "confidence":0.92,
-                    "elements":[ 
+                    "elements":[
                       "#/readResults/0/lines/7/words/0"
                     ]
                   },
-                  "Name":{ 
+                  "Name":{
                     "type":"string",
                     "valueString":"Cappuccino",
                     "text":"Cappuccino",
-                    "boundingBox":[ 
+                    "boundingBox":[
                       322,
                       1586,
                       654.2,
@@ -394,15 +406,15 @@ The `"readResults"` node contains all of the recognized text. Text is organized 
                     ],
                     "page":1,
                     "confidence":0.923,
-                    "elements":[ 
+                    "elements":[
                       "#/readResults/0/lines/7/words/1"
                     ]
                   },
-                  "TotalPrice":{ 
+                  "TotalPrice":{
                     "type":"number",
                     "valueNumber":2.2,
                     "text":"$2.20",
-                    "boundingBox":[ 
+                    "boundingBox":[
                       1107.7,
                       1584,
                       1263,
@@ -414,7 +426,7 @@ The `"readResults"` node contains all of the recognized text. Text is organized 
                     ],
                     "page":1,
                     "confidence":0.918,
-                    "elements":[ 
+                    "elements":[
                       "#/readResults/0/lines/8/words/0"
                     ]
                   }
@@ -423,11 +435,11 @@ The `"readResults"` node contains all of the recognized text. Text is organized 
               ...
             ]
           },
-          "Subtotal":{ 
+          "Subtotal":{
             "type":"number",
             "valueNumber":11.7,
             "text":"11.70",
-            "boundingBox":[ 
+            "boundingBox":[
               1146,
               2221,
               1297.3,
@@ -439,15 +451,15 @@ The `"readResults"` node contains all of the recognized text. Text is organized 
             ],
             "page":1,
             "confidence":0.955,
-            "elements":[ 
+            "elements":[
               "#/readResults/0/lines/13/words/1"
             ]
           },
-          "Tax":{ 
+          "Tax":{
             "type":"number",
             "valueNumber":1.17,
             "text":"1.17",
-            "boundingBox":[ 
+            "boundingBox":[
               1190,
               2359,
               1304,
@@ -459,15 +471,15 @@ The `"readResults"` node contains all of the recognized text. Text is organized 
             ],
             "page":1,
             "confidence":0.979,
-            "elements":[ 
+            "elements":[
               "#/readResults/0/lines/15/words/1"
             ]
           },
-          "Tip":{ 
+          "Tip":{
             "type":"number",
             "valueNumber":1.63,
             "text":"1.63",
-            "boundingBox":[ 
+            "boundingBox":[
               1094,
               2479,
               1267.7,
@@ -479,15 +491,15 @@ The `"readResults"` node contains all of the recognized text. Text is organized 
             ],
             "page":1,
             "confidence":0.941,
-            "elements":[ 
+            "elements":[
               "#/readResults/0/lines/17/words/1"
             ]
           },
-          "Total":{ 
+          "Total":{
             "type":"number",
             "valueNumber":14.5,
             "text":"$14.50",
-            "boundingBox":[ 
+            "boundingBox":[
               1034.2,
               2617,
               1387.5,
@@ -499,7 +511,7 @@ The `"readResults"` node contains all of the recognized text. Text is organized 
             ],
             "page":1,
             "confidence":0.985,
-            "elements":[ 
+            "elements":[
               "#/readResults/0/lines/19/words/0"
             ]
           }

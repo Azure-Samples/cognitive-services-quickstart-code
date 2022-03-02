@@ -58,9 +58,8 @@ func main() {
 	/*
 	Authenticate
 	*/
-	// Add FACE_SUBSCRIPTION_KEY, FACE_ENDPOINT, and AZURE_SUBSCRIPTION_ID to your environment variables.
-	subscriptionKey := os.Getenv("FACE_SUBSCRIPTION_KEY")
-	endpoint := os.Getenv("FACE_ENDPOINT")
+	subscriptionKey := "PASTE_YOUR_FACE_SUBSCRIPTION_KEY_HERE"
+	endpoint := "PASTE_YOUR_FACE_ENDPOINT_HERE"
 
 	// Client used for Detect Faces, Find Similar, and Verify examples.
 	client := face.NewClient(endpoint)
@@ -83,7 +82,7 @@ func main() {
 	singleImageURL := face.ImageURL { URL: &singleFaceImageURL } 
 	singleImageName := path.Base(singleFaceImageURL)
 	// Array types chosen for the attributes of Face
-	attributes := []face.AttributeType {"age", "emotion", "gender"}
+	attributes := []face.AttributeType {"age", "emotion"}
 	returnFaceID := true
 	returnRecognitionModel := false
 	returnFaceLandmarks := false
@@ -103,11 +102,10 @@ func main() {
 	fmt.Println("Detected face in (" + singleImageName + ") with ID(s): ")
 	fmt.Println(dFaces[0].FaceID)
 	fmt.Println()
-	// Find/display the age and gender attributes
+	// Find/display the age attribute
 	for _, dFace := range dFaces { 
 		fmt.Println("Face attributes:")
 		fmt.Printf("  Age: %.0f", *dFace.FaceAttributes.Age) 
-		fmt.Println("\n  Gender: " + dFace.FaceAttributes.Gender) 
 	} 
 	// Get/display the emotion attribute
 	emotionStruct := *dFaces[0].FaceAttributes.Emotion

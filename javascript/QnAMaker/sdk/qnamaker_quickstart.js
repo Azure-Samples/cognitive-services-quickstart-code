@@ -46,7 +46,7 @@ const qnamaker_runtime = require("@azure/cognitiveservices-qnamaker-runtime");
 * The value of `runtime_endpoint` has the format https://YOUR-RESOURCE-NAME.azurewebsites.net.
 */
 // <Resourcevariables>
-const subscription_key = "PASTE_YOUR_QNA_MAKER_SUBSCRIPTION_KEY_HERE";
+const subscription_key = "PASTE_YOUR_QNA_MAKER_AUTHORING_SUBSCRIPTION_KEY_HERE";
 const endpoint = "PASTE_YOUR_QNA_MAKER_AUTHORING_ENDPOINT_HERE";
 const runtime_endpoint = "PASTE_YOUR_QNA_MAKER_RUNTIME_ENDPOINT_HERE";
 // </Resourcevariables>

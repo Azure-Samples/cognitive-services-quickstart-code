@@ -36,7 +36,7 @@ import os
 import time
 
 from azure.cognitiveservices.knowledge.qnamaker import QnAMakerClient
-from azure.cognitiveservices.knowledge.qnamaker.models import QnADTO, MetadataDTO, CreateKbDTO, OperationStateType, UpdateKbOperationDTO, UpdateKbOperationDTOAdd, EndpointKeysDTO, QnADTOContext, PromptDTO, QueryDTO
+from azure.cognitiveservices.knowledge.qnamaker.models import FileDTO, QnADTO, MetadataDTO, CreateKbDTO, OperationStateType, UpdateKbOperationDTO, UpdateKbOperationDTOAdd, EndpointKeysDTO, QnADTOContext, PromptDTO, QueryDTO
 
 from msrest.authentication import CognitiveServicesCredentials
 # </Dependencies>
@@ -94,7 +94,12 @@ def create_kb(client):
     )
 
     urls = []
-    files=[]
+    files = [
+        FileDTO(
+            file_name = "structured.docx",
+            file_uri = "https://github.com/Azure-Samples/cognitive-services-sample-data-files/raw/master/qna-maker/data-source-formats/structured.docx"
+        )]
+
 
     create_kb_dto = CreateKbDTO(
         name="QnA Maker Python SDK Quickstart",

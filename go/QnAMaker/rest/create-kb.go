@@ -119,8 +119,8 @@ func main() {
 *
 * The value of `endpoint` has the format https://YOUR-RESOURCE-NAME.cognitiveservices.azure.com.
 */
-	var subscription_key string = "PASTE_YOUR_QNA_MAKER_SUBSCRIPTION_KEY_HERE"
-	var endpoint string = "PASTE_YOUR_QNA_MAKER_ENDPOINT_HERE"
+	var subscription_key string = "PASTE_YOUR_QNA_MAKER_AUTHORING_SUBSCRIPTION_KEY_HERE"
+	var endpoint string = "PASTE_YOUR_QNA_MAKER_AUTHORING_ENDPOINT_HERE"
 
 	var service string = "/qnamaker/v4.0"
 	var method string = "/knowledgebases/create"

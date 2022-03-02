@@ -11,16 +11,8 @@ require 'azure_cognitiveservices_spellcheck'
 # For more information about how to use the Azure SDK for Ruby, see:
 # https://azure.microsoft.com/en-us/resources/samples/cognitive-services-ruby-sdk-samples/
 
-if (!ENV["BING_SPELL_CHECK_SUBSCRIPTION_KEY"])
-	raise "Please set/export the following environment variable: BING_SPELL_CHECK_SUBSCRIPTION_KEY"
-else
-	subscription_key = ENV["BING_SPELL_CHECK_SUBSCRIPTION_KEY"]
-end
-if (!ENV["BING_SPELL_CHECK_ENDPOINT"])
-	raise "Please set/export the following environment variable: BING_SPELL_CHECK_ENDPOINT"
-else
-	endpoint = ENV["BING_SPELL_CHECK_ENDPOINT"]
-end
+subscription_key = 'PASTE_YOUR_SPELL_CHECK_SUBSCRIPTION_KEY_HERE'
+endpoint = 'PASTE_YOUR_SPELL_CHECK_ENDPOINT_HERE'
 
 client = Azure::CognitiveServices::SpellCheck::V1_0::SpellCheckClient.new()
 client.credentials = MsRestAzure::CognitiveServicesCredentials.new(subscription_key)
