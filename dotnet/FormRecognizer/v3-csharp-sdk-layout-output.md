@@ -2,7 +2,7 @@
 
 [Reference documentation](https://docs.microsoft.com/dotnet/api/azure.ai.formrecognizer.documentanalysis?view=azure-dotnet-preview&preserve-view=true) | [Library Source Code](https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/) | [Package (NuGet)](https://www.nuget.org/packages/Azure.AI.FormRecognizer/4.0.0-beta.3) | [Samples](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/README.md)
 
-You can get started using the Azure Form Recognizer layout model with the [C# programming language quickstart](quickstarts/try-v3-csharp-sdk.md#layout-model). The layout model analyzes and extracts tables, lines, words, and selection marks like radio buttons and check boxes from forms and documents, without the need to train a model.. Here is the expected outcome from the general document model quickstart code:
+You can get started using the Azure Form Recognizer layout model with the [C# programming language quickstart](quickstarts/try-v3-csharp-sdk.md#layout-model). The layout model analyzes and extracts tables, lines, words, and selection marks like radio buttons and check boxes from forms and documents, without the need to train a model. Here is the expected outcome from the layout model quickstart code:
 
 ## Layout model output
 
