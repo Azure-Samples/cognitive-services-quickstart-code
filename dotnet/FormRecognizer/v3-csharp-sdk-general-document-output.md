@@ -1,6 +1,6 @@
 # Quickstart: Form Recognizer C# SDK v3.0 output
 
-## [**General document model**](https://docs.microsoft.com/azure/applied-ai-services/form-recognizer/quickstarts/try-v3-csharp-sdk#general-document-model): 
+## [**General document model**](https://docs.microsoft.com/azure/applied-ai-services/form-recognizer/quickstarts/try-v3-csharp-sdk#general-document-model)
   
 
 Detected key-value pairs:
