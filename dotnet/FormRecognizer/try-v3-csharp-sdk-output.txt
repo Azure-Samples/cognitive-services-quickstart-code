@@ -1,4 +1,5 @@
-The following is the output from Quickstart: Form Recognizer C# SDK v3.0 - Azure Applied AI Services | Microsoft Docs https://docs.microsoft.com/en-us/azure/applied-ai-services/form-recognizer/quickstarts/try-v3-csharp-sdk#general-document-model
+The following is the output from Quickstart: Form Recognizer C# SDK v3.0 General document model: 
+https://docs.microsoft.com/en-us/azure/applied-ai-services/form-recognizer/quickstarts/try-v3-csharp-sdk#general-document-model
 
 Detected key-value pairs:
   Found key with no value: '?'
