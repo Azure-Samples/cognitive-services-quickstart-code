@@ -6,7 +6,7 @@ You can get started using the Azure Form Recognizer layout model with the [Pytho
 
 ## Layout model output
 
-----Analyzing layout from page #1----
+----Analyzing layout from page # 1----
 
 Page has width: 8.5 and height: 11.0, measured with unit: inch
 
