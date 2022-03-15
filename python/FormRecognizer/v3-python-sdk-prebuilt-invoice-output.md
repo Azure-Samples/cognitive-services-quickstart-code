@@ -6,7 +6,7 @@ You can get started using the Azure Form Recognizer layout model with the [Pytho
 
 ## Prebuilt-invoice output
 
---------Recognizing invoice #1--------
+--------Recognizing invoice # 1--------
 
 Vendor Name: CONTOSO LTD. has confidence: 0.919
 
