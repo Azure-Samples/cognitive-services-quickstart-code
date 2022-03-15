@@ -7,11 +7,19 @@ You can get started using the Azure Form Recognizer prebuilt model with the [C# 
 ## Prebuilt invoice model output
 
 Document 0:
+
 Vendor Name: 'CONTOSO LTD.', with confidence 0.962
+
 Customer Name: 'MICROSOFT CORPORATION', with confidence 0.951
+
 Item:
-  Description: 'Test for 23 fields', with confidence 0.899
-  Amount: '100', with confidence 0.902
+
+  Description: 'Test for 23 fields', with confidence 0.899
+
+  Amount: '100', with confidence 0.902
+
 Sub Total: '100', with confidence 0.979
+
 Total Tax: '10', with confidence 0.979
+
 Invoice Total: '110', with confidence 0.973
