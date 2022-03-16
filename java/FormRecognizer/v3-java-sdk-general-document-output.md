@@ -2,7 +2,7 @@
 
 [Reference documentation](/java/api/overview/azure/ai-formrecognizer-readme?view=azure-java-preview&preserve-view=true) | [Library source code](https://github.com/Azure/azure-sdk-for-java/tree/azure-ai-formrecognizer_4.0.0-beta.4/sdk/formrecognizer/azure-ai-formrecognizer/) | [Package (Maven)](https://search.maven.org/artifact/com.azure/azure-ai-formrecognizer/4.0.0-beta.4/jar) | [Samples](https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/formrecognizer/azure-ai-formrecognizer/src/samples/README.md)
 
-You can get started using the Azure Form Recognizer general document model with the [Java programming language quickstart](https://docs.microsoft.com/en-us/azure/applied-ai-services/form-recognizer/quickstarts/try-v3-java-sdk). The general document model analyzes and extracts text, tables, structure, key-value pairs, and named entities from forms and documents. Here is the expected outcome from the general document model quickstart code:
+You can get started using the Azure Form Recognizer general document model with the [Java programming language quickstart](https://docs.microsoft.com/en-us/azure/applied-ai-services/form-recognizer/quickstarts/try-v3-java-sdk#general-document-model). The general document model analyzes and extracts text, tables, structure, key-value pairs, and named entities from forms and documents. Here is the expected outcome from the general document model quickstart code:
 
 ## General document model output
 
