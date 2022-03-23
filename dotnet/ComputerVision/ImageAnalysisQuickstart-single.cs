@@ -48,11 +48,6 @@ namespace ComputerVisionQuickstart
         static string subscriptionKey = "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE";
         static string endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE";
 
-        // Download these images (link in prerequisites), or you can use any appropriate image on your local machine.
-        private const string ANALYZE_LOCAL_IMAGE = "celebrities.jpg";
-        private const string DETECT_LOCAL_IMAGE = "objects.jpg";
-        private const string DETECT_DOMAIN_SPECIFIC_LOCAL = "celebrities.jpg";
-
         // URL image used for analyzing an image (image of puppy)
         private const string ANALYZE_URL_IMAGE = "https://moderatorsampleimages.blob.core.windows.net/samples/sample16.png";
 
@@ -90,11 +85,7 @@ namespace ComputerVisionQuickstart
 
             List<VisualFeatureTypes?> features = new List<VisualFeatureTypes?>()
             {
-                VisualFeatureTypes.Categories, VisualFeatureTypes.Description,
-                VisualFeatureTypes.Faces, VisualFeatureTypes.ImageType,
-                VisualFeatureTypes.Tags, VisualFeatureTypes.Adult,
-                VisualFeatureTypes.Color, VisualFeatureTypes.Brands,
-                VisualFeatureTypes.Objects
+                VisualFeatureTypes.Tags
             };
 
             Console.WriteLine($"Analyzing the image {Path.GetFileName(imageUrl)}...");
@@ -109,74 +100,6 @@ namespace ComputerVisionQuickstart
                 Console.WriteLine($"{caption.Text} with confidence {caption.Confidence}");
             }
             Console.WriteLine();
-
-            // Display categories the image is divided into.
-            Console.WriteLine("Categories:");
-            foreach (var category in results.Categories)
-            {
-                Console.WriteLine($"{category.Name} with confidence {category.Score}");
-            }
-            Console.WriteLine();
-
-            // Image tags and their confidence score
-            Console.WriteLine("Tags:");
-            foreach (var tag in results.Tags)
-            {
-                Console.WriteLine($"{tag.Name} {tag.Confidence}");
-            }
-            Console.WriteLine();
-
-            // Objects
-            Console.WriteLine("Objects:");
-            foreach (var obj in results.Objects)
-            {
-                Console.WriteLine($"{obj.ObjectProperty} with confidence {obj.Confidence} at location {obj.Rectangle.X}, " +
-                  $"{obj.Rectangle.X + obj.Rectangle.W}, {obj.Rectangle.Y}, {obj.Rectangle.Y + obj.Rectangle.H}");
-            }
-            Console.WriteLine();
-
-            // Faces
-            Console.WriteLine("Faces:");
-            foreach (var face in results.Faces)
-            {
-                Console.WriteLine($"A {face.Gender} of age {face.Age} at location {face.FaceRectangle.Left}, " +
-                  $"{face.FaceRectangle.Left}, {face.FaceRectangle.Top + face.FaceRectangle.Width}, " +
-                  $"{face.FaceRectangle.Top + face.FaceRectangle.Height}");
-            }
-            Console.WriteLine();
-
-            // Adult or racy content, if any.
-            Console.WriteLine("Adult:");
-            Console.WriteLine($"Has adult content: {results.Adult.IsAdultContent} with confidence {results.Adult.AdultScore}");
-            Console.WriteLine($"Has racy content: {results.Adult.IsRacyContent} with confidence {results.Adult.RacyScore}");
-            Console.WriteLine($"Has gory content: {results.Adult.IsGoryContent} with confidence {results.Adult.GoreScore}");
-            Console.WriteLine();
-
-            // Well-known (or custom, if set) brands.
-            Console.WriteLine("Brands:");
-            foreach (var brand in results.Brands)
-            {
-                Console.WriteLine($"Logo of {brand.Name} with confidence {brand.Confidence} at location {brand.Rectangle.X}, " +
-                  $"{brand.Rectangle.X + brand.Rectangle.W}, {brand.Rectangle.Y}, {brand.Rectangle.Y + brand.Rectangle.H}");
-            }
-            Console.WriteLine();
-
-            // Celebrities in image, if any.
-            Console.WriteLine("Celebrities:");
-            foreach (var category in results.Categories)
-            {
-                if (category.Detail?.Celebrities != null)
-                {
-                    foreach (var celeb in category.Detail.Celebrities)
-                    {
-                        Console.WriteLine($"{celeb.Name} with confidence {celeb.Confidence} at location {celeb.FaceRectangle.Left}, " +
-                          $"{celeb.FaceRectangle.Top}, {celeb.FaceRectangle.Height}, {celeb.FaceRectangle.Width}");
-                    }
-                }
-            }
-            Console.WriteLine();
-
-            
         }
     }
 }
