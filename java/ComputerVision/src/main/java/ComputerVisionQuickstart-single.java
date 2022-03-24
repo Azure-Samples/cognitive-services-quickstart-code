@@ -44,23 +44,17 @@ public class ComputerVisionQuickstart {
     private static void ReadFromFile(ComputerVisionClient client) {
         System.out.println("-----------------------------------------------");
         
-        String localFilePath = "src\\main\\resources\\myImage.png";
-        System.out.println("Read with local file: " + localFilePath);
+        String remoteTextImageURL = "https://intelligentkioskstore.blob.core.windows.net/visionapi/suggestedphotos/3.png";
+        System.out.println("Read with URL: " + remoteTextImageURL);
 
         try {
-            File rawImage = new File(localFilePath);
-            byte[] localImageBytes = Files.readAllBytes(rawImage.toPath());
-
             // Cast Computer Vision to its implementation to expose the required methods
             ComputerVisionImpl vision = (ComputerVisionImpl) client.computerVision();
 
             // Read in remote image and response header
-            ReadInStreamHeaders responseHeader =
-                    vision.readInStreamWithServiceResponseAsync(localImageBytes, null, null)
-                        .toBlocking()
-                        .single()
-                        .headers();
-            // Extract the operationLocation from the response header
+            void responseHeader = vision.read(remoteTextImageURL, null);
+
+            // Extract the operation Id from the operationLocation header
             String operationLocation = responseHeader.operationLocation();
             System.out.println("Operation Location:" + operationLocation);
 

@@ -50,17 +50,6 @@ END - Authenticate
 '''
 
 '''
-Quickstart variables
-These variables are shared by several examples
-'''
-
-remote_image_url = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/landmark.jpg"
-
-'''
-END - Quickstart variables
-'''
-
-'''
 OCR: Read File using the Read API, extract text - remote
 This example will extract text in an image, then print results, line by line.
 This API call can also extract handwriting style text (not shown).
@@ -71,7 +60,6 @@ read_image_url = "https://raw.githubusercontent.com/MicrosoftDocs/azure-docs/mas
 
 # Call API with URL and raw response (allows you to get the operation location)
 read_response = computervision_client.read(read_image_url,  raw=True)
-
 
 # Get the operation location (URL with an ID at the end) from the response
 read_operation_location = read_response.headers["Operation-Location"]
