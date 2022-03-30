@@ -222,8 +222,11 @@ public class ImageAnalysisQuickstart {
          *
          * Set a string variable equal to the path of a remote image.
          */
+        // <snippet_urlimage>
         String pathToRemoteImage = "https://github.com/Azure-Samples/cognitive-services-sample-data-files/raw/master/ComputerVision/Images/faces.jpg";
+        // </snippet_urlimage>
 
+        // <snippet_features_remote>
         // This list defines the features to be extracted from the image.
         List<VisualFeatureTypes> featuresToExtractFromRemoteImage = new ArrayList<>();
         featuresToExtractFromRemoteImage.add(VisualFeatureTypes.DESCRIPTION);
@@ -233,10 +236,12 @@ public class ImageAnalysisQuickstart {
         featuresToExtractFromRemoteImage.add(VisualFeatureTypes.ADULT);
         featuresToExtractFromRemoteImage.add(VisualFeatureTypes.COLOR);
         featuresToExtractFromRemoteImage.add(VisualFeatureTypes.IMAGE_TYPE);
+        // </snippet_features_remote>
 
         System.out.println("\n\nAnalyzing an image from a URL ...");
 
         try {
+            // <snippet_analyze>
             // Call the Computer Vision service and tell it to analyze the loaded image.
             ImageAnalysis analysis = compVisClient.computerVision().analyzeImage().withUrl(pathToRemoteImage)
                     .withVisualFeatures(featuresToExtractFromRemoteImage).execute();
@@ -311,6 +316,7 @@ public class ImageAnalysisQuickstart {
             System.out.println("\nImage type:");
             System.out.println("Clip art type: " + analysis.imageType().clipArtType());
             System.out.println("Line drawing type: " + analysis.imageType().lineDrawingType());
+            // </snippet_analyze>
         }
 
         catch (Exception e) {

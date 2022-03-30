@@ -1,10 +1,3 @@
-/*  This Quickstart for the Azure Cognitive Services Computer Vision API shows how to analyze
- *  an image and recognize text for both a local and remote (URL) image.
- *
- *  - Extract Text (OCR) with the new Read API to find text in an image or document.
- */
-
-// <snippet_single>
 import com.microsoft.azure.cognitiveservices.vision.computervision.*;
 import com.microsoft.azure.cognitiveservices.vision.computervision.implementation.ComputerVisionImpl;
 import com.microsoft.azure.cognitiveservices.vision.computervision.models.*;
@@ -28,8 +21,8 @@ public class ComputerVisionQuickstart {
         // Create an authenticated Computer Vision client.
         ComputerVisionClient compVisClient = Authenticate(subscriptionKey, endpoint); 
 
-        // Read from local file
-        ReadFromFile(compVisClient);
+        // Read from remote image
+        ReadFromUrl(compVisClient);
     }
 
     public static ComputerVisionClient Authenticate(String subscriptionKey, String endpoint){
@@ -37,11 +30,10 @@ public class ComputerVisionQuickstart {
     }
     
     /**
-     * OCR with READ : Performs a Read Operation on a local image
+     * OCR with READ : Performs a Read Operation
      * @param client instantiated vision client
-     * @param localFilePath local file path from which to perform the read operation against
      */
-    private static void ReadFromFile(ComputerVisionClient client) {
+    private static void ReadFromUrl(ComputerVisionClient client) {
         System.out.println("-----------------------------------------------");
         
         String remoteTextImageURL = "https://intelligentkioskstore.blob.core.windows.net/visionapi/suggestedphotos/3.png";
@@ -52,7 +44,10 @@ public class ComputerVisionQuickstart {
             ComputerVisionImpl vision = (ComputerVisionImpl) client.computerVision();
 
             // Read in remote image and response header
-            void responseHeader = vision.read(remoteTextImageURL, null);
+            ReadHeaders responseHeader = vision.readWithServiceResponseAsync(remoteTextImageURL, null, null,null)
+                    .toBlocking()
+                    .single()
+                    .headers();
 
             // Extract the operation Id from the operationLocation header
             String operationLocation = responseHeader.operationLocation();
@@ -127,4 +122,3 @@ public class ComputerVisionQuickstart {
         }
     }
 }
-// </snippet_single>
