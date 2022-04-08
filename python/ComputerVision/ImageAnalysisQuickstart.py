@@ -74,7 +74,7 @@ These variables are shared by several examples
 # Detect domain-specific content, Detect image types, Detect objects
 images_folder = os.path.join (os.path.dirname(os.path.abspath(__file__)), "images")
 # <snippet_remoteimage>
-remote_image_url = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/landmark.jpg"
+remote_image_url = "https://moderatorsampleimages.blob.core.windows.net/samples/sample16.png"
 # </snippet_remoteimage>
 '''
 END - Quickstart variables
@@ -104,27 +104,6 @@ print()
 END - Describe an Image - local
 '''
 
-# <snippet_describe>
-'''
-Describe an Image - remote
-This example describes the contents of an image with the confidence score.
-'''
-print("===== Describe an image - remote =====")
-# Call API
-description_results = computervision_client.describe_image(remote_image_url )
-
-# Get the captions (descriptions) from the response, with confidence level
-print("Description of remote image: ")
-if (len(description_results.captions) == 0):
-    print("No description detected.")
-else:
-    for caption in description_results.captions:
-        print("'{}' with confidence {:.2f}%".format(caption.text, caption.confidence * 100))
-# </snippet_describe>
-print()
-'''
-END - Describe an Image - remote
-'''
 
 '''
 Categorize an Image -  local
@@ -150,29 +129,146 @@ print()
 END - Categorize an Image - local
 '''
 
-# <snippet_categorize>
-'''
-Categorize an Image - remote
-This example extracts (general) categories from a remote image with a confidence score.
-'''
-print("===== Categorize an image - remote =====")
+# <snippet_features_remote>
+print("===== Analyze an image - remote =====")
 # Select the visual feature(s) you want.
-remote_image_features = ["categories"]
+remote_image_features = ["categories","brands","adult","color","description","faces","image_type","objects","tags"]
+remote_image_details = ["celebrities","landmarks"]
+# </snippet_features_remote>
+
+# <snippet_analyze>
 # Call API with URL and features
-categorize_results_remote = computervision_client.analyze_image(remote_image_url , remote_image_features)
+results_remote = computervision_client.analyze_image(remote_image_url , remote_image_features, remote_image_details)
 
 # Print results with confidence score
 print("Categories from remote image: ")
-if (len(categorize_results_remote.categories) == 0):
+if (len(results_remote.categories) == 0):
     print("No categories detected.")
 else:
-    for category in categorize_results_remote.categories:
+    for category in results_remote.categories:
         print("'{}' with confidence {:.2f}%".format(category.name, category.score * 100))
-# </snippet_categorize>
 print()
-'''
- END - Categorize an Image - remote
-'''
+
+# Detect faces
+# Print the results with gender, age, and bounding box
+print("Faces in the remote image: ")
+if (len(results_remote.faces) == 0):
+    print("No faces detected.")
+else:
+    for face in results_remote.faces:
+        print("'{}' of age {} at location {}, {}, {}, {}".format(face.gender, face.age, \
+        face.face_rectangle.left, face.face_rectangle.top, \
+        face.face_rectangle.left + face.face_rectangle.width, \
+        face.face_rectangle.top + face.face_rectangle.height))
+
+# Adult content
+# Print results with adult/racy score
+print("Analyzing remote image for adult or racy content ... ")
+print("Is adult content: {} with confidence {:.2f}".format(results_remote.adult.is_adult_content, results_remote.adult.adult_score * 100))
+print("Has racy content: {} with confidence {:.2f}".format(results_remote.adult.is_racy_content, results_remote.adult.racy_score * 100))
+# </snippet_adult>
+print()
+
+# Detect colors
+# Print results of color scheme
+print("Getting color scheme of the remote image: ")
+print("Is black and white: {}".format(results_remote.color.is_bw_img))
+print("Accent color: {}".format(results_remote.color.accent_color))
+print("Dominant background color: {}".format(results_remote.color.dominant_color_background))
+print("Dominant foreground color: {}".format(results_remote.color.dominant_color_foreground))
+print("Dominant colors: {}".format(results_remote.color.dominant_colors))
+# </snippet_color>
+print()
+
+# Detect image type
+# Prints type results with degree of accuracy
+print("Type of remote image:")
+if results_remote.image_type.clip_art_type == 0:
+    print("Image is not clip art.")
+elif results_remote.image_type.line_drawing_type == 1:
+    print("Image is ambiguously clip art.")
+elif results_remote.image_type.line_drawing_type == 2:
+    print("Image is normal clip art.")
+else:
+    print("Image is good clip art.")
+
+if results_remote.image_type.line_drawing_type == 0:
+    print("Image is not a line drawing.")
+else:
+    print("Image is a line drawing")
+
+# Detect brands
+print("Detecting brands in remote image: ")
+if len(results_remote.brands) == 0:
+    print("No brands detected.")
+else:
+    for brand in results_remote.brands:
+        print("'{}' brand detected with confidence {:.1f}% at location {}, {}, {}, {}".format( \
+        brand.name, brand.confidence * 100, brand.rectangle.x, brand.rectangle.x + brand.rectangle.w, \
+        brand.rectangle.y, brand.rectangle.y + brand.rectangle.h))
+
+# Detect objects
+# Print detected objects results with bounding boxes
+print("Detecting objects in remote image:")
+if len(results_remote.objects) == 0:
+    print("No objects detected.")
+else:
+    for object in detect_objects_results_remote.objects:
+        print("object at location {}, {}, {}, {}".format( \
+        object.rectangle.x, object.rectangle.x + object.rectangle.w, \
+        object.rectangle.y, object.rectangle.y + object.rectangle.h))
+
+
+# Describe image
+# Get the captions (descriptions) from the response, with confidence level
+print("Description of remote image: ")
+if (len(results_remote.description) == 0):
+    print("No description detected.")
+else:
+    for caption in results_remote.description:
+        print("'{}' with confidence {:.2f}%".format(caption.text, caption.confidence * 100))
+print()
+
+# Return tags
+# Print results with confidence score
+print("Tags in the remote image: ")
+if (len(results_remote.tags) == 0):
+    print("No tags detected.")
+else:
+    for tag in results_remote.tags:
+        print("'{}' with confidence {:.2f}%".format(tag.name, tag.confidence * 100))
+
+# Detect celebrities
+print("Celebrities in the remote image:")
+if (len(results_remote.categories.detail.celebrities) == 0):
+    print("No celebrities detected.")
+else:
+    for celeb in results_remote.categories.detail.celebrities:
+        print(celeb["name"])
+
+# Detect landmarks
+print("Landmarks in the remote image:")
+if len(results_remote.categories.detail.landmarks) == 0:
+    print("No landmarks detected.")
+else:
+    for landmark in results_remote.categories.detail.landmarks:
+        print(landmark["name"])
+
+# </snippet_analyze>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 '''
 Tag an Image - local
@@ -196,27 +292,6 @@ print()
 END - Tag an Image - local
 '''
 
-# <snippet_tags>
-'''
-Tag an Image - remote
-This example returns a tag (key word) for each thing in the image.
-'''
-print("===== Tag an image - remote =====")
-# Call API with remote image
-tags_result_remote = computervision_client.tag_image(remote_image_url )
-
-# Print results with confidence score
-print("Tags in the remote image: ")
-if (len(tags_result_remote.tags) == 0):
-    print("No tags detected.")
-else:
-    for tag in tags_result_remote.tags:
-        print("'{}' with confidence {:.2f}%".format(tag.name, tag.confidence * 100))
-# </snippet_tags>
-print()
-'''
-END - Tag an Image - remote
-'''
 
 '''
 Detect Faces - local
@@ -246,36 +321,6 @@ print()
 END - Detect Faces - local
 '''
 
-# <snippet_faces>
-'''
-Detect Faces - remote
-This example detects faces in a remote image, gets their gender and age, 
-and marks them with a bounding box.
-'''
-print("===== Detect Faces - remote =====")
-# Get an image with faces
-remote_image_url_faces = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/faces.jpg"
-# Select the visual feature(s) you want.
-remote_image_features = ["faces"]
-# Call the API with remote URL and features
-detect_faces_results_remote = computervision_client.analyze_image(remote_image_url_faces, remote_image_features)
-
-# Print the results with gender, age, and bounding box
-print("Faces in the remote image: ")
-if (len(detect_faces_results_remote.faces) == 0):
-    print("No faces detected.")
-else:
-    for face in detect_faces_results_remote.faces:
-        print("'{}' of age {} at location {}, {}, {}, {}".format(face.gender, face.age, \
-        face.face_rectangle.left, face.face_rectangle.top, \
-        face.face_rectangle.left + face.face_rectangle.width, \
-        face.face_rectangle.top + face.face_rectangle.height))
-# </snippet_faces>
-print()
-'''
-END - Detect Faces - remote
-'''
-
 '''
 Detect Adult or Racy Content - local
 This example detects adult or racy content in a local image, then prints the adult/racy score.
@@ -296,28 +341,6 @@ print("Has racy content: {} with confidence {:.2f}".format(detect_adult_results_
 print()
 '''
 END - Detect Adult or Racy Content - local
-'''
-
-# <snippet_adult>
-'''
-Detect Adult or Racy Content - remote
-This example detects adult or racy content in a remote image, then prints the adult/racy score.
-The score is ranged 0.0 - 1.0 with smaller numbers indicating negative results.
-'''
-print("===== Detect Adult or Racy Content - remote =====")
-# Select the visual feature(s) you want
-remote_image_features = ["adult"]
-# Call API with URL and features
-detect_adult_results_remote = computervision_client.analyze_image(remote_image_url, remote_image_features)
-
-# Print results with adult/racy score
-print("Analyzing remote image for adult or racy content ... ")
-print("Is adult content: {} with confidence {:.2f}".format(detect_adult_results_remote.adult.is_adult_content, detect_adult_results_remote.adult.adult_score * 100))
-print("Has racy content: {} with confidence {:.2f}".format(detect_adult_results_remote.adult.is_racy_content, detect_adult_results_remote.adult.racy_score * 100))
-# </snippet_adult>
-print()
-'''
-END - Detect Adult or Racy Content - remote
 '''
 
 '''
@@ -342,30 +365,6 @@ print("Dominant colors: {}".format(detect_color_results_local.color.dominant_col
 print()
 '''
 END - Detect Color - local
-'''
-
-# <snippet_color>
-'''
-Detect Color - remote
-This example detects the different aspects of its color scheme in a remote image.
-'''
-print("===== Detect Color - remote =====")
-# Select the feature(s) you want
-remote_image_features = ["color"]
-# Call API with URL and features
-detect_color_results_remote = computervision_client.analyze_image(remote_image_url, remote_image_features)
-
-# Print results of color scheme
-print("Getting color scheme of the remote image: ")
-print("Is black and white: {}".format(detect_color_results_remote.color.is_bw_img))
-print("Accent color: {}".format(detect_color_results_remote.color.accent_color))
-print("Dominant background color: {}".format(detect_color_results_remote.color.dominant_color_background))
-print("Dominant foreground color: {}".format(detect_color_results_remote.color.dominant_color_foreground))
-print("Dominant colors: {}".format(detect_color_results_remote.color.dominant_colors))
-# </snippet_color>
-print()
-'''
-END - Detect Color - remote
 '''
 
 '''
@@ -405,42 +404,6 @@ print()
 END - Detect Domain-specific Content - local
 '''
 
-# <snippet_celebs>
-'''
-Detect Domain-specific Content - remote
-This example detects celebrites and landmarks in remote images.
-'''
-print("===== Detect Domain-specific Content - remote =====")
-# URL of one or more celebrities
-remote_image_url_celebs = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/faces.jpg"
-# Call API with content type (celebrities) and URL
-detect_domain_results_celebs_remote = computervision_client.analyze_image_by_domain("celebrities", remote_image_url_celebs)
-
-# Print detection results with name
-print("Celebrities in the remote image:")
-if len(detect_domain_results_celebs_remote.result["celebrities"]) == 0:
-    print("No celebrities detected.")
-else:
-    for celeb in detect_domain_results_celebs_remote.result["celebrities"]:
-        print(celeb["name"])
-# </snippet_celebs>
-
-# <snippet_landmarks>
-# Call API with content type (landmarks) and URL
-detect_domain_results_landmarks = computervision_client.analyze_image_by_domain("landmarks", remote_image_url)
-print()
-
-print("Landmarks in the remote image:")
-if len(detect_domain_results_landmarks.result["landmarks"]) == 0:
-    print("No landmarks detected.")
-else:
-    for landmark in detect_domain_results_landmarks.result["landmarks"]:
-        print(landmark["name"])
-# </snippet_landmarks>
-print()
-'''
-END - Detect Domain-specific Content - remote
-'''
 
 '''
 Detect Image Types - local
@@ -475,39 +438,6 @@ print()
 END - Detect Image Types - local
 '''
 
-# <snippet_type>
-'''
-Detect Image Types - remote
-This example detects an image's type (clip art/line drawing).
-'''
-print("===== Detect Image Types - remote =====")
-# Get URL of an image with a type
-remote_image_url_type = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/type-image.jpg"
-# Select visual feature(s) you want
-remote_image_features = [VisualFeatureTypes.image_type]
-# Call API with URL and features
-detect_type_results_remote = computervision_client.analyze_image(remote_image_url_type, remote_image_features)
-
-# Prints type results with degree of accuracy
-print("Type of remote image:")
-if detect_type_results_remote.image_type.clip_art_type == 0:
-    print("Image is not clip art.")
-elif detect_type_results_remote.image_type.line_drawing_type == 1:
-    print("Image is ambiguously clip art.")
-elif detect_type_results_remote.image_type.line_drawing_type == 2:
-    print("Image is normal clip art.")
-else:
-    print("Image is good clip art.")
-
-if detect_type_results_remote.image_type.line_drawing_type == 0:
-    print("Image is not a line drawing.")
-else:
-    print("Image is a line drawing")
-# </snippet_type>
-print()
-'''
-END - Detect Image Types - remote
-'''
 
 '''
 Detect Objects - local
@@ -532,32 +462,6 @@ else:
 print()
 '''
 END - Detect Objects - local
-'''
-
-# <snippet_objects>
-'''
-Detect Objects - remote
-This example detects different kinds of objects with bounding boxes in a remote image.
-'''
-print("===== Detect Objects - remote =====")
-# Get URL image with different objects
-remote_image_url_objects = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/objects.jpg"
-# Call API with URL
-detect_objects_results_remote = computervision_client.detect_objects(remote_image_url_objects)
-
-# Print detected objects results with bounding boxes
-print("Detecting objects in remote image:")
-if len(detect_objects_results_remote.objects) == 0:
-    print("No objects detected.")
-else:
-    for object in detect_objects_results_remote.objects:
-        print("object at location {}, {}, {}, {}".format( \
-        object.rectangle.x, object.rectangle.x + object.rectangle.w, \
-        object.rectangle.y, object.rectangle.y + object.rectangle.h))
-# </snippet_objects>
-print()
-'''
-END - Detect Objects - remote
 '''
 
 '''
@@ -585,33 +489,6 @@ else:
 print()
 '''
 END - Detect brands - local
-'''
-
-# <snippet_brands>
-'''
-Detect Brands - remote
-This example detects common brands like logos and puts a bounding box around them.
-'''
-print("===== Detect Brands - remote =====")
-# Get a URL with a brand logo
-remote_image_url = "https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/images/gray-shirt-logo.jpg"
-# Select the visual feature(s) you want
-remote_image_features = ["brands"]
-# Call API with URL and features
-detect_brands_results_remote = computervision_client.analyze_image(remote_image_url, remote_image_features)
-
-print("Detecting brands in remote image: ")
-if len(detect_brands_results_remote.brands) == 0:
-    print("No brands detected.")
-else:
-    for brand in detect_brands_results_remote.brands:
-        print("'{}' brand detected with confidence {:.1f}% at location {}, {}, {}, {}".format( \
-        brand.name, brand.confidence * 100, brand.rectangle.x, brand.rectangle.x + brand.rectangle.w, \
-        brand.rectangle.y, brand.rectangle.y + brand.rectangle.h))
-# </snippet_brands>
-print()
-'''
-END - Detect Brands - remote
 '''
 
 '''

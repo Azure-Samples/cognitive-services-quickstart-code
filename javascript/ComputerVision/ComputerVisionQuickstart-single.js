@@ -56,8 +56,6 @@ function computerVision() {
   async.series([
     async function () {
 
-     
-
       /**
        * OCR: READ PRINTED & HANDWRITTEN TEXT WITH THE READ API
        * Extracts text from images using OCR (optical character recognition).
@@ -68,25 +66,12 @@ function computerVision() {
 
       // URL images containing printed and/or handwritten text. 
       // The URL can point to image files (.jpg/.png/.bmp) or multi-page files (.pdf, .tiff).
-      const printedTextSampleURL = 'https://moderatorsampleimages.blob.core.windows.net/samples/sample2.jpg';
-      const multiLingualTextURL = 'https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/MultiLingual.png';
-      const mixedMultiPagePDFURL = 'https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/MultiPageHandwrittenForm.pdf';
-
+      const printedTextSampleURL = 'https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/printed_text.jpg';
 
       // Recognize text in printed image from a URL
       console.log('Read printed text from URL...', printedTextSampleURL.split('/').pop());
       const printedResult = await readTextFromURL(computerVisionClient, printedTextSampleURL);
       printRecText(printedResult);
-
-      // Recognize multi-lingual text in a PNG from a URL
-      console.log('\nRead printed multi-lingual text in a PNG from URL...', multiLingualTextURL.split('/').pop());
-      const multiLingualResult = await readTextFromURL(computerVisionClient, multiLingualTextURL);
-      printRecText(multiLingualResult);
-
-      // Recognize printed text and handwritten text in a PDF from a URL
-      console.log('\nRead printed and handwritten text from a PDF from URL...', mixedMultiPagePDFURL.split('/').pop());
-      const mixedPdfResult = await readTextFromURL(computerVisionClient, mixedMultiPagePDFURL);
-      printRecText(mixedPdfResult);
 
       // Perform read and await the result from URL
       async function readTextFromURL(client, url) {
@@ -97,11 +82,9 @@ function computerVision() {
 
         // Wait for read recognition to complete
         // result.status is initially undefined, since it's the result of read
-        while (result.status !== STATUS_SUCCEEDED) { await sleep(1000); result = await client.getReadResult(operation); }
+        while (result.status !== "succeeded") { await sleep(1000); result = await client.getReadResult(operation); }
         return result.analyzeResult.readResults; // Return the first page of result. Replace [0] with the desired page if this is a multi-page file such as .pdf or .tiff.
       }
-
-      
 
       // Prints all text from Read result
       function printRecText(readResults) {
@@ -154,7 +137,6 @@ function computerVision() {
       /**
        * END - Recognize Printed & Handwritten Text
        */
-
       console.log();
       console.log('-------------------------------------------------');
       console.log('End of quickstart.');
