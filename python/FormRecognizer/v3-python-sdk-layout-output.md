@@ -1,4 +1,4 @@
-# Quickstart output: Python SDK v3.0 layout model
+# Quickstart output: Python SDK layout model (beta)
 
 [Reference documentation](/python/api/azure-ai-formrecognizer/azure.ai.formrecognizer?view=azure-python-preview&preserve-view=true) | [Library source code](https://github.com/Azure/azure-sdk-for-python/tree/azure-ai-formrecognizer_3.2.0b3/sdk/formrecognizer/azure-ai-formrecognizer/) | [Package (PyPi)](https://pypi.org/project/azure-ai-formrecognizer/3.2.0b3/) | [Samples](https://github.com/Azure/azure-sdk-for-python/blob/azure-ai-formrecognizer_3.2.0b3/sdk/formrecognizer/azure-ai-formrecognizer/samples/README.md)
 
