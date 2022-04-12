@@ -1,3 +1,4 @@
+// <snippet_single>
 import com.microsoft.azure.cognitiveservices.vision.computervision.*;
 import com.microsoft.azure.cognitiveservices.vision.computervision.implementation.ComputerVisionImpl;
 import com.microsoft.azure.cognitiveservices.vision.computervision.models.*;
@@ -36,7 +37,7 @@ public class ComputerVisionQuickstart {
     private static void ReadFromUrl(ComputerVisionClient client) {
         System.out.println("-----------------------------------------------");
         
-        String remoteTextImageURL = "https://intelligentkioskstore.blob.core.windows.net/visionapi/suggestedphotos/3.png";
+        String remoteTextImageURL = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/printed_text.jpg";
         System.out.println("Read with URL: " + remoteTextImageURL);
 
         try {
@@ -44,10 +45,10 @@ public class ComputerVisionQuickstart {
             ComputerVisionImpl vision = (ComputerVisionImpl) client.computerVision();
 
             // Read in remote image and response header
-            ReadHeaders responseHeader = vision.readWithServiceResponseAsync(remoteTextImageURL, null, null,null)
-                    .toBlocking()
-                    .single()
-                    .headers();
+            ReadHeaders responseHeader = vision.readWithServiceResponseAsync(remoteTextImageURL, null)
+            .toBlocking()
+            .single()
+            .headers();
 
             // Extract the operation Id from the operationLocation header
             String operationLocation = responseHeader.operationLocation();
@@ -122,3 +123,4 @@ public class ComputerVisionQuickstart {
         }
     }
 }
+// </snippet_single>
