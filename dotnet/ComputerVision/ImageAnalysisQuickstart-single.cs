@@ -93,11 +93,11 @@ namespace ComputerVisionQuickstart
             // Analyze the URL image 
             ImageAnalysis results = await client.AnalyzeImageAsync(imageUrl, visualFeatures: features);
 
-            // Sunmarizes the image content.
-            Console.WriteLine("Summary:");
-            foreach (var caption in results.Description.Captions)
+            // Image tags and their confidence score
+            Console.WriteLine("Tags:");
+            foreach (var tag in results.Tags)
             {
-                Console.WriteLine($"{caption.Text} with confidence {caption.Confidence}");
+                Console.WriteLine($"{tag.Name} {tag.Confidence}");
             }
             Console.WriteLine();
         }
