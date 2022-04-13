@@ -2,7 +2,7 @@
 
 [Reference documentation](/python/api/azure-ai-formrecognizer/azure.ai.formrecognizer?view=azure-python-preview&preserve-view=true) | [Library source code](https://github.com/Azure/azure-sdk-for-python/tree/azure-ai-formrecognizer_3.2.0b3/sdk/formrecognizer/azure-ai-formrecognizer/) | [Package (PyPi)](https://pypi.org/project/azure-ai-formrecognizer/3.2.0b3/) | [Samples](https://github.com/Azure/azure-sdk-for-python/blob/azure-ai-formrecognizer_3.2.0b3/sdk/formrecognizer/azure-ai-formrecognizer/samples/README.md)
 
-The prebuilt-read model extracts printed and handwritten textual elements including lines, words, locations, and detected languages from documents (PDF and TIFF) and images (JPG, PNG, and BMP). The read model is the foundation for all Form Recognizer models. Here is the expected outcome from the prebuilt-read how-to article:
+The prebuilt-read model extracts printed and handwritten textual elements including lines, words, locations, and detected languages from documents (PDF and TIFF) and images (JPG, PNG, and BMP). The read model is the foundation for all Form Recognizer models. Here is the expected outcome from the [prebuilt-read how-to article](https://docs.microsoft.com/azure/applied-ai-services/form-recognizer/how-to-guides/use-prebuilt-read?pivots=programming-language-python):
 
 Document contains content:  While healthcare is still in the early stages of its Al journey, we
 
