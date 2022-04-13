@@ -2,7 +2,7 @@
 
 [Reference documentation](https://docs.microsoft.com/dotnet/api/azure.ai.formrecognizer.documentanalysis?view=azure-dotnet-preview&preserve-view=true) | [Library Source Code](https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/) | [Package (NuGet)](https://www.nuget.org/packages/Azure.AI.FormRecognizer/4.0.0-beta.3) | [Samples](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/README.md)
 
-The prebuilt-read model extracts printed and handwritten textual elements including lines, words, locations, and detected languages from documents (PDF and TIFF) and images (JPG, PNG, and BMP). The read model is the foundation for all Form Recognizer models. Here is the expected outcome from the prebuilt-read how-to article:
+The prebuilt-read model extracts printed and handwritten textual elements including lines, words, locations, and detected languages from documents (PDF and TIFF) and images (JPG, PNG, and BMP). The read model is the foundation for all Form Recognizer models. Here is the expected outcome from the [prebuilt-read how-to article](https://docs.microsoft.com/azure/applied-ai-services/form-recognizer/how-to-guides/use-prebuilt-read?pivots=programming-language-csharp):
 
 Document Page 1 has 86 line(s), 697 word(s),
 
