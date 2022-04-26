@@ -49,7 +49,7 @@ namespace FormRecognizerQuickStart
         static async Task RunFormRecognizerClient()
         {
             // Create form client object with Form Recognizer subscription key
-            FormTrainingClient formTrainingClient = new FormTrainingClient(new Uri(formRecognizerEndpoint), new AzureKeyCredential(subscriptionKey));
+            var formTrainingClient = new FormTrainingClient(new Uri(formRecognizerEndpoint), new AzureKeyCredential(subscriptionKey));
 
             Console.WriteLine("Train Model with training data...");
             string modelId = await TrainModelAsync(formTrainingClient, trainingDataUrl);
