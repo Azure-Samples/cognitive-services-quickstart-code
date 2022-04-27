@@ -4,8 +4,8 @@
 /* To run this sample, install the following modules.
  * npm install @azure/arm-cognitiveservices @azure/identity
  */
-var Arm = require("@azure/arm-cognitiveservices");
-var Identity = require("@azure/identity");
+var { CognitiveServicesManagementClient } = require("@azure/arm-cognitiveservices");
+var { ClientSecretCredential } = require("@azure/identity");
 // </snippet_imports>
 
 /*
@@ -60,7 +60,7 @@ const subdomain_name = "PASTE_YOUR_SUBDOMAIN_NAME_HERE";
 // <snippet_list_avail>
 async function list_available_kinds_skus_locations (client) {
 	console.log ("Available SKUs:");
-	var result = await client.list ();
+	var result = await client.resourceSkus.list ();
 	console.log("Kind\tSKU Name\tSKU Tier\tLocations");
 	result.forEach (function (x) {
 		var locations = x.locations.join(",");
@@ -72,7 +72,7 @@ async function list_available_kinds_skus_locations (client) {
 // <snippet_list>
 async function list_resources (client) {
 	console.log ("Resources in resource group: " + resource_group_name);
-	var result = await client.listByResourceGroup (resource_group_name);
+	var result = await client.accounts.listByResourceGroup (resource_group_name);
 	result.forEach (function (x) {
 		console.log(x);
 		console.log();
@@ -86,7 +86,7 @@ async function create_resource (client, resource_name, resource_kind, resource_s
 /* NOTE If you do not want to use a custom subdomain name, remove the customSubDomainName
 property from the properties object. */
 	var parameters = { sku : { name: resource_sku }, kind : resource_kind, location : resource_region, properties : { customSubDomainName : subdomain_name } };
-    return client.create(resource_group_name, resource_name, parameters)
+    return client.accounts.beginCreateAndWait(resource_group_name, resource_name, parameters)
         .then((result) => {
 			console.log("Resource created.");
 			console.log();
@@ -103,7 +103,7 @@ property from the properties object. */
 // <snippet_delete>
 async function delete_resource (client, resource_name) {
 	console.log ("Deleting resource: " + resource_name + "...");
-	await client.deleteMethod (resource_group_name, resource_name)
+	await client.accounts.beginDeleteAndWait (resource_group_name, resource_name)
 	console.log ("Resource deleted.");
 	console.log ();
 }
@@ -112,7 +112,7 @@ async function delete_resource (client, resource_name) {
 // <snippet_purge>
 async function purge_resource (client, resource_name, resource_region) {
 	console.log ("Purging resource: " + resource_name + "...");
-	await client.purge (resource_region, resource_group_name, resource_name)
+	await client.deletedAccounts.beginPurgeAndWait (resource_region, resource_group_name, resource_name)
 	console.log ("Resource purged.");
 	console.log ();
 }
@@ -121,15 +121,12 @@ async function purge_resource (client, resource_name, resource_region) {
 // <snippet_main_auth>
 async function quickstart() {
 /* For more information see:
-https://www.npmjs.com/package/@azure/arm-cognitiveservices/v/6.0.0
+https://www.npmjs.com/package/@azure/arm-cognitiveservices/v/7.1.0
 https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-a-service-principal-with-a-client-secret
 */
-	const credentials = new Identity.ClientSecretCredential(tenant_id, service_principal_application_id, service_principal_secret);
-	const client = new Arm.CognitiveServicesManagementClient (credentials, subscription_id);
-	// Note Azure resources are also sometimes referred to as accounts.
-	const accounts_client = new Arm.Accounts (client);
-	const resource_skus_client = new Arm.ResourceSkus (client);
-	const deleted_accounts_client = new Arm.DeletedAccounts (client);
+	const credentials = new ClientSecretCredential(tenant_id, service_principal_application_id, service_principal_secret);
+	const client = new CognitiveServicesManagementClient (credentials, subscription_id);
+	
 	// </snippet_main_auth>
 
 	// <snippet_main_calls>
@@ -142,18 +139,18 @@ https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/identity/identity/sample
 //	await list_available_kinds_skus_locations (resource_skus_client);
 
 	// Create a resource with kind Text Translation, SKU F0 (free tier), location global.
-	await create_resource (accounts_client, resource_name, resource_kind, resource_sku, resource_region);
+	await create_resource (client, resource_name, resource_kind, resource_sku, resource_region);
 
 	// Uncomment to list all resources for your Azure account.
 //	await list_resources (accounts_client);
 
 	// Delete the resource.
-	await delete_resource (accounts_client, resource_name);
+	await delete_resource (client, resource_name);
 
 	/* NOTE: When you delete a resource, it is only soft-deleted. You must also purge it. Otherwise, if you try to create another
 	resource with the same name or custom subdomain, you will receive an error stating that such a resource already exists. */
 	// Purge the resource.
-	await purge_resource(deleted_accounts_client, resource_name, resource_region);
+	await purge_resource(client, resource_name, resource_region);
 }
 // </snippet_main_calls>
 
