@@ -25,8 +25,7 @@ References:
     - API: https://westus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-2/operations/5d986960601faab4bf452005
 '''
 
-# <snippet_imports_and_vars>
-# <snippet_imports>
+# <snippet_single>
 from azure.cognitiveservices.vision.computervision import ComputerVisionClient
 from azure.cognitiveservices.vision.computervision.models import OperationStatusCodes
 from azure.cognitiveservices.vision.computervision.models import VisualFeatureTypes
@@ -37,26 +36,19 @@ import os
 from PIL import Image
 import sys
 import time
-# </snippet_imports>
 
 '''
 Authenticate
 Authenticates your credentials and creates a client.
 '''
-# <snippet_vars>
 subscription_key = "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE"
 endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE"
-# </snippet_vars>
-# </snippet_imports_and_vars>
 
-# <snippet_client>
 computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(subscription_key))
-# </snippet_client>
 '''
 END - Authenticate
 '''
 
-# <snippet_read_call>
 '''
 OCR: Read File using the Read API, extract text - remote
 This example will extract text in an image, then print results, line by line.
@@ -68,9 +60,7 @@ read_image_url = "https://raw.githubusercontent.com/MicrosoftDocs/azure-docs/mas
 
 # Call API with URL and raw response (allows you to get the operation location)
 read_response = computervision_client.read(read_image_url,  raw=True)
-# </snippet_read_call>
 
-# <snippet_read_response>
 # Get the operation location (URL with an ID at the end) from the response
 read_operation_location = read_response.headers["Operation-Location"]
 # Grab the ID from the URL
@@ -90,46 +80,10 @@ if read_result.status == OperationStatusCodes.succeeded:
             print(line.text)
             print(line.bounding_box)
 print()
-# </snippet_read_response>
 '''
 END - Read File - remote
 '''
 
-'''
-OCR: Read File using the Read API, extract text - local
-This example extracts text from a local image, then prints results.
-This API call can also recognize remote image text (shown in next example, Read File - remote).
-'''
-print("===== Read File - local =====")
-# Get image path
-read_image_path = os.path.join (images_folder, "printed_text.jpg")
-# Open the image
-read_image = open(read_image_path, "rb")
-
-# Call API with image and raw response (allows you to get the operation location)
-read_response = computervision_client.read_in_stream(read_image, raw=True)
-# Get the operation location (URL with ID as last appendage)
-read_operation_location = read_response.headers["Operation-Location"]
-# Take the ID off and use to get results
-operation_id = read_operation_location.split("/")[-1]
-
-# Call the "GET" API and wait for the retrieval of the results
-while True:
-    read_result = computervision_client.get_read_result(operation_id)
-    if read_result.status.lower () not in ['notstarted', 'running']:
-        break
-    print ('Waiting for result...')
-    time.sleep(10)
-
-# Print results, line by line
-if read_result.status == OperationStatusCodes.succeeded:
-    for text_result in read_result.analyze_result.read_results:
-        for line in text_result.lines:
-            print(line.text)
-            print(line.bounding_box)
-print()
-'''
-END - Read File - local
-'''
-
 print("End of Computer Vision quickstart.")
+
+# </snippet_single>

@@ -157,8 +157,9 @@ namespace FaceQuickstart
                 detectedFaces = await client.Face.DetectWithUrlAsync($"{url}{imageFileName}",
                         returnFaceAttributes: new List<FaceAttributeType> { FaceAttributeType.Accessories, FaceAttributeType.Age,
                         FaceAttributeType.Blur, FaceAttributeType.Emotion, FaceAttributeType.Exposure, FaceAttributeType.FacialHair,
-                        FaceAttributeType.Gender, FaceAttributeType.Glasses, FaceAttributeType.Hair, FaceAttributeType.HeadPose,
-                        FaceAttributeType.Makeup, FaceAttributeType.Noise, FaceAttributeType.Occlusion, FaceAttributeType.Smile },
+                        FaceAttributeType.Glasses, FaceAttributeType.Hair, FaceAttributeType.HeadPose,
+                        FaceAttributeType.Makeup, FaceAttributeType.Noise, FaceAttributeType.Occlusion, FaceAttributeType.Smile, 
+                        FaceAttributeType.Smile, FaceAttributeType.QualityForRecognition },
                         // We specify detection model 1 because we are retrieving attributes.
                         detectionModel: DetectionModel.Detection01,
                         recognitionModel: recognitionModel);
@@ -207,7 +208,6 @@ namespace FaceQuickstart
                     // Get more face attributes
                     Console.WriteLine($"Exposure : {face.FaceAttributes.Exposure.ExposureLevel}");
                     Console.WriteLine($"FacialHair : {string.Format("{0}", face.FaceAttributes.FacialHair.Moustache + face.FaceAttributes.FacialHair.Beard + face.FaceAttributes.FacialHair.Sideburns > 0 ? "Yes" : "No")}");
-                    Console.WriteLine($"Gender : {face.FaceAttributes.Gender}");
                     Console.WriteLine($"Glasses : {face.FaceAttributes.Glasses}");
 
                     // Get hair color
@@ -230,6 +230,9 @@ namespace FaceQuickstart
                     Console.WriteLine($"Occlusion : {string.Format("EyeOccluded: {0}", face.FaceAttributes.Occlusion.EyeOccluded ? "Yes" : "No")} " +
                         $" {string.Format("ForeheadOccluded: {0}", face.FaceAttributes.Occlusion.ForeheadOccluded ? "Yes" : "No")}   {string.Format("MouthOccluded: {0}", face.FaceAttributes.Occlusion.MouthOccluded ? "Yes" : "No")}");
                     Console.WriteLine($"Smile : {face.FaceAttributes.Smile}");
+                    
+                    // Get quality for recognition attribute
+                    Console.WriteLine($"QualityForRecognition : {face.FaceAttributes.QualityForRecognition}");
                     Console.WriteLine();
                 }
             }
@@ -238,6 +241,9 @@ namespace FaceQuickstart
 
         // Detect faces from image url for recognition purpose. This is a helper method for other functions in this quickstart.
         // Parameter `returnFaceId` of `DetectWithUrlAsync` must be set to `true` (by default) for recognition purpose.
+        // Parameter `FaceAttributes` is set to include the QualityForRecognition attribute. 
+        // Recognition model must be set to recognition_03 or recognition_04 as a result.
+        // Result faces with insufficient quality for recognition are filtered out. 
         // The field `faceId` in returned `DetectedFace`s will be used in Face - Find Similar, Face - Verify. and Face - Identify.
         // It will expire 24 hours after the detection call.
         // <snippet_face_detect_recognize>
@@ -245,9 +251,17 @@ namespace FaceQuickstart
         {
             // Detect faces from image URL. Since only recognizing, use the recognition model 1.
             // We use detection model 3 because we are not retrieving attributes.
-            IList<DetectedFace> detectedFaces = await faceClient.Face.DetectWithUrlAsync(url, recognitionModel: recognition_model, detectionModel: DetectionModel.Detection03);
-            Console.WriteLine($"{detectedFaces.Count} face(s) detected from image `{Path.GetFileName(url)}`");
-            return detectedFaces.ToList();
+            IList<DetectedFace> detectedFaces = await faceClient.Face.DetectWithUrlAsync(url, recognitionModel: recognition_model, detectionModel: DetectionModel.Detection03, FaceAttributes: new List<FaceAttributeType> { FaceAttributeType.QualityForRecognition });
+            List<DetectedFace> sufficientQualityFaces = new List<DetectedFace>();
+            foreach (DetectedFace detectedFace in detectedFaces){
+                var faceQualityForRecognition = detectedFace.FaceAttributes.QualityForRecognition;
+                if (faceQualityForRecognition.HasValue && (faceQualityForRecognition.Value >= QualityForRecognition.Medium)){
+                    sufficientQualityFaces.Add(detectedFace);
+                }
+            }
+            Console.WriteLine($"{detectedFaces.Count} face(s) with {sufficientQualityFaces.Count} having sufficient quality for recognition detected from image `{Path.GetFileName(url)}`");
+
+            return sufficientQualityFaces.ToList();
         }
         // </snippet_face_detect_recognize>
         /*
@@ -402,6 +416,27 @@ namespace FaceQuickstart
                 // Add face to the person group person.
                 foreach (var similarImage in personDictionary[groupedFace])
                 {
+                    Console.WriteLine($"Check whether image is of sufficient quality for recognition");
+                    IList<DetectedFace> detectedFaces = await client.Face.DetectWithUrlAsync($"{url}{similarImage}", 
+                        recognitionModel: recognition_model, 
+                        detectionModel: DetectionModel.Detection03,
+                        returnFaceAttributes: new List<FaceAttributeType> { FaceAttributeType.QualityForRecognition });
+                    bool sufficientQuality = true;
+                    foreach (var face in detectedFaces)
+                    {
+                        var faceQualityForRecognition = face.FaceAttributes.QualityForRecognition;
+                        //  Only "high" quality images are recommended for person enrollment
+                        if (faceQualityForRecognition.HasValue && (faceQualityForRecognition.Value != QualityForRecognition.High)){
+                            sufficientQuality = false;
+                            break;
+                        }
+                    }
+
+                    if (!sufficientQuality){
+                        continue;
+                    }
+
+
                     Console.WriteLine($"Add face to the person group person({groupedFace}) from image `{similarImage}`");
                     PersistedFace face = await client.PersonGroupPerson.AddFaceFromUrlAsync(personGroupId, person.PersonId,
                         $"{url}{similarImage}", similarImage);

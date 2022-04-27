@@ -142,12 +142,11 @@ namespace ComputerVisionQuickstart
             };
             // </snippet_visualfeatures>
 
-            // <snippet_analyze_call>
             Console.WriteLine($"Analyzing the image {Path.GetFileName(imageUrl)}...");
             Console.WriteLine();
+            // <snippet_analyze>
             // Analyze the URL image 
             ImageAnalysis results = await client.AnalyzeImageAsync(imageUrl, visualFeatures: features);
-            // </snippet_analyze_call>
 
             // <snippet_describe>
             // Sunmarizes the image content.
@@ -239,7 +238,6 @@ namespace ComputerVisionQuickstart
             Console.WriteLine();
             // </snippet_celebs>
 
-
             // <snippet_landmarks>
             // Popular landmarks in image, if any.
             Console.WriteLine("Landmarks:");
@@ -274,6 +272,7 @@ namespace ComputerVisionQuickstart
             Console.WriteLine("Line Drawing Type: " + results.ImageType.LineDrawingType);
             Console.WriteLine();
             // </snippet_type>
+            // </snippet_analyze>
         }
         /*
          * END - ANALYZE IMAGE - URL IMAGE

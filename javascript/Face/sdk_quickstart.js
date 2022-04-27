@@ -42,9 +42,10 @@ async function DetectFaceExtract() {
 	await Promise.all (image_file_names.map (async function (image_file_name) {
         let detected_faces = await client.face.detectWithUrl(image_base_url + image_file_name,
 			{
-				returnFaceAttributes: ["Accessories","Age","Blur","Emotion","Exposure","FacialHair","Gender","Glasses","Hair","HeadPose","Makeup","Noise","Occlusion","Smile"],
+				returnFaceAttributes: ["Accessories","Age","Blur","Emotion","Exposure","FacialHair","Glasses","Hair","HeadPose","Makeup","Noise","Occlusion","Smile","QualityForRecognition"],
 				// We specify detection model 1 because we are retrieving attributes.
-				detectionModel: "detection_01"
+				detectionModel: "detection_01",
+                recognitionModel: "recognition_03"
 			});
         console.log (detected_faces.length + " face(s) detected from image " + image_file_name + ".");
 		console.log("Face attributes for face(s) in " + image_file_name + ":");
@@ -93,7 +94,6 @@ async function DetectFaceExtract() {
 			else {
 				console.log("FacialHair: No");
 			}
-			console.log("Gender: " + face.faceAttributes.gender);
 			console.log("Glasses: " + face.faceAttributes.glasses);
 
 			// Get hair color
@@ -128,6 +128,8 @@ async function DetectFaceExtract() {
 			console.log("  Mouth occluded: " + (face.faceAttributes.occlusion.mouthOccluded ? "Yes" : "No"));
 
 			console.log("Smile: " + face.faceAttributes.smile);
+
+			console.log("QualityForRecognition: " + face.faceAttributes.qualityForRecognition)
 			console.log();
 		});
 	}));
@@ -137,13 +139,15 @@ async function DetectFaceExtract() {
 // <recognize>
 async function DetectFaceRecognize(url) {
     // Detect faces from image URL. Since only recognizing, use the recognition model 4.
-    // We use detection model 3 because we are not retrieving attributes.
+    // We use detection model 3 because we are only retrieving the qualityForRecognition attribute.
+	// Result faces with quality for recognition lower than "medium" are filtered out.
     let detected_faces = await client.face.detectWithUrl(url,
 		{
 			detectionModel: "detection_03",
-			recognitionModel: "recognition_04"
+			recognitionModel: "recognition_04",
+            returnFaceAttributes: ["QualityForRecognition"]
 		});
-    return detected_faces;
+    return detected_faces.filter(face => face.faceAttributes.qualityForRecognition == 'high' || face.faceAttributes.qualityForRecognition == 'medium');
 }
 // </recognize>
 
@@ -199,8 +203,25 @@ async function AddFacesToPersonGroup(person_dictionary, person_group_id) {
 
 		// Add faces to the person group person.
 		await Promise.all (value.map (async function (similar_image) {
-			console.log("Add face to the person group person: (" + key + ") from image: " + similar_image + ".");
-			await client.personGroupPerson.addFaceFromUrl(person_group_id, person.personId, image_base_url + similar_image);
+			// Check if the image is of sufficent quality for recognition.
+			let sufficientQuality = true;
+			let detected_faces = await client.face.detectWithUrl(image_base_url + similar_image,
+				{
+					returnFaceAttributes: ["QualityForRecognition"],
+					detectionModel: "detection_03",
+					recognitionModel: "recognition_03"
+				});
+			detected_faces.forEach(detected_face => {
+				if (detected_face.faceAttributes.qualityForRecognition != 'high'){
+					sufficientQuality = false;
+				}
+			});
+
+			// Quality is sufficent, add to group.
+			if (sufficientQuality){
+				console.log("Add face to the person group person: (" + key + ") from image: " + similar_image + ".");
+				await client.personGroupPerson.addFaceFromUrl(person_group_id, person.personId, image_base_url + similar_image);
+			}
 		}));
 	}));
 
@@ -257,10 +278,9 @@ async function IdentifyInPersonGroup() {
 	await WaitForPersonGroupTraining(person_group_id);
 	console.log();
 
-	// Detect faces from source image url.
+	// Detect faces from source image url and only take those with sufficient quality for recognition.
 	let face_ids = (await DetectFaceRecognize(image_base_url + source_image_file_name)).map (face => face.faceId);
-
-// Identify the faces in a person group.
+	// Identify the faces in a person group.
     let results = await client.face.identify(face_ids, { personGroupId : person_group_id});
 	await Promise.all (results.map (async function (result) {
         let person = await client.personGroupPerson.get(person_group_id, result.candidates[0].personId);
