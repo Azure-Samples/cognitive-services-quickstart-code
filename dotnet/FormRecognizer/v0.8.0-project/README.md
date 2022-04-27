@@ -15,7 +15,6 @@ These samples demonstrate how to use the Form Recognizer client library for C# t
 * Train a custom model
 * Analyze form using previously trained custom model
 
-
 ## Getting Started
 
 ### Prerequisites
