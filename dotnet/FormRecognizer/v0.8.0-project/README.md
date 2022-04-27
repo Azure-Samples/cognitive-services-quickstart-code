@@ -36,11 +36,11 @@ These samples demonstrate how to use the Form Recognizer client library for C# t
 1. Open *Program.cs*.
 1. Replace `<Subscription Key>` with your valid subscription key.
 1. Change `formRecognizerEndpoint` to the Azure region associated with your subscription keys, if necessary.
-1. Replace <`AzureBlobSaS>` with the SAS for the container in the Azure Blob Storage.
+1. Replace `<AzureBlobSaS>` with the SAS for the container in the Azure Blob Storage.
 1. Run the program.
 
 ## Resources
 
-* [Form Recognizer service documentation](https://docs.microsoft.com/en-us/azure/cognitive-services/form-recognizer/)
+* [Form Recognizer service documentation](https://docs.microsoft.com/azure/cognitive-services/form-recognizer/)
 * [Form Recognizer API](https://westus2.dev.cognitive.microsoft.com/docs/services/form-recognizer-api)
 * [Azure.AI.FormRecognizer](https://www.nuget.org/packages/Azure.AI.FormRecognizer/3.1.1) NuGet package
