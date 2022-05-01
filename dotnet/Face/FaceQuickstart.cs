@@ -79,7 +79,7 @@ namespace FaceQuickstart
             const string RECOGNITION_MODEL4 = RecognitionModel.Recognition04;
             // </snippet_detect_models>
 
-			// <snippet_maincalls>
+            // <snippet_maincalls>
             // Authenticate.
             IFaceClient client = Authenticate(ENDPOINT, SUBSCRIPTION_KEY);
             // </snippet_client>
@@ -97,9 +97,9 @@ namespace FaceQuickstart
             LargePersonGroup(client, IMAGE_BASE_URL, RECOGNITION_MODEL4).Wait();
             // Group faces - automatically group similar faces.
             Group(client, IMAGE_BASE_URL, RECOGNITION_MODEL4).Wait();
-            // FaceList - create a face list, then get data
             // </snippet_maincalls>
 
+            // FaceList - create a face list, then get data
             FaceListOperations(client, IMAGE_BASE_URL).Wait();
             // Large FaceList - create a large face list, then get data
             LargeFaceListOperations(client, IMAGE_BASE_URL).Wait();
@@ -116,23 +116,23 @@ namespace FaceQuickstart
 
         // <snippet_auth>
         /*
-		 *	AUTHENTICATE
-		 *	Uses subscription key and region to create a client.
-		 */
+         *    AUTHENTICATE
+         *    Uses subscription key and region to create a client.
+         */
         public static IFaceClient Authenticate(string endpoint, string key)
         {
             return new FaceClient(new ApiKeyServiceClientCredentials(key)) { Endpoint = endpoint };
         }
         // </snippet_auth>
         /*
-		 * END - Authenticate
-		 */
+         * END - Authenticate
+         */
 
         // <snippet_detect>
         /* 
-		 * DETECT FACES
-		 * Detects features from faces and IDs them.
-		 */
+         * DETECT FACES
+         * Detects features from faces and IDs them.
+         */
         public static async Task DetectFaceExtract(IFaceClient client, string url, string recognitionModel)
         {
             Console.WriteLine("========DETECT FACES========");
@@ -142,12 +142,12 @@ namespace FaceQuickstart
             List<string> imageFileNames = new List<string>
                             {
                                 "detection1.jpg",    // single female with glasses
-								// "detection2.jpg", // (optional: single man)
-								// "detection3.jpg", // (optional: single male construction worker)
-								// "detection4.jpg", // (optional: 3 people at cafe, 1 is blurred)
-								"detection5.jpg",    // family, woman child man
-								"detection6.jpg"     // elderly couple, male female
-							};
+                                // "detection2.jpg", // (optional: single man)
+                                // "detection3.jpg", // (optional: single male construction worker)
+                                // "detection4.jpg", // (optional: 3 people at cafe, 1 is blurred)
+                                "detection5.jpg",    // family, woman child man
+                                "detection6.jpg"     // elderly couple, male female
+                            };
 
             foreach (var imageFileName in imageFileNames)
             {
@@ -265,14 +265,14 @@ namespace FaceQuickstart
         }
         // </snippet_face_detect_recognize>
         /*
-		 * END - DETECT FACES 
-		 */
+         * END - DETECT FACES 
+         */
 
         // <snippet_find_similar>
         /*
-		 * FIND SIMILAR
-		 * This example will take an image and find a similar one to it in another image.
-		 */
+         * FIND SIMILAR
+         * This example will take an image and find a similar one to it in another image.
+         */
         public static async Task FindSimilar(IFaceClient client, string url, string recognition_model)
         {
             Console.WriteLine("========FIND SIMILAR========");
@@ -316,15 +316,15 @@ namespace FaceQuickstart
             // </snippet_find_similar_print>
         }
         /*
-		 * END - FIND SIMILAR 
-		 */
+         * END - FIND SIMILAR 
+         */
 
         /*
-		 * VERIFY
-		 * The Verify operation takes a face ID from DetectedFace or PersistedFace and either another face ID 
-		 * or a Person object and determines whether they belong to the same person. If you pass in a Person object, 
-		 * you can optionally pass in a PersonGroup to which that Person belongs to improve performance.
-		 */
+         * VERIFY
+         * The Verify operation takes a face ID from DetectedFace or PersistedFace and either another face ID 
+         * or a Person object and determines whether they belong to the same person. If you pass in a Person object, 
+         * you can optionally pass in a PersonGroup to which that Person belongs to improve performance.
+         */
         public static async Task Verify(IFaceClient client, string url, string recognitionModel03)
         {
             Console.WriteLine("========VERIFY========");
@@ -371,17 +371,17 @@ namespace FaceQuickstart
             Console.WriteLine();
         }
         /*
-		 * END - VERIFY 
-		 */
+         * END - VERIFY 
+         */
 
         /*
-		 * IDENTIFY FACES
-		 * To identify faces, you need to create and define a person group.
-		 * The Identify operation takes one or several face IDs from DetectedFace or PersistedFace and a PersonGroup and returns 
-		 * a list of Person objects that each face might belong to. Returned Person objects are wrapped as Candidate objects, 
-		 * which have a prediction confidence value.
-		 */
-		// <snippet_persongroup_files>
+         * IDENTIFY FACES
+         * To identify faces, you need to create and define a person group.
+         * The Identify operation takes one or several face IDs from DetectedFace or PersistedFace and a PersonGroup and returns 
+         * a list of Person objects that each face might belong to. Returned Person objects are wrapped as Candidate objects, 
+         * which have a prediction confidence value.
+         */
+        // <snippet_persongroup_files>
         public static async Task IdentifyInPersonGroup(IFaceClient client, string url, string recognitionModel)
         {
             Console.WriteLine("========IDENTIFY FACES========");
@@ -485,17 +485,17 @@ namespace FaceQuickstart
         // </snippet_identify>
 
         /*
-		 * END - IDENTIFY FACES
-		 */
+         * END - IDENTIFY FACES
+         */
 
         /*
-		 * LARGE PERSON GROUP
-		 * The example will create a large person group, retrieve information from it, 
-		 * list the Person IDs it contains, and finally delete a large person group.
-		 * For simplicity, the same images are used for the regular-sized person group in IDENTIFY FACES of this quickstart.
-		 * A large person group is made up of person group persons. 
-		 * One person group person is made up of many similar images of that person, which are each PersistedFace objects.
-		 */
+         * LARGE PERSON GROUP
+         * The example will create a large person group, retrieve information from it, 
+         * list the Person IDs it contains, and finally delete a large person group.
+         * For simplicity, the same images are used for the regular-sized person group in IDENTIFY FACES of this quickstart.
+         * A large person group is made up of person group persons. 
+         * One person group person is made up of many similar images of that person, which are each PersistedFace objects.
+         */
         public static async Task LargePersonGroup(IFaceClient client, string url, string recognitionModel)
         {
             Console.WriteLine("========LARGE PERSON GROUP========");
@@ -578,15 +578,15 @@ namespace FaceQuickstart
             Console.WriteLine();
         }
         /*
-		 * END - LARGE PERSON GROUP
-		 */
+         * END - LARGE PERSON GROUP
+         */
 
         /*
-		 * GROUP FACES
-		 * This method of grouping is useful if you don't need to create a person group. It will automatically group similar
-		 * images, whereas the person group method allows you to define the grouping.
-		 * A single "messyGroup" array contains face IDs for which no similarities were found.
-		 */
+         * GROUP FACES
+         * This method of grouping is useful if you don't need to create a person group. It will automatically group similar
+         * images, whereas the person group method allows you to define the grouping.
+         * A single "messyGroup" array contains face IDs for which no similarities were found.
+         */
         public static async Task Group(IFaceClient client, string url, string recognition_model)
         {
             Console.WriteLine("========GROUP FACES========");
@@ -637,14 +637,14 @@ namespace FaceQuickstart
             Console.WriteLine();
         }
         /*
-		 * END - GROUP FACES
-		 */
+         * END - GROUP FACES
+         */
 
         /*
-		 * FACELIST OPERATIONS
-		 * Create a face list and add single-faced images to it, then retrieve data from the faces.
-		 * Images are used from URLs.
-		 */
+         * FACELIST OPERATIONS
+         * Create a face list and add single-faced images to it, then retrieve data from the faces.
+         * Images are used from URLs.
+         */
         public static async Task FaceListOperations(IFaceClient client, string baseUrl)
         {
             Console.WriteLine("========FACELIST OPERATIONS========");
@@ -660,9 +660,9 @@ namespace FaceQuickstart
             List<string> imageFileNames = new List<string>
                             {
                                 "detection1.jpg",    // single female with glasses
-								"detection2.jpg",    // single male
-							    "detection3.jpg",    // single male construction worker
-							};
+                                "detection2.jpg",    // single male
+                                "detection3.jpg",    // single male construction worker
+                            };
 
             // Add Faces to the FaceList.
             foreach (string image in imageFileNames)
@@ -691,14 +691,14 @@ namespace FaceQuickstart
             Console.WriteLine();
         }
         /*
-		 * END - FACELIST OPERATIONS
-		 */
+         * END - FACELIST OPERATIONS
+         */
 
         /*
-		* LARGE FACELIST OPERATIONS
-		* Create a large face list and adds single-faced images to it, then retrieve data from the faces.
-		* Images are used from URLs. Large face lists are preferred for scale, up to 1 million images.
-		*/
+        * LARGE FACELIST OPERATIONS
+        * Create a large face list and adds single-faced images to it, then retrieve data from the faces.
+        * Images are used from URLs. Large face lists are preferred for scale, up to 1 million images.
+        */
         public static async Task LargeFaceListOperations(IFaceClient client, string baseUrl)
         {
             Console.WriteLine("======== LARGE FACELIST OPERATIONS========");
@@ -778,15 +778,15 @@ namespace FaceQuickstart
             Console.WriteLine();
         }
         /*
-		* END - LARGE FACELIST OPERATIONS
-		*/
+        * END - LARGE FACELIST OPERATIONS
+        */
 
         // <snippet_deletepersongroup>
         /*
-		 * DELETE PERSON GROUP
-		 * After this entire example is executed, delete the person group in your Azure account,
-		 * otherwise you cannot recreate one with the same name (if running example repeatedly).
-		 */
+         * DELETE PERSON GROUP
+         * After this entire example is executed, delete the person group in your Azure account,
+         * otherwise you cannot recreate one with the same name (if running example repeatedly).
+         */
         public static async Task DeletePersonGroup(IFaceClient client, String personGroupId)
         {
             await client.PersonGroup.DeleteAsync(personGroupId);
@@ -794,7 +794,7 @@ namespace FaceQuickstart
         }
         // </snippet_deletepersongroup>
         /*
-		 * END - DELETE PERSON GROUP
-		 */
+         * END - DELETE PERSON GROUP
+         */
     }
 }
