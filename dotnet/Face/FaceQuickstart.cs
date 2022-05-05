@@ -268,13 +268,13 @@ namespace FaceQuickstart
 		 * END - DETECT FACES 
 		 */
 
-        // <snippet_find_similar>
         /*
 		 * FIND SIMILAR
 		 * This example will take an image and find a similar one to it in another image.
 		 */
-        public static async Task FindSimilar(IFaceClient client, string url, string recognition_model)
+        public static async Task FindSimilar(IFaceClient client, string base_url, string recognition_model)
         {
+            // <snippet_loadfaces>
             Console.WriteLine("========FIND SIMILAR========");
             Console.WriteLine();
 
@@ -295,15 +295,17 @@ namespace FaceQuickstart
             foreach (var targetImageFileName in targetImageFileNames)
             {
                 // Detect faces from target image url.
-                var faces = await DetectFaceRecognize(client, $"{url}{targetImageFileName}", recognition_model);
+                var faces = await DetectFaceRecognize(client, $"{base_url}{targetImageFileName}", recognition_model);
                 // Add detected faceId to list of GUIDs.
                 targetFaceIds.Add(faces[0].FaceId.Value);
             }
 
             // Detect faces from source image url.
-            IList<DetectedFace> detectedFaces = await DetectFaceRecognize(client, $"{url}{sourceImageFileName}", recognition_model);
+            IList<DetectedFace> detectedFaces = await DetectFaceRecognize(client, $"{base_url}{sourceImageFileName}", recognition_model);
             Console.WriteLine();
+            // </snippet_loadfaces>
 
+            // <snippet_find_similar>
             // Find a similar face(s) in the list of IDs. Comapring only the first in list for testing purposes.
             IList<SimilarFace> similarResults = await client.Face.FindSimilarAsync(detectedFaces[0].FaceId.Value, null, null, targetFaceIds);
             // </snippet_find_similar>
