@@ -1,4 +1,4 @@
-﻿// <snippet_imports>
+// <snippet_imports>
 using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Prediction;
 using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training;
 using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training.Models;
@@ -13,31 +13,36 @@ namespace ObjectDetection
 {
     class Program
     {
-        static void Main(string[] args)
+        static Tag forkTag;
+        static Tag scissorsTag;
+	    
+	static void Main(string[] args)
         {
             // <snippet_creds>
             string trainingKey = "PASTE_YOUR_CUSTOM_VISION_TRAINING_SUBSCRIPTION_KEY_HERE";
             string trainingEndpoint = "PASTE_YOUR_CUSTOM_VISION_TRAINING_ENDPOINT_HERE";
             string predictionKey = "PASTE_YOUR_CUSTOM_VISION_PREDICTION_SUBSCRIPTION_KEY_HERE";
-			string predictionEndpoint = "PASTE_YOUR_CUSTOM_VISION_PREDICTION_ENDPOINT_HERE";
+	    string predictionEndpoint = "PASTE_YOUR_CUSTOM_VISION_PREDICTION_ENDPOINT_HERE";
             // </snippet_creds>
 
             // <snippet_maincalls>
-            CustomVisionTrainingClient TrainingApi = AuthenticateTraining(trainingEndpoint, trainingKey);
+            CustomVisionTrainingClient trainingApi = AuthenticateTraining(trainingEndpoint, trainingKey);
             CustomVisionPredictionClient predictionApi = AuthenticatePrediction(predictionEndpoint, predictionKey);
+		
+	    string publishedModelName = "toolModel";
 
             Project project = CreateProject(trainingApi);
             AddTags(trainingApi, project);
             UploadImages(trainingApi, project);
-            TrainProject(trainingApi, project);
-            PublishIteration(trainingApi, project);
-            TestIteration(predictionApi, project);
+            Iteration iteration = TrainProject(trainingApi, project);
+            PublishIteration(trainingApi, project, iteration, publishedModelName);
+            TestIteration(predictionApi, project, publishedModelName);
             // </snippet_maincalls>
 
         }
 
         // <snippet_auth>
-        private CustomVisionTrainingClient AuthenticateTraining(string endpoint, string trainingKey, string predictionKey)
+        private static CustomVisionTrainingClient AuthenticateTraining(string endpoint, string trainingKey)
         {
             // Create the Api, passing in the training key
             CustomVisionTrainingClient trainingApi = new CustomVisionTrainingClient(new Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training.ApiKeyServiceClientCredentials(trainingKey))
@@ -46,7 +51,8 @@ namespace ObjectDetection
             };
             return trainingApi;
         }
-        private CustomVisionPredictionClient AuthenticatePrediction(string endpoint, string predictionKey)
+	    
+        private static CustomVisionPredictionClient AuthenticatePrediction(string endpoint, string predictionKey)
         {
             // Create a prediction endpoint, passing in the obtained prediction key
             CustomVisionPredictionClient predictionApi = new CustomVisionPredictionClient(new Microsoft.Azure.CognitiveServices.Vision.CustomVision.Prediction.ApiKeyServiceClientCredentials(predictionKey))
@@ -58,7 +64,7 @@ namespace ObjectDetection
         // </snippet_auth>
 
         // <snippet_create>
-        private Project CreateProject(CustomVisionTrainingClient trainingApi)
+        private static Project CreateProject(CustomVisionTrainingClient trainingApi)
         {
             // Find the object detection domain
             var domains = trainingApi.GetDomains();
@@ -66,21 +72,23 @@ namespace ObjectDetection
 
             // Create a new project
             Console.WriteLine("Creating new project:");
-            project = trainingApi.CreateProject("My New Project", null, objDetectionDomain.Id);
+            Project project = trainingApi.CreateProject("My New Project", null, objDetectionDomain.Id);
+		
+	    return project;
         }
         // </snippet_create>
 
         // <snippet_tags>
-        private void AddTags(CustomVisionTrainingClient trainingApi, Project project)
+        private static void AddTags(CustomVisionTrainingClient trainingApi, Project project)
         {
             // Make two tags in the new project
-            var forkTag = trainingApi.CreateTag(project.Id, "fork");
-            var scissorsTag = trainingApi.CreateTag(project.Id, "scissors");
+            forkTag = trainingApi.CreateTag(project.Id, "fork");
+            scissorsTag = trainingApi.CreateTag(project.Id, "scissors");
         }
         // </snippet_tags>
 
         // <snippet_upload_regions>
-        private void UploadImages(CustomVisionTrainingClient trainingApi)
+        private static void UploadImages(CustomVisionTrainingClient trainingApi, Project project)
         {
             Dictionary<string, double[]> fileToRegionMap = new Dictionary<string, double[]>()
             {
@@ -153,7 +161,7 @@ namespace ObjectDetection
         // </snippet_upload>
         
         // <snippet_train>
-        private void TrainProject(CustomVisionTrainingClient trainingApi, Project project)
+        private static Iteration TrainProject(CustomVisionTrainingClient trainingApi, Project project)
         {
 
             // Now there are images with tags start training the project
@@ -168,23 +176,23 @@ namespace ObjectDetection
                 // Re-query the iteration to get its updated status
                 iteration = trainingApi.GetIteration(project.Id, iteration.Id);
             }
+		
+	    return iteration;
         }
         // </snippet_train>
 
         // <snippet_publish>
-        private void PublishIteration(CustomVisionTrainingClient trainingApi, Project project)
+        private static void PublishIteration(CustomVisionTrainingClient trainingApi, Project project, Iteration iteration, string publishedModelName)
         {
-
             // The iteration is now trained. Publish it to the prediction end point.
-            var publishedModelName = "toolModel";
-            var predictionResourceId = "<target prediction resource ID>";
+            string predictionResourceId = "<target prediction resource ID>";
             trainingApi.PublishIteration(project.Id, iteration.Id, publishedModelName, predictionResourceId);
             Console.WriteLine("Done!\n");
         }
         // </snippet_publish>
 
         // <snippet_prediction>
-        private void TestIteration(CustomVisionPredictionClient predictionApi, Project project)
+        private static void TestIteration(CustomVisionPredictionClient predictionApi, Project project, string publishedModelName)
         {
 
             // Make a prediction against the new project
