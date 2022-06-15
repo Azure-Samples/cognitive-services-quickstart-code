@@ -46,13 +46,13 @@ namespace ComputerVisionQuickstart
     {
         // <snippet_vars>
         // Add your Computer Vision subscription key and endpoint
-        static string subscriptionKey = "4b1cf26493144617a36bfb3036786c9b";
-        static string endpoint = "https://cvlinda.cognitiveservices.azure.com/";
+        static string subscriptionKey = "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE";
+        static string endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE";
         // </snippet_vars>
         // </snippet_using_and_vars>
 
         // Download these images (link in prerequisites), or you can use any appropriate image on your local machine.
-        // private const string ANALYZE_LOCAL_IMAGE = "celebrities.jpg";
+        private const string ANALYZE_LOCAL_IMAGE = "celebrities.jpg";
 
         // <snippet_analyze_url>
         // URL image  (image of puppy)
@@ -153,8 +153,7 @@ namespace ComputerVisionQuickstart
 
         /*
        * ANALYZE IMAGE - LOCAL IMAGE
-	     * Analyze local image. Extracts captions, categories, tags, objects, faces, racy/adult/gory content,
-	     * brands, celebrities, landmarks, color scheme, and image types.
+	     * Analyze local image. Extracts captions, and tags.
        */
         public static async Task AnalyzeImageLocal(ComputerVisionClient client, string localImage)
         {
