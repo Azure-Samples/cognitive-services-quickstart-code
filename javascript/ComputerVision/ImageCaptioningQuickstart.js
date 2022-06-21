@@ -25,9 +25,7 @@
  *  - API v3.2: https://westus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-2/operations/5d986960601faab4bf452005
  * 
  * Examples included in this quickstart:
- * Authenticate, Describe Image, Detect Faces, Detect Objects, Detect Tags, Detect Type, 
- * Detect Category, Detect Brand, Detect Color Scheme, Detect Domain-specific Content, Detect Adult Content
- * Generate Thumbnail
+ * Authenticate, Describe Image, Detect Tags
  */
 
 // <snippet_imports_and_vars>
