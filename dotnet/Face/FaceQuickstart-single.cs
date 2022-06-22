@@ -20,10 +20,10 @@ namespace FaceQuickstart
 
         // From your Face subscription in the Azure portal, get your subscription key and endpoint.
         const string SUBSCRIPTION_KEY = "PASTE_YOUR_FACE_SUBSCRIPTION_KEY_HERE";
-        const string ENDPOINT = "PASTE_YOUR_FACE_ENDPOINT_HERE";
+        const string ENDPOINT = "PASTE_YOUR_FACE_SUBSCRIPTION_ENDPOINT_HERE";
         // </snippet_creds>
 
-        static void Main(string[] args)
+         static void Main(string[] args)
         {
             // Recognition model 4 was released in 2021 February.
             // It is recommended since its accuracy is improved
@@ -61,7 +61,7 @@ namespace FaceQuickstart
         {
             // Detect faces from image URL. Since only recognizing, use the recognition model 1.
             // We use detection model 3 because we are not retrieving attributes.
-            IList<DetectedFace> detectedFaces = await faceClient.Face.DetectWithUrlAsync(url, recognitionModel: recognition_model, detectionModel: DetectionModel.Detection03, FaceAttributes: new List<FaceAttributeType> { FaceAttributeType.QualityForRecognition });
+            IList<DetectedFace> detectedFaces = await faceClient.Face.DetectWithUrlAsync(url, recognitionModel: recognition_model, detectionModel: DetectionModel.Detection03, returnFaceAttributes: new List<FaceAttributeType> { FaceAttributeType.QualityForRecognition });
             List<DetectedFace> sufficientQualityFaces = new List<DetectedFace>();
             foreach (DetectedFace detectedFace in detectedFaces){
                 var faceQualityForRecognition = detectedFace.FaceAttributes.QualityForRecognition;
@@ -117,14 +117,14 @@ namespace FaceQuickstart
                 foreach (var similarImage in personDictionary[groupedFace])
                 {
                     Console.WriteLine($"Check whether image is of sufficient quality for recognition");
-                    IList<DetectedFace> detectedFaces = await client.Face.DetectWithUrlAsync($"{url}{similarImage}", 
-                        recognitionModel: recognition_model, 
+                    IList<DetectedFace> detectedFaces1 = await client.Face.DetectWithUrlAsync($"{url}{similarImage}", 
+                        recognitionModel: recognitionModel, 
                         detectionModel: DetectionModel.Detection03,
                         returnFaceAttributes: new List<FaceAttributeType> { FaceAttributeType.QualityForRecognition });
                     bool sufficientQuality = true;
-                    foreach (var face in detectedFaces)
+                    foreach (var face1 in detectedFaces1)
                     {
-                        var faceQualityForRecognition = face.FaceAttributes.QualityForRecognition;
+                        var faceQualityForRecognition = face1.FaceAttributes.QualityForRecognition;
                         //  Only "high" quality images are recommended for person enrollment
                         if (faceQualityForRecognition.HasValue && (faceQualityForRecognition.Value != QualityForRecognition.High)){
                             sufficientQuality = false;
