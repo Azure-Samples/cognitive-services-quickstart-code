@@ -15,15 +15,18 @@ namespace FaceQuickstart
     {
         static string personGroupId = Guid.NewGuid().ToString();
 
+        // <snippet_image_url>
         // URL path for the images.
         const string IMAGE_BASE_URL = "https://csdx.blob.core.windows.net/resources/Face/Images/";
+        // </snippet_image_url>
 
+        // <snippet_creds>
         // From your Face subscription in the Azure portal, get your subscription key and endpoint.
         const string SUBSCRIPTION_KEY = "PASTE_YOUR_FACE_SUBSCRIPTION_KEY_HERE";
         const string ENDPOINT = "PASTE_YOUR_FACE_SUBSCRIPTION_ENDPOINT_HERE";
         // </snippet_creds>
 
-         static void Main(string[] args)
+        static void Main(string[] args)
         {
             // Recognition model 4 was released in 2021 February.
             // It is recommended since its accuracy is improved
@@ -32,15 +35,18 @@ namespace FaceQuickstart
             // with models 1 and 2.
             const string RECOGNITION_MODEL4 = RecognitionModel.Recognition04;
 
+            // <snippet_main_call>
             // Authenticate.
             IFaceClient client = Authenticate(ENDPOINT, SUBSCRIPTION_KEY);
 
             // Identify - recognize a face(s) in a person group (a person group is created in this example).
             IdentifyInPersonGroup(client, IMAGE_BASE_URL, RECOGNITION_MODEL4).Wait();
+            // </snippet_main_call>
 
             Console.WriteLine("End of quickstart.");
         }
 
+        // <snippet_auth>
         /*
 		 *	AUTHENTICATE
 		 *	Uses subscription key and region to create a client.
@@ -49,7 +55,9 @@ namespace FaceQuickstart
         {
             return new FaceClient(new ApiKeyServiceClientCredentials(key)) { Endpoint = endpoint };
         }
+        // </snippet_auth>
 
+        // <snippet_detect_face_with_quality>
         // Detect faces from image url for recognition purpose. This is a helper method for other functions in this quickstart.
         // Parameter `returnFaceId` of `DetectWithUrlAsync` must be set to `true` (by default) for recognition purpose.
         // Parameter `FaceAttributes` is set to include the QualityForRecognition attribute. 
@@ -73,6 +81,7 @@ namespace FaceQuickstart
 
             return sufficientQualityFaces.ToList();
         }
+        // </snippet_detect_face_with_quality>
 
         /*
 		 * IDENTIFY FACES
@@ -142,7 +151,9 @@ namespace FaceQuickstart
                         $"{url}{similarImage}", similarImage);
                 }
             }
+            // </snippet_persongroup_create>
 
+            // <snippet_persongroup_train>
             // Start to train the person group.
             Console.WriteLine();
             Console.WriteLine($"Train person group {personGroupId}.");
@@ -157,6 +168,7 @@ namespace FaceQuickstart
                 if (trainingStatus.Status == TrainingStatusType.Succeeded) { break; }
             }
             Console.WriteLine();
+            // </snippet_persongroup_train>
 
             List<Guid> sourceFaceIds = new List<Guid>();
             // Detect faces from source image url.
@@ -165,6 +177,7 @@ namespace FaceQuickstart
             // Add detected faceId to sourceFaceIds.
             foreach (var detectedFace in detectedFaces) { sourceFaceIds.Add(detectedFace.FaceId.Value); }
             
+            // <snippet_identify_face>
             // Identify the faces in a person group. 
             var identifyResults = await client.Face.IdentifyAsync(sourceFaceIds, personGroupId);
 
@@ -178,6 +191,7 @@ namespace FaceQuickstart
                 Console.WriteLine($"Person '{person.Name}' is identified for the face in: {sourceImageFileName} - {identifyResult.FaceId}," +
                     $" confidence: {identifyResult.Candidates[0].Confidence}.");
             }
+            // </snippet_identify_face>
             Console.WriteLine();
         }
     }
