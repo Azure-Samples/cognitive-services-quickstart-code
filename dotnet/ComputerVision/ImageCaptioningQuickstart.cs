@@ -74,7 +74,7 @@ namespace ComputerVisionQuickstart
             AnalyzeImageUrl(client, ANALYZE_URL_IMAGE).Wait();
             // </snippet_main_calls>
 
-           //  AnalyzeImageLocal(client, ANALYZE_LOCAL_IMAGE).Wait();
+           AnalyzeImageLocal(client, ANALYZE_LOCAL_IMAGE).Wait();
 
             Console.WriteLine("----------------------------------------------------------");
             Console.WriteLine();
