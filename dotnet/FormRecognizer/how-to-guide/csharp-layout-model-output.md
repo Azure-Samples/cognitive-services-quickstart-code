@@ -1,1145 +1,1343 @@
-Document Page 1 has 69 line(s), 425 word(s),
+Document Page 1 has 91 line(s), 173 word(s),
 
-and 14 selection mark(s).
+and 2 selection mark(s).
 
-Line 0 has content: 'UNITED STATES'.
+Line 0 has content: 'Liberty's Delightful Sinful Bakery & Café'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 3.4915, Y= 0.6828
+Upper left => X: 46, Y= 49
 
-      Upper right => X: 5.0116, Y= 0.6828
+Upper right => X: 364, Y= 49
 
-      Lower right => X: 5.0116, Y= 0.8265
+Lower right => X: 364, Y= 69
 
-      Lower left => X: 3.4915, Y= 0.8265
+Lower left => X: 46, Y= 69
 
-Line 1 has content: 'SECURITIES AND EXCHANGE COMMISSION'.
+Line 1 has content: '765 Halifax St. Clearwater, FL 33756'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 2.1937, Y= 0.9061
+Upper left => X: 48, Y= 69
 
-      Upper right => X: 6.297, Y= 0.9061
+Upper right => X: 320, Y= 69
 
-      Lower right => X: 6.297, Y= 1.0498
+Lower right => X: 320, Y= 88
 
-      Lower left => X: 2.1937, Y= 1.0498
+Lower left => X: 48, Y= 88
 
-Line 2 has content: 'Washington, D.C. 20549'.
+Line 2 has content: 'D'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 3.4629, Y= 1.1179
+Upper left => X: 826, Y= 59
 
-      Upper right => X: 5.031, Y= 1.1179
+Upper right => X: 840, Y= 60
 
-      Lower right => X: 5.031, Y= 1.2483
+Lower right => X: 840, Y= 87
 
-      Lower left => X: 3.4629, Y= 1.2483
+Lower left => X: 825, Y= 87
 
-Line 3 has content: 'FORM 10-Q'.
+Line 3 has content: 'Our reference: 3456623'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 3.7352, Y= 1.4211
+Upper left => X: 46, Y= 102
 
-      Upper right => X: 4.7769, Y= 1.4211
+Upper right => X: 208, Y= 101
 
-      Lower right => X: 4.7769, Y= 1.5763
+Lower right => X: 208, Y= 118
 
-      Lower left => X: 3.7352, Y= 1.5763
+Lower left => X: 46, Y= 118
 
-Line 4 has content: '?'.
+Line 4 has content: 'Your reference: 2334566'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 0.6694, Y= 1.7746
+Upper left => X: 255, Y= 102
 
-      Upper right => X: 0.7764, Y= 1.7746
+Upper right => X: 424, Y= 101
 
-      Lower right => X: 0.7764, Y= 1.8833
+Lower right => X: 424, Y= 118
 
-      Lower left => X: 0.6694, Y= 1.8833
+Lower left => X: 255, Y= 118
 
-Line 5 has content: 'QUARTERLY REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF'.
+Line 5 has content: 'Received from:'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 0.996, Y= 1.7804
+Upper left => X: 48, Y= 168
 
-      Upper right => X: 7.8449, Y= 1.7804
+Upper right => X: 169, Y= 168
 
-      Lower right => X: 7.8449, Y= 1.9108
+Lower right => X: 169, Y= 186
 
-      Lower left => X: 0.996, Y= 1.9108
+Lower left => X: 48, Y= 186
 
-Line 6 has content: '1934'.
+Line 6 has content: '8556 Indian Summer Ave.'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 1.001, Y= 1.9542
+Upper left => X: 47, Y= 188
 
-      Upper right => X: 1.2967, Y= 1.9542
+Upper right => X: 238, Y= 188
 
-      Lower right => X: 1.2967, Y= 2.0559
+Lower right => X: 238, Y= 207
 
-      Lower left => X: 1.001, Y= 2.0559
+Lower left => X: 47, Y= 206
 
-Line 7 has content: 'For the Quarterly Period Ended March 31, 2020'.
+Line 7 has content: 'New Haven, CT 06511'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 0.9982, Y= 2.1626
+Upper left => X: 47, Y= 208
 
-      Upper right => X: 3.4543, Y= 2.1626
+Upper right => X: 216, Y= 208
 
-      Lower right => X: 3.4543, Y= 2.2665
+Lower right => X: 216, Y= 226
 
-      Lower left => X: 0.9982, Y= 2.2665
+Lower left => X: 47, Y= 227
 
-Line 8 has content: 'OR'.
+Line 8 has content: 'Liberty booking contact'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 4.1471, Y= 2.2972
+Upper left => X: 599, Y= 174
 
-      Upper right => X: 4.3587, Y= 2.2972
+Upper right => X: 790, Y= 174
 
-      Lower right => X: 4.3587, Y= 2.4049
+Lower right => X: 790, Y= 193
 
-      Lower left => X: 4.1471, Y= 2.4049
+Lower left => X: 599, Y= 193
 
-Line 9 has content: '?'.
+Line 9 has content: '40 River Street'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 0.6694, Y= 2.6955
+Upper left => X: 600, Y= 195
 
-      Upper right => X: 0.777, Y= 2.6955
+Upper right => X: 713, Y= 196
 
-      Lower right => X: 0.777, Y= 2.8042
+Lower right => X: 713, Y= 214
 
-      Lower left => X: 0.6694, Y= 2.8042
+Lower left => X: 600, Y= 213
 
-Line 10 has content: 'TRANSITION REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF'.
+Line 10 has content: 'East Northport, NY 11731'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 0.9929, Y= 2.7029
+Upper left => X: 600, Y= 215
 
-      Upper right => X: 7.8449, Y= 2.7029
+Upper right => X: 791, Y= 215
 
-      Lower right => X: 7.8449, Y= 2.8333
+Lower right => X: 791, Y= 235
 
-      Lower left => X: 0.9929, Y= 2.8333
+Lower left => X: 600, Y= 235
 
-Line 11 has content: '1934'.
+Line 11 has content: 'Name Summer River'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 1.001, Y= 2.8775
+Upper left => X: 46, Y= 250
 
-      Upper right => X: 1.2967, Y= 2.8775
+Upper right => X: 204, Y= 250
 
-      Lower right => X: 1.2967, Y= 2.9792
+Lower right => X: 204, Y= 267
 
-      Lower left => X: 1.001, Y= 2.9792
+Lower left => X: 46, Y= 267
 
-Line 12 has content: 'For the Transition Period From'.
+Line 12 has content: 'Tel. 34456632'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 0.9982, Y= 3.0873
+Upper left => X: 46, Y= 270
 
-      Upper right => X: 2.6112, Y= 3.0873
+Upper right => X: 155, Y= 270
 
-      Lower right => X: 2.6112, Y= 3.1679
+Lower right => X: 155, Y= 288
 
-      Lower left => X: 0.9982, Y= 3.1679
+Lower left => X: 46, Y= 288
 
-Line 13 has content: 'to'.
+Line 13 has content: 'E-mail email6@libertydelightfulsinful.com'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 3.1754, Y= 3.0889
+Upper left => X: 47, Y= 290
 
-      Upper right => X: 3.275, Y= 3.0889
+Upper right => X: 355, Y= 290
 
-      Lower right => X: 3.275, Y= 3.1679
+Lower right => X: 355, Y= 309
 
-      Lower left => X: 3.1754, Y= 3.1679
+Lower left => X: 47, Y= 309
 
-Line 14 has content: 'Commission File Number 001-37845'.
+Line 14 has content: 'Booking Confirmation - ORIGINAL'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 3.2447, Y= 3.2697
+Upper left => X: 48, Y= 354
 
-      Upper right => X: 5.2571, Y= 3.2697
+Upper right => X: 495, Y= 354
 
-      Lower right => X: 5.2571, Y= 3.3573
+Lower right => X: 496, Y= 381
 
-      Lower left => X: 3.2447, Y= 3.3573
+Lower left => X: 48, Y= 384
 
-Line 15 has content: 'MICROSOFT CORPORATION'.
+Line 15 has content: 'Our reference:'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 2.5453, Y= 3.5647
+Upper left => X: 70, Y= 410
 
-      Upper right => X: 5.952, Y= 3.5647
+Upper right => X: 178, Y= 411
 
-      Lower right => X: 5.952, Y= 3.7497
+Lower right => X: 178, Y= 428
 
-      Lower left => X: 2.5453, Y= 3.7497
+Lower left => X: 70, Y= 428
 
-Line 16 has content: 'WASHINGTON'.
+Line 16 has content: '3456623'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 2.0004, Y= 3.9639
+Upper left => X: 202, Y= 409
 
-      Upper right => X: 2.8111, Y= 3.9639
+Upper right => X: 287, Y= 408
 
-      Lower right => X: 2.8111, Y= 4.0514
+Lower right => X: 287, Y= 427
 
-      Lower left => X: 2.0004, Y= 4.0514
+Lower left => X: 202, Y= 427
 
-Line 17 has content: '(STATE OF INCORPORATION)'.
+Line 17 has content: 'Your reference:'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 1.7151, Y= 4.1057
+Upper left => X: 70, Y= 433
 
-      Upper right => X: 3.1046, Y= 4.1057
+Upper right => X: 188, Y= 433
 
-      Lower right => X: 3.1046, Y= 4.197
+Lower right => X: 188, Y= 450
 
-      Lower left => X: 1.7151, Y= 4.197
+Lower left => X: 70, Y= 450
 
-Line 18 has content: '91-1144442'.
+Line 18 has content: '2334566'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 5.7788, Y= 3.9649
+Upper left => X: 200, Y= 433
 
-      Upper right => X: 6.3997, Y= 3.9649
+Upper right => X: 267, Y= 433
 
-      Lower right => X: 6.3997, Y= 4.0514
+Lower right => X: 268, Y= 449
 
-      Lower left => X: 5.7788, Y= 4.0514
+Lower left => X: 200, Y= 450
 
-Line 19 has content: '(I.R.S. ID)'.
+Line 19 has content: 'BL/NO:'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 5.8792, Y= 4.1057
+Upper left => X: 70, Y= 452
 
-      Upper right => X: 6.3016, Y= 4.1057
+Upper right => X: 127, Y= 453
 
-      Lower right => X: 6.3016, Y= 4.197
+Lower right => X: 127, Y= 470
 
-      Lower left => X: 5.8792, Y= 4.197
+Lower left => X: 70, Y= 469
 
-Line 20 has content: 'ONE MICROSOFT WAY, REDMOND, WASHINGTON 98052-6399'.
+Line 20 has content: 'EURH234'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 2.5939, Y= 4.2851
+Upper left => X: 202, Y= 453
 
-      Upper right => X: 5.9056, Y= 4.2851
+Upper right => X: 278, Y= 453
 
-      Lower right => X: 5.9056, Y= 4.3835
+Lower right => X: 278, Y= 469
 
-      Lower left => X: 2.5939, Y= 4.3835
+Lower left => X: 202, Y= 469
 
-Line 21 has content: '(425) 882-8080'.
+Line 21 has content: 'Summary:'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 3.8758, Y= 4.4135
+Upper left => X: 71, Y= 475
 
-      Upper right => X: 4.6237, Y= 4.4135
+Upper right => X: 147, Y= 476
 
-      Lower right => X: 4.6237, Y= 4.5173
+Lower right => X: 147, Y= 493
 
-      Lower left => X: 3.8758, Y= 4.5173
+Lower left => X: 71, Y= 491
 
-Line 22 has content: 'www.microsoft.com/investor'.
+Line 22 has content: '45x72'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 3.4906, Y= 4.541
+Upper left => X: 202, Y= 474
 
-      Upper right => X: 5.0096, Y= 4.541
+Upper right => X: 248, Y= 475
 
-      Lower right => X: 5.0096, Y= 4.6229
+Lower right => X: 248, Y= 490
 
-      Lower left => X: 3.4906, Y= 4.6229
+Lower left => X: 201, Y= 490
 
-Line 23 has content: 'Securities registered pursuant to Section 12(b) of the Act:'.
+Line 23 has content: 'Export:'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 0.6345, Y= 4.7405
+Upper left => X: 69, Y= 535
 
-      Upper right => X: 3.6169, Y= 4.7405
+Upper right => X: 123, Y= 535
 
-      Lower right => X: 3.6169, Y= 4.8514
+Lower right => X: 123, Y= 554
 
-      Lower left => X: 0.6345, Y= 4.8514
+Lower left => X: 69, Y= 553
 
-Line 24 has content: 'Title of each class'.
+Line 24 has content: 'Common'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 0.6319, Y= 4.9689
+Upper left => X: 186, Y= 535
 
-      Upper right => X: 1.5695, Y= 4.9689
+Upper right => X: 255, Y= 536
 
-      Lower right => X: 1.5695, Y= 5.0563
+Lower right => X: 255, Y= 553
 
-      Lower left => X: 0.6319, Y= 5.0563
+Lower left => X: 186, Y= 552
 
-Line 25 has content: 'Trading Symbol'.
+Line 25 has content: 'Export empty pick up depot(s)'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 4.3444, Y= 4.9689
+Upper left => X: 48, Y= 599
 
-      Upper right => X: 5.1604, Y= 4.9689
+Upper right => X: 285, Y= 599
 
-      Lower right => X: 5.1604, Y= 5.0797
+Lower right => X: 285, Y= 620
 
-      Lower left => X: 4.3444, Y= 5.0797
+Lower left => X: 48, Y= 620
 
-Line 26 has content: 'Name of exchange on which registered'.
+Line 26 has content: '97 Morris Lane'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 5.5923, Y= 4.9689
+Upper left => X: 46, Y= 640
 
-      Upper right => X: 7.6228, Y= 4.9689
+Upper right => X: 159, Y= 641
 
-      Lower right => X: 7.6228, Y= 5.0797
+Lower right => X: 159, Y= 659
 
-      Lower left => X: 5.5923, Y= 5.0797
+Lower left => X: 46, Y= 658
 
-Line 27 has content: 'Common stock, $0.00000625 par value per share'.
+Line 27 has content: 'Sterling Heights, MI 48310'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 0.6347, Y= 5.1719
+Upper left => X: 46, Y= 660
 
-      Upper right => X: 3.3476, Y= 5.1719
+Upper right => X: 244, Y= 660
 
-      Lower right => X: 3.3476, Y= 5.2865
+Lower right => X: 244, Y= 679
 
-      Lower left => X: 0.6347, Y= 5.2865
+Lower left => X: 46, Y= 679
 
-Line 28 has content: 'MSFT'.
+Line 28 has content: 'Booking date:'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 4.6026, Y= 5.1772
+Upper left => X: 502, Y= 430
 
-      Upper right => X: 4.9132, Y= 5.1772
+Upper right => X: 606, Y= 430
 
-      Lower right => X: 4.9132, Y= 5.2648
+Lower right => X: 606, Y= 449
 
-      Lower left => X: 4.6026, Y= 5.2648
+Lower left => X: 502, Y= 449
 
-Line 29 has content: 'NASDAQ'.
+Line 29 has content: '05-Dec-2018'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 6.3604, Y= 5.1772
+Upper left => X: 616, Y= 427
 
-      Upper right => X: 6.8629, Y= 5.1772
+Upper right => X: 719, Y= 426
 
-      Lower right => X: 6.8629, Y= 5.2717
+Lower right => X: 719, Y= 449
 
-      Lower left => X: 6.3604, Y= 5.2717
+Lower left => X: 616, Y= 450
 
-Line 30 has content: '2.125% Notes due 2021'.
+Line 30 has content: 'Contract No:'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 0.6321, Y= 5.3347
+Upper left => X: 501, Y= 448
 
-      Upper right => X: 1.9098, Y= 5.3347
+Upper right => X: 598, Y= 447
 
-      Lower right => X: 1.9098, Y= 5.4241
+Lower right => X: 598, Y= 469
 
-      Lower left => X: 0.6321, Y= 5.4241
+Lower left => X: 501, Y= 470
 
-Line 31 has content: 'MSFT'.
+Line 31 has content: '334566'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 4.6026, Y= 5.3347
+Upper left => X: 621, Y= 450
 
-      Upper right => X: 4.9132, Y= 5.3347
+Upper right => X: 680, Y= 450
 
-      Lower right => X: 4.9132, Y= 5.4223
+Lower right => X: 680, Y= 467
 
-      Lower left => X: 4.6026, Y= 5.4223
+Lower left => X: 621, Y= 467
 
-Line 32 has content: 'NASDAQ'.
+Line 32 has content: 'Opt. A'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 6.3604, Y= 5.3347
+Upper left => X: 539, Y= 490
 
-      Upper right => X: 6.8629, Y= 5.3347
+Upper right => X: 593, Y= 489
 
-      Lower right => X: 6.8629, Y= 5.4292
+Lower right => X: 594, Y= 512
 
-      Lower left => X: 6.3604, Y= 5.4292
+Lower left => X: 540, Y= 513
 
-Line 33 has content: '3.125% Notes due 2028'.
+Line 33 has content: 'Opt. B'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 0.6337, Y= 5.493
+Upper left => X: 661, Y= 495
 
-      Upper right => X: 1.9238, Y= 5.493
+Upper right => X: 711, Y= 495
 
-      Lower right => X: 1.9238, Y= 5.5825
+Lower right => X: 711, Y= 513
 
-      Lower left => X: 0.6337, Y= 5.5825
+Lower left => X: 662, Y= 513
 
-Line 34 has content: 'MSFT'.
+Line 34 has content: 'From'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 4.6026, Y= 5.493
+Upper left => X: 53, Y= 693
 
-      Upper right => X: 4.9132, Y= 5.493
+Upper right => X: 94, Y= 695
 
-      Lower right => X: 4.9132, Y= 5.5806
+Lower right => X: 94, Y= 710
 
-      Lower left => X: 4.6026, Y= 5.5806
+Lower left => X: 53, Y= 709
 
-Line 35 has content: 'NASDAQ'.
+Line 35 has content: 'To'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 6.3604, Y= 5.493
+Upper left => X: 212, Y= 694
 
-      Upper right => X: 6.8629, Y= 5.493
+Upper right => X: 233, Y= 695
 
-      Lower right => X: 6.8629, Y= 5.5876
+Lower right => X: 233, Y= 709
 
-      Lower left => X: 6.3604, Y= 5.5876
+Lower left => X: 213, Y= 709
 
-Line 36 has content: '2.625% Notes due 2033'.
+Line 36 has content: 'By'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 0.6321, Y= 5.6505
+Upper left => X: 370, Y= 695
 
-      Upper right => X: 1.9238, Y= 5.6505
+Upper right => X: 390, Y= 696
 
-      Lower right => X: 1.9238, Y= 5.74
+Lower right => X: 389, Y= 709
 
-      Lower left => X: 0.6321, Y= 5.74
+Lower left => X: 370, Y= 709
 
-Line 37 has content: 'MSFT'.
+Line 37 has content: 'ETD'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 4.6026, Y= 5.6505
+Upper left => X: 526, Y= 694
 
-      Upper right => X: 4.9132, Y= 5.6505
+Upper right => X: 557, Y= 695
 
-      Lower right => X: 4.9132, Y= 5.7381
+Lower right => X: 557, Y= 710
 
-      Lower left => X: 4.6026, Y= 5.7381
+Lower left => X: 527, Y= 709
 
-Line 38 has content: 'NASDAQ'.
+Line 38 has content: 'ETA'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 6.3604, Y= 5.6505
+Upper left => X: 681, Y= 694
 
-      Upper right => X: 6.8629, Y= 5.6505
+Upper right => X: 714, Y= 695
 
-      Lower right => X: 6.8629, Y= 5.7451
+Lower right => X: 715, Y= 709
 
-      Lower left => X: 6.3604, Y= 5.7451
+Lower left => X: 682, Y= 709
 
-Line 39 has content: 'Securities registered pursuant to Section 12(g) of the Act:'.
+Line 39 has content: '118 Queen Street'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 0.6345, Y= 5.8505
+Upper left => X: 57, Y= 712
 
-      Upper right => X: 3.6169, Y= 5.8505
+Upper right => X: 177, Y= 712
 
-      Lower right => X: 3.6169, Y= 5.9614
+Lower right => X: 177, Y= 728
 
-      Lower left => X: 0.6345, Y= 5.9614
+Lower left => X: 57, Y= 728
 
-Line 40 has content: 'NONE'.
+Line 40 has content: 'Hoboken, NJ 07030'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 0.6379, Y= 6.0789
+Upper left => X: 56, Y= 729
 
-      Upper right => X: 0.9646, Y= 6.0789
+Upper right => X: 191, Y= 729
 
-      Lower right => X: 0.9646, Y= 6.1663
+Lower right => X: 191, Y= 745
 
-      Lower left => X: 0.6379, Y= 6.1663
+Lower left => X: 56, Y= 745
 
-Line 41 has content: 'Indicate by check mark whether the registrant (1) has filed all reports required to be filed by Section 13 or 15(d) of the Securities Exchange'.
+Line 41 has content: '52 West Trenton St.'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 0.661, Y= 6.2705
+Upper left => X: 212, Y= 712
 
-      Upper right => X: 7.8456, Y= 6.2705
+Upper right => X: 345, Y= 712
 
-      Lower right => X: 7.8456, Y= 6.3814
+Lower right => X: 345, Y= 728
 
-      Lower left => X: 0.661, Y= 6.3814
+Lower left => X: 212, Y= 728
 
-Line 42 has content: 'Act of 1934 during the preceding 12 months (or for such shorter period that the registrant was required to file such reports), and (2) has'.
+Line 42 has content: 'Harleysville, PA'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 0.65, Y= 6.4064
+Upper left => X: 210, Y= 729
 
-      Upper right => X: 7.8445, Y= 6.4064
+Upper right => X: 320, Y= 729
 
-      Lower right => X: 7.8445, Y= 6.5172
+Lower right => X: 320, Y= 746
 
-      Lower left => X: 0.65, Y= 6.5172
+Lower left => X: 210, Y= 746
 
-Line 43 has content: 'been subject to such filing requirements for the past 90 days.'.
+Line 43 has content: '19438'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 0.6578, Y= 6.5497
+Upper left => X: 215, Y= 747
 
-      Upper right => X: 3.8221, Y= 6.5497
+Upper right => X: 256, Y= 748
 
-      Lower right => X: 3.8221, Y= 6.6605
+Lower right => X: 256, Y= 763
 
-      Lower left => X: 0.6578, Y= 6.6605
+Lower left => X: 214, Y= 763
 
-Line 44 has content: 'Yes ?'.
+Line 44 has content: 'cause science slow'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 3.9638, Y= 6.549
+Upper left => X: 367, Y= 713
 
-      Upper right => X: 4.3353, Y= 6.549
+Upper right => X: 501, Y= 713
 
-      Lower right => X: 4.3353, Y= 6.6371
+Lower right => X: 501, Y= 728
 
-      Lower left => X: 3.9638, Y= 6.6371
+Lower left => X: 367, Y= 728
 
-Line 45 has content: 'No ?'.
+Line 45 has content: '09-Dec-2018'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 4.4902, Y= 6.5477
+Upper left => X: 525, Y= 712
 
-      Upper right => X: 4.8008, Y= 6.5477
+Upper right => X: 613, Y= 712
 
-      Lower right => X: 4.8008, Y= 6.6371
+Lower right => X: 613, Y= 727
 
-      Lower left => X: 4.4902, Y= 6.6371
+Lower left => X: 525, Y= 727
 
-Line 46 has content: 'Indicate by check mark whether the registrant has submitted electronically every Interactive Data File required to be submitted pursuant to Rule'.
+Line 46 has content: '19:00'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 0.6611, Y= 6.7519
+Upper left => X: 526, Y= 730
 
-      Upper right => X: 7.845, Y= 6.7519
+Upper right => X: 565, Y= 730
 
-      Lower right => X: 7.845, Y= 6.8614
+Lower right => X: 564, Y= 744
 
-      Lower left => X: 0.6611, Y= 6.8614
+Lower left => X: 526, Y= 744
 
-Line 47 has content: '405 of Regulation S-T (§232.405 of this chapter) during the preceding 12 months (or for such shorter period that the registrant was required to'.
+Line 47 has content: '09-Dec-2020'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 0.6517, Y= 6.8863
+Upper left => X: 681, Y= 713
 
-      Upper right => X: 7.8459, Y= 6.8863
+Upper right => X: 770, Y= 712
 
-      Lower right => X: 7.8459, Y= 6.9972
+Lower right => X: 770, Y= 727
 
-      Lower left => X: 0.6517, Y= 6.9972
+Lower left => X: 681, Y= 728
 
-Line 48 has content: 'submit such files).'.
+Line 48 has content: '11:00'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 0.6538, Y= 7.0296
+Upper left => X: 682, Y= 731
 
-      Upper right => X: 1.5594, Y= 7.0296
+Upper right => X: 721, Y= 730
 
-      Lower right => X: 1.5594, Y= 7.1405
+Lower right => X: 720, Y= 744
 
-      Lower left => X: 0.6538, Y= 7.1405
+Lower left => X: 682, Y= 744
 
-Line 49 has content: 'Yes ?'.
+Line 49 has content: '9 Ketch Harbour'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 1.6938, Y= 7.0289
+Upper left => X: 55, Y= 765
 
-      Upper right => X: 2.0577, Y= 7.0289
+Upper right => X: 167, Y= 765
 
-      Lower right => X: 2.0577, Y= 7.1171
+Lower right => X: 167, Y= 781
 
-      Lower left => X: 1.6938, Y= 7.1171
+Lower left => X: 55, Y= 780
 
-Line 50 has content: 'No ?'.
+Line 50 has content: 'Ave.'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 2.2066, Y= 7.0276
+Upper left => X: 56, Y= 783
 
-      Upper right => X: 2.5115, Y= 7.0276
+Upper right => X: 86, Y= 784
 
-      Lower right => X: 2.5115, Y= 7.1171
+Lower right => X: 86, Y= 797
 
-      Lower left => X: 2.2066, Y= 7.1171
+Lower left => X: 56, Y= 797
 
-Line 51 has content: 'Indicate by check mark whether the registrant is a large accelerated filer, an accelerated filer, a non-accelerated filer, a smaller reporting'.
+Line 51 has content: 'Vincentown, NJ'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 0.6611, Y= 7.2304
+Upper left => X: 55, Y= 799
 
-      Upper right => X: 7.8417, Y= 7.2304
+Upper right => X: 161, Y= 799
 
-      Lower right => X: 7.8417, Y= 7.3413
+Lower right => X: 161, Y= 814
 
-      Lower left => X: 0.6611, Y= 7.3413
+Lower left => X: 55, Y= 815
 
-Line 52 has content: 'company, or an emerging growth company. See the definitions of "large accelerated filer," "accelerated filer," "smaller reporting company,"'.
+Line 52 has content: '75 Fawn Street'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 0.6547, Y= 7.3663
+Upper left => X: 211, Y= 765
 
-      Upper right => X: 7.8449, Y= 7.3663
+Upper right => X: 316, Y= 765
 
-      Lower right => X: 7.8449, Y= 7.4772
+Lower right => X: 316, Y= 781
 
-      Lower left => X: 0.6547, Y= 7.4772
+Lower left => X: 211, Y= 780
 
-Line 53 has content: 'and "emerging growth company" in Rule 12b-2 of the Exchange Act.'.
+Line 53 has content: 'Peabody, MA 01960'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 0.6543, Y= 7.5021
+Upper left => X: 212, Y= 782
 
-      Upper right => X: 4.1966, Y= 7.5021
+Upper right => X: 350, Y= 782
 
-      Lower right => X: 4.1966, Y= 7.613
+Lower right => X: 350, Y= 798
 
-      Lower left => X: 0.6543, Y= 7.613
+Lower left => X: 212, Y= 798
 
-Line 54 has content: 'Large accelerated filer ?'.
+Line 54 has content: 'tone late spoken'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 0.6586, Y= 7.709
+Upper left => X: 368, Y= 766
 
-      Upper right => X: 1.9534, Y= 7.709
+Upper right => X: 481, Y= 766
 
-      Lower right => X: 1.9534, Y= 7.8206
+Lower right => X: 481, Y= 782
 
-      Lower left => X: 0.6586, Y= 7.8206
+Lower left => X: 368, Y= 782
 
-Line 55 has content: 'Non-accelerated filer ?'.
+Line 55 has content: '12-Dec-2018'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 0.659, Y= 7.8827
+Upper left => X: 526, Y= 765
 
-      Upper right => X: 1.8756, Y= 7.8827
+Upper right => X: 614, Y= 765
 
-      Lower right => X: 1.8756, Y= 7.9721
+Lower right => X: 614, Y= 780
 
-      Lower left => X: 0.659, Y= 7.9721
+Lower left => X: 526, Y= 781
 
-Line 56 has content: 'Accelerated filer ?'.
+Line 56 has content: '10:00'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 5.3358, Y= 7.7077
+Upper left => X: 525, Y= 782
 
-      Upper right => X: 6.3181, Y= 7.7077
+Upper right => X: 565, Y= 783
 
-      Lower right => X: 6.3181, Y= 7.7971
+Lower right => X: 565, Y= 797
 
-      Lower left => X: 5.3358, Y= 7.7971
+Lower left => X: 526, Y= 797
 
-Line 57 has content: 'Smaller reporting company ?'.
+Line 57 has content: '19-Dec-2020'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 5.3412, Y= 7.8827
+Upper left => X: 683, Y= 766
 
-      Upper right => X: 6.8831, Y= 7.8827
+Upper right => X: 771, Y= 765
 
-      Lower right => X: 6.8831, Y= 7.9956
+Lower right => X: 771, Y= 781
 
-      Lower left => X: 5.3412, Y= 7.9956
+Lower left => X: 683, Y= 781
 
-Line 58 has content: 'Emerging growth company ?'.
+Line 58 has content: 'Deadline'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 5.3452, Y= 8.0585
+Upper left => X: 55, Y= 849
 
-      Upper right => X: 6.8764, Y= 8.0585
+Upper right => X: 120, Y= 850
 
-      Lower right => X: 6.8764, Y= 8.1714
+Lower right => X: 120, Y= 865
 
-      Lower left => X: 5.3452, Y= 8.1714
+Lower left => X: 55, Y= 864
 
-Line 59 has content: 'If an emerging growth company, indicate by check mark if the registrant has elected not to use the extended transition period for complying'.
+Line 59 has content: 'Location'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 0.661, Y= 8.2614
+Upper left => X: 251, Y= 850
 
-      Upper right => X: 7.842, Y= 8.2614
+Upper right => X: 314, Y= 850
 
-      Lower right => X: 7.842, Y= 8.3722
+Lower right => X: 314, Y= 865
 
-      Lower left => X: 0.661, Y= 8.3722
+Lower left => X: 251, Y= 864
 
-Line 60 has content: 'with any new or revised financial accounting standards provided pursuant to Section 13(a) of the Exchange Act. ?'.
+Line 60 has content: 'Date/Time (local)'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 0.6504, Y= 8.4139
+Upper left => X: 446, Y= 849
 
-      Upper right => X: 6.6275, Y= 8.4139
+Upper right => X: 569, Y= 849
 
-      Lower right => X: 6.6275, Y= 8.5248
+Lower right => X: 569, Y= 865
 
-      Lower left => X: 0.6504, Y= 8.5248
+Lower left => X: 446, Y= 865
 
-Line 61 has content: 'Indicate by check mark whether the registrant is a shell company (as defined in Rule 12b-2 of the Exchange Act).'.
+Line 61 has content: 'Required action'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 0.6609, Y= 8.6172
+Upper left => X: 642, Y= 849
 
-      Upper right => X: 6.3833, Y= 8.6172
+Upper right => X: 757, Y= 849
 
-      Lower right => X: 6.3833, Y= 8.7281
+Lower right => X: 757, Y= 865
 
-      Lower left => X: 0.6609, Y= 8.7281
+Lower left => X: 642, Y= 865
 
-Line 62 has content: 'Yes ?'.
+Line 62 has content: 'Table'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 6.5188, Y= 8.6152
+Upper left => X: 56, Y= 867
 
-      Upper right => X: 6.8824, Y= 8.6152
+Upper right => X: 94, Y= 867
 
-      Lower right => X: 6.8824, Y= 8.7046
+Lower right => X: 93, Y= 881
 
-      Lower left => X: 6.5188, Y= 8.7046
+Lower left => X: 56, Y= 880
 
-Line 63 has content: 'No ?'.
+Line 63 has content: 'Harleysville'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 7.0307, Y= 8.6165
+Upper left => X: 252, Y= 867
 
-      Upper right => X: 7.3351, Y= 8.6165
+Upper right => X: 331, Y= 867
 
-      Lower right => X: 7.3351, Y= 8.7046
+Lower right => X: 331, Y= 882
 
-      Lower left => X: 7.0307, Y= 8.7046
+Lower left => X: 252, Y= 882
 
-Line 64 has content: 'Indicate the number of shares outstanding of each of the issuer's classes of common stock, as of the latest practicable date.'.
+Line 64 has content: '(PA)'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 0.6611, Y= 8.818
+Upper left => X: 254, Y= 884
 
-      Upper right => X: 6.9374, Y= 8.818
+Upper right => X: 282, Y= 885
 
-      Lower right => X: 6.9374, Y= 8.9289
+Lower right => X: 282, Y= 901
 
-      Lower left => X: 0.6611, Y= 8.9289
+Lower left => X: 254, Y= 900
 
-Line 65 has content: 'Class'.
+Line 65 has content: '08-Dec-2019'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 0.6549, Y= 9.0975
+Upper left => X: 447, Y= 866
 
-      Upper right => X: 0.9237, Y= 9.0975
+Upper right => X: 535, Y= 866
 
-      Lower right => X: 0.9237, Y= 9.1745
+Lower right => X: 535, Y= 882
 
-      Lower left => X: 0.6549, Y= 9.1745
+Lower left => X: 447, Y= 881
 
-Line 66 has content: 'Outstanding as of April 24, 2020'.
+Line 66 has content: 'Flight'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 6.1303, Y= 9.105
+Upper left => X: 56, Y= 902
 
-      Upper right => X: 7.707, Y= 9.105
+Upper right => X: 94, Y= 902
 
-      Lower right => X: 7.707, Y= 9.2026
+Lower right => X: 94, Y= 919
 
-      Lower left => X: 6.1303, Y= 9.2026
+Lower left => X: 56, Y= 918
 
-Line 67 has content: 'Common Stock, $0.00000625 par value per share'.
+Line 67 has content: 'Harleysville'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 0.6559, Y= 9.3141
+Upper left => X: 252, Y= 902
 
-      Upper right => X: 3.2571, Y= 9.3141
+Upper right => X: 328, Y= 903
 
-      Lower right => X: 3.2571, Y= 9.4301
+Lower right => X: 328, Y= 918
 
-      Lower left => X: 0.6559, Y= 9.4301
+Lower left => X: 252, Y= 917
 
-Line 68 has content: '7,583,440,247 shares'.
+Line 68 has content: '(PA'.
 
-    Its bounding box is:
+Its bounding box is:
 
-      Upper left => X: 6.5747, Y= 9.3458
+Upper left => X: 253, Y= 919
 
-      Upper right => X: 7.7069, Y= 9.3458
+Upper right => X: 280, Y= 920
 
-      Lower right => X: 7.7069, Y= 9.4475
+Lower right => X: 279, Y= 935
 
-      Lower left => X: 6.5747, Y= 9.4475
+Lower left => X: 254, Y= 935
 
-Selection Mark 0 is Selected.
+Line 69 has content: '08-Dec-2019'.
 
-    Its bounding polygon (points ordered clockwise):
+Its bounding box is:
 
-      Point 0 => X: 0.6694, Y: 1.7746
+Upper left => X: 447, Y= 902
 
-      Point 1 => X: 0.7764, Y: 1.7746
+Upper right => X: 536, Y= 902
 
-      Point 2 => X: 0.7764, Y: 1.8833
+Lower right => X: 536, Y= 917
 
-      Point 3 => X: 0.6694, Y: 1.8833
+Lower left => X: 447, Y= 917
+
+Line 70 has content: '13:00'.
+
+Its bounding box is:
+
+Upper left => X: 448, Y= 920
+
+Upper right => X: 487, Y= 919
+
+Lower right => X: 486, Y= 934
+
+Lower left => X: 448, Y= 934
+
+Line 71 has content: 'Two more days and all his'.
+
+Its bounding box is:
+
+Upper left => X: 643, Y= 902
+
+Upper right => X: 818, Y= 901
+
+Lower right => X: 818, Y= 918
+
+Lower left => X: 643, Y= 919
+
+Line 72 has content: 'problems would be solved.'.
+
+Its bounding box is:
+
+Upper left => X: 643, Y= 920
+
+Upper right => X: 821, Y= 919
+
+Lower right => X: 822, Y= 934
+
+Lower left => X: 643, Y= 936
+
+Line 73 has content: 'Round'.
+
+Its bounding box is:
+
+Upper left => X: 56, Y= 938
+
+Upper right => X: 103, Y= 937
+
+Lower right => X: 103, Y= 952
+
+Lower left => X: 56, Y= 953
+
+Line 74 has content: 'Harleysville'.
+
+Its bounding box is:
+
+Upper left => X: 251, Y= 937
+
+Upper right => X: 328, Y= 937
+
+Lower right => X: 328, Y= 954
+
+Lower left => X: 251, Y= 953
+
+Line 75 has content: '(PA'.
+
+Its bounding box is:
+
+Upper left => X: 253, Y= 954
+
+Upper right => X: 280, Y= 955
+
+Lower right => X: 280, Y= 970
+
+Lower left => X: 253, Y= 970
+
+Line 76 has content: '09-Dec-2019'.
+
+Its bounding box is:
+
+Upper left => X: 447, Y= 938
+
+Upper right => X: 535, Y= 937
+
+Lower right => X: 535, Y= 952
+
+Lower left => X: 447, Y= 953
+
+Line 77 has content: 'Accent'.
+
+Its bounding box is:
+
+Upper left => X: 54, Y= 973
+
+Upper right => X: 105, Y= 973
+
+Lower right => X: 105, Y= 987
+
+Lower left => X: 54, Y= 987
+
+Line 78 has content: 'Harleysville'.
+
+Its bounding box is:
+
+Upper left => X: 252, Y= 972
+
+Upper right => X: 328, Y= 973
+
+Lower right => X: 328, Y= 989
+
+Lower left => X: 252, Y= 988
+
+Line 79 has content: '(PA)'.
+
+Its bounding box is:
+
+Upper left => X: 254, Y= 991
+
+Upper right => X: 283, Y= 992
+
+Lower right => X: 282, Y= 1006
+
+Lower left => X: 254, Y= 1005
+
+Line 80 has content: '10-Dec-2019'.
+
+Its bounding box is:
+
+Upper left => X: 447, Y= 972
+
+Upper right => X: 536, Y= 972
+
+Lower right => X: 536, Y= 987
+
+Lower left => X: 447, Y= 988
+
+Line 81 has content: 'Monkey'.
+
+Its bounding box is:
+
+Upper left => X: 56, Y= 1009
+
+Upper right => X: 109, Y= 1009
+
+Lower right => X: 109, Y= 1025
+
+Lower left => X: 55, Y= 1024
+
+Line 82 has content: 'Harleysville'.
+
+Its bounding box is:
+
+Upper left => X: 252, Y= 1008
+
+Upper right => X: 329, Y= 1009
+
+Lower right => X: 328, Y= 1025
+
+Lower left => X: 252, Y= 1024
+
+Line 83 has content: '(PA)'.
+
+Its bounding box is:
+
+Upper left => X: 253, Y= 1026
+
+Upper right => X: 280, Y= 1026
+
+Lower right => X: 279, Y= 1041
+
+Lower left => X: 253, Y= 1041
+
+Line 84 has content: '11-Dec-2019'.
+
+Its bounding box is:
+
+Upper left => X: 448, Y= 1009
+
+Upper right => X: 536, Y= 1009
+
+Lower right => X: 536, Y= 1023
+
+Lower left => X: 448, Y= 1023
+
+Line 85 has content: 'Route'.
+
+Its bounding box is:
+
+Upper left => X: 56, Y= 1044
+
+Upper right => X: 97, Y= 1045
+
+Lower right => X: 97, Y= 1058
+
+Lower left => X: 56, Y= 1059
+
+Line 86 has content: 'Harleysville'.
+
+Its bounding box is:
+
+Upper left => X: 253, Y= 1044
+
+Upper right => X: 329, Y= 1044
+
+Lower right => X: 328, Y= 1060
+
+Lower left => X: 253, Y= 1059
+
+Line 87 has content: '(PA)'.
+
+Its bounding box is:
+
+Upper left => X: 254, Y= 1061
+
+Upper right => X: 281, Y= 1062
+
+Lower right => X: 280, Y= 1076
+
+Lower left => X: 254, Y= 1075
+
+Line 88 has content: '11-Dec-2019'.
+
+Its bounding box is:
+
+Upper left => X: 449, Y= 1044
+
+Upper right => X: 535, Y= 1044
+
+Lower right => X: 535, Y= 1058
+
+Lower left => X: 449, Y= 1058
+
+Line 89 has content: 'Peanuts don't grow on'.
+
+Its bounding box is:
+
+Upper left => X: 643, Y= 1043
+
+Upper right => X: 794, Y= 1044
+
+Lower right => X: 794, Y= 1061
+
+Lower left => X: 643, Y= 1059
+
+Line 90 has content: 'trees.'.
+
+Its bounding box is:
+
+Upper left => X: 643, Y= 1061
+
+Upper right => X: 681, Y= 1063
+
+Lower right => X: 681, Y= 1076
+
+Lower left => X: 643, Y= 1075
+
+Selection Mark 0 is Unselected.
+
+Its bounding polygon (points ordered clockwise):
+
+Point 0 => X: 507, Y: 488
+
+Point 1 => X: 537, Y: 488
+
+Point 2 => X: 537, Y: 519
+
+Point 3 => X: 507, Y: 519
 
 Selection Mark 1 is Unselected.
 
-    Its bounding polygon (points ordered clockwise):
+Its bounding polygon (points ordered clockwise):
 
-      Point 0 => X: 0.6694, Y: 2.6955
+Point 0 => X: 614, Y: 489
 
-      Point 1 => X: 0.777, Y: 2.6955
+Point 1 => X: 645, Y: 489
 
-      Point 2 => X: 0.777, Y: 2.8042
+Point 2 => X: 645, Y: 520
 
-      Point 3 => X: 0.6694, Y: 2.8042
-
-Selection Mark 2 is Selected.
-
-    Its bounding polygon (points ordered clockwise):
-
-      Point 0 => X: 4.2484, Y: 6.549
-
-      Point 1 => X: 4.3353, Y: 6.549
-
-      Point 2 => X: 4.3353, Y: 6.6371
-
-      Point 3 => X: 4.2484, Y: 6.6371
-
-Selection Mark 3 is Unselected.
-
-    Its bounding polygon (points ordered clockwise):
-
-      Point 0 => X: 4.7134, Y: 6.5477
-
-      Point 1 => X: 4.8008, Y: 6.5477
-
-      Point 2 => X: 4.8008, Y: 6.6358
-
-      Point 3 => X: 4.7134, Y: 6.6358
-
-Selection Mark 4 is Selected.
-
-    Its bounding polygon (points ordered clockwise):
-
-      Point 0 => X: 1.9708, Y: 7.0289
-
-      Point 1 => X: 2.0577, Y: 7.0289
-
-      Point 2 => X: 2.0577, Y: 7.1171
-
-      Point 3 => X: 1.9708, Y: 7.1171
-
-Selection Mark 5 is Unselected.
-
-    Its bounding polygon (points ordered clockwise):
-
-      Point 0 => X: 2.4242, Y: 7.0276
-
-      Point 1 => X: 2.5115, Y: 7.0276
-
-      Point 2 => X: 2.5115, Y: 7.1158
-
-      Point 3 => X: 2.4242, Y: 7.1158
-
-Selection Mark 6 is Selected.
-
-    Its bounding polygon (points ordered clockwise):
-
-      Point 0 => X: 1.8666, Y: 7.709
-
-      Point 1 => X: 1.9534, Y: 7.709
-
-      Point 2 => X: 1.9534, Y: 7.7971
-
-      Point 3 => X: 1.8666, Y: 7.7971
-
-Selection Mark 7 is Unselected.
-
-    Its bounding polygon (points ordered clockwise):
-
-      Point 0 => X: 6.2307, Y: 7.7077
-
-      Point 1 => X: 6.3181, Y: 7.7077
-
-      Point 2 => X: 6.3181, Y: 7.7958
-
-      Point 3 => X: 6.2307, Y: 7.7958
-
-Selection Mark 8 is Unselected.
-
-    Its bounding polygon (points ordered clockwise):
-
-      Point 0 => X: 1.7882, Y: 7.8827
-
-      Point 1 => X: 1.8756, Y: 7.8827
-
-      Point 2 => X: 1.8756, Y: 7.9708
-
-      Point 3 => X: 1.7882, Y: 7.9708
-
-Selection Mark 9 is Unselected.
-
-    Its bounding polygon (points ordered clockwise):
-
-      Point 0 => X: 6.7957, Y: 7.8827
-
-      Point 1 => X: 6.8831, Y: 7.8827
-
-      Point 2 => X: 6.8831, Y: 7.9708
-
-      Point 3 => X: 6.7957, Y: 7.9708
-
-Selection Mark 10 is Unselected.
-
-    Its bounding polygon (points ordered clockwise):
-
-      Point 0 => X: 6.7891, Y: 8.0585
-
-      Point 1 => X: 6.8764, Y: 8.0585
-
-      Point 2 => X: 6.8764, Y: 8.1467
-
-      Point 3 => X: 6.7891, Y: 8.1467
-
-Selection Mark 11 is Unselected.
-
-    Its bounding polygon (points ordered clockwise):
-
-      Point 0 => X: 6.5447, Y: 8.416
-
-      Point 1 => X: 6.6275, Y: 8.416
-
-      Point 2 => X: 6.6275, Y: 8.5
-
-      Point 3 => X: 6.5447, Y: 8.5
-
-Selection Mark 12 is Unselected.
-
-    Its bounding polygon (points ordered clockwise):
-
-      Point 0 => X: 6.795, Y: 8.6152
-
-      Point 1 => X: 6.8824, Y: 8.6152
-
-      Point 2 => X: 6.8824, Y: 8.7033
-
-      Point 3 => X: 6.795, Y: 8.7033
-
-Selection Mark 13 is Selected.
-
-    Its bounding polygon (points ordered clockwise):
-
-      Point 0 => X: 7.2483, Y: 8.6165
-
-      Point 1 => X: 7.3351, Y: 8.6165
-
-      Point 2 => X: 7.3351, Y: 8.7046
-
-      Point 3 => X: 7.2483, Y: 8.7046
+Point 3 => X: 614, Y: 520
 
 Paragraphs:
 
-Paragraph content: UNITED STATES SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549
+Paragraph content: Liberty's Delightful Sinful Bakery & Café 765 Halifax St. Clearwater, FL 33756
 
-Paragraph content: FORM 10-Q
+Paragraph content: D
 
-Paragraph content: ? QUARTERLY REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF 1934
+Paragraph content: Our reference: 3456623
 
-Paragraph content: For the Quarterly Period Ended March 31, 2020
+Paragraph content: Your reference: 2334566
 
-Paragraph content: OR
+Paragraph content: Received from: 8556 Indian Summer Ave. New Haven, CT 06511
 
-Paragraph content: ? TRANSITION REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF 1934
+Paragraph content: Liberty booking contact 40 River Street East Northport, NY 11731
 
-Paragraph content: For the Transition Period From to
+Paragraph content: Name Summer River Tel. 34456632 E-mail email6@libertydelightfulsinful.com
 
-Paragraph content: Commission File Number 001-37845
+Paragraph content: Booking Confirmation - ORIGINAL
 
-Paragraph content: MICROSOFT CORPORATION
+Paragraph content: Our reference:
 
-Paragraph content: WASHINGTON
+Paragraph content: 3456623
 
-Paragraph content: (STATE OF INCORPORATION)
+Paragraph content: Your reference:
 
-Paragraph content: 91-1144442
+Paragraph content: 2334566
 
-Paragraph content: (I.R.S. ID)
+Paragraph content: BL/NO:
 
-Paragraph content: ONE MICROSOFT WAY, REDMOND, WASHINGTON 98052-6399
+Paragraph content: EURH234
 
-Paragraph content: (425) 882-8080
+Paragraph content: Summary:
 
-Paragraph content: www.microsoft.com/investor
+Paragraph content: 45x72
 
-Paragraph content: Securities registered pursuant to Section 12(b) of the Act:
+Paragraph content: Export:
 
-Paragraph content: Title of each class
+Paragraph content: Common
 
-Paragraph content: Trading Symbol
+Paragraph content: Export empty pick up depot(s)
 
-Paragraph content: Name of exchange on which registered
+Paragraph content: 97 Morris Lane Sterling Heights, MI 48310
 
-Paragraph content: Common stock, $0.00000625 par value per share
+Paragraph content: Booking date:
 
-Paragraph content: MSFT
+Paragraph content: 05-Dec-2018
 
-Paragraph content: NASDAQ
+Paragraph content: Contract No:
 
-Paragraph content: 2.125% Notes due 2021
+Paragraph content: 334566
 
-Paragraph content: MSFT
+Paragraph content: Opt. A
 
-Paragraph content: NASDAQ
+Paragraph content: Opt. B
 
-Paragraph content: 3.125% Notes due 2028
+Paragraph content: From
 
-Paragraph content: MSFT
+Paragraph content: To
 
-Paragraph content: NASDAQ
+Paragraph content: By
 
-Paragraph content: 2.625% Notes due 2033
+Paragraph content: ETD
 
-Paragraph content: MSFT
+Paragraph content: ETA
 
-Paragraph content: NASDAQ
+Paragraph content: 118 Queen Street Hoboken, NJ 07030
 
-Paragraph content: Securities registered pursuant to Section 12(g) of the Act:
+Paragraph content: 52 West Trenton St. Harleysville, PA 19438
 
-Paragraph content: NONE
+Paragraph content: cause science slow
 
-Paragraph content: Indicate by check mark whether the registrant (1) has filed all reports required to be filed by Section 13 or 15(d) of the Securities Exchange Act of 1934 during the preceding 12 months (or for such shorter period that the registrant was required to file such reports), and (2) has been subject to such filing requirements for the past 90 days. Yes ? No ?
+Paragraph content: 09-Dec-2018 19:00
 
-Paragraph content: Indicate by check mark whether the registrant has submitted electronically every Interactive Data File required to be submitted pursuant to Rule 405 of Regulation S-T (§232.405 of this chapter) during the preceding 12 months (or for such shorter period that the registrant was required to submit such files). Yes ? No ?
+Paragraph content: 09-Dec-2020 11:00
 
-Paragraph content: Indicate by check mark whether the registrant is a large accelerated filer, an accelerated filer, a non-accelerated filer, a smaller reporting company, or an emerging growth company. See the definitions of "large accelerated filer," "accelerated filer," "smaller reporting company," and "emerging growth company" in Rule 12b-2 of the Exchange Act.
+Paragraph content: 9 Ketch Harbour Ave. Vincentown, NJ
 
-Paragraph content: Large accelerated filer ?
+Paragraph content: 75 Fawn Street Peabody, MA 01960
 
-Paragraph content: Non-accelerated filer ?
+Paragraph content: tone late spoken
 
-Paragraph content: Accelerated filer ?
+Paragraph content: 12-Dec-2018 10:00
 
-Paragraph content: Smaller reporting company ?
+Paragraph content: 19-Dec-2020
 
-Paragraph content: Emerging growth company ?
+Paragraph content: Deadline
 
-Paragraph content: If an emerging growth company, indicate by check mark if the registrant has elected not to use the extended transition period for complying with any new or revised financial accounting standards provided pursuant to Section 13(a) of the Exchange Act. ?
+Paragraph content: Location
 
-Paragraph content: Indicate by check mark whether the registrant is a shell company (as defined in Rule 12b-2 of the Exchange Act).
+Paragraph content: Date/Time (local)
 
-Paragraph content: Yes ? No ?
+Paragraph content: Required action
 
-Paragraph content: Indicate the number of shares outstanding of each of the issuer's classes of common stock, as of the latest practicable date.
+Paragraph content: Table
 
-Paragraph content: Class
+Paragraph content: Harleysville (PA)
 
-Paragraph content: Outstanding as of April 24, 2020
+Paragraph content: 08-Dec-2019
 
-Paragraph content: Common Stock, $0.00000625 par value per share
+Paragraph content: Flight
 
-Paragraph content: 7,583,440,247 shares
+Paragraph content: Harleysville (PA
+
+Paragraph content: 08-Dec-2019 13:00
+
+Paragraph content: Two more days and all his problems would be solved.
+
+Paragraph content: Round
+
+Paragraph content: Harleysville (PA
+
+Paragraph content: 09-Dec-2019
+
+Paragraph content: Accent
+
+Paragraph content: Harleysville (PA)
+
+Paragraph content: 10-Dec-2019
+
+Paragraph content: Monkey
+
+Paragraph content: Harleysville (PA)
+
+Paragraph content: 11-Dec-2019
+
+Paragraph content: Route
+
+Paragraph content: Harleysville (PA)
+
+Paragraph content: 11-Dec-2019
+
+Paragraph content: Peanuts don't grow on trees.
 
 The following tables were extracted:
 
-Table 0 has 5 rows and 3 columns.
+Table 0 has 4 rows and 5 columns.
 
-    Cell (0, 0) has kind 'columnHeader' and content: 'Title of each class'.
+Cell (0, 0) has kind 'columnHeader' and content: 'From'.
 
-    Cell (0, 1) has kind 'columnHeader' and content: 'Trading Symbol'.
+Cell (0, 1) has kind 'columnHeader' and content: 'To'.
 
-    Cell (0, 2) has kind 'columnHeader' and content: 'Name of exchange on which registered'.
+Cell (0, 2) has kind 'columnHeader' and content: 'By'.
 
-    Cell (1, 0) has kind 'content' and content: 'Common stock, $0.00000625 par value per share'.
+Cell (0, 3) has kind 'columnHeader' and content: 'ETD'.
 
-    Cell (1, 1) has kind 'content' and content: 'MSFT'.
+Cell (0, 4) has kind 'columnHeader' and content: 'ETA'.
 
-    Cell (1, 2) has kind 'content' and content: 'NASDAQ'.
+Cell (1, 0) has kind 'content' and content: '118 Queen Street Hoboken, NJ 07030'.
 
-    Cell (2, 0) has kind 'content' and content: '2.125% Notes due 2021'.
+Cell (1, 1) has kind 'content' and content: '52 West Trenton St. Harleysville, PA 19438'.
 
-    Cell (2, 1) has kind 'content' and content: 'MSFT'.
+Cell (1, 2) has kind 'content' and content: 'cause science slow'.
 
-    Cell (2, 2) has kind 'content' and content: 'NASDAQ'.
+Cell (1, 3) has kind 'content' and content: '09-Dec-2018 19:00'.
 
-    Cell (3, 0) has kind 'content' and content: '3.125% Notes due 2028'.
+Cell (1, 4) has kind 'content' and content: '09-Dec-2020 11:00'.
 
-    Cell (3, 1) has kind 'content' and content: 'MSFT'.
+Cell (3, 0) has kind 'content' and content: '9 Ketch Harbour Ave. Vincentown, NJ'.
 
-    Cell (3, 2) has kind 'content' and content: 'NASDAQ'.
+Cell (3, 1) has kind 'content' and content: '75 Fawn Street Peabody, MA 01960'.
 
-    Cell (4, 0) has kind 'content' and content: '2.625% Notes due 2033'.
+Cell (3, 2) has kind 'content' and content: 'tone late spoken'.
 
-    Cell (4, 1) has kind 'content' and content: 'MSFT'.
+Cell (3, 3) has kind 'content' and content: '12-Dec-2018 10:00'.
 
-    Cell (4, 2) has kind 'content' and content: 'NASDAQ'.
+Cell (3, 4) has kind 'content' and content: '19-Dec-2020'.
 
-Table 1 has 2 rows and 2 columns.
+Table 1 has 7 rows and 4 columns.
 
-    Cell (0, 0) has kind 'columnHeader' and content: 'Class'.
+Cell (0, 0) has kind 'columnHeader' and content: 'Deadline'.
 
-    Cell (0, 1) has kind 'columnHeader' and content: 'Outstanding as of April 24, 2020'.
+Cell (0, 1) has kind 'columnHeader' and content: 'Location'.
 
-    Cell (1, 0) has kind 'content' and content: 'Common Stock, $0.00000625 par value per share'.
+Cell (0, 2) has kind 'columnHeader' and content: 'Date/Time (local)'.
 
-    Cell (1, 1) has kind 'content' and content: '7,583,440,247 shares'.
+Cell (0, 3) has kind 'columnHeader' and content: 'Required action'.
+
+Cell (1, 0) has kind 'content' and content: 'Table'.
+
+Cell (1, 1) has kind 'content' and content: 'Harleysville (PA)'.
+
+Cell (1, 2) has kind 'content' and content: '08-Dec-2019'.
+
+Cell (1, 3) has kind 'content' and content: ''.
+
+Cell (2, 0) has kind 'content' and content: 'Flight'.
+
+Cell (2, 1) has kind 'content' and content: 'Harleysville (PA'.
+
+Cell (2, 2) has kind 'content' and content: '08-Dec-2019 13:00'.
+
+Cell (2, 3) has kind 'content' and content: 'Two more days and all his problems would be solved.'.
+
+Cell (3, 0) has kind 'content' and content: 'Round'.
+
+Cell (3, 1) has kind 'content' and content: 'Harleysville (PA'.
+
+Cell (3, 2) has kind 'content' and content: '09-Dec-2019'.
+
+Cell (3, 3) has kind 'content' and content: ''.
+
+Cell (4, 0) has kind 'content' and content: 'Accent'.
+
+Cell (4, 1) has kind 'content' and content: 'Harleysville (PA)'.
+
+Cell (4, 2) has kind 'content' and content: '10-Dec-2019'.
+
+Cell (4, 3) has kind 'content' and content: ''.
+
+Cell (5, 0) has kind 'content' and content: 'Monkey'.
+
+Cell (5, 1) has kind 'content' and content: 'Harleysville (PA)'.
+
+Cell (5, 2) has kind 'content' and content: '11-Dec-2019'.
+
+Cell (5, 3) has kind 'content' and content: ''.
+
+Cell (6, 0) has kind 'content' and content: 'Route'.
+
+Cell (6, 1) has kind 'content' and content: 'Harleysville (PA)'.
+
+Cell (6, 2) has kind 'content' and content: '11-Dec-2019'.
+
+Cell (6, 3) has kind 'content' and content: 'Peanuts don't grow on trees.'.
