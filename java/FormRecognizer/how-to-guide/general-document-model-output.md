@@ -1,1091 +1,1197 @@
-Detected key-value pairs:
+Page has width: 8.50 and height: 11.00, measured with unit: inch
 
-Found key-value pair: 'QUARTERLY REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF 1934' and ':selected:'
+Line UNITED STATES is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@39fc6b2c, com.azure.ai.formrecognizer.documentanalysis.models.Point@704b2127, com.azure.ai.formrecognizer.documentanalysis.models.Point@3ee39da0, com.azure.ai.formrecognizer.documentanalysis.models.Point@5d332969].
 
-Found key-value pair: 'For the Quarterly Period Ended' and '2020'
+Line SECURITIES AND EXCHANGE COMMISSION is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@7cc9ce8, com.azure.ai.formrecognizer.documentanalysis.models.Point@2e27d72f, com.azure.ai.formrecognizer.documentanalysis.models.Point@c0b41d6, com.azure.ai.formrecognizer.documentanalysis.models.Point@4837595f].
 
-Found key with no value: 'March 31,'
+Line Washington, D.C. 20549 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@2bffa76d, com.azure.ai.formrecognizer.documentanalysis.models.Point@3b718392, com.azure.ai.formrecognizer.documentanalysis.models.Point@6d2260db, com.azure.ai.formrecognizer.documentanalysis.models.Point@1f2d2181].
 
-Found key-value pair: 'TRANSITION REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF 1934' and ':unselected:'
+Line FORM 10-Q is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@49bf29c6, com.azure.ai.formrecognizer.documentanalysis.models.Point@7ee55e70, com.azure.ai.formrecognizer.documentanalysis.models.Point@3fcdcf, com.azure.ai.formrecognizer.documentanalysis.models.Point@7668d560].
 
-Found key with no value: 'For the Transition Period From'
+Line ? is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@46292372, com.azure.ai.formrecognizer.documentanalysis.models.Point@126be319, com.azure.ai.formrecognizer.documentanalysis.models.Point@6c44052e, com.azure.ai.formrecognizer.documentanalysis.models.Point@5c371e13].
 
-Found key with no value: 'to'
+Line QUARTERLY REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@530a8454, com.azure.ai.formrecognizer.documentanalysis.models.Point@1e34c607, com.azure.ai.formrecognizer.documentanalysis.models.Point@5215cd9a, com.azure.ai.formrecognizer.documentanalysis.models.Point@36b6964d].
 
-Found key-value pair: 'Commission File Number' and '001-37845'
+Line 1934 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@31198ceb, com.azure.ai.formrecognizer.documentanalysis.models.Point@9257031, com.azure.ai.formrecognizer.documentanalysis.models.Point@75201592, com.azure.ai.formrecognizer.documentanalysis.models.Point@7726e185].
 
-Found key-value pair: '(STATE OF INCORPORATION)' and 'WASHINGTON
+Line For the Quarterly Period Ended March 31, 2020 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@aa5455e, com.azure.ai.formrecognizer.documentanalysis.models.Point@282308c3, com.azure.ai.formrecognizer.documentanalysis.models.Point@5dda14d0, com.azure.ai.formrecognizer.documentanalysis.models.Point@1db0ec27].
 
-(425) 882-8080'
+Line OR is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@3d9fc57a, com.azure.ai.formrecognizer.documentanalysis.models.Point@d4ab71a, com.azure.ai.formrecognizer.documentanalysis.models.Point@3b4ef7, com.azure.ai.formrecognizer.documentanalysis.models.Point@1af05b03].
 
-Found key-value pair: '(I.R.S. ID)' and '91-1144442'
+Line ? is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@5987e932, com.azure.ai.formrecognizer.documentanalysis.models.Point@1ad777f, com.azure.ai.formrecognizer.documentanalysis.models.Point@5bbbdd4b, com.azure.ai.formrecognizer.documentanalysis.models.Point@438bad7c].
 
-Found key-value pair: 'Securities registered pursuant to Section 12(g) of the Act:' and 'NONE'
+Line TRANSITION REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@25230246, com.azure.ai.formrecognizer.documentanalysis.models.Point@4fdf8f12, com.azure.ai.formrecognizer.documentanalysis.models.Point@4a8b5227, com.azure.ai.formrecognizer.documentanalysis.models.Point@54f5f647].
 
-Found key-value pair: 'Yes' and ':selected:'
+Line 1934 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@6979efad, com.azure.ai.formrecognizer.documentanalysis.models.Point@5a6d5a8f, com.azure.ai.formrecognizer.documentanalysis.models.Point@4a67318f, com.azure.ai.formrecognizer.documentanalysis.models.Point@315ba14a].
 
-Found key-value pair: 'No' and ':unselected:'
+Line For the Transition Period From is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@17f9344b, com.azure.ai.formrecognizer.documentanalysis.models.Point@27f0ad19, com.azure.ai.formrecognizer.documentanalysis.models.Point@54e81b21, com.azure.ai.formrecognizer.documentanalysis.models.Point@38d5b107].
 
-Found key-value pair: 'Yes' and ':selected:'
+Line to is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@6650813a, com.azure.ai.formrecognizer.documentanalysis.models.Point@44ea608c, com.azure.ai.formrecognizer.documentanalysis.models.Point@50cf5a23, com.azure.ai.formrecognizer.documentanalysis.models.Point@450794b4].
 
-Found key-value pair: 'No' and ':unselected:'
+Line Commission File Number 001-37845 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@273c947f, com.azure.ai.formrecognizer.documentanalysis.models.Point@30457e14, com.azure.ai.formrecognizer.documentanalysis.models.Point@1af1347d, com.azure.ai.formrecognizer.documentanalysis.models.Point@632aa1a3].
 
-Found key-value pair: 'Large accelerated filer' and ':selected:'
+Line MICROSOFT CORPORATION is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@20765ed5, com.azure.ai.formrecognizer.documentanalysis.models.Point@3b582111, com.azure.ai.formrecognizer.documentanalysis.models.Point@2899a8db, com.azure.ai.formrecognizer.documentanalysis.models.Point@1e8823d2].
 
-Found key-value pair: 'Accelerated filer' and ':unselected:'
+Line WASHINGTON is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@c1a4620, com.azure.ai.formrecognizer.documentanalysis.models.Point@76b0ae1b, com.azure.ai.formrecognizer.documentanalysis.models.Point@130a0f66, com.azure.ai.formrecognizer.documentanalysis.models.Point@4c432866].
 
-Found key-value pair: 'Non-accelerated filer' and ':unselected:'
+Line (STATE OF INCORPORATION) is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@12365c88, com.azure.ai.formrecognizer.documentanalysis.models.Point@6105f8a3, com.azure.ai.formrecognizer.documentanalysis.models.Point@2237bada, com.azure.ai.formrecognizer.documentanalysis.models.Point@77e2a6e2].
 
-Found key-value pair: 'Smaller reporting company' and ':unselected:'
+Line 91-1144442 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@5710768a, com.azure.ai.formrecognizer.documentanalysis.models.Point@199e4c2b, com.azure.ai.formrecognizer.documentanalysis.models.Point@6e0d4a8, com.azure.ai.formrecognizer.documentanalysis.models.Point@64d7b720].
 
-Found key-value pair: 'Emerging growth company' and ':unselected:'
+Line (I.R.S. ID) is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@30272916, com.azure.ai.formrecognizer.documentanalysis.models.Point@5bb3d42d, com.azure.ai.formrecognizer.documentanalysis.models.Point@5bf61e67, com.azure.ai.formrecognizer.documentanalysis.models.Point@2c1dc8e].
 
-Found key-value pair: 'If an emerging growth company, indicate by check mark if the registrant has elected not to use the extended transition period for complying with any new or revised financial accounting standards provided pursuant to Section 13(a) of the Exchange Act.' and ':unselected:'
+Line ONE MICROSOFT WAY, REDMOND, WASHINGTON 98052-6399 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@b273a59, com.azure.ai.formrecognizer.documentanalysis.models.Point@4e7095ac, com.azure.ai.formrecognizer.documentanalysis.models.Point@251ebf23, com.azure.ai.formrecognizer.documentanalysis.models.Point@29b732a2].
 
-Found key-value pair: 'Yes' and ':unselected:'
+Line (425) 882-8080 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@1b70203f, com.azure.ai.formrecognizer.documentanalysis.models.Point@51671b08, com.azure.ai.formrecognizer.documentanalysis.models.Point@15051a0, com.azure.ai.formrecognizer.documentanalysis.models.Point@1162410a].
 
-Found key-value pair: 'No' and ':selected:'
+Line www.microsoft.com/investor is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@b09fac1, com.azure.ai.formrecognizer.documentanalysis.models.Point@62df0ff3, com.azure.ai.formrecognizer.documentanalysis.models.Point@61019f59, com.azure.ai.formrecognizer.documentanalysis.models.Point@62e8f862].
 
-Document Page 1 has 69 line(s), 425 word(s),
+Line Securities registered pursuant to Section 12(b) of the Act: is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@26f3d90c, com.azure.ai.formrecognizer.documentanalysis.models.Point@3c49fab6, com.azure.ai.formrecognizer.documentanalysis.models.Point@515f4131, com.azure.ai.formrecognizer.documentanalysis.models.Point@74518890].
 
-and 14 selection mark(s).
+Line Title of each class is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@4c5204af, com.azure.ai.formrecognizer.documentanalysis.models.Point@3f3ddbd9, com.azure.ai.formrecognizer.documentanalysis.models.Point@14c053c6, com.azure.ai.formrecognizer.documentanalysis.models.Point@6c2d4cc6].
 
-Line 0 has content: 'UNITED STATES'.
+Line Trading Symbol is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@30865a90, com.azure.ai.formrecognizer.documentanalysis.models.Point@6134ac4a, com.azure.ai.formrecognizer.documentanalysis.models.Point@777c9dc9, com.azure.ai.formrecognizer.documentanalysis.models.Point@71b1a49c].
 
-Its bounding polygon (points ordered clockwise):
+Line Name of exchange on which registered is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@73e132e0, com.azure.ai.formrecognizer.documentanalysis.models.Point@3773862a, com.azure.ai.formrecognizer.documentanalysis.models.Point@2472c7d8, com.azure.ai.formrecognizer.documentanalysis.models.Point@589b028e].
 
-Point 0 => X: 3.4915, Y: 0.6828
+Line Common stock, $0.00000625 par value per share is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@22175d4f, com.azure.ai.formrecognizer.documentanalysis.models.Point@9fecdf1, com.azure.ai.formrecognizer.documentanalysis.models.Point@3b809711, com.azure.ai.formrecognizer.documentanalysis.models.Point@3b0f7d9d].
 
-Point 1 => X: 5.0116, Y: 0.6828
+Line MSFT is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@236ab296, com.azure.ai.formrecognizer.documentanalysis.models.Point@5c84624f, com.azure.ai.formrecognizer.documentanalysis.models.Point@63034ed1, com.azure.ai.formrecognizer.documentanalysis.models.Point@232024b9].
 
-Point 2 => X: 5.0116, Y: 0.8265
+Line NASDAQ is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@55a8dc49, com.azure.ai.formrecognizer.documentanalysis.models.Point@2a415aa9, com.azure.ai.formrecognizer.documentanalysis.models.Point@53cdecf6, com.azure.ai.formrecognizer.documentanalysis.models.Point@71ea1fda].
 
-Point 3 => X: 3.4915, Y: 0.8265
+Line 2.125% Notes due 2021 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@62b3df3a, com.azure.ai.formrecognizer.documentanalysis.models.Point@420745d7, com.azure.ai.formrecognizer.documentanalysis.models.Point@7e11ab3d, com.azure.ai.formrecognizer.documentanalysis.models.Point@5fa47fea].
 
-Line 1 has content: 'SECURITIES AND EXCHANGE COMMISSION'.
+Line MSFT is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@2392212b, com.azure.ai.formrecognizer.documentanalysis.models.Point@5b43e173, com.azure.ai.formrecognizer.documentanalysis.models.Point@28f8e165, com.azure.ai.formrecognizer.documentanalysis.models.Point@545f80bf].
 
-Its bounding polygon (points ordered clockwise):
+Line NASDAQ is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@66f66866, com.azure.ai.formrecognizer.documentanalysis.models.Point@22fa55b2, com.azure.ai.formrecognizer.documentanalysis.models.Point@4d666b41, com.azure.ai.formrecognizer.documentanalysis.models.Point@6594402a].
 
-Point 0 => X: 2.1937, Y: 0.9061
+Line 3.125% Notes due 2028 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@30f4b1a6, com.azure.ai.formrecognizer.documentanalysis.models.Point@405325cf, com.azure.ai.formrecognizer.documentanalysis.models.Point@3e1162e7, com.azure.ai.formrecognizer.documentanalysis.models.Point@79c3f01f].
 
-Point 1 => X: 6.297, Y: 0.9061
+Line MSFT is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@6c2f1700, com.azure.ai.formrecognizer.documentanalysis.models.Point@350b3a17, com.azure.ai.formrecognizer.documentanalysis.models.Point@38600b, com.azure.ai.formrecognizer.documentanalysis.models.Point@669d2b1b].
 
-Point 2 => X: 6.297, Y: 1.0498
+Line NASDAQ is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@721eb7df, com.azure.ai.formrecognizer.documentanalysis.models.Point@1ea9f009, com.azure.ai.formrecognizer.documentanalysis.models.Point@5d52e3ef, com.azure.ai.formrecognizer.documentanalysis.models.Point@5298dead].
 
-Point 3 => X: 2.1937, Y: 1.0498
+Line 2.625% Notes due 2033 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@553f3b6e, com.azure.ai.formrecognizer.documentanalysis.models.Point@4c7a078, com.azure.ai.formrecognizer.documentanalysis.models.Point@4e406694, com.azure.ai.formrecognizer.documentanalysis.models.Point@5ab9b447].
 
-Line 2 has content: 'Washington, D.C. 20549'.
+Line MSFT is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@76f10035, com.azure.ai.formrecognizer.documentanalysis.models.Point@4f8caaf3, com.azure.ai.formrecognizer.documentanalysis.models.Point@2b50150, com.azure.ai.formrecognizer.documentanalysis.models.Point@15b986cd].
 
-Its bounding polygon (points ordered clockwise):
+Line NASDAQ is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@6bb7cce7, com.azure.ai.formrecognizer.documentanalysis.models.Point@41c62850, com.azure.ai.formrecognizer.documentanalysis.models.Point@6b530eb9, com.azure.ai.formrecognizer.documentanalysis.models.Point@328572f0].
 
-Point 0 => X: 3.4629, Y: 1.1179
+Line Securities registered pursuant to Section 12(g) of the Act: is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@678040b3, com.azure.ai.formrecognizer.documentanalysis.models.Point@17f460bb, com.azure.ai.formrecognizer.documentanalysis.models.Point@64a1923a, com.azure.ai.formrecognizer.documentanalysis.models.Point@7d2a6eac].
 
-Point 1 => X: 5.031, Y: 1.1179
+Line NONE is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@18ca3c62, com.azure.ai.formrecognizer.documentanalysis.models.Point@2c0f7678, com.azure.ai.formrecognizer.documentanalysis.models.Point@44d70181, com.azure.ai.formrecognizer.documentanalysis.models.Point@6aa648b9].
 
-Point 2 => X: 5.031, Y: 1.2483
+Line Indicate by check mark whether the registrant (1) has filed all reports required to be filed by Section 13 or 15(d) of the Securities Exchange is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@23c650a3, com.azure.ai.formrecognizer.documentanalysis.models.Point@742d4e15, com.azure.ai.formrecognizer.documentanalysis.models.Point@88a8218, com.azure.ai.formrecognizer.documentanalysis.models.Point@50b1f030].
 
-Point 3 => X: 3.4629, Y: 1.2483
+Line Act of 1934 during the preceding 12 months (or for such shorter period that the registrant was required to file such reports), and (2) has is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@4163f1cd, com.azure.ai.formrecognizer.documentanalysis.models.Point@5fa05212, com.azure.ai.formrecognizer.documentanalysis.models.Point@3e681bc, com.azure.ai.formrecognizer.documentanalysis.models.Point@5c09d180].
 
-Line 3 has content: 'FORM 10-Q'.
+Line been subject to such filing requirements for the past 90 days. is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@23aae55, com.azure.ai.formrecognizer.documentanalysis.models.Point@5f574cc2, com.azure.ai.formrecognizer.documentanalysis.models.Point@680bddf5, com.azure.ai.formrecognizer.documentanalysis.models.Point@7a9c84a5].
 
-Its bounding polygon (points ordered clockwise):
+Line Yes ? is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@2d83c5a5, com.azure.ai.formrecognizer.documentanalysis.models.Point@48d7ad8b, com.azure.ai.formrecognizer.documentanalysis.models.Point@7e053511, com.azure.ai.formrecognizer.documentanalysis.models.Point@60222fd8].
 
-Point 0 => X: 3.7352, Y: 1.4211
+Line No ? is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@53bf7094, com.azure.ai.formrecognizer.documentanalysis.models.Point@26f1249d, com.azure.ai.formrecognizer.documentanalysis.models.Point@710b30ef, com.azure.ai.formrecognizer.documentanalysis.models.Point@a68df9].
 
-Point 1 => X: 4.7769, Y: 1.4211
+Line Indicate by check mark whether the registrant has submitted electronically every Interactive Data File required to be submitted pursuant to Rule is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@28b576a9, com.azure.ai.formrecognizer.documentanalysis.models.Point@7cf7aee, com.azure.ai.formrecognizer.documentanalysis.models.Point@2f6bbeb0, com.azure.ai.formrecognizer.documentanalysis.models.Point@1b1637e1].
 
-Point 2 => X: 4.7769, Y: 1.5763
+Line 405 of Regulation S-T (∩┐╜232.405 of this chapter) during the preceding 12 months (or for such shorter period that the registrant was required to is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@18151a14, com.azure.ai.formrecognizer.documentanalysis.models.Point@64711bf2, com.azure.ai.formrecognizer.documentanalysis.models.Point@169da7f2, com.azure.ai.formrecognizer.documentanalysis.models.Point@3c1e23ff].
 
-Point 3 => X: 3.7352, Y: 1.5763
+Line submit such files). is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@ceb4bd2, com.azure.ai.formrecognizer.documentanalysis.models.Point@60297f36, com.azure.ai.formrecognizer.documentanalysis.models.Point@1bf0f6f6, com.azure.ai.formrecognizer.documentanalysis.models.Point@56bc3fac].
 
-Line 4 has content: '?'.
+Line Yes ? is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@df4b72, com.azure.ai.formrecognizer.documentanalysis.models.Point@2ba45490, com.azure.ai.formrecognizer.documentanalysis.models.Point@37ff4054, com.azure.ai.formrecognizer.documentanalysis.models.Point@894858].
 
-Its bounding polygon (points ordered clockwise):
+Line No ? is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@7af707e0, com.azure.ai.formrecognizer.documentanalysis.models.Point@737edcfa, com.azure.ai.formrecognizer.documentanalysis.models.Point@3ecedf21, com.azure.ai.formrecognizer.documentanalysis.models.Point@74cf8b28].
 
-Point 0 => X: 0.6694, Y: 1.7746
+Line Indicate by check mark whether the registrant is a large accelerated filer, an accelerated filer, a non-accelerated filer, a smaller reporting is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@36c54a56, com.azure.ai.formrecognizer.documentanalysis.models.Point@3359c978, com.azure.ai.formrecognizer.documentanalysis.models.Point@7ba63fe5, com.azure.ai.formrecognizer.documentanalysis.models.Point@73386d72].
 
-Point 1 => X: 0.7764, Y: 1.7746
+Line company, or an emerging growth company. See the definitions of ∩┐╜large accelerated filer,∩┐╜ ∩┐╜accelerated filer,∩┐╜ ∩┐╜smaller reporting company,∩┐╜ is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@6f330eb9, com.azure.ai.formrecognizer.documentanalysis.models.Point@125c082e, com.azure.ai.formrecognizer.documentanalysis.models.Point@584f5497, com.azure.ai.formrecognizer.documentanalysis.models.Point@68ace111].
 
-Point 2 => X: 0.7764, Y: 1.8833
+Line and ∩┐╜emerging growth company∩┐╜ in Rule 12b-2 of the Exchange Act. is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@1f9d6c7b, com.azure.ai.formrecognizer.documentanalysis.models.Point@6df20ade, com.azure.ai.formrecognizer.documentanalysis.models.Point@4fbb001b, com.azure.ai.formrecognizer.documentanalysis.models.Point@4010d494].
 
-Point 3 => X: 0.6694, Y: 1.8833
+Line Large accelerated filer ? is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@341a8659, com.azure.ai.formrecognizer.documentanalysis.models.Point@4943defe, com.azure.ai.formrecognizer.documentanalysis.models.Point@5eefa415, com.azure.ai.formrecognizer.documentanalysis.models.Point@181d7f28].
 
-Line 5 has content: 'QUARTERLY REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF'.
+Line Non-accelerated filer ? is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@78d50a3c, com.azure.ai.formrecognizer.documentanalysis.models.Point@2fb69ff6, com.azure.ai.formrecognizer.documentanalysis.models.Point@cda4919, com.azure.ai.formrecognizer.documentanalysis.models.Point@7f4d9395].
 
-Its bounding polygon (points ordered clockwise):
+Line Accelerated filer ? is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@2f19f2aa, com.azure.ai.formrecognizer.documentanalysis.models.Point@344b8190, com.azure.ai.formrecognizer.documentanalysis.models.Point@6a078481, com.azure.ai.formrecognizer.documentanalysis.models.Point@79c5636f].
 
-Point 0 => X: 0.996, Y: 1.7804
+Line Smaller reporting company ? is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@1929425f, com.azure.ai.formrecognizer.documentanalysis.models.Point@718607eb, com.azure.ai.formrecognizer.documentanalysis.models.Point@27f3b6d6, com.azure.ai.formrecognizer.documentanalysis.models.Point@757f675c].
 
-Point 1 => X: 7.8449, Y: 1.7804
+Line Emerging growth company ? is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@2617f816, com.azure.ai.formrecognizer.documentanalysis.models.Point@676f0a60, com.azure.ai.formrecognizer.documentanalysis.models.Point@5d10455d, com.azure.ai.formrecognizer.documentanalysis.models.Point@535b8c24].
 
-Point 2 => X: 7.8449, Y: 1.9108
+Line If an emerging growth company, indicate by check mark if the registrant has elected not to use the extended transition period for complying is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@4a951911, com.azure.ai.formrecognizer.documentanalysis.models.Point@55b62629, com.azure.ai.formrecognizer.documentanalysis.models.Point@a53bb6f, com.azure.ai.formrecognizer.documentanalysis.models.Point@5e63cad].
 
-Point 3 => X: 0.996, Y: 1.9108
+Line with any new or revised financial accounting standards provided pursuant to Section 13(a) of the Exchange Act. ? is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@6759f091, com.azure.ai.formrecognizer.documentanalysis.models.Point@33a053d, com.azure.ai.formrecognizer.documentanalysis.models.Point@14a54ef6, com.azure.ai.formrecognizer.documentanalysis.models.Point@20921b9b].
 
-Line 6 has content: '1934'.
+Line Indicate by check mark whether the registrant is a shell company (as defined in Rule 12b-2 of the Exchange Act). is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@867ba60, com.azure.ai.formrecognizer.documentanalysis.models.Point@5ba745bc, com.azure.ai.formrecognizer.documentanalysis.models.Point@654b72c0, com.azure.ai.formrecognizer.documentanalysis.models.Point@55b5e331].
 
-Its bounding polygon (points ordered clockwise):
+Line Yes ? is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@6034e75d, com.azure.ai.formrecognizer.documentanalysis.models.Point@15fc442, com.azure.ai.formrecognizer.documentanalysis.models.Point@3f3c7bdb, com.azure.ai.formrecognizer.documentanalysis.models.Point@456abb66].
 
-Point 0 => X: 1.001, Y: 1.9542
+Line No ? is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@2a3a299, com.azure.ai.formrecognizer.documentanalysis.models.Point@7da10b5b, com.azure.ai.formrecognizer.documentanalysis.models.Point@219f4597, com.azure.ai.formrecognizer.documentanalysis.models.Point@31be6b49].
 
-Point 1 => X: 1.2967, Y: 1.9542
+Line Indicate the number of shares outstanding of each of the issuer∩┐╜s classes of common stock, as of the latest practicable date. is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@2e16b08d, com.azure.ai.formrecognizer.documentanalysis.models.Point@5b989dc7, com.azure.ai.formrecognizer.documentanalysis.models.Point@70d8de, com.azure.ai.formrecognizer.documentanalysis.models.Point@42561fba].
 
-Point 2 => X: 1.2967, Y: 2.0559
+Line Class is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@595f4da5, com.azure.ai.formrecognizer.documentanalysis.models.Point@46b695ec, com.azure.ai.formrecognizer.documentanalysis.models.Point@408613cc, com.azure.ai.formrecognizer.documentanalysis.models.Point@325f7fa9].
 
-Point 3 => X: 1.001, Y: 2.0559
+Line Outstanding as of April 24, 2020 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@11ce2e22, com.azure.ai.formrecognizer.documentanalysis.models.Point@63a5d002, com.azure.ai.formrecognizer.documentanalysis.models.Point@13cda7c9, com.azure.ai.formrecognizer.documentanalysis.models.Point@5aa6202e].
 
-Line 7 has content: 'For the Quarterly Period Ended March 31, 2020'.
+Line Common Stock, $0.00000625 par value per share is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@3af9aa66, com.azure.ai.formrecognizer.documentanalysis.models.Point@771158fb, com.azure.ai.formrecognizer.documentanalysis.models.Point@91c4a3f, com.azure.ai.formrecognizer.documentanalysis.models.Point@62d0ac62].
 
-Its bounding polygon (points ordered clockwise):
+Line 7,583,440,247 shares is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@150d80c4, com.azure.ai.formrecognizer.documentanalysis.models.Point@6826c41e, com.azure.ai.formrecognizer.documentanalysis.models.Point@3003697, com.azure.ai.formrecognizer.documentanalysis.models.Point@64d43929].
 
-Point 0 => X: 0.9982, Y: 2.1626
+Word UNITED has a confidence score of 1.00
 
-Point 1 => X: 3.4543, Y: 2.1626
+.Word STATES has a confidence score of 1.00
 
-Point 2 => X: 3.4543, Y: 2.2665
+.Word SECURITIES has a confidence score of 1.00
 
-Point 3 => X: 0.9982, Y: 2.2665
+.Word AND has a confidence score of 1.00
 
-Line 8 has content: 'OR'.
+.Word EXCHANGE has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word COMMISSION has a confidence score of 1.00
 
-Point 0 => X: 4.1471, Y: 2.2972
+.Word Washington, has a confidence score of 1.00
 
-Point 1 => X: 4.3587, Y: 2.2972
+.Word D.C. has a confidence score of 1.00
 
-Point 2 => X: 4.3587, Y: 2.4049
+.Word 20549 has a confidence score of 1.00
 
-Point 3 => X: 4.1471, Y: 2.4049
+.Word FORM has a confidence score of 1.00
 
-Line 9 has content: '?'.
+.Word 10-Q has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word ? has a confidence score of 1.00
 
-Point 0 => X: 0.6694, Y: 2.6955
+.Word QUARTERLY has a confidence score of 1.00
 
-Point 1 => X: 0.777, Y: 2.6955
+.Word REPORT has a confidence score of 1.00
 
-Point 2 => X: 0.777, Y: 2.8042
+.Word PURSUANT has a confidence score of 1.00
 
-Point 3 => X: 0.6694, Y: 2.8042
+.Word TO has a confidence score of 1.00
 
-Line 10 has content: 'TRANSITION REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF'.
+.Word SECTION has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word 13 has a confidence score of 1.00
 
-Point 0 => X: 0.9929, Y: 2.7029
+.Word OR has a confidence score of 1.00
 
-Point 1 => X: 7.8449, Y: 2.7029
+.Word 15(d) has a confidence score of 1.00
 
-Point 2 => X: 7.8449, Y: 2.8333
+.Word OF has a confidence score of 1.00
 
-Point 3 => X: 0.9929, Y: 2.8333
+.Word THE has a confidence score of 1.00
 
-Line 11 has content: '1934'.
+.Word SECURITIES has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word EXCHANGE has a confidence score of 1.00
 
-Point 0 => X: 1.001, Y: 2.8775
+.Word ACT has a confidence score of 1.00
 
-Point 1 => X: 1.2967, Y: 2.8775
+.Word OF has a confidence score of 1.00
 
-Point 2 => X: 1.2967, Y: 2.9792
+.Word 1934 has a confidence score of 1.00
 
-Point 3 => X: 1.001, Y: 2.9792
+.Word For has a confidence score of 1.00
 
-Line 12 has content: 'For the Transition Period From'.
+.Word the has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word Quarterly has a confidence score of 1.00
 
-Point 0 => X: 0.9982, Y: 3.0873
+.Word Period has a confidence score of 1.00
 
-Point 1 => X: 2.6112, Y: 3.0873
+.Word Ended has a confidence score of 1.00
 
-Point 2 => X: 2.6112, Y: 3.1679
+.Word March has a confidence score of 1.00
 
-Point 3 => X: 0.9982, Y: 3.1679
+.Word 31, has a confidence score of 1.00
 
-Line 13 has content: 'to'.
+.Word 2020 has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word OR has a confidence score of 1.00
 
-Point 0 => X: 3.1754, Y: 3.0889
+.Word ? has a confidence score of 1.00
 
-Point 1 => X: 3.275, Y: 3.0889
+.Word TRANSITION has a confidence score of 1.00
 
-Point 2 => X: 3.275, Y: 3.1679
+.Word REPORT has a confidence score of 1.00
 
-Point 3 => X: 3.1754, Y: 3.1679
+.Word PURSUANT has a confidence score of 1.00
 
-Line 14 has content: 'Commission File Number 001-37845'.
+.Word TO has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word SECTION has a confidence score of 1.00
 
-Point 0 => X: 3.2447, Y: 3.2697
+.Word 13 has a confidence score of 1.00
 
-Point 1 => X: 5.2571, Y: 3.2697
+.Word OR has a confidence score of 1.00
 
-Point 2 => X: 5.2571, Y: 3.3573
+.Word 15(d) has a confidence score of 1.00
 
-Point 3 => X: 3.2447, Y: 3.3573
+.Word OF has a confidence score of 1.00
 
-Line 15 has content: 'MICROSOFT CORPORATION'.
+.Word THE has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word SECURITIES has a confidence score of 1.00
 
-Point 0 => X: 2.5453, Y: 3.5647
+.Word EXCHANGE has a confidence score of 1.00
 
-Point 1 => X: 5.952, Y: 3.5647
+.Word ACT has a confidence score of 1.00
 
-Point 2 => X: 5.952, Y: 3.7497
+.Word OF has a confidence score of 1.00
 
-Point 3 => X: 2.5453, Y: 3.7497
+.Word 1934 has a confidence score of 1.00
 
-Line 16 has content: 'WASHINGTON'.
+.Word For has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word the has a confidence score of 1.00
 
-Point 0 => X: 2.0004, Y: 3.9639
+.Word Transition has a confidence score of 1.00
 
-Point 1 => X: 2.8111, Y: 3.9639
+.Word Period has a confidence score of 1.00
 
-Point 2 => X: 2.8111, Y: 4.0514
+.Word From has a confidence score of 1.00
 
-Point 3 => X: 2.0004, Y: 4.0514
+.Word to has a confidence score of 1.00
 
-Line 17 has content: '(STATE OF INCORPORATION)'.
+.Word Commission has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word File has a confidence score of 1.00
 
-Point 0 => X: 1.7151, Y: 4.1057
+.Word Number has a confidence score of 1.00
 
-Point 1 => X: 3.1046, Y: 4.1057
+.Word 001-37845 has a confidence score of 1.00
 
-Point 2 => X: 3.1046, Y: 4.197
+.Word MICROSOFT has a confidence score of 1.00
 
-Point 3 => X: 1.7151, Y: 4.197
+.Word CORPORATION has a confidence score of 1.00
 
-Line 18 has content: '91-1144442'.
+.Word WASHINGTON has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word (STATE has a confidence score of 1.00
 
-Point 0 => X: 5.7788, Y: 3.9649
+.Word OF has a confidence score of 1.00
 
-Point 1 => X: 6.3997, Y: 3.9649
+.Word INCORPORATION) has a confidence score of 1.00
 
-Point 2 => X: 6.3997, Y: 4.0514
+.Word 91-1144442 has a confidence score of 1.00
 
-Point 3 => X: 5.7788, Y: 4.0514
+.Word (I.R.S. has a confidence score of 1.00
 
-Line 19 has content: '(I.R.S. ID)'.
+.Word ID) has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word ONE has a confidence score of 1.00
 
-Point 0 => X: 5.8792, Y: 4.1057
+.Word MICROSOFT has a confidence score of 1.00
 
-Point 1 => X: 6.3016, Y: 4.1057
+.Word WAY, has a confidence score of 1.00
 
-Point 2 => X: 6.3016, Y: 4.197
+.Word REDMOND, has a confidence score of 1.00
 
-Point 3 => X: 5.8792, Y: 4.197
+.Word WASHINGTON has a confidence score of 1.00
 
-Line 20 has content: 'ONE MICROSOFT WAY, REDMOND, WASHINGTON 98052-6399'.
+.Word 98052-6399 has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word (425) has a confidence score of 1.00
 
-Point 0 => X: 2.5939, Y: 4.2851
+.Word 882-8080 has a confidence score of 1.00
 
-Point 1 => X: 5.9056, Y: 4.2851
+.Word www.microsoft.com/investor has a confidence score of 1.00
 
-Point 2 => X: 5.9056, Y: 4.3835
+.Word Securities has a confidence score of 1.00
 
-Point 3 => X: 2.5939, Y: 4.3835
+.Word registered has a confidence score of 1.00
 
-Line 21 has content: '(425) 882-8080'.
+.Word pursuant has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word to has a confidence score of 1.00
 
-Point 0 => X: 3.8758, Y: 4.4135
+.Word Section has a confidence score of 1.00
 
-Point 1 => X: 4.6237, Y: 4.4135
+.Word 12(b) has a confidence score of 1.00
 
-Point 2 => X: 4.6237, Y: 4.5173
+.Word of has a confidence score of 1.00
 
-Point 3 => X: 3.8758, Y: 4.5173
+.Word the has a confidence score of 1.00
 
-Line 22 has content: 'www.microsoft.com/investor'.
+.Word Act: has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word Title has a confidence score of 1.00
 
-Point 0 => X: 3.4906, Y: 4.541
+.Word of has a confidence score of 1.00
 
-Point 1 => X: 5.0096, Y: 4.541
+.Word each has a confidence score of 1.00
 
-Point 2 => X: 5.0096, Y: 4.6229
+.Word class has a confidence score of 1.00
 
-Point 3 => X: 3.4906, Y: 4.6229
+.Word Trading has a confidence score of 1.00
 
-Line 23 has content: 'Securities registered pursuant to Section 12(b) of the Act:'.
+.Word Symbol has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word Name has a confidence score of 1.00
 
-Point 0 => X: 0.6345, Y: 4.7405
+.Word of has a confidence score of 1.00
 
-Point 1 => X: 3.6169, Y: 4.7405
+.Word exchange has a confidence score of 1.00
 
-Point 2 => X: 3.6169, Y: 4.8514
+.Word on has a confidence score of 1.00
 
-Point 3 => X: 0.6345, Y: 4.8514
+.Word which has a confidence score of 1.00
 
-Line 24 has content: 'Title of each class'.
+.Word registered has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word Common has a confidence score of 1.00
 
-Point 0 => X: 0.6319, Y: 4.9689
+.Word stock, has a confidence score of 1.00
 
-Point 1 => X: 1.5695, Y: 4.9689
+.Word $0.00000625 has a confidence score of 1.00
 
-Point 2 => X: 1.5695, Y: 5.0563
+.Word par has a confidence score of 1.00
 
-Point 3 => X: 0.6319, Y: 5.0563
+.Word value has a confidence score of 1.00
 
-Line 25 has content: 'Trading Symbol'.
+.Word per has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word share has a confidence score of 1.00
 
-Point 0 => X: 4.3444, Y: 4.9689
+.Word MSFT has a confidence score of 1.00
 
-Point 1 => X: 5.1604, Y: 4.9689
+.Word NASDAQ has a confidence score of 1.00
 
-Point 2 => X: 5.1604, Y: 5.0797
+.Word 2.125% has a confidence score of 1.00
 
-Point 3 => X: 4.3444, Y: 5.0797
+.Word Notes has a confidence score of 1.00
 
-Line 26 has content: 'Name of exchange on which registered'.
+.Word due has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word 2021 has a confidence score of 1.00
 
-Point 0 => X: 5.5923, Y: 4.9689
+.Word MSFT has a confidence score of 1.00
 
-Point 1 => X: 7.6228, Y: 4.9689
+.Word NASDAQ has a confidence score of 1.00
 
-Point 2 => X: 7.6228, Y: 5.0797
+.Word 3.125% has a confidence score of 1.00
 
-Point 3 => X: 5.5923, Y: 5.0797
+.Word Notes has a confidence score of 1.00
 
-Line 27 has content: 'Common stock, $0.00000625 par value per share'.
+.Word due has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word 2028 has a confidence score of 1.00
 
-Point 0 => X: 0.6347, Y: 5.1719
+.Word MSFT has a confidence score of 1.00
 
-Point 1 => X: 3.3476, Y: 5.1719
+.Word NASDAQ has a confidence score of 1.00
 
-Point 2 => X: 3.3476, Y: 5.2865
+.Word 2.625% has a confidence score of 1.00
 
-Point 3 => X: 0.6347, Y: 5.2865
+.Word Notes has a confidence score of 1.00
 
-Line 28 has content: 'MSFT'.
+.Word due has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word 2033 has a confidence score of 1.00
 
-Point 0 => X: 4.6026, Y: 5.1772
+.Word MSFT has a confidence score of 1.00
 
-Point 1 => X: 4.9132, Y: 5.1772
+.Word NASDAQ has a confidence score of 1.00
 
-Point 2 => X: 4.9132, Y: 5.2648
+.Word Securities has a confidence score of 1.00
 
-Point 3 => X: 4.6026, Y: 5.2648
+.Word registered has a confidence score of 1.00
 
-Line 29 has content: 'NASDAQ'.
+.Word pursuant has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word to has a confidence score of 1.00
 
-Point 0 => X: 6.3604, Y: 5.1772
+.Word Section has a confidence score of 1.00
 
-Point 1 => X: 6.8629, Y: 5.1772
+.Word 12(g) has a confidence score of 1.00
 
-Point 2 => X: 6.8629, Y: 5.2717
+.Word of has a confidence score of 1.00
 
-Point 3 => X: 6.3604, Y: 5.2717
+.Word the has a confidence score of 1.00
 
-Line 30 has content: '2.125% Notes due 2021'.
+.Word Act: has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word NONE has a confidence score of 1.00
 
-Point 0 => X: 0.6321, Y: 5.3347
+.Word Indicate has a confidence score of 1.00
 
-Point 1 => X: 1.9098, Y: 5.3347
+.Word by has a confidence score of 1.00
 
-Point 2 => X: 1.9098, Y: 5.4241
+.Word check has a confidence score of 1.00
 
-Point 3 => X: 0.6321, Y: 5.4241
+.Word mark has a confidence score of 1.00
 
-Line 31 has content: 'MSFT'.
+.Word whether has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word the has a confidence score of 1.00
 
-Point 0 => X: 4.6026, Y: 5.3347
+.Word registrant has a confidence score of 1.00
 
-Point 1 => X: 4.9132, Y: 5.3347
+.Word (1) has a confidence score of 1.00
 
-Point 2 => X: 4.9132, Y: 5.4223
+.Word has has a confidence score of 1.00
 
-Point 3 => X: 4.6026, Y: 5.4223
+.Word filed has a confidence score of 1.00
 
-Line 32 has content: 'NASDAQ'.
+.Word all has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word reports has a confidence score of 1.00
 
-Point 0 => X: 6.3604, Y: 5.3347
+.Word required has a confidence score of 1.00
 
-Point 1 => X: 6.8629, Y: 5.3347
+.Word to has a confidence score of 1.00
 
-Point 2 => X: 6.8629, Y: 5.4292
+.Word be has a confidence score of 1.00
 
-Point 3 => X: 6.3604, Y: 5.4292
+.Word filed has a confidence score of 1.00
 
-Line 33 has content: '3.125% Notes due 2028'.
+.Word by has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word Section has a confidence score of 1.00
 
-Point 0 => X: 0.6337, Y: 5.493
+.Word 13 has a confidence score of 1.00
 
-Point 1 => X: 1.9238, Y: 5.493
+.Word or has a confidence score of 1.00
 
-Point 2 => X: 1.9238, Y: 5.5825
+.Word 15(d) has a confidence score of 1.00
 
-Point 3 => X: 0.6337, Y: 5.5825
+.Word of has a confidence score of 1.00
 
-Line 34 has content: 'MSFT'.
+.Word the has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word Securities has a confidence score of 1.00
 
-Point 0 => X: 4.6026, Y: 5.493
+.Word Exchange has a confidence score of 1.00
 
-Point 1 => X: 4.9132, Y: 5.493
+.Word Act has a confidence score of 1.00
 
-Point 2 => X: 4.9132, Y: 5.5806
+.Word of has a confidence score of 1.00
 
-Point 3 => X: 4.6026, Y: 5.5806
+.Word 1934 has a confidence score of 1.00
 
-Line 35 has content: 'NASDAQ'.
+.Word during has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word the has a confidence score of 1.00
 
-Point 0 => X: 6.3604, Y: 5.493
+.Word preceding has a confidence score of 1.00
 
-Point 1 => X: 6.8629, Y: 5.493
+.Word 12 has a confidence score of 1.00
 
-Point 2 => X: 6.8629, Y: 5.5876
+.Word months has a confidence score of 1.00
 
-Point 3 => X: 6.3604, Y: 5.5876
+.Word (or has a confidence score of 1.00
 
-Line 36 has content: '2.625% Notes due 2033'.
+.Word for has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word such has a confidence score of 1.00
 
-Point 0 => X: 0.6321, Y: 5.6505
+.Word shorter has a confidence score of 1.00
 
-Point 1 => X: 1.9238, Y: 5.6505
+.Word period has a confidence score of 1.00
 
-Point 2 => X: 1.9238, Y: 5.74
+.Word that has a confidence score of 1.00
 
-Point 3 => X: 0.6321, Y: 5.74
+.Word the has a confidence score of 1.00
 
-Line 37 has content: 'MSFT'.
+.Word registrant has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word was has a confidence score of 1.00
 
-Point 0 => X: 4.6026, Y: 5.6505
+.Word required has a confidence score of 1.00
 
-Point 1 => X: 4.9132, Y: 5.6505
+.Word to has a confidence score of 1.00
 
-Point 2 => X: 4.9132, Y: 5.7381
+.Word file has a confidence score of 1.00
 
-Point 3 => X: 4.6026, Y: 5.7381
+.Word such has a confidence score of 1.00
 
-Line 38 has content: 'NASDAQ'.
+.Word reports), has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word and has a confidence score of 1.00
 
-Point 0 => X: 6.3604, Y: 5.6505
+.Word (2) has a confidence score of 1.00
 
-Point 1 => X: 6.8629, Y: 5.6505
+.Word has has a confidence score of 1.00
 
-Point 2 => X: 6.8629, Y: 5.7451
+.Word been has a confidence score of 1.00
 
-Point 3 => X: 6.3604, Y: 5.7451
+.Word subject has a confidence score of 1.00
 
-Line 39 has content: 'Securities registered pursuant to Section 12(g) of the Act:'.
+.Word to has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word such has a confidence score of 1.00
 
-Point 0 => X: 0.6345, Y: 5.8505
+.Word filing has a confidence score of 1.00
 
-Point 1 => X: 3.6169, Y: 5.8505
+.Word requirements has a confidence score of 1.00
 
-Point 2 => X: 3.6169, Y: 5.9614
+.Word for has a confidence score of 1.00
 
-Point 3 => X: 0.6345, Y: 5.9614
+.Word the has a confidence score of 1.00
 
-Line 40 has content: 'NONE'.
+.Word past has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word 90 has a confidence score of 1.00
 
-Point 0 => X: 0.6379, Y: 6.0789
+.Word days. has a confidence score of 1.00
 
-Point 1 => X: 0.9646, Y: 6.0789
+.Word Yes has a confidence score of 1.00
 
-Point 2 => X: 0.9646, Y: 6.1663
+.Word ? has a confidence score of 1.00
 
-Point 3 => X: 0.6379, Y: 6.1663
+.Word No has a confidence score of 1.00
 
-Line 41 has content: 'Indicate by check mark whether the registrant (1) has filed all reports required to be filed by Section 13 or 15(d) of the Securities Exchange'.
+.Word ? has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word Indicate has a confidence score of 1.00
 
-Point 0 => X: 0.661, Y: 6.2705
+.Word by has a confidence score of 1.00
 
-Point 1 => X: 7.8456, Y: 6.2705
+.Word check has a confidence score of 1.00
 
-Point 2 => X: 7.8456, Y: 6.3814
+.Word mark has a confidence score of 1.00
 
-Point 3 => X: 0.661, Y: 6.3814
+.Word whether has a confidence score of 1.00
 
-Line 42 has content: 'Act of 1934 during the preceding 12 months (or for such shorter period that the registrant was required to file such reports), and (2) has'.
+.Word the has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word registrant has a confidence score of 1.00
 
-Point 0 => X: 0.65, Y: 6.4064
+.Word has has a confidence score of 1.00
 
-Point 1 => X: 7.8445, Y: 6.4064
+.Word submitted has a confidence score of 1.00
 
-Point 2 => X: 7.8445, Y: 6.5172
+.Word electronically has a confidence score of 1.00
 
-Point 3 => X: 0.65, Y: 6.5172
+.Word every has a confidence score of 1.00
 
-Line 43 has content: 'been subject to such filing requirements for the past 90 days.'.
+.Word Interactive has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word Data has a confidence score of 1.00
 
-Point 0 => X: 0.6578, Y: 6.5497
+.Word File has a confidence score of 1.00
 
-Point 1 => X: 3.8221, Y: 6.5497
+.Word required has a confidence score of 1.00
 
-Point 2 => X: 3.8221, Y: 6.6605
+.Word to has a confidence score of 1.00
 
-Point 3 => X: 0.6578, Y: 6.6605
+.Word be has a confidence score of 1.00
 
-Line 44 has content: 'Yes ?'.
+.Word submitted has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word pursuant has a confidence score of 1.00
 
-Point 0 => X: 3.9638, Y: 6.549
+.Word to has a confidence score of 1.00
 
-Point 1 => X: 4.3353, Y: 6.549
+.Word Rule has a confidence score of 1.00
 
-Point 2 => X: 4.3353, Y: 6.6371
+.Word 405 has a confidence score of 1.00
 
-Point 3 => X: 3.9638, Y: 6.6371
+.Word of has a confidence score of 1.00
 
-Line 45 has content: 'No ?'.
+.Word Regulation has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word S-T has a confidence score of 1.00
 
-Point 0 => X: 4.4902, Y: 6.5477
+.Word (∩┐╜232.405 has a confidence score of 1.00
 
-Point 1 => X: 4.8008, Y: 6.5477
+.Word of has a confidence score of 1.00
 
-Point 2 => X: 4.8008, Y: 6.6371
+.Word this has a confidence score of 1.00
 
-Point 3 => X: 4.4902, Y: 6.6371
+.Word chapter) has a confidence score of 1.00
 
-Line 46 has content: 'Indicate by check mark whether the registrant has submitted electronically every Interactive Data File required to be submitted pursuant to Rule'.
+.Word during has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word the has a confidence score of 1.00
 
-Point 0 => X: 0.6611, Y: 6.7519
+.Word preceding has a confidence score of 1.00
 
-Point 1 => X: 7.845, Y: 6.7519
+.Word 12 has a confidence score of 1.00
 
-Point 2 => X: 7.845, Y: 6.8614
+.Word months has a confidence score of 1.00
 
-Point 3 => X: 0.6611, Y: 6.8614
+.Word (or has a confidence score of 1.00
 
-Line 47 has content: '405 of Regulation S-T (§232.405 of this chapter) during the preceding 12 months (or for such shorter period that the registrant was required to'.
+.Word for has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word such has a confidence score of 1.00
 
-Point 0 => X: 0.6517, Y: 6.8863
+.Word shorter has a confidence score of 1.00
 
-Point 1 => X: 7.8459, Y: 6.8863
+.Word period has a confidence score of 1.00
 
-Point 2 => X: 7.8459, Y: 6.9972
+.Word that has a confidence score of 1.00
 
-Point 3 => X: 0.6517, Y: 6.9972
+.Word the has a confidence score of 1.00
 
-Line 48 has content: 'submit such files).'.
+.Word registrant has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word was has a confidence score of 1.00
 
-Point 0 => X: 0.6538, Y: 7.0296
+.Word required has a confidence score of 1.00
 
-Point 1 => X: 1.5594, Y: 7.0296
+.Word to has a confidence score of 1.00
 
-Point 2 => X: 1.5594, Y: 7.1405
+.Word submit has a confidence score of 1.00
 
-Point 3 => X: 0.6538, Y: 7.1405
+.Word such has a confidence score of 1.00
 
-Line 49 has content: 'Yes ?'.
+.Word files). has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word Yes has a confidence score of 1.00
 
-Point 0 => X: 1.6938, Y: 7.0289
+.Word ? has a confidence score of 1.00
 
-Point 1 => X: 2.0577, Y: 7.0289
+.Word No has a confidence score of 1.00
 
-Point 2 => X: 2.0577, Y: 7.1171
+.Word ? has a confidence score of 1.00
 
-Point 3 => X: 1.6938, Y: 7.1171
+.Word Indicate has a confidence score of 1.00
 
-Line 50 has content: 'No ?'.
+.Word by has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word check has a confidence score of 1.00
 
-Point 0 => X: 2.2066, Y: 7.0276
+.Word mark has a confidence score of 1.00
 
-Point 1 => X: 2.5115, Y: 7.0276
+.Word whether has a confidence score of 1.00
 
-Point 2 => X: 2.5115, Y: 7.1171
+.Word the has a confidence score of 1.00
 
-Point 3 => X: 2.2066, Y: 7.1171
+.Word registrant has a confidence score of 1.00
 
-Line 51 has content: 'Indicate by check mark whether the registrant is a large accelerated filer, an accelerated filer, a non-accelerated filer, a smaller reporting'.
+.Word is has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word a has a confidence score of 1.00
 
-Point 0 => X: 0.6611, Y: 7.2304
+.Word large has a confidence score of 1.00
 
-Point 1 => X: 7.8417, Y: 7.2304
+.Word accelerated has a confidence score of 1.00
 
-Point 2 => X: 7.8417, Y: 7.3413
+.Word filer, has a confidence score of 1.00
 
-Point 3 => X: 0.6611, Y: 7.3413
+.Word an has a confidence score of 1.00
 
-Line 52 has content: 'company, or an emerging growth company. See the definitions of "large accelerated filer," "accelerated filer," "smaller reporting company,"'.
+.Word accelerated has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word filer, has a confidence score of 1.00
 
-Point 0 => X: 0.6547, Y: 7.3663
+.Word a has a confidence score of 1.00
 
-Point 1 => X: 7.8449, Y: 7.3663
+.Word non-accelerated has a confidence score of 1.00
 
-Point 2 => X: 7.8449, Y: 7.4772
+.Word filer, has a confidence score of 1.00
 
-Point 3 => X: 0.6547, Y: 7.4772
+.Word a has a confidence score of 1.00
 
-Line 53 has content: 'and "emerging growth company" in Rule 12b-2 of the Exchange Act.'.
+.Word smaller has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word reporting has a confidence score of 1.00
 
-Point 0 => X: 0.6543, Y: 7.5021
+.Word company, has a confidence score of 1.00
 
-Point 1 => X: 4.1966, Y: 7.5021
+.Word or has a confidence score of 1.00
 
-Point 2 => X: 4.1966, Y: 7.613
+.Word an has a confidence score of 1.00
 
-Point 3 => X: 0.6543, Y: 7.613
+.Word emerging has a confidence score of 1.00
 
-Line 54 has content: 'Large accelerated filer ?'.
+.Word growth has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word company. has a confidence score of 1.00
 
-Point 0 => X: 0.6586, Y: 7.709
+.Word See has a confidence score of 1.00
 
-Point 1 => X: 1.9534, Y: 7.709
+.Word the has a confidence score of 1.00
 
-Point 2 => X: 1.9534, Y: 7.8206
+.Word definitions has a confidence score of 1.00
 
-Point 3 => X: 0.6586, Y: 7.8206
+.Word of has a confidence score of 1.00
 
-Line 55 has content: 'Non-accelerated filer ?'.
+.Word ∩┐╜large has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word accelerated has a confidence score of 1.00
 
-Point 0 => X: 0.659, Y: 7.8827
+.Word filer,∩┐╜ has a confidence score of 1.00
 
-Point 1 => X: 1.8756, Y: 7.8827
+.Word ∩┐╜accelerated has a confidence score of 1.00
 
-Point 2 => X: 1.8756, Y: 7.9721
+.Word filer,∩┐╜ has a confidence score of 1.00
 
-Point 3 => X: 0.659, Y: 7.9721
+.Word ∩┐╜smaller has a confidence score of 1.00
 
-Line 56 has content: 'Accelerated filer ?'.
+.Word reporting has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word company,∩┐╜ has a confidence score of 1.00
 
-Point 0 => X: 5.3358, Y: 7.7077
+.Word and has a confidence score of 1.00
 
-Point 1 => X: 6.3181, Y: 7.7077
+.Word ∩┐╜emerging has a confidence score of 1.00
 
-Point 2 => X: 6.3181, Y: 7.7971
+.Word growth has a confidence score of 1.00
 
-Point 3 => X: 5.3358, Y: 7.7971
+.Word company∩┐╜ has a confidence score of 1.00
 
-Line 57 has content: 'Smaller reporting company ?'.
+.Word in has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word Rule has a confidence score of 1.00
 
-Point 0 => X: 5.3412, Y: 7.8827
+.Word 12b-2 has a confidence score of 1.00
 
-Point 1 => X: 6.8831, Y: 7.8827
+.Word of has a confidence score of 1.00
 
-Point 2 => X: 6.8831, Y: 7.9956
+.Word the has a confidence score of 1.00
 
-Point 3 => X: 5.3412, Y: 7.9956
+.Word Exchange has a confidence score of 1.00
 
-Line 58 has content: 'Emerging growth company ?'.
+.Word Act. has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word Large has a confidence score of 1.00
 
-Point 0 => X: 5.3452, Y: 8.0585
+.Word accelerated has a confidence score of 1.00
 
-Point 1 => X: 6.8764, Y: 8.0585
+.Word filer has a confidence score of 1.00
 
-Point 2 => X: 6.8764, Y: 8.1714
+.Word ? has a confidence score of 1.00
 
-Point 3 => X: 5.3452, Y: 8.1714
+.Word Non-accelerated has a confidence score of 1.00
 
-Line 59 has content: 'If an emerging growth company, indicate by check mark if the registrant has elected not to use the extended transition period for complying'.
+.Word filer has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word ? has a confidence score of 1.00
 
-Point 0 => X: 0.661, Y: 8.2614
+.Word Accelerated has a confidence score of 1.00
 
-Point 1 => X: 7.842, Y: 8.2614
+.Word filer has a confidence score of 1.00
 
-Point 2 => X: 7.842, Y: 8.3722
+.Word ? has a confidence score of 1.00
 
-Point 3 => X: 0.661, Y: 8.3722
+.Word Smaller has a confidence score of 1.00
 
-Line 60 has content: 'with any new or revised financial accounting standards provided pursuant to Section 13(a) of the Exchange Act. ?'.
+.Word reporting has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word company has a confidence score of 1.00
 
-Point 0 => X: 0.6504, Y: 8.4139
+.Word ? has a confidence score of 1.00
 
-Point 1 => X: 6.6275, Y: 8.4139
+.Word Emerging has a confidence score of 1.00
 
-Point 2 => X: 6.6275, Y: 8.5248
+.Word growth has a confidence score of 1.00
 
-Point 3 => X: 0.6504, Y: 8.5248
+.Word company has a confidence score of 1.00
 
-Line 61 has content: 'Indicate by check mark whether the registrant is a shell company (as defined in Rule 12b-2 of the Exchange Act).'.
+.Word ? has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word If has a confidence score of 1.00
 
-Point 0 => X: 0.6609, Y: 8.6172
+.Word an has a confidence score of 1.00
 
-Point 1 => X: 6.3833, Y: 8.6172
+.Word emerging has a confidence score of 1.00
 
-Point 2 => X: 6.3833, Y: 8.7281
+.Word growth has a confidence score of 1.00
 
-Point 3 => X: 0.6609, Y: 8.7281
+.Word company, has a confidence score of 1.00
 
-Line 62 has content: 'Yes ?'.
+.Word indicate has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word by has a confidence score of 1.00
 
-Point 0 => X: 6.5188, Y: 8.6152
+.Word check has a confidence score of 1.00
 
-Point 1 => X: 6.8824, Y: 8.6152
+.Word mark has a confidence score of 1.00
 
-Point 2 => X: 6.8824, Y: 8.7046
+.Word if has a confidence score of 1.00
 
-Point 3 => X: 6.5188, Y: 8.7046
+.Word the has a confidence score of 1.00
 
-Line 63 has content: 'No ?'.
+.Word registrant has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word has has a confidence score of 1.00
 
-Point 0 => X: 7.0307, Y: 8.6165
+.Word elected has a confidence score of 1.00
 
-Point 1 => X: 7.3351, Y: 8.6165
+.Word not has a confidence score of 1.00
 
-Point 2 => X: 7.3351, Y: 8.7046
+.Word to has a confidence score of 1.00
 
-Point 3 => X: 7.0307, Y: 8.7046
+.Word use has a confidence score of 1.00
 
-Line 64 has content: 'Indicate the number of shares outstanding of each of the issuer's classes of common stock, as of the latest practicable date.'.
+.Word the has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word extended has a confidence score of 1.00
 
-Point 0 => X: 0.6611, Y: 8.818
+.Word transition has a confidence score of 1.00
 
-Point 1 => X: 6.9374, Y: 8.818
+.Word period has a confidence score of 1.00
 
-Point 2 => X: 6.9374, Y: 8.9289
+.Word for has a confidence score of 1.00
 
-Point 3 => X: 0.6611, Y: 8.9289
+.Word complying has a confidence score of 1.00
 
-Line 65 has content: 'Class'.
+.Word with has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word any has a confidence score of 1.00
 
-Point 0 => X: 0.6549, Y: 9.0975
+.Word new has a confidence score of 1.00
 
-Point 1 => X: 0.9237, Y: 9.0975
+.Word or has a confidence score of 1.00
 
-Point 2 => X: 0.9237, Y: 9.1745
+.Word revised has a confidence score of 1.00
 
-Point 3 => X: 0.6549, Y: 9.1745
+.Word financial has a confidence score of 1.00
 
-Line 66 has content: 'Outstanding as of April 24, 2020'.
+.Word accounting has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word standards has a confidence score of 1.00
 
-Point 0 => X: 6.1303, Y: 9.105
+.Word provided has a confidence score of 1.00
 
-Point 1 => X: 7.707, Y: 9.105
+.Word pursuant has a confidence score of 1.00
 
-Point 2 => X: 7.707, Y: 9.2026
+.Word to has a confidence score of 1.00
 
-Point 3 => X: 6.1303, Y: 9.2026
+.Word Section has a confidence score of 1.00
 
-Line 67 has content: 'Common Stock, $0.00000625 par value per share'.
+.Word 13(a) has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word of has a confidence score of 1.00
 
-Point 0 => X: 0.6559, Y: 9.3141
+.Word the has a confidence score of 1.00
 
-Point 1 => X: 3.2571, Y: 9.3141
+.Word Exchange has a confidence score of 1.00
 
-Point 2 => X: 3.2571, Y: 9.4301
+.Word Act. has a confidence score of 1.00
 
-Point 3 => X: 0.6559, Y: 9.4301
+.Word ? has a confidence score of 1.00
 
-Line 68 has content: '7,583,440,247 shares'.
+.Word Indicate has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word by has a confidence score of 1.00
 
-Point 0 => X: 6.5747, Y: 9.3458
+.Word check has a confidence score of 1.00
 
-Point 1 => X: 7.7069, Y: 9.3458
+.Word mark has a confidence score of 1.00
 
-Point 2 => X: 7.7069, Y: 9.4475
+.Word whether has a confidence score of 1.00
 
-Point 3 => X: 6.5747, Y: 9.4475
+.Word the has a confidence score of 1.00
 
-Selection Mark 0 is Selected.
+.Word registrant has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word is has a confidence score of 1.00
 
-Point 0 => X: 0.6694, Y: 1.7746
+.Word a has a confidence score of 1.00
 
-Point 1 => X: 0.7764, Y: 1.7746
+.Word shell has a confidence score of 1.00
 
-Point 2 => X: 0.7764, Y: 1.8833
+.Word company has a confidence score of 1.00
 
-Point 3 => X: 0.6694, Y: 1.8833
+.Word (as has a confidence score of 1.00
 
-Selection Mark 1 is Unselected.
+.Word defined has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word in has a confidence score of 1.00
 
-Point 0 => X: 0.6694, Y: 2.6955
+.Word Rule has a confidence score of 1.00
 
-Point 1 => X: 0.777, Y: 2.6955
+.Word 12b-2 has a confidence score of 1.00
 
-Point 2 => X: 0.777, Y: 2.8042
+.Word of has a confidence score of 1.00
 
-Point 3 => X: 0.6694, Y: 2.8042
+.Word the has a confidence score of 1.00
 
-Selection Mark 2 is Selected.
+.Word Exchange has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word Act). has a confidence score of 1.00
 
-Point 0 => X: 4.2484, Y: 6.549
+.Word Yes has a confidence score of 1.00
 
-Point 1 => X: 4.3353, Y: 6.549
+.Word ? has a confidence score of 1.00
 
-Point 2 => X: 4.3353, Y: 6.6371
+.Word No has a confidence score of 1.00
 
-Point 3 => X: 4.2484, Y: 6.6371
+.Word ? has a confidence score of 1.00
 
-Selection Mark 3 is Unselected.
+.Word Indicate has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word the has a confidence score of 1.00
 
-Point 0 => X: 4.7134, Y: 6.5477
+.Word number has a confidence score of 1.00
 
-Point 1 => X: 4.8008, Y: 6.5477
+.Word of has a confidence score of 1.00
 
-Point 2 => X: 4.8008, Y: 6.6358
+.Word shares has a confidence score of 1.00
 
-Point 3 => X: 4.7134, Y: 6.6358
+.Word outstanding has a confidence score of 1.00
 
-Selection Mark 4 is Selected.
+.Word of has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word each has a confidence score of 1.00
 
-Point 0 => X: 1.9708, Y: 7.0289
+.Word of has a confidence score of 1.00
 
-Point 1 => X: 2.0577, Y: 7.0289
+.Word the has a confidence score of 1.00
 
-Point 2 => X: 2.0577, Y: 7.1171
+.Word issuer∩┐╜s has a confidence score of 1.00
 
-Point 3 => X: 1.9708, Y: 7.1171
+.Word classes has a confidence score of 1.00
 
-Selection Mark 5 is Unselected.
+.Word of has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word common has a confidence score of 1.00
 
-Point 0 => X: 2.4242, Y: 7.0276
+.Word stock, has a confidence score of 1.00
 
-Point 1 => X: 2.5115, Y: 7.0276
+.Word as has a confidence score of 1.00
 
-Point 2 => X: 2.5115, Y: 7.1158
+.Word of has a confidence score of 1.00
 
-Point 3 => X: 2.4242, Y: 7.1158
+.Word the has a confidence score of 1.00
 
-Selection Mark 6 is Selected.
+.Word latest has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word practicable has a confidence score of 1.00
 
-Point 0 => X: 1.8666, Y: 7.709
+.Word date. has a confidence score of 1.00
 
-Point 1 => X: 1.9534, Y: 7.709
+.Word Class has a confidence score of 1.00
 
-Point 2 => X: 1.9534, Y: 7.7971
+.Word Outstanding has a confidence score of 1.00
 
-Point 3 => X: 1.8666, Y: 7.7971
+.Word as has a confidence score of 1.00
 
-Selection Mark 7 is Unselected.
+.Word of has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word April has a confidence score of 1.00
 
-Point 0 => X: 6.2307, Y: 7.7077
+.Word 24, has a confidence score of 1.00
 
-Point 1 => X: 6.3181, Y: 7.7077
+.Word 2020 has a confidence score of 1.00
 
-Point 2 => X: 6.3181, Y: 7.7958
+.Word Common has a confidence score of 1.00
 
-Point 3 => X: 6.2307, Y: 7.7958
+.Word Stock, has a confidence score of 1.00
 
-Selection Mark 8 is Unselected.
+.Word $0.00000625 has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Word par has a confidence score of 1.00
 
-Point 0 => X: 1.7882, Y: 7.8827
+.Word value has a confidence score of 1.00
 
-Point 1 => X: 1.8756, Y: 7.8827
+.Word per has a confidence score of 1.00
 
-Point 2 => X: 1.8756, Y: 7.9708
+.Word share has a confidence score of 1.00
 
-Point 3 => X: 1.7882, Y: 7.9708
+.Word 7,583,440,247 has a confidence score of 1.00
 
-Selection Mark 9 is Unselected.
+.Word shares has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+.Table 0 has 5 rows and 3 columns.
 
-Point 0 => X: 6.7957, Y: 7.8827
+Cell 'Title of each class', has row index 0 and column index 0.
 
-Point 1 => X: 6.8831, Y: 7.8827
+Cell 'Trading Symbol', has row index 0 and column index 1.
 
-Point 2 => X: 6.8831, Y: 7.9708
+Cell 'Name of exchange on which registered', has row index 0 and column index 2.
 
-Point 3 => X: 6.7957, Y: 7.9708
+Cell 'Common stock, $0.00000625 par value per share', has row index 1 and column index 0.
 
-Selection Mark 10 is Unselected.
+Cell 'MSFT', has row index 1 and column index 1.
 
-Its bounding polygon (points ordered clockwise):
+Cell 'NASDAQ', has row index 1 and column index 2.
 
-Point 0 => X: 6.7891, Y: 8.0585
+Cell '2.125% Notes due 2021', has row index 2 and column index 0.
 
-Point 1 => X: 6.8764, Y: 8.0585
+Cell 'MSFT', has row index 2 and column index 1.
 
-Point 2 => X: 6.8764, Y: 8.1467
+Cell 'NASDAQ', has row index 2 and column index 2.
 
-Point 3 => X: 6.7891, Y: 8.1467
+Cell '3.125% Notes due 2028', has row index 3 and column index 0.
 
-Selection Mark 11 is Unselected.
+Cell 'MSFT', has row index 3 and column index 1.
 
-Its bounding polygon (points ordered clockwise):
+Cell 'NASDAQ', has row index 3 and column index 2.
 
-Point 0 => X: 6.5447, Y: 8.416
+Cell '2.625% Notes due 2033', has row index 4 and column index 0.
 
-Point 1 => X: 6.6275, Y: 8.416
+Cell 'MSFT', has row index 4 and column index 1.
 
-Point 2 => X: 6.6275, Y: 8.5
-
-Point 3 => X: 6.5447, Y: 8.5
-
-Selection Mark 12 is Unselected.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 6.795, Y: 8.6152
-
-Point 1 => X: 6.8824, Y: 8.6152
-
-Point 2 => X: 6.8824, Y: 8.7033
-
-Point 3 => X: 6.795, Y: 8.7033
-
-Selection Mark 13 is Selected.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 7.2483, Y: 8.6165
-
-Point 1 => X: 7.3351, Y: 8.6165
-
-Point 2 => X: 7.3351, Y: 8.7046
-
-Point 3 => X: 7.2483, Y: 8.7046
-
-The following tables were extracted:
-
-Table 0 has 5 rows and 3 columns.
-
-Cell (0, 0) has kind 'columnHeader' and content: 'Title of each class'.
-
-Cell (0, 1) has kind 'columnHeader' and content: 'Trading Symbol'.
-
-Cell (0, 2) has kind 'columnHeader' and content: 'Name of exchange on which registered'.
-
-Cell (1, 0) has kind 'content' and content: 'Common stock, $0.00000625 par value per share'.
-
-Cell (1, 1) has kind 'content' and content: 'MSFT'.
-
-Cell (1, 2) has kind 'content' and content: 'NASDAQ'.
-
-Cell (2, 0) has kind 'content' and content: '2.125% Notes due 2021'.
-
-Cell (2, 1) has kind 'content' and content: 'MSFT'.
-
-Cell (2, 2) has kind 'content' and content: 'NASDAQ'.
-
-Cell (3, 0) has kind 'content' and content: '3.125% Notes due 2028'.
-
-Cell (3, 1) has kind 'content' and content: 'MSFT'.
-
-Cell (3, 2) has kind 'content' and content: 'NASDAQ'.
-
-Cell (4, 0) has kind 'content' and content: '2.625% Notes due 2033'.
-
-Cell (4, 1) has kind 'content' and content: 'MSFT'.
-
-Cell (4, 2) has kind 'content' and content: 'NASDAQ'.
+Cell 'NASDAQ', has row index 4 and column index 2.
 
 Table 1 has 2 rows and 2 columns.
 
-Cell (0, 0) has kind 'columnHeader' and content: 'Class'.
+Cell 'Class', has row index 0 and column index 0.
 
-Cell (0, 1) has kind 'columnHeader' and content: 'Outstanding as of April 24, 2020'.
+Cell 'Outstanding as of April 24, 2020', has row index 0 and column index 1.
 
-Cell (1, 0) has kind 'content' and content: 'Common Stock, $0.00000625 par value per share'.
+Cell 'Common Stock, $0.00000625 par value per share', has row index 1 and column index 0.
 
-Cell (1, 1) has kind 'content' and content: '7,583,440,247 shares'.
+Cell '7,583,440,247 shares', has row index 1 and column index 1.
+
+Key content: QUARTERLY REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF 1934
+
+Key content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@410e94e]
+
+Value content: :selected:
+
+Value content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@2d691f3d]
+
+Key content: For the Quarterly Period Ended
+
+Key content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@1bdbf9be]
+
+Value content: 2020
+
+Value content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@1e7f2e0f]
+
+Key content: March 31,
+
+Key content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@1da6ee17]
+
+Key content: TRANSITION REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF 1934
+
+Key content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@78d39a69]
+
+Value content: :unselected:
+
+Value content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@3c818ac4]
+
+Key content: For the Transition Period From
+
+Key content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@5b69d40d]
+
+Key content: to
+
+Key content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@71154f21]
+
+Key content: Commission File Number
+
+Key content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@15f193b8]
+
+Value content: 001-37845
+
+Value content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@2516fc68]
+
+Key content: (STATE OF INCORPORATION)
+
+Key content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@304a9d7b]
+
+Value content: WASHINGTON
+
+(425) 882-8080
+
+Value content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@6bfdb014]
+
+Key content: (I.R.S. ID)
+
+Key content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@72889280]
+
+Value content: 91-1144442
+
+Value content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@606fc505]
+
+Key content: Securities registered pursuant to Section 12(g) of the Act:
+
+Key content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@4aa3d36]
+
+Value content: NONE
+
+Value content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@2d140a7]
+
+Key content: Yes
+
+Key content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@347bdeef]
+
+Value content: :selected:
+
+Value content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@2aa27288]
+
+Key content: No
+
+Key content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@7f34a967]
+
+Value content: :unselected:
+
+Value content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@77e80a5e]
+
+Key content: Yes
+
+Key content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@1d8e2eea]
+
+Value content: :selected:
+
+Value content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@240139e1]
+
+Key content: No
+
+Key content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@7ea4d397]
+
+Value content: :unselected:
+
+Value content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@49298ce7]
+
+Key content: Large accelerated filer
+
+Key content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@253c1256]
+
+Value content: :selected:
+
+Value content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@8dfe921]
+
+Key content: Accelerated filer
+
+Key content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@503fbbc6]
+
+Value content: :unselected:
+
+Value content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@55f45b92]
+
+Key content: Non-accelerated filer
+
+Key content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@109f5dd8]
+
+Value content: :unselected:
+
+Value content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@67fe380b]
+
+Key content: Smaller reporting company
+
+Key content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@4a325eb9]
+
+Value content: :unselected:
+
+Value content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@3dedb4a6]
+
+Key content: Emerging growth company
+
+Key content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@57f64f5e]
+
+Value content: :unselected:
+
+Value content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@415e0bcb]
+
+Key content: If an emerging growth company, indicate by check mark if the registrant has elected not to use the extended transition period for complying with any new or revised financial accounting standards provided pursuant to Section 13(a) of the Exchange Act.
+
+Key content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@194152cf]
+
+Value content: :unselected:
+
+Value content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@49d98dc5]
+
+Key content: Yes
+
+Key content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@2c30b71f]
+
+Value content: :unselected:
+
+Value content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@1d81e101]
+
+Key content: No
+
+Key content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@ec50f54]
+
+Value content: :selected:
+
+Value content bounding region: [com.azure.ai.formrecognizer.documentanalysis.models.BoundingRegion@bf71cec]
