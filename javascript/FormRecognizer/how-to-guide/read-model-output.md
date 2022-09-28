@@ -2,1726 +2,1726 @@ Pages:
 
 - Page 1 (unit: pixel)
 
-  915x1190, angle: 0
+915x1190, angle: 0
 
-  86 lines, 696 words
+86 lines, 696 words
 
-  Lines:
+Lines:
 
-  - "While healthcare is still in the early stages of its Al journey, we"
+- "While healthcare is still in the early stages of its Al journey, we"
 
-    - "While"
+- "While"
 
-    - "healthcare"
+- "healthcare"
 
-    - "is"
+- "is"
 
-    - "still"
+- "still"
 
-    - "in"
+- "in"
 
-    - "the"
+- "the"
 
-    - "early"
+- "early"
 
-    - "stages"
+- "stages"
 
-    - "of"
+- "of"
 
-    - "its"
+- "its"
 
-    - "Al"
+- "Al"
 
-    - "journey,"
+- "journey,"
 
-    - "we"
+- "we"
 
-  - "are seeing pharmaceutical and other life sciences organizations"
+- "are seeing pharmaceutical and other life sciences organizations"
 
-    - "are"
+- "are"
 
-    - "seeing"
+- "seeing"
 
-    - "pharmaceutical"
+- "pharmaceutical"
 
-    - "and"
+- "and"
 
-    - "other"
+- "other"
 
-    - "life"
+- "life"
 
-    - "sciences"
+- "sciences"
 
-    - "organizations"
+- "organizations"
 
-  - "making major investments in Al and related technologies.""
+- "making major investments in Al and related technologies.""
 
-    - "making"
+- "making"
 
-    - "major"
+- "major"
 
-    - "investments"
+- "investments"
 
-    - "in"
+- "in"
 
-    - "Al"
+- "Al"
 
-    - "and"
+- "and"
 
-    - "related"
+- "related"
 
-    - "technologies.""
+- "technologies.""
 
-  - "TOM LAWRY | National Director for Al, Health and Life Sciences | Microsoft"
+- "TOM LAWRY | National Director for Al, Health and Life Sciences | Microsoft"
 
-    - "TOM"
+- "TOM"
 
-    - "LAWRY"
+- "LAWRY"
 
-    - "|"
+- "|"
 
-    - "National"
+- "National"
 
-    - "Director"
+- "Director"
 
-    - "for"
+- "for"
 
-    - "Al,"
+- "Al,"
 
-    - "Health"
+- "Health"
 
-    - "and"
+- "and"
 
-    - "Life"
+- "Life"
 
-    - "Sciences"
+- "Sciences"
 
-    - "|"
+- "|"
 
-    - "Microsoft"
+- "Microsoft"
 
-  - "As pharmaceutical and other life sciences organizations invest"
+- "As pharmaceutical and other life sciences organizations invest"
 
-    - "As"
+- "As"
 
-    - "pharmaceutical"
+- "pharmaceutical"
 
-    - "and"
+- "and"
 
-    - "other"
+- "other"
 
-    - "life"
+- "life"
 
-    - "sciences"
+- "sciences"
 
-    - "organizations"
+- "organizations"
 
-    - "invest"
+- "invest"
 
-  - "in and deploy advanced technologies, they are beginning to see"
+- "in and deploy advanced technologies, they are beginning to see"
 
-    - "in"
+- "in"
 
-    - "and"
+- "and"
 
-    - "deploy"
+- "deploy"
 
-    - "advanced"
+- "advanced"
 
-    - "technologies,"
+- "technologies,"
 
-    - "they"
+- "they"
 
-    - "are"
+- "are"
 
-    - "beginning"
+- "beginning"
 
-    - "to"
+- "to"
 
-    - "see"
+- "see"
 
-  - "benefits in diverse areas across their organizations. Companies"
+- "benefits in diverse areas across their organizations. Companies"
 
-    - "benefits"
+- "benefits"
 
-    - "in"
+- "in"
 
-    - "diverse"
+- "diverse"
 
-    - "areas"
+- "areas"
 
-    - "across"
+- "across"
 
-    - "their"
+- "their"
 
-    - "organizations."
+- "organizations."
 
-    - "Companies"
+- "Companies"
 
-  - "are looking to incorporate automation and continuing smart"
+- "are looking to incorporate automation and continuing smart"
 
-    - "are"
+- "are"
 
-    - "looking"
+- "looking"
 
-    - "to"
+- "to"
 
-    - "incorporate"
+- "incorporate"
 
-    - "automation"
+- "automation"
 
-    - "and"
+- "and"
 
-    - "continuing"
+- "continuing"
 
-    - "smart"
+- "smart"
 
-  - "factory investments to reduce costs in drug discovery, research"
+- "factory investments to reduce costs in drug discovery, research"
 
-    - "factory"
+- "factory"
 
-    - "investments"
+- "investments"
 
-    - "to"
+- "to"
 
-    - "reduce"
+- "reduce"
 
-    - "costs"
+- "costs"
 
-    - "in"
+- "in"
 
-    - "drug"
+- "drug"
 
-    - "discovery,"
+- "discovery,"
 
-    - "research"
+- "research"
 
-  - "and development, and manufacturing and supply chain"
+- "and development, and manufacturing and supply chain"
 
-    - "and"
+- "and"
 
-    - "development,"
+- "development,"
 
-    - "and"
+- "and"
 
-    - "manufacturing"
+- "manufacturing"
 
-    - "and"
+- "and"
 
-    - "supply"
+- "supply"
 
-    - "chain"
+- "chain"
 
-  - "management. Many life sciences organizations are also choosing"
+- "management. Many life sciences organizations are also choosing"
 
-    - "management."
+- "management."
 
-    - "Many"
+- "Many"
 
-    - "life"
+- "life"
 
-    - "sciences"
+- "sciences"
 
-    - "organizations"
+- "organizations"
 
-    - "are"
+- "are"
 
-    - "also"
+- "also"
 
-    - "choosing"
+- "choosing"
 
-  - "to stay with more virtual approaches in the "new normal" -"
+- "to stay with more virtual approaches in the "new normal" -"
 
-    - "to"
+- "to"
 
-    - "stay"
+- "stay"
 
-    - "with"
+- "with"
 
-    - "more"
+- "more"
 
-    - "virtual"
+- "virtual"
 
-    - "approaches"
+- "approaches"
 
-    - "in"
+- "in"
 
-    - "the"
+- "the"
 
-    - ""new"
+- ""new"
 
-    - "normal""
+- "normal""
 
-    - "-"
+- "-"
 
-  - "particularly in clinical trials and sales and marketing areas."
+- "particularly in clinical trials and sales and marketing areas."
 
-    - "particularly"
+- "particularly"
 
-    - "in"
+- "in"
 
-    - "clinical"
+- "clinical"
 
-    - "trials"
+- "trials"
 
-    - "and"
+- "and"
 
-    - "sales"
+- "sales"
 
-    - "and"
+- "and"
 
-    - "marketing"
+- "marketing"
 
-    - "areas."
+- "areas."
 
-  - "Enhancing the patient"
+- "Enhancing the patient"
 
-    - "Enhancing"
+- "Enhancing"
 
-    - "the"
+- "the"
 
-    - "patient"
+- "patient"
 
-  - "and provider experience"
+- "and provider experience"
 
-    - "and"
+- "and"
 
-    - "provider"
+- "provider"
 
-    - "experience"
+- "experience"
 
-  - "Clinical trial sponsors are continually seeking to make clinical"
+- "Clinical trial sponsors are continually seeking to make clinical"
 
-    - "Clinical"
+- "Clinical"
 
-    - "trial"
+- "trial"
 
-    - "sponsors"
+- "sponsors"
 
-    - "are"
+- "are"
 
-    - "continually"
+- "continually"
 
-    - "seeking"
+- "seeking"
 
-    - "to"
+- "to"
 
-    - "make"
+- "make"
 
-    - "clinical"
+- "clinical"
 
-  - "trials faster and to improve the experience for patients and"
+- "trials faster and to improve the experience for patients and"
 
-    - "trials"
+- "trials"
 
-    - "faster"
+- "faster"
 
-    - "and"
+- "and"
 
-    - "to"
+- "to"
 
-    - "improve"
+- "improve"
 
-    - "the"
+- "the"
 
-    - "experience"
+- "experience"
 
-    - "for"
+- "for"
 
-    - "patients"
+- "patients"
 
-    - "and"
+- "and"
 
-  - "physicians. The COVID-19 pandemic has accelerated the"
+- "physicians. The COVID-19 pandemic has accelerated the"
 
-    - "physicians."
+- "physicians."
 
-    - "The"
+- "The"
 
-    - "COVID-19"
+- "COVID-19"
 
-    - "pandemic"
+- "pandemic"
 
-    - "has"
+- "has"
 
-    - "accelerated"
+- "accelerated"
 
-    - "the"
+- "the"
 
-  - "adoption of decentralized clinical trials, with an increase in"
+- "adoption of decentralized clinical trials, with an increase in"
 
-    - "adoption"
+- "adoption"
 
-    - "of"
+- "of"
 
-    - "decentralized"
+- "decentralized"
 
-    - "clinical"
+- "clinical"
 
-    - "trials,"
+- "trials,"
 
-    - "with"
+- "with"
 
-    - "an"
+- "an"
 
-    - "increase"
+- "increase"
 
-    - "in"
+- "in"
 
-  - "trial activities conducted remotely and in participants' homes."
+- "trial activities conducted remotely and in participants' homes."
 
-    - "trial"
+- "trial"
 
-    - "activities"
+- "activities"
 
-    - "conducted"
+- "conducted"
 
-    - "remotely"
+- "remotely"
 
-    - "and"
+- "and"
 
-    - "in"
+- "in"
 
-    - "participants'"
+- "participants'"
 
-    - "homes."
+- "homes."
 
-  - "In a Mckinsey survey1 up to 98 percent of patients reported"
+- "In a Mckinsey survey1 up to 98 percent of patients reported"
 
-    - "In"
+- "In"
 
-    - "a"
+- "a"
 
-    - "Mckinsey"
+- "Mckinsey"
 
-    - "survey1"
+- "survey1"
 
-    - "up"
+- "up"
 
-    - "to"
+- "to"
 
-    - "98"
+- "98"
 
-    - "percent"
+- "percent"
 
-    - "of"
+- "of"
 
-    - "patients"
+- "patients"
 
-    - "reported"
+- "reported"
 
-  - "satisfaction with telemedicine. In the same report, 72 percent of"
+- "satisfaction with telemedicine. In the same report, 72 percent of"
 
-    - "satisfaction"
+- "satisfaction"
 
-    - "with"
+- "with"
 
-    - "telemedicine."
+- "telemedicine."
 
-    - "In"
+- "In"
 
-    - "the"
+- "the"
 
-    - "same"
+- "same"
 
-    - "report,"
+- "report,"
 
-    - "72"
+- "72"
 
-    - "percent"
+- "percent"
 
-    - "of"
+- "of"
 
-  - "physicians surveyed reported similar or better experiences with"
+- "physicians surveyed reported similar or better experiences with"
 
-    - "physicians"
+- "physicians"
 
-    - "surveyed"
+- "surveyed"
 
-    - "reported"
+- "reported"
 
-    - "similar"
+- "similar"
 
-    - "or"
+- "or"
 
-    - "better"
+- "better"
 
-    - "experiences"
+- "experiences"
 
-    - "with"
+- "with"
 
-  - "remote engagement compared with in-person visits."
+- "remote engagement compared with in-person visits."
 
-    - "remote"
+- "remote"
 
-    - "engagement"
+- "engagement"
 
-    - "compared"
+- "compared"
 
-    - "with"
+- "with"
 
-    - "in-person"
+- "in-person"
 
-    - "visits."
+- "visits."
 
-  - "The shift of trial activities closer to patients has been enabled by"
+- "The shift of trial activities closer to patients has been enabled by"
 
-    - "The"
+- "The"
 
-    - "shift"
+- "shift"
 
-    - "of"
+- "of"
 
-    - "trial"
+- "trial"
 
-    - "activities"
+- "activities"
 
-    - "closer"
+- "closer"
 
-    - "to"
+- "to"
 
-    - "patients"
+- "patients"
 
-    - "has"
+- "has"
 
-    - "been"
+- "been"
 
-    - "enabled"
+- "enabled"
 
-    - "by"
+- "by"
 
-  - "a myriad of evolving technologies and services (e.g., electronic"
+- "a myriad of evolving technologies and services (e.g., electronic"
 
-    - "a"
+- "a"
 
-    - "myriad"
+- "myriad"
 
-    - "of"
+- "of"
 
-    - "evolving"
+- "evolving"
 
-    - "technologies"
+- "technologies"
 
-    - "and"
+- "and"
 
-    - "services"
+- "services"
 
-    - "(e.g.,"
+- "(e.g.,"
 
-    - "electronic"
+- "electronic"
 
-  - "consent, telehealth and remote patient monitoring). The aim"
+- "consent, telehealth and remote patient monitoring). The aim"
 
-    - "consent,"
+- "consent,"
 
-    - "telehealth"
+- "telehealth"
 
-    - "and"
+- "and"
 
-    - "remote"
+- "remote"
 
-    - "patient"
+- "patient"
 
-    - "monitoring)."
+- "monitoring)."
 
-    - "The"
+- "The"
 
-    - "aim"
+- "aim"
 
-  - "to use technology to improve the patient experience and"
+- "to use technology to improve the patient experience and"
 
-    - "to"
+- "to"
 
-    - "use"
+- "use"
 
-    - "technology"
+- "technology"
 
-    - "to"
+- "to"
 
-    - "improve"
+- "improve"
 
-    - "the"
+- "the"
 
-    - "patient"
+- "patient"
 
-    - "experience"
+- "experience"
 
-    - "and"
+- "and"
 
-  - "convenience has also broadened trial access to reach a broader,"
+- "convenience has also broadened trial access to reach a broader,"
 
-    - "convenience"
+- "convenience"
 
-    - "has"
+- "has"
 
-    - "also"
+- "also"
 
-    - "broadened"
+- "broadened"
 
-    - "trial"
+- "trial"
 
-    - "access"
+- "access"
 
-    - "to"
+- "to"
 
-    - "reach"
+- "reach"
 
-    - "a"
+- "a"
 
-    - "broader,"
+- "broader,"
 
-  - "more diverse patient population."
+- "more diverse patient population."
 
-    - "more"
+- "more"
 
-    - "diverse"
+- "diverse"
 
-    - "patient"
+- "patient"
 
-    - "population."
+- "population."
 
-  - ""It's an interesting and exciting time right now," said Keren"
+- ""It's an interesting and exciting time right now," said Keren"
 
-    - ""It's"
+- ""It's"
 
-    - "an"
+- "an"
 
-    - "interesting"
+- "interesting"
 
-    - "and"
+- "and"
 
-    - "exciting"
+- "exciting"
 
-    - "time"
+- "time"
 
-    - "right"
+- "right"
 
-    - "now,""
+- "now,""
 
-    - "said"
+- "said"
 
-    - "Keren"
+- "Keren"
 
-  - "Priyadarshini, Regional Business Lead - Asia, Worldwide"
+- "Priyadarshini, Regional Business Lead - Asia, Worldwide"
 
-    - "Priyadarshini,"
+- "Priyadarshini,"
 
-    - "Regional"
+- "Regional"
 
-    - "Business"
+- "Business"
 
-    - "Lead"
+- "Lead"
 
-    - "-"
+- "-"
 
-    - "Asia,"
+- "Asia,"
 
-    - "Worldwide"
+- "Worldwide"
 
-  - "Health, Microsoft. "It used to be that physicians were key."
+- "Health, Microsoft. "It used to be that physicians were key."
 
-    - "Health,"
+- "Health,"
 
-    - "Microsoft."
+- "Microsoft."
 
-    - ""It"
+- ""It"
 
-    - "used"
+- "used"
 
-    - "to"
+- "to"
 
-    - "be"
+- "be"
 
-    - "that"
+- "that"
 
-    - "physicians"
+- "physicians"
 
-    - "were"
+- "were"
 
-    - "key."
+- "key."
 
-  - "Now, suddenly, patients are feeling empowered by technology."
+- "Now, suddenly, patients are feeling empowered by technology."
 
-    - "Now,"
+- "Now,"
 
-    - "suddenly,"
+- "suddenly,"
 
-    - "patients"
+- "patients"
 
-    - "are"
+- "are"
 
-    - "feeling"
+- "feeling"
 
-    - "empowered"
+- "empowered"
 
-    - "by"
+- "by"
 
-    - "technology."
+- "technology."
 
-  - "Pharmaceutical companies and other life sciences companies"
+- "Pharmaceutical companies and other life sciences companies"
 
-    - "Pharmaceutical"
+- "Pharmaceutical"
 
-    - "companies"
+- "companies"
 
-    - "and"
+- "and"
 
-    - "other"
+- "other"
 
-    - "life"
+- "life"
 
-    - "sciences"
+- "sciences"
 
-    - "companies"
+- "companies"
 
-  - "are realizing they have to pay attention to the patient"
+- "are realizing they have to pay attention to the patient"
 
-    - "are"
+- "are"
 
-    - "realizing"
+- "realizing"
 
-    - "they"
+- "they"
 
-    - "have"
+- "have"
 
-    - "to"
+- "to"
 
-    - "pay"
+- "pay"
 
-    - "attention"
+- "attention"
 
-    - "to"
+- "to"
 
-    - "the"
+- "the"
 
-    - "patient"
+- "patient"
 
-  - "experience in addition to the physician experience.""
+- "experience in addition to the physician experience.""
 
-    - "experience"
+- "experience"
 
-    - "in"
+- "in"
 
-    - "addition"
+- "addition"
 
-    - "to"
+- "to"
 
-    - "the"
+- "the"
 
-    - "physician"
+- "physician"
 
-    - "experience.""
+- "experience.""
 
-  - "Enhanced patient experiences can be delivered in many different"
+- "Enhanced patient experiences can be delivered in many different"
 
-    - "Enhanced"
+- "Enhanced"
 
-    - "patient"
+- "patient"
 
-    - "experiences"
+- "experiences"
 
-    - "can"
+- "can"
 
-    - "be"
+- "be"
 
-    - "delivered"
+- "delivered"
 
-    - "in"
+- "in"
 
-    - "many"
+- "many"
 
-    - "different"
+- "different"
 
-  - "ways. One example of a life sciences product that leverages the"
+- "ways. One example of a life sciences product that leverages the"
 
-    - "ways."
+- "ways."
 
-    - "One"
+- "One"
 
-    - "example"
+- "example"
 
-    - "of"
+- "of"
 
-    - "a"
+- "a"
 
-    - "life"
+- "life"
 
-    - "sciences"
+- "sciences"
 
-    - "product"
+- "product"
 
-    - "that"
+- "that"
 
-    - "leverages"
+- "leverages"
 
-    - "the"
+- "the"
 
-  - "intelligent cloud to directly affect the patient experience is the"
+- "intelligent cloud to directly affect the patient experience is the"
 
-    - "intelligent"
+- "intelligent"
 
-    - "cloud"
+- "cloud"
 
-    - "to"
+- "to"
 
-    - "directly"
+- "directly"
 
-    - "affect"
+- "affect"
 
-    - "the"
+- "the"
 
-    - "patient"
+- "patient"
 
-    - "experience"
+- "experience"
 
-    - "is"
+- "is"
 
-    - "the"
+- "the"
 
-  - "Tandem® Diabetes Care insulin pump. The Tandem® t:slim X2"
+- "Tandem® Diabetes Care insulin pump. The Tandem® t:slim X2"
 
-    - "Tandem®"
+- "Tandem®"
 
-    - "Diabetes"
+- "Diabetes"
 
-    - "Care"
+- "Care"
 
-    - "insulin"
+- "insulin"
 
-    - "pump."
+- "pump."
 
-    - "The"
+- "The"
 
-    - "Tandem®"
+- "Tandem®"
 
-    - "t:slim"
+- "t:slim"
 
-    - "X2"
+- "X2"
 
-  - "insulin pump with Basal-IQ technology enables patients with"
+- "insulin pump with Basal-IQ technology enables patients with"
 
-    - "insulin"
+- "insulin"
 
-    - "pump"
+- "pump"
 
-    - "with"
+- "with"
 
-    - "Basal-IQ"
+- "Basal-IQ"
 
-    - "technology"
+- "technology"
 
-    - "enables"
+- "enables"
 
-    - "patients"
+- "patients"
 
-    - "with"
+- "with"
 
-  - "Type 1 diabetes to predict and prevent the low levels of blood"
+- "Type 1 diabetes to predict and prevent the low levels of blood"
 
-    - "Type"
+- "Type"
 
-    - "1"
+- "1"
 
-    - "diabetes"
+- "diabetes"
 
-    - "to"
+- "to"
 
-    - "predict"
+- "predict"
 
-    - "and"
+- "and"
 
-    - "prevent"
+- "prevent"
 
-    - "the"
+- "the"
 
-    - "low"
+- "low"
 
-    - "levels"
+- "levels"
 
-    - "of"
+- "of"
 
-    - "blood"
+- "blood"
 
-  - "sugar that cause hypoglycemia.2 The algorithm-driven, software-"
+- "sugar that cause hypoglycemia.2 The algorithm-driven, software-"
 
-    - "sugar"
+- "sugar"
 
-    - "that"
+- "that"
 
-    - "cause"
+- "cause"
 
-    - "hypoglycemia.2"
+- "hypoglycemia.2"
 
-    - "The"
+- "The"
 
-    - "algorithm-driven,"
+- "algorithm-driven,"
 
-    - "software-"
+- "software-"
 
-  - "updatable pump improves the patient experience by automating"
+- "updatable pump improves the patient experience by automating"
 
-    - "updatable"
+- "updatable"
 
-    - "pump"
+- "pump"
 
-    - "improves"
+- "improves"
 
-    - "the"
+- "the"
 
-    - "patient"
+- "patient"
 
-    - "experience"
+- "experience"
 
-    - "by"
+- "by"
 
-    - "automating"
+- "automating"
 
-  - "chronic disease management and eliminating the need for"
+- "chronic disease management and eliminating the need for"
 
-    - "chronic"
+- "chronic"
 
-    - "disease"
+- "disease"
 
-    - "management"
+- "management"
 
-    - "and"
+- "and"
 
-    - "eliminating"
+- "eliminating"
 
-    - "the"
+- "the"
 
-    - "need"
+- "need"
 
-    - "for"
+- "for"
 
-  - "constant finger pricks to check glucose levels."
+- "constant finger pricks to check glucose levels."
 
-    - "constant"
+- "constant"
 
-    - "finger"
+- "finger"
 
-    - "pricks"
+- "pricks"
 
-    - "to"
+- "to"
 
-    - "check"
+- "check"
 
-    - "glucose"
+- "glucose"
 
-    - "levels."
+- "levels."
 
-  - "Tandem was able to create and deploy this innovation by"
+- "Tandem was able to create and deploy this innovation by"
 
-    - "Tandem"
+- "Tandem"
 
-    - "was"
+- "was"
 
-    - "able"
+- "able"
 
-    - "to"
+- "to"
 
-    - "create"
+- "create"
 
-    - "and"
+- "and"
 
-    - "deploy"
+- "deploy"
 
-    - "this"
+- "this"
 
-    - "innovation"
+- "innovation"
 
-    - "by"
+- "by"
 
-  - "leveraging the Al and machine learning capabilities of the"
+- "leveraging the Al and machine learning capabilities of the"
 
-    - "leveraging"
+- "leveraging"
 
-    - "the"
+- "the"
 
-    - "Al"
+- "Al"
 
-    - "and"
+- "and"
 
-    - "machine"
+- "machine"
 
-    - "learning"
+- "learning"
 
-    - "capabilities"
+- "capabilities"
 
-    - "of"
+- "of"
 
-    - "the"
+- "the"
 
-  - "intelligent cloud. As Al and other technologies continue to"
+- "intelligent cloud. As Al and other technologies continue to"
 
-    - "intelligent"
+- "intelligent"
 
-    - "cloud."
+- "cloud."
 
-    - "As"
+- "As"
 
-    - "Al"
+- "Al"
 
-    - "and"
+- "and"
 
-    - "other"
+- "other"
 
-    - "technologies"
+- "technologies"
 
-    - "continue"
+- "continue"
 
-    - "to"
+- "to"
 
-  - "advance, potential use cases will multiply. "Speed to value is"
+- "advance, potential use cases will multiply. "Speed to value is"
 
-    - "advance,"
+- "advance,"
 
-    - "potential"
+- "potential"
 
-    - "use"
+- "use"
 
-    - "cases"
+- "cases"
 
-    - "will"
+- "will"
 
-    - "multiply."
+- "multiply."
 
-    - ""Speed"
+- ""Speed"
 
-    - "to"
+- "to"
 
-    - "value"
+- "value"
 
-    - "is"
+- "is"
 
-  - "going to continue to accelerate," said Lawry."
+- "going to continue to accelerate," said Lawry."
 
-    - "going"
+- "going"
 
-    - "to"
+- "to"
 
-    - "continue"
+- "continue"
 
-    - "to"
+- "to"
 
-    - "accelerate,""
+- "accelerate,""
 
-    - "said"
+- "said"
 
-    - "Lawry."
+- "Lawry."
 
-  - "In addition to enhancing the patient experience,"
+- "In addition to enhancing the patient experience,"
 
-    - "In"
+- "In"
 
-    - "addition"
+- "addition"
 
-    - "to"
+- "to"
 
-    - "enhancing"
+- "enhancing"
 
-    - "the"
+- "the"
 
-    - "patient"
+- "patient"
 
-    - "experience,"
+- "experience,"
 
-  - "pharmaceutical and other life sciences companies can"
+- "pharmaceutical and other life sciences companies can"
 
-    - "pharmaceutical"
+- "pharmaceutical"
 
-    - "and"
+- "and"
 
-    - "other"
+- "other"
 
-    - "life"
+- "life"
 
-    - "sciences"
+- "sciences"
 
-    - "companies"
+- "companies"
 
-    - "can"
+- "can"
 
-  - "leverage advanced technologies to improve relationships with"
+- "leverage advanced technologies to improve relationships with"
 
-    - "leverage"
+- "leverage"
 
-    - "advanced"
+- "advanced"
 
-    - "technologies"
+- "technologies"
 
-    - "to"
+- "to"
 
-    - "improve"
+- "improve"
 
-    - "relationships"
+- "relationships"
 
-    - "with"
+- "with"
 
-  - "providers. For example, COVID-19 is driving changes in the"
+- "providers. For example, COVID-19 is driving changes in the"
 
-    - "providers."
+- "providers."
 
-    - "For"
+- "For"
 
-    - "example,"
+- "example,"
 
-    - "COVID-19"
+- "COVID-19"
 
-    - "is"
+- "is"
 
-    - "driving"
+- "driving"
 
-    - "changes"
+- "changes"
 
-    - "in"
+- "in"
 
-    - "the"
+- "the"
 
-  - "way companies interact with clinicians. Prior to COVID-19,"
+- "way companies interact with clinicians. Prior to COVID-19,"
 
-    - "way"
+- "way"
 
-    - "companies"
+- "companies"
 
-    - "interact"
+- "interact"
 
-    - "with"
+- "with"
 
-    - "clinicians."
+- "clinicians."
 
-    - "Prior"
+- "Prior"
 
-    - "to"
+- "to"
 
-    - "COVID-19,"
+- "COVID-19,"
 
-  - "75 percent of physicians preferred in-person sales visits from"
+- "75 percent of physicians preferred in-person sales visits from"
 
-    - "75"
+- "75"
 
-    - "percent"
+- "percent"
 
-    - "of"
+- "of"
 
-    - "physicians"
+- "physicians"
 
-    - "preferred"
+- "preferred"
 
-    - "in-person"
+- "in-person"
 
-    - "sales"
+- "sales"
 
-    - "visits"
+- "visits"
 
-    - "from"
+- "from"
 
-  - "medtech reps; likewise, 77 percent of physicians preferred in-"
+- "medtech reps; likewise, 77 percent of physicians preferred in-"
 
-    - "medtech"
+- "medtech"
 
-    - "reps;"
+- "reps;"
 
-    - "likewise,"
+- "likewise,"
 
-    - "77"
+- "77"
 
-    - "percent"
+- "percent"
 
-    - "of"
+- "of"
 
-    - "physicians"
+- "physicians"
 
-    - "preferred"
+- "preferred"
 
-    - "in-"
+- "in-"
 
-  - "person sales visits from pharma reps.3"
+- "person sales visits from pharma reps.3"
 
-    - "person"
+- "person"
 
-    - "sales"
+- "sales"
 
-    - "visits"
+- "visits"
 
-    - "from"
+- "from"
 
-    - "pharma"
+- "pharma"
 
-    - "reps.3"
+- "reps.3"
 
-  - "Since the advent of COVID-19, however, physician"
+- "Since the advent of COVID-19, however, physician"
 
-    - "Since"
+- "Since"
 
-    - "the"
+- "the"
 
-    - "advent"
+- "advent"
 
-    - "of"
+- "of"
 
-    - "COVID-19,"
+- "COVID-19,"
 
-    - "however,"
+- "however,"
 
-    - "physician"
+- "physician"
 
-  - "preferences are moving toward virtual visits. Only 53 percent"
+- "preferences are moving toward virtual visits. Only 53 percent"
 
-    - "preferences"
+- "preferences"
 
-    - "are"
+- "are"
 
-    - "moving"
+- "moving"
 
-    - "toward"
+- "toward"
 
-    - "virtual"
+- "virtual"
 
-    - "visits."
+- "visits."
 
-    - "Only"
+- "Only"
 
-    - "53"
+- "53"
 
-    - "percent"
+- "percent"
 
-  - "of physicians now express a preference for in-person visits"
+- "of physicians now express a preference for in-person visits"
 
-    - "of"
+- "of"
 
-    - "physicians"
+- "physicians"
 
-    - "now"
+- "now"
 
-    - "express"
+- "express"
 
-    - "a"
+- "a"
 
-    - "preference"
+- "preference"
 
-    - "for"
+- "for"
 
-    - "in-person"
+- "in-person"
 
-    - "visits"
+- "visits"
 
-  - "from medtech reps and only 40 percent prefer in-person visits"
+- "from medtech reps and only 40 percent prefer in-person visits"
 
-    - "from"
+- "from"
 
-    - "medtech"
+- "medtech"
 
-    - "reps"
+- "reps"
 
-    - "and"
+- "and"
 
-    - "only"
+- "only"
 
-    - "40"
+- "40"
 
-    - "percent"
+- "percent"
 
-    - "prefer"
+- "prefer"
 
-    - "in-person"
+- "in-person"
 
-    - "visits"
+- "visits"
 
-  - "from pharma reps. That puts the onus on pharmaceutical and"
+- "from pharma reps. That puts the onus on pharmaceutical and"
 
-    - "from"
+- "from"
 
-    - "pharma"
+- "pharma"
 
-    - "reps."
+- "reps."
 
-    - "That"
+- "That"
 
-    - "puts"
+- "puts"
 
-    - "the"
+- "the"
 
-    - "onus"
+- "onus"
 
-    - "on"
+- "on"
 
-    - "pharmaceutical"
+- "pharmaceutical"
 
-    - "and"
+- "and"
 
-  - "life sciences organizations to deliver valuable and engaging"
+- "life sciences organizations to deliver valuable and engaging"
 
-    - "life"
+- "life"
 
-    - "sciences"
+- "sciences"
 
-    - "organizations"
+- "organizations"
 
-    - "to"
+- "to"
 
-    - "deliver"
+- "deliver"
 
-    - "valuable"
+- "valuable"
 
-    - "and"
+- "and"
 
-    - "engaging"
+- "engaging"
 
-  - "virtual visits to providers."
+- "virtual visits to providers."
 
-    - "virtual"
+- "virtual"
 
-    - "visits"
+- "visits"
 
-    - "to"
+- "to"
 
-    - "providers."
+- "providers."
 
-  - "One way to do that is to leverage text analytics capabilities to"
+- "One way to do that is to leverage text analytics capabilities to"
 
-    - "One"
+- "One"
 
-    - "way"
+- "way"
 
-    - "to"
+- "to"
 
-    - "do"
+- "do"
 
-    - "that"
+- "that"
 
-    - "is"
+- "is"
 
-    - "to"
+- "to"
 
-    - "leverage"
+- "leverage"
 
-    - "text"
+- "text"
 
-    - "analytics"
+- "analytics"
 
-    - "capabilities"
+- "capabilities"
 
-    - "to"
+- "to"
 
-  - "enhance the provider information stored in the organization's"
+- "enhance the provider information stored in the organization's"
 
-    - "enhance"
+- "enhance"
 
-    - "the"
+- "the"
 
-    - "provider"
+- "provider"
 
-    - "information"
+- "information"
 
-    - "stored"
+- "stored"
 
-    - "in"
+- "in"
 
-    - "the"
+- "the"
 
-    - "organization's"
+- "organization's"
 
-  - "customer relationship management (CRM) system. For"
+- "customer relationship management (CRM) system. For"
 
-    - "customer"
+- "customer"
 
-    - "relationship"
+- "relationship"
 
-    - "management"
+- "management"
 
-    - "(CRM)"
+- "(CRM)"
 
-    - "system."
+- "system."
 
-    - "For"
+- "For"
 
-  - "example, a rep setting up a visit with 'Dr. X' could run text"
+- "example, a rep setting up a visit with 'Dr. X' could run text"
 
-    - "example,"
+- "example,"
 
-    - "a"
+- "a"
 
-    - "rep"
+- "rep"
 
-    - "setting"
+- "setting"
 
-    - "up"
+- "up"
 
-    - "a"
+- "a"
 
-    - "visit"
+- "visit"
 
-    - "with"
+- "with"
 
-    - "'Dr."
+- "'Dr."
 
-    - "X'"
+- "X'"
 
-    - "could"
+- "could"
 
-    - "run"
+- "run"
 
-    - "text"
+- "text"
 
-  - "analytics on publicly available resources on the web to identify"
+- "analytics on publicly available resources on the web to identify"
 
-    - "analytics"
+- "analytics"
 
-    - "on"
+- "on"
 
-    - "publicly"
+- "publicly"
 
-    - "available"
+- "available"
 
-    - "resources"
+- "resources"
 
-    - "on"
+- "on"
 
-    - "the"
+- "the"
 
-    - "web"
+- "web"
 
-    - "to"
+- "to"
 
-    - "identify"
+- "identify"
 
-  - "on which specific topics Dr. X has been writing about and"
+- "on which specific topics Dr. X has been writing about and"
 
-    - "on"
+- "on"
 
-    - "which"
+- "which"
 
-    - "specific"
+- "specific"
 
-    - "topics"
+- "topics"
 
-    - "Dr."
+- "Dr."
 
-    - "X"
+- "X"
 
-    - "has"
+- "has"
 
-    - "been"
+- "been"
 
-    - "writing"
+- "writing"
 
-    - "about"
+- "about"
 
-    - "and"
+- "and"
 
-  - "commenting. "All kinds of publicly available information can"
+- "commenting. "All kinds of publicly available information can"
 
-    - "commenting."
+- "commenting."
 
-    - ""All"
+- ""All"
 
-    - "kinds"
+- "kinds"
 
-    - "of"
+- "of"
 
-    - "publicly"
+- "publicly"
 
-    - "available"
+- "available"
 
-    - "information"
+- "information"
 
-    - "can"
+- "can"
 
-  - "All kinds of publicly"
+- "All kinds of publicly"
 
-    - "All"
+- "All"
 
-    - "kinds"
+- "kinds"
 
-    - "of"
+- "of"
 
-    - "publicly"
+- "publicly"
 
-  - "available information"
+- "available information"
 
-    - "available"
+- "available"
 
-    - "information"
+- "information"
 
-  - "can be mined with text"
+- "can be mined with text"
 
-    - "can"
+- "can"
 
-    - "be"
+- "be"
 
-    - "mined"
+- "mined"
 
-    - "with"
+- "with"
 
-    - "text"
+- "text"
 
-  - "analytics technology,"
+- "analytics technology,"
 
-    - "analytics"
+- "analytics"
 
-    - "technology,"
+- "technology,"
 
-  - "which can be used to arm the"
+- "which can be used to arm the"
 
-    - "which"
+- "which"
 
-    - "can"
+- "can"
 
-    - "be"
+- "be"
 
-    - "used"
+- "used"
 
-    - "to"
+- "to"
 
-    - "arm"
+- "arm"
 
-    - "the"
+- "the"
 
-  - "sales rep with relevant information even"
+- "sales rep with relevant information even"
 
-    - "sales"
+- "sales"
 
-    - "rep"
+- "rep"
 
-    - "with"
+- "with"
 
-    - "relevant"
+- "relevant"
 
-    - "information"
+- "information"
 
-    - "even"
+- "even"
 
-  - "before he or she meets the doctor. It's a"
+- "before he or she meets the doctor. It's a"
 
-    - "before"
+- "before"
 
-    - "he"
+- "he"
 
-    - "or"
+- "or"
 
-    - "she"
+- "she"
 
-    - "meets"
+- "meets"
 
-    - "the"
+- "the"
 
-    - "doctor."
+- "doctor."
 
-    - "It's"
+- "It's"
 
-    - "a"
+- "a"
 
-  - "totally different, digital game now.""
+- "totally different, digital game now.""
 
-    - "totally"
+- "totally"
 
-    - "different,"
+- "different,"
 
-    - "digital"
+- "digital"
 
-    - "game"
+- "game"
 
-    - "now.""
+- "now.""
 
-  - "KEREN PRIYADARSHINI | Regional Business Lead - Asia,"
+- "KEREN PRIYADARSHINI | Regional Business Lead - Asia,"
 
-    - "KEREN"
+- "KEREN"
 
-    - "PRIYADARSHINI"
+- "PRIYADARSHINI"
 
-    - "|"
+- "|"
 
-    - "Regional"
+- "Regional"
 
-    - "Business"
+- "Business"
 
-    - "Lead"
+- "Lead"
 
-    - "-"
+- "-"
 
-    - "Asia,"
+- "Asia,"
 
-  - "Worldwide Health | Microsoft"
+- "Worldwide Health | Microsoft"
 
-    - "Worldwide"
+- "Worldwide"
 
-    - "Health"
+- "Health"
 
-    - "|"
+- "|"
 
-    - "Microsoft"
+- "Microsoft"
 
-  - "EMBRACING DIGITAL TRANSFORMATION IN LIFE SCIENCES ORGANIZATIONS"
+- "EMBRACING DIGITAL TRANSFORMATION IN LIFE SCIENCES ORGANIZATIONS"
 
-    - "EMBRACING"
+- "EMBRACING"
 
-    - "DIGITAL"
+- "DIGITAL"
 
-    - "TRANSFORMATION"
+- "TRANSFORMATION"
 
-    - "IN"
+- "IN"
 
-    - "LIFE"
+- "LIFE"
 
-    - "SCIENCES"
+- "SCIENCES"
 
-    - "ORGANIZATIONS"
+- "ORGANIZATIONS"
 
-  - "2"
+- "2"
 
-    - "2"
+- "2"
 
 Languages:
 
 - Found language: undefined (confidence: 0.95)
 
-  - "While healthcare is still in the early stages of its Al journey, we are seeing pharmaceutical and other life sciences organizations"
+- "While healthcare is still in the early stages of its Al journey, we are seeing pharmaceutical and other life sciences organizations"
 
-  - "in and deploy advanced technologies, they are beginning to see"
+- "in and deploy advanced technologies, they are beginning to see"
 
-  - "are looking to incorporate automation and continuing smart"
+- "are looking to incorporate automation and continuing smart"
 
-  - "and development, and manufacturing and supply chain management. Many life sciences organizations are also choosing to stay with more virtual approaches in the \"new normal\" -"
+- "and development, and manufacturing and supply chain management. Many life sciences organizations are also choosing to stay with more virtual approaches in the \"new normal\" -"
 
-  - "Clinical trial sponsors are continually seeking to make clinical"
+- "Clinical trial sponsors are continually seeking to make clinical"
 
-  - "adoption of decentralized clinical trials, with an increase in"
+- "adoption of decentralized clinical trials, with an increase in"
 
-  - "satisfaction with telemedicine. In the same report, 72 percent of"
+- "satisfaction with telemedicine. In the same report, 72 percent of"
 
-  - "convenience has also broadened trial access to reach a broader,"
+- "convenience has also broadened trial access to reach a broader,"
 
-  - "Now, suddenly, patients are feeling empowered by technology."
+- "Now, suddenly, patients are feeling empowered by technology."
 
-  - "Type 1 diabetes to predict and prevent the low levels of blood"
+- "Type 1 diabetes to predict and prevent the low levels of blood"
 
-  - "chronic disease management and eliminating the need for"
+- "chronic disease management and eliminating the need for"
 
-  - "Tandem was able to create and deploy this innovation by"
+- "Tandem was able to create and deploy this innovation by"
 
-  - "advance, potential use cases will multiply. \"Speed to value is"
+- "advance, potential use cases will multiply. \"Speed to value is"
 
-  - "In addition to enhancing the patient experience,"
+- "In addition to enhancing the patient experience,"
 
-  - "leverage advanced technologies to improve relationships with providers. For example, COVID-19 is driving changes in the way companies interact with clinicians. Prior to COVID-19, 75 percent of physicians preferred in-person sales visits from medtech reps; likewise, 77 percent of physicians preferred in-"
+- "leverage advanced technologies to improve relationships with providers. For example, COVID-19 is driving changes in the way companies interact with clinicians. Prior to COVID-19, 75 percent of physicians preferred in-person sales visits from medtech reps; likewise, 77 percent of physicians preferred in-"
 
-  - "preferences are moving toward virtual visits. Only 53 percent"
+- "preferences are moving toward virtual visits. Only 53 percent"
 
-  - "from pharma reps. That puts the onus on pharmaceutical and life sciences organizations to deliver valuable and engaging virtual visits to providers."
+- "from pharma reps. That puts the onus on pharmaceutical and life sciences organizations to deliver valuable and engaging virtual visits to providers."
 
-  - "enhance the provider information stored in the organization's"
+- "enhance the provider information stored in the organization's"
 
-  - "All kinds of publicly"
+- "All kinds of publicly"
 
-  - "can be mined with text"
+- "can be mined with text"
 
-  - "sales rep with relevant information even"
+- "sales rep with relevant information even"
 
-  - "totally different, digital game now.\""
+- "totally different, digital game now.\""
 
 - Found language: undefined (confidence: 0.8)
 
-  - "making major investments in Al and related technologies.\""
+- "making major investments in Al and related technologies.\""
 
-  - "factory investments to reduce costs in drug discovery, research"
+- "factory investments to reduce costs in drug discovery, research"
 
-  - "physicians. The COVID-19 pandemic has accelerated the"
+- "physicians. The COVID-19 pandemic has accelerated the"
 
-  - "a myriad of evolving technologies and services (e.g., electronic consent, telehealth and remote patient monitoring). The aim"
+- "a myriad of evolving technologies and services (e.g., electronic consent, telehealth and remote patient monitoring). The aim"
 
-  - "customer relationship management (CRM) system. For"
+- "customer relationship management (CRM) system. For"
 
 - Found language: undefined (confidence: 0.7)
 
-  - "TOM LAWRY | National Director for Al, Health and Life Sciences | Microsoft"
+- "TOM LAWRY | National Director for Al, Health and Life Sciences | Microsoft"
 
-  - "constant finger pricks to check glucose levels."
+- "constant finger pricks to check glucose levels."
 
-  - "EMBRACING DIGITAL TRANSFORMATION IN LIFE SCIENCES ORGANIZATIONS"
+- "EMBRACING DIGITAL TRANSFORMATION IN LIFE SCIENCES ORGANIZATIONS"
 
 - Found language: undefined (confidence: 0.9)
 
-  - "As pharmaceutical and other life sciences organizations invest"
+- "As pharmaceutical and other life sciences organizations invest"
 
-  - "more diverse patient population."
+- "more diverse patient population."
 
-  - "Health, Microsoft. \"It used to be that physicians were key."
+- "Health, Microsoft. \"It used to be that physicians were key."
 
-  - "insulin pump with Basal-IQ technology enables patients with"
+- "insulin pump with Basal-IQ technology enables patients with"
 
-  - "updatable pump improves the patient experience by automating"
+- "updatable pump improves the patient experience by automating"
 
-  - "leveraging the Al and machine learning capabilities of the intelligent cloud. As Al and other technologies continue to"
+- "leveraging the Al and machine learning capabilities of the intelligent cloud. As Al and other technologies continue to"
 
-  - "of physicians now express a preference for in-person visits"
+- "of physicians now express a preference for in-person visits"
 
-  - "One way to do that is to leverage text analytics capabilities to"
+- "One way to do that is to leverage text analytics capabilities to"
 
 - Found language: undefined (confidence: 1)
 
-  - "benefits in diverse areas across their organizations. Companies"
+- "benefits in diverse areas across their organizations. Companies"
 
-  - "Enhancing the patient and provider experience"
+- "Enhancing the patient and provider experience"
 
-  - "trials faster and to improve the experience for patients and"
+- "trials faster and to improve the experience for patients and"
 
-  - "trial activities conducted remotely and in participants' homes."
+- "trial activities conducted remotely and in participants' homes."
 
-  - "The shift of trial activities closer to patients has been enabled by"
+- "The shift of trial activities closer to patients has been enabled by"
 
-  - "\"It's an interesting and exciting time right now,\" said Keren"
+- "\"It's an interesting and exciting time right now,\" said Keren"
 
-  - "intelligent cloud to directly affect the patient experience is the"
+- "intelligent cloud to directly affect the patient experience is the"
 
-  - "example, a rep setting up a visit with 'Dr. X' could run text"
+- "example, a rep setting up a visit with 'Dr. X' could run text"
 
-  - "on which specific topics Dr. X has been writing about and"
+- "on which specific topics Dr. X has been writing about and"
 
-  - "available information"
+- "available information"
 
-  - "analytics technology,\nwhich can be used to arm the"
+- "analytics technology,\nwhich can be used to arm the"
 
-  - "before he or she meets the doctor. It's a"
+- "before he or she meets the doctor. It's a"
 
 - Found language: undefined (confidence: 0.99)
 
-  - "particularly in clinical trials and sales and marketing areas."
+- "particularly in clinical trials and sales and marketing areas."
 
-  - "In a Mckinsey survey1 up to 98 percent of patients reported"
+- "In a Mckinsey survey1 up to 98 percent of patients reported"
 
-  - "physicians surveyed reported similar or better experiences with remote engagement compared with in-person visits."
+- "physicians surveyed reported similar or better experiences with remote engagement compared with in-person visits."
 
-  - "to use technology to improve the patient experience and"
+- "to use technology to improve the patient experience and"
 
-  - "Pharmaceutical companies and other life sciences companies are realizing they have to pay attention to the patient experience in addition to the physician experience.\"\nEnhanced patient experiences can be delivered in many different ways. One example of a life sciences product that leverages the"
+- "Pharmaceutical companies and other life sciences companies are realizing they have to pay attention to the patient experience in addition to the physician experience.\"\nEnhanced patient experiences can be delivered in many different ways. One example of a life sciences product that leverages the"
 
-  - "going to continue to accelerate,\" said Lawry."
+- "going to continue to accelerate,\" said Lawry."
 
-  - "pharmaceutical and other life sciences companies can"
+- "pharmaceutical and other life sciences companies can"
 
-  - "person sales visits from pharma reps.3\nSince the advent of COVID-19, however, physician"
+- "person sales visits from pharma reps.3\nSince the advent of COVID-19, however, physician"
 
-  - "from medtech reps and only 40 percent prefer in-person visits"
+- "from medtech reps and only 40 percent prefer in-person visits"
 
-  - "analytics on publicly available resources on the web to identify"
+- "analytics on publicly available resources on the web to identify"
 
-  - "commenting. \"All kinds of publicly available information can"
+- "commenting. \"All kinds of publicly available information can"
 
 - Found language: undefined (confidence: 0.6)
 
-  - "Priyadarshini, Regional Business Lead - Asia, Worldwide"
+- "Priyadarshini, Regional Business Lead - Asia, Worldwide"
 
-  - "sugar that cause hypoglycemia.2 The algorithm-driven, software-"
+- "sugar that cause hypoglycemia.2 The algorithm-driven, software-"
 
 - Found language: undefined (confidence: 0.4)
 
-  - "Tandem® Diabetes Care insulin pump. The Tandem® t:slim X2"
+- "Tandem® Diabetes Care insulin pump. The Tandem® t:slim X2"
 
-  - "Worldwide Health | Microsoft"
+- "Worldwide Health | Microsoft"
 
 - Found language: undefined (confidence: 0.2)
 
-  - "KEREN PRIYADARSHINI | Regional Business Lead - Asia,"
+- "KEREN PRIYADARSHINI | Regional Business Lead - Asia,"
 
 No text styles were extracted from the document.
