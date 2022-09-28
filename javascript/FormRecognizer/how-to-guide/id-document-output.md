@@ -1,15 +1,21 @@
-CountryRegion: 'USA', with confidence 0.995
+Extracted a Driver License:
 
-Date Of Birth: '3/23/1988 12:00:00 AM +00:00', with confidence 0.99
+Name: CHRIS SMITH
 
-Date Of Expiration: '3/23/2026 12:00:00 AM +00:00', with confidence 0.99
+License No.: 034568
 
-Document Number: '034568', with confidence 0.99
+Date of Birth: 03/23/1988
 
-First Name: 'CHRIS', with confidence 0.989
+Expiration: 03/23/2026
 
-Last Name: 'SMITH', with confidence 0.989
+Height: 5'11"
 
-Region: 'West Virginia', with confidence 0.99
+Weight: 185LB
 
-Sex: 'M', with confidence 0.99
+Eye color: BLU
+
+Restrictions: NONE
+
+Endorsements: NONE
+
+Class: A
