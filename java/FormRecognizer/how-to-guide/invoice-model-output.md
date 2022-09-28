@@ -1,29 +1,25 @@
-Document 0:
+----------- Analyzing invoice  0 -----------
 
-Vendor Name: 'CONTOSO LTD.', with confidence 0.925
+Vendor Name: CONTOSO LTD., confidence: 0.93
 
-Customer Name: 'MICROSOFT CORPORATION', with confidence 0.908
+Customer Name: MICROSOFT CORPORATION, confidence: 0.91
 
-Item:
+Customer Address Recipient: Microsoft Corp, confidence: 0.93
 
-Description: 'Consulting Services', with confidence 0.951
+Invoice ID: INV-100, confidence: 0.97
 
-Amount: '$60', with confidence 0.967
+Invoice Date: 2019-11-15, confidence: 0.97
 
-Item:
+Invoice Items:
 
-Description: 'Document Fee', with confidence 0.951
+Description: Consulting Services, confidence: 0.95s
 
-Amount: '$30', with confidence 0.967
+Quantity: 2.000000, confidence: 0.97
 
-Item:
+Description: Document Fee, confidence: 0.95s
 
-Description: 'Printing Fee', with confidence 0.951
+Quantity: 3.000000, confidence: 0.97
 
-Amount: '$10', with confidence 0.967
+Description: Printing Fee, confidence: 0.95s
 
-Sub Total: '$100', with confidence 0.968
-
-Total Tax: '$10', with confidence 0.959
-
-Invoice Total: '$110', with confidence 0.945
+Quantity: 10.000000, confidence: 0.97
