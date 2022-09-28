@@ -1,1343 +1,623 @@
-Document Page 1 has 91 line(s), 173 word(s),
+Page has width: 909.00 and height: 1177.00, measured with unit: pixel
 
-and 2 selection mark(s).
+Line Liberty's Delightful Sinful Bakery & Caf∩┐╜ is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@39fc6b2c, com.azure.ai.formrecognizer.documentanalysis.models.Point@704b2127, com.azure.ai.formrecognizer.documentanalysis.models.Point@3ee39da0, com.azure.ai.formrecognizer.documentanalysis.models.Point@5d332969].
 
-Line 0 has content: 'Liberty's Delightful Sinful Bakery & Café'.
+Line 765 Halifax St. Clearwater, FL 33756 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@7cc9ce8, com.azure.ai.formrecognizer.documentanalysis.models.Point@2e27d72f, com.azure.ai.formrecognizer.documentanalysis.models.Point@c0b41d6, com.azure.ai.formrecognizer.documentanalysis.models.Point@4837595f].
 
-Its bounding polygon (points ordered clockwise):
+Line D is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@2bffa76d, com.azure.ai.formrecognizer.documentanalysis.models.Point@3b718392, com.azure.ai.formrecognizer.documentanalysis.models.Point@6d2260db, com.azure.ai.formrecognizer.documentanalysis.models.Point@1f2d2181].
 
-Point 0 => X: 46, Y: 49
+Line Our reference: 3456623 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@49bf29c6, com.azure.ai.formrecognizer.documentanalysis.models.Point@7ee55e70, com.azure.ai.formrecognizer.documentanalysis.models.Point@3fcdcf, com.azure.ai.formrecognizer.documentanalysis.models.Point@7668d560].
 
-Point 1 => X: 364, Y: 49
+Line Your reference: 2334566 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@46292372, com.azure.ai.formrecognizer.documentanalysis.models.Point@126be319, com.azure.ai.formrecognizer.documentanalysis.models.Point@6c44052e, com.azure.ai.formrecognizer.documentanalysis.models.Point@5c371e13].
 
-Point 2 => X: 364, Y: 69
+Line Received from: is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@530a8454, com.azure.ai.formrecognizer.documentanalysis.models.Point@1e34c607, com.azure.ai.formrecognizer.documentanalysis.models.Point@5215cd9a, com.azure.ai.formrecognizer.documentanalysis.models.Point@36b6964d].
 
-Point 3 => X: 46, Y: 69
+Line 8556 Indian Summer Ave. is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@31198ceb, com.azure.ai.formrecognizer.documentanalysis.models.Point@9257031, com.azure.ai.formrecognizer.documentanalysis.models.Point@75201592, com.azure.ai.formrecognizer.documentanalysis.models.Point@7726e185].
 
-Line 1 has content: '765 Halifax St. Clearwater, FL 33756'.
+Line New Haven, CT 06511 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@aa5455e, com.azure.ai.formrecognizer.documentanalysis.models.Point@282308c3, com.azure.ai.formrecognizer.documentanalysis.models.Point@5dda14d0, com.azure.ai.formrecognizer.documentanalysis.models.Point@1db0ec27].
 
-Its bounding polygon (points ordered clockwise):
+Line Liberty booking contact is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@3d9fc57a, com.azure.ai.formrecognizer.documentanalysis.models.Point@d4ab71a, com.azure.ai.formrecognizer.documentanalysis.models.Point@3b4ef7, com.azure.ai.formrecognizer.documentanalysis.models.Point@1af05b03].
 
-Point 0 => X: 48, Y: 69
+Line 40 River Street is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@5987e932, com.azure.ai.formrecognizer.documentanalysis.models.Point@1ad777f, com.azure.ai.formrecognizer.documentanalysis.models.Point@5bbbdd4b, com.azure.ai.formrecognizer.documentanalysis.models.Point@438bad7c].
 
-Point 1 => X: 320, Y: 69
+Line East Northport, NY 11731 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@25230246, com.azure.ai.formrecognizer.documentanalysis.models.Point@4fdf8f12, com.azure.ai.formrecognizer.documentanalysis.models.Point@4a8b5227, com.azure.ai.formrecognizer.documentanalysis.models.Point@54f5f647].
 
-Point 2 => X: 320, Y: 88
+Line Name Summer River is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@6979efad, com.azure.ai.formrecognizer.documentanalysis.models.Point@5a6d5a8f, com.azure.ai.formrecognizer.documentanalysis.models.Point@4a67318f, com.azure.ai.formrecognizer.documentanalysis.models.Point@315ba14a].
 
-Point 3 => X: 48, Y: 88
+Line Tel. 34456632 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@17f9344b, com.azure.ai.formrecognizer.documentanalysis.models.Point@27f0ad19, com.azure.ai.formrecognizer.documentanalysis.models.Point@54e81b21, com.azure.ai.formrecognizer.documentanalysis.models.Point@38d5b107].
 
-Line 2 has content: 'D'.
+Line E-mail email6@libertydelightfulsinful.com is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@6650813a, com.azure.ai.formrecognizer.documentanalysis.models.Point@44ea608c, com.azure.ai.formrecognizer.documentanalysis.models.Point@50cf5a23, com.azure.ai.formrecognizer.documentanalysis.models.Point@450794b4].
 
-Its bounding polygon (points ordered clockwise):
+Line Booking Confirmation - ORIGINAL is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@273c947f, com.azure.ai.formrecognizer.documentanalysis.models.Point@30457e14, com.azure.ai.formrecognizer.documentanalysis.models.Point@1af1347d, com.azure.ai.formrecognizer.documentanalysis.models.Point@632aa1a3].
 
-Point 0 => X: 826, Y: 59
+Line Our reference: is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@20765ed5, com.azure.ai.formrecognizer.documentanalysis.models.Point@3b582111, com.azure.ai.formrecognizer.documentanalysis.models.Point@2899a8db, com.azure.ai.formrecognizer.documentanalysis.models.Point@1e8823d2].
 
-Point 1 => X: 840, Y: 60
+Line 3456623 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@c1a4620, com.azure.ai.formrecognizer.documentanalysis.models.Point@76b0ae1b, com.azure.ai.formrecognizer.documentanalysis.models.Point@130a0f66, com.azure.ai.formrecognizer.documentanalysis.models.Point@4c432866].
 
-Point 2 => X: 840, Y: 87
+Line Your reference: is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@12365c88, com.azure.ai.formrecognizer.documentanalysis.models.Point@6105f8a3, com.azure.ai.formrecognizer.documentanalysis.models.Point@2237bada, com.azure.ai.formrecognizer.documentanalysis.models.Point@77e2a6e2].
 
-Point 3 => X: 825, Y: 87
+Line 2334566 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@5710768a, com.azure.ai.formrecognizer.documentanalysis.models.Point@199e4c2b, com.azure.ai.formrecognizer.documentanalysis.models.Point@6e0d4a8, com.azure.ai.formrecognizer.documentanalysis.models.Point@64d7b720].
 
-Line 3 has content: 'Our reference: 3456623'.
+Line BL/NO: is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@30272916, com.azure.ai.formrecognizer.documentanalysis.models.Point@5bb3d42d, com.azure.ai.formrecognizer.documentanalysis.models.Point@5bf61e67, com.azure.ai.formrecognizer.documentanalysis.models.Point@2c1dc8e].
 
-Its bounding polygon (points ordered clockwise):
+Line EURH234 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@b273a59, com.azure.ai.formrecognizer.documentanalysis.models.Point@4e7095ac, com.azure.ai.formrecognizer.documentanalysis.models.Point@251ebf23, com.azure.ai.formrecognizer.documentanalysis.models.Point@29b732a2].
 
-Point 0 => X: 46, Y: 102
+Line Summary: is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@1b70203f, com.azure.ai.formrecognizer.documentanalysis.models.Point@51671b08, com.azure.ai.formrecognizer.documentanalysis.models.Point@15051a0, com.azure.ai.formrecognizer.documentanalysis.models.Point@1162410a].
 
-Point 1 => X: 208, Y: 101
+Line 45∩┐╜72 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@b09fac1, com.azure.ai.formrecognizer.documentanalysis.models.Point@62df0ff3, com.azure.ai.formrecognizer.documentanalysis.models.Point@61019f59, com.azure.ai.formrecognizer.documentanalysis.models.Point@62e8f862].
 
-Point 2 => X: 208, Y: 118
+Line Export: is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@26f3d90c, com.azure.ai.formrecognizer.documentanalysis.models.Point@3c49fab6, com.azure.ai.formrecognizer.documentanalysis.models.Point@515f4131, com.azure.ai.formrecognizer.documentanalysis.models.Point@74518890].
 
-Point 3 => X: 46, Y: 118
+Line Common is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@4c5204af, com.azure.ai.formrecognizer.documentanalysis.models.Point@3f3ddbd9, com.azure.ai.formrecognizer.documentanalysis.models.Point@14c053c6, com.azure.ai.formrecognizer.documentanalysis.models.Point@6c2d4cc6].
 
-Line 4 has content: 'Your reference: 2334566'.
+Line Export empty pick up depot(s) is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@30865a90, com.azure.ai.formrecognizer.documentanalysis.models.Point@6134ac4a, com.azure.ai.formrecognizer.documentanalysis.models.Point@777c9dc9, com.azure.ai.formrecognizer.documentanalysis.models.Point@71b1a49c].
 
-Its bounding polygon (points ordered clockwise):
+Line 97 Morris Lane is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@73e132e0, com.azure.ai.formrecognizer.documentanalysis.models.Point@3773862a, com.azure.ai.formrecognizer.documentanalysis.models.Point@2472c7d8, com.azure.ai.formrecognizer.documentanalysis.models.Point@589b028e].
 
-Point 0 => X: 255, Y: 102
+Line Sterling Heights, MI 48310 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@22175d4f, com.azure.ai.formrecognizer.documentanalysis.models.Point@9fecdf1, com.azure.ai.formrecognizer.documentanalysis.models.Point@3b809711, com.azure.ai.formrecognizer.documentanalysis.models.Point@3b0f7d9d].
 
-Point 1 => X: 424, Y: 101
+Line Booking date: is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@236ab296, com.azure.ai.formrecognizer.documentanalysis.models.Point@5c84624f, com.azure.ai.formrecognizer.documentanalysis.models.Point@63034ed1, com.azure.ai.formrecognizer.documentanalysis.models.Point@232024b9].
 
-Point 2 => X: 424, Y: 118
+Line 05-Dec-2018 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@55a8dc49, com.azure.ai.formrecognizer.documentanalysis.models.Point@2a415aa9, com.azure.ai.formrecognizer.documentanalysis.models.Point@53cdecf6, com.azure.ai.formrecognizer.documentanalysis.models.Point@71ea1fda].
 
-Point 3 => X: 255, Y: 118
+Line Contract No: is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@62b3df3a, com.azure.ai.formrecognizer.documentanalysis.models.Point@420745d7, com.azure.ai.formrecognizer.documentanalysis.models.Point@7e11ab3d, com.azure.ai.formrecognizer.documentanalysis.models.Point@5fa47fea].
 
-Line 5 has content: 'Received from:'.
+Line 334566 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@2392212b, com.azure.ai.formrecognizer.documentanalysis.models.Point@5b43e173, com.azure.ai.formrecognizer.documentanalysis.models.Point@28f8e165, com.azure.ai.formrecognizer.documentanalysis.models.Point@545f80bf].
 
-Its bounding polygon (points ordered clockwise):
+Line Opt. A is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@66f66866, com.azure.ai.formrecognizer.documentanalysis.models.Point@22fa55b2, com.azure.ai.formrecognizer.documentanalysis.models.Point@4d666b41, com.azure.ai.formrecognizer.documentanalysis.models.Point@6594402a].
 
-Point 0 => X: 48, Y: 168
+Line Opt. B is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@30f4b1a6, com.azure.ai.formrecognizer.documentanalysis.models.Point@405325cf, com.azure.ai.formrecognizer.documentanalysis.models.Point@3e1162e7, com.azure.ai.formrecognizer.documentanalysis.models.Point@79c3f01f].
 
-Point 1 => X: 169, Y: 168
+Line From is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@6c2f1700, com.azure.ai.formrecognizer.documentanalysis.models.Point@350b3a17, com.azure.ai.formrecognizer.documentanalysis.models.Point@38600b, com.azure.ai.formrecognizer.documentanalysis.models.Point@669d2b1b].
 
-Point 2 => X: 169, Y: 186
+Line To is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@721eb7df, com.azure.ai.formrecognizer.documentanalysis.models.Point@1ea9f009, com.azure.ai.formrecognizer.documentanalysis.models.Point@5d52e3ef, com.azure.ai.formrecognizer.documentanalysis.models.Point@5298dead].
 
-Point 3 => X: 48, Y: 186
+Line By is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@553f3b6e, com.azure.ai.formrecognizer.documentanalysis.models.Point@4c7a078, com.azure.ai.formrecognizer.documentanalysis.models.Point@4e406694, com.azure.ai.formrecognizer.documentanalysis.models.Point@5ab9b447].
 
-Line 6 has content: '8556 Indian Summer Ave.'.
+Line ETD is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@76f10035, com.azure.ai.formrecognizer.documentanalysis.models.Point@4f8caaf3, com.azure.ai.formrecognizer.documentanalysis.models.Point@2b50150, com.azure.ai.formrecognizer.documentanalysis.models.Point@15b986cd].
 
-Its bounding polygon (points ordered clockwise):
+Line ETA is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@6bb7cce7, com.azure.ai.formrecognizer.documentanalysis.models.Point@41c62850, com.azure.ai.formrecognizer.documentanalysis.models.Point@6b530eb9, com.azure.ai.formrecognizer.documentanalysis.models.Point@328572f0].
 
-Point 0 => X: 47, Y: 188
+Line 118 Queen Street is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@678040b3, com.azure.ai.formrecognizer.documentanalysis.models.Point@17f460bb, com.azure.ai.formrecognizer.documentanalysis.models.Point@64a1923a, com.azure.ai.formrecognizer.documentanalysis.models.Point@7d2a6eac].
 
-Point 1 => X: 238, Y: 188
+Line Hoboken, NJ 07030 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@18ca3c62, com.azure.ai.formrecognizer.documentanalysis.models.Point@2c0f7678, com.azure.ai.formrecognizer.documentanalysis.models.Point@44d70181, com.azure.ai.formrecognizer.documentanalysis.models.Point@6aa648b9].
 
-Point 2 => X: 238, Y: 207
+Line 52 West Trenton St. is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@23c650a3, com.azure.ai.formrecognizer.documentanalysis.models.Point@742d4e15, com.azure.ai.formrecognizer.documentanalysis.models.Point@88a8218, com.azure.ai.formrecognizer.documentanalysis.models.Point@50b1f030].
 
-Point 3 => X: 47, Y: 206
+Line Harleysville, PA is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@4163f1cd, com.azure.ai.formrecognizer.documentanalysis.models.Point@5fa05212, com.azure.ai.formrecognizer.documentanalysis.models.Point@3e681bc, com.azure.ai.formrecognizer.documentanalysis.models.Point@5c09d180].
 
-Line 7 has content: 'New Haven, CT 06511'.
+Line 19438 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@23aae55, com.azure.ai.formrecognizer.documentanalysis.models.Point@5f574cc2, com.azure.ai.formrecognizer.documentanalysis.models.Point@680bddf5, com.azure.ai.formrecognizer.documentanalysis.models.Point@7a9c84a5].
 
-Its bounding polygon (points ordered clockwise):
+Line cause science slow is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@2d83c5a5, com.azure.ai.formrecognizer.documentanalysis.models.Point@48d7ad8b, com.azure.ai.formrecognizer.documentanalysis.models.Point@7e053511, com.azure.ai.formrecognizer.documentanalysis.models.Point@60222fd8].
 
-Point 0 => X: 47, Y: 208
+Line 09-Dec-2018 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@53bf7094, com.azure.ai.formrecognizer.documentanalysis.models.Point@26f1249d, com.azure.ai.formrecognizer.documentanalysis.models.Point@710b30ef, com.azure.ai.formrecognizer.documentanalysis.models.Point@a68df9].
 
-Point 1 => X: 216, Y: 208
+Line 19:00 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@28b576a9, com.azure.ai.formrecognizer.documentanalysis.models.Point@7cf7aee, com.azure.ai.formrecognizer.documentanalysis.models.Point@2f6bbeb0, com.azure.ai.formrecognizer.documentanalysis.models.Point@1b1637e1].
 
-Point 2 => X: 216, Y: 226
+Line 09-Dec-2020 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@18151a14, com.azure.ai.formrecognizer.documentanalysis.models.Point@64711bf2, com.azure.ai.formrecognizer.documentanalysis.models.Point@169da7f2, com.azure.ai.formrecognizer.documentanalysis.models.Point@3c1e23ff].
 
-Point 3 => X: 47, Y: 227
+Line 11:00 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@ceb4bd2, com.azure.ai.formrecognizer.documentanalysis.models.Point@60297f36, com.azure.ai.formrecognizer.documentanalysis.models.Point@1bf0f6f6, com.azure.ai.formrecognizer.documentanalysis.models.Point@56bc3fac].
 
-Line 8 has content: 'Liberty booking contact'.
+Line 9 Ketch Harbour is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@df4b72, com.azure.ai.formrecognizer.documentanalysis.models.Point@2ba45490, com.azure.ai.formrecognizer.documentanalysis.models.Point@37ff4054, com.azure.ai.formrecognizer.documentanalysis.models.Point@894858].
 
-Its bounding polygon (points ordered clockwise):
+Line Ave. is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@7af707e0, com.azure.ai.formrecognizer.documentanalysis.models.Point@737edcfa, com.azure.ai.formrecognizer.documentanalysis.models.Point@3ecedf21, com.azure.ai.formrecognizer.documentanalysis.models.Point@74cf8b28].
 
-Point 0 => X: 599, Y: 174
+Line Vincentown, NJ is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@36c54a56, com.azure.ai.formrecognizer.documentanalysis.models.Point@3359c978, com.azure.ai.formrecognizer.documentanalysis.models.Point@7ba63fe5, com.azure.ai.formrecognizer.documentanalysis.models.Point@73386d72].
 
-Point 1 => X: 790, Y: 174
+Line 75 Fawn Street is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@6f330eb9, com.azure.ai.formrecognizer.documentanalysis.models.Point@125c082e, com.azure.ai.formrecognizer.documentanalysis.models.Point@584f5497, com.azure.ai.formrecognizer.documentanalysis.models.Point@68ace111].
 
-Point 2 => X: 790, Y: 193
+Line Peabody, MA 01960 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@1f9d6c7b, com.azure.ai.formrecognizer.documentanalysis.models.Point@6df20ade, com.azure.ai.formrecognizer.documentanalysis.models.Point@4fbb001b, com.azure.ai.formrecognizer.documentanalysis.models.Point@4010d494].
 
-Point 3 => X: 599, Y: 193
+Line tone late spoken is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@341a8659, com.azure.ai.formrecognizer.documentanalysis.models.Point@4943defe, com.azure.ai.formrecognizer.documentanalysis.models.Point@5eefa415, com.azure.ai.formrecognizer.documentanalysis.models.Point@181d7f28].
 
-Line 9 has content: '40 River Street'.
+Line 12-Dec-2018 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@78d50a3c, com.azure.ai.formrecognizer.documentanalysis.models.Point@2fb69ff6, com.azure.ai.formrecognizer.documentanalysis.models.Point@cda4919, com.azure.ai.formrecognizer.documentanalysis.models.Point@7f4d9395].
 
-Its bounding polygon (points ordered clockwise):
+Line 10:00 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@2f19f2aa, com.azure.ai.formrecognizer.documentanalysis.models.Point@344b8190, com.azure.ai.formrecognizer.documentanalysis.models.Point@6a078481, com.azure.ai.formrecognizer.documentanalysis.models.Point@79c5636f].
 
-Point 0 => X: 600, Y: 195
+Line 19-Dec-2020 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@1929425f, com.azure.ai.formrecognizer.documentanalysis.models.Point@718607eb, com.azure.ai.formrecognizer.documentanalysis.models.Point@27f3b6d6, com.azure.ai.formrecognizer.documentanalysis.models.Point@757f675c].
 
-Point 1 => X: 713, Y: 196
+Line Deadline is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@2617f816, com.azure.ai.formrecognizer.documentanalysis.models.Point@676f0a60, com.azure.ai.formrecognizer.documentanalysis.models.Point@5d10455d, com.azure.ai.formrecognizer.documentanalysis.models.Point@535b8c24].
 
-Point 2 => X: 713, Y: 214
+Line Location is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@4a951911, com.azure.ai.formrecognizer.documentanalysis.models.Point@55b62629, com.azure.ai.formrecognizer.documentanalysis.models.Point@a53bb6f, com.azure.ai.formrecognizer.documentanalysis.models.Point@5e63cad].
 
-Point 3 => X: 600, Y: 213
+Line Date/Time (local) is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@6759f091, com.azure.ai.formrecognizer.documentanalysis.models.Point@33a053d, com.azure.ai.formrecognizer.documentanalysis.models.Point@14a54ef6, com.azure.ai.formrecognizer.documentanalysis.models.Point@20921b9b].
 
-Line 10 has content: 'East Northport, NY 11731'.
+Line Required action is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@867ba60, com.azure.ai.formrecognizer.documentanalysis.models.Point@5ba745bc, com.azure.ai.formrecognizer.documentanalysis.models.Point@654b72c0, com.azure.ai.formrecognizer.documentanalysis.models.Point@55b5e331].
 
-Its bounding polygon (points ordered clockwise):
+Line Table is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@6034e75d, com.azure.ai.formrecognizer.documentanalysis.models.Point@15fc442, com.azure.ai.formrecognizer.documentanalysis.models.Point@3f3c7bdb, com.azure.ai.formrecognizer.documentanalysis.models.Point@456abb66].
 
-Point 0 => X: 600, Y: 215
+Line Harleysville is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@2a3a299, com.azure.ai.formrecognizer.documentanalysis.models.Point@7da10b5b, com.azure.ai.formrecognizer.documentanalysis.models.Point@219f4597, com.azure.ai.formrecognizer.documentanalysis.models.Point@31be6b49].
 
-Point 1 => X: 791, Y: 215
+Line (PA) is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@2e16b08d, com.azure.ai.formrecognizer.documentanalysis.models.Point@5b989dc7, com.azure.ai.formrecognizer.documentanalysis.models.Point@70d8de, com.azure.ai.formrecognizer.documentanalysis.models.Point@42561fba].
 
-Point 2 => X: 791, Y: 235
+Line 08-Dec-2019 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@595f4da5, com.azure.ai.formrecognizer.documentanalysis.models.Point@46b695ec, com.azure.ai.formrecognizer.documentanalysis.models.Point@408613cc, com.azure.ai.formrecognizer.documentanalysis.models.Point@325f7fa9].
 
-Point 3 => X: 600, Y: 235
+Line Flight is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@11ce2e22, com.azure.ai.formrecognizer.documentanalysis.models.Point@63a5d002, com.azure.ai.formrecognizer.documentanalysis.models.Point@13cda7c9, com.azure.ai.formrecognizer.documentanalysis.models.Point@5aa6202e].
 
-Line 11 has content: 'Name Summer River'.
+Line Harleysville is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@3af9aa66, com.azure.ai.formrecognizer.documentanalysis.models.Point@771158fb, com.azure.ai.formrecognizer.documentanalysis.models.Point@91c4a3f, com.azure.ai.formrecognizer.documentanalysis.models.Point@62d0ac62].
 
-Its bounding polygon (points ordered clockwise):
+Line (PA is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@150d80c4, com.azure.ai.formrecognizer.documentanalysis.models.Point@6826c41e, com.azure.ai.formrecognizer.documentanalysis.models.Point@3003697, com.azure.ai.formrecognizer.documentanalysis.models.Point@64d43929].
 
-Point 0 => X: 46, Y: 250
+Line 08-Dec-2019 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@1d269ed7, com.azure.ai.formrecognizer.documentanalysis.models.Point@437ebf59, com.azure.ai.formrecognizer.documentanalysis.models.Point@41c89d2f, com.azure.ai.formrecognizer.documentanalysis.models.Point@410e94e].
 
-Point 1 => X: 204, Y: 250
+Line 13:00 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@2d691f3d, com.azure.ai.formrecognizer.documentanalysis.models.Point@1bdbf9be, com.azure.ai.formrecognizer.documentanalysis.models.Point@1e7f2e0f, com.azure.ai.formrecognizer.documentanalysis.models.Point@1da6ee17].
 
-Point 2 => X: 204, Y: 267
+Line Two more days and all his is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@78d39a69, com.azure.ai.formrecognizer.documentanalysis.models.Point@3c818ac4, com.azure.ai.formrecognizer.documentanalysis.models.Point@5b69d40d, com.azure.ai.formrecognizer.documentanalysis.models.Point@71154f21].
 
-Point 3 => X: 46, Y: 267
+Line problems would be solved. is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@15f193b8, com.azure.ai.formrecognizer.documentanalysis.models.Point@2516fc68, com.azure.ai.formrecognizer.documentanalysis.models.Point@304a9d7b, com.azure.ai.formrecognizer.documentanalysis.models.Point@6bfdb014].
 
-Line 12 has content: 'Tel. 34456632'.
+Line Round is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@72889280, com.azure.ai.formrecognizer.documentanalysis.models.Point@606fc505, com.azure.ai.formrecognizer.documentanalysis.models.Point@4aa3d36, com.azure.ai.formrecognizer.documentanalysis.models.Point@2d140a7].
 
-Its bounding polygon (points ordered clockwise):
+Line Harleysville is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@347bdeef, com.azure.ai.formrecognizer.documentanalysis.models.Point@2aa27288, com.azure.ai.formrecognizer.documentanalysis.models.Point@7f34a967, com.azure.ai.formrecognizer.documentanalysis.models.Point@77e80a5e].
 
-Point 0 => X: 46, Y: 270
+Line (PA is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@1d8e2eea, com.azure.ai.formrecognizer.documentanalysis.models.Point@240139e1, com.azure.ai.formrecognizer.documentanalysis.models.Point@7ea4d397, com.azure.ai.formrecognizer.documentanalysis.models.Point@49298ce7].
 
-Point 1 => X: 155, Y: 270
+Line 09-Dec-2019 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@253c1256, com.azure.ai.formrecognizer.documentanalysis.models.Point@8dfe921, com.azure.ai.formrecognizer.documentanalysis.models.Point@503fbbc6, com.azure.ai.formrecognizer.documentanalysis.models.Point@55f45b92].
 
-Point 2 => X: 155, Y: 288
+Line Accent is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@109f5dd8, com.azure.ai.formrecognizer.documentanalysis.models.Point@67fe380b, com.azure.ai.formrecognizer.documentanalysis.models.Point@4a325eb9, com.azure.ai.formrecognizer.documentanalysis.models.Point@3dedb4a6].
 
-Point 3 => X: 46, Y: 288
+Line Harleysville is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@57f64f5e, com.azure.ai.formrecognizer.documentanalysis.models.Point@415e0bcb, com.azure.ai.formrecognizer.documentanalysis.models.Point@194152cf, com.azure.ai.formrecognizer.documentanalysis.models.Point@49d98dc5].
 
-Line 13 has content: 'E-mail email6@libertydelightfulsinful.com'.
+Line (PA) is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@2c30b71f, com.azure.ai.formrecognizer.documentanalysis.models.Point@1d81e101, com.azure.ai.formrecognizer.documentanalysis.models.Point@ec50f54, com.azure.ai.formrecognizer.documentanalysis.models.Point@bf71cec].
 
-Its bounding polygon (points ordered clockwise):
+Line 10-Dec-2019 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@22d6cac2, com.azure.ai.formrecognizer.documentanalysis.models.Point@30cdae70, com.azure.ai.formrecognizer.documentanalysis.models.Point@1654a892, com.azure.ai.formrecognizer.documentanalysis.models.Point@2577d6c8].
 
-Point 0 => X: 47, Y: 290
+Line Monkey is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@3163987e, com.azure.ai.formrecognizer.documentanalysis.models.Point@6c000e0c, com.azure.ai.formrecognizer.documentanalysis.models.Point@5f233b26, com.azure.ai.formrecognizer.documentanalysis.models.Point@44f9779c].
 
-Point 1 => X: 355, Y: 290
+Line Harleysville is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@6974a715, com.azure.ai.formrecognizer.documentanalysis.models.Point@5e8a459, com.azure.ai.formrecognizer.documentanalysis.models.Point@43d455c9, com.azure.ai.formrecognizer.documentanalysis.models.Point@4c9e9fb8].
 
-Point 2 => X: 355, Y: 309
+Line (PA) is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@9ec531, com.azure.ai.formrecognizer.documentanalysis.models.Point@40147317, com.azure.ai.formrecognizer.documentanalysis.models.Point@210f0cc1, com.azure.ai.formrecognizer.documentanalysis.models.Point@19542407].
 
-Point 3 => X: 47, Y: 309
+Line 11-Dec-2019 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@6f95cd51, com.azure.ai.formrecognizer.documentanalysis.models.Point@c7a977f, com.azure.ai.formrecognizer.documentanalysis.models.Point@55caeb35, com.azure.ai.formrecognizer.documentanalysis.models.Point@6d868997].
 
-Line 14 has content: 'Booking Confirmation - ORIGINAL'.
+Line Route is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@2c383e33, com.azure.ai.formrecognizer.documentanalysis.models.Point@74a195a4, com.azure.ai.formrecognizer.documentanalysis.models.Point@76304b46, com.azure.ai.formrecognizer.documentanalysis.models.Point@2fa3be26].
 
-Its bounding polygon (points ordered clockwise):
+Line Harleysville is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@4287d447, com.azure.ai.formrecognizer.documentanalysis.models.Point@3af37506, com.azure.ai.formrecognizer.documentanalysis.models.Point@4e6d7365, com.azure.ai.formrecognizer.documentanalysis.models.Point@7c0da600].
 
-Point 0 => X: 48, Y: 354
+Line (PA) is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@d4602a, com.azure.ai.formrecognizer.documentanalysis.models.Point@21ae6e73, com.azure.ai.formrecognizer.documentanalysis.models.Point@47dd778, com.azure.ai.formrecognizer.documentanalysis.models.Point@15515c51].
 
-Point 1 => X: 495, Y: 354
+Line 11-Dec-2019 is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@36a7abe1, com.azure.ai.formrecognizer.documentanalysis.models.Point@64a896b0, com.azure.ai.formrecognizer.documentanalysis.models.Point@e044b4a, com.azure.ai.formrecognizer.documentanalysis.models.Point@11a82d0f].
 
-Point 2 => X: 496, Y: 381
+Line Peanuts don't grow on is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@1adb7478, com.azure.ai.formrecognizer.documentanalysis.models.Point@3ae66c85, com.azure.ai.formrecognizer.documentanalysis.models.Point@16943e88, com.azure.ai.formrecognizer.documentanalysis.models.Point@4604b900].
 
-Point 3 => X: 48, Y: 384
+Line trees. is within a bounding polygon [com.azure.ai.formrecognizer.documentanalysis.models.Point@73d6d0c, com.azure.ai.formrecognizer.documentanalysis.models.Point@e36bb2a, com.azure.ai.formrecognizer.documentanalysis.models.Point@3961a41a, com.azure.ai.formrecognizer.documentanalysis.models.Point@5a4ed68f].
 
-Line 15 has content: 'Our reference:'.
+Word 'Liberty's' has a confidence score of 0.99
 
-Its bounding polygon (points ordered clockwise):
+Word 'Delightful' has a confidence score of 0.99
 
-Point 0 => X: 70, Y: 410
+Word 'Sinful' has a confidence score of 1.00
 
-Point 1 => X: 178, Y: 411
+Word 'Bakery' has a confidence score of 1.00
 
-Point 2 => X: 178, Y: 428
+Word '&' has a confidence score of 0.99
 
-Point 3 => X: 70, Y: 428
+Word 'Caf∩┐╜' has a confidence score of 0.86
 
-Line 16 has content: '3456623'.
+Word '765' has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+Word 'Halifax' has a confidence score of 1.00
 
-Point 0 => X: 202, Y: 409
+Word 'St.' has a confidence score of 1.00
 
-Point 1 => X: 287, Y: 408
+Word 'Clearwater,' has a confidence score of 0.99
 
-Point 2 => X: 287, Y: 427
+Word 'FL' has a confidence score of 1.00
 
-Point 3 => X: 202, Y: 427
+Word '33756' has a confidence score of 0.99
 
-Line 17 has content: 'Your reference:'.
+Word 'D' has a confidence score of 0.98
 
-Its bounding polygon (points ordered clockwise):
+Word 'Our' has a confidence score of 1.00
 
-Point 0 => X: 70, Y: 433
+Word 'reference:' has a confidence score of 0.99
 
-Point 1 => X: 188, Y: 433
+Word '3456623' has a confidence score of 1.00
 
-Point 2 => X: 188, Y: 450
+Word 'Your' has a confidence score of 0.99
 
-Point 3 => X: 70, Y: 450
+Word 'reference:' has a confidence score of 1.00
 
-Line 18 has content: '2334566'.
+Word '2334566' has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+Word 'Received' has a confidence score of 1.00
 
-Point 0 => X: 200, Y: 433
+Word 'from:' has a confidence score of 1.00
 
-Point 1 => X: 267, Y: 433
+Word '8556' has a confidence score of 0.99
 
-Point 2 => X: 268, Y: 449
+Word 'Indian' has a confidence score of 0.96
 
-Point 3 => X: 200, Y: 450
+Word 'Summer' has a confidence score of 1.00
 
-Line 19 has content: 'BL/NO:'.
+Word 'Ave.' has a confidence score of 0.98
 
-Its bounding polygon (points ordered clockwise):
+Word 'New' has a confidence score of 1.00
 
-Point 0 => X: 70, Y: 452
+Word 'Haven,' has a confidence score of 1.00
 
-Point 1 => X: 127, Y: 453
+Word 'CT' has a confidence score of 1.00
 
-Point 2 => X: 127, Y: 470
+Word '06511' has a confidence score of 0.99
 
-Point 3 => X: 70, Y: 469
+Word 'Liberty' has a confidence score of 0.99
 
-Line 20 has content: 'EURH234'.
+Word 'booking' has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+Word 'contact' has a confidence score of 1.00
 
-Point 0 => X: 202, Y: 453
+Word '40' has a confidence score of 1.00
 
-Point 1 => X: 278, Y: 453
+Word 'River' has a confidence score of 1.00
 
-Point 2 => X: 278, Y: 469
+Word 'Street' has a confidence score of 1.00
 
-Point 3 => X: 202, Y: 469
+Word 'East' has a confidence score of 0.99
 
-Line 21 has content: 'Summary:'.
+Word 'Northport,' has a confidence score of 0.99
 
-Its bounding polygon (points ordered clockwise):
+Word 'NY' has a confidence score of 1.00
 
-Point 0 => X: 71, Y: 475
+Word '11731' has a confidence score of 1.00
 
-Point 1 => X: 147, Y: 476
+Word 'Name' has a confidence score of 0.99
 
-Point 2 => X: 147, Y: 493
+Word 'Summer' has a confidence score of 1.00
 
-Point 3 => X: 71, Y: 491
+Word 'River' has a confidence score of 1.00
 
-Line 22 has content: '45x72'.
+Word 'Tel.' has a confidence score of 0.99
 
-Its bounding polygon (points ordered clockwise):
+Word '34456632' has a confidence score of 0.99
 
-Point 0 => X: 202, Y: 474
+Word 'E-mail' has a confidence score of 0.99
 
-Point 1 => X: 248, Y: 475
+Word 'email6@libertydelightfulsinful.com' has a confidence score of 0.96
 
-Point 2 => X: 248, Y: 490
+Word 'Booking' has a confidence score of 0.99
 
-Point 3 => X: 201, Y: 490
+Word 'Confirmation' has a confidence score of 0.99
 
-Line 23 has content: 'Export:'.
+Word '-' has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+Word 'ORIGINAL' has a confidence score of 0.99
 
-Point 0 => X: 69, Y: 535
+Word 'Our' has a confidence score of 1.00
 
-Point 1 => X: 123, Y: 535
+Word 'reference:' has a confidence score of 0.99
 
-Point 2 => X: 123, Y: 554
+Word '3456623' has a confidence score of 1.00
 
-Point 3 => X: 69, Y: 553
+Word 'Your' has a confidence score of 0.99
 
-Line 24 has content: 'Common'.
+Word 'reference:' has a confidence score of 0.99
 
-Its bounding polygon (points ordered clockwise):
+Word '2334566' has a confidence score of 1.00
 
-Point 0 => X: 186, Y: 535
+Word 'BL/NO:' has a confidence score of 0.99
 
-Point 1 => X: 255, Y: 536
+Word 'EURH234' has a confidence score of 0.99
 
-Point 2 => X: 255, Y: 553
+Word 'Summary:' has a confidence score of 0.99
 
-Point 3 => X: 186, Y: 552
+Word '45∩┐╜72' has a confidence score of 0.61
 
-Line 25 has content: 'Export empty pick up depot(s)'.
+Word 'Export:' has a confidence score of 0.98
 
-Its bounding polygon (points ordered clockwise):
+Word 'Common' has a confidence score of 1.00
 
-Point 0 => X: 48, Y: 599
+Word 'Export' has a confidence score of 0.99
 
-Point 1 => X: 285, Y: 599
+Word 'empty' has a confidence score of 1.00
 
-Point 2 => X: 285, Y: 620
+Word 'pick' has a confidence score of 0.99
 
-Point 3 => X: 48, Y: 620
+Word 'up' has a confidence score of 1.00
 
-Line 26 has content: '97 Morris Lane'.
+Word 'depot(s)' has a confidence score of 0.99
 
-Its bounding polygon (points ordered clockwise):
+Word '97' has a confidence score of 1.00
 
-Point 0 => X: 46, Y: 640
+Word 'Morris' has a confidence score of 1.00
 
-Point 1 => X: 159, Y: 641
+Word 'Lane' has a confidence score of 0.99
 
-Point 2 => X: 159, Y: 659
+Word 'Sterling' has a confidence score of 1.00
 
-Point 3 => X: 46, Y: 658
+Word 'Heights,' has a confidence score of 1.00
 
-Line 27 has content: 'Sterling Heights, MI 48310'.
+Word 'MI' has a confidence score of 0.93
 
-Its bounding polygon (points ordered clockwise):
+Word '48310' has a confidence score of 1.00
 
-Point 0 => X: 46, Y: 660
+Word 'Booking' has a confidence score of 0.99
 
-Point 1 => X: 244, Y: 660
+Word 'date:' has a confidence score of 1.00
 
-Point 2 => X: 244, Y: 679
+Word '05-Dec-2018' has a confidence score of 0.97
 
-Point 3 => X: 46, Y: 679
+Word 'Contract' has a confidence score of 0.99
 
-Line 28 has content: 'Booking date:'.
+Word 'No:' has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+Word '334566' has a confidence score of 0.99
 
-Point 0 => X: 502, Y: 430
+Word 'Opt.' has a confidence score of 0.99
 
-Point 1 => X: 606, Y: 430
+Word 'A' has a confidence score of 1.00
 
-Point 2 => X: 606, Y: 449
+Word 'Opt.' has a confidence score of 0.99
 
-Point 3 => X: 502, Y: 449
+Word 'B' has a confidence score of 1.00
 
-Line 29 has content: '05-Dec-2018'.
+Word 'From' has a confidence score of 0.99
 
-Its bounding polygon (points ordered clockwise):
+Word 'To' has a confidence score of 1.00
 
-Point 0 => X: 616, Y: 427
+Word 'By' has a confidence score of 0.70
 
-Point 1 => X: 719, Y: 426
+Word 'ETD' has a confidence score of 1.00
 
-Point 2 => X: 719, Y: 449
+Word 'ETA' has a confidence score of 0.99
 
-Point 3 => X: 616, Y: 450
+Word '118' has a confidence score of 1.00
 
-Line 30 has content: 'Contract No:'.
+Word 'Queen' has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+Word 'Street' has a confidence score of 1.00
 
-Point 0 => X: 501, Y: 448
+Word 'Hoboken,' has a confidence score of 0.99
 
-Point 1 => X: 598, Y: 447
+Word 'NJ' has a confidence score of 1.00
 
-Point 2 => X: 598, Y: 469
+Word '07030' has a confidence score of 1.00
 
-Point 3 => X: 501, Y: 470
+Word '52' has a confidence score of 0.99
 
-Line 31 has content: '334566'.
+Word 'West' has a confidence score of 0.99
 
-Its bounding polygon (points ordered clockwise):
+Word 'Trenton' has a confidence score of 1.00
 
-Point 0 => X: 621, Y: 450
+Word 'St.' has a confidence score of 1.00
 
-Point 1 => X: 680, Y: 450
+Word 'Harleysville,' has a confidence score of 0.99
 
-Point 2 => X: 680, Y: 467
+Word 'PA' has a confidence score of 1.00
 
-Point 3 => X: 621, Y: 467
+Word '19438' has a confidence score of 1.00
 
-Line 32 has content: 'Opt. A'.
+Word 'cause' has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+Word 'science' has a confidence score of 1.00
 
-Point 0 => X: 539, Y: 490
+Word 'slow' has a confidence score of 0.99
 
-Point 1 => X: 593, Y: 489
+Word '09-Dec-2018' has a confidence score of 0.99
 
-Point 2 => X: 594, Y: 512
+Word '19:00' has a confidence score of 0.99
 
-Point 3 => X: 540, Y: 513
+Word '09-Dec-2020' has a confidence score of 0.99
 
-Line 33 has content: 'Opt. B'.
+Word '11:00' has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+Word '9' has a confidence score of 0.98
 
-Point 0 => X: 661, Y: 495
+Word 'Ketch' has a confidence score of 1.00
 
-Point 1 => X: 711, Y: 495
+Word 'Harbour' has a confidence score of 1.00
 
-Point 2 => X: 711, Y: 513
+Word 'Ave.' has a confidence score of 0.99
 
-Point 3 => X: 662, Y: 513
+Word 'Vincentown,' has a confidence score of 0.99
 
-Line 34 has content: 'From'.
+Word 'NJ' has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+Word '75' has a confidence score of 1.00
 
-Point 0 => X: 53, Y: 693
+Word 'Fawn' has a confidence score of 0.99
 
-Point 1 => X: 94, Y: 695
+Word 'Street' has a confidence score of 1.00
 
-Point 2 => X: 94, Y: 710
+Word 'Peabody,' has a confidence score of 0.99
 
-Point 3 => X: 53, Y: 709
+Word 'MA' has a confidence score of 1.00
 
-Line 35 has content: 'To'.
+Word '01960' has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+Word 'tone' has a confidence score of 1.00
 
-Point 0 => X: 212, Y: 694
+Word 'late' has a confidence score of 0.99
 
-Point 1 => X: 233, Y: 695
+Word 'spoken' has a confidence score of 1.00
 
-Point 2 => X: 233, Y: 709
+Word '12-Dec-2018' has a confidence score of 0.97
 
-Point 3 => X: 213, Y: 709
+Word '10:00' has a confidence score of 0.99
 
-Line 36 has content: 'By'.
+Word '19-Dec-2020' has a confidence score of 0.98
 
-Its bounding polygon (points ordered clockwise):
+Word 'Deadline' has a confidence score of 0.99
 
-Point 0 => X: 370, Y: 695
+Word 'Location' has a confidence score of 0.99
 
-Point 1 => X: 390, Y: 696
+Word 'Date/Time' has a confidence score of 0.99
 
-Point 2 => X: 389, Y: 709
+Word '(local)' has a confidence score of 0.99
 
-Point 3 => X: 370, Y: 709
+Word 'Required' has a confidence score of 0.99
 
-Line 37 has content: 'ETD'.
+Word 'action' has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+Word 'Table' has a confidence score of 1.00
 
-Point 0 => X: 526, Y: 694
+Word 'Harleysville' has a confidence score of 0.99
 
-Point 1 => X: 557, Y: 695
+Word '(PA)' has a confidence score of 0.99
 
-Point 2 => X: 557, Y: 710
+Word '08-Dec-2019' has a confidence score of 0.99
 
-Point 3 => X: 527, Y: 709
+Word 'Flight' has a confidence score of 1.00
 
-Line 38 has content: 'ETA'.
+Word 'Harleysville' has a confidence score of 0.99
 
-Its bounding polygon (points ordered clockwise):
+Word '(PA' has a confidence score of 0.98
 
-Point 0 => X: 681, Y: 694
+Word '08-Dec-2019' has a confidence score of 0.99
 
-Point 1 => X: 714, Y: 695
+Word '13:00' has a confidence score of 1.00
 
-Point 2 => X: 715, Y: 709
+Word 'Two' has a confidence score of 1.00
 
-Point 3 => X: 682, Y: 709
+Word 'more' has a confidence score of 0.99
 
-Line 39 has content: '118 Queen Street'.
+Word 'days' has a confidence score of 0.98
 
-Its bounding polygon (points ordered clockwise):
+Word 'and' has a confidence score of 1.00
 
-Point 0 => X: 57, Y: 712
+Word 'all' has a confidence score of 1.00
 
-Point 1 => X: 177, Y: 712
+Word 'his' has a confidence score of 1.00
 
-Point 2 => X: 177, Y: 728
+Word 'problems' has a confidence score of 1.00
 
-Point 3 => X: 57, Y: 728
+Word 'would' has a confidence score of 1.00
 
-Line 40 has content: 'Hoboken, NJ 07030'.
+Word 'be' has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+Word 'solved.' has a confidence score of 1.00
 
-Point 0 => X: 56, Y: 729
+Word 'Round' has a confidence score of 1.00
 
-Point 1 => X: 191, Y: 729
+Word 'Harleysville' has a confidence score of 0.99
 
-Point 2 => X: 191, Y: 745
+Word '(PA' has a confidence score of 0.98
 
-Point 3 => X: 56, Y: 745
+Word '09-Dec-2019' has a confidence score of 0.98
 
-Line 41 has content: '52 West Trenton St.'.
+Word 'Accent' has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+Word 'Harleysville' has a confidence score of 0.99
 
-Point 0 => X: 212, Y: 712
+Word '(PA)' has a confidence score of 0.99
 
-Point 1 => X: 345, Y: 712
+Word '10-Dec-2019' has a confidence score of 0.99
 
-Point 2 => X: 345, Y: 728
+Word 'Monkey' has a confidence score of 0.99
 
-Point 3 => X: 212, Y: 728
+Word 'Harleysville' has a confidence score of 0.99
 
-Line 42 has content: 'Harleysville, PA'.
+Word '(PA)' has a confidence score of 0.95
 
-Its bounding polygon (points ordered clockwise):
+Word '11-Dec-2019' has a confidence score of 0.99
 
-Point 0 => X: 210, Y: 729
+Word 'Route' has a confidence score of 1.00
 
-Point 1 => X: 320, Y: 729
+Word 'Harleysville' has a confidence score of 0.99
 
-Point 2 => X: 320, Y: 746
+Word '(PA)' has a confidence score of 0.98
 
-Point 3 => X: 210, Y: 746
+Word '11-Dec-2019' has a confidence score of 0.99
 
-Line 43 has content: '19438'.
+Word 'Peanuts' has a confidence score of 1.00
 
-Its bounding polygon (points ordered clockwise):
+Word 'don't' has a confidence score of 0.96
 
-Point 0 => X: 215, Y: 747
+Word 'grow' has a confidence score of 0.99
 
-Point 1 => X: 256, Y: 748
+Word 'on' has a confidence score of 1.00
 
-Point 2 => X: 256, Y: 763
+Word 'trees.' has a confidence score of 0.96
 
-Point 3 => X: 214, Y: 763
+Selection mark is 'unselected' and is within a bounding polygon [507.00, 488.00], [537.00, 488.00], [537.00, 519.00], [507.00, 519.00] with confidence 1.00.
 
-Line 44 has content: 'cause science slow'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 367, Y: 713
-
-Point 1 => X: 501, Y: 713
-
-Point 2 => X: 501, Y: 728
-
-Point 3 => X: 367, Y: 728
-
-Line 45 has content: '09-Dec-2018'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 525, Y: 712
-
-Point 1 => X: 613, Y: 712
-
-Point 2 => X: 613, Y: 727
-
-Point 3 => X: 525, Y: 727
-
-Line 46 has content: '19:00'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 526, Y: 730
-
-Point 1 => X: 565, Y: 730
-
-Point 2 => X: 564, Y: 744
-
-Point 3 => X: 526, Y: 744
-
-Line 47 has content: '09-Dec-2020'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 681, Y: 713
-
-Point 1 => X: 770, Y: 712
-
-Point 2 => X: 770, Y: 727
-
-Point 3 => X: 681, Y: 728
-
-Line 48 has content: '11:00'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 682, Y: 731
-
-Point 1 => X: 721, Y: 730
-
-Point 2 => X: 720, Y: 744
-
-Point 3 => X: 682, Y: 744
-
-Line 49 has content: '9 Ketch Harbour'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 55, Y: 765
-
-Point 1 => X: 167, Y: 765
-
-Point 2 => X: 167, Y: 781
-
-Point 3 => X: 55, Y: 780
-
-Line 50 has content: 'Ave.'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 56, Y: 783
-
-Point 1 => X: 86, Y: 784
-
-Point 2 => X: 86, Y: 797
-
-Point 3 => X: 56, Y: 797
-
-Line 51 has content: 'Vincentown, NJ'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 55, Y: 799
-
-Point 1 => X: 161, Y: 799
-
-Point 2 => X: 161, Y: 814
-
-Point 3 => X: 55, Y: 815
-
-Line 52 has content: '75 Fawn Street'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 211, Y: 765
-
-Point 1 => X: 316, Y: 765
-
-Point 2 => X: 316, Y: 781
-
-Point 3 => X: 211, Y: 780
-
-Line 53 has content: 'Peabody, MA 01960'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 212, Y: 782
-
-Point 1 => X: 350, Y: 782
-
-Point 2 => X: 350, Y: 798
-
-Point 3 => X: 212, Y: 798
-
-Line 54 has content: 'tone late spoken'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 368, Y: 766
-
-Point 1 => X: 481, Y: 766
-
-Point 2 => X: 481, Y: 782
-
-Point 3 => X: 368, Y: 782
-
-Line 55 has content: '12-Dec-2018'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 526, Y: 765
-
-Point 1 => X: 614, Y: 765
-
-Point 2 => X: 614, Y: 780
-
-Point 3 => X: 526, Y: 781
-
-Line 56 has content: '10:00'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 525, Y: 782
-
-Point 1 => X: 565, Y: 783
-
-Point 2 => X: 565, Y: 797
-
-Point 3 => X: 526, Y: 797
-
-Line 57 has content: '19-Dec-2020'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 683, Y: 766
-
-Point 1 => X: 771, Y: 765
-
-Point 2 => X: 771, Y: 781
-
-Point 3 => X: 683, Y: 781
-
-Line 58 has content: 'Deadline'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 55, Y: 849
-
-Point 1 => X: 120, Y: 850
-
-Point 2 => X: 120, Y: 865
-
-Point 3 => X: 55, Y: 864
-
-Line 59 has content: 'Location'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 251, Y: 850
-
-Point 1 => X: 314, Y: 850
-
-Point 2 => X: 314, Y: 865
-
-Point 3 => X: 251, Y: 864
-
-Line 60 has content: 'Date/Time (local)'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 446, Y: 849
-
-Point 1 => X: 569, Y: 849
-
-Point 2 => X: 569, Y: 865
-
-Point 3 => X: 446, Y: 865
-
-Line 61 has content: 'Required action'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 642, Y: 849
-
-Point 1 => X: 757, Y: 849
-
-Point 2 => X: 757, Y: 865
-
-Point 3 => X: 642, Y: 865
-
-Line 62 has content: 'Table'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 56, Y: 867
-
-Point 1 => X: 94, Y: 867
-
-Point 2 => X: 93, Y: 881
-
-Point 3 => X: 56, Y: 880
-
-Line 63 has content: 'Harleysville'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 252, Y: 867
-
-Point 1 => X: 331, Y: 867
-
-Point 2 => X: 331, Y: 882
-
-Point 3 => X: 252, Y: 882
-
-Line 64 has content: '(PA)'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 254, Y: 884
-
-Point 1 => X: 282, Y: 885
-
-Point 2 => X: 282, Y: 901
-
-Point 3 => X: 254, Y: 900
-
-Line 65 has content: '08-Dec-2019'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 447, Y: 866
-
-Point 1 => X: 535, Y: 866
-
-Point 2 => X: 535, Y: 882
-
-Point 3 => X: 447, Y: 881
-
-Line 66 has content: 'Flight'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 56, Y: 902
-
-Point 1 => X: 94, Y: 902
-
-Point 2 => X: 94, Y: 919
-
-Point 3 => X: 56, Y: 918
-
-Line 67 has content: 'Harleysville'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 252, Y: 902
-
-Point 1 => X: 328, Y: 903
-
-Point 2 => X: 328, Y: 918
-
-Point 3 => X: 252, Y: 917
-
-Line 68 has content: '(PA'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 253, Y: 919
-
-Point 1 => X: 280, Y: 920
-
-Point 2 => X: 279, Y: 935
-
-Point 3 => X: 254, Y: 935
-
-Line 69 has content: '08-Dec-2019'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 447, Y: 902
-
-Point 1 => X: 536, Y: 902
-
-Point 2 => X: 536, Y: 917
-
-Point 3 => X: 447, Y: 917
-
-Line 70 has content: '13:00'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 448, Y: 920
-
-Point 1 => X: 487, Y: 919
-
-Point 2 => X: 486, Y: 934
-
-Point 3 => X: 448, Y: 934
-
-Line 71 has content: 'Two more days and all his'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 643, Y: 902
-
-Point 1 => X: 818, Y: 901
-
-Point 2 => X: 818, Y: 918
-
-Point 3 => X: 643, Y: 919
-
-Line 72 has content: 'problems would be solved.'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 643, Y: 920
-
-Point 1 => X: 821, Y: 919
-
-Point 2 => X: 822, Y: 934
-
-Point 3 => X: 643, Y: 936
-
-Line 73 has content: 'Round'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 56, Y: 938
-
-Point 1 => X: 103, Y: 937
-
-Point 2 => X: 103, Y: 952
-
-Point 3 => X: 56, Y: 953
-
-Line 74 has content: 'Harleysville'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 251, Y: 937
-
-Point 1 => X: 328, Y: 937
-
-Point 2 => X: 328, Y: 954
-
-Point 3 => X: 251, Y: 953
-
-Line 75 has content: '(PA'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 253, Y: 954
-
-Point 1 => X: 280, Y: 955
-
-Point 2 => X: 280, Y: 970
-
-Point 3 => X: 253, Y: 970
-
-Line 76 has content: '09-Dec-2019'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 447, Y: 938
-
-Point 1 => X: 535, Y: 937
-
-Point 2 => X: 535, Y: 952
-
-Point 3 => X: 447, Y: 953
-
-Line 77 has content: 'Accent'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 54, Y: 973
-
-Point 1 => X: 105, Y: 973
-
-Point 2 => X: 105, Y: 987
-
-Point 3 => X: 54, Y: 987
-
-Line 78 has content: 'Harleysville'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 252, Y: 972
-
-Point 1 => X: 328, Y: 973
-
-Point 2 => X: 328, Y: 989
-
-Point 3 => X: 252, Y: 988
-
-Line 79 has content: '(PA)'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 254, Y: 991
-
-Point 1 => X: 283, Y: 992
-
-Point 2 => X: 282, Y: 1006
-
-Point 3 => X: 254, Y: 1005
-
-Line 80 has content: '10-Dec-2019'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 447, Y: 972
-
-Point 1 => X: 536, Y: 972
-
-Point 2 => X: 536, Y: 987
-
-Point 3 => X: 447, Y: 988
-
-Line 81 has content: 'Monkey'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 56, Y: 1009
-
-Point 1 => X: 109, Y: 1009
-
-Point 2 => X: 109, Y: 1025
-
-Point 3 => X: 55, Y: 1024
-
-Line 82 has content: 'Harleysville'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 252, Y: 1008
-
-Point 1 => X: 329, Y: 1009
-
-Point 2 => X: 328, Y: 1025
-
-Point 3 => X: 252, Y: 1024
-
-Line 83 has content: '(PA)'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 253, Y: 1026
-
-Point 1 => X: 280, Y: 1026
-
-Point 2 => X: 279, Y: 1041
-
-Point 3 => X: 253, Y: 1041
-
-Line 84 has content: '11-Dec-2019'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 448, Y: 1009
-
-Point 1 => X: 536, Y: 1009
-
-Point 2 => X: 536, Y: 1023
-
-Point 3 => X: 448, Y: 1023
-
-Line 85 has content: 'Route'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 56, Y: 1044
-
-Point 1 => X: 97, Y: 1045
-
-Point 2 => X: 97, Y: 1058
-
-Point 3 => X: 56, Y: 1059
-
-Line 86 has content: 'Harleysville'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 253, Y: 1044
-
-Point 1 => X: 329, Y: 1044
-
-Point 2 => X: 328, Y: 1060
-
-Point 3 => X: 253, Y: 1059
-
-Line 87 has content: '(PA)'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 254, Y: 1061
-
-Point 1 => X: 281, Y: 1062
-
-Point 2 => X: 280, Y: 1076
-
-Point 3 => X: 254, Y: 1075
-
-Line 88 has content: '11-Dec-2019'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 449, Y: 1044
-
-Point 1 => X: 535, Y: 1044
-
-Point 2 => X: 535, Y: 1058
-
-Point 3 => X: 449, Y: 1058
-
-Line 89 has content: 'Peanuts don't grow on'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 643, Y: 1043
-
-Point 1 => X: 794, Y: 1044
-
-Point 2 => X: 794, Y: 1061
-
-Point 3 => X: 643, Y: 1059
-
-Line 90 has content: 'trees.'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 643, Y: 1061
-
-Point 1 => X: 681, Y: 1063
-
-Point 2 => X: 681, Y: 1076
-
-Point 3 => X: 643, Y: 1075
-
-Selection Mark 0 is Unselected.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 507, Y: 488
-
-Point 1 => X: 537, Y: 488
-
-Point 2 => X: 537, Y: 519
-
-Point 3 => X: 507, Y: 519
-
-Selection Mark 1 is Unselected.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 614, Y: 489
-
-Point 1 => X: 645, Y: 489
-
-Point 2 => X: 645, Y: 520
-
-Point 3 => X: 614, Y: 520
-
-Paragraphs:
-
-Paragraph content: Liberty's Delightful Sinful Bakery & Café 765 Halifax St. Clearwater, FL 33756
-
-Paragraph content: D
-
-Paragraph content: Our reference: 3456623
-
-Paragraph content: Your reference: 2334566
-
-Paragraph content: Received from: 8556 Indian Summer Ave. New Haven, CT 06511
-
-Paragraph content: Liberty booking contact 40 River Street East Northport, NY 11731
-
-Paragraph content: Name Summer River Tel. 34456632 E-mail email6@libertydelightfulsinful.com
-
-Paragraph content: Booking Confirmation - ORIGINAL
-
-Paragraph content: Our reference:
-
-Paragraph content: 3456623
-
-Paragraph content: Your reference:
-
-Paragraph content: 2334566
-
-Paragraph content: BL/NO:
-
-Paragraph content: EURH234
-
-Paragraph content: Summary:
-
-Paragraph content: 45x72
-
-Paragraph content: Export:
-
-Paragraph content: Common
-
-Paragraph content: Export empty pick up depot(s)
-
-Paragraph content: 97 Morris Lane Sterling Heights, MI 48310
-
-Paragraph content: Booking date:
-
-Paragraph content: 05-Dec-2018
-
-Paragraph content: Contract No:
-
-Paragraph content: 334566
-
-Paragraph content: Opt. A
-
-Paragraph content: Opt. B
-
-Paragraph content: From
-
-Paragraph content: To
-
-Paragraph content: By
-
-Paragraph content: ETD
-
-Paragraph content: ETA
-
-Paragraph content: 118 Queen Street Hoboken, NJ 07030
-
-Paragraph content: 52 West Trenton St. Harleysville, PA 19438
-
-Paragraph content: cause science slow
-
-Paragraph content: 09-Dec-2018 19:00
-
-Paragraph content: 09-Dec-2020 11:00
-
-Paragraph content: 9 Ketch Harbour Ave. Vincentown, NJ
-
-Paragraph content: 75 Fawn Street Peabody, MA 01960
-
-Paragraph content: tone late spoken
-
-Paragraph content: 12-Dec-2018 10:00
-
-Paragraph content: 19-Dec-2020
-
-Paragraph content: Deadline
-
-Paragraph content: Location
-
-Paragraph content: Date/Time (local)
-
-Paragraph content: Required action
-
-Paragraph content: Table
-
-Paragraph content: Harleysville (PA)
-
-Paragraph content: 08-Dec-2019
-
-Paragraph content: Flight
-
-Paragraph content: Harleysville (PA
-
-Paragraph content: 08-Dec-2019 13:00
-
-Paragraph content: Two more days and all his problems would be solved.
-
-Paragraph content: Round
-
-Paragraph content: Harleysville (PA
-
-Paragraph content: 09-Dec-2019
-
-Paragraph content: Accent
-
-Paragraph content: Harleysville (PA)
-
-Paragraph content: 10-Dec-2019
-
-Paragraph content: Monkey
-
-Paragraph content: Harleysville (PA)
-
-Paragraph content: 11-Dec-2019
-
-Paragraph content: Route
-
-Paragraph content: Harleysville (PA)
-
-Paragraph content: 11-Dec-2019
-
-Paragraph content: Peanuts don't grow on trees.
-
-The following tables were extracted:
+Selection mark is 'unselected' and is within a bounding polygon [614.00, 489.00], [645.00, 489.00], [645.00, 520.00], [614.00, 520.00] with confidence 1.00.
 
 Table 0 has 4 rows and 5 columns.
 
-Cell (0, 0) has kind 'columnHeader' and content: 'From'.
+Cell 'From', has row index 0 and column index 0.
 
-Cell (0, 1) has kind 'columnHeader' and content: 'To'.
+Cell 'To', has row index 0 and column index 1.
 
-Cell (0, 2) has kind 'columnHeader' and content: 'By'.
+Cell 'By', has row index 0 and column index 2.
 
-Cell (0, 3) has kind 'columnHeader' and content: 'ETD'.
+Cell 'ETD', has row index 0 and column index 3.
 
-Cell (0, 4) has kind 'columnHeader' and content: 'ETA'.
+Cell 'ETA', has row index 0 and column index 4.
 
-Cell (1, 0) has kind 'content' and content: '118 Queen Street Hoboken, NJ 07030'.
+Cell '118 Queen Street Hoboken, NJ 07030', has row index 1 and column index 0.
 
-Cell (1, 1) has kind 'content' and content: '52 West Trenton St. Harleysville, PA 19438'.
+Cell '52 West Trenton St. Harleysville, PA 19438', has row index 1 and column index 1.
 
-Cell (1, 2) has kind 'content' and content: 'cause science slow'.
+Cell 'cause science slow', has row index 1 and column index 2.
 
-Cell (1, 3) has kind 'content' and content: '09-Dec-2018 19:00'.
+Cell '09-Dec-2018 19:00', has row index 1 and column index 3.
 
-Cell (1, 4) has kind 'content' and content: '09-Dec-2020 11:00'.
+Cell '09-Dec-2020 11:00', has row index 1 and column index 4.
 
-Cell (3, 0) has kind 'content' and content: '9 Ketch Harbour Ave. Vincentown, NJ'.
+Cell '9 Ketch Harbour Ave. Vincentown, NJ', has row index 3 and column index 0.
 
-Cell (3, 1) has kind 'content' and content: '75 Fawn Street Peabody, MA 01960'.
+Cell '75 Fawn Street Peabody, MA 01960', has row index 3 and column index 1.
 
-Cell (3, 2) has kind 'content' and content: 'tone late spoken'.
+Cell 'tone late spoken', has row index 3 and column index 2.
 
-Cell (3, 3) has kind 'content' and content: '12-Dec-2018 10:00'.
+Cell '12-Dec-2018 10:00', has row index 3 and column index 3.
 
-Cell (3, 4) has kind 'content' and content: '19-Dec-2020'.
+Cell '19-Dec-2020', has row index 3 and column index 4.
 
 Table 1 has 7 rows and 4 columns.
 
-Cell (0, 0) has kind 'columnHeader' and content: 'Deadline'.
+Cell 'Deadline', has row index 0 and column index 0.
 
-Cell (0, 1) has kind 'columnHeader' and content: 'Location'.
+Cell 'Location', has row index 0 and column index 1.
 
-Cell (0, 2) has kind 'columnHeader' and content: 'Date/Time (local)'.
+Cell 'Date/Time (local)', has row index 0 and column index 2.
 
-Cell (0, 3) has kind 'columnHeader' and content: 'Required action'.
+Cell 'Required action', has row index 0 and column index 3.
 
-Cell (1, 0) has kind 'content' and content: 'Table'.
+Cell 'Table', has row index 1 and column index 0.
 
-Cell (1, 1) has kind 'content' and content: 'Harleysville (PA)'.
+Cell 'Harleysville (PA)', has row index 1 and column index 1.
 
-Cell (1, 2) has kind 'content' and content: '08-Dec-2019'.
+Cell '08-Dec-2019', has row index 1 and column index 2.
 
-Cell (1, 3) has kind 'content' and content: ''.
+Cell '', has row index 1 and column index 3.
 
-Cell (2, 0) has kind 'content' and content: 'Flight'.
+Cell 'Flight', has row index 2 and column index 0.
 
-Cell (2, 1) has kind 'content' and content: 'Harleysville (PA'.
+Cell 'Harleysville (PA', has row index 2 and column index 1.
 
-Cell (2, 2) has kind 'content' and content: '08-Dec-2019 13:00'.
+Cell '08-Dec-2019 13:00', has row index 2 and column index 2.
 
-Cell (2, 3) has kind 'content' and content: 'Two more days and all his problems would be solved.'.
+Cell 'Two more days and all his problems would be solved.', has row index 2 and column index 3.
 
-Cell (3, 0) has kind 'content' and content: 'Round'.
+Cell 'Round', has row index 3 and column index 0.
 
-Cell (3, 1) has kind 'content' and content: 'Harleysville (PA'.
+Cell 'Harleysville (PA', has row index 3 and column index 1.
 
-Cell (3, 2) has kind 'content' and content: '09-Dec-2019'.
+Cell '09-Dec-2019', has row index 3 and column index 2.
 
-Cell (3, 3) has kind 'content' and content: ''.
+Cell '', has row index 3 and column index 3.
 
-Cell (4, 0) has kind 'content' and content: 'Accent'.
+Cell 'Accent', has row index 4 and column index 0.
 
-Cell (4, 1) has kind 'content' and content: 'Harleysville (PA)'.
+Cell 'Harleysville (PA)', has row index 4 and column index 1.
 
-Cell (4, 2) has kind 'content' and content: '10-Dec-2019'.
+Cell '10-Dec-2019', has row index 4 and column index 2.
 
-Cell (4, 3) has kind 'content' and content: ''.
+Cell '', has row index 4 and column index 3.
 
-Cell (5, 0) has kind 'content' and content: 'Monkey'.
+Cell 'Monkey', has row index 5 and column index 0.
 
-Cell (5, 1) has kind 'content' and content: 'Harleysville (PA)'.
+Cell 'Harleysville (PA)', has row index 5 and column index 1.
 
-Cell (5, 2) has kind 'content' and content: '11-Dec-2019'.
+Cell '11-Dec-2019', has row index 5 and column index 2.
 
-Cell (5, 3) has kind 'content' and content: ''.
+Cell '', has row index 5 and column index 3.
 
-Cell (6, 0) has kind 'content' and content: 'Route'.
+Cell 'Route', has row index 6 and column index 0.
 
-Cell (6, 1) has kind 'content' and content: 'Harleysville (PA)'.
+Cell 'Harleysville (PA)', has row index 6 and column index 1.
 
-Cell (6, 2) has kind 'content' and content: '11-Dec-2019'.
+Cell '11-Dec-2019', has row index 6 and column index 2.
 
-Cell (6, 3) has kind 'content' and content: 'Peanuts don't grow on trees.'.
+Cell 'Peanuts don't grow on trees.', has row index 6 and column index 3.
