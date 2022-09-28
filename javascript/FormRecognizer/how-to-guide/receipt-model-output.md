@@ -1,17 +1,17 @@
-Merchant Name: 'Contoso', with confidence 0.616
+=== Receipt Information ===
 
-Transaction Date: '6/10/2019 12:00:00 AM +00:00', with confidence 0.989
+Type: receipt.retailMeal
 
-Item:
+Merchant: Contoso
 
-Description: 'Surface Pro 6', with confidence 0.99
+Items:
 
-Total Price: '1998', with confidence 0.995
+- Description: Surface Pro 6
 
-Item:
+  Total Price: $1,998.00
 
-Description: 'Surface Pen', with confidence 0.99
+- Description: Surface Pen
 
-Total Price: '299.97', with confidence 0.995
+  Total Price: $299.97
 
-Total: '2516.28', with confidence '0.988'
+Total: $2,516.28
