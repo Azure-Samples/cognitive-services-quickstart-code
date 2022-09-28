@@ -1,1055 +1,1727 @@
-Document Page 1 has 86 line(s), 696 word(s),
+Pages:
 
-and 0 selection mark(s).
+- Page 1 (unit: pixel)
 
-Line 0 has content: 'While healthcare is still in the early stages of its Al journey, we'.
+  915x1190, angle: 0
 
-Its bounding polygon (points ordered clockwise):
+  86 lines, 696 words
 
-Point 0 => X: 257, Y: 54
+  Lines:
 
-Point 1 => X: 817, Y: 56
+  - "While healthcare is still in the early stages of its Al journey, we"
 
-Point 2 => X: 817, Y: 79
+    - "While"
 
-Point 3 => X: 257, Y: 77
+    - "healthcare"
 
-Line 1 has content: 'are seeing pharmaceutical and other life sciences organizations'.
+    - "is"
 
-Its bounding polygon (points ordered clockwise):
+    - "still"
 
-Point 0 => X: 258, Y: 83
+    - "in"
 
-Point 1 => X: 826, Y: 83
+    - "the"
 
-Point 2 => X: 826, Y: 105
+    - "early"
 
-Point 3 => X: 258, Y: 105
+    - "stages"
 
-Line 2 has content: 'making major investments in Al and related technologies."'.
+    - "of"
 
-Its bounding polygon (points ordered clockwise):
+    - "its"
 
-Point 0 => X: 259, Y: 112
+    - "Al"
 
-Point 1 => X: 785, Y: 111
+    - "journey,"
 
-Point 2 => X: 785, Y: 134
+    - "we"
 
-Point 3 => X: 259, Y: 135
+  - "are seeing pharmaceutical and other life sciences organizations"
 
-Line 3 has content: 'TOM LAWRY | National Director for Al, Health and Life Sciences | Microsoft'.
+    - "are"
 
-Its bounding polygon (points ordered clockwise):
+    - "seeing"
 
-Point 0 => X: 258, Y: 150
+    - "pharmaceutical"
 
-Point 1 => X: 637, Y: 151
+    - "and"
 
-Point 2 => X: 637, Y: 167
+    - "other"
 
-Point 3 => X: 258, Y: 166
+    - "life"
 
-Line 4 has content: 'As pharmaceutical and other life sciences organizations invest'.
+    - "sciences"
 
-Its bounding polygon (points ordered clockwise):
+    - "organizations"
 
-Point 0 => X: 75, Y: 241
+  - "making major investments in Al and related technologies.""
 
-Point 1 => X: 422, Y: 241
+    - "making"
 
-Point 2 => X: 422, Y: 258
+    - "major"
 
-Point 3 => X: 75, Y: 257
+    - "investments"
 
-Line 5 has content: 'in and deploy advanced technologies, they are beginning to see'.
+    - "in"
 
-Its bounding polygon (points ordered clockwise):
+    - "Al"
 
-Point 0 => X: 75, Y: 259
+    - "and"
 
-Point 1 => X: 435, Y: 260
+    - "related"
 
-Point 2 => X: 435, Y: 277
+    - "technologies.""
 
-Point 3 => X: 75, Y: 276
+  - "TOM LAWRY | National Director for Al, Health and Life Sciences | Microsoft"
 
-Line 6 has content: 'benefits in diverse areas across their organizations. Companies'.
+    - "TOM"
 
-Its bounding polygon (points ordered clockwise):
+    - "LAWRY"
 
-Point 0 => X: 77, Y: 277
+    - "|"
 
-Point 1 => X: 427, Y: 278
+    - "National"
 
-Point 2 => X: 427, Y: 295
+    - "Director"
 
-Point 3 => X: 77, Y: 294
+    - "for"
 
-Line 7 has content: 'are looking to incorporate automation and continuing smart'.
+    - "Al,"
 
-Its bounding polygon (points ordered clockwise):
+    - "Health"
 
-Point 0 => X: 75, Y: 296
+    - "and"
 
-Point 1 => X: 414, Y: 296
+    - "Life"
 
-Point 2 => X: 414, Y: 313
+    - "Sciences"
 
-Point 3 => X: 75, Y: 313
+    - "|"
 
-Line 8 has content: 'factory investments to reduce costs in drug discovery, research'.
+    - "Microsoft"
 
-Its bounding polygon (points ordered clockwise):
+  - "As pharmaceutical and other life sciences organizations invest"
 
-Point 0 => X: 77, Y: 314
+    - "As"
 
-Point 1 => X: 428, Y: 314
+    - "pharmaceutical"
 
-Point 2 => X: 428, Y: 331
+    - "and"
 
-Point 3 => X: 77, Y: 331
+    - "other"
 
-Line 9 has content: 'and development, and manufacturing and supply chain'.
+    - "life"
 
-Its bounding polygon (points ordered clockwise):
+    - "sciences"
 
-Point 0 => X: 76, Y: 331
+    - "organizations"
 
-Point 1 => X: 388, Y: 331
+    - "invest"
 
-Point 2 => X: 388, Y: 349
+  - "in and deploy advanced technologies, they are beginning to see"
 
-Point 3 => X: 76, Y: 349
+    - "in"
 
-Line 10 has content: 'management. Many life sciences organizations are also choosing'.
+    - "and"
 
-Its bounding polygon (points ordered clockwise):
+    - "deploy"
 
-Point 0 => X: 76, Y: 350
+    - "advanced"
 
-Point 1 => X: 440, Y: 350
+    - "technologies,"
 
-Point 2 => X: 440, Y: 367
+    - "they"
 
-Point 3 => X: 76, Y: 367
+    - "are"
 
-Line 11 has content: 'to stay with more virtual approaches in the "new normal" -'.
+    - "beginning"
 
-Its bounding polygon (points ordered clockwise):
+    - "to"
 
-Point 0 => X: 76, Y: 368
+    - "see"
 
-Point 1 => X: 404, Y: 368
+  - "benefits in diverse areas across their organizations. Companies"
 
-Point 2 => X: 404, Y: 385
+    - "benefits"
 
-Point 3 => X: 76, Y: 385
+    - "in"
 
-Line 12 has content: 'particularly in clinical trials and sales and marketing areas.'.
+    - "diverse"
 
-Its bounding polygon (points ordered clockwise):
+    - "areas"
 
-Point 0 => X: 77, Y: 385
+    - "across"
 
-Point 1 => X: 396, Y: 385
+    - "their"
 
-Point 2 => X: 396, Y: 404
+    - "organizations."
 
-Point 3 => X: 77, Y: 403
+    - "Companies"
 
-Line 13 has content: 'Enhancing the patient'.
+  - "are looking to incorporate automation and continuing smart"
 
-Its bounding polygon (points ordered clockwise):
+    - "are"
 
-Point 0 => X: 77, Y: 422
+    - "looking"
 
-Point 1 => X: 268, Y: 422
+    - "to"
 
-Point 2 => X: 268, Y: 447
+    - "incorporate"
 
-Point 3 => X: 77, Y: 446
+    - "automation"
 
-Line 14 has content: 'and provider experience'.
+    - "and"
 
-Its bounding polygon (points ordered clockwise):
+    - "continuing"
 
-Point 0 => X: 76, Y: 447
+    - "smart"
 
-Point 1 => X: 285, Y: 447
+  - "factory investments to reduce costs in drug discovery, research"
 
-Point 2 => X: 285, Y: 470
+    - "factory"
 
-Point 3 => X: 76, Y: 470
+    - "investments"
 
-Line 15 has content: 'Clinical trial sponsors are continually seeking to make clinical'.
+    - "to"
 
-Its bounding polygon (points ordered clockwise):
+    - "reduce"
 
-Point 0 => X: 76, Y: 481
+    - "costs"
 
-Point 1 => X: 425, Y: 480
+    - "in"
 
-Point 2 => X: 425, Y: 499
+    - "drug"
 
-Point 3 => X: 76, Y: 499
+    - "discovery,"
 
-Line 16 has content: 'trials faster and to improve the experience for patients and'.
+    - "research"
 
-Its bounding polygon (points ordered clockwise):
+  - "and development, and manufacturing and supply chain"
 
-Point 0 => X: 76, Y: 499
+    - "and"
 
-Point 1 => X: 414, Y: 500
+    - "development,"
 
-Point 2 => X: 414, Y: 517
+    - "and"
 
-Point 3 => X: 76, Y: 517
+    - "manufacturing"
 
-Line 17 has content: 'physicians. The COVID-19 pandemic has accelerated the'.
+    - "and"
 
-Its bounding polygon (points ordered clockwise):
+    - "supply"
 
-Point 0 => X: 76, Y: 517
+    - "chain"
 
-Point 1 => X: 410, Y: 517
+  - "management. Many life sciences organizations are also choosing"
 
-Point 2 => X: 410, Y: 534
+    - "management."
 
-Point 3 => X: 76, Y: 535
+    - "Many"
 
-Line 18 has content: 'adoption of decentralized clinical trials, with an increase in'.
+    - "life"
 
-Its bounding polygon (points ordered clockwise):
+    - "sciences"
 
-Point 0 => X: 75, Y: 535
+    - "organizations"
 
-Point 1 => X: 411, Y: 535
+    - "are"
 
-Point 2 => X: 411, Y: 553
+    - "also"
 
-Point 3 => X: 75, Y: 553
+    - "choosing"
 
-Line 19 has content: 'trial activities conducted remotely and in participants' homes.'.
+  - "to stay with more virtual approaches in the "new normal" -"
 
-Its bounding polygon (points ordered clockwise):
+    - "to"
 
-Point 0 => X: 77, Y: 554
+    - "stay"
 
-Point 1 => X: 428, Y: 555
+    - "with"
 
-Point 2 => X: 428, Y: 572
+    - "more"
 
-Point 3 => X: 77, Y: 572
+    - "virtual"
 
-Line 20 has content: 'In a Mckinsey survey1 up to 98 percent of patients reported'.
+    - "approaches"
 
-Its bounding polygon (points ordered clockwise):
+    - "in"
 
-Point 0 => X: 76, Y: 572
+    - "the"
 
-Point 1 => X: 420, Y: 572
+    - ""new"
 
-Point 2 => X: 420, Y: 590
+    - "normal""
 
-Point 3 => X: 76, Y: 590
+    - "-"
 
-Line 21 has content: 'satisfaction with telemedicine. In the same report, 72 percent of'.
+  - "particularly in clinical trials and sales and marketing areas."
 
-Its bounding polygon (points ordered clockwise):
+    - "particularly"
 
-Point 0 => X: 77, Y: 591
+    - "in"
 
-Point 1 => X: 442, Y: 591
+    - "clinical"
 
-Point 2 => X: 442, Y: 608
+    - "trials"
 
-Point 3 => X: 77, Y: 607
+    - "and"
 
-Line 22 has content: 'physicians surveyed reported similar or better experiences with'.
+    - "sales"
 
-Its bounding polygon (points ordered clockwise):
+    - "and"
 
-Point 0 => X: 77, Y: 609
+    - "marketing"
 
-Point 1 => X: 438, Y: 609
+    - "areas."
 
-Point 2 => X: 438, Y: 626
+  - "Enhancing the patient"
 
-Point 3 => X: 77, Y: 626
+    - "Enhancing"
 
-Line 23 has content: 'remote engagement compared with in-person visits.'.
+    - "the"
 
-Its bounding polygon (points ordered clockwise):
+    - "patient"
 
-Point 0 => X: 76, Y: 628
+  - "and provider experience"
 
-Point 1 => X: 378, Y: 627
+    - "and"
 
-Point 2 => X: 378, Y: 644
+    - "provider"
 
-Point 3 => X: 76, Y: 644
+    - "experience"
 
-Line 24 has content: 'The shift of trial activities closer to patients has been enabled by'.
+  - "Clinical trial sponsors are continually seeking to make clinical"
 
-Its bounding polygon (points ordered clockwise):
+    - "Clinical"
 
-Point 0 => X: 73, Y: 656
+    - "trial"
 
-Point 1 => X: 443, Y: 657
+    - "sponsors"
 
-Point 2 => X: 443, Y: 675
+    - "are"
 
-Point 3 => X: 73, Y: 674
+    - "continually"
 
-Line 25 has content: 'a myriad of evolving technologies and services (e.g., electronic'.
+    - "seeking"
 
-Its bounding polygon (points ordered clockwise):
+    - "to"
 
-Point 0 => X: 75, Y: 676
+    - "make"
 
-Point 1 => X: 439, Y: 676
+    - "clinical"
 
-Point 2 => X: 439, Y: 693
+  - "trials faster and to improve the experience for patients and"
 
-Point 3 => X: 75, Y: 693
+    - "trials"
 
-Line 26 has content: 'consent, telehealth and remote patient monitoring). The aim'.
+    - "faster"
 
-Its bounding polygon (points ordered clockwise):
+    - "and"
 
-Point 0 => X: 77, Y: 694
+    - "to"
 
-Point 1 => X: 428, Y: 693
+    - "improve"
 
-Point 2 => X: 428, Y: 710
+    - "the"
 
-Point 3 => X: 77, Y: 711
+    - "experience"
 
-Line 27 has content: 'to use technology to improve the patient experience and'.
+    - "for"
 
-Its bounding polygon (points ordered clockwise):
+    - "patients"
 
-Point 0 => X: 76, Y: 713
+    - "and"
 
-Point 1 => X: 406, Y: 712
+  - "physicians. The COVID-19 pandemic has accelerated the"
 
-Point 2 => X: 406, Y: 729
+    - "physicians."
 
-Point 3 => X: 76, Y: 729
+    - "The"
 
-Line 28 has content: 'convenience has also broadened trial access to reach a broader,'.
+    - "COVID-19"
 
-Its bounding polygon (points ordered clockwise):
+    - "pandemic"
 
-Point 0 => X: 76, Y: 730
+    - "has"
 
-Point 1 => X: 441, Y: 730
+    - "accelerated"
 
-Point 2 => X: 441, Y: 746
+    - "the"
 
-Point 3 => X: 76, Y: 746
+  - "adoption of decentralized clinical trials, with an increase in"
 
-Line 29 has content: 'more diverse patient population.'.
+    - "adoption"
 
-Its bounding polygon (points ordered clockwise):
+    - "of"
 
-Point 0 => X: 76, Y: 749
+    - "decentralized"
 
-Point 1 => X: 265, Y: 749
+    - "clinical"
 
-Point 2 => X: 265, Y: 765
+    - "trials,"
 
-Point 3 => X: 76, Y: 764
+    - "with"
 
-Line 30 has content: '"It's an interesting and exciting time right now," said Keren'.
+    - "an"
 
-Its bounding polygon (points ordered clockwise):
+    - "increase"
 
-Point 0 => X: 72, Y: 779
+    - "in"
 
-Point 1 => X: 404, Y: 779
+  - "trial activities conducted remotely and in participants' homes."
 
-Point 2 => X: 404, Y: 797
+    - "trial"
 
-Point 3 => X: 72, Y: 797
+    - "activities"
 
-Line 31 has content: 'Priyadarshini, Regional Business Lead - Asia, Worldwide'.
+    - "conducted"
 
-Its bounding polygon (points ordered clockwise):
+    - "remotely"
 
-Point 0 => X: 75, Y: 797
+    - "and"
 
-Point 1 => X: 402, Y: 797
+    - "in"
 
-Point 2 => X: 402, Y: 814
+    - "participants'"
 
-Point 3 => X: 75, Y: 814
+    - "homes."
 
-Line 32 has content: 'Health, Microsoft. "It used to be that physicians were key.'.
+  - "In a Mckinsey survey1 up to 98 percent of patients reported"
 
-Its bounding polygon (points ordered clockwise):
+    - "In"
 
-Point 0 => X: 76, Y: 815
+    - "a"
 
-Point 1 => X: 408, Y: 817
+    - "Mckinsey"
 
-Point 2 => X: 408, Y: 834
+    - "survey1"
 
-Point 3 => X: 76, Y: 832
+    - "up"
 
-Line 33 has content: 'Now, suddenly, patients are feeling empowered by technology.'.
+    - "to"
 
-Its bounding polygon (points ordered clockwise):
+    - "98"
 
-Point 0 => X: 76, Y: 833
+    - "percent"
 
-Point 1 => X: 436, Y: 834
+    - "of"
 
-Point 2 => X: 436, Y: 851
+    - "patients"
 
-Point 3 => X: 76, Y: 851
+    - "reported"
 
-Line 34 has content: 'Pharmaceutical companies and other life sciences companies'.
+  - "satisfaction with telemedicine. In the same report, 72 percent of"
 
-Its bounding polygon (points ordered clockwise):
+    - "satisfaction"
 
-Point 0 => X: 77, Y: 852
+    - "with"
 
-Point 1 => X: 428, Y: 852
+    - "telemedicine."
 
-Point 2 => X: 428, Y: 869
+    - "In"
 
-Point 3 => X: 77, Y: 868
+    - "the"
 
-Line 35 has content: 'are realizing they have to pay attention to the patient'.
+    - "same"
 
-Its bounding polygon (points ordered clockwise):
+    - "report,"
 
-Point 0 => X: 73, Y: 870
+    - "72"
 
-Point 1 => X: 383, Y: 870
+    - "percent"
 
-Point 2 => X: 383, Y: 887
+    - "of"
 
-Point 3 => X: 73, Y: 887
+  - "physicians surveyed reported similar or better experiences with"
 
-Line 36 has content: 'experience in addition to the physician experience."'.
+    - "physicians"
 
-Its bounding polygon (points ordered clockwise):
+    - "surveyed"
 
-Point 0 => X: 76, Y: 888
+    - "reported"
 
-Point 1 => X: 373, Y: 888
+    - "similar"
 
-Point 2 => X: 373, Y: 905
+    - "or"
 
-Point 3 => X: 76, Y: 906
+    - "better"
 
-Line 37 has content: 'Enhanced patient experiences can be delivered in many different'.
+    - "experiences"
 
-Its bounding polygon (points ordered clockwise):
+    - "with"
 
-Point 0 => X: 77, Y: 919
+  - "remote engagement compared with in-person visits."
 
-Point 1 => X: 442, Y: 918
+    - "remote"
 
-Point 2 => X: 442, Y: 935
+    - "engagement"
 
-Point 3 => X: 77, Y: 936
+    - "compared"
 
-Line 38 has content: 'ways. One example of a life sciences product that leverages the'.
+    - "with"
 
-Its bounding polygon (points ordered clockwise):
+    - "in-person"
 
-Point 0 => X: 76, Y: 936
+    - "visits."
 
-Point 1 => X: 433, Y: 936
+  - "The shift of trial activities closer to patients has been enabled by"
 
-Point 2 => X: 433, Y: 954
+    - "The"
 
-Point 3 => X: 76, Y: 954
+    - "shift"
 
-Line 39 has content: 'intelligent cloud to directly affect the patient experience is the'.
+    - "of"
 
-Its bounding polygon (points ordered clockwise):
+    - "trial"
 
-Point 0 => X: 75, Y: 955
+    - "activities"
 
-Point 1 => X: 425, Y: 955
+    - "closer"
 
-Point 2 => X: 425, Y: 972
+    - "to"
 
-Point 3 => X: 75, Y: 972
+    - "patients"
 
-Line 40 has content: 'Tandemr Diabetes Care insulin pump. The Tandemr t:slim X2'.
+    - "has"
 
-Its bounding polygon (points ordered clockwise):
+    - "been"
 
-Point 0 => X: 75, Y: 972
+    - "enabled"
 
-Point 1 => X: 424, Y: 972
+    - "by"
 
-Point 2 => X: 424, Y: 990
+  - "a myriad of evolving technologies and services (e.g., electronic"
 
-Point 3 => X: 75, Y: 990
+    - "a"
 
-Line 41 has content: 'insulin pump with Basal-IQ technology enables patients with'.
+    - "myriad"
 
-Its bounding polygon (points ordered clockwise):
+    - "of"
 
-Point 0 => X: 75, Y: 990
+    - "evolving"
 
-Point 1 => X: 417, Y: 990
+    - "technologies"
 
-Point 2 => X: 417, Y: 1008
+    - "and"
 
-Point 3 => X: 75, Y: 1008
+    - "services"
 
-Line 42 has content: 'Type 1 diabetes to predict and prevent the low levels of blood'.
+    - "(e.g.,"
 
-Its bounding polygon (points ordered clockwise):
+    - "electronic"
 
-Point 0 => X: 75, Y: 1008
+  - "consent, telehealth and remote patient monitoring). The aim"
 
-Point 1 => X: 420, Y: 1008
+    - "consent,"
 
-Point 2 => X: 420, Y: 1025
+    - "telehealth"
 
-Point 3 => X: 75, Y: 1026
+    - "and"
 
-Line 43 has content: 'sugar that cause hypoglycemia.2 The algorithm-driven, software-'.
+    - "remote"
 
-Its bounding polygon (points ordered clockwise):
+    - "patient"
 
-Point 0 => X: 75, Y: 1027
+    - "monitoring)."
 
-Point 1 => X: 440, Y: 1026
+    - "The"
 
-Point 2 => X: 441, Y: 1044
+    - "aim"
 
-Point 3 => X: 75, Y: 1045
+  - "to use technology to improve the patient experience and"
 
-Line 44 has content: 'updatable pump improves the patient experience by automating'.
+    - "to"
 
-Its bounding polygon (points ordered clockwise):
+    - "use"
 
-Point 0 => X: 76, Y: 1045
+    - "technology"
 
-Point 1 => X: 440, Y: 1045
+    - "to"
 
-Point 2 => X: 440, Y: 1062
+    - "improve"
 
-Point 3 => X: 76, Y: 1062
+    - "the"
 
-Line 45 has content: 'chronic disease management and eliminating the need for'.
+    - "patient"
 
-Its bounding polygon (points ordered clockwise):
+    - "experience"
 
-Point 0 => X: 76, Y: 1062
+    - "and"
 
-Point 1 => X: 403, Y: 1062
+  - "convenience has also broadened trial access to reach a broader,"
 
-Point 2 => X: 403, Y: 1080
+    - "convenience"
 
-Point 3 => X: 76, Y: 1080
+    - "has"
 
-Line 46 has content: 'constant finger pricks to check glucose levels.'.
+    - "also"
 
-Its bounding polygon (points ordered clockwise):
+    - "broadened"
 
-Point 0 => X: 75, Y: 1081
+    - "trial"
 
-Point 1 => X: 332, Y: 1080
+    - "access"
 
-Point 2 => X: 332, Y: 1097
+    - "to"
 
-Point 3 => X: 75, Y: 1098
+    - "reach"
 
-Line 47 has content: 'Tandem was able to create and deploy this innovation by'.
+    - "a"
 
-Its bounding polygon (points ordered clockwise):
+    - "broader,"
 
-Point 0 => X: 466, Y: 240
+  - "more diverse patient population."
 
-Point 1 => X: 792, Y: 240
+    - "more"
 
-Point 2 => X: 792, Y: 258
+    - "diverse"
 
-Point 3 => X: 466, Y: 257
+    - "patient"
 
-Line 48 has content: 'leveraging the Al and machine learning capabilities of the'.
+    - "population."
 
-Its bounding polygon (points ordered clockwise):
+  - ""It's an interesting and exciting time right now," said Keren"
 
-Point 0 => X: 467, Y: 260
+    - ""It's"
 
-Point 1 => X: 801, Y: 260
+    - "an"
 
-Point 2 => X: 801, Y: 276
+    - "interesting"
 
-Point 3 => X: 467, Y: 277
+    - "and"
 
-Line 49 has content: 'intelligent cloud. As Al and other technologies continue to'.
+    - "exciting"
 
-Its bounding polygon (points ordered clockwise):
+    - "time"
 
-Point 0 => X: 468, Y: 277
+    - "right"
 
-Point 1 => X: 808, Y: 277
+    - "now,""
 
-Point 2 => X: 808, Y: 295
+    - "said"
 
-Point 3 => X: 468, Y: 294
+    - "Keren"
 
-Line 50 has content: 'advance, potential use cases will multiply. "Speed to value is'.
+  - "Priyadarshini, Regional Business Lead - Asia, Worldwide"
 
-Its bounding polygon (points ordered clockwise):
+    - "Priyadarshini,"
 
-Point 0 => X: 468, Y: 296
+    - "Regional"
 
-Point 1 => X: 810, Y: 295
+    - "Business"
 
-Point 2 => X: 810, Y: 312
+    - "Lead"
 
-Point 3 => X: 468, Y: 313
+    - "-"
 
-Line 51 has content: 'going to continue to accelerate," said Lawry.'.
+    - "Asia,"
 
-Its bounding polygon (points ordered clockwise):
+    - "Worldwide"
 
-Point 0 => X: 468, Y: 315
+  - "Health, Microsoft. "It used to be that physicians were key."
 
-Point 1 => X: 723, Y: 314
+    - "Health,"
 
-Point 2 => X: 723, Y: 330
+    - "Microsoft."
 
-Point 3 => X: 468, Y: 332
+    - ""It"
 
-Line 52 has content: 'In addition to enhancing the patient experience,'.
+    - "used"
 
-Its bounding polygon (points ordered clockwise):
+    - "to"
 
-Point 0 => X: 468, Y: 344
+    - "be"
 
-Point 1 => X: 745, Y: 346
+    - "that"
 
-Point 2 => X: 745, Y: 362
+    - "physicians"
 
-Point 3 => X: 468, Y: 361
+    - "were"
 
-Line 53 has content: 'pharmaceutical and other life sciences companies can'.
+    - "key."
 
-Its bounding polygon (points ordered clockwise):
+  - "Now, suddenly, patients are feeling empowered by technology."
 
-Point 0 => X: 469, Y: 363
+    - "Now,"
 
-Point 1 => X: 779, Y: 363
+    - "suddenly,"
 
-Point 2 => X: 779, Y: 380
+    - "patients"
 
-Point 3 => X: 469, Y: 379
+    - "are"
 
-Line 54 has content: 'leverage advanced technologies to improve relationships with'.
+    - "feeling"
 
-Its bounding polygon (points ordered clockwise):
+    - "empowered"
 
-Point 0 => X: 468, Y: 382
+    - "by"
 
-Point 1 => X: 822, Y: 381
+    - "technology."
 
-Point 2 => X: 822, Y: 397
+  - "Pharmaceutical companies and other life sciences companies"
 
-Point 3 => X: 468, Y: 398
+    - "Pharmaceutical"
 
-Line 55 has content: 'providers. For example, COVID-19 is driving changes in the'.
+    - "companies"
 
-Its bounding polygon (points ordered clockwise):
+    - "and"
 
-Point 0 => X: 467, Y: 399
+    - "other"
 
-Point 1 => X: 814, Y: 399
+    - "life"
 
-Point 2 => X: 814, Y: 415
+    - "sciences"
 
-Point 3 => X: 467, Y: 416
+    - "companies"
 
-Line 56 has content: 'way companies interact with clinicians. Prior to COVID-19,'.
+  - "are realizing they have to pay attention to the patient"
 
-Its bounding polygon (points ordered clockwise):
+    - "are"
 
-Point 0 => X: 467, Y: 418
+    - "realizing"
 
-Point 1 => X: 806, Y: 416
+    - "they"
 
-Point 2 => X: 807, Y: 432
+    - "have"
 
-Point 3 => X: 467, Y: 435
+    - "to"
 
-Line 57 has content: '75 percent of physicians preferred in-person sales visits from'.
+    - "pay"
 
-Its bounding polygon (points ordered clockwise):
+    - "attention"
 
-Point 0 => X: 466, Y: 435
+    - "to"
 
-Point 1 => X: 815, Y: 435
+    - "the"
 
-Point 2 => X: 815, Y: 452
+    - "patient"
 
-Point 3 => X: 466, Y: 453
+  - "experience in addition to the physician experience.""
 
-Line 58 has content: 'medtech reps; likewise, 77 percent of physicians preferred in-'.
+    - "experience"
 
-Its bounding polygon (points ordered clockwise):
+    - "in"
 
-Point 0 => X: 467, Y: 452
+    - "addition"
 
-Point 1 => X: 818, Y: 452
+    - "to"
 
-Point 2 => X: 818, Y: 470
+    - "the"
 
-Point 3 => X: 467, Y: 470
+    - "physician"
 
-Line 59 has content: 'person sales visits from pharma reps.3'.
+    - "experience.""
 
-Its bounding polygon (points ordered clockwise):
+  - "Enhanced patient experiences can be delivered in many different"
 
-Point 0 => X: 468, Y: 471
+    - "Enhanced"
 
-Point 1 => X: 685, Y: 471
+    - "patient"
 
-Point 2 => X: 685, Y: 489
+    - "experiences"
 
-Point 3 => X: 468, Y: 489
+    - "can"
 
-Line 60 has content: 'Since the advent of COVID-19, however, physician'.
+    - "be"
 
-Its bounding polygon (points ordered clockwise):
+    - "delivered"
 
-Point 0 => X: 467, Y: 502
+    - "in"
 
-Point 1 => X: 771, Y: 503
+    - "many"
 
-Point 2 => X: 771, Y: 520
+    - "different"
 
-Point 3 => X: 467, Y: 519
+  - "ways. One example of a life sciences product that leverages the"
 
-Line 61 has content: 'preferences are moving toward virtual visits. Only 53 percent'.
+    - "ways."
 
-Its bounding polygon (points ordered clockwise):
+    - "One"
 
-Point 0 => X: 468, Y: 521
+    - "example"
 
-Point 1 => X: 828, Y: 521
+    - "of"
 
-Point 2 => X: 828, Y: 538
+    - "a"
 
-Point 3 => X: 468, Y: 538
+    - "life"
 
-Line 62 has content: 'of physicians now express a preference for in-person visits'.
+    - "sciences"
 
-Its bounding polygon (points ordered clockwise):
+    - "product"
 
-Point 0 => X: 467, Y: 539
+    - "that"
 
-Point 1 => X: 811, Y: 539
+    - "leverages"
 
-Point 2 => X: 811, Y: 556
+    - "the"
 
-Point 3 => X: 467, Y: 556
+  - "intelligent cloud to directly affect the patient experience is the"
 
-Line 63 has content: 'from medtech reps and only 40 percent prefer in-person visits'.
+    - "intelligent"
 
-Its bounding polygon (points ordered clockwise):
+    - "cloud"
 
-Point 0 => X: 468, Y: 557
+    - "to"
 
-Point 1 => X: 835, Y: 557
+    - "directly"
 
-Point 2 => X: 835, Y: 574
+    - "affect"
 
-Point 3 => X: 468, Y: 574
+    - "the"
 
-Line 64 has content: 'from pharma reps. That puts the onus on pharmaceutical and'.
+    - "patient"
 
-Its bounding polygon (points ordered clockwise):
+    - "experience"
 
-Point 0 => X: 469, Y: 574
+    - "is"
 
-Point 1 => X: 835, Y: 574
+    - "the"
 
-Point 2 => X: 835, Y: 592
+  - "Tandem® Diabetes Care insulin pump. The Tandem® t:slim X2"
 
-Point 3 => X: 469, Y: 592
+    - "Tandem®"
 
-Line 65 has content: 'life sciences organizations to deliver valuable and engaging'.
+    - "Diabetes"
 
-Its bounding polygon (points ordered clockwise):
+    - "Care"
 
-Point 0 => X: 468, Y: 593
+    - "insulin"
 
-Point 1 => X: 819, Y: 593
+    - "pump."
 
-Point 2 => X: 819, Y: 611
+    - "The"
 
-Point 3 => X: 468, Y: 610
+    - "Tandem®"
 
-Line 66 has content: 'virtual visits to providers.'.
+    - "t:slim"
 
-Its bounding polygon (points ordered clockwise):
+    - "X2"
 
-Point 0 => X: 468, Y: 611
+  - "insulin pump with Basal-IQ technology enables patients with"
 
-Point 1 => X: 616, Y: 611
+    - "insulin"
 
-Point 2 => X: 616, Y: 627
+    - "pump"
 
-Point 3 => X: 468, Y: 627
+    - "with"
 
-Line 67 has content: 'One way to do that is to leverage text analytics capabilities to'.
+    - "Basal-IQ"
 
-Its bounding polygon (points ordered clockwise):
+    - "technology"
 
-Point 0 => X: 468, Y: 642
+    - "enables"
 
-Point 1 => X: 822, Y: 642
+    - "patients"
 
-Point 2 => X: 822, Y: 659
+    - "with"
 
-Point 3 => X: 468, Y: 659
+  - "Type 1 diabetes to predict and prevent the low levels of blood"
 
-Line 68 has content: 'enhance the provider information stored in the organization's'.
+    - "Type"
 
-Its bounding polygon (points ordered clockwise):
+    - "1"
 
-Point 0 => X: 469, Y: 660
+    - "diabetes"
 
-Point 1 => X: 820, Y: 660
+    - "to"
 
-Point 2 => X: 820, Y: 676
+    - "predict"
 
-Point 3 => X: 469, Y: 677
+    - "and"
 
-Line 69 has content: 'customer relationship management (CRM) system. For'.
+    - "prevent"
 
-Its bounding polygon (points ordered clockwise):
+    - "the"
 
-Point 0 => X: 466, Y: 679
+    - "low"
 
-Point 1 => X: 789, Y: 677
+    - "levels"
 
-Point 2 => X: 789, Y: 694
+    - "of"
 
-Point 3 => X: 467, Y: 696
+    - "blood"
 
-Line 70 has content: 'example, a rep setting up a visit with 'Dr. X' could run text'.
+  - "sugar that cause hypoglycemia.2 The algorithm-driven, software-"
 
-Its bounding polygon (points ordered clockwise):
+    - "sugar"
 
-Point 0 => X: 468, Y: 697
+    - "that"
 
-Point 1 => X: 801, Y: 695
+    - "cause"
 
-Point 2 => X: 801, Y: 712
+    - "hypoglycemia.2"
 
-Point 3 => X: 468, Y: 714
+    - "The"
 
-Line 71 has content: 'analytics on publicly available resources on the web to identify'.
+    - "algorithm-driven,"
 
-Its bounding polygon (points ordered clockwise):
+    - "software-"
 
-Point 0 => X: 467, Y: 714
+  - "updatable pump improves the patient experience by automating"
 
-Point 1 => X: 825, Y: 713
+    - "updatable"
 
-Point 2 => X: 825, Y: 730
+    - "pump"
 
-Point 3 => X: 467, Y: 731
+    - "improves"
 
-Line 72 has content: 'on which specific topics Dr. X has been writing about and'.
+    - "the"
 
-Its bounding polygon (points ordered clockwise):
+    - "patient"
 
-Point 0 => X: 466, Y: 731
+    - "experience"
 
-Point 1 => X: 799, Y: 731
+    - "by"
 
-Point 2 => X: 799, Y: 749
+    - "automating"
 
-Point 3 => X: 466, Y: 749
+  - "chronic disease management and eliminating the need for"
 
-Line 73 has content: 'commenting. "All kinds of publicly available information can'.
+    - "chronic"
 
-Its bounding polygon (points ordered clockwise):
+    - "disease"
 
-Point 0 => X: 467, Y: 749
+    - "management"
 
-Point 1 => X: 813, Y: 749
+    - "and"
 
-Point 2 => X: 813, Y: 767
+    - "eliminating"
 
-Point 3 => X: 467, Y: 768
+    - "the"
 
-Line 74 has content: 'All kinds of publicly'.
+    - "need"
 
-Its bounding polygon (points ordered clockwise):
+    - "for"
 
-Point 0 => X: 467, Y: 827
+  - "constant finger pricks to check glucose levels."
 
-Point 1 => X: 644, Y: 827
+    - "constant"
 
-Point 2 => X: 644, Y: 851
+    - "finger"
 
-Point 3 => X: 467, Y: 851
+    - "pricks"
 
-Line 75 has content: 'available information'.
+    - "to"
 
-Its bounding polygon (points ordered clockwise):
+    - "check"
 
-Point 0 => X: 467, Y: 856
+    - "glucose"
 
-Point 1 => X: 661, Y: 855
+    - "levels."
 
-Point 2 => X: 661, Y: 877
+  - "Tandem was able to create and deploy this innovation by"
 
-Point 3 => X: 467, Y: 878
+    - "Tandem"
 
-Line 76 has content: 'can be mined with text'.
+    - "was"
 
-Its bounding polygon (points ordered clockwise):
+    - "able"
 
-Point 0 => X: 469, Y: 886
+    - "to"
 
-Point 1 => X: 674, Y: 885
+    - "create"
 
-Point 2 => X: 674, Y: 906
+    - "and"
 
-Point 3 => X: 469, Y: 906
+    - "deploy"
 
-Line 77 has content: 'analytics technology,'.
+    - "this"
 
-Its bounding polygon (points ordered clockwise):
+    - "innovation"
 
-Point 0 => X: 468, Y: 914
+    - "by"
 
-Point 1 => X: 660, Y: 915
+  - "leveraging the Al and machine learning capabilities of the"
 
-Point 2 => X: 660, Y: 938
+    - "leveraging"
 
-Point 3 => X: 468, Y: 937
+    - "the"
 
-Line 78 has content: 'which can be used to arm the'.
+    - "Al"
 
-Its bounding polygon (points ordered clockwise):
+    - "and"
 
-Point 0 => X: 468, Y: 942
+    - "machine"
 
-Point 1 => X: 729, Y: 942
+    - "learning"
 
-Point 2 => X: 729, Y: 964
+    - "capabilities"
 
-Point 3 => X: 468, Y: 963
+    - "of"
 
-Line 79 has content: 'sales rep with relevant information even'.
+    - "the"
 
-Its bounding polygon (points ordered clockwise):
+  - "intelligent cloud. As Al and other technologies continue to"
 
-Point 0 => X: 468, Y: 971
+    - "intelligent"
 
-Point 1 => X: 831, Y: 971
+    - "cloud."
 
-Point 2 => X: 831, Y: 992
+    - "As"
 
-Point 3 => X: 468, Y: 993
+    - "Al"
 
-Line 80 has content: 'before he or she meets the doctor. It's a'.
+    - "and"
 
-Its bounding polygon (points ordered clockwise):
+    - "other"
 
-Point 0 => X: 468, Y: 998
+    - "technologies"
 
-Point 1 => X: 823, Y: 999
+    - "continue"
 
-Point 2 => X: 823, Y: 1021
+    - "to"
 
-Point 3 => X: 468, Y: 1021
+  - "advance, potential use cases will multiply. "Speed to value is"
 
-Line 81 has content: 'totally different, digital game now."'.
+    - "advance,"
 
-Its bounding polygon (points ordered clockwise):
+    - "potential"
 
-Point 0 => X: 469, Y: 1028
+    - "use"
 
-Point 1 => X: 789, Y: 1027
+    - "cases"
 
-Point 2 => X: 789, Y: 1051
+    - "will"
 
-Point 3 => X: 469, Y: 1051
+    - "multiply."
 
-Line 82 has content: 'KEREN PRIYADARSHINI | Regional Business Lead - Asia,'.
+    - ""Speed"
 
-Its bounding polygon (points ordered clockwise):
+    - "to"
 
-Point 0 => X: 468, Y: 1067
+    - "value"
 
-Point 1 => X: 761, Y: 1068
+    - "is"
 
-Point 2 => X: 761, Y: 1084
+  - "going to continue to accelerate," said Lawry."
 
-Point 3 => X: 468, Y: 1083
+    - "going"
 
-Line 83 has content: 'Worldwide Health | Microsoft'.
+    - "to"
 
-Its bounding polygon (points ordered clockwise):
+    - "continue"
 
-Point 0 => X: 467, Y: 1088
+    - "to"
 
-Point 1 => X: 615, Y: 1088
+    - "accelerate,""
 
-Point 2 => X: 615, Y: 1104
+    - "said"
 
-Point 3 => X: 467, Y: 1104
+    - "Lawry."
 
-Line 84 has content: 'EMBRACING DIGITAL TRANSFORMATION IN LIFE SCIENCES ORGANIZATIONS'.
+  - "In addition to enhancing the patient experience,"
 
-Its bounding polygon (points ordered clockwise):
+    - "In"
 
-Point 0 => X: 77, Y: 1140
+    - "addition"
 
-Point 1 => X: 451, Y: 1140
+    - "to"
 
-Point 2 => X: 451, Y: 1153
+    - "enhancing"
 
-Point 3 => X: 77, Y: 1154
+    - "the"
 
-Line 85 has content: '2'.
+    - "patient"
 
-Its bounding polygon (points ordered clockwise):
+    - "experience,"
 
-Point 0 => X: 811, Y: 1138
+  - "pharmaceutical and other life sciences companies can"
 
-Point 1 => X: 823, Y: 1139
+    - "pharmaceutical"
 
-Point 2 => X: 822, Y: 1154
+    - "and"
 
-Point 3 => X: 810, Y: 1153
+    - "other"
 
-Detected languages:
+    - "life"
 
-Found language with locale'en' with confidence 0.95.
+    - "sciences"
 
-Found language with locale'en' with confidence 0.8.
+    - "companies"
 
-Found language with locale'en' with confidence 0.7.
+    - "can"
 
-Found language with locale'en' with confidence 0.9.
+  - "leverage advanced technologies to improve relationships with"
 
-Found language with locale'en' with confidence 1.
+    - "leverage"
 
-Found language with locale'en' with confidence 0.99.
+    - "advanced"
 
-Found language with locale'en' with confidence 0.6.
+    - "technologies"
 
-Found language with locale'en' with confidence 0.4.
+    - "to"
 
-Found language with locale'en' with confidence 0.2.
+    - "improve"
+
+    - "relationships"
+
+    - "with"
+
+  - "providers. For example, COVID-19 is driving changes in the"
+
+    - "providers."
+
+    - "For"
+
+    - "example,"
+
+    - "COVID-19"
+
+    - "is"
+
+    - "driving"
+
+    - "changes"
+
+    - "in"
+
+    - "the"
+
+  - "way companies interact with clinicians. Prior to COVID-19,"
+
+    - "way"
+
+    - "companies"
+
+    - "interact"
+
+    - "with"
+
+    - "clinicians."
+
+    - "Prior"
+
+    - "to"
+
+    - "COVID-19,"
+
+  - "75 percent of physicians preferred in-person sales visits from"
+
+    - "75"
+
+    - "percent"
+
+    - "of"
+
+    - "physicians"
+
+    - "preferred"
+
+    - "in-person"
+
+    - "sales"
+
+    - "visits"
+
+    - "from"
+
+  - "medtech reps; likewise, 77 percent of physicians preferred in-"
+
+    - "medtech"
+
+    - "reps;"
+
+    - "likewise,"
+
+    - "77"
+
+    - "percent"
+
+    - "of"
+
+    - "physicians"
+
+    - "preferred"
+
+    - "in-"
+
+  - "person sales visits from pharma reps.3"
+
+    - "person"
+
+    - "sales"
+
+    - "visits"
+
+    - "from"
+
+    - "pharma"
+
+    - "reps.3"
+
+  - "Since the advent of COVID-19, however, physician"
+
+    - "Since"
+
+    - "the"
+
+    - "advent"
+
+    - "of"
+
+    - "COVID-19,"
+
+    - "however,"
+
+    - "physician"
+
+  - "preferences are moving toward virtual visits. Only 53 percent"
+
+    - "preferences"
+
+    - "are"
+
+    - "moving"
+
+    - "toward"
+
+    - "virtual"
+
+    - "visits."
+
+    - "Only"
+
+    - "53"
+
+    - "percent"
+
+  - "of physicians now express a preference for in-person visits"
+
+    - "of"
+
+    - "physicians"
+
+    - "now"
+
+    - "express"
+
+    - "a"
+
+    - "preference"
+
+    - "for"
+
+    - "in-person"
+
+    - "visits"
+
+  - "from medtech reps and only 40 percent prefer in-person visits"
+
+    - "from"
+
+    - "medtech"
+
+    - "reps"
+
+    - "and"
+
+    - "only"
+
+    - "40"
+
+    - "percent"
+
+    - "prefer"
+
+    - "in-person"
+
+    - "visits"
+
+  - "from pharma reps. That puts the onus on pharmaceutical and"
+
+    - "from"
+
+    - "pharma"
+
+    - "reps."
+
+    - "That"
+
+    - "puts"
+
+    - "the"
+
+    - "onus"
+
+    - "on"
+
+    - "pharmaceutical"
+
+    - "and"
+
+  - "life sciences organizations to deliver valuable and engaging"
+
+    - "life"
+
+    - "sciences"
+
+    - "organizations"
+
+    - "to"
+
+    - "deliver"
+
+    - "valuable"
+
+    - "and"
+
+    - "engaging"
+
+  - "virtual visits to providers."
+
+    - "virtual"
+
+    - "visits"
+
+    - "to"
+
+    - "providers."
+
+  - "One way to do that is to leverage text analytics capabilities to"
+
+    - "One"
+
+    - "way"
+
+    - "to"
+
+    - "do"
+
+    - "that"
+
+    - "is"
+
+    - "to"
+
+    - "leverage"
+
+    - "text"
+
+    - "analytics"
+
+    - "capabilities"
+
+    - "to"
+
+  - "enhance the provider information stored in the organization's"
+
+    - "enhance"
+
+    - "the"
+
+    - "provider"
+
+    - "information"
+
+    - "stored"
+
+    - "in"
+
+    - "the"
+
+    - "organization's"
+
+  - "customer relationship management (CRM) system. For"
+
+    - "customer"
+
+    - "relationship"
+
+    - "management"
+
+    - "(CRM)"
+
+    - "system."
+
+    - "For"
+
+  - "example, a rep setting up a visit with 'Dr. X' could run text"
+
+    - "example,"
+
+    - "a"
+
+    - "rep"
+
+    - "setting"
+
+    - "up"
+
+    - "a"
+
+    - "visit"
+
+    - "with"
+
+    - "'Dr."
+
+    - "X'"
+
+    - "could"
+
+    - "run"
+
+    - "text"
+
+  - "analytics on publicly available resources on the web to identify"
+
+    - "analytics"
+
+    - "on"
+
+    - "publicly"
+
+    - "available"
+
+    - "resources"
+
+    - "on"
+
+    - "the"
+
+    - "web"
+
+    - "to"
+
+    - "identify"
+
+  - "on which specific topics Dr. X has been writing about and"
+
+    - "on"
+
+    - "which"
+
+    - "specific"
+
+    - "topics"
+
+    - "Dr."
+
+    - "X"
+
+    - "has"
+
+    - "been"
+
+    - "writing"
+
+    - "about"
+
+    - "and"
+
+  - "commenting. "All kinds of publicly available information can"
+
+    - "commenting."
+
+    - ""All"
+
+    - "kinds"
+
+    - "of"
+
+    - "publicly"
+
+    - "available"
+
+    - "information"
+
+    - "can"
+
+  - "All kinds of publicly"
+
+    - "All"
+
+    - "kinds"
+
+    - "of"
+
+    - "publicly"
+
+  - "available information"
+
+    - "available"
+
+    - "information"
+
+  - "can be mined with text"
+
+    - "can"
+
+    - "be"
+
+    - "mined"
+
+    - "with"
+
+    - "text"
+
+  - "analytics technology,"
+
+    - "analytics"
+
+    - "technology,"
+
+  - "which can be used to arm the"
+
+    - "which"
+
+    - "can"
+
+    - "be"
+
+    - "used"
+
+    - "to"
+
+    - "arm"
+
+    - "the"
+
+  - "sales rep with relevant information even"
+
+    - "sales"
+
+    - "rep"
+
+    - "with"
+
+    - "relevant"
+
+    - "information"
+
+    - "even"
+
+  - "before he or she meets the doctor. It's a"
+
+    - "before"
+
+    - "he"
+
+    - "or"
+
+    - "she"
+
+    - "meets"
+
+    - "the"
+
+    - "doctor."
+
+    - "It's"
+
+    - "a"
+
+  - "totally different, digital game now.""
+
+    - "totally"
+
+    - "different,"
+
+    - "digital"
+
+    - "game"
+
+    - "now.""
+
+  - "KEREN PRIYADARSHINI | Regional Business Lead - Asia,"
+
+    - "KEREN"
+
+    - "PRIYADARSHINI"
+
+    - "|"
+
+    - "Regional"
+
+    - "Business"
+
+    - "Lead"
+
+    - "-"
+
+    - "Asia,"
+
+  - "Worldwide Health | Microsoft"
+
+    - "Worldwide"
+
+    - "Health"
+
+    - "|"
+
+    - "Microsoft"
+
+  - "EMBRACING DIGITAL TRANSFORMATION IN LIFE SCIENCES ORGANIZATIONS"
+
+    - "EMBRACING"
+
+    - "DIGITAL"
+
+    - "TRANSFORMATION"
+
+    - "IN"
+
+    - "LIFE"
+
+    - "SCIENCES"
+
+    - "ORGANIZATIONS"
+
+  - "2"
+
+    - "2"
+
+Languages:
+
+- Found language: undefined (confidence: 0.95)
+
+  - "While healthcare is still in the early stages of its Al journey, we are seeing pharmaceutical and other life sciences organizations"
+
+  - "in and deploy advanced technologies, they are beginning to see"
+
+  - "are looking to incorporate automation and continuing smart"
+
+  - "and development, and manufacturing and supply chain management. Many life sciences organizations are also choosing to stay with more virtual approaches in the \"new normal\" -"
+
+  - "Clinical trial sponsors are continually seeking to make clinical"
+
+  - "adoption of decentralized clinical trials, with an increase in"
+
+  - "satisfaction with telemedicine. In the same report, 72 percent of"
+
+  - "convenience has also broadened trial access to reach a broader,"
+
+  - "Now, suddenly, patients are feeling empowered by technology."
+
+  - "Type 1 diabetes to predict and prevent the low levels of blood"
+
+  - "chronic disease management and eliminating the need for"
+
+  - "Tandem was able to create and deploy this innovation by"
+
+  - "advance, potential use cases will multiply. \"Speed to value is"
+
+  - "In addition to enhancing the patient experience,"
+
+  - "leverage advanced technologies to improve relationships with providers. For example, COVID-19 is driving changes in the way companies interact with clinicians. Prior to COVID-19, 75 percent of physicians preferred in-person sales visits from medtech reps; likewise, 77 percent of physicians preferred in-"
+
+  - "preferences are moving toward virtual visits. Only 53 percent"
+
+  - "from pharma reps. That puts the onus on pharmaceutical and life sciences organizations to deliver valuable and engaging virtual visits to providers."
+
+  - "enhance the provider information stored in the organization's"
+
+  - "All kinds of publicly"
+
+  - "can be mined with text"
+
+  - "sales rep with relevant information even"
+
+  - "totally different, digital game now.\""
+
+- Found language: undefined (confidence: 0.8)
+
+  - "making major investments in Al and related technologies.\""
+
+  - "factory investments to reduce costs in drug discovery, research"
+
+  - "physicians. The COVID-19 pandemic has accelerated the"
+
+  - "a myriad of evolving technologies and services (e.g., electronic consent, telehealth and remote patient monitoring). The aim"
+
+  - "customer relationship management (CRM) system. For"
+
+- Found language: undefined (confidence: 0.7)
+
+  - "TOM LAWRY | National Director for Al, Health and Life Sciences | Microsoft"
+
+  - "constant finger pricks to check glucose levels."
+
+  - "EMBRACING DIGITAL TRANSFORMATION IN LIFE SCIENCES ORGANIZATIONS"
+
+- Found language: undefined (confidence: 0.9)
+
+  - "As pharmaceutical and other life sciences organizations invest"
+
+  - "more diverse patient population."
+
+  - "Health, Microsoft. \"It used to be that physicians were key."
+
+  - "insulin pump with Basal-IQ technology enables patients with"
+
+  - "updatable pump improves the patient experience by automating"
+
+  - "leveraging the Al and machine learning capabilities of the intelligent cloud. As Al and other technologies continue to"
+
+  - "of physicians now express a preference for in-person visits"
+
+  - "One way to do that is to leverage text analytics capabilities to"
+
+- Found language: undefined (confidence: 1)
+
+  - "benefits in diverse areas across their organizations. Companies"
+
+  - "Enhancing the patient and provider experience"
+
+  - "trials faster and to improve the experience for patients and"
+
+  - "trial activities conducted remotely and in participants' homes."
+
+  - "The shift of trial activities closer to patients has been enabled by"
+
+  - "\"It's an interesting and exciting time right now,\" said Keren"
+
+  - "intelligent cloud to directly affect the patient experience is the"
+
+  - "example, a rep setting up a visit with 'Dr. X' could run text"
+
+  - "on which specific topics Dr. X has been writing about and"
+
+  - "available information"
+
+  - "analytics technology,\nwhich can be used to arm the"
+
+  - "before he or she meets the doctor. It's a"
+
+- Found language: undefined (confidence: 0.99)
+
+  - "particularly in clinical trials and sales and marketing areas."
+
+  - "In a Mckinsey survey1 up to 98 percent of patients reported"
+
+  - "physicians surveyed reported similar or better experiences with remote engagement compared with in-person visits."
+
+  - "to use technology to improve the patient experience and"
+
+  - "Pharmaceutical companies and other life sciences companies are realizing they have to pay attention to the patient experience in addition to the physician experience.\"\nEnhanced patient experiences can be delivered in many different ways. One example of a life sciences product that leverages the"
+
+  - "going to continue to accelerate,\" said Lawry."
+
+  - "pharmaceutical and other life sciences companies can"
+
+  - "person sales visits from pharma reps.3\nSince the advent of COVID-19, however, physician"
+
+  - "from medtech reps and only 40 percent prefer in-person visits"
+
+  - "analytics on publicly available resources on the web to identify"
+
+  - "commenting. \"All kinds of publicly available information can"
+
+- Found language: undefined (confidence: 0.6)
+
+  - "Priyadarshini, Regional Business Lead - Asia, Worldwide"
+
+  - "sugar that cause hypoglycemia.2 The algorithm-driven, software-"
+
+- Found language: undefined (confidence: 0.4)
+
+  - "Tandem® Diabetes Care insulin pump. The Tandem® t:slim X2"
+
+  - "Worldwide Health | Microsoft"
+
+- Found language: undefined (confidence: 0.2)
+
+  - "KEREN PRIYADARSHINI | Regional Business Lead - Asia,"
+
+No text styles were extracted from the document.
