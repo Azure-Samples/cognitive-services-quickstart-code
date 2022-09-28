@@ -1,21 +1,21 @@
-Contact Name:
+--------Analyzing business card 0 -----------
 
-First Name: 'Avery', with confidence 0.989
+Contact name: Chris Smith
 
-Last Name: 'Smith', with confidence 0.989
+        First Name: Chris, confidence: 0.99
 
-Job Title: 'Senior Researcher', with confidence 0.988
+        Last Name: Smith, confidence: 0.99
 
-Department: 'Cloud & Al Department', with confidence 0.973
+Job Title: Senior Researcher, confidence: 0.99
 
-Email: 'avery.smith@contoso.com', with confidence 0.988
+Department: Cloud & AI Department, confidence: 0.97
 
-Website: 'https://www.contoso.com/', with confidence 0.989
+Email: chris.smith@contoso.com, confidence: 0.99
 
-Mobile phone number: '+10791112345', with confidence 0.987
+Web site: https://www.contoso.com/, confidence: 0.99
 
-Work phone number: '+10209875432', with confidence 0.985
+Mobile phone number: +19871234567, confidence: 0.99
 
-Fax phone number: '+10207892345', with confidence 0.987
+Fax phone number: +19873126745, confidence: 0.99
 
-Company name: 'Contoso', with confidence 0.895
+Company name: CONTOSO, confidence: 0.40
