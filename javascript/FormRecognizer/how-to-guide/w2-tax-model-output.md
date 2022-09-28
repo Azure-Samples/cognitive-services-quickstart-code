@@ -1,35 +1,37 @@
-Document 0:
+Employee:
 
-AdditionalInfo:
+Name: ANGEL BROWN
 
-Amount: '6939.68', with confidence 0
+SSN/TIN: 123-45-6789
 
-LetterCode: 'DD', with confidence 0
+Address:
 
-AdditionalInfo:
+Street Address: 4567 MAIN STREET
 
-Amount: '5432', with confidence 0
+Postal Code: 12345
 
-LetterCode: 'F', with confidence 0
+Employer:
 
-AdditionalInfo:
+Name: CONTOSO LTD
 
-Amount: '876.3', with confidence 0
+ID (EIN): 98-7654321
 
-LetterCode: 'D', with confidence 0
+Address:
 
-AdditionalInfo:
+Street Address: 123 MICROSOFT WAY
 
-Amount: '123.3', with confidence 0
+Postal Code: 98765
 
-LetterCode: 'C', with confidence 0
+Control Number: 000086242
 
-Allocated Tips: '874.2', with confidence 0.999
+Tax Year: 2018
 
-Employer Name: 'CONTOSO LTD', with confidence 0.999
+Additional Info:
 
-Employer ID Number: '98-7654321', with confidence 0.999
+- DD: 6939.68
 
-Employer Address: '123 MICROSOFT WAY
+- F: 5432.00
 
-REDMOND, WA 98765', with confidence 0.999
+- D: 876.30
+
+- C: 123.30
