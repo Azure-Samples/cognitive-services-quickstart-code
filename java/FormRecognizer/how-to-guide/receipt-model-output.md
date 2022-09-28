@@ -1,17 +1,17 @@
-Merchant Name: 'Contoso', with confidence 0.616
+----------- Analyzing receipt info 0 -----------
 
-Transaction Date: '6/10/2019 12:00:00 AM +00:00', with confidence 0.989
+Merchant Name: Contoso, confidence: 0.62
 
-Item:
+Merchant Phone number: +19876543210, confidence: 0.99
 
-Description: 'Surface Pro 6', with confidence 0.99
+Transaction Date: 2019-06-10, confidence: 0.99
 
-Total Price: '1998', with confidence 0.995
+Receipt Items:
 
-Item:
+Total Price: 1998.000000, confidence: 1.00
 
-Description: 'Surface Pen', with confidence 0.99
+Quantity: 2.000000, confidence: 1.00
 
-Total Price: '299.97', with confidence 0.995
+Total Price: 299.970001, confidence: 1.00
 
-Total: '2516.28', with confidence '0.988'
+Quantity: 3.000000, confidence: 1.00
