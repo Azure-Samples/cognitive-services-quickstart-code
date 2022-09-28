@@ -1,21 +1,15 @@
-Contact Name:
+Name: Chris Smith
 
-First Name: 'Avery', with confidence 0.989
+Company: CONTOSO
 
-Last Name: 'Smith', with confidence 0.989
+Address: 4001 1st Ave NE Redmond, WA 98052
 
-Job Title: 'Senior Researcher', with confidence 0.988
+Job title: Senior Researcher
 
-Department: 'Cloud & Al Department', with confidence 0.973
+Department: Cloud & AI Department
 
-Email: 'avery.smith@contoso.com', with confidence 0.988
+Email: chris.smith@contoso.com
 
-Website: 'https://www.contoso.com/', with confidence 0.989
+Work phone: +1 (987) 213-5674
 
-Mobile phone number: '+10791112345', with confidence 0.987
-
-Work phone number: '+10209875432', with confidence 0.985
-
-Fax phone number: '+10207892345', with confidence 0.987
-
-Company name: 'Contoso', with confidence 0.895
+Website: https://www.contoso.com/
