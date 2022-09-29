@@ -1,1343 +1,713 @@
-Document Page 1 has 91 line(s), 173 word(s),
+Page has width: 909.0 and height: 1177.0, measured with unit: pixel
 
-and 2 selection mark(s).
+...Line # 0 has word count 6 and text 'Liberty's Delightful Sinful Bakery & Café' within bounding box '[46.0, 49.0], [364.0, 49.0], [364.0, 69.0], [46.0, 69.0]'
 
-Line 0 has content: 'Liberty's Delightful Sinful Bakery & Café'.
+......Word 'Liberty's' has a confidence of 0.991
 
-Its bounding polygon (points ordered clockwise):
+......Word 'Delightful' has a confidence of 0.987
 
-Point 0 => X: 46, Y: 49
+......Word 'Sinful' has a confidence of 0.997
 
-Point 1 => X: 364, Y: 49
+......Word 'Bakery' has a confidence of 0.997
 
-Point 2 => X: 364, Y: 69
+......Word '&' has a confidence of 0.991
 
-Point 3 => X: 46, Y: 69
+......Word 'Café' has a confidence of 0.857
 
-Line 1 has content: '765 Halifax St. Clearwater, FL 33756'.
+...Line # 1 has word count 6 and text '765 Halifax St. Clearwater, FL 33756' within bounding box '[48.0, 69.0], [320.0, 69.0], [320.0, 88.0], [48.0, 88.0]'
 
-Its bounding polygon (points ordered clockwise):
+......Word '765' has a confidence of 0.997
 
-Point 0 => X: 48, Y: 69
+......Word 'Halifax' has a confidence of 0.996
 
-Point 1 => X: 320, Y: 69
+......Word 'St.' has a confidence of 0.998
 
-Point 2 => X: 320, Y: 88
+......Word 'Clearwater,' has a confidence of 0.993
 
-Point 3 => X: 48, Y: 88
+......Word 'FL' has a confidence of 0.997
 
-Line 2 has content: 'D'.
+......Word '33756' has a confidence of 0.993
 
-Its bounding polygon (points ordered clockwise):
+...Line # 2 has word count 1 and text 'D' within bounding box '[826.0, 59.0], [840.0, 60.0], [840.0, 87.0], [825.0, 87.0]'
 
-Point 0 => X: 826, Y: 59
+......Word 'D' has a confidence of 0.98
 
-Point 1 => X: 840, Y: 60
+...Line # 3 has word count 3 and text 'Our reference: 3456623' within bounding box '[46.0, 102.0], [208.0, 101.0], [208.0, 118.0], [46.0, 118.0]'
 
-Point 2 => X: 840, Y: 87
+......Word 'Our' has a confidence of 0.997
 
-Point 3 => X: 825, Y: 87
+......Word 'reference:' has a confidence of 0.994
 
-Line 3 has content: 'Our reference: 3456623'.
+......Word '3456623' has a confidence of 0.996
 
-Its bounding polygon (points ordered clockwise):
+...Line # 4 has word count 3 and text 'Your reference: 2334566' within bounding box '[255.0, 102.0], [424.0, 101.0], [424.0, 118.0], [255.0, 118.0]'
 
-Point 0 => X: 46, Y: 102
+......Word 'Your' has a confidence of 0.988
 
-Point 1 => X: 208, Y: 101
+......Word 'reference:' has a confidence of 0.995
 
-Point 2 => X: 208, Y: 118
+......Word '2334566' has a confidence of 0.996
 
-Point 3 => X: 46, Y: 118
+...Line # 5 has word count 2 and text 'Received from:' within bounding box '[48.0, 168.0], [169.0, 168.0], [169.0, 186.0], [48.0, 186.0]'
 
-Line 4 has content: 'Your reference: 2334566'.
+......Word 'Received' has a confidence of 0.996
 
-Its bounding polygon (points ordered clockwise):
+......Word 'from:' has a confidence of 0.997
 
-Point 0 => X: 255, Y: 102
+...Line # 6 has word count 4 and text '8556 Indian Summer Ave.' within bounding box '[47.0, 188.0], [238.0, 188.0], [238.0, 207.0], [47.0, 206.0]'
 
-Point 1 => X: 424, Y: 101
+......Word '8556' has a confidence of 0.991
 
-Point 2 => X: 424, Y: 118
+......Word 'Indian' has a confidence of 0.963
 
-Point 3 => X: 255, Y: 118
+......Word 'Summer' has a confidence of 0.997
 
-Line 5 has content: 'Received from:'.
+......Word 'Ave.' has a confidence of 0.983
 
-Its bounding polygon (points ordered clockwise):
+...Line # 7 has word count 4 and text 'New Haven, CT 06511' within bounding box '[47.0, 208.0], [216.0, 208.0], [216.0, 226.0], [47.0, 227.0]'
 
-Point 0 => X: 48, Y: 168
+......Word 'New' has a confidence of 0.996
 
-Point 1 => X: 169, Y: 168
+......Word 'Haven,' has a confidence of 0.997
 
-Point 2 => X: 169, Y: 186
+......Word 'CT' has a confidence of 0.997
 
-Point 3 => X: 48, Y: 186
+......Word '06511' has a confidence of 0.994
 
-Line 6 has content: '8556 Indian Summer Ave.'.
+...Line # 8 has word count 3 and text 'Liberty booking contact' within bounding box '[599.0, 174.0], [790.0, 174.0], [790.0, 193.0], [599.0, 193.0]'
 
-Its bounding polygon (points ordered clockwise):
+......Word 'Liberty' has a confidence of 0.993
 
-Point 0 => X: 47, Y: 188
+......Word 'booking' has a confidence of 0.996
 
-Point 1 => X: 238, Y: 188
+......Word 'contact' has a confidence of 0.996
 
-Point 2 => X: 238, Y: 207
+...Line # 9 has word count 3 and text '40 River Street' within bounding box '[600.0, 195.0], [713.0, 196.0], [713.0, 214.0], [600.0, 213.0]'
 
-Point 3 => X: 47, Y: 206
+......Word '40' has a confidence of 0.998
 
-Line 7 has content: 'New Haven, CT 06511'.
+......Word 'River' has a confidence of 0.997
 
-Its bounding polygon (points ordered clockwise):
+......Word 'Street' has a confidence of 0.997
 
-Point 0 => X: 47, Y: 208
+...Line # 10 has word count 4 and text 'East Northport, NY 11731' within bounding box '[600.0, 215.0], [791.0, 215.0], [791.0, 235.0], [600.0, 235.0]'
 
-Point 1 => X: 216, Y: 208
+......Word 'East' has a confidence of 0.986
 
-Point 2 => X: 216, Y: 226
+......Word 'Northport,' has a confidence of 0.991
 
-Point 3 => X: 47, Y: 227
+......Word 'NY' has a confidence of 0.997
 
-Line 8 has content: 'Liberty booking contact'.
+......Word '11731' has a confidence of 0.995
 
-Its bounding polygon (points ordered clockwise):
+...Line # 11 has word count 3 and text 'Name Summer River' within bounding box '[46.0, 250.0], [204.0, 250.0], [204.0, 267.0], [46.0, 267.0]'
 
-Point 0 => X: 599, Y: 174
+......Word 'Name' has a confidence of 0.991
 
-Point 1 => X: 790, Y: 174
+......Word 'Summer' has a confidence of 0.997
 
-Point 2 => X: 790, Y: 193
+......Word 'River' has a confidence of 0.997
 
-Point 3 => X: 599, Y: 193
+...Line # 12 has word count 2 and text 'Tel. 34456632' within bounding box '[46.0, 270.0], [155.0, 270.0], [155.0, 288.0], [46.0, 288.0]'
 
-Line 9 has content: '40 River Street'.
+......Word 'Tel.' has a confidence of 0.987
 
-Its bounding polygon (points ordered clockwise):
+......Word '34456632' has a confidence of 0.993
 
-Point 0 => X: 600, Y: 195
+...Line # 13 has word count 2 and text 'E-mail email6@libertydelightfulsinful.com' within bounding box '[47.0, 290.0], [355.0, 290.0], [355.0, 309.0], [47.0, 309.0]'
 
-Point 1 => X: 713, Y: 196
+......Word 'E-mail' has a confidence of 0.993
 
-Point 2 => X: 713, Y: 214
+......Word 'email6@libertydelightfulsinful.com' has a confidence of 0.959
 
-Point 3 => X: 600, Y: 213
+...Line # 14 has word count 4 and text 'Booking Confirmation - ORIGINAL' within bounding box '[48.0, 354.0], [495.0, 354.0], [496.0, 381.0], [48.0, 384.0]'
 
-Line 10 has content: 'East Northport, NY 11731'.
+......Word 'Booking' has a confidence of 0.994
 
-Its bounding polygon (points ordered clockwise):
+......Word 'Confirmation' has a confidence of 0.991
 
-Point 0 => X: 600, Y: 215
+......Word '-' has a confidence of 0.995
 
-Point 1 => X: 791, Y: 215
+......Word 'ORIGINAL' has a confidence of 0.993
 
-Point 2 => X: 791, Y: 235
+...Line # 15 has word count 2 and text 'Our reference:' within bounding box '[70.0, 410.0], [178.0, 411.0], [178.0, 428.0], [70.0, 428.0]'
 
-Point 3 => X: 600, Y: 235
+......Word 'Our' has a confidence of 0.997
 
-Line 11 has content: 'Name Summer River'.
+......Word 'reference:' has a confidence of 0.993
 
-Its bounding polygon (points ordered clockwise):
+...Line # 16 has word count 1 and text '3456623' within bounding box '[202.0, 409.0], [287.0, 408.0], [287.0, 427.0], [202.0, 427.0]'
 
-Point 0 => X: 46, Y: 250
+......Word '3456623' has a confidence of 0.996
 
-Point 1 => X: 204, Y: 250
+...Line # 17 has word count 2 and text 'Your reference:' within bounding box '[70.0, 433.0], [188.0, 433.0], [188.0, 450.0], [70.0, 450.0]'
 
-Point 2 => X: 204, Y: 267
+......Word 'Your' has a confidence of 0.988
 
-Point 3 => X: 46, Y: 267
+......Word 'reference:' has a confidence of 0.994
 
-Line 12 has content: 'Tel. 34456632'.
+...Line # 18 has word count 1 and text '2334566' within bounding box '[200.0, 433.0], [267.0, 433.0], [268.0, 449.0], [200.0, 450.0]'
 
-Its bounding polygon (points ordered clockwise):
+......Word '2334566' has a confidence of 0.996
 
-Point 0 => X: 46, Y: 270
+...Line # 19 has word count 1 and text 'BL/NO:' within bounding box '[70.0, 452.0], [127.0, 453.0], [127.0, 470.0], [70.0, 469.0]'
 
-Point 1 => X: 155, Y: 270
+......Word 'BL/NO:' has a confidence of 0.993
 
-Point 2 => X: 155, Y: 288
+...Line # 20 has word count 1 and text 'EURH234' within bounding box '[202.0, 453.0], [278.0, 453.0], [278.0, 469.0], [202.0, 469.0]'
 
-Point 3 => X: 46, Y: 288
+......Word 'EURH234' has a confidence of 0.993
 
-Line 13 has content: 'E-mail email6@libertydelightfulsinful.com'.
+...Line # 21 has word count 1 and text 'Summary:' within bounding box '[71.0, 475.0], [147.0, 476.0], [147.0, 493.0], [71.0, 491.0]'
 
-Its bounding polygon (points ordered clockwise):
+......Word 'Summary:' has a confidence of 0.994
 
-Point 0 => X: 47, Y: 290
+...Line # 22 has word count 1 and text '45×72' within bounding box '[202.0, 474.0], [248.0, 475.0], [248.0, 490.0], [201.0, 490.0]'
 
-Point 1 => X: 355, Y: 290
+......Word '45×72' has a confidence of 0.608
 
-Point 2 => X: 355, Y: 309
+...Line # 23 has word count 1 and text 'Export:' within bounding box '[69.0, 535.0], [123.0, 535.0], [123.0, 554.0], [69.0, 553.0]'
 
-Point 3 => X: 47, Y: 309
+......Word 'Export:' has a confidence of 0.98
 
-Line 14 has content: 'Booking Confirmation - ORIGINAL'.
+...Line # 24 has word count 1 and text 'Common' within bounding box '[186.0, 535.0], [255.0, 536.0], [255.0, 553.0], [186.0, 552.0]'
 
-Its bounding polygon (points ordered clockwise):
+......Word 'Common' has a confidence of 0.997
 
-Point 0 => X: 48, Y: 354
+...Line # 25 has word count 5 and text 'Export empty pick up depot(s)' within bounding box '[48.0, 599.0], [285.0, 599.0], [285.0, 620.0], [48.0, 620.0]'
 
-Point 1 => X: 495, Y: 354
+......Word 'Export' has a confidence of 0.994
 
-Point 2 => X: 496, Y: 381
+......Word 'empty' has a confidence of 0.997
 
-Point 3 => X: 48, Y: 384
+......Word 'pick' has a confidence of 0.988
 
-Line 15 has content: 'Our reference:'.
+......Word 'up' has a confidence of 0.997
 
-Its bounding polygon (points ordered clockwise):
+......Word 'depot(s)' has a confidence of 0.993
 
-Point 0 => X: 70, Y: 410
+...Line # 26 has word count 3 and text '97 Morris Lane' within bounding box '[46.0, 640.0], [159.0, 641.0], [159.0, 659.0], [46.0, 658.0]'
 
-Point 1 => X: 178, Y: 411
+......Word '97' has a confidence of 0.996
 
-Point 2 => X: 178, Y: 428
+......Word 'Morris' has a confidence of 0.996
 
-Point 3 => X: 70, Y: 428
+......Word 'Lane' has a confidence of 0.989
 
-Line 16 has content: '3456623'.
+...Line # 27 has word count 4 and text 'Sterling Heights, MI 48310' within bounding box '[46.0, 660.0], [244.0, 660.0], [244.0, 679.0], [46.0, 679.0]'
 
-Its bounding polygon (points ordered clockwise):
+......Word 'Sterling' has a confidence of 0.996
 
-Point 0 => X: 202, Y: 409
+......Word 'Heights,' has a confidence of 0.995
 
-Point 1 => X: 287, Y: 408
+......Word 'MI' has a confidence of 0.932
 
-Point 2 => X: 287, Y: 427
+......Word '48310' has a confidence of 0.997
 
-Point 3 => X: 202, Y: 427
+...Line # 28 has word count 2 and text 'Booking date:' within bounding box '[502.0, 430.0], [606.0, 430.0], [606.0, 449.0], [502.0, 449.0]'
 
-Line 17 has content: 'Your reference:'.
+......Word 'Booking' has a confidence of 0.993
 
-Its bounding polygon (points ordered clockwise):
+......Word 'date:' has a confidence of 0.997
 
-Point 0 => X: 70, Y: 433
+...Line # 29 has word count 1 and text '05-Dec-2018' within bounding box '[616.0, 427.0], [719.0, 426.0], [719.0, 449.0], [616.0, 450.0]'
 
-Point 1 => X: 188, Y: 433
+......Word '05-Dec-2018' has a confidence of 0.97
 
-Point 2 => X: 188, Y: 450
+...Line # 30 has word count 2 and text 'Contract No:' within bounding box '[501.0, 448.0], [598.0, 447.0], [598.0, 469.0], [501.0, 470.0]'
 
-Point 3 => X: 70, Y: 450
+......Word 'Contract' has a confidence of 0.994
 
-Line 18 has content: '2334566'.
+......Word 'No:' has a confidence of 0.997
 
-Its bounding polygon (points ordered clockwise):
+...Line # 31 has word count 1 and text '334566' within bounding box '[621.0, 450.0], [680.0, 450.0], [680.0, 467.0], [621.0, 467.0]'
 
-Point 0 => X: 200, Y: 433
+......Word '334566' has a confidence of 0.994
 
-Point 1 => X: 267, Y: 433
+...Line # 32 has word count 2 and text 'Opt. A' within bounding box '[539.0, 490.0], [593.0, 489.0], [594.0, 512.0], [540.0, 513.0]'
 
-Point 2 => X: 268, Y: 449
+......Word 'Opt.' has a confidence of 0.986
 
-Point 3 => X: 200, Y: 450
+......Word 'A' has a confidence of 0.998
 
-Line 19 has content: 'BL/NO:'.
+...Line # 33 has word count 2 and text 'Opt. B' within bounding box '[661.0, 495.0], [711.0, 495.0], [711.0, 513.0], [662.0, 513.0]'
 
-Its bounding polygon (points ordered clockwise):
+......Word 'Opt.' has a confidence of 0.985
 
-Point 0 => X: 70, Y: 452
+......Word 'B' has a confidence of 0.995
 
-Point 1 => X: 127, Y: 453
+...Line # 34 has word count 1 and text 'From' within bounding box '[53.0, 693.0], [94.0, 695.0], [94.0, 710.0], [53.0, 709.0]'
 
-Point 2 => X: 127, Y: 470
+......Word 'From' has a confidence of 0.988
 
-Point 3 => X: 70, Y: 469
+...Line # 35 has word count 1 and text 'To' within bounding box '[212.0, 694.0], [233.0, 695.0], [233.0, 709.0], [213.0, 709.0]'
 
-Line 20 has content: 'EURH234'.
+......Word 'To' has a confidence of 0.997
 
-Its bounding polygon (points ordered clockwise):
+...Line # 36 has word count 1 and text 'By' within bounding box '[370.0, 695.0], [390.0, 696.0], [389.0, 709.0], [370.0, 709.0]'
 
-Point 0 => X: 202, Y: 453
+......Word 'By' has a confidence of 0.7
 
-Point 1 => X: 278, Y: 453
+...Line # 37 has word count 1 and text 'ETD' within bounding box '[526.0, 694.0], [557.0, 695.0], [557.0, 710.0], [527.0, 709.0]'
 
-Point 2 => X: 278, Y: 469
+......Word 'ETD' has a confidence of 0.997
 
-Point 3 => X: 202, Y: 469
+...Line # 38 has word count 1 and text 'ETA' within bounding box '[681.0, 694.0], [714.0, 695.0], [715.0, 709.0], [682.0, 709.0]'
 
-Line 21 has content: 'Summary:'.
+......Word 'ETA' has a confidence of 0.994
 
-Its bounding polygon (points ordered clockwise):
+...Line # 39 has word count 3 and text '118 Queen Street' within bounding box '[57.0, 712.0], [177.0, 712.0], [177.0, 728.0], [57.0, 728.0]'
 
-Point 0 => X: 71, Y: 475
+......Word '118' has a confidence of 0.995
 
-Point 1 => X: 147, Y: 476
+......Word 'Queen' has a confidence of 0.997
 
-Point 2 => X: 147, Y: 493
+......Word 'Street' has a confidence of 0.997
 
-Point 3 => X: 71, Y: 491
+...Line # 40 has word count 3 and text 'Hoboken, NJ 07030' within bounding box '[56.0, 729.0], [191.0, 729.0], [191.0, 745.0], [56.0, 745.0]'
 
-Line 22 has content: '45x72'.
+......Word 'Hoboken,' has a confidence of 0.993
 
-Its bounding polygon (points ordered clockwise):
+......Word 'NJ' has a confidence of 0.997
 
-Point 0 => X: 202, Y: 474
+......Word '07030' has a confidence of 0.997
 
-Point 1 => X: 248, Y: 475
+...Line # 41 has word count 4 and text '52 West Trenton St.' within bounding box '[212.0, 712.0], [345.0, 712.0], [345.0, 728.0], [212.0, 728.0]'
 
-Point 2 => X: 248, Y: 490
+......Word '52' has a confidence of 0.994
 
-Point 3 => X: 201, Y: 490
+......Word 'West' has a confidence of 0.99
 
-Line 23 has content: 'Export:'.
+......Word 'Trenton' has a confidence of 0.996
 
-Its bounding polygon (points ordered clockwise):
+......Word 'St.' has a confidence of 0.997
 
-Point 0 => X: 69, Y: 535
+...Line # 42 has word count 2 and text 'Harleysville, PA' within bounding box '[210.0, 729.0], [320.0, 729.0], [320.0, 746.0], [210.0, 746.0]'
 
-Point 1 => X: 123, Y: 535
+......Word 'Harleysville,' has a confidence of 0.991
 
-Point 2 => X: 123, Y: 554
+......Word 'PA' has a confidence of 0.997
 
-Point 3 => X: 69, Y: 553
+...Line # 43 has word count 1 and text '19438' within bounding box '[215.0, 747.0], [256.0, 748.0], [256.0, 763.0], [214.0, 763.0]'
 
-Line 24 has content: 'Common'.
+......Word '19438' has a confidence of 0.997
 
-Its bounding polygon (points ordered clockwise):
+...Line # 44 has word count 3 and text 'cause science slow' within bounding box '[367.0, 713.0], [501.0, 713.0], [501.0, 728.0], [367.0, 728.0]'
 
-Point 0 => X: 186, Y: 535
+......Word 'cause' has a confidence of 0.997
 
-Point 1 => X: 255, Y: 536
+......Word 'science' has a confidence of 0.996
 
-Point 2 => X: 255, Y: 553
+......Word 'slow' has a confidence of 0.988
 
-Point 3 => X: 186, Y: 552
+...Line # 45 has word count 1 and text '09-Dec-2018' within bounding box '[525.0, 712.0], [613.0, 712.0], [613.0, 727.0], [525.0, 727.0]'
 
-Line 25 has content: 'Export empty pick up depot(s)'.
+......Word '09-Dec-2018' has a confidence of 0.991
 
-Its bounding polygon (points ordered clockwise):
+...Line # 46 has word count 1 and text '19:00' within bounding box '[526.0, 730.0], [565.0, 730.0], [564.0, 744.0], [526.0, 744.0]'
 
-Point 0 => X: 48, Y: 599
+......Word '19:00' has a confidence of 0.993
 
-Point 1 => X: 285, Y: 599
+...Line # 47 has word count 1 and text '09-Dec-2020' within bounding box '[681.0, 713.0], [770.0, 712.0], [770.0, 727.0], [681.0, 728.0]'
 
-Point 2 => X: 285, Y: 620
+......Word '09-Dec-2020' has a confidence of 0.991
 
-Point 3 => X: 48, Y: 620
+...Line # 48 has word count 1 and text '11:00' within bounding box '[682.0, 731.0], [721.0, 730.0], [720.0, 744.0], [682.0, 744.0]'
 
-Line 26 has content: '97 Morris Lane'.
+......Word '11:00' has a confidence of 0.997
 
-Its bounding polygon (points ordered clockwise):
+...Line # 49 has word count 3 and text '9 Ketch Harbour' within bounding box '[55.0, 765.0], [167.0, 765.0], [167.0, 781.0], [55.0, 780.0]'
 
-Point 0 => X: 46, Y: 640
+......Word '9' has a confidence of 0.981
 
-Point 1 => X: 159, Y: 641
+......Word 'Ketch' has a confidence of 0.997
 
-Point 2 => X: 159, Y: 659
+......Word 'Harbour' has a confidence of 0.996
 
-Point 3 => X: 46, Y: 658
+...Line # 50 has word count 1 and text 'Ave.' within bounding box '[56.0, 783.0], [86.0, 784.0], [86.0, 797.0], [56.0, 797.0]'
 
-Line 27 has content: 'Sterling Heights, MI 48310'.
+......Word 'Ave.' has a confidence of 0.991
 
-Its bounding polygon (points ordered clockwise):
+...Line # 51 has word count 2 and text 'Vincentown, NJ' within bounding box '[55.0, 799.0], [161.0, 799.0], [161.0, 814.0], [55.0, 815.0]'
 
-Point 0 => X: 46, Y: 660
+......Word 'Vincentown,' has a confidence of 0.993
 
-Point 1 => X: 244, Y: 660
+......Word 'NJ' has a confidence of 0.997
 
-Point 2 => X: 244, Y: 679
+...Line # 52 has word count 3 and text '75 Fawn Street' within bounding box '[211.0, 765.0], [316.0, 765.0], [316.0, 781.0], [211.0, 780.0]'
 
-Point 3 => X: 46, Y: 679
+......Word '75' has a confidence of 0.997
 
-Line 28 has content: 'Booking date:'.
+......Word 'Fawn' has a confidence of 0.991
 
-Its bounding polygon (points ordered clockwise):
+......Word 'Street' has a confidence of 0.997
 
-Point 0 => X: 502, Y: 430
+...Line # 53 has word count 3 and text 'Peabody, MA 01960' within bounding box '[212.0, 782.0], [350.0, 782.0], [350.0, 798.0], [212.0, 798.0]'
 
-Point 1 => X: 606, Y: 430
+......Word 'Peabody,' has a confidence of 0.994
 
-Point 2 => X: 606, Y: 449
+......Word 'MA' has a confidence of 0.997
 
-Point 3 => X: 502, Y: 449
+......Word '01960' has a confidence of 0.997
 
-Line 29 has content: '05-Dec-2018'.
+...Line # 54 has word count 3 and text 'tone late spoken' within bounding box '[368.0, 766.0], [481.0, 766.0], [481.0, 782.0], [368.0, 782.0]'
 
-Its bounding polygon (points ordered clockwise):
+......Word 'tone' has a confidence of 0.995
 
-Point 0 => X: 616, Y: 427
+......Word 'late' has a confidence of 0.988
 
-Point 1 => X: 719, Y: 426
+......Word 'spoken' has a confidence of 0.997
 
-Point 2 => X: 719, Y: 449
+...Line # 55 has word count 1 and text '12-Dec-2018' within bounding box '[526.0, 765.0], [614.0, 765.0], [614.0, 780.0], [526.0, 781.0]'
 
-Point 3 => X: 616, Y: 450
+......Word '12-Dec-2018' has a confidence of 0.969
 
-Line 30 has content: 'Contract No:'.
+...Line # 56 has word count 1 and text '10:00' within bounding box '[525.0, 782.0], [565.0, 783.0], [565.0, 797.0], [526.0, 797.0]'
 
-Its bounding polygon (points ordered clockwise):
+......Word '10:00' has a confidence of 0.993
 
-Point 0 => X: 501, Y: 448
+...Line # 57 has word count 1 and text '19-Dec-2020' within bounding box '[683.0, 766.0], [771.0, 765.0], [771.0, 781.0], [683.0, 781.0]'
 
-Point 1 => X: 598, Y: 447
+......Word '19-Dec-2020' has a confidence of 0.98
 
-Point 2 => X: 598, Y: 469
+...Line # 58 has word count 1 and text 'Deadline' within bounding box '[55.0, 849.0], [120.0, 850.0], [120.0, 865.0], [55.0, 864.0]'
 
-Point 3 => X: 501, Y: 470
+......Word 'Deadline' has a confidence of 0.991
 
-Line 31 has content: '334566'.
+...Line # 59 has word count 1 and text 'Location' within bounding box '[251.0, 850.0], [314.0, 850.0], [314.0, 865.0], [251.0, 864.0]'
 
-Its bounding polygon (points ordered clockwise):
+......Word 'Location' has a confidence of 0.994
 
-Point 0 => X: 621, Y: 450
+...Line # 60 has word count 2 and text 'Date/Time (local)' within bounding box '[446.0, 849.0], [569.0, 849.0], [569.0, 865.0], [446.0, 865.0]'
 
-Point 1 => X: 680, Y: 450
+......Word 'Date/Time' has a confidence of 0.991
 
-Point 2 => X: 680, Y: 467
+......Word '(local)' has a confidence of 0.991
 
-Point 3 => X: 621, Y: 467
+...Line # 61 has word count 2 and text 'Required action' within bounding box '[642.0, 849.0], [757.0, 849.0], [757.0, 865.0], [642.0, 865.0]'
 
-Line 32 has content: 'Opt. A'.
+......Word 'Required' has a confidence of 0.991
 
-Its bounding polygon (points ordered clockwise):
+......Word 'action' has a confidence of 0.997
 
-Point 0 => X: 539, Y: 490
+...Line # 62 has word count 1 and text 'Table' within bounding box '[56.0, 867.0], [94.0, 867.0], [93.0, 881.0], [56.0, 880.0]'
 
-Point 1 => X: 593, Y: 489
+......Word 'Table' has a confidence of 0.997
 
-Point 2 => X: 594, Y: 512
+...Line # 63 has word count 1 and text 'Harleysville' within bounding box '[252.0, 867.0], [331.0, 867.0], [331.0, 882.0], [252.0, 882.0]'
 
-Point 3 => X: 540, Y: 513
+......Word 'Harleysville' has a confidence of 0.993
 
-Line 33 has content: 'Opt. B'.
+...Line # 64 has word count 1 and text '(PA)' within bounding box '[254.0, 884.0], [282.0, 885.0], [282.0, 901.0], [254.0, 900.0]'
 
-Its bounding polygon (points ordered clockwise):
+......Word '(PA)' has a confidence of 0.991
 
-Point 0 => X: 661, Y: 495
+...Line # 65 has word count 1 and text '08-Dec-2019' within bounding box '[447.0, 866.0], [535.0, 866.0], [535.0, 882.0], [447.0, 881.0]'
 
-Point 1 => X: 711, Y: 495
+......Word '08-Dec-2019' has a confidence of 0.991
 
-Point 2 => X: 711, Y: 513
+...Line # 66 has word count 1 and text 'Flight' within bounding box '[56.0, 902.0], [94.0, 902.0], [94.0, 919.0], [56.0, 918.0]'
 
-Point 3 => X: 662, Y: 513
+......Word 'Flight' has a confidence of 0.997
 
-Line 34 has content: 'From'.
+...Line # 67 has word count 1 and text 'Harleysville' within bounding box '[252.0, 902.0], [328.0, 903.0], [328.0, 918.0], [252.0, 917.0]'
 
-Its bounding polygon (points ordered clockwise):
+......Word 'Harleysville' has a confidence of 0.992
 
-Point 0 => X: 53, Y: 693
+...Line # 68 has word count 1 and text '(PA' within bounding box '[253.0, 919.0], [280.0, 920.0], [279.0, 935.0], [254.0, 935.0]'
 
-Point 1 => X: 94, Y: 695
+......Word '(PA' has a confidence of 0.98
 
-Point 2 => X: 94, Y: 710
+...Line # 69 has word count 1 and text '08-Dec-2019' within bounding box '[447.0, 902.0], [536.0, 902.0], [536.0, 917.0], [447.0, 917.0]'
 
-Point 3 => X: 53, Y: 709
+......Word '08-Dec-2019' has a confidence of 0.991
 
-Line 35 has content: 'To'.
+...Line # 70 has word count 1 and text '13:00' within bounding box '[448.0, 920.0], [487.0, 919.0], [486.0, 934.0], [448.0, 934.0]'
 
-Its bounding polygon (points ordered clockwise):
+......Word '13:00' has a confidence of 0.997
 
-Point 0 => X: 212, Y: 694
+...Line # 71 has word count 6 and text 'Two more days and all his' within bounding box '[643.0, 902.0], [818.0, 901.0], [818.0, 918.0], [643.0, 919.0]'
 
-Point 1 => X: 233, Y: 695
+......Word 'Two' has a confidence of 0.997
 
-Point 2 => X: 233, Y: 709
+......Word 'more' has a confidence of 0.989
 
-Point 3 => X: 213, Y: 709
+......Word 'days' has a confidence of 0.979
 
-Line 36 has content: 'By'.
+......Word 'and' has a confidence of 0.998
 
-Its bounding polygon (points ordered clockwise):
+......Word 'all' has a confidence of 0.998
 
-Point 0 => X: 370, Y: 695
+......Word 'his' has a confidence of 0.998
 
-Point 1 => X: 390, Y: 696
+...Line # 72 has word count 4 and text 'problems would be solved.' within bounding box '[643.0, 920.0], [821.0, 919.0], [822.0, 934.0], [643.0, 936.0]'
 
-Point 2 => X: 389, Y: 709
+......Word 'problems' has a confidence of 0.995
 
-Point 3 => X: 370, Y: 709
+......Word 'would' has a confidence of 0.997
 
-Line 37 has content: 'ETD'.
+......Word 'be' has a confidence of 0.997
 
-Its bounding polygon (points ordered clockwise):
+......Word 'solved.' has a confidence of 0.996
 
-Point 0 => X: 526, Y: 694
+...Line # 73 has word count 1 and text 'Round' within bounding box '[56.0, 938.0], [103.0, 937.0], [103.0, 952.0], [56.0, 953.0]'
 
-Point 1 => X: 557, Y: 695
+......Word 'Round' has a confidence of 0.997
 
-Point 2 => X: 557, Y: 710
+...Line # 74 has word count 1 and text 'Harleysville' within bounding box '[251.0, 937.0], [328.0, 937.0], [328.0, 954.0], [251.0, 953.0]'
 
-Point 3 => X: 527, Y: 709
+......Word 'Harleysville' has a confidence of 0.991
 
-Line 38 has content: 'ETA'.
+...Line # 75 has word count 1 and text '(PA' within bounding box '[253.0, 954.0], [280.0, 955.0], [280.0, 970.0], [253.0, 970.0]'
 
-Its bounding polygon (points ordered clockwise):
+......Word '(PA' has a confidence of 0.98
 
-Point 0 => X: 681, Y: 694
+...Line # 76 has word count 1 and text '09-Dec-2019' within bounding box '[447.0, 938.0], [535.0, 937.0], [535.0, 952.0], [447.0, 953.0]'
 
-Point 1 => X: 714, Y: 695
+......Word '09-Dec-2019' has a confidence of 0.98
 
-Point 2 => X: 715, Y: 709
+...Line # 77 has word count 1 and text 'Accent' within bounding box '[54.0, 973.0], [105.0, 973.0], [105.0, 987.0], [54.0, 987.0]'
 
-Point 3 => X: 682, Y: 709
+......Word 'Accent' has a confidence of 0.997
 
-Line 39 has content: '118 Queen Street'.
+...Line # 78 has word count 1 and text 'Harleysville' within bounding box '[252.0, 972.0], [328.0, 973.0], [328.0, 989.0], [252.0, 988.0]'
 
-Its bounding polygon (points ordered clockwise):
+......Word 'Harleysville' has a confidence of 0.992
 
-Point 0 => X: 57, Y: 712
+...Line # 79 has word count 1 and text '(PA)' within bounding box '[254.0, 991.0], [283.0, 992.0], [282.0, 1006.0], [254.0, 1005.0]'
 
-Point 1 => X: 177, Y: 712
+......Word '(PA)' has a confidence of 0.991
 
-Point 2 => X: 177, Y: 728
+...Line # 80 has word count 1 and text '10-Dec-2019' within bounding box '[447.0, 972.0], [536.0, 972.0], [536.0, 987.0], [447.0, 988.0]'
 
-Point 3 => X: 57, Y: 728
+......Word '10-Dec-2019' has a confidence of 0.991
 
-Line 40 has content: 'Hoboken, NJ 07030'.
+...Line # 81 has word count 1 and text 'Monkey' within bounding box '[56.0, 1009.0], [109.0, 1009.0], [109.0, 1025.0], [55.0, 1024.0]'
 
-Its bounding polygon (points ordered clockwise):
+......Word 'Monkey' has a confidence of 0.993
 
-Point 0 => X: 56, Y: 729
+...Line # 82 has word count 1 and text 'Harleysville' within bounding box '[252.0, 1008.0], [329.0, 1009.0], [328.0, 1025.0], [252.0, 1024.0]'
 
-Point 1 => X: 191, Y: 729
+......Word 'Harleysville' has a confidence of 0.992
 
-Point 2 => X: 191, Y: 745
+...Line # 83 has word count 1 and text '(PA)' within bounding box '[253.0, 1026.0], [280.0, 1026.0], [279.0, 1041.0], [253.0, 1041.0]'
 
-Point 3 => X: 56, Y: 745
+......Word '(PA)' has a confidence of 0.955
 
-Line 41 has content: '52 West Trenton St.'.
+...Line # 84 has word count 1 and text '11-Dec-2019' within bounding box '[448.0, 1009.0], [536.0, 1009.0], [536.0, 1023.0], [448.0, 1023.0]'
 
-Its bounding polygon (points ordered clockwise):
+......Word '11-Dec-2019' has a confidence of 0.991
 
-Point 0 => X: 212, Y: 712
+...Line # 85 has word count 1 and text 'Route' within bounding box '[56.0, 1044.0], [97.0, 1045.0], [97.0, 1058.0], [56.0, 1059.0]'
 
-Point 1 => X: 345, Y: 712
+......Word 'Route' has a confidence of 0.995
 
-Point 2 => X: 345, Y: 728
+...Line # 86 has word count 1 and text 'Harleysville' within bounding box '[253.0, 1044.0], [329.0, 1044.0], [328.0, 1060.0], [253.0, 1059.0]'
 
-Point 3 => X: 212, Y: 728
+......Word 'Harleysville' has a confidence of 0.993
 
-Line 42 has content: 'Harleysville, PA'.
+...Line # 87 has word count 1 and text '(PA)' within bounding box '[254.0, 1061.0], [281.0, 1062.0], [280.0, 1076.0], [254.0, 1075.0]'
 
-Its bounding polygon (points ordered clockwise):
+......Word '(PA)' has a confidence of 0.981
 
-Point 0 => X: 210, Y: 729
+...Line # 88 has word count 1 and text '11-Dec-2019' within bounding box '[449.0, 1044.0], [535.0, 1044.0], [535.0, 1058.0], [449.0, 1058.0]'
 
-Point 1 => X: 320, Y: 729
+......Word '11-Dec-2019' has a confidence of 0.991
 
-Point 2 => X: 320, Y: 746
+...Line # 89 has word count 4 and text 'Peanuts don't grow on' within bounding box '[643.0, 1043.0], [794.0, 1044.0], [794.0, 1061.0], [643.0, 1059.0]'
 
-Point 3 => X: 210, Y: 746
+......Word 'Peanuts' has a confidence of 0.996
 
-Line 43 has content: '19438'.
+......Word 'don't' has a confidence of 0.965
 
-Its bounding polygon (points ordered clockwise):
+......Word 'grow' has a confidence of 0.991
 
-Point 0 => X: 215, Y: 747
+......Word 'on' has a confidence of 0.997
 
-Point 1 => X: 256, Y: 748
+...Line # 90 has word count 1 and text 'trees.' within bounding box '[643.0, 1061.0], [681.0, 1063.0], [681.0, 1076.0], [643.0, 1075.0]'
 
-Point 2 => X: 256, Y: 763
+......Word 'trees.' has a confidence of 0.958
 
-Point 3 => X: 214, Y: 763
+...Selection mark is 'unselected' within bounding box '[507.0, 488.0], [537.0, 488.0], [537.0, 519.0], [507.0, 519.0]' and has a confidence of 1.0
 
-Line 44 has content: 'cause science slow'.
+...Selection mark is 'unselected' within bounding box '[614.0, 489.0], [645.0, 489.0], [645.0, 520.0], [614.0, 520.0]' and has a confidence of 1.0
 
-Its bounding polygon (points ordered clockwise):
+Table # 0 has 4 rows and 5 columns
 
-Point 0 => X: 367, Y: 713
+Table # 0 location on page: 1 is [48.0, 692.0], [832.0, 693.0], [833.0, 818.0], [48.0, 818.0]
 
-Point 1 => X: 501, Y: 713
+...Cell[0][0] has content 'From'
 
-Point 2 => X: 501, Y: 728
+...content on page 1 is within bounding box '[49.0, 692.0], [201.0, 692.0], [201.0, 711.0], [49.0, 711.0]'
 
-Point 3 => X: 367, Y: 728
+...Cell[0][1] has content 'To'
 
-Line 45 has content: '09-Dec-2018'.
+...content on page 1 is within bounding box '[201.0, 692.0], [359.0, 692.0], [359.0, 711.0], [201.0, 711.0]'
 
-Its bounding polygon (points ordered clockwise):
+...Cell[0][2] has content 'By'
 
-Point 0 => X: 525, Y: 712
+...content on page 1 is within bounding box '[359.0, 692.0], [512.0, 692.0], [512.0, 711.0], [359.0, 711.0]'
 
-Point 1 => X: 613, Y: 712
+...Cell[0][3] has content 'ETD'
 
-Point 2 => X: 613, Y: 727
+...content on page 1 is within bounding box '[512.0, 692.0], [648.0, 692.0], [648.0, 711.0], [512.0, 711.0]'
 
-Point 3 => X: 525, Y: 727
+...Cell[0][4] has content 'ETA'
 
-Line 46 has content: '19:00'.
+...content on page 1 is within bounding box '[648.0, 692.0], [832.0, 693.0], [832.0, 712.0], [648.0, 711.0]'
 
-Its bounding polygon (points ordered clockwise):
+...Cell[1][0] has content '118 Queen Street Hoboken, NJ 07030'
 
-Point 0 => X: 526, Y: 730
+...content on page 1 is within bounding box '[49.0, 711.0], [201.0, 711.0], [200.0, 764.0], [49.0, 764.0]'
 
-Point 1 => X: 565, Y: 730
+...Cell[1][1] has content '52 West Trenton St. Harleysville, PA 19438'
 
-Point 2 => X: 564, Y: 744
+...content on page 1 is within bounding box '[201.0, 711.0], [359.0, 711.0], [359.0, 764.0], [200.0, 764.0]'
 
-Point 3 => X: 526, Y: 744
+...Cell[1][2] has content 'cause science slow'
 
-Line 47 has content: '09-Dec-2020'.
+...content on page 1 is within bounding box '[359.0, 711.0], [512.0, 711.0], [513.0, 764.0], [359.0, 764.0]'
 
-Its bounding polygon (points ordered clockwise):
+...Cell[1][3] has content '09-Dec-2018 19:00'
 
-Point 0 => X: 681, Y: 713
+...content on page 1 is within bounding box '[512.0, 711.0], [648.0, 711.0], [648.0, 764.0], [513.0, 764.0]'
 
-Point 1 => X: 770, Y: 712
+...Cell[1][4] has content '09-Dec-2020 11:00'
 
-Point 2 => X: 770, Y: 727
+...content on page 1 is within bounding box '[648.0, 711.0], [832.0, 712.0], [832.0, 764.0], [648.0, 764.0]'
 
-Point 3 => X: 681, Y: 728
+...Cell[3][0] has content '9 Ketch Harbour Ave. Vincentown, NJ'
 
-Line 48 has content: '11:00'.
+...content on page 1 is within bounding box '[49.0, 764.0], [200.0, 764.0], [200.0, 816.0], [49.0, 816.0]'
 
-Its bounding polygon (points ordered clockwise):
+...Cell[3][1] has content '75 Fawn Street Peabody, MA 01960'
 
-Point 0 => X: 682, Y: 731
+...content on page 1 is within bounding box '[200.0, 764.0], [359.0, 764.0], [359.0, 816.0], [200.0, 816.0]'
 
-Point 1 => X: 721, Y: 730
+...Cell[3][2] has content 'tone late spoken'
 
-Point 2 => X: 720, Y: 744
+...content on page 1 is within bounding box '[359.0, 764.0], [513.0, 764.0], [513.0, 816.0], [359.0, 816.0]'
 
-Point 3 => X: 682, Y: 744
+...Cell[3][3] has content '12-Dec-2018 10:00'
 
-Line 49 has content: '9 Ketch Harbour'.
+...content on page 1 is within bounding box '[513.0, 764.0], [648.0, 764.0], [649.0, 816.0], [513.0, 816.0]'
 
-Its bounding polygon (points ordered clockwise):
+...Cell[3][4] has content '19-Dec-2020'
 
-Point 0 => X: 55, Y: 765
+...content on page 1 is within bounding box '[648.0, 764.0], [832.0, 764.0], [832.0, 816.0], [649.0, 816.0]'
 
-Point 1 => X: 167, Y: 765
+Table # 1 has 7 rows and 4 columns
 
-Point 2 => X: 167, Y: 781
+Table # 1 location on page: 1 is [47.0, 847.0], [834.0, 848.0], [834.0, 1080.0], [47.0, 1079.0]
 
-Point 3 => X: 55, Y: 780
+...Cell[0][0] has content 'Deadline'
 
-Line 50 has content: 'Ave.'.
+...content on page 1 is within bounding box '[50.0, 848.0], [184.0, 848.0], [184.0, 866.0], [50.0, 866.0]'
 
-Its bounding polygon (points ordered clockwise):
+...Cell[0][1] has content 'Location'
 
-Point 0 => X: 56, Y: 783
+...content on page 1 is within bounding box '[184.0, 848.0], [388.0, 848.0], [388.0, 866.0], [184.0, 866.0]'
 
-Point 1 => X: 86, Y: 784
+...Cell[0][2] has content 'Date/Time (local)'
 
-Point 2 => X: 86, Y: 797
+...content on page 1 is within bounding box '[388.0, 848.0], [604.0, 848.0], [604.0, 866.0], [388.0, 866.0]'
 
-Point 3 => X: 56, Y: 797
+...Cell[0][3] has content 'Required action'
 
-Line 51 has content: 'Vincentown, NJ'.
+...content on page 1 is within bounding box '[604.0, 848.0], [832.0, 848.0], [832.0, 866.0], [604.0, 866.0]'
 
-Its bounding polygon (points ordered clockwise):
+...Cell[1][0] has content 'Table'
 
-Point 0 => X: 55, Y: 799
+...content on page 1 is within bounding box '[50.0, 866.0], [184.0, 866.0], [184.0, 901.0], [49.0, 901.0]'
 
-Point 1 => X: 161, Y: 799
+...Cell[1][1] has content 'Harleysville (PA)'
 
-Point 2 => X: 161, Y: 814
+...content on page 1 is within bounding box '[184.0, 866.0], [388.0, 866.0], [388.0, 901.0], [184.0, 901.0]'
 
-Point 3 => X: 55, Y: 815
+...Cell[1][2] has content '08-Dec-2019'
 
-Line 52 has content: '75 Fawn Street'.
+...content on page 1 is within bounding box '[388.0, 866.0], [604.0, 866.0], [604.0, 901.0], [388.0, 901.0]'
 
-Its bounding polygon (points ordered clockwise):
+...Cell[1][3] has content ''
 
-Point 0 => X: 211, Y: 765
+...content on page 1 is within bounding box '[604.0, 866.0], [832.0, 866.0], [832.0, 902.0], [604.0, 901.0]'
 
-Point 1 => X: 316, Y: 765
+...Cell[2][0] has content 'Flight'
 
-Point 2 => X: 316, Y: 781
+...content on page 1 is within bounding box '[49.0, 901.0], [184.0, 901.0], [184.0, 936.0], [49.0, 936.0]'
 
-Point 3 => X: 211, Y: 780
+...Cell[2][1] has content 'Harleysville (PA'
 
-Line 53 has content: 'Peabody, MA 01960'.
+...content on page 1 is within bounding box '[184.0, 901.0], [388.0, 901.0], [388.0, 936.0], [184.0, 936.0]'
 
-Its bounding polygon (points ordered clockwise):
+...Cell[2][2] has content '08-Dec-2019 13:00'
 
-Point 0 => X: 212, Y: 782
+...content on page 1 is within bounding box '[388.0, 901.0], [604.0, 901.0], [604.0, 936.0], [388.0, 936.0]'
 
-Point 1 => X: 350, Y: 782
+...Cell[2][3] has content 'Two more days and all his problems would be solved.'
 
-Point 2 => X: 350, Y: 798
+...content on page 1 is within bounding box '[604.0, 901.0], [832.0, 902.0], [832.0, 937.0], [604.0, 936.0]'
 
-Point 3 => X: 212, Y: 798
+...Cell[3][0] has content 'Round'
 
-Line 54 has content: 'tone late spoken'.
+...content on page 1 is within bounding box '[49.0, 936.0], [184.0, 936.0], [185.0, 971.0], [49.0, 971.0]'
 
-Its bounding polygon (points ordered clockwise):
+...Cell[3][1] has content 'Harleysville (PA'
 
-Point 0 => X: 368, Y: 766
+...content on page 1 is within bounding box '[184.0, 936.0], [388.0, 936.0], [389.0, 971.0], [185.0, 971.0]'
 
-Point 1 => X: 481, Y: 766
+...Cell[3][2] has content '09-Dec-2019'
 
-Point 2 => X: 481, Y: 782
+...content on page 1 is within bounding box '[388.0, 936.0], [604.0, 936.0], [604.0, 971.0], [389.0, 971.0]'
 
-Point 3 => X: 368, Y: 782
+...Cell[3][3] has content ''
 
-Line 55 has content: '12-Dec-2018'.
+...content on page 1 is within bounding box '[604.0, 936.0], [832.0, 937.0], [832.0, 971.0], [604.0, 971.0]'
 
-Its bounding polygon (points ordered clockwise):
+...Cell[4][0] has content 'Accent'
 
-Point 0 => X: 526, Y: 765
+...content on page 1 is within bounding box '[49.0, 971.0], [185.0, 971.0], [185.0, 1007.0], [49.0, 1007.0]'
 
-Point 1 => X: 614, Y: 765
+...Cell[4][1] has content 'Harleysville (PA)'
 
-Point 2 => X: 614, Y: 780
+...content on page 1 is within bounding box '[185.0, 971.0], [389.0, 971.0], [389.0, 1007.0], [185.0, 1007.0]'
 
-Point 3 => X: 526, Y: 781
+...Cell[4][2] has content '10-Dec-2019'
 
-Line 56 has content: '10:00'.
+...content on page 1 is within bounding box '[389.0, 971.0], [604.0, 971.0], [604.0, 1007.0], [389.0, 1007.0]'
 
-Its bounding polygon (points ordered clockwise):
+...Cell[4][3] has content ''
 
-Point 0 => X: 525, Y: 782
+...content on page 1 is within bounding box '[604.0, 971.0], [832.0, 971.0], [832.0, 1007.0], [604.0, 1007.0]'
 
-Point 1 => X: 565, Y: 783
+...Cell[5][0] has content 'Monkey'
 
-Point 2 => X: 565, Y: 797
+...content on page 1 is within bounding box '[49.0, 1007.0], [185.0, 1007.0], [185.0, 1042.0], [49.0, 1042.0]'
 
-Point 3 => X: 526, Y: 797
+...Cell[5][1] has content 'Harleysville (PA)'
 
-Line 57 has content: '19-Dec-2020'.
+...content on page 1 is within bounding box '[185.0, 1007.0], [389.0, 1007.0], [389.0, 1042.0], [185.0, 1042.0]'
 
-Its bounding polygon (points ordered clockwise):
+...Cell[5][2] has content '11-Dec-2019'
 
-Point 0 => X: 683, Y: 766
+...content on page 1 is within bounding box '[389.0, 1007.0], [604.0, 1007.0], [604.0, 1042.0], [389.0, 1042.0]'
 
-Point 1 => X: 771, Y: 765
+...Cell[5][3] has content ''
 
-Point 2 => X: 771, Y: 781
+...content on page 1 is within bounding box '[604.0, 1007.0], [832.0, 1007.0], [832.0, 1042.0], [604.0, 1042.0]'
 
-Point 3 => X: 683, Y: 781
+...Cell[6][0] has content 'Route'
 
-Line 58 has content: 'Deadline'.
+...content on page 1 is within bounding box '[49.0, 1042.0], [185.0, 1042.0], [185.0, 1077.0], [49.0, 1077.0]'
 
-Its bounding polygon (points ordered clockwise):
+...Cell[6][1] has content 'Harleysville (PA)'
 
-Point 0 => X: 55, Y: 849
+...content on page 1 is within bounding box '[185.0, 1042.0], [389.0, 1042.0], [389.0, 1077.0], [185.0, 1077.0]'
 
-Point 1 => X: 120, Y: 850
+...Cell[6][2] has content '11-Dec-2019'
 
-Point 2 => X: 120, Y: 865
+...content on page 1 is within bounding box '[389.0, 1042.0], [604.0, 1042.0], [604.0, 1077.0], [389.0, 1077.0]'
 
-Point 3 => X: 55, Y: 864
+...Cell[6][3] has content 'Peanuts don't grow on trees.'
 
-Line 59 has content: 'Location'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 251, Y: 850
-
-Point 1 => X: 314, Y: 850
-
-Point 2 => X: 314, Y: 865
-
-Point 3 => X: 251, Y: 864
-
-Line 60 has content: 'Date/Time (local)'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 446, Y: 849
-
-Point 1 => X: 569, Y: 849
-
-Point 2 => X: 569, Y: 865
-
-Point 3 => X: 446, Y: 865
-
-Line 61 has content: 'Required action'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 642, Y: 849
-
-Point 1 => X: 757, Y: 849
-
-Point 2 => X: 757, Y: 865
-
-Point 3 => X: 642, Y: 865
-
-Line 62 has content: 'Table'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 56, Y: 867
-
-Point 1 => X: 94, Y: 867
-
-Point 2 => X: 93, Y: 881
-
-Point 3 => X: 56, Y: 880
-
-Line 63 has content: 'Harleysville'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 252, Y: 867
-
-Point 1 => X: 331, Y: 867
-
-Point 2 => X: 331, Y: 882
-
-Point 3 => X: 252, Y: 882
-
-Line 64 has content: '(PA)'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 254, Y: 884
-
-Point 1 => X: 282, Y: 885
-
-Point 2 => X: 282, Y: 901
-
-Point 3 => X: 254, Y: 900
-
-Line 65 has content: '08-Dec-2019'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 447, Y: 866
-
-Point 1 => X: 535, Y: 866
-
-Point 2 => X: 535, Y: 882
-
-Point 3 => X: 447, Y: 881
-
-Line 66 has content: 'Flight'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 56, Y: 902
-
-Point 1 => X: 94, Y: 902
-
-Point 2 => X: 94, Y: 919
-
-Point 3 => X: 56, Y: 918
-
-Line 67 has content: 'Harleysville'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 252, Y: 902
-
-Point 1 => X: 328, Y: 903
-
-Point 2 => X: 328, Y: 918
-
-Point 3 => X: 252, Y: 917
-
-Line 68 has content: '(PA'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 253, Y: 919
-
-Point 1 => X: 280, Y: 920
-
-Point 2 => X: 279, Y: 935
-
-Point 3 => X: 254, Y: 935
-
-Line 69 has content: '08-Dec-2019'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 447, Y: 902
-
-Point 1 => X: 536, Y: 902
-
-Point 2 => X: 536, Y: 917
-
-Point 3 => X: 447, Y: 917
-
-Line 70 has content: '13:00'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 448, Y: 920
-
-Point 1 => X: 487, Y: 919
-
-Point 2 => X: 486, Y: 934
-
-Point 3 => X: 448, Y: 934
-
-Line 71 has content: 'Two more days and all his'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 643, Y: 902
-
-Point 1 => X: 818, Y: 901
-
-Point 2 => X: 818, Y: 918
-
-Point 3 => X: 643, Y: 919
-
-Line 72 has content: 'problems would be solved.'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 643, Y: 920
-
-Point 1 => X: 821, Y: 919
-
-Point 2 => X: 822, Y: 934
-
-Point 3 => X: 643, Y: 936
-
-Line 73 has content: 'Round'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 56, Y: 938
-
-Point 1 => X: 103, Y: 937
-
-Point 2 => X: 103, Y: 952
-
-Point 3 => X: 56, Y: 953
-
-Line 74 has content: 'Harleysville'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 251, Y: 937
-
-Point 1 => X: 328, Y: 937
-
-Point 2 => X: 328, Y: 954
-
-Point 3 => X: 251, Y: 953
-
-Line 75 has content: '(PA'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 253, Y: 954
-
-Point 1 => X: 280, Y: 955
-
-Point 2 => X: 280, Y: 970
-
-Point 3 => X: 253, Y: 970
-
-Line 76 has content: '09-Dec-2019'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 447, Y: 938
-
-Point 1 => X: 535, Y: 937
-
-Point 2 => X: 535, Y: 952
-
-Point 3 => X: 447, Y: 953
-
-Line 77 has content: 'Accent'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 54, Y: 973
-
-Point 1 => X: 105, Y: 973
-
-Point 2 => X: 105, Y: 987
-
-Point 3 => X: 54, Y: 987
-
-Line 78 has content: 'Harleysville'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 252, Y: 972
-
-Point 1 => X: 328, Y: 973
-
-Point 2 => X: 328, Y: 989
-
-Point 3 => X: 252, Y: 988
-
-Line 79 has content: '(PA)'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 254, Y: 991
-
-Point 1 => X: 283, Y: 992
-
-Point 2 => X: 282, Y: 1006
-
-Point 3 => X: 254, Y: 1005
-
-Line 80 has content: '10-Dec-2019'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 447, Y: 972
-
-Point 1 => X: 536, Y: 972
-
-Point 2 => X: 536, Y: 987
-
-Point 3 => X: 447, Y: 988
-
-Line 81 has content: 'Monkey'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 56, Y: 1009
-
-Point 1 => X: 109, Y: 1009
-
-Point 2 => X: 109, Y: 1025
-
-Point 3 => X: 55, Y: 1024
-
-Line 82 has content: 'Harleysville'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 252, Y: 1008
-
-Point 1 => X: 329, Y: 1009
-
-Point 2 => X: 328, Y: 1025
-
-Point 3 => X: 252, Y: 1024
-
-Line 83 has content: '(PA)'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 253, Y: 1026
-
-Point 1 => X: 280, Y: 1026
-
-Point 2 => X: 279, Y: 1041
-
-Point 3 => X: 253, Y: 1041
-
-Line 84 has content: '11-Dec-2019'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 448, Y: 1009
-
-Point 1 => X: 536, Y: 1009
-
-Point 2 => X: 536, Y: 1023
-
-Point 3 => X: 448, Y: 1023
-
-Line 85 has content: 'Route'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 56, Y: 1044
-
-Point 1 => X: 97, Y: 1045
-
-Point 2 => X: 97, Y: 1058
-
-Point 3 => X: 56, Y: 1059
-
-Line 86 has content: 'Harleysville'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 253, Y: 1044
-
-Point 1 => X: 329, Y: 1044
-
-Point 2 => X: 328, Y: 1060
-
-Point 3 => X: 253, Y: 1059
-
-Line 87 has content: '(PA)'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 254, Y: 1061
-
-Point 1 => X: 281, Y: 1062
-
-Point 2 => X: 280, Y: 1076
-
-Point 3 => X: 254, Y: 1075
-
-Line 88 has content: '11-Dec-2019'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 449, Y: 1044
-
-Point 1 => X: 535, Y: 1044
-
-Point 2 => X: 535, Y: 1058
-
-Point 3 => X: 449, Y: 1058
-
-Line 89 has content: 'Peanuts don't grow on'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 643, Y: 1043
-
-Point 1 => X: 794, Y: 1044
-
-Point 2 => X: 794, Y: 1061
-
-Point 3 => X: 643, Y: 1059
-
-Line 90 has content: 'trees.'.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 643, Y: 1061
-
-Point 1 => X: 681, Y: 1063
-
-Point 2 => X: 681, Y: 1076
-
-Point 3 => X: 643, Y: 1075
-
-Selection Mark 0 is Unselected.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 507, Y: 488
-
-Point 1 => X: 537, Y: 488
-
-Point 2 => X: 537, Y: 519
-
-Point 3 => X: 507, Y: 519
-
-Selection Mark 1 is Unselected.
-
-Its bounding polygon (points ordered clockwise):
-
-Point 0 => X: 614, Y: 489
-
-Point 1 => X: 645, Y: 489
-
-Point 2 => X: 645, Y: 520
-
-Point 3 => X: 614, Y: 520
-
-Paragraphs:
-
-Paragraph content: Liberty's Delightful Sinful Bakery & Café 765 Halifax St. Clearwater, FL 33756
-
-Paragraph content: D
-
-Paragraph content: Our reference: 3456623
-
-Paragraph content: Your reference: 2334566
-
-Paragraph content: Received from: 8556 Indian Summer Ave. New Haven, CT 06511
-
-Paragraph content: Liberty booking contact 40 River Street East Northport, NY 11731
-
-Paragraph content: Name Summer River Tel. 34456632 E-mail email6@libertydelightfulsinful.com
-
-Paragraph content: Booking Confirmation - ORIGINAL
-
-Paragraph content: Our reference:
-
-Paragraph content: 3456623
-
-Paragraph content: Your reference:
-
-Paragraph content: 2334566
-
-Paragraph content: BL/NO:
-
-Paragraph content: EURH234
-
-Paragraph content: Summary:
-
-Paragraph content: 45x72
-
-Paragraph content: Export:
-
-Paragraph content: Common
-
-Paragraph content: Export empty pick up depot(s)
-
-Paragraph content: 97 Morris Lane Sterling Heights, MI 48310
-
-Paragraph content: Booking date:
-
-Paragraph content: 05-Dec-2018
-
-Paragraph content: Contract No:
-
-Paragraph content: 334566
-
-Paragraph content: Opt. A
-
-Paragraph content: Opt. B
-
-Paragraph content: From
-
-Paragraph content: To
-
-Paragraph content: By
-
-Paragraph content: ETD
-
-Paragraph content: ETA
-
-Paragraph content: 118 Queen Street Hoboken, NJ 07030
-
-Paragraph content: 52 West Trenton St. Harleysville, PA 19438
-
-Paragraph content: cause science slow
-
-Paragraph content: 09-Dec-2018 19:00
-
-Paragraph content: 09-Dec-2020 11:00
-
-Paragraph content: 9 Ketch Harbour Ave. Vincentown, NJ
-
-Paragraph content: 75 Fawn Street Peabody, MA 01960
-
-Paragraph content: tone late spoken
-
-Paragraph content: 12-Dec-2018 10:00
-
-Paragraph content: 19-Dec-2020
-
-Paragraph content: Deadline
-
-Paragraph content: Location
-
-Paragraph content: Date/Time (local)
-
-Paragraph content: Required action
-
-Paragraph content: Table
-
-Paragraph content: Harleysville (PA)
-
-Paragraph content: 08-Dec-2019
-
-Paragraph content: Flight
-
-Paragraph content: Harleysville (PA
-
-Paragraph content: 08-Dec-2019 13:00
-
-Paragraph content: Two more days and all his problems would be solved.
-
-Paragraph content: Round
-
-Paragraph content: Harleysville (PA
-
-Paragraph content: 09-Dec-2019
-
-Paragraph content: Accent
-
-Paragraph content: Harleysville (PA)
-
-Paragraph content: 10-Dec-2019
-
-Paragraph content: Monkey
-
-Paragraph content: Harleysville (PA)
-
-Paragraph content: 11-Dec-2019
-
-Paragraph content: Route
-
-Paragraph content: Harleysville (PA)
-
-Paragraph content: 11-Dec-2019
-
-Paragraph content: Peanuts don't grow on trees.
-
-The following tables were extracted:
-
-Table 0 has 4 rows and 5 columns.
-
-Cell (0, 0) has kind 'columnHeader' and content: 'From'.
-
-Cell (0, 1) has kind 'columnHeader' and content: 'To'.
-
-Cell (0, 2) has kind 'columnHeader' and content: 'By'.
-
-Cell (0, 3) has kind 'columnHeader' and content: 'ETD'.
-
-Cell (0, 4) has kind 'columnHeader' and content: 'ETA'.
-
-Cell (1, 0) has kind 'content' and content: '118 Queen Street Hoboken, NJ 07030'.
-
-Cell (1, 1) has kind 'content' and content: '52 West Trenton St. Harleysville, PA 19438'.
-
-Cell (1, 2) has kind 'content' and content: 'cause science slow'.
-
-Cell (1, 3) has kind 'content' and content: '09-Dec-2018 19:00'.
-
-Cell (1, 4) has kind 'content' and content: '09-Dec-2020 11:00'.
-
-Cell (3, 0) has kind 'content' and content: '9 Ketch Harbour Ave. Vincentown, NJ'.
-
-Cell (3, 1) has kind 'content' and content: '75 Fawn Street Peabody, MA 01960'.
-
-Cell (3, 2) has kind 'content' and content: 'tone late spoken'.
-
-Cell (3, 3) has kind 'content' and content: '12-Dec-2018 10:00'.
-
-Cell (3, 4) has kind 'content' and content: '19-Dec-2020'.
-
-Table 1 has 7 rows and 4 columns.
-
-Cell (0, 0) has kind 'columnHeader' and content: 'Deadline'.
-
-Cell (0, 1) has kind 'columnHeader' and content: 'Location'.
-
-Cell (0, 2) has kind 'columnHeader' and content: 'Date/Time (local)'.
-
-Cell (0, 3) has kind 'columnHeader' and content: 'Required action'.
-
-Cell (1, 0) has kind 'content' and content: 'Table'.
-
-Cell (1, 1) has kind 'content' and content: 'Harleysville (PA)'.
-
-Cell (1, 2) has kind 'content' and content: '08-Dec-2019'.
-
-Cell (1, 3) has kind 'content' and content: ''.
-
-Cell (2, 0) has kind 'content' and content: 'Flight'.
-
-Cell (2, 1) has kind 'content' and content: 'Harleysville (PA'.
-
-Cell (2, 2) has kind 'content' and content: '08-Dec-2019 13:00'.
-
-Cell (2, 3) has kind 'content' and content: 'Two more days and all his problems would be solved.'.
-
-Cell (3, 0) has kind 'content' and content: 'Round'.
-
-Cell (3, 1) has kind 'content' and content: 'Harleysville (PA'.
-
-Cell (3, 2) has kind 'content' and content: '09-Dec-2019'.
-
-Cell (3, 3) has kind 'content' and content: ''.
-
-Cell (4, 0) has kind 'content' and content: 'Accent'.
-
-Cell (4, 1) has kind 'content' and content: 'Harleysville (PA)'.
-
-Cell (4, 2) has kind 'content' and content: '10-Dec-2019'.
-
-Cell (4, 3) has kind 'content' and content: ''.
-
-Cell (5, 0) has kind 'content' and content: 'Monkey'.
-
-Cell (5, 1) has kind 'content' and content: 'Harleysville (PA)'.
-
-Cell (5, 2) has kind 'content' and content: '11-Dec-2019'.
-
-Cell (5, 3) has kind 'content' and content: ''.
-
-Cell (6, 0) has kind 'content' and content: 'Route'.
-
-Cell (6, 1) has kind 'content' and content: 'Harleysville (PA)'.
-
-Cell (6, 2) has kind 'content' and content: '11-Dec-2019'.
-
-Cell (6, 3) has kind 'content' and content: 'Peanuts don't grow on trees.'.
+...content on page 1 is within bounding box '[604.0, 1042.0], [832.0, 1042.0], [832.0, 1077.0], [604.0, 1077.0]'
