@@ -1,17 +1,33 @@
-Merchant Name: 'Contoso', with confidence 0.616
+--------Analysis of receipt #1--------
 
-Transaction Date: '6/10/2019 12:00:00 AM +00:00', with confidence 0.989
+Receipt type: receipt.retailMeal
 
-Item:
+Merchant Name: Contoso has confidence: 0.616
 
-Description: 'Surface Pro 6', with confidence 0.99
+Transaction Date: 2019-06-10 has confidence: 0.989
 
-Total Price: '1998', with confidence 0.995
+Receipt items:
 
-Item:
+...Item #1
 
-Description: 'Surface Pen', with confidence 0.99
+......Item Description: Surface Pro 6 has confidence: 0.99
 
-Total Price: '299.97', with confidence 0.995
+......Item Quantity: 2.0 has confidence: 0.995
 
-Total: '2516.28', with confidence '0.988'
+......Total Item Price: 1998.0 has confidence: 0.995
+
+...Item #2
+
+......Item Description: Surface Pen has confidence: 0.99
+
+......Item Quantity: 3.0 has confidence: 0.995
+
+......Total Item Price: 299.97 has confidence: 0.995
+
+Subtotal: 2297.97 has confidence: 0.986
+
+Total tax: 218.31 has confidence: 0.989
+
+Total: 2516.28 has confidence: 0.988
+
+---
