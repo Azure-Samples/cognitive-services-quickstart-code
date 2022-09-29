@@ -1,21 +1,25 @@
-Contact Name:
+--------Analyzing business card #1--------
 
-First Name: 'Avery', with confidence 0.989
+Contact First Name: Chris has confidence: 0.989
 
-Last Name: 'Smith', with confidence 0.989
+Contact Last Name: Smith has confidence: 0.99
 
-Job Title: 'Senior Researcher', with confidence 0.988
+Company Name: CONTOSO has confidence: 0.4
 
-Department: 'Cloud & Al Department', with confidence 0.973
+Department: Cloud & AI Department has confidence: 0.973
 
-Email: 'avery.smith@contoso.com', with confidence 0.988
+Job Title: Senior Researcher has confidence: 0.988
 
-Website: 'https://www.contoso.com/', with confidence 0.989
+Email: chris.smith@contoso.com has confidence: 0.989
 
-Mobile phone number: '+10791112345', with confidence 0.987
+Website: https://www.contoso.com/ has confidence: 0.989
 
-Work phone number: '+10209875432', with confidence 0.985
+Address: AddressValue(house_number=4001, po_box=None, road=1st Ave NE, city=Redmond, state=WA, postal_code=98052, country_region=None, street_address=4001 1st Ave NE) has confidence: 0.969
 
-Fax phone number: '+10207892345', with confidence 0.987
+Mobile phone number: +1 (987) 123-4567 has confidence: 0.988
 
-Company name: 'Contoso', with confidence 0.895
+Fax number: +1 (987) 312-6745 has confidence: 0.988
+
+Work phone number: +1 (987) 213-5674 has confidence: 0.985
+
+---
