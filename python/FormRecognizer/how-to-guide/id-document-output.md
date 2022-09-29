@@ -1,15 +1,21 @@
-CountryRegion: 'USA', with confidence 0.995
+--------Analyzing ID document #1--------
 
-Date Of Birth: '3/23/1988 12:00:00 AM +00:00', with confidence 0.99
+First Name: CHRIS has confidence: 0.989
 
-Date Of Expiration: '3/23/2026 12:00:00 AM +00:00', with confidence 0.99
+Last Name: SMITH has confidence: 0.989
 
-Document Number: '034568', with confidence 0.99
+Document Number: 034568 has confidence: 0.99
 
-First Name: 'CHRIS', with confidence 0.989
+Date of Birth: 1988-03-23 has confidence: 0.99
 
-Last Name: 'SMITH', with confidence 0.989
+Date of Expiration: 2026-03-23 has confidence: 0.99
 
-Region: 'West Virginia', with confidence 0.99
+Sex: M has confidence: 0.99
 
-Sex: 'M', with confidence 0.99
+Address: AddressValue(house_number=None, po_box=None, road=Main Street, city=Charleston, state=WV, postal_code=456789, country_region=None, street_address=Main Street) has confidence: 0.99
+
+Country/Region: USA has confidence: 0.995
+
+Region: West Virginia has confidence: 0.99
+
+---
