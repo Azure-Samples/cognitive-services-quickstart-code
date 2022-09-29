@@ -1,1055 +1,1603 @@
-Document Page 1 has 86 line(s), 696 word(s),
+Document contains content:  While healthcare is still in the early stages of its Al journey, we are seeing pharmaceutical and other life sciences organizations making major investments in Al and related technologies." TOM LAWRY | National Director for Al, Health and Life Sciences | Microsoft
 
-and 0 selection mark(s).
+As pharmaceutical and other life sciences organizations invest in and deploy advanced technologies, they are beginning to see benefits in diverse areas across their organizations. Companies are looking to incorporate automation and continuing smart factory investments to reduce costs in drug discovery, research and development, and manufacturing and supply chain management. Many life sciences organizations are also choosing to stay with more virtual approaches in the "new normal" - particularly in clinical trials and sales and marketing areas.
 
-Line 0 has content: 'While healthcare is still in the early stages of its Al journey, we'.
+Enhancing the patient and provider experience
 
-Its bounding polygon (points ordered clockwise):
+Clinical trial sponsors are continually seeking to make clinical trials faster and to improve the experience for patients and physicians. The COVID-19 pandemic has accelerated the adoption of decentralized clinical trials, with an increase in trial activities conducted remotely and in participants' homes. In a Mckinsey survey1 up to 98 percent of patients reported satisfaction with telemedicine. In the same report, 72 percent of physicians surveyed reported similar or better experiences with remote engagement compared with in-person visits.
 
-Point 0 => X: 257, Y: 54
+The shift of trial activities closer to patients has been enabled by a myriad of evolving technologies and services (e.g., electronic consent, telehealth and remote patient monitoring). The aim to use technology to improve the patient experience and convenience has also broadened trial access to reach a broader, more diverse patient population.
 
-Point 1 => X: 817, Y: 56
+"It's an interesting and exciting time right now," said Keren Priyadarshini, Regional Business Lead - Asia, Worldwide Health, Microsoft. "It used to be that physicians were key. Now, suddenly, patients are feeling empowered by technology. Pharmaceutical companies and other life sciences companies are realizing they have to pay attention to the patient experience in addition to the physician experience."
 
-Point 2 => X: 817, Y: 79
+Enhanced patient experiences can be delivered in many different ways. One example of a life sciences product that leverages the intelligent cloud to directly affect the patient experience is the Tandem® Diabetes Care insulin pump. The Tandem® t:slim X2 insulin pump with Basal-IQ technology enables patients with Type 1 diabetes to predict and prevent the low levels of blood sugar that cause hypoglycemia.2 The algorithm-driven, software- updatable pump improves the patient experience by automating chronic disease management and eliminating the need for constant finger pricks to check glucose levels.
 
-Point 3 => X: 257, Y: 77
+Tandem was able to create and deploy this innovation by leveraging the Al and machine learning capabilities of the intelligent cloud. As Al and other technologies continue to advance, potential use cases will multiply. "Speed to value is going to continue to accelerate," said Lawry.
 
-Line 1 has content: 'are seeing pharmaceutical and other life sciences organizations'.
+In addition to enhancing the patient experience, pharmaceutical and other life sciences companies can leverage advanced technologies to improve relationships with providers. For example, COVID-19 is driving changes in the way companies interact with clinicians. Prior to COVID-19, 75 percent of physicians preferred in-person sales visits from medtech reps; likewise, 77 percent of physicians preferred in- person sales visits from pharma reps.3
 
-Its bounding polygon (points ordered clockwise):
+Since the advent of COVID-19, however, physician preferences are moving toward virtual visits. Only 53 percent of physicians now express a preference for in-person visits from medtech reps and only 40 percent prefer in-person visits from pharma reps. That puts the onus on pharmaceutical and life sciences organizations to deliver valuable and engaging virtual visits to providers.
 
-Point 0 => X: 258, Y: 83
+One way to do that is to leverage text analytics capabilities to enhance the provider information stored in the organization's customer relationship management (CRM) system. For example, a rep setting up a visit with 'Dr. X' could run text analytics on publicly available resources on the web to identify on which specific topics Dr. X has been writing about and commenting. "All kinds of publicly available information can
 
-Point 1 => X: 826, Y: 83
+All kinds of publicly available information can be mined with text analytics technology,
 
-Point 2 => X: 826, Y: 105
+which can be used to arm the
 
-Point 3 => X: 258, Y: 105
+sales rep with relevant information even before he or she meets the doctor. It's a totally different, digital game now."
 
-Line 2 has content: 'making major investments in Al and related technologies."'.
+KEREN PRIYADARSHINI | Regional Business Lead - Asia, Worldwide Health | Microsoft
 
-Its bounding polygon (points ordered clockwise):
+EMBRACING DIGITAL TRANSFORMATION IN LIFE SCIENCES ORGANIZATIONS
 
-Point 0 => X: 259, Y: 112
+2
 
-Point 1 => X: 785, Y: 111
+----Analyzing Read from page #1----
 
-Point 2 => X: 785, Y: 134
+Page has width: 915.0 and height: 1190.0, measured with unit: pixel
 
-Point 3 => X: 259, Y: 135
+...Line # 0 has text content 'While healthcare is still in the early stages of its Al journey, we' within bounding box '[257.0, 54.0], [817.0, 56.0], [817.0, 79.0], [257.0, 77.0]'
 
-Line 3 has content: 'TOM LAWRY | National Director for Al, Health and Life Sciences | Microsoft'.
+...Line # 1 has text content 'are seeing pharmaceutical and other life sciences organizations' within bounding box '[258.0, 83.0], [826.0, 83.0], [826.0, 105.0], [258.0, 105.0]'
 
-Its bounding polygon (points ordered clockwise):
+...Line # 2 has text content 'making major investments in Al and related technologies."' within bounding box '[259.0, 112.0], [785.0, 111.0], [785.0, 134.0], [259.0, 135.0]'
 
-Point 0 => X: 258, Y: 150
+...Line # 3 has text content 'TOM LAWRY | National Director for Al, Health and Life Sciences | Microsoft' within bounding box '[258.0, 150.0], [637.0, 151.0], [637.0, 167.0], [258.0, 166.0]'
 
-Point 1 => X: 637, Y: 151
+...Line # 4 has text content 'As pharmaceutical and other life sciences organizations invest' within bounding box '[75.0, 241.0], [422.0, 241.0], [422.0, 258.0], [75.0, 257.0]'
 
-Point 2 => X: 637, Y: 167
+...Line # 5 has text content 'in and deploy advanced technologies, they are beginning to see' within bounding box '[75.0, 259.0], [435.0, 260.0], [435.0, 277.0], [75.0, 276.0]'
 
-Point 3 => X: 258, Y: 166
+...Line # 6 has text content 'benefits in diverse areas across their organizations. Companies' within bounding box '[77.0, 277.0], [427.0, 278.0], [427.0, 295.0], [77.0, 294.0]'
 
-Line 4 has content: 'As pharmaceutical and other life sciences organizations invest'.
+...Line # 7 has text content 'are looking to incorporate automation and continuing smart' within bounding box '[75.0, 296.0], [414.0, 296.0], [414.0, 313.0], [75.0, 313.0]'
 
-Its bounding polygon (points ordered clockwise):
+...Line # 8 has text content 'factory investments to reduce costs in drug discovery, research' within bounding box '[77.0, 314.0], [428.0, 314.0], [428.0, 331.0], [77.0, 331.0]'
 
-Point 0 => X: 75, Y: 241
+...Line # 9 has text content 'and development, and manufacturing and supply chain' within bounding box '[76.0, 331.0], [388.0, 331.0], [388.0, 349.0], [76.0, 349.0]'
 
-Point 1 => X: 422, Y: 241
+...Line # 10 has text content 'management. Many life sciences organizations are also choosing' within bounding box '[76.0, 350.0], [440.0, 350.0], [440.0, 367.0], [76.0, 367.0]'
 
-Point 2 => X: 422, Y: 258
+...Line # 11 has text content 'to stay with more virtual approaches in the "new normal" -' within bounding box '[76.0, 368.0], [404.0, 368.0], [404.0, 385.0], [76.0, 385.0]'
 
-Point 3 => X: 75, Y: 257
+...Line # 12 has text content 'particularly in clinical trials and sales and marketing areas.' within bounding box '[77.0, 385.0], [396.0, 385.0], [396.0, 404.0], [77.0, 403.0]'
 
-Line 5 has content: 'in and deploy advanced technologies, they are beginning to see'.
+...Line # 13 has text content 'Enhancing the patient' within bounding box '[77.0, 422.0], [268.0, 422.0], [268.0, 447.0], [77.0, 446.0]'
 
-Its bounding polygon (points ordered clockwise):
+...Line # 14 has text content 'and provider experience' within bounding box '[76.0, 447.0], [285.0, 447.0], [285.0, 470.0], [76.0, 470.0]'
 
-Point 0 => X: 75, Y: 259
+...Line # 15 has text content 'Clinical trial sponsors are continually seeking to make clinical' within bounding box '[76.0, 481.0], [425.0, 480.0], [425.0, 499.0], [76.0, 499.0]'
 
-Point 1 => X: 435, Y: 260
+...Line # 16 has text content 'trials faster and to improve the experience for patients and' within bounding box '[76.0, 499.0], [414.0, 500.0], [414.0, 517.0], [76.0, 517.0]'
 
-Point 2 => X: 435, Y: 277
+...Line # 17 has text content 'physicians. The COVID-19 pandemic has accelerated the' within bounding box '[76.0, 517.0], [410.0, 517.0], [410.0, 534.0], [76.0, 535.0]'
 
-Point 3 => X: 75, Y: 276
+...Line # 18 has text content 'adoption of decentralized clinical trials, with an increase in' within bounding box '[75.0, 535.0], [411.0, 535.0], [411.0, 553.0], [75.0, 553.0]'
 
-Line 6 has content: 'benefits in diverse areas across their organizations. Companies'.
+...Line # 19 has text content 'trial activities conducted remotely and in participants' homes.' within bounding box '[77.0, 554.0], [428.0, 555.0], [428.0, 572.0], [77.0, 572.0]'
 
-Its bounding polygon (points ordered clockwise):
+...Line # 20 has text content 'In a Mckinsey survey1 up to 98 percent of patients reported' within bounding box '[76.0, 572.0], [420.0, 572.0], [420.0, 590.0], [76.0, 590.0]'
 
-Point 0 => X: 77, Y: 277
+...Line # 21 has text content 'satisfaction with telemedicine. In the same report, 72 percent of' within bounding box '[77.0, 591.0], [442.0, 591.0], [442.0, 608.0], [77.0, 607.0]'
 
-Point 1 => X: 427, Y: 278
+...Line # 22 has text content 'physicians surveyed reported similar or better experiences with' within bounding box '[77.0, 609.0], [438.0, 609.0], [438.0, 626.0], [77.0, 626.0]'
 
-Point 2 => X: 427, Y: 295
+...Line # 23 has text content 'remote engagement compared with in-person visits.' within bounding box '[76.0, 628.0], [378.0, 627.0], [378.0, 644.0], [76.0, 644.0]'
 
-Point 3 => X: 77, Y: 294
+...Line # 24 has text content 'The shift of trial activities closer to patients has been enabled by' within bounding box '[73.0, 656.0], [443.0, 657.0], [443.0, 675.0], [73.0, 674.0]'
 
-Line 7 has content: 'are looking to incorporate automation and continuing smart'.
+...Line # 25 has text content 'a myriad of evolving technologies and services (e.g., electronic' within bounding box '[75.0, 676.0], [439.0, 676.0], [439.0, 693.0], [75.0, 693.0]'
 
-Its bounding polygon (points ordered clockwise):
+...Line # 26 has text content 'consent, telehealth and remote patient monitoring). The aim' within bounding box '[77.0, 694.0], [428.0, 693.0], [428.0, 710.0], [77.0, 711.0]'
 
-Point 0 => X: 75, Y: 296
+...Line # 27 has text content 'to use technology to improve the patient experience and' within bounding box '[76.0, 713.0], [406.0, 712.0], [406.0, 729.0], [76.0, 729.0]'
 
-Point 1 => X: 414, Y: 296
+...Line # 28 has text content 'convenience has also broadened trial access to reach a broader,' within bounding box '[76.0, 730.0], [441.0, 730.0], [441.0, 746.0], [76.0, 746.0]'
 
-Point 2 => X: 414, Y: 313
+...Line # 29 has text content 'more diverse patient population.' within bounding box '[76.0, 749.0], [265.0, 749.0], [265.0, 765.0], [76.0, 764.0]'
 
-Point 3 => X: 75, Y: 313
+...Line # 30 has text content '"It's an interesting and exciting time right now," said Keren' within bounding box '[72.0, 779.0], [404.0, 779.0], [404.0, 797.0], [72.0, 797.0]'
 
-Line 8 has content: 'factory investments to reduce costs in drug discovery, research'.
+...Line # 31 has text content 'Priyadarshini, Regional Business Lead - Asia, Worldwide' within bounding box '[75.0, 797.0], [402.0, 797.0], [402.0, 814.0], [75.0, 814.0]'
 
-Its bounding polygon (points ordered clockwise):
+...Line # 32 has text content 'Health, Microsoft. "It used to be that physicians were key.' within bounding box '[76.0, 815.0], [408.0, 817.0], [408.0, 834.0], [76.0, 832.0]'
 
-Point 0 => X: 77, Y: 314
+...Line # 33 has text content 'Now, suddenly, patients are feeling empowered by technology.' within bounding box '[76.0, 833.0], [436.0, 834.0], [436.0, 851.0], [76.0, 851.0]'
 
-Point 1 => X: 428, Y: 314
+...Line # 34 has text content 'Pharmaceutical companies and other life sciences companies' within bounding box '[77.0, 852.0], [428.0, 852.0], [428.0, 869.0], [77.0, 868.0]'
 
-Point 2 => X: 428, Y: 331
+...Line # 35 has text content 'are realizing they have to pay attention to the patient' within bounding box '[73.0, 870.0], [383.0, 870.0], [383.0, 887.0], [73.0, 887.0]'
 
-Point 3 => X: 77, Y: 331
+...Line # 36 has text content 'experience in addition to the physician experience."' within bounding box '[76.0, 888.0], [373.0, 888.0], [373.0, 905.0], [76.0, 906.0]'
 
-Line 9 has content: 'and development, and manufacturing and supply chain'.
+...Line # 37 has text content 'Enhanced patient experiences can be delivered in many different' within bounding box '[77.0, 919.0], [442.0, 918.0], [442.0, 935.0], [77.0, 936.0]'
 
-Its bounding polygon (points ordered clockwise):
+...Line # 38 has text content 'ways. One example of a life sciences product that leverages the' within bounding box '[76.0, 936.0], [433.0, 936.0], [433.0, 954.0], [76.0, 954.0]'
 
-Point 0 => X: 76, Y: 331
+...Line # 39 has text content 'intelligent cloud to directly affect the patient experience is the' within bounding box '[75.0, 955.0], [425.0, 955.0], [425.0, 972.0], [75.0, 972.0]'
 
-Point 1 => X: 388, Y: 331
+...Line # 40 has text content 'Tandem® Diabetes Care insulin pump. The Tandem® t:slim X2' within bounding box '[75.0, 972.0], [424.0, 972.0], [424.0, 990.0], [75.0, 990.0]'
 
-Point 2 => X: 388, Y: 349
+...Line # 41 has text content 'insulin pump with Basal-IQ technology enables patients with' within bounding box '[75.0, 990.0], [417.0, 990.0], [417.0, 1008.0], [75.0, 1008.0]'
 
-Point 3 => X: 76, Y: 349
+...Line # 42 has text content 'Type 1 diabetes to predict and prevent the low levels of blood' within bounding box '[75.0, 1008.0], [420.0, 1008.0], [420.0, 1025.0], [75.0, 1026.0]'
 
-Line 10 has content: 'management. Many life sciences organizations are also choosing'.
+...Line # 43 has text content 'sugar that cause hypoglycemia.2 The algorithm-driven, software-' within bounding box '[75.0, 1027.0], [440.0, 1026.0], [441.0, 1044.0], [75.0, 1045.0]'
 
-Its bounding polygon (points ordered clockwise):
+...Line # 44 has text content 'updatable pump improves the patient experience by automating' within bounding box '[76.0, 1045.0], [440.0, 1045.0], [440.0, 1062.0], [76.0, 1062.0]'
 
-Point 0 => X: 76, Y: 350
+...Line # 45 has text content 'chronic disease management and eliminating the need for' within bounding box '[76.0, 1062.0], [403.0, 1062.0], [403.0, 1080.0], [76.0, 1080.0]'
 
-Point 1 => X: 440, Y: 350
+...Line # 46 has text content 'constant finger pricks to check glucose levels.' within bounding box '[75.0, 1081.0], [332.0, 1080.0], [332.0, 1097.0], [75.0, 1098.0]'
 
-Point 2 => X: 440, Y: 367
+...Line # 47 has text content 'Tandem was able to create and deploy this innovation by' within bounding box '[466.0, 240.0], [792.0, 240.0], [792.0, 258.0], [466.0, 257.0]'
 
-Point 3 => X: 76, Y: 367
+...Line # 48 has text content 'leveraging the Al and machine learning capabilities of the' within bounding box '[467.0, 260.0], [801.0, 260.0], [801.0, 276.0], [467.0, 277.0]'
 
-Line 11 has content: 'to stay with more virtual approaches in the "new normal" -'.
+...Line # 49 has text content 'intelligent cloud. As Al and other technologies continue to' within bounding box '[468.0, 277.0], [808.0, 277.0], [808.0, 295.0], [468.0, 294.0]'
 
-Its bounding polygon (points ordered clockwise):
+...Line # 50 has text content 'advance, potential use cases will multiply. "Speed to value is' within bounding box '[468.0, 296.0], [810.0, 295.0], [810.0, 312.0], [468.0, 313.0]'
 
-Point 0 => X: 76, Y: 368
+...Line # 51 has text content 'going to continue to accelerate," said Lawry.' within bounding box '[468.0, 315.0], [723.0, 314.0], [723.0, 330.0], [468.0, 332.0]'
 
-Point 1 => X: 404, Y: 368
+...Line # 52 has text content 'In addition to enhancing the patient experience,' within bounding box '[468.0, 344.0], [745.0, 346.0], [745.0, 362.0], [468.0, 361.0]'
 
-Point 2 => X: 404, Y: 385
+...Line # 53 has text content 'pharmaceutical and other life sciences companies can' within bounding box '[469.0, 363.0], [779.0, 363.0], [779.0, 380.0], [469.0, 379.0]'
 
-Point 3 => X: 76, Y: 385
+...Line # 54 has text content 'leverage advanced technologies to improve relationships with' within bounding box '[468.0, 382.0], [822.0, 381.0], [822.0, 397.0], [468.0, 398.0]'
 
-Line 12 has content: 'particularly in clinical trials and sales and marketing areas.'.
+...Line # 55 has text content 'providers. For example, COVID-19 is driving changes in the' within bounding box '[467.0, 399.0], [814.0, 399.0], [814.0, 415.0], [467.0, 416.0]'
 
-Its bounding polygon (points ordered clockwise):
+...Line # 56 has text content 'way companies interact with clinicians. Prior to COVID-19,' within bounding box '[467.0, 418.0], [806.0, 416.0], [807.0, 432.0], [467.0, 435.0]'
 
-Point 0 => X: 77, Y: 385
+...Line # 57 has text content '75 percent of physicians preferred in-person sales visits from' within bounding box '[466.0, 435.0], [815.0, 435.0], [815.0, 452.0], [466.0, 453.0]'
 
-Point 1 => X: 396, Y: 385
+...Line # 58 has text content 'medtech reps; likewise, 77 percent of physicians preferred in-' within bounding box '[467.0, 452.0], [818.0, 452.0], [818.0, 470.0], [467.0, 470.0]'
 
-Point 2 => X: 396, Y: 404
+...Line # 59 has text content 'person sales visits from pharma reps.3' within bounding box '[468.0, 471.0], [685.0, 471.0], [685.0, 489.0], [468.0, 489.0]'
 
-Point 3 => X: 77, Y: 403
+...Line # 60 has text content 'Since the advent of COVID-19, however, physician' within bounding box '[467.0, 502.0], [771.0, 503.0], [771.0, 520.0], [467.0, 519.0]'
 
-Line 13 has content: 'Enhancing the patient'.
+...Line # 61 has text content 'preferences are moving toward virtual visits. Only 53 percent' within bounding box '[468.0, 521.0], [828.0, 521.0], [828.0, 538.0], [468.0, 538.0]'
 
-Its bounding polygon (points ordered clockwise):
+...Line # 62 has text content 'of physicians now express a preference for in-person visits' within bounding box '[467.0, 539.0], [811.0, 539.0], [811.0, 556.0], [467.0, 556.0]'
 
-Point 0 => X: 77, Y: 422
+...Line # 63 has text content 'from medtech reps and only 40 percent prefer in-person visits' within bounding box '[468.0, 557.0], [835.0, 557.0], [835.0, 574.0], [468.0, 574.0]'
 
-Point 1 => X: 268, Y: 422
+...Line # 64 has text content 'from pharma reps. That puts the onus on pharmaceutical and' within bounding box '[469.0, 574.0], [835.0, 574.0], [835.0, 592.0], [469.0, 592.0]'
 
-Point 2 => X: 268, Y: 447
+...Line # 65 has text content 'life sciences organizations to deliver valuable and engaging' within bounding box '[468.0, 593.0], [819.0, 593.0], [819.0, 611.0], [468.0, 610.0]'
 
-Point 3 => X: 77, Y: 446
+...Line # 66 has text content 'virtual visits to providers.' within bounding box '[468.0, 611.0], [616.0, 611.0], [616.0, 627.0], [468.0, 627.0]'
 
-Line 14 has content: 'and provider experience'.
+...Line # 67 has text content 'One way to do that is to leverage text analytics capabilities to' within bounding box '[468.0, 642.0], [822.0, 642.0], [822.0, 659.0], [468.0, 659.0]'
 
-Its bounding polygon (points ordered clockwise):
+...Line # 68 has text content 'enhance the provider information stored in the organization's' within bounding box '[469.0, 660.0], [820.0, 660.0], [820.0, 676.0], [469.0, 677.0]'
 
-Point 0 => X: 76, Y: 447
+...Line # 69 has text content 'customer relationship management (CRM) system. For' within bounding box '[466.0, 679.0], [789.0, 677.0], [789.0, 694.0], [467.0, 696.0]'
 
-Point 1 => X: 285, Y: 447
+...Line # 70 has text content 'example, a rep setting up a visit with 'Dr. X' could run text' within bounding box '[468.0, 697.0], [801.0, 695.0], [801.0, 712.0], [468.0, 714.0]'
 
-Point 2 => X: 285, Y: 470
+...Line # 71 has text content 'analytics on publicly available resources on the web to identify' within bounding box '[467.0, 714.0], [825.0, 713.0], [825.0, 730.0], [467.0, 731.0]'
 
-Point 3 => X: 76, Y: 470
+...Line # 72 has text content 'on which specific topics Dr. X has been writing about and' within bounding box '[466.0, 731.0], [799.0, 731.0], [799.0, 749.0], [466.0, 749.0]'
 
-Line 15 has content: 'Clinical trial sponsors are continually seeking to make clinical'.
+...Line # 73 has text content 'commenting. "All kinds of publicly available information can' within bounding box '[467.0, 749.0], [813.0, 749.0], [813.0, 767.0], [467.0, 768.0]'
 
-Its bounding polygon (points ordered clockwise):
+...Line # 74 has text content 'All kinds of publicly' within bounding box '[467.0, 827.0], [644.0, 827.0], [644.0, 851.0], [467.0, 851.0]'
 
-Point 0 => X: 76, Y: 481
+...Line # 75 has text content 'available information' within bounding box '[467.0, 856.0], [661.0, 855.0], [661.0, 877.0], [467.0, 878.0]'
 
-Point 1 => X: 425, Y: 480
+...Line # 76 has text content 'can be mined with text' within bounding box '[469.0, 886.0], [674.0, 885.0], [674.0, 906.0], [469.0, 906.0]'
 
-Point 2 => X: 425, Y: 499
+...Line # 77 has text content 'analytics technology,' within bounding box '[468.0, 914.0], [660.0, 915.0], [660.0, 938.0], [468.0, 937.0]'
 
-Point 3 => X: 76, Y: 499
+...Line # 78 has text content 'which can be used to arm the' within bounding box '[468.0, 942.0], [729.0, 942.0], [729.0, 964.0], [468.0, 963.0]'
 
-Line 16 has content: 'trials faster and to improve the experience for patients and'.
+...Line # 79 has text content 'sales rep with relevant information even' within bounding box '[468.0, 971.0], [831.0, 971.0], [831.0, 992.0], [468.0, 993.0]'
 
-Its bounding polygon (points ordered clockwise):
+...Line # 80 has text content 'before he or she meets the doctor. It's a' within bounding box '[468.0, 998.0], [823.0, 999.0], [823.0, 1021.0], [468.0, 1021.0]'
 
-Point 0 => X: 76, Y: 499
+...Line # 81 has text content 'totally different, digital game now."' within bounding box '[469.0, 1028.0], [789.0, 1027.0], [789.0, 1051.0], [469.0, 1051.0]'
 
-Point 1 => X: 414, Y: 500
+...Line # 82 has text content 'KEREN PRIYADARSHINI | Regional Business Lead - Asia,' within bounding box '[468.0, 1067.0], [761.0, 1068.0], [761.0, 1084.0], [468.0, 1083.0]'
 
-Point 2 => X: 414, Y: 517
+...Line # 83 has text content 'Worldwide Health | Microsoft' within bounding box '[467.0, 1088.0], [615.0, 1088.0], [615.0, 1104.0], [467.0, 1104.0]'
 
-Point 3 => X: 76, Y: 517
+...Line # 84 has text content 'EMBRACING DIGITAL TRANSFORMATION IN LIFE SCIENCES ORGANIZATIONS' within bounding box '[77.0, 1140.0], [451.0, 1140.0], [451.0, 1153.0], [77.0, 1154.0]'
 
-Line 17 has content: 'physicians. The COVID-19 pandemic has accelerated the'.
+...Line # 85 has text content '2' within bounding box '[811.0, 1138.0], [823.0, 1139.0], [822.0, 1154.0], [810.0, 1153.0]'
 
-Its bounding polygon (points ordered clockwise):
+...Word 'While' has a confidence of 0.997
 
-Point 0 => X: 76, Y: 517
+...Word 'healthcare' has a confidence of 0.994
 
-Point 1 => X: 410, Y: 517
+...Word 'is' has a confidence of 0.997
 
-Point 2 => X: 410, Y: 534
+...Word 'still' has a confidence of 0.997
 
-Point 3 => X: 76, Y: 535
+...Word 'in' has a confidence of 0.997
 
-Line 18 has content: 'adoption of decentralized clinical trials, with an increase in'.
+...Word 'the' has a confidence of 0.998
 
-Its bounding polygon (points ordered clockwise):
+...Word 'early' has a confidence of 0.997
 
-Point 0 => X: 75, Y: 535
+...Word 'stages' has a confidence of 0.997
 
-Point 1 => X: 411, Y: 535
+...Word 'of' has a confidence of 0.997
 
-Point 2 => X: 411, Y: 553
+...Word 'its' has a confidence of 0.997
 
-Point 3 => X: 75, Y: 553
+...Word 'Al' has a confidence of 0.866
 
-Line 19 has content: 'trial activities conducted remotely and in participants' homes.'.
+...Word 'journey,' has a confidence of 0.994
 
-Its bounding polygon (points ordered clockwise):
+...Word 'we' has a confidence of 0.997
 
-Point 0 => X: 77, Y: 554
+...Word 'are' has a confidence of 0.997
 
-Point 1 => X: 428, Y: 555
+...Word 'seeing' has a confidence of 0.996
 
-Point 2 => X: 428, Y: 572
+...Word 'pharmaceutical' has a confidence of 0.991
 
-Point 3 => X: 77, Y: 572
+...Word 'and' has a confidence of 0.998
 
-Line 20 has content: 'In a Mckinsey survey1 up to 98 percent of patients reported'.
+...Word 'other' has a confidence of 0.997
 
-Its bounding polygon (points ordered clockwise):
+...Word 'life' has a confidence of 0.988
 
-Point 0 => X: 76, Y: 572
+...Word 'sciences' has a confidence of 0.994
 
-Point 1 => X: 420, Y: 572
+...Word 'organizations' has a confidence of 0.991
 
-Point 2 => X: 420, Y: 590
+...Word 'making' has a confidence of 0.994
 
-Point 3 => X: 76, Y: 590
+...Word 'major' has a confidence of 0.997
 
-Line 21 has content: 'satisfaction with telemedicine. In the same report, 72 percent of'.
+...Word 'investments' has a confidence of 0.993
 
-Its bounding polygon (points ordered clockwise):
+...Word 'in' has a confidence of 0.997
 
-Point 0 => X: 77, Y: 591
+...Word 'Al' has a confidence of 0.677
 
-Point 1 => X: 442, Y: 591
+...Word 'and' has a confidence of 0.998
 
-Point 2 => X: 442, Y: 608
+...Word 'related' has a confidence of 0.996
 
-Point 3 => X: 77, Y: 607
+...Word 'technologies."' has a confidence of 0.955
 
-Line 22 has content: 'physicians surveyed reported similar or better experiences with'.
+...Word 'TOM' has a confidence of 0.997
 
-Its bounding polygon (points ordered clockwise):
+...Word 'LAWRY' has a confidence of 0.996
 
-Point 0 => X: 77, Y: 609
+...Word '|' has a confidence of 0.994
 
-Point 1 => X: 438, Y: 609
+...Word 'National' has a confidence of 0.994
 
-Point 2 => X: 438, Y: 626
+...Word 'Director' has a confidence of 0.994
 
-Point 3 => X: 77, Y: 626
+...Word 'for' has a confidence of 0.997
 
-Line 23 has content: 'remote engagement compared with in-person visits.'.
+...Word 'Al,' has a confidence of 0.884
 
-Its bounding polygon (points ordered clockwise):
+...Word 'Health' has a confidence of 0.995
 
-Point 0 => X: 76, Y: 628
+...Word 'and' has a confidence of 0.997
 
-Point 1 => X: 378, Y: 627
+...Word 'Life' has a confidence of 0.985
 
-Point 2 => X: 378, Y: 644
+...Word 'Sciences' has a confidence of 0.991
 
-Point 3 => X: 76, Y: 644
+...Word '|' has a confidence of 0.992
 
-Line 24 has content: 'The shift of trial activities closer to patients has been enabled by'.
+...Word 'Microsoft' has a confidence of 0.991
 
-Its bounding polygon (points ordered clockwise):
+...Word 'As' has a confidence of 0.997
 
-Point 0 => X: 73, Y: 656
+...Word 'pharmaceutical' has a confidence of 0.991
 
-Point 1 => X: 443, Y: 657
+...Word 'and' has a confidence of 0.997
 
-Point 2 => X: 443, Y: 675
+...Word 'other' has a confidence of 0.997
 
-Point 3 => X: 73, Y: 674
+...Word 'life' has a confidence of 0.991
 
-Line 25 has content: 'a myriad of evolving technologies and services (e.g., electronic'.
+...Word 'sciences' has a confidence of 0.994
 
-Its bounding polygon (points ordered clockwise):
+...Word 'organizations' has a confidence of 0.992
 
-Point 0 => X: 75, Y: 676
+...Word 'invest' has a confidence of 0.996
 
-Point 1 => X: 439, Y: 676
+...Word 'in' has a confidence of 0.997
 
-Point 2 => X: 439, Y: 693
+...Word 'and' has a confidence of 0.998
 
-Point 3 => X: 75, Y: 693
+...Word 'deploy' has a confidence of 0.996
 
-Line 26 has content: 'consent, telehealth and remote patient monitoring). The aim'.
+...Word 'advanced' has a confidence of 0.994
 
-Its bounding polygon (points ordered clockwise):
+...Word 'technologies,' has a confidence of 0.991
 
-Point 0 => X: 77, Y: 694
+...Word 'they' has a confidence of 0.989
 
-Point 1 => X: 428, Y: 693
+...Word 'are' has a confidence of 0.997
 
-Point 2 => X: 428, Y: 710
+...Word 'beginning' has a confidence of 0.995
 
-Point 3 => X: 77, Y: 711
+...Word 'to' has a confidence of 0.997
 
-Line 27 has content: 'to use technology to improve the patient experience and'.
+...Word 'see' has a confidence of 0.997
 
-Its bounding polygon (points ordered clockwise):
+...Word 'benefits' has a confidence of 0.993
 
-Point 0 => X: 76, Y: 713
+...Word 'in' has a confidence of 0.997
 
-Point 1 => X: 406, Y: 712
+...Word 'diverse' has a confidence of 0.996
 
-Point 2 => X: 406, Y: 729
+...Word 'areas' has a confidence of 0.997
 
-Point 3 => X: 76, Y: 729
+...Word 'across' has a confidence of 0.996
 
-Line 28 has content: 'convenience has also broadened trial access to reach a broader,'.
+...Word 'their' has a confidence of 0.997
 
-Its bounding polygon (points ordered clockwise):
+...Word 'organizations.' has a confidence of 0.991
 
-Point 0 => X: 76, Y: 730
+...Word 'Companies' has a confidence of 0.994
 
-Point 1 => X: 441, Y: 730
+...Word 'are' has a confidence of 0.997
 
-Point 2 => X: 441, Y: 746
+...Word 'looking' has a confidence of 0.996
 
-Point 3 => X: 76, Y: 746
+...Word 'to' has a confidence of 0.998
 
-Line 29 has content: 'more diverse patient population.'.
+...Word 'incorporate' has a confidence of 0.993
 
-Its bounding polygon (points ordered clockwise):
+...Word 'automation' has a confidence of 0.994
 
-Point 0 => X: 76, Y: 749
+...Word 'and' has a confidence of 0.998
 
-Point 1 => X: 265, Y: 749
+...Word 'continuing' has a confidence of 0.994
 
-Point 2 => X: 265, Y: 765
+...Word 'smart' has a confidence of 0.997
 
-Point 3 => X: 76, Y: 764
+...Word 'factory' has a confidence of 0.996
 
-Line 30 has content: '"It's an interesting and exciting time right now," said Keren'.
+...Word 'investments' has a confidence of 0.991
 
-Its bounding polygon (points ordered clockwise):
+...Word 'to' has a confidence of 0.997
 
-Point 0 => X: 72, Y: 779
+...Word 'reduce' has a confidence of 0.997
 
-Point 1 => X: 404, Y: 779
+...Word 'costs' has a confidence of 0.995
 
-Point 2 => X: 404, Y: 797
+...Word 'in' has a confidence of 0.997
 
-Point 3 => X: 72, Y: 797
+...Word 'drug' has a confidence of 0.991
 
-Line 31 has content: 'Priyadarshini, Regional Business Lead - Asia, Worldwide'.
+...Word 'discovery,' has a confidence of 0.993
 
-Its bounding polygon (points ordered clockwise):
+...Word 'research' has a confidence of 0.995
 
-Point 0 => X: 75, Y: 797
+...Word 'and' has a confidence of 0.997
 
-Point 1 => X: 402, Y: 797
+...Word 'development,' has a confidence of 0.991
 
-Point 2 => X: 402, Y: 814
+...Word 'and' has a confidence of 0.998
 
-Point 3 => X: 75, Y: 814
+...Word 'manufacturing' has a confidence of 0.992
 
-Line 32 has content: 'Health, Microsoft. "It used to be that physicians were key.'.
+...Word 'and' has a confidence of 0.998
 
-Its bounding polygon (points ordered clockwise):
+...Word 'supply' has a confidence of 0.997
 
-Point 0 => X: 76, Y: 815
+...Word 'chain' has a confidence of 0.997
 
-Point 1 => X: 408, Y: 817
+...Word 'management.' has a confidence of 0.982
 
-Point 2 => X: 408, Y: 834
+...Word 'Many' has a confidence of 0.991
 
-Point 3 => X: 76, Y: 832
+...Word 'life' has a confidence of 0.988
 
-Line 33 has content: 'Now, suddenly, patients are feeling empowered by technology.'.
+...Word 'sciences' has a confidence of 0.994
 
-Its bounding polygon (points ordered clockwise):
+...Word 'organizations' has a confidence of 0.992
 
-Point 0 => X: 76, Y: 833
+...Word 'are' has a confidence of 0.997
 
-Point 1 => X: 436, Y: 834
+...Word 'also' has a confidence of 0.988
 
-Point 2 => X: 436, Y: 851
+...Word 'choosing' has a confidence of 0.995
 
-Point 3 => X: 76, Y: 851
+...Word 'to' has a confidence of 0.998
 
-Line 34 has content: 'Pharmaceutical companies and other life sciences companies'.
+...Word 'stay' has a confidence of 0.988
 
-Its bounding polygon (points ordered clockwise):
+...Word 'with' has a confidence of 0.988
 
-Point 0 => X: 77, Y: 852
+...Word 'more' has a confidence of 0.988
 
-Point 1 => X: 428, Y: 852
+...Word 'virtual' has a confidence of 0.995
 
-Point 2 => X: 428, Y: 869
+...Word 'approaches' has a confidence of 0.994
 
-Point 3 => X: 77, Y: 868
+...Word 'in' has a confidence of 0.997
 
-Line 35 has content: 'are realizing they have to pay attention to the patient'.
+...Word 'the' has a confidence of 0.997
 
-Its bounding polygon (points ordered clockwise):
+...Word '"new' has a confidence of 0.991
 
-Point 0 => X: 73, Y: 870
+...Word 'normal"' has a confidence of 0.993
 
-Point 1 => X: 383, Y: 870
+...Word '-' has a confidence of 0.993
 
-Point 2 => X: 383, Y: 887
+...Word 'particularly' has a confidence of 0.989
 
-Point 3 => X: 73, Y: 887
+...Word 'in' has a confidence of 0.997
 
-Line 36 has content: 'experience in addition to the physician experience."'.
+...Word 'clinical' has a confidence of 0.994
 
-Its bounding polygon (points ordered clockwise):
+...Word 'trials' has a confidence of 0.993
 
-Point 0 => X: 76, Y: 888
+...Word 'and' has a confidence of 0.998
 
-Point 1 => X: 373, Y: 888
+...Word 'sales' has a confidence of 0.997
 
-Point 2 => X: 373, Y: 905
+...Word 'and' has a confidence of 0.998
 
-Point 3 => X: 76, Y: 906
+...Word 'marketing' has a confidence of 0.995
 
-Line 37 has content: 'Enhanced patient experiences can be delivered in many different'.
+...Word 'areas.' has a confidence of 0.979
 
-Its bounding polygon (points ordered clockwise):
+...Word 'Enhancing' has a confidence of 0.992
 
-Point 0 => X: 77, Y: 919
+...Word 'the' has a confidence of 0.998
 
-Point 1 => X: 442, Y: 918
+...Word 'patient' has a confidence of 0.996
 
-Point 2 => X: 442, Y: 935
+...Word 'and' has a confidence of 0.998
 
-Point 3 => X: 77, Y: 936
+...Word 'provider' has a confidence of 0.996
 
-Line 38 has content: 'ways. One example of a life sciences product that leverages the'.
+...Word 'experience' has a confidence of 0.994
 
-Its bounding polygon (points ordered clockwise):
+...Word 'Clinical' has a confidence of 0.994
 
-Point 0 => X: 76, Y: 936
+...Word 'trial' has a confidence of 0.994
 
-Point 1 => X: 433, Y: 936
+...Word 'sponsors' has a confidence of 0.994
 
-Point 2 => X: 433, Y: 954
+...Word 'are' has a confidence of 0.997
 
-Point 3 => X: 76, Y: 954
+...Word 'continually' has a confidence of 0.993
 
-Line 39 has content: 'intelligent cloud to directly affect the patient experience is the'.
+...Word 'seeking' has a confidence of 0.996
 
-Its bounding polygon (points ordered clockwise):
+...Word 'to' has a confidence of 0.997
 
-Point 0 => X: 75, Y: 955
+...Word 'make' has a confidence of 0.988
 
-Point 1 => X: 425, Y: 955
+...Word 'clinical' has a confidence of 0.995
 
-Point 2 => X: 425, Y: 972
+...Word 'trials' has a confidence of 0.994
 
-Point 3 => X: 75, Y: 972
+...Word 'faster' has a confidence of 0.996
 
-Line 40 has content: 'Tandemr Diabetes Care insulin pump. The Tandemr t:slim X2'.
+...Word 'and' has a confidence of 0.997
 
-Its bounding polygon (points ordered clockwise):
+...Word 'to' has a confidence of 0.997
 
-Point 0 => X: 75, Y: 972
+...Word 'improve' has a confidence of 0.996
 
-Point 1 => X: 424, Y: 972
+...Word 'the' has a confidence of 0.997
 
-Point 2 => X: 424, Y: 990
+...Word 'experience' has a confidence of 0.994
 
-Point 3 => X: 75, Y: 990
+...Word 'for' has a confidence of 0.998
 
-Line 41 has content: 'insulin pump with Basal-IQ technology enables patients with'.
+...Word 'patients' has a confidence of 0.994
 
-Its bounding polygon (points ordered clockwise):
+...Word 'and' has a confidence of 0.998
 
-Point 0 => X: 75, Y: 990
+...Word 'physicians.' has a confidence of 0.991
 
-Point 1 => X: 417, Y: 990
+...Word 'The' has a confidence of 0.997
 
-Point 2 => X: 417, Y: 1008
+...Word 'COVID-19' has a confidence of 0.993
 
-Point 3 => X: 75, Y: 1008
+...Word 'pandemic' has a confidence of 0.988
 
-Line 42 has content: 'Type 1 diabetes to predict and prevent the low levels of blood'.
+...Word 'has' has a confidence of 0.998
 
-Its bounding polygon (points ordered clockwise):
+...Word 'accelerated' has a confidence of 0.993
 
-Point 0 => X: 75, Y: 1008
+...Word 'the' has a confidence of 0.997
 
-Point 1 => X: 420, Y: 1008
+...Word 'adoption' has a confidence of 0.992
 
-Point 2 => X: 420, Y: 1025
+...Word 'of' has a confidence of 0.997
 
-Point 3 => X: 75, Y: 1026
+...Word 'decentralized' has a confidence of 0.993
 
-Line 43 has content: 'sugar that cause hypoglycemia.2 The algorithm-driven, software-'.
+...Word 'clinical' has a confidence of 0.992
 
-Its bounding polygon (points ordered clockwise):
+...Word 'trials,' has a confidence of 0.991
 
-Point 0 => X: 75, Y: 1027
+...Word 'with' has a confidence of 0.991
 
-Point 1 => X: 440, Y: 1026
+...Word 'an' has a confidence of 0.997
 
-Point 2 => X: 441, Y: 1044
+...Word 'increase' has a confidence of 0.995
 
-Point 3 => X: 75, Y: 1045
+...Word 'in' has a confidence of 0.997
 
-Line 44 has content: 'updatable pump improves the patient experience by automating'.
+...Word 'trial' has a confidence of 0.994
 
-Its bounding polygon (points ordered clockwise):
+...Word 'activities' has a confidence of 0.991
 
-Point 0 => X: 76, Y: 1045
+...Word 'conducted' has a confidence of 0.994
 
-Point 1 => X: 440, Y: 1045
+...Word 'remotely' has a confidence of 0.994
 
-Point 2 => X: 440, Y: 1062
+...Word 'and' has a confidence of 0.997
 
-Point 3 => X: 76, Y: 1062
+...Word 'in' has a confidence of 0.997
 
-Line 45 has content: 'chronic disease management and eliminating the need for'.
+...Word 'participants'' has a confidence of 0.963
 
-Its bounding polygon (points ordered clockwise):
+...Word 'homes.' has a confidence of 0.96
 
-Point 0 => X: 76, Y: 1062
+...Word 'In' has a confidence of 0.94
 
-Point 1 => X: 403, Y: 1062
+...Word 'a' has a confidence of 0.996
 
-Point 2 => X: 403, Y: 1080
+...Word 'Mckinsey' has a confidence of 0.993
 
-Point 3 => X: 76, Y: 1080
+...Word 'survey1' has a confidence of 0.843
 
-Line 46 has content: 'constant finger pricks to check glucose levels.'.
+...Word 'up' has a confidence of 0.997
 
-Its bounding polygon (points ordered clockwise):
+...Word 'to' has a confidence of 0.997
 
-Point 0 => X: 75, Y: 1081
+...Word '98' has a confidence of 0.997
 
-Point 1 => X: 332, Y: 1080
+...Word 'percent' has a confidence of 0.996
 
-Point 2 => X: 332, Y: 1097
+...Word 'of' has a confidence of 0.997
 
-Point 3 => X: 75, Y: 1098
+...Word 'patients' has a confidence of 0.994
 
-Line 47 has content: 'Tandem was able to create and deploy this innovation by'.
+...Word 'reported' has a confidence of 0.995
 
-Its bounding polygon (points ordered clockwise):
+...Word 'satisfaction' has a confidence of 0.991
 
-Point 0 => X: 466, Y: 240
+...Word 'with' has a confidence of 0.988
 
-Point 1 => X: 792, Y: 240
+...Word 'telemedicine.' has a confidence of 0.992
 
-Point 2 => X: 792, Y: 258
+...Word 'In' has a confidence of 0.993
 
-Point 3 => X: 466, Y: 257
+...Word 'the' has a confidence of 0.997
 
-Line 48 has content: 'leveraging the Al and machine learning capabilities of the'.
+...Word 'same' has a confidence of 0.988
 
-Its bounding polygon (points ordered clockwise):
+...Word 'report,' has a confidence of 0.994
 
-Point 0 => X: 467, Y: 260
+...Word '72' has a confidence of 0.997
 
-Point 1 => X: 801, Y: 260
+...Word 'percent' has a confidence of 0.996
 
-Point 2 => X: 801, Y: 276
+...Word 'of' has a confidence of 0.992
 
-Point 3 => X: 467, Y: 277
+...Word 'physicians' has a confidence of 0.991
 
-Line 49 has content: 'intelligent cloud. As Al and other technologies continue to'.
+...Word 'surveyed' has a confidence of 0.994
 
-Its bounding polygon (points ordered clockwise):
+...Word 'reported' has a confidence of 0.994
 
-Point 0 => X: 468, Y: 277
+...Word 'similar' has a confidence of 0.994
 
-Point 1 => X: 808, Y: 277
+...Word 'or' has a confidence of 0.997
 
-Point 2 => X: 808, Y: 295
+...Word 'better' has a confidence of 0.996
 
-Point 3 => X: 468, Y: 294
+...Word 'experiences' has a confidence of 0.993
 
-Line 50 has content: 'advance, potential use cases will multiply. "Speed to value is'.
+...Word 'with' has a confidence of 0.987
 
-Its bounding polygon (points ordered clockwise):
+...Word 'remote' has a confidence of 0.993
 
-Point 0 => X: 468, Y: 296
+...Word 'engagement' has a confidence of 0.994
 
-Point 1 => X: 810, Y: 295
+...Word 'compared' has a confidence of 0.995
 
-Point 2 => X: 810, Y: 312
+...Word 'with' has a confidence of 0.988
 
-Point 3 => X: 468, Y: 313
+...Word 'in-person' has a confidence of 0.993
 
-Line 51 has content: 'going to continue to accelerate," said Lawry.'.
+...Word 'visits.' has a confidence of 0.991
 
-Its bounding polygon (points ordered clockwise):
+...Word 'The' has a confidence of 0.997
 
-Point 0 => X: 468, Y: 315
+...Word 'shift' has a confidence of 0.997
 
-Point 1 => X: 723, Y: 314
+...Word 'of' has a confidence of 0.997
 
-Point 2 => X: 723, Y: 330
+...Word 'trial' has a confidence of 0.996
 
-Point 3 => X: 468, Y: 332
+...Word 'activities' has a confidence of 0.993
 
-Line 52 has content: 'In addition to enhancing the patient experience,'.
+...Word 'closer' has a confidence of 0.997
 
-Its bounding polygon (points ordered clockwise):
+...Word 'to' has a confidence of 0.998
 
-Point 0 => X: 468, Y: 344
+...Word 'patients' has a confidence of 0.994
 
-Point 1 => X: 745, Y: 346
+...Word 'has' has a confidence of 0.997
 
-Point 2 => X: 745, Y: 362
+...Word 'been' has a confidence of 0.99
 
-Point 3 => X: 468, Y: 361
+...Word 'enabled' has a confidence of 0.996
 
-Line 53 has content: 'pharmaceutical and other life sciences companies can'.
+...Word 'by' has a confidence of 0.997
 
-Its bounding polygon (points ordered clockwise):
+...Word 'a' has a confidence of 0.994
 
-Point 0 => X: 469, Y: 363
+...Word 'myriad' has a confidence of 0.996
 
-Point 1 => X: 779, Y: 363
+...Word 'of' has a confidence of 0.997
 
-Point 2 => X: 779, Y: 380
+...Word 'evolving' has a confidence of 0.995
 
-Point 3 => X: 469, Y: 379
+...Word 'technologies' has a confidence of 0.991
 
-Line 54 has content: 'leverage advanced technologies to improve relationships with'.
+...Word 'and' has a confidence of 0.997
 
-Its bounding polygon (points ordered clockwise):
+...Word 'services' has a confidence of 0.994
 
-Point 0 => X: 468, Y: 382
+...Word '(e.g.,' has a confidence of 0.991
 
-Point 1 => X: 822, Y: 381
+...Word 'electronic' has a confidence of 0.993
 
-Point 2 => X: 822, Y: 397
+...Word 'consent,' has a confidence of 0.993
 
-Point 3 => X: 468, Y: 398
+...Word 'telehealth' has a confidence of 0.993
 
-Line 55 has content: 'providers. For example, COVID-19 is driving changes in the'.
+...Word 'and' has a confidence of 0.998
 
-Its bounding polygon (points ordered clockwise):
+...Word 'remote' has a confidence of 0.996
 
-Point 0 => X: 467, Y: 399
+...Word 'patient' has a confidence of 0.996
 
-Point 1 => X: 814, Y: 399
+...Word 'monitoring).' has a confidence of 0.991
 
-Point 2 => X: 814, Y: 415
+...Word 'The' has a confidence of 0.997
 
-Point 3 => X: 467, Y: 416
+...Word 'aim' has a confidence of 0.997
 
-Line 56 has content: 'way companies interact with clinicians. Prior to COVID-19,'.
+...Word 'to' has a confidence of 0.997
 
-Its bounding polygon (points ordered clockwise):
+...Word 'use' has a confidence of 0.997
 
-Point 0 => X: 467, Y: 418
+...Word 'technology' has a confidence of 0.994
 
-Point 1 => X: 806, Y: 416
+...Word 'to' has a confidence of 0.997
 
-Point 2 => X: 807, Y: 432
+...Word 'improve' has a confidence of 0.996
 
-Point 3 => X: 467, Y: 435
+...Word 'the' has a confidence of 0.997
 
-Line 57 has content: '75 percent of physicians preferred in-person sales visits from'.
+...Word 'patient' has a confidence of 0.996
 
-Its bounding polygon (points ordered clockwise):
+...Word 'experience' has a confidence of 0.994
 
-Point 0 => X: 466, Y: 435
+...Word 'and' has a confidence of 0.998
 
-Point 1 => X: 815, Y: 435
+...Word 'convenience' has a confidence of 0.992
 
-Point 2 => X: 815, Y: 452
+...Word 'has' has a confidence of 0.994
 
-Point 3 => X: 466, Y: 453
+...Word 'also' has a confidence of 0.988
 
-Line 58 has content: 'medtech reps; likewise, 77 percent of physicians preferred in-'.
+...Word 'broadened' has a confidence of 0.994
 
-Its bounding polygon (points ordered clockwise):
+...Word 'trial' has a confidence of 0.996
 
-Point 0 => X: 467, Y: 452
+...Word 'access' has a confidence of 0.997
 
-Point 1 => X: 818, Y: 452
+...Word 'to' has a confidence of 0.998
 
-Point 2 => X: 818, Y: 470
+...Word 'reach' has a confidence of 0.997
 
-Point 3 => X: 467, Y: 470
+...Word 'a' has a confidence of 0.995
 
-Line 59 has content: 'person sales visits from pharma reps.3'.
+...Word 'broader,' has a confidence of 0.993
 
-Its bounding polygon (points ordered clockwise):
+...Word 'more' has a confidence of 0.997
 
-Point 0 => X: 468, Y: 471
+...Word 'diverse' has a confidence of 0.996
 
-Point 1 => X: 685, Y: 471
+...Word 'patient' has a confidence of 0.996
 
-Point 2 => X: 685, Y: 489
+...Word 'population.' has a confidence of 0.98
 
-Point 3 => X: 468, Y: 489
+...Word '"It's' has a confidence of 0.766
 
-Line 60 has content: 'Since the advent of COVID-19, however, physician'.
+...Word 'an' has a confidence of 0.997
 
-Its bounding polygon (points ordered clockwise):
+...Word 'interesting' has a confidence of 0.993
 
-Point 0 => X: 467, Y: 502
+...Word 'and' has a confidence of 0.998
 
-Point 1 => X: 771, Y: 503
+...Word 'exciting' has a confidence of 0.995
 
-Point 2 => X: 771, Y: 520
+...Word 'time' has a confidence of 0.988
 
-Point 3 => X: 467, Y: 519
+...Word 'right' has a confidence of 0.997
 
-Line 61 has content: 'preferences are moving toward virtual visits. Only 53 percent'.
+...Word 'now,"' has a confidence of 0.993
 
-Its bounding polygon (points ordered clockwise):
+...Word 'said' has a confidence of 0.985
 
-Point 0 => X: 468, Y: 521
+...Word 'Keren' has a confidence of 0.997
 
-Point 1 => X: 828, Y: 521
+...Word 'Priyadarshini,' has a confidence of 0.991
 
-Point 2 => X: 828, Y: 538
+...Word 'Regional' has a confidence of 0.994
 
-Point 3 => X: 468, Y: 538
+...Word 'Business' has a confidence of 0.993
 
-Line 62 has content: 'of physicians now express a preference for in-person visits'.
+...Word 'Lead' has a confidence of 0.987
 
-Its bounding polygon (points ordered clockwise):
+...Word '-' has a confidence of 0.994
 
-Point 0 => X: 467, Y: 539
+...Word 'Asia,' has a confidence of 0.994
 
-Point 1 => X: 811, Y: 539
+...Word 'Worldwide' has a confidence of 0.993
 
-Point 2 => X: 811, Y: 556
+...Word 'Health,' has a confidence of 0.995
 
-Point 3 => X: 467, Y: 556
+...Word 'Microsoft.' has a confidence of 0.991
 
-Line 63 has content: 'from medtech reps and only 40 percent prefer in-person visits'.
+...Word '"It' has a confidence of 0.882
 
-Its bounding polygon (points ordered clockwise):
+...Word 'used' has a confidence of 0.988
 
-Point 0 => X: 468, Y: 557
+...Word 'to' has a confidence of 0.997
 
-Point 1 => X: 835, Y: 557
+...Word 'be' has a confidence of 0.997
 
-Point 2 => X: 835, Y: 574
+...Word 'that' has a confidence of 0.988
 
-Point 3 => X: 468, Y: 574
+...Word 'physicians' has a confidence of 0.991
 
-Line 64 has content: 'from pharma reps. That puts the onus on pharmaceutical and'.
+...Word 'were' has a confidence of 0.988
 
-Its bounding polygon (points ordered clockwise):
+...Word 'key.' has a confidence of 0.971
 
-Point 0 => X: 469, Y: 574
+...Word 'Now,' has a confidence of 0.979
 
-Point 1 => X: 835, Y: 574
+...Word 'suddenly,' has a confidence of 0.994
 
-Point 2 => X: 835, Y: 592
+...Word 'patients' has a confidence of 0.995
 
-Point 3 => X: 469, Y: 592
+...Word 'are' has a confidence of 0.998
 
-Line 65 has content: 'life sciences organizations to deliver valuable and engaging'.
+...Word 'feeling' has a confidence of 0.996
 
-Its bounding polygon (points ordered clockwise):
+...Word 'empowered' has a confidence of 0.995
 
-Point 0 => X: 468, Y: 593
+...Word 'by' has a confidence of 0.997
 
-Point 1 => X: 819, Y: 593
+...Word 'technology.' has a confidence of 0.99
 
-Point 2 => X: 819, Y: 611
+...Word 'Pharmaceutical' has a confidence of 0.991
 
-Point 3 => X: 468, Y: 610
+...Word 'companies' has a confidence of 0.993
 
-Line 66 has content: 'virtual visits to providers.'.
+...Word 'and' has a confidence of 0.998
 
-Its bounding polygon (points ordered clockwise):
+...Word 'other' has a confidence of 0.997
 
-Point 0 => X: 468, Y: 611
+...Word 'life' has a confidence of 0.988
 
-Point 1 => X: 616, Y: 611
+...Word 'sciences' has a confidence of 0.994
 
-Point 2 => X: 616, Y: 627
+...Word 'companies' has a confidence of 0.994
 
-Point 3 => X: 468, Y: 627
+...Word 'are' has a confidence of 0.997
 
-Line 67 has content: 'One way to do that is to leverage text analytics capabilities to'.
+...Word 'realizing' has a confidence of 0.994
 
-Its bounding polygon (points ordered clockwise):
+...Word 'they' has a confidence of 0.988
 
-Point 0 => X: 468, Y: 642
+...Word 'have' has a confidence of 0.988
 
-Point 1 => X: 822, Y: 642
+...Word 'to' has a confidence of 0.998
 
-Point 2 => X: 822, Y: 659
+...Word 'pay' has a confidence of 0.997
 
-Point 3 => X: 468, Y: 659
+...Word 'attention' has a confidence of 0.994
 
-Line 68 has content: 'enhance the provider information stored in the organization's'.
+...Word 'to' has a confidence of 0.997
 
-Its bounding polygon (points ordered clockwise):
+...Word 'the' has a confidence of 0.997
 
-Point 0 => X: 469, Y: 660
+...Word 'patient' has a confidence of 0.996
 
-Point 1 => X: 820, Y: 660
+...Word 'experience' has a confidence of 0.991
 
-Point 2 => X: 820, Y: 676
+...Word 'in' has a confidence of 0.997
 
-Point 3 => X: 469, Y: 677
+...Word 'addition' has a confidence of 0.994
 
-Line 69 has content: 'customer relationship management (CRM) system. For'.
+...Word 'to' has a confidence of 0.997
 
-Its bounding polygon (points ordered clockwise):
+...Word 'the' has a confidence of 0.997
 
-Point 0 => X: 466, Y: 679
+...Word 'physician' has a confidence of 0.993
 
-Point 1 => X: 789, Y: 677
+...Word 'experience."' has a confidence of 0.97
 
-Point 2 => X: 789, Y: 694
+...Word 'Enhanced' has a confidence of 0.991
 
-Point 3 => X: 467, Y: 696
+...Word 'patient' has a confidence of 0.995
 
-Line 70 has content: 'example, a rep setting up a visit with 'Dr. X' could run text'.
+...Word 'experiences' has a confidence of 0.991
 
-Its bounding polygon (points ordered clockwise):
+...Word 'can' has a confidence of 0.997
 
-Point 0 => X: 468, Y: 697
+...Word 'be' has a confidence of 0.996
 
-Point 1 => X: 801, Y: 695
+...Word 'delivered' has a confidence of 0.993
 
-Point 2 => X: 801, Y: 712
+...Word 'in' has a confidence of 0.998
 
-Point 3 => X: 468, Y: 714
+...Word 'many' has a confidence of 0.988
 
-Line 71 has content: 'analytics on publicly available resources on the web to identify'.
+...Word 'different' has a confidence of 0.995
 
-Its bounding polygon (points ordered clockwise):
+...Word 'ways.' has a confidence of 0.994
 
-Point 0 => X: 467, Y: 714
+...Word 'One' has a confidence of 0.997
 
-Point 1 => X: 825, Y: 713
+...Word 'example' has a confidence of 0.995
 
-Point 2 => X: 825, Y: 730
+...Word 'of' has a confidence of 0.997
 
-Point 3 => X: 467, Y: 731
+...Word 'a' has a confidence of 0.994
 
-Line 72 has content: 'on which specific topics Dr. X has been writing about and'.
+...Word 'life' has a confidence of 0.989
 
-Its bounding polygon (points ordered clockwise):
+...Word 'sciences' has a confidence of 0.994
 
-Point 0 => X: 466, Y: 731
+...Word 'product' has a confidence of 0.995
 
-Point 1 => X: 799, Y: 731
+...Word 'that' has a confidence of 0.988
 
-Point 2 => X: 799, Y: 749
+...Word 'leverages' has a confidence of 0.994
 
-Point 3 => X: 466, Y: 749
+...Word 'the' has a confidence of 0.997
 
-Line 73 has content: 'commenting. "All kinds of publicly available information can'.
+...Word 'intelligent' has a confidence of 0.981
 
-Its bounding polygon (points ordered clockwise):
+...Word 'cloud' has a confidence of 0.997
 
-Point 0 => X: 467, Y: 749
+...Word 'to' has a confidence of 0.997
 
-Point 1 => X: 813, Y: 749
+...Word 'directly' has a confidence of 0.995
 
-Point 2 => X: 813, Y: 767
+...Word 'affect' has a confidence of 0.995
 
-Point 3 => X: 467, Y: 768
+...Word 'the' has a confidence of 0.997
 
-Line 74 has content: 'All kinds of publicly'.
+...Word 'patient' has a confidence of 0.996
 
-Its bounding polygon (points ordered clockwise):
+...Word 'experience' has a confidence of 0.994
 
-Point 0 => X: 467, Y: 827
+...Word 'is' has a confidence of 0.997
 
-Point 1 => X: 644, Y: 827
+...Word 'the' has a confidence of 0.997
 
-Point 2 => X: 644, Y: 851
+...Word 'Tandem®' has a confidence of 0.872
 
-Point 3 => X: 467, Y: 851
+...Word 'Diabetes' has a confidence of 0.991
 
-Line 75 has content: 'available information'.
+...Word 'Care' has a confidence of 0.988
 
-Its bounding polygon (points ordered clockwise):
+...Word 'insulin' has a confidence of 0.995
 
-Point 0 => X: 467, Y: 856
+...Word 'pump.' has a confidence of 0.994
 
-Point 1 => X: 661, Y: 855
+...Word 'The' has a confidence of 0.997
 
-Point 2 => X: 661, Y: 877
+...Word 'Tandem®' has a confidence of 0.619
 
-Point 3 => X: 467, Y: 878
+...Word 't:slim' has a confidence of 0.971
 
-Line 76 has content: 'can be mined with text'.
+...Word 'X2' has a confidence of 0.993
 
-Its bounding polygon (points ordered clockwise):
+...Word 'insulin' has a confidence of 0.995
 
-Point 0 => X: 469, Y: 886
+...Word 'pump' has a confidence of 0.986
 
-Point 1 => X: 674, Y: 885
+...Word 'with' has a confidence of 0.99
 
-Point 2 => X: 674, Y: 906
+...Word 'Basal-IQ' has a confidence of 0.937
 
-Point 3 => X: 469, Y: 906
+...Word 'technology' has a confidence of 0.993
 
-Line 77 has content: 'analytics technology,'.
+...Word 'enables' has a confidence of 0.995
 
-Its bounding polygon (points ordered clockwise):
+...Word 'patients' has a confidence of 0.994
 
-Point 0 => X: 468, Y: 914
+...Word 'with' has a confidence of 0.979
 
-Point 1 => X: 660, Y: 915
+...Word 'Type' has a confidence of 0.993
 
-Point 2 => X: 660, Y: 938
+...Word '1' has a confidence of 0.995
 
-Point 3 => X: 468, Y: 937
+...Word 'diabetes' has a confidence of 0.993
 
-Line 78 has content: 'which can be used to arm the'.
+...Word 'to' has a confidence of 0.997
 
-Its bounding polygon (points ordered clockwise):
+...Word 'predict' has a confidence of 0.994
 
-Point 0 => X: 468, Y: 942
+...Word 'and' has a confidence of 0.997
 
-Point 1 => X: 729, Y: 942
+...Word 'prevent' has a confidence of 0.995
 
-Point 2 => X: 729, Y: 964
+...Word 'the' has a confidence of 0.997
 
-Point 3 => X: 468, Y: 963
+...Word 'low' has a confidence of 0.997
 
-Line 79 has content: 'sales rep with relevant information even'.
+...Word 'levels' has a confidence of 0.995
 
-Its bounding polygon (points ordered clockwise):
+...Word 'of' has a confidence of 0.997
 
-Point 0 => X: 468, Y: 971
+...Word 'blood' has a confidence of 0.997
 
-Point 1 => X: 831, Y: 971
+...Word 'sugar' has a confidence of 0.995
 
-Point 2 => X: 831, Y: 992
+...Word 'that' has a confidence of 0.989
 
-Point 3 => X: 468, Y: 993
+...Word 'cause' has a confidence of 0.997
 
-Line 80 has content: 'before he or she meets the doctor. It's a'.
+...Word 'hypoglycemia.2' has a confidence of 0.907
 
-Its bounding polygon (points ordered clockwise):
+...Word 'The' has a confidence of 0.997
 
-Point 0 => X: 468, Y: 998
+...Word 'algorithm-driven,' has a confidence of 0.991
 
-Point 1 => X: 823, Y: 999
+...Word 'software-' has a confidence of 0.993
 
-Point 2 => X: 823, Y: 1021
+...Word 'updatable' has a confidence of 0.992
 
-Point 3 => X: 468, Y: 1021
+...Word 'pump' has a confidence of 0.988
 
-Line 81 has content: 'totally different, digital game now."'.
+...Word 'improves' has a confidence of 0.995
 
-Its bounding polygon (points ordered clockwise):
+...Word 'the' has a confidence of 0.997
 
-Point 0 => X: 469, Y: 1028
+...Word 'patient' has a confidence of 0.996
 
-Point 1 => X: 789, Y: 1027
+...Word 'experience' has a confidence of 0.994
 
-Point 2 => X: 789, Y: 1051
+...Word 'by' has a confidence of 0.997
 
-Point 3 => X: 469, Y: 1051
+...Word 'automating' has a confidence of 0.994
 
-Line 82 has content: 'KEREN PRIYADARSHINI | Regional Business Lead - Asia,'.
+...Word 'chronic' has a confidence of 0.994
 
-Its bounding polygon (points ordered clockwise):
+...Word 'disease' has a confidence of 0.996
 
-Point 0 => X: 468, Y: 1067
+...Word 'management' has a confidence of 0.994
 
-Point 1 => X: 761, Y: 1068
+...Word 'and' has a confidence of 0.998
 
-Point 2 => X: 761, Y: 1084
+...Word 'eliminating' has a confidence of 0.993
 
-Point 3 => X: 468, Y: 1083
+...Word 'the' has a confidence of 0.998
 
-Line 83 has content: 'Worldwide Health | Microsoft'.
+...Word 'need' has a confidence of 0.991
 
-Its bounding polygon (points ordered clockwise):
+...Word 'for' has a confidence of 0.998
 
-Point 0 => X: 467, Y: 1088
+...Word 'constant' has a confidence of 0.995
 
-Point 1 => X: 615, Y: 1088
+...Word 'finger' has a confidence of 0.997
 
-Point 2 => X: 615, Y: 1104
+...Word 'pricks' has a confidence of 0.996
 
-Point 3 => X: 467, Y: 1104
+...Word 'to' has a confidence of 0.997
 
-Line 84 has content: 'EMBRACING DIGITAL TRANSFORMATION IN LIFE SCIENCES ORGANIZATIONS'.
+...Word 'check' has a confidence of 0.997
 
-Its bounding polygon (points ordered clockwise):
+...Word 'glucose' has a confidence of 0.996
 
-Point 0 => X: 77, Y: 1140
+...Word 'levels.' has a confidence of 0.961
 
-Point 1 => X: 451, Y: 1140
+...Word 'Tandem' has a confidence of 0.991
 
-Point 2 => X: 451, Y: 1153
+...Word 'was' has a confidence of 0.997
 
-Point 3 => X: 77, Y: 1154
+...Word 'able' has a confidence of 0.987
 
-Line 85 has content: '2'.
+...Word 'to' has a confidence of 0.997
 
-Its bounding polygon (points ordered clockwise):
+...Word 'create' has a confidence of 0.996
 
-Point 0 => X: 811, Y: 1138
+...Word 'and' has a confidence of 0.997
 
-Point 1 => X: 823, Y: 1139
+...Word 'deploy' has a confidence of 0.996
 
-Point 2 => X: 822, Y: 1154
+...Word 'this' has a confidence of 0.991
 
-Point 3 => X: 810, Y: 1153
+...Word 'innovation' has a confidence of 0.994
 
-Detected languages:
+...Word 'by' has a confidence of 0.997
 
-Found language with locale'en' with confidence 0.95.
+...Word 'leveraging' has a confidence of 0.98
 
-Found language with locale'en' with confidence 0.8.
+...Word 'the' has a confidence of 0.997
 
-Found language with locale'en' with confidence 0.7.
+...Word 'Al' has a confidence of 0.902
 
-Found language with locale'en' with confidence 0.9.
+...Word 'and' has a confidence of 0.997
 
-Found language with locale'en' with confidence 1.
+...Word 'machine' has a confidence of 0.996
 
-Found language with locale'en' with confidence 0.99.
+...Word 'learning' has a confidence of 0.991
 
-Found language with locale'en' with confidence 0.6.
+...Word 'capabilities' has a confidence of 0.991
 
-Found language with locale'en' with confidence 0.4.
+...Word 'of' has a confidence of 0.997
 
-Found language with locale'en' with confidence 0.2.
+...Word 'the' has a confidence of 0.998
+
+...Word 'intelligent' has a confidence of 0.991
+
+...Word 'cloud.' has a confidence of 0.996
+
+...Word 'As' has a confidence of 0.997
+
+...Word 'Al' has a confidence of 0.811
+
+...Word 'and' has a confidence of 0.998
+
+...Word 'other' has a confidence of 0.997
+
+...Word 'technologies' has a confidence of 0.991
+
+...Word 'continue' has a confidence of 0.995
+
+...Word 'to' has a confidence of 0.997
+
+...Word 'advance,' has a confidence of 0.992
+
+...Word 'potential' has a confidence of 0.994
+
+...Word 'use' has a confidence of 0.997
+
+...Word 'cases' has a confidence of 0.997
+
+...Word 'will' has a confidence of 0.987
+
+...Word 'multiply.' has a confidence of 0.993
+
+...Word '"Speed' has a confidence of 0.987
+
+...Word 'to' has a confidence of 0.997
+
+...Word 'value' has a confidence of 0.997
+
+...Word 'is' has a confidence of 0.997
+
+...Word 'going' has a confidence of 0.991
+
+...Word 'to' has a confidence of 0.997
+
+...Word 'continue' has a confidence of 0.995
+
+...Word 'to' has a confidence of 0.997
+
+...Word 'accelerate,"' has a confidence of 0.98
+
+...Word 'said' has a confidence of 0.987
+
+...Word 'Lawry.' has a confidence of 0.957
+
+...Word 'In' has a confidence of 0.934
+
+...Word 'addition' has a confidence of 0.994
+
+...Word 'to' has a confidence of 0.997
+
+...Word 'enhancing' has a confidence of 0.994
+
+...Word 'the' has a confidence of 0.998
+
+...Word 'patient' has a confidence of 0.996
+
+...Word 'experience,' has a confidence of 0.957
+
+...Word 'pharmaceutical' has a confidence of 0.991
+
+...Word 'and' has a confidence of 0.997
+
+...Word 'other' has a confidence of 0.997
+
+...Word 'life' has a confidence of 0.988
+
+...Word 'sciences' has a confidence of 0.994
+
+...Word 'companies' has a confidence of 0.994
+
+...Word 'can' has a confidence of 0.998
+
+...Word 'leverage' has a confidence of 0.993
+
+...Word 'advanced' has a confidence of 0.995
+
+...Word 'technologies' has a confidence of 0.991
+
+...Word 'to' has a confidence of 0.997
+
+...Word 'improve' has a confidence of 0.996
+
+...Word 'relationships' has a confidence of 0.991
+
+...Word 'with' has a confidence of 0.988
+
+...Word 'providers.' has a confidence of 0.991
+
+...Word 'For' has a confidence of 0.997
+
+...Word 'example,' has a confidence of 0.994
+
+...Word 'COVID-19' has a confidence of 0.994
+
+...Word 'is' has a confidence of 0.997
+
+...Word 'driving' has a confidence of 0.994
+
+...Word 'changes' has a confidence of 0.996
+
+...Word 'in' has a confidence of 0.997
+
+...Word 'the' has a confidence of 0.998
+
+...Word 'way' has a confidence of 0.995
+
+...Word 'companies' has a confidence of 0.994
+
+...Word 'interact' has a confidence of 0.995
+
+...Word 'with' has a confidence of 0.988
+
+...Word 'clinicians.' has a confidence of 0.991
+
+...Word 'Prior' has a confidence of 0.995
+
+...Word 'to' has a confidence of 0.997
+
+...Word 'COVID-19,' has a confidence of 0.97
+
+...Word '75' has a confidence of 0.992
+
+...Word 'percent' has a confidence of 0.995
+
+...Word 'of' has a confidence of 0.997
+
+...Word 'physicians' has a confidence of 0.992
+
+...Word 'preferred' has a confidence of 0.994
+
+...Word 'in-person' has a confidence of 0.994
+
+...Word 'sales' has a confidence of 0.997
+
+...Word 'visits' has a confidence of 0.993
+
+...Word 'from' has a confidence of 0.988
+
+...Word 'medtech' has a confidence of 0.996
+
+...Word 'reps;' has a confidence of 0.996
+
+...Word 'likewise,' has a confidence of 0.993
+
+...Word '77' has a confidence of 0.997
+
+...Word 'percent' has a confidence of 0.996
+
+...Word 'of' has a confidence of 0.997
+
+...Word 'physicians' has a confidence of 0.993
+
+...Word 'preferred' has a confidence of 0.995
+
+...Word 'in-' has a confidence of 0.997
+
+...Word 'person' has a confidence of 0.993
+
+...Word 'sales' has a confidence of 0.997
+
+...Word 'visits' has a confidence of 0.993
+
+...Word 'from' has a confidence of 0.987
+
+...Word 'pharma' has a confidence of 0.996
+
+...Word 'reps.3' has a confidence of 0.771
+
+...Word 'Since' has a confidence of 0.993
+
+...Word 'the' has a confidence of 0.997
+
+...Word 'advent' has a confidence of 0.996
+
+...Word 'of' has a confidence of 0.997
+
+...Word 'COVID-19,' has a confidence of 0.992
+
+...Word 'however,' has a confidence of 0.994
+
+...Word 'physician' has a confidence of 0.993
+
+...Word 'preferences' has a confidence of 0.991
+
+...Word 'are' has a confidence of 0.997
+
+...Word 'moving' has a confidence of 0.997
+
+...Word 'toward' has a confidence of 0.996
+
+...Word 'virtual' has a confidence of 0.995
+
+...Word 'visits.' has a confidence of 0.992
+
+...Word 'Only' has a confidence of 0.987
+
+...Word '53' has a confidence of 0.997
+
+...Word 'percent' has a confidence of 0.996
+
+...Word 'of' has a confidence of 0.994
+
+...Word 'physicians' has a confidence of 0.993
+
+...Word 'now' has a confidence of 0.997
+
+...Word 'express' has a confidence of 0.996
+
+...Word 'a' has a confidence of 0.995
+
+...Word 'preference' has a confidence of 0.994
+
+...Word 'for' has a confidence of 0.998
+
+...Word 'in-person' has a confidence of 0.994
+
+...Word 'visits' has a confidence of 0.996
+
+...Word 'from' has a confidence of 0.991
+
+...Word 'medtech' has a confidence of 0.996
+
+...Word 'reps' has a confidence of 0.987
+
+...Word 'and' has a confidence of 0.998
+
+...Word 'only' has a confidence of 0.991
+
+...Word '40' has a confidence of 0.997
+
+...Word 'percent' has a confidence of 0.996
+
+...Word 'prefer' has a confidence of 0.996
+
+...Word 'in-person' has a confidence of 0.994
+
+...Word 'visits' has a confidence of 0.995
+
+...Word 'from' has a confidence of 0.987
+
+...Word 'pharma' has a confidence of 0.993
+
+...Word 'reps.' has a confidence of 0.766
+
+...Word 'That' has a confidence of 0.984
+
+...Word 'puts' has a confidence of 0.982
+
+...Word 'the' has a confidence of 0.997
+
+...Word 'onus' has a confidence of 0.991
+
+...Word 'on' has a confidence of 0.997
+
+...Word 'pharmaceutical' has a confidence of 0.991
+
+...Word 'and' has a confidence of 0.998
+
+...Word 'life' has a confidence of 0.986
+
+...Word 'sciences' has a confidence of 0.994
+
+...Word 'organizations' has a confidence of 0.992
+
+...Word 'to' has a confidence of 0.997
+
+...Word 'deliver' has a confidence of 0.996
+
+...Word 'valuable' has a confidence of 0.995
+
+...Word 'and' has a confidence of 0.998
+
+...Word 'engaging' has a confidence of 0.995
+
+...Word 'virtual' has a confidence of 0.995
+
+...Word 'visits' has a confidence of 0.996
+
+...Word 'to' has a confidence of 0.997
+
+...Word 'providers.' has a confidence of 0.988
+
+...Word 'One' has a confidence of 0.997
+
+...Word 'way' has a confidence of 0.997
+
+...Word 'to' has a confidence of 0.997
+
+...Word 'do' has a confidence of 0.997
+
+...Word 'that' has a confidence of 0.991
+
+...Word 'is' has a confidence of 0.997
+
+...Word 'to' has a confidence of 0.997
+
+...Word 'leverage' has a confidence of 0.995
+
+...Word 'text' has a confidence of 0.987
+
+...Word 'analytics' has a confidence of 0.991
+
+...Word 'capabilities' has a confidence of 0.991
+
+...Word 'to' has a confidence of 0.997
+
+...Word 'enhance' has a confidence of 0.993
+
+...Word 'the' has a confidence of 0.997
+
+...Word 'provider' has a confidence of 0.995
+
+...Word 'information' has a confidence of 0.993
+
+...Word 'stored' has a confidence of 0.997
+
+...Word 'in' has a confidence of 0.997
+
+...Word 'the' has a confidence of 0.998
+
+...Word 'organization's' has a confidence of 0.98
+
+...Word 'customer' has a confidence of 0.995
+
+...Word 'relationship' has a confidence of 0.992
+
+...Word 'management' has a confidence of 0.994
+
+...Word '(CRM)' has a confidence of 0.997
+
+...Word 'system.' has a confidence of 0.993
+
+...Word 'For' has a confidence of 0.998
+
+...Word 'example,' has a confidence of 0.991
+
+...Word 'a' has a confidence of 0.998
+
+...Word 'rep' has a confidence of 0.997
+
+...Word 'setting' has a confidence of 0.996
+
+...Word 'up' has a confidence of 0.997
+
+...Word 'a' has a confidence of 0.998
+
+...Word 'visit' has a confidence of 0.997
+
+...Word 'with' has a confidence of 0.991
+
+...Word ''Dr.' has a confidence of 0.878
+
+...Word 'X'' has a confidence of 0.991
+
+...Word 'could' has a confidence of 0.997
+
+...Word 'run' has a confidence of 0.997
+
+...Word 'text' has a confidence of 0.99
+
+...Word 'analytics' has a confidence of 0.991
+
+...Word 'on' has a confidence of 0.997
+
+...Word 'publicly' has a confidence of 0.991
+
+...Word 'available' has a confidence of 0.994
+
+...Word 'resources' has a confidence of 0.994
+
+...Word 'on' has a confidence of 0.997
+
+...Word 'the' has a confidence of 0.997
+
+...Word 'web' has a confidence of 0.998
+
+...Word 'to' has a confidence of 0.997
+
+...Word 'identify' has a confidence of 0.995
+
+...Word 'on' has a confidence of 0.997
+
+...Word 'which' has a confidence of 0.994
+
+...Word 'specific' has a confidence of 0.993
+
+...Word 'topics' has a confidence of 0.993
+
+...Word 'Dr.' has a confidence of 0.997
+
+...Word 'X' has a confidence of 0.994
+
+...Word 'has' has a confidence of 0.993
+
+...Word 'been' has a confidence of 0.987
+
+...Word 'writing' has a confidence of 0.991
+
+...Word 'about' has a confidence of 0.997
+
+...Word 'and' has a confidence of 0.997
+
+...Word 'commenting.' has a confidence of 0.993
+
+...Word '"All' has a confidence of 0.966
+
+...Word 'kinds' has a confidence of 0.996
+
+...Word 'of' has a confidence of 0.997
+
+...Word 'publicly' has a confidence of 0.993
+
+...Word 'available' has a confidence of 0.994
+
+...Word 'information' has a confidence of 0.993
+
+...Word 'can' has a confidence of 0.998
+
+...Word 'All' has a confidence of 0.993
+
+...Word 'kinds' has a confidence of 0.997
+
+...Word 'of' has a confidence of 0.997
+
+...Word 'publicly' has a confidence of 0.995
+
+...Word 'available' has a confidence of 0.994
+
+...Word 'information' has a confidence of 0.993
+
+...Word 'can' has a confidence of 0.997
+
+...Word 'be' has a confidence of 0.997
+
+...Word 'mined' has a confidence of 0.997
+
+...Word 'with' has a confidence of 0.986
+
+...Word 'text' has a confidence of 0.988
+
+...Word 'analytics' has a confidence of 0.995
+
+...Word 'technology,' has a confidence of 0.993
+
+...Word 'which' has a confidence of 0.996
+
+...Word 'can' has a confidence of 0.998
+
+...Word 'be' has a confidence of 0.997
+
+...Word 'used' has a confidence of 0.991
+
+...Word 'to' has a confidence of 0.997
+
+...Word 'arm' has a confidence of 0.997
+
+...Word 'the' has a confidence of 0.998
+
+...Word 'sales' has a confidence of 0.993
+
+...Word 'rep' has a confidence of 0.998
+
+...Word 'with' has a confidence of 0.991
+
+...Word 'relevant' has a confidence of 0.995
+
+...Word 'information' has a confidence of 0.993
+
+...Word 'even' has a confidence of 0.988
+
+...Word 'before' has a confidence of 0.993
+
+...Word 'he' has a confidence of 0.997
+
+...Word 'or' has a confidence of 0.997
+
+...Word 'she' has a confidence of 0.998
+
+...Word 'meets' has a confidence of 0.997
+
+...Word 'the' has a confidence of 0.998
+
+...Word 'doctor.' has a confidence of 0.994
+
+...Word 'It's' has a confidence of 0.932
+
+...Word 'a' has a confidence of 0.993
+
+...Word 'totally' has a confidence of 0.996
+
+...Word 'different,' has a confidence of 0.994
+
+...Word 'digital' has a confidence of 0.996
+
+...Word 'game' has a confidence of 0.987
+
+...Word 'now."' has a confidence of 0.942
+
+...Word 'KEREN' has a confidence of 0.994
+
+...Word 'PRIYADARSHINI' has a confidence of 0.991
+
+...Word '|' has a confidence of 0.991
+
+...Word 'Regional' has a confidence of 0.994
+
+...Word 'Business' has a confidence of 0.994
+
+...Word 'Lead' has a confidence of 0.989
+
+...Word '-' has a confidence of 0.994
+
+...Word 'Asia,' has a confidence of 0.954
+
+...Word 'Worldwide' has a confidence of 0.993
+
+...Word 'Health' has a confidence of 0.995
+
+...Word '|' has a confidence of 0.967
+
+...Word 'Microsoft' has a confidence of 0.993
+
+...Word 'EMBRACING' has a confidence of 0.992
+
+...Word 'DIGITAL' has a confidence of 0.991
+
+...Word 'TRANSFORMATION' has a confidence of 0.991
+
+...Word 'IN' has a confidence of 0.997
+
+...Word 'LIFE' has a confidence of 0.988
+
+...Word 'SCIENCES' has a confidence of 0.965
+
+...Word 'ORGANIZATIONS' has a confidence of 0.991
+
+...Word '2' has a confidence of 0.994
+
+---
