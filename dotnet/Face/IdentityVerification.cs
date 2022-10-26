@@ -22,8 +22,8 @@ namespace FaceQuickstart
 
         // <snippet_creds>
         // From your Face subscription in the Azure portal, get your subscription key and endpoint.
-        const string SUBSCRIPTION_KEY = "PASTE_YOUR_FACE_SUBSCRIPTION_KEY_HERE";
-        const string ENDPOINT = "PASTE_YOUR_FACE_SUBSCRIPTION_ENDPOINT_HERE";
+        const string SUBSCRIPTION_KEY = "PASTE YOUR KEY";
+        const string ENDPOINT = "PASTE YOUR ENDPOINT";
         // </snippet_creds>
 
         static void Main(string[] args)
@@ -193,6 +193,29 @@ namespace FaceQuickstart
             }
             // </snippet_identify_face>
             Console.WriteLine();
+
+            // <snippet_verify_face>
+            Console.WriteLine("verify");
+            IList<Person> persons = await client.PersonGroupPerson.ListAsync(personGroupId);
+            Guid faceId = detectedFaces[0].FaceId.Value;
+            foreach (var person in persons)
+            {
+                Console.WriteLine($"faceID: {faceId}");
+                try
+                {
+                    VerifyResult result = await client.Face.VerifyFaceToPersonAsync(faceId, person.PersonId, personGroupId);
+                    if (result.IsIdentical)
+                    {
+                        Console.WriteLine($"verify face {faceId} is person {person.Name}");
+                    }
+                }
+                catch (APIErrorException e)
+                {
+                    Console.WriteLine(e.Response);
+                }
+                
+            }
+            // </snippet_verify_face>
         }
     }
 }

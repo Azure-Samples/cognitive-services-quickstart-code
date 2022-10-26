@@ -83,10 +83,10 @@ description_result = computervision_client.describe_image_in_stream(local_image)
 
 # Get the captions (descriptions) from the response, with confidence level
 print("Description of local image: ")
-if ( not description_result.description):
+if ( not description_result.captions):
     print("No description detected.")
 else:
-    for caption in description_result.description.captions:
+    for caption in description_result.captions:
         print("'{}' with confidence {:.2f}%".format(caption.text, caption.confidence * 100))
 print()
 '''
