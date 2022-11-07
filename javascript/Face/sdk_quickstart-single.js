@@ -12,7 +12,7 @@ const credentials = new msRest.ApiKeyCredentials({ inHeader: { 'Ocp-Apim-Subscri
 const client = new Face.FaceClient(credentials, endpoint);
 
 
-const image_base_url = "https://csdx.blob.core.windows.net/resources/Face/Images/";
+const image_base_url = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/";
 const person_group_id = uuid();
 
 function sleep(ms) {

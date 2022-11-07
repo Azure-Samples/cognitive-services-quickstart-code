@@ -36,7 +36,7 @@ const uuidV4 = require('uuid/v4');
 let singleFaceImageUrl = 'https://www.biography.com/.image/t_share/MTQ1MzAyNzYzOTgxNTE0NTEz/john-f-kennedy---mini-biography.jpg';
 // An image with several faces
 let groupImageUrl = 'http://www.historyplace.com/kennedy/president-family-portrait-closeup.jpg';
-const IMAGE_BASE_URL = 'https://csdx.blob.core.windows.net/resources/Face/Images/'
+const IMAGE_BASE_URL = 'https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/'
 // Person Group ID must be lower case, alphanumeric, with '-' and/or '_'.
 const PERSON_GROUP_ID = 'my-unique-person-group'
 
