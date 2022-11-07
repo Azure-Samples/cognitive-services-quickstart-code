@@ -7,21 +7,21 @@ curl -H "Ocp-Apim-Subscription-Key: TODO_INSERT_YOUR_FACE_SUBSCRIPTION_KEY_HERE"
 # </detection_model_1>
 
 # <detect_for_similar>
-curl -H "Ocp-Apim-Subscription-Key: TODO_INSERT_YOUR_FACE_SUBSCRIPTION_KEY_HERE" "TODO_INSERT_YOUR_FACE_ENDPOINT_HERE/face/v1.0/detect?detectionModel=detection_03&returnFaceId=true&returnFaceLandmarks=false" -H "Content-Type: application/json" --data-ascii "{\"url\":\"https://csdx.blob.core.windows.net/resources/Face/Images/Family1-Dad1.jpg\"}"
+curl -H "Ocp-Apim-Subscription-Key: TODO_INSERT_YOUR_FACE_SUBSCRIPTION_KEY_HERE" "TODO_INSERT_YOUR_FACE_ENDPOINT_HERE/face/v1.0/detect?detectionModel=detection_03&returnFaceId=true&returnFaceLandmarks=false" -H "Content-Type: application/json" --data-ascii "{\"url\":\"https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/Family1-Dad1.jpg\"}"
 # </detect_for_similar>
 
 # <similar_group>
-https://csdx.blob.core.windows.net/resources/Face/Images/Family1-Daughter1.jpg
-https://csdx.blob.core.windows.net/resources/Face/Images/Family1-Mom1.jpg
-https://csdx.blob.core.windows.net/resources/Face/Images/Family1-Son1.jpg
-https://csdx.blob.core.windows.net/resources/Face/Images/Family2-Lady1.jpg
-https://csdx.blob.core.windows.net/resources/Face/Images/Family2-Man1.jpg
-https://csdx.blob.core.windows.net/resources/Face/Images/Family3-Lady1.jpg
-https://csdx.blob.core.windows.net/resources/Face/Images/Family3-Man1.jpg
+https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/Family1-Daughter1.jpg
+https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/Family1-Mom1.jpg
+https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/Family1-Son1.jpg
+https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/Family2-Lady1.jpg
+https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/Family2-Man1.jpg
+https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/Family3-Lady1.jpg
+https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/Family3-Man1.jpg
 # </similar_group>
 
 # <similar_matcher>
-https://csdx.blob.core.windows.net/resources/Face/Images/findsimilar.jpg
+https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/findsimilar.jpg
 # </similar_matcher>
 
 # <similar>
@@ -49,7 +49,7 @@ curl --location --request POST 'TODO_INSERT_YOUR_FACE_ENDPOINT_HERE/face/v1.0/de
 
 # detect faces, save IDs
 # <identify_detect>
-curl -v -X POST "https://westus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=false&returnFaceAttributes={string}&recognitionModel=recognition_04&returnRecognitionModel=false&detectionModel=detection_03&faceIdTimeToLive=86400" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: {subscription key}" --data-ascii "{\"url\":\"https://csdx.blob.core.windows.net/resources/Face/Images/identification1.jpg\"}" 
+curl -v -X POST "https://westus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=false&returnFaceAttributes={string}&recognitionModel=recognition_04&returnRecognitionModel=false&detectionModel=detection_03&faceIdTimeToLive=86400" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: {subscription key}" --data-ascii "{\"url\":\"https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/identification1.jpg\"}" 
 # </identify_detect>
 
 # Create persongroup
@@ -71,7 +71,7 @@ curl -v -X POST "https://westus.api.cognitive.microsoft.com/face/v1.0/largeperso
 
 # Add faces to person
 # <identify_add_face>
-curl -v -X POST "https://westus.api.cognitive.microsoft.com/face/v1.0/largepersongroups/{largePersonGroupId}/persons/{personId}/persistedfaces?detectionModel=detection_03" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: {subscription key}" --data-ascii "{\"url\":\"https://csdx.blob.core.windows.net/resources/Face/Images/Family1-Dad.jpg\"}" 
+curl -v -X POST "https://westus.api.cognitive.microsoft.com/face/v1.0/largepersongroups/{largePersonGroupId}/persons/{personId}/persistedfaces?detectionModel=detection_03" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: {subscription key}" --data-ascii "{\"url\":\"https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/Family1-Dad.jpg\"}" 
 # </identify_add_face>
 
 # Train persongroup

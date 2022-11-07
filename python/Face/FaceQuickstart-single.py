@@ -23,7 +23,7 @@ KEY = "PASTE_YOUR_FACE_SUBSCRIPTION_KEY_HERE"
 ENDPOINT = "PASTE_YOUR_FACE_ENDPOINT_HERE"
 
 # Base url for the Verify and Facelist/Large Facelist operations
-IMAGE_BASE_URL = 'https://csdx.blob.core.windows.net/resources/Face/Images/'
+IMAGE_BASE_URL = 'https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/'
 
 # Used in the Person Group Operations and Delete Person Group examples.
 # You can call list_person_groups to print a list of preexisting PersonGroups.
@@ -54,9 +54,9 @@ child = face_client.person_group_person.create(PERSON_GROUP_ID, name="Child")
 Detect faces and register them to each person
 '''
 # Find all jpeg images of friends in working directory (TBD pull from web instead)
-woman_images = ["https://csdx.blob.core.windows.net/resources/Face/Images/Family1-Mom1.jpg", "https://csdx.blob.core.windows.net/resources/Face/Images/Family1-Mom2.jpg"]
-man_images = ["https://csdx.blob.core.windows.net/resources/Face/Images/Family1-Dad1.jpg", "https://csdx.blob.core.windows.net/resources/Face/Images/Family1-Dad2.jpg"]
-child_images = ["https://csdx.blob.core.windows.net/resources/Face/Images/Family1-Son1.jpg", "https://csdx.blob.core.windows.net/resources/Face/Images/Family1-Son2.jpg"]
+woman_images = ["https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/Family1-Mom1.jpg", "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/Family1-Mom2.jpg"]
+man_images = ["https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/Family1-Dad1.jpg", "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/Family1-Dad2.jpg"]
+child_images = ["https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/Family1-Son1.jpg", "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/Family1-Son2.jpg"]
 
 # Add to woman person
 for image in woman_images:
@@ -124,7 +124,7 @@ while (True):
 Identify a face against a defined PersonGroup
 '''
 # Group image for testing against
-test_image = "https://csdx.blob.core.windows.net/resources/Face/Images/identification1.jpg"
+test_image = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/identification1.jpg"
 
 print('Pausing for 10 seconds to avoid triggering rate limit on free account...')
 time.sleep (10)

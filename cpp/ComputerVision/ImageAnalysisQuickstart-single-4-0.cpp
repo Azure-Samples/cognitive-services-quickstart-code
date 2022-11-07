@@ -23,9 +23,6 @@ void AnalyzeImage()
     // HEX number (no dashes), found in the Azure portal. Similar to "d0dbd4c2a93346f18c785a426da83e15".
     std::shared_ptr<VisionServiceOptions> serviceOptions = VisionServiceOptions::FromEndpoint("PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE", "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE");
 
-    // Specify the image file on disk to analyze
-    std::shared_ptr<VisionSource> imageSource = VisionSource::FromFile("laptop-on-kitchen-table.jpg");
-
     // specify the URL of the image to analyze
     std::shared_ptr<VisionSource> imageSource = VisionSource::FromUrl("https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/landmark.jpg");
 
