@@ -38,7 +38,7 @@ References:
 # <snippet_imports>
 from azure.cognitiveservices.vision.computervision import ComputerVisionClient
 from azure.cognitiveservices.vision.computervision.models import OperationStatusCodes
-from azure.cognitiveservices.vision.computervision.models import VisualFeatureTypes
+from azure.cognitiveservices.vision.computervision.models import VisualFeatureTypes, Details
 from msrest.authentication import CognitiveServicesCredentials
 
 from array import array
@@ -132,8 +132,8 @@ END - Categorize an Image - local
 # <snippet_features_remote>
 print("===== Analyze an image - remote =====")
 # Select the visual feature(s) you want.
-remote_image_features = ["categories","brands","adult","color","description","faces","image_type","objects","tags"]
-remote_image_details = ["celebrities","landmarks"]
+remote_image_features = [VisualFeatureTypes.categories,VisualFeatureTypes.brands,VisualFeatureTypes.adult,VisualFeatureTypes.color,VisualFeatureTypes.description,VisualFeatureTypes.faces,VisualFeatureTypes.image_type,VisualFeatureTypes.objects,VisualFeatureTypes.tags]
+remote_image_details = [Details.celebrities,Details.landmarks]
 # </snippet_features_remote>
 
 # <snippet_analyze>
