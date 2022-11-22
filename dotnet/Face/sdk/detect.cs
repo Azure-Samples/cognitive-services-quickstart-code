@@ -78,13 +78,9 @@ namespace ConsoleApp1
 
             // <attributes1>
             var requiredFaceAttributes = new FaceAttributeType?[] {
-                FaceAttributeType.Age,
-                FaceAttributeType.Gender,
-                FaceAttributeType.Smile,
                 FaceAttributeType.FacialHair,
                 FaceAttributeType.HeadPose,
                 FaceAttributeType.Glasses,
-                FaceAttributeType.Emotion,
                 FaceAttributeType.QualityForRecognition
             };
             // Note DetectionModel.Detection02 cannot be used with returnFaceAttributes.
@@ -95,13 +91,9 @@ namespace ConsoleApp1
             foreach (var face in faces3)
             {
                 var attributes = face.FaceAttributes;
-                var age = attributes.Age;
-                var gender = attributes.Gender;
-                var smile = attributes.Smile;
                 var facialHair = attributes.FacialHair;
                 var headPose = attributes.HeadPose;
                 var glasses = attributes.Glasses;
-                var emotion = attributes.Emotion;
                 var qualityForRecognition = attributes.QualityForRecognition;
             }
             // </attributes2>
