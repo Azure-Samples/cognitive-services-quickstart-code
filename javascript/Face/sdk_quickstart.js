@@ -143,6 +143,7 @@ async function DetectFaceRecognize(url) {
 	// Result faces with quality for recognition lower than "medium" are filtered out.
     let detected_faces = await client.face.detectWithUrl(url,
 		{
+			returnFaceId: true,
 			detectionModel: "detection_03",
 			recognitionModel: "recognition_04",
             returnFaceAttributes: ["QualityForRecognition"]
