@@ -77,7 +77,7 @@ namespace ConsoleApp1
             // </direction>
 
             // <attributes1>
-            var requiredFaceAttributes = new FaceAttributeType?[] {
+            var requiredFaceAttributes = new FaceAttributeType[] {
                 FaceAttributeType.FacialHair,
                 FaceAttributeType.HeadPose,
                 FaceAttributeType.Glasses,
