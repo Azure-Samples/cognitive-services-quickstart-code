@@ -95,3 +95,14 @@ curl -v -X POST "https://westus.api.cognitive.microsoft.com/face/v1.0/identify" 
 # <identify_delete>
 curl -v -X DELETE "https://westus.api.cognitive.microsoft.com/face/v1.0/largepersongroups/{largePersonGroupId}" -H "Ocp-Apim-Subscription-Key: {subscription key}"
 # </identify_delete>
+
+# <verify>
+curl -v -X POST "https://westus.api.cognitive.microsoft.com/face/v1.0/verify"
+-H "Content-Type: application/json"
+-H "Ocp-Apim-Subscription-Key: {subscription key}"
+--data-ascii "{
+    \"faceId\": \"\{INSERT_SOURCE_FACE_ID}\",
+    \"personId\": \"{INSERT_PERSON_ID}\",
+    \"largePersonGroupId\": \"INSERT_PERSONGROUP_ID\"
+}" 
+# </verify>

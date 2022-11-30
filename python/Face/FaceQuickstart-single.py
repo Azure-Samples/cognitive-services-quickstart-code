@@ -143,11 +143,16 @@ results = face_client.face.identify(face_ids, PERSON_GROUP_ID)
 print('Identifying faces in image')
 if not results:
     print('No person identified in the person group')
-for person in results:
-	if len(person.candidates) > 0:
-		print('Person for face ID {} is identified in image, with a confidence of {}.'.format(person.face_id, person.candidates[0].confidence)) # Get topmost confidence score
-	else:
-		print('No person identified for face ID {} in image.'.format(person.face_id))
+for identifiedFace in results:
+    if len(identifiedFace.candidates) > 0:
+        print('Person is identified for face ID {} in image, with a confidence of {}.'.format(identifiedFace.face_id, identifiedFace.candidates[0].confidence)) # Get topmost confidence score
+
+        # Verify faces
+        verify_result = face_client.face.verify_face_to_person(identifiedFace.face_id, identifiedFace.candidates[0].person_id, PERSON_GROUP_ID)
+        print('verification result: {}. confidence: {}'.format(verify_result.is_identical, verify_result.confidence))
+    else:
+        print('No person identified for face ID {} in image.'.format(identifiedFace.face_id))
+ 
 
 print()
 print('End of quickstart.')
