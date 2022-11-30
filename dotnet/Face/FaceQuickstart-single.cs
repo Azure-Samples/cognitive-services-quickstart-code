@@ -16,7 +16,7 @@ namespace FaceQuickstart
         static string personGroupId = Guid.NewGuid().ToString();
 
         // URL path for the images.
-        const string IMAGE_BASE_URL = "https://csdx.blob.core.windows.net/resources/Face/Images/";
+        const string IMAGE_BASE_URL = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/";
 
         // From your Face subscription in the Azure portal, get your subscription key and endpoint.
         const string SUBSCRIPTION_KEY = "PASTE_YOUR_FACE_SUBSCRIPTION_KEY_HERE";
