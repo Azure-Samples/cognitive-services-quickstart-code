@@ -134,12 +134,19 @@ async function IdentifyInPersonGroup() {
     let results = await client.face.identify(face_ids, { personGroupId : person_group_id});
 	await Promise.all (results.map (async function (result) {
         try{
-		let person = await client.personGroupPerson.get(person_group_id, result.candidates[0].personId);
+            let person = await client.personGroupPerson.get(person_group_id, result.candidates[0].personId);
 
-        console.log("Person: " + person.name + " is identified for face in: " + source_image_file_name + " with ID: " + result.faceId + ". Confidence: " + result.candidates[0].confidence + ".");
+            console.log("Person: " + person.name + " is identified for face in: " + source_image_file_name + " with ID: " + result.faceId + ". Confidence: " + result.candidates[0].confidence + ".");
+
+			// Verification:
+            let verifyResult = await client.face.verifyFaceToPerson(result.faceId, person.personId, {personGroupId : person_group_id});
+            console.log("Verification result between face "+ result.faceId +" and person "+ person.personId+ ": " +verifyResult.isIdentical + " with confidence: "+ verifyResult.confidence);
+
 		} catch(error) {
-			console.log("no persons identified for face with ID " + result.faceId)
+			//console.log("no persons identified for face with ID " + result.faceId);
+            console.log(error.toString());
 		}
+        
     }));
     console.log();
 }
