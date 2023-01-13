@@ -78,7 +78,6 @@ namespace ConsoleApp1
 
             // <attributes1>
             var requiredFaceAttributes = new FaceAttributeType[] {
-                FaceAttributeType.FacialHair,
                 FaceAttributeType.HeadPose,
                 FaceAttributeType.Glasses,
                 FaceAttributeType.QualityForRecognition
@@ -91,7 +90,6 @@ namespace ConsoleApp1
             foreach (var face in faces3)
             {
                 var attributes = face.FaceAttributes;
-                var facialHair = attributes.FacialHair;
                 var headPose = attributes.HeadPose;
                 var glasses = attributes.Glasses;
                 var qualityForRecognition = attributes.QualityForRecognition;
