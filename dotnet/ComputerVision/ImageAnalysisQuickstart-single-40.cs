@@ -8,8 +8,11 @@
 // <snippet_single>
 using Azure.AI.Vision.Core.Input;
 using Azure.AI.Vision.Core.Options;
-using Azure.AI.Vision.Preview.ImageAnalysis;
+using Azure.AI.Vision.ImageAnalysis;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 class Program
@@ -39,21 +42,22 @@ class Program
 
         if (result.Reason == ImageAnalysisResultReason.Analyzed)
         {
-            Console.WriteLine($"Tags:");
-            foreach (var tag in result.Tags)
+            Console.WriteLine($" Tags:");
+            foreach (var tag in e.Result.Tags)
             {
-                Console.WriteLine($"\t\"{Tag.Name}\", Confidence {Tag.Confidence}");
-            };
+                Console.WriteLine($"   \"{tag.Name}\", Confidence {tag.Confidence:0.0000}");
+            }
 
         }
         else if (result.Reason == ImageAnalysisResultReason.Error)
         {
-            Console.WriteLine($"Analysis failed.");
+            Console.WriteLine(" Analysis failed.");
 
-            var errorDetails = ImageAnalysisErrorDetails.FromResult(result);
-            Console.WriteLine($"  Error reason : {errorDetails.Reason}");
-            Console.WriteLine($"  Error message: {errorDetails.Message}");
-            Console.WriteLine($"Did you set the computer vision endpoint and key?");
+                var errorDetails = ImageAnalysisErrorDetails.FromResult(e.Result);
+                Console.WriteLine($"   Error reason : {errorDetails.Reason}");
+                Console.WriteLine($"   Error code : {errorDetails.ErrorCode}");
+                Console.WriteLine($"   Error message: {errorDetails.Message}");
+                Console.WriteLine(" Did you set the computer vision endpoint and key?");
         }
     }
 }
