@@ -23,7 +23,7 @@ class Program
         var serviceOptions = new VisionServiceOptions("PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE", "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE");
 
         // Specify the URL of the image to analyze
-        var imageSource = VisionSource.FromUrl(new Uri("https://moderatorsampleimages.blob.core.windows.net/samples/sample16.png"));
+        var imageSource = VisionSource.FromUrl(new Uri("https://docs.microsoft.com/azure/cognitive-services/computer-vision/images/windows-kitchen.jpg"));
 
         // Specify the options that will control the ImageAnalyzer
         var analysisOptions = new ImageAnalysisOptions()
@@ -32,7 +32,7 @@ class Program
             Features = ImageAnalysisFeature.Tags
         };
 
-        using var analyzer = new ImageAnalyzer(serviceOptions, imageSource, analysisOptions);
+        var analyzer = new ImageAnalyzer(serviceOptions, imageSource, analysisOptions);
 
         Console.WriteLine("Please wait for image analysis results...");
         var result = await analyzer.AnalyzeAsync();
