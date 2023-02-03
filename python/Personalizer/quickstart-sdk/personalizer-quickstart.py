@@ -208,6 +208,6 @@ while continue_loop:
 # </snippet_2>
 
 # <snippet_multi>
-#for i in range(0,1000):
-#    run_personalizer_cycle()
+for i in range(0,1000):
+    run_personalizer_cycle()
 # </snippet_multi>
