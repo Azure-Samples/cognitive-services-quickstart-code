@@ -361,7 +361,10 @@ class Program
         return Console.ReadKey().Key.ToString().Last().ToString().ToUpper();
     }
 
-/*
+}
+// </snippet_2>
+
+
 // <snippet_multi>
     static void Main(string[] args)
     {
@@ -409,7 +412,3 @@ class Program
     } while (runLoop < 1000);
 }
 // </snippet_multi>
-*/
-
-}
-// </snippet_2>
