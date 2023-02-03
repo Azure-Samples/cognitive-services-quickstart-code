@@ -44,8 +44,8 @@ namespace ComputerVisionQuickstart
     class Program
     {
         // <snippet_vars>
-        // Add your Computer Vision subscription key and endpoint
-        static string subscriptionKey = "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE";
+        // Add your Computer Vision key and endpoint
+        static string key = "PASTE_YOUR_COMPUTER_VISION_KEY_HERE";
         static string endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE";
         // </snippet_vars>
 	// </snippet_using_and_vars>
@@ -63,7 +63,7 @@ namespace ComputerVisionQuickstart
             Console.WriteLine();
 
             // <snippet_main_calls>
-            ComputerVisionClient client = Authenticate(endpoint, subscriptionKey);
+            ComputerVisionClient client = Authenticate(endpoint, key);
 
             // Extract text (OCR) from a URL image using the Read API
             ReadFileUrl(client, READ_TEXT_URL_IMAGE).Wait();

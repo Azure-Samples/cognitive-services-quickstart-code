@@ -42,7 +42,7 @@ To create and run the sample, do the following steps:
     ```
 
 1. Replace the `Main` public class with the following code.
-1. Replace the values of `subscriptionKey` and `endpoint` with your Computer Vision subscription key and endpoint.
+1. Replace the values of `key` and `endpoint` with your Computer Vision key and endpoint.
 1. Optionally, replace the value of `imageToAnalyze` with the URL of a different image from which you want to extract text.
 1. Save, then build the Java project.
 1. If you're using an IDE, run `Main`. Otherwise, open a command prompt window and then use the `java` command to run the compiled class. For example, `java Main`.
@@ -51,9 +51,9 @@ To create and run the sample, do the following steps:
 
 public class Main {
 
-    // Add your Computer Vision subscription key and endpoint to your environment variables.
+    // Add your Computer Vision key and endpoint to your environment variables.
     // After setting, close and then re-open your command shell or project for the changes to take effect.
-    private static String subscriptionKey = "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE";
+    private static String key = "PASTE_YOUR_COMPUTER_VISION_KEY_HERE";
     private static String endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE";
 
     private static String uriBase = endpoint + "/vision/v3.1/read/analyze";
@@ -66,7 +66,7 @@ public class Main {
         CloseableHttpClient httpResultClient = HttpClientBuilder.create().build();;
 
         System.out.println("Endpoint:         " + endpoint);
-        System.out.println("Subscription key: " + subscriptionKey);
+        System.out.println("key: " + key);
 
         try {
             // This operation requires two REST API calls. One to submit the image
@@ -80,7 +80,7 @@ public class Main {
 
             // Request headers.
             request.setHeader("Content-Type", "application/json");
-            request.setHeader("Ocp-Apim-Subscription-Key", subscriptionKey);
+            request.setHeader("Ocp-Apim-Subscription-Key", key);
 
             // Request body.
             StringEntity requestEntity =
@@ -138,7 +138,7 @@ public class Main {
 
             // Call the second REST API method and get the response.
             HttpGet resultRequest = new HttpGet(operationLocation);
-            resultRequest.setHeader("Ocp-Apim-Subscription-Key", subscriptionKey);
+            resultRequest.setHeader("Ocp-Apim-Subscription-Key", key);
 
             HttpResponse resultResponse = httpResultClient.execute(resultRequest);
             HttpEntity responseEntity = resultResponse.getEntity();

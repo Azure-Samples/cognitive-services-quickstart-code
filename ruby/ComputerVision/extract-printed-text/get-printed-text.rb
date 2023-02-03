@@ -10,8 +10,8 @@ uri.query = URI.encode_www_form({
 request = Net::HTTP::Post.new(uri.request_uri)
 
 # Request headers
-# Replace <Subscription Key> with your valid subscription key.
-request['Ocp-Apim-Subscription-Key'] = 'PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE'
+# Replace <key> with your valid key.
+request['Ocp-Apim-Subscription-Key'] = 'PASTE_YOUR_COMPUTER_VISION_KEY_HERE'
 request['Content-Type'] = 'application/json'
 
 request.body =

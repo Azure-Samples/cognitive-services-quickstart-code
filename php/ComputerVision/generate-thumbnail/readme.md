@@ -8,7 +8,7 @@ If you don't have an Azure subscription, you can visit [the Microsoft Cognitive 
 
 - You must have [PHP](https://secure.php.net/downloads.php) installed.
 - You must have [Pear](https://pear.php.net) installed.
-- You must have a subscription key for Computer Vision. You can get a free trial key from [Try Cognitive Services](https://azure.microsoft.com/try/cognitive-services/?api=computer-vision). Or, follow the instructions in [Create a Cognitive Services account](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account) to subscribe to Computer Vision and get your key.
+- You must have a key for Computer Vision. You can get a free trial key from [Try Cognitive Services](https://azure.microsoft.com/try/cognitive-services/?api=computer-vision). Or, follow the instructions in [Create a Cognitive Services account](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account) to subscribe to Computer Vision and get your key.
 
 ## Create and run the sample
 
@@ -26,8 +26,8 @@ To create and run the sample, do the following steps:
 
 1. Copy the following code into a text editor.
 1. Make the following changes in code where needed:
-    1. Replace the value of `subscriptionKey` with your subscription key.
-    1. Replace the value of `uriBase` with the endpoint URL for the [Get Thumbnail](https://westcentralus.dev.cognitive.microsoft.com/docs/services/5adf991815e1060e6355ad44/operations/56f91f2e778daf14a499e1fb) method from the Azure region where you obtained your subscription keys, if necessary.
+    1. Replace the value of `key` with your key.
+    1. Replace the value of `uriBase` with the endpoint URL for the [Get Thumbnail](https://westcentralus.dev.cognitive.microsoft.com/docs/services/5adf991815e1060e6355ad44/operations/56f91f2e778daf14a499e1fb) method from the Azure region where you obtained your keys, if necessary.
     1. Optionally, replace the value of `imageUrl` with the URL of a different image for which you want to generate a thumbnail.
 1. Save the code as a file with a `.php` extension. For example, `get-thumbnail.php`.
 1. Open a browser window with PHP support.
@@ -40,11 +40,11 @@ To create and run the sample, do the following steps:
 </head>
 <body>
 <?php
-// Replace <Subscription Key> with a valid subscription key.
-$ocpApimSubscriptionKey = '<Subscription Key>';
+// Replace <key> with a valid key.
+$ocpApimkey = '<key>';
 
 // You must use the same location in your REST call as you used to obtain
-// your subscription keys. For example, if you obtained your subscription keys
+// your keys. For example, if you obtained your keys
 // from westus, replace "westcentralus" in the URL below with "westus".
 $uriBase = 'https://westcentralus.api.cognitive.microsoft.com/vision/v2.0/';
 
@@ -59,7 +59,7 @@ $url = $request->getUrl();
 $headers = array(
     // Request headers
     'Content-Type' => 'application/json',
-    'Ocp-Apim-Subscription-Key' => $ocpApimSubscriptionKey
+    'Ocp-Apim-Subscription-Key' => $ocpApimkey
 );
 $request->setHeader($headers);
 

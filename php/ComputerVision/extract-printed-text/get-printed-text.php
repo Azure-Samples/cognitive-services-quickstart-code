@@ -5,8 +5,8 @@
 </head>
 <body>
 <?php
-// Replace <Subscription Key> with a valid subscription key.
-$ocpApimSubscriptionKey = 'PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE';
+// Replace <key> with a valid key.
+$ocpApimkey = 'PASTE_YOUR_COMPUTER_VISION_KEY_HERE';
 $uriBase = 'PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE' + 'vision/v3.1/';
 
 $imageUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/' .
@@ -20,7 +20,7 @@ $url = $request->getUrl();
 $headers = array(
     // Request headers
     'Content-Type' => 'application/json',
-    'Ocp-Apim-Subscription-Key' => $ocpApimSubscriptionKey
+    'Ocp-Apim-Subscription-Key' => $ocpApimkey
 );
 $request->setHeader($headers);
 

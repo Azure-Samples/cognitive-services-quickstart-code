@@ -44,8 +44,8 @@ namespace ComputerVisionQuickstart
 {
     class Program
     {
-        // Add your Computer Vision subscription key and endpoint
-        static string subscriptionKey = "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE";
+        // Add your Computer Vision key and endpoint
+        static string key = "PASTE_YOUR_COMPUTER_VISION_KEY_HERE";
         static string endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE";
 
         // URL image used for analyzing an image (image of puppy)
@@ -57,7 +57,7 @@ namespace ComputerVisionQuickstart
             Console.WriteLine();
 
             // Create a client
-            ComputerVisionClient client = Authenticate(endpoint, subscriptionKey);
+            ComputerVisionClient client = Authenticate(endpoint, key);
 
             // Analyze an image to get features and other properties.
             AnalyzeImageUrl(client, ANALYZE_URL_IMAGE).Wait();
