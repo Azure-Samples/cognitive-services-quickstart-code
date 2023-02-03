@@ -307,7 +307,7 @@ class Program
     // </snippet_1>
 
     //*********************
-    
+
 // <snippet_2>
     static void Main(string[] args)
     {
@@ -356,10 +356,60 @@ class Program
         } while (runLoop);
     }
 
-    private static string GetKey()
+        private static string GetKey()
     {
         return Console.ReadKey().Key.ToString().Last().ToString().ToUpper();
     }
+
+/*
+// <snippet_multi>
+    static void Main(string[] args)
+    {
+    int iteration = 1;
+    int runLoop = 0;
+
+    // Get the actions list to choose from personalizer with their features.
+    IList<RankableAction> actions = GetActions();
+
+    // Initialize Personalizer client.
+    PersonalizerClient client = InitializePersonalizerClient(ServiceEndpoint);
+
+    do
+    {
+        Console.WriteLine("\nIteration: " + iteration++);
+
+        // <rank>
+        // Get context information.
+        Context context = GetContext();
+
+        // Create current context from user specified data.
+        IList<object> currentContext = new List<object>() {
+            context
+        };
+
+        // Generate an ID to associate with the request.
+        string eventId = Guid.NewGuid().ToString();
+
+        // Rank the actions
+        var request = new RankRequest(actions: actions, contextFeatures: currentContext, eventId: eventId);
+        RankResponse response = client.Rank(request);
+        // </rank>
+
+        Console.WriteLine($"\nPersonalizer service thinks {context.User.Name} would like to have: {response.RewardActionId}.");
+
+        // <reward>
+        float reward = GetRewardScore(context, response.RewardActionId);
+
+        // Send the reward for the action based on user response.
+        client.Reward(response.EventId, new RewardRequest(reward));
+        // </reward>
+
+        runLoop = runLoop + 1;
+
+    } while (runLoop < 1000);
+}
+// </snippet_multi>
+*/
 
 }
 // </snippet_2>
