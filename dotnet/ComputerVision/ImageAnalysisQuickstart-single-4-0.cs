@@ -26,28 +26,30 @@ class Program
         var serviceOptions = new VisionServiceOptions("PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE", "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE");
 
         // Specify the URL of the image to analyze
-        var imageSource = VisionSource.FromUrl(new Uri("https://moderatorsampleimages.blob.core.windows.net/samples/sample16.png"));
+        var imageSource = VisionSource.FromUrl(new Uri("https://docs.microsoft.com/azure/cognitive-services/computer-vision/images/windows-kitchen.jpg"));
 
         // Specify the options that will control the ImageAnalyzer
         var analysisOptions = new ImageAnalysisOptions()
         {
             // You must define one or more features to extract during image analysis
-            Features = ImageAnalysisFeature.Tags
+            Features = ImageAnalysisFeature.Captions
         };
 
-        using var analyzer = new ImageAnalyzer(serviceOptions, imageSource, analysisOptions);
+        var analyzer = new ImageAnalyzer(serviceOptions, imageSource, analysisOptions);
 
         Console.WriteLine("Please wait for image analysis results...");
         var result = await analyzer.AnalyzeAsync();
 
         if (result.Reason == ImageAnalysisResultReason.Analyzed)
         {
-            Console.WriteLine($" Tags:");
-            foreach (var tag in e.Result.Tags)
+            if (result.Captions != null)
             {
-                Console.WriteLine($"   \"{tag.Name}\", Confidence {tag.Confidence:0.0000}");
+                Console.WriteLine(" Captions:");
+                foreach (var caption in result.Captions)
+                {
+                    Console.WriteLine($"   \"{caption.Content}\", Confidence {caption.Confidence:0.0000}");
+                };
             }
-
         }
         else if (result.Reason == ImageAnalysisResultReason.Error)
         {
