@@ -29,7 +29,7 @@ class Program
         var analysisOptions = new ImageAnalysisOptions()
         {
             // You must define one or more features to extract during image analysis
-            Features = ImageAnalysisFeature.Tags
+            Features = ImageAnalysisFeature.Captions
         };
 
         var analyzer = new ImageAnalyzer(serviceOptions, imageSource, analysisOptions);
@@ -39,12 +39,14 @@ class Program
 
         if (result.Reason == ImageAnalysisResultReason.Analyzed)
         {
-            Console.WriteLine($"Tags:");
-            foreach (var tag in result.Tags)
+            if (result.Captions != null)
             {
-                Console.WriteLine($"\t\"{Tag.Name}\", Confidence {Tag.Confidence}");
-            };
-
+                Console.WriteLine(" Captions:");
+                foreach (var caption in result.Captions)
+                {
+                    Console.WriteLine($"   \"{caption.Content}\", Confidence {caption.Confidence:0.0000}");
+                };
+            }
         }
         else if (result.Reason == ImageAnalysisResultReason.Error)
         {

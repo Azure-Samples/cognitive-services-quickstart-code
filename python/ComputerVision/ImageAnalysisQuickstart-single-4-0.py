@@ -21,7 +21,7 @@ vision_source = visionsdk.VisionSource(url=image_url)
 # Set the language and one or more visual features as analysis options
 image_analysis_options =  visionsdk.ImageAnalysisOptions()
 image_analysis_options.features = (
-    visionsdk.ImageAnalysisFeature.TAGS
+    visionsdk.ImageAnalysisFeature.CAPTIONS
 )
 
 # Create the image analyzer object
@@ -32,10 +32,10 @@ result = image_analyzer.analyze()
 
 # Checks result.
 if result.reason == visionsdk.ImageAnalysisResultReason.ANALYZED:
-    print("Tags:")
-    descriptions = result.tags
-    for tag in tags:
-        print("\t{}, Confidence {}".format(tag.name, tag.confidence))
+    if result.captions is not None:
+            print(' Captions:')
+            for caption in result.captions:
+                print('   \'{}\', Confidence {:.4f}'.format(caption.content, caption.confidence))
     
 elif result.reason == visionsdk.ImageAnalysisResultReason.STOPPED:
     error_details = visionsdk.ImageAnalysisErrorDetails(result)

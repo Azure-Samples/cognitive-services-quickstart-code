@@ -30,7 +30,7 @@ void AnalyzeImage()
     std::shared_ptr<ImageAnalysisOptions> analysisOptions = ImageAnalysisOptions::Create();
 
     // You must define one or more features to extract during image analysis
-    analysisOptions->SetFeatures({ImageAnalysisFeature::Descriptions, ImageAnalysisFeature::Objects});
+    analysisOptions->SetFeatures({ImageAnalysisFeature::Captions});
 
     std::shared_ptr<ImageAnalyzer> analyzer = ImageAnalyzer::Create(serviceOptions, imageSource, analysisOptions);
 
@@ -39,13 +39,14 @@ void AnalyzeImage()
 
     if (result->GetReason() == ImageAnalysisResultReason::Analyzed)
     {
-        if (result->GetTags().HasValue())
+        const Nullable<ContentCaptions>& captions = result->GetCaptions();
+        if (captions.HasValue())
         {
-            std::vector<ImageTag> tags = result->GetTags().Value();
-            std::cout << "Tags:" << std::endl;
-            for (ImageTag tag : tags)
+            std::cout << " Captions:" << std::endl;
+            for (const ContentCaption& caption : captions.Value())
             {
-                std::cout << "\t\"" << tag.Name << "\", Confidence " << tag.Confidence << std::endl;
+                std::cout << "   \"" << caption.Content;
+                std::cout << "\", Confidence " << caption.Confidence << std::endl;
             }
         }
     }
