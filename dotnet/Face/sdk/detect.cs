@@ -24,7 +24,7 @@ namespace ConsoleApp1
             var imageUrl = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/faces.jpg";
 
             // <basic1>
-            IList<DetectedFace> faces = await faceClient.Face.DetectWithUrlAsync(url: imageUrl, returnFaceId: true, detectionModel: DetectionModel.Detection03);
+            IList<DetectedFace> faces = await faceClient.Face.DetectWithUrlAsync(url: imageUrl, returnFaceId: false, detectionModel: DetectionModel.Detection03);
             // </basic1>
 
             // <basic2>
@@ -37,7 +37,7 @@ namespace ConsoleApp1
 
             // <landmarks1>
             // Note DetectionModel.Detection02 cannot be used with returnFaceLandmarks.
-            IList<DetectedFace> faces2 = await faceClient.Face.DetectWithUrlAsync(url: imageUrl, returnFaceId: true, returnFaceLandmarks: true, detectionModel: DetectionModel.Detection01);
+            IList<DetectedFace> faces2 = await faceClient.Face.DetectWithUrlAsync(url: imageUrl, returnFaceId: false, returnFaceLandmarks: true, detectionModel: DetectionModel.Detection01);
             // </landmarks1>
 
             // <landmarks2>
@@ -78,20 +78,18 @@ namespace ConsoleApp1
 
             // <attributes1>
             var requiredFaceAttributes = new FaceAttributeType[] {
-                FaceAttributeType.FacialHair,
                 FaceAttributeType.HeadPose,
                 FaceAttributeType.Glasses,
                 FaceAttributeType.QualityForRecognition
             };
             // Note DetectionModel.Detection02 cannot be used with returnFaceAttributes.
-            var faces3 = await faceClient.Face.DetectWithUrlAsync(url: imageUrl, returnFaceId: true, returnFaceAttributes: requiredFaceAttributes, detectionModel: DetectionModel.Detection01, recognitionModel: RecognitionModel.Recognition04);
+            var faces3 = await faceClient.Face.DetectWithUrlAsync(url: imageUrl, returnFaceId: false, returnFaceAttributes: requiredFaceAttributes, detectionModel: DetectionModel.Detection01, recognitionModel: RecognitionModel.Recognition04);
             // </attributes1>
 
             // <attributes2>
             foreach (var face in faces3)
             {
                 var attributes = face.FaceAttributes;
-                var facialHair = attributes.FacialHair;
                 var headPose = attributes.HeadPose;
                 var glasses = attributes.Glasses;
                 var qualityForRecognition = attributes.QualityForRecognition;

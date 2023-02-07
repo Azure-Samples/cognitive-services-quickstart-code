@@ -222,10 +222,10 @@ else:
 # Describe image
 # Get the captions (descriptions) from the response, with confidence level
 print("Description of remote image: ")
-if (len(results_remote.description) == 0):
+if (len(results_remote.description.captions) == 0):
     print("No description detected.")
 else:
-    for caption in results_remote.description:
+    for caption in results_remote.description.captions:
         print("'{}' with confidence {:.2f}%".format(caption.text, caption.confidence * 100))
 print()
 

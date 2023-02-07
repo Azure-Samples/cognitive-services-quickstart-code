@@ -8,8 +8,11 @@
 // <snippet_single>
 using Azure.AI.Vision.Core.Input;
 using Azure.AI.Vision.Core.Options;
-using Azure.AI.Vision.Preview.ImageAnalysis;
+using Azure.AI.Vision.ImageAnalysis;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 class Program
@@ -50,12 +53,13 @@ class Program
         }
         else if (result.Reason == ImageAnalysisResultReason.Error)
         {
-            Console.WriteLine($"Analysis failed.");
+            Console.WriteLine(" Analysis failed.");
 
-            var errorDetails = ImageAnalysisErrorDetails.FromResult(result);
-            Console.WriteLine($"  Error reason : {errorDetails.Reason}");
-            Console.WriteLine($"  Error message: {errorDetails.Message}");
-            Console.WriteLine($"Did you set the computer vision endpoint and key?");
+                var errorDetails = ImageAnalysisErrorDetails.FromResult(e.Result);
+                Console.WriteLine($"   Error reason : {errorDetails.Reason}");
+                Console.WriteLine($"   Error code : {errorDetails.ErrorCode}");
+                Console.WriteLine($"   Error message: {errorDetails.Message}");
+                Console.WriteLine(" Did you set the computer vision endpoint and key?");
         }
     }
 }

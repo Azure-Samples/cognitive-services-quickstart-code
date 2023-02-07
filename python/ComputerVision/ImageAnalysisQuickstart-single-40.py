@@ -25,7 +25,7 @@ image_analysis_options.features = (
 )
 
 # Create the image analyzer object
-image_analyzer = visionsdk.ImageAnalyzer(config=service_options, input=vision_source, options=image_analysis_options)
+image_analyzer = visionsdk.ImageAnalyzer(service_options=service_options, vision_source=vision_source, image_analysis_options=image_analysis_options)
 
 # Do image analysis for the specified visual features
 result = image_analyzer.analyze()
@@ -37,10 +37,11 @@ if result.reason == visionsdk.ImageAnalysisResultReason.ANALYZED:
             for caption in result.captions:
                 print('   \'{}\', Confidence {:.4f}'.format(caption.content, caption.confidence))
     
-elif result.reason == visionsdk.ImageAnalysisResultReason.STOPPED:
-    error_details = visionsdk.ImageAnalysisErrorDetails(result)
-    print("Analysis failed.")
-    print("Error reason: {}".format(error_details.error_code))
-    print("Error message: {}".format(error_details.message))
-    print("Did you set the computer vision endpoint and key?")
+elif args.result.reason == visionsdk.ImageAnalysisResultReason.ERROR:
+    error_details = visionsdk.ImageAnalysisErrorDetails.from_result(args.result)
+    print(" Analysis failed.")
+    print("   Error reason: {}".format(error_details.reason))
+    print("   Error code: {}".format(error_details.error_code))
+    print("   Error message: {}".format(error_details.message))
+    print(" Did you set the computer vision endpoint and key?")
 # </snippet_single>

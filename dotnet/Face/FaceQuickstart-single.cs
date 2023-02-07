@@ -50,12 +50,12 @@ namespace FaceQuickstart
             return new FaceClient(new ApiKeyServiceClientCredentials(key)) { Endpoint = endpoint };
         }
 
-        // Detect faces from image url for recognition purpose. This is a helper method for other functions in this quickstart.
-        // Parameter `returnFaceId` of `DetectWithUrlAsync` must be set to `true` (by default) for recognition purpose.
+        // Detect faces from image url for recognition purposes. This is a helper method for other functions in this quickstart.
+        // Parameter `returnFaceId` of `DetectWithUrlAsync` must be set to `true` (by default) for recognition purposes.
         // Parameter `FaceAttributes` is set to include the QualityForRecognition attribute. 
         // Recognition model must be set to recognition_03 or recognition_04 as a result.
         // Result faces with insufficient quality for recognition are filtered out. 
-        // The field `faceId` in returned `DetectedFace`s will be used in Face - Find Similar, Face - Verify. and Face - Identify.
+        // The field `faceId` in returned `DetectedFace`s will be used in Face - Face - Verify and Face - Identify.
         // It will expire 24 hours after the detection call.
         private static async Task<List<DetectedFace>> DetectFaceRecognize(IFaceClient faceClient, string url, string recognition_model)
         {
@@ -136,7 +136,7 @@ namespace FaceQuickstart
                         continue;
                     }
 
-
+                    // add face to the person group
                     Console.WriteLine($"Add face to the person group person({groupedFace}) from image `{similarImage}`");
                     PersistedFace face = await client.PersonGroupPerson.AddFaceFromUrlAsync(personGroupId, person.PersonId,
                         $"{url}{similarImage}", similarImage);
@@ -177,6 +177,9 @@ namespace FaceQuickstart
                 Person person = await client.PersonGroupPerson.GetAsync(personGroupId, identifyResult.Candidates[0].PersonId);
                 Console.WriteLine($"Person '{person.Name}' is identified for the face in: {sourceImageFileName} - {identifyResult.FaceId}," +
                     $" confidence: {identifyResult.Candidates[0].Confidence}.");
+
+                VerifyResult verifyResult = await client.Face.VerifyFaceToPersonAsync(identifyResult.FaceId, person.PersonId, personGroupId);
+                Console.WriteLine($"Verification result: is a match? {verifyResult.IsIdentical}. confidence: {verifyResult.Confidence}");
             }
             Console.WriteLine();
         }
