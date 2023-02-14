@@ -7,13 +7,11 @@
 // <snippet-single>
 #include <memory>
 #include <iostream>
-#include <vision_api_cxx.h>
+#include <vision_api_cxx_image_analyzer.h>
 
 using namespace Azure::AI::Vision::Service;
 using namespace Azure::AI::Vision::Input;
-using namespace Azure::AI::Vision::Preview::ImageAnalysis;
-using namespace Azure::AI::Vision::Preview::ImageAnalysis::Options;
-using namespace Azure::AI::Vision::Preview::ImageAnalysis::Results;
+using namespace Azure::AI::Vision::ImageAnalysis;
 
 void AnalyzeImage()
 {
@@ -24,13 +22,13 @@ void AnalyzeImage()
     std::shared_ptr<VisionServiceOptions> serviceOptions = VisionServiceOptions::FromEndpoint("PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE", "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE");
 
     // specify the URL of the image to analyze
-    std::shared_ptr<VisionSource> imageSource = VisionSource::FromUrl("https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/landmark.jpg");
+    std::shared_ptr<VisionSource> imageSource = VisionSource::FromUrl("https://learn.microsoft.com/azure/cognitive-services/computer-vision/media/quickstarts/presentation.png");
 
     // Creates the options object that will control the ImageAnalyzer
     std::shared_ptr<ImageAnalysisOptions> analysisOptions = ImageAnalysisOptions::Create();
 
     // You must define one or more features to extract during image analysis
-    analysisOptions->SetFeatures({ImageAnalysisFeature::Captions});
+    analysisOptions->SetFeatures({ ImageAnalysisFeature::Caption });
 
     std::shared_ptr<ImageAnalyzer> analyzer = ImageAnalyzer::Create(serviceOptions, imageSource, analysisOptions);
 
@@ -39,31 +37,23 @@ void AnalyzeImage()
 
     if (result->GetReason() == ImageAnalysisResultReason::Analyzed)
     {
-        const Nullable<ContentCaptions>& captions = result->GetCaptions();
+        const Nullable<ContentCaption>& captions = result->GetCaption();
         if (captions.HasValue())
         {
-            std::cout << " Captions:" << std::endl;
-            for (const ContentCaption& caption : captions.Value())
-            {
-                std::cout << "   \"" << caption.Content;
-                std::cout << "\", Confidence " << caption.Confidence << std::endl;
-            }
+            std::cout << " Caption:" << std::endl;
+            std::cout << "   \"" << captions.Value().Content;
+            std::cout << "\", Confidence " << captions.Value().Confidence << std::endl;
+            
         }
     }
-    else if (result->GetReason() == ImageAnalysisResultReason::Stopped)
+    else if (result->GetReason() == ImageAnalysisResultReason::Error)
     {
+        std::shared_ptr<ImageAnalysisErrorDetails> errorDetails = ImageAnalysisErrorDetails::FromResult(result);
         std::cout << "Analysis failed." << std::endl;
-
-        std::shared_ptr<ImageAnalysisStopDetails> stopDetails = ImageAnalysisStopDetails::FromResult(result);
-
-        if (stopDetails->GetReason() == ImageAnalysisStopReason::Error)
-        {
-            std::shared_ptr<ImageAnalysisErrorDetails> errorDetails = ImageAnalysisErrorDetails::FromResult(result);
-
-            std::cout << "Error reason =  " << (int)errorDetails->GetReason() << std::endl;
-            std::cout << "Error message = " << errorDetails->GetMessage() << std::endl;
-            std::cout << "Did you set the computer vision endpoint and key?" << std::endl;
-        }
+        std::cout << "   Error reason = " << (int)errorDetails->GetReason() << std::endl;
+        std::cout << "   Error code = " << errorDetails->GetErrorCode() << std::endl;
+        std::cout << "   Error message = " << errorDetails->GetMessage() << std::endl;
+        std::cout << " Did you set the computer vision endpoint and key?" << std::endl;
     }
 }
 
