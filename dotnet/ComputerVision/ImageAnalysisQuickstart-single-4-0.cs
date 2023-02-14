@@ -30,6 +30,7 @@ class Program
         {
             // You must define one or more features to extract during image analysis
             Features = ImageAnalysisFeature.Caption
+            | ImageAnalysisFeature.Text
         };
 
         var analyzer = new ImageAnalyzer(serviceOptions, imageSource, analysisOptions);
@@ -43,6 +44,21 @@ class Program
             {
                 Console.WriteLine(" Caption:");
                 Console.WriteLine($"   \"{result.Caption.Content}\", Confidence {result.Caption.Confidence:0.0000}");
+            }
+        }
+        if (result.Text != null)
+        {
+            Console.WriteLine($" Text:");
+            foreach (var line in result.Text.Lines)
+            {
+                string pointsToString = "{" + string.Join(',', line.BoundingPolygon.Select(pointsToString => pointsToString.ToString())) + "}";
+                Console.WriteLine($"   Line: '{line.Content}', Bounding polygon {pointsToString}");
+
+                foreach (var word in line.Words)
+                {
+                    pointsToString = "{" + string.Join(',', word.BoundingPolygon.Select(pointsToString => pointsToString.ToString())) + "}";
+                    Console.WriteLine($"     Word: '{word.Content}', Bounding polygon {pointsToString}, Confidence {word.Confidence:0.0000}");
+                }
             }
         }
         else if (result.Reason == ImageAnalysisResultReason.Error)

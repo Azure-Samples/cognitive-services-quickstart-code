@@ -15,10 +15,6 @@ using namespace Azure::AI::Vision::ImageAnalysis;
 
 void AnalyzeImage()
 {
-    // Replace the string "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE" with your Computer Vision endpoint, found in the Azure portal.
-    // The endpoint has the form "https://<your-computer-vision-resource-name>.cognitiveservices.azure.com".
-    // Replace the string "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE" with your Computer Vision key. The key is a 32-character
-    // HEX number (no dashes), found in the Azure portal. Similar to "d0dbd4c2a93346f18c785a426da83e15".
     std::shared_ptr<VisionServiceOptions> serviceOptions = VisionServiceOptions::FromEndpoint("PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE", "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE");
 
     // specify the URL of the image to analyze
@@ -28,7 +24,10 @@ void AnalyzeImage()
     std::shared_ptr<ImageAnalysisOptions> analysisOptions = ImageAnalysisOptions::Create();
 
     // You must define one or more features to extract during image analysis
-    analysisOptions->SetFeatures({ ImageAnalysisFeature::Caption });
+    analysisOptions->SetFeatures(
+        { ImageAnalysisFeature::Caption,
+            ImageAnalysisFeature::Text,
+        });
 
     std::shared_ptr<ImageAnalyzer> analyzer = ImageAnalyzer::Create(serviceOptions, imageSource, analysisOptions);
 
@@ -43,7 +42,24 @@ void AnalyzeImage()
             std::cout << " Caption:" << std::endl;
             std::cout << "   \"" << captions.Value().Content;
             std::cout << "\", Confidence " << captions.Value().Confidence << std::endl;
-            
+        }
+
+        const Nullable<DetectedText>& detectedText = result->GetText();
+        if (detectedText.HasValue())
+        {
+            std::cout << " Text:\n";
+            for (const DetectedTextLine& line : detectedText.Value().Lines)
+            {
+                std::cout << "   Line: \"" << line.Content << "\"";
+                //std::cout << ", Bounding polygon " << PolygonToString(line.BoundingPolygon) << "}\n";
+
+                for (const DetectedTextWord& word : line.Words)
+                {
+                    std::cout << "     Word: \"" << word.Content << "\"";
+                    //std::cout << ", Bounding polygon " << PolygonToString(word.BoundingPolygon);
+                    std::cout << ", Confidence " << word.Confidence << std::endl;
+                }
+            }
         }
     }
     else if (result->GetReason() == ImageAnalysisResultReason::Error)
