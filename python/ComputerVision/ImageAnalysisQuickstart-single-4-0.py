@@ -15,7 +15,7 @@ computer_vision_endpoint, computer_vision_key = "PASTE_YOUR_COMPUTER_VISION_ENDP
 service_options = visionsdk.VisionServiceOptions(endpoint=computer_vision_endpoint, key=computer_vision_key)
 
 # Specify the URL of the image to analyze
-image_url = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/landmark.jpg"
+image_url = "https://learn.microsoft.com/azure/cognitive-services/computer-vision/media/quickstarts/presentation.png"
 vision_source = visionsdk.VisionSource(url=image_url)
 
 # Set the language and one or more visual features as analysis options
