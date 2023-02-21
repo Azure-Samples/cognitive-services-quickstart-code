@@ -10,9 +10,6 @@ using Azure.AI.Vision.Core.Input;
 using Azure.AI.Vision.Core.Options;
 using Azure.AI.Vision.ImageAnalysis;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 class Program
@@ -23,7 +20,8 @@ class Program
 
         
         // Specify the URL of the image to analyze
-        var imageSource = VisionSource.FromUrl(new Uri("https://learn.microsoft.com/azure/cognitive-services/computer-vision/media/quickstarts/presentation.png"));
+        var imageSource = VisionSource.FromUrl(new Uri(
+            "https://learn.microsoft.com/azure/cognitive-services/computer-vision/media/quickstarts/presentation.png"));
 
         // Specify the options that will control the ImageAnalyzer
         var analysisOptions = new ImageAnalysisOptions()
@@ -43,7 +41,8 @@ class Program
             if (result.Caption != null)
             {
                 Console.WriteLine(" Caption:");
-                Console.WriteLine($"   \"{result.Caption.Content}\", Confidence {result.Caption.Confidence:0.0000}");
+                Console.WriteLine(
+                    $"   \"{result.Caption.Content}\", Confidence {result.Caption.Confidence:0.0000}");
             }
         }
         if (result.Text != null)
