@@ -22,6 +22,7 @@ vision_source = visionsdk.VisionSource(url=image_url)
 image_analysis_options =  visionsdk.ImageAnalysisOptions()
 image_analysis_options.features = (
     visionsdk.ImageAnalysisFeature.CAPTIONS
+    | visionsdk.ImageAnalysisFeature.TEXT
 )
 
 # Create the image analyzer object
@@ -33,9 +34,18 @@ result = image_analyzer.analyze()
 # Checks result.
 if result.reason == visionsdk.ImageAnalysisResultReason.ANALYZED:
     if result.captions is not None:
-            print(' Captions:')
-            for caption in result.captions:
-                print('   \'{}\', Confidence {:.4f}'.format(caption.content, caption.confidence))
+        print(' Captions:')
+        for caption in result.captions:
+            print('   \'{}\', Confidence {:.4f}'.format(caption.content, caption.confidence))
+    if result.text is not None:
+        print(' Text:')
+        for line in result.text.lines:
+            points_string = '{' + ', '.join([str(int(point)) for point in line.bounding_polygon]) + '}'
+            print('   Line: \'{}\', Bounding polygon {}'.format(line.content, points_string))
+            for word in line.words:
+                points_string = '{' + ', '.join([str(int(point)) for point in word.bounding_polygon]) + '}'
+                print('     Word: \'{}\', Bounding polygon {}, Confidence {:.4f}'
+                        .format(word.content, points_string, word.confidence))
     
 elif args.result.reason == visionsdk.ImageAnalysisResultReason.ERROR:
     error_details = visionsdk.ImageAnalysisErrorDetails.from_result(args.result)
