@@ -104,31 +104,26 @@ function getActionsList() {
 }
 // </snippet_1>
 
+// <snippet_2>
 async function main() {
 
-    // <AuthorizationVariables>
     // The key specific to your personalization service instance; e.g. "0123456789abcdef0123456789ABCDEF"
     const serviceKey = "PASTE_YOUR_PERSONALIZER_SUBSCRIPTION_KEY_HERE";
   
     // The endpoint specific to your personalization service instance; 
     // e.g. https://<your-resource-name>.cognitiveservices.azure.com
     const baseUri = "PASTE_YOUR_PERSONALIZER_ENDPOINT_HERE";
-    // </AuthorizationVariables>
   
-    // <Client>
     const credentials = new CognitiveServicesCredentials(serviceKey);
   
     // Initialize Personalization client.
     const personalizerClient = new Personalizer.PersonalizerClient(credentials, baseUri);
-    // </Client>
   
   
-    // <mainLoop>
     let runLoop = true;
   
     do {
   
-      // <rank>
       let rankRequest = {}
   
       // Generate an ID to associate with the request.
@@ -147,7 +142,6 @@ async function main() {
   
       // Rank the actions
       const rankResponse = await personalizerClient.rank(rankRequest);
-      // </rank>
   
       console.log("\nPersonalization service thinks you would like to have:\n")
       console.log(rankResponse.rewardActionId);
@@ -162,21 +156,17 @@ async function main() {
   
       // Send the reward for the action based on user response.
   
-      // <reward>
       const rewardRequest = {
         value: reward
       }
   
       await personalizerClient.events.reward(rankRequest.eventId, rewardRequest);
-      // </reward>
   
       runLoop = continueLoop();
   
     } while (runLoop);
-    // </mainLoop>
   }
   
-  // <continueLoop>
   function continueLoop() {
     const answer = readline.question("\nPress q to break, any other key to continue.\n")
     if (answer.toLowerCase() === 'q') {
@@ -184,10 +174,8 @@ async function main() {
     }
     return true;
   }
-  // </continueLoop>
 
-// <callMain>
 main()
 .then(result => console.log("done"))
 .catch(err=> console.log(err));
-// </callMain>
+// </snippet_2>
