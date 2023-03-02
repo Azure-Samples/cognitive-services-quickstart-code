@@ -149,7 +149,7 @@ namespace ComputerVisionQuickstart
             ImageAnalysis results = await client.AnalyzeImageAsync(imageUrl, visualFeatures: features);
 
             // <snippet_describe>
-            // Sunmarizes the image content.
+            // Summarizes the image content.
             Console.WriteLine("Summary:");
             foreach (var caption in results.Description.Captions)
             {
@@ -307,7 +307,7 @@ namespace ComputerVisionQuickstart
                 // Analyze the local image.
                 ImageAnalysis results = await client.AnalyzeImageInStreamAsync(analyzeImageStream, visualFeatures: features);
 
-                // Sunmarizes the image content.
+                // Summarizes the image content.
                 if (null != results.Description && null != results.Description.Captions)
                 {
                     Console.WriteLine("Summary:");
