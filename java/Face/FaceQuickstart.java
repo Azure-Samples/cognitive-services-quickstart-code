@@ -65,12 +65,14 @@ public class FaceQuickstart {
          */
         final String KEY = "PASTE_YOUR_FACE_SUBSCRIPTION_KEY_HERE";
 
-        // Add your region of your Face subscription, for example 'westus', 'eastus', etc.
-        // List of Azure Regions: https://docs.microsoft.com/en-us/java/api/com.microsoft.azure.cognitiveservices.vision.faceapi.models.azureregions?view=azure-java-stable
-        final AzureRegions REGION = AzureRegions.WESTUS;
+        // Construct the base url for authentication using your region of your Face subscription, for example 'westus', 'eastus', etc.
+        // You can find the name for your specific region by using the following Azure CLI command:
+        // az account list-locations -o table
+        final String REGION = "westus";
+        final String BASE_URL = String.format("https://%s.api.cognitive.microsoft.com/face/v1.0/", REGION);
 
         // Create Face client
-        FaceAPI client = FaceAPIManager.authenticate(REGION, KEY);
+        FaceAPI client = FaceAPIManager.authenticate(BASE_URL, KEY);
         /**
          * END - Authenticate
          */
