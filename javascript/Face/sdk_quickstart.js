@@ -13,7 +13,7 @@ const client = new Face.FaceClient(credentials, endpoint);
 // </credentials>
 
 // <globals>
-const image_base_url = "https://csdx.blob.core.windows.net/resources/Face/Images/";
+const image_base_url = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/";
 const person_group_id = uuid();
 // </globals>
 
@@ -143,6 +143,7 @@ async function DetectFaceRecognize(url) {
 	// Result faces with quality for recognition lower than "medium" are filtered out.
     let detected_faces = await client.face.detectWithUrl(url,
 		{
+			returnFaceId: true,
 			detectionModel: "detection_03",
 			recognitionModel: "recognition_04",
             returnFaceAttributes: ["QualityForRecognition"]

@@ -53,7 +53,7 @@ func main() {
 	faceContext := context.Background()
 
 	// Base url for the Verify and Large Face List examples
-	const imageBaseURL = "https://csdx.blob.core.windows.net/resources/Face/Images/"
+	const imageBaseURL = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/"
 
 	/*
 	Authenticate

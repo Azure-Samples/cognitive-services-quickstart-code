@@ -58,7 +58,7 @@ namespace FaceQuickstart
         // <snippet_image_url>
         // Used for all examples.
         // URL for the images.
-        const string IMAGE_BASE_URL = "https://csdx.blob.core.windows.net/resources/Face/Images/";
+        const string IMAGE_BASE_URL = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/";
         // </snippet_image_url>
 
         // <snippet_creds>
@@ -251,7 +251,7 @@ namespace FaceQuickstart
         {
             // Detect faces from image URL. Since only recognizing, use the recognition model 1.
             // We use detection model 3 because we are not retrieving attributes.
-            IList<DetectedFace> detectedFaces = await faceClient.Face.DetectWithUrlAsync(url, recognitionModel: recognition_model, detectionModel: DetectionModel.Detection03, FaceAttributes: new List<FaceAttributeType> { FaceAttributeType.QualityForRecognition });
+            IList<DetectedFace> detectedFaces = await faceClient.Face.DetectWithUrlAsync(url, returnFaceId: true, recognitionModel: recognition_model, detectionModel: DetectionModel.Detection03, FaceAttributes: new List<FaceAttributeType> { FaceAttributeType.QualityForRecognition });
             List<DetectedFace> sufficientQualityFaces = new List<DetectedFace>();
             foreach (DetectedFace detectedFace in detectedFaces){
                 var faceQualityForRecognition = detectedFace.FaceAttributes.QualityForRecognition;

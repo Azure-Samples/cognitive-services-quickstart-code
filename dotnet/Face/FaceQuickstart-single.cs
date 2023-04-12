@@ -16,14 +16,14 @@ namespace FaceQuickstart
         static string personGroupId = Guid.NewGuid().ToString();
 
         // URL path for the images.
-        const string IMAGE_BASE_URL = "https://csdx.blob.core.windows.net/resources/Face/Images/";
+        const string IMAGE_BASE_URL = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/";
 
         // From your Face subscription in the Azure portal, get your subscription key and endpoint.
         const string SUBSCRIPTION_KEY = "PASTE_YOUR_FACE_SUBSCRIPTION_KEY_HERE";
-        const string ENDPOINT = "PASTE_YOUR_FACE_ENDPOINT_HERE";
+        const string ENDPOINT = "PASTE_YOUR_FACE_SUBSCRIPTION_ENDPOINT_HERE";
         // </snippet_creds>
 
-        static void Main(string[] args)
+         static void Main(string[] args)
         {
             // Recognition model 4 was released in 2021 February.
             // It is recommended since its accuracy is improved
@@ -50,18 +50,18 @@ namespace FaceQuickstart
             return new FaceClient(new ApiKeyServiceClientCredentials(key)) { Endpoint = endpoint };
         }
 
-        // Detect faces from image url for recognition purpose. This is a helper method for other functions in this quickstart.
-        // Parameter `returnFaceId` of `DetectWithUrlAsync` must be set to `true` (by default) for recognition purpose.
+        // Detect faces from image url for recognition purposes. This is a helper method for other functions in this quickstart.
+        // Parameter `returnFaceId` of `DetectWithUrlAsync` must be set to `true` (by default) for recognition purposes.
         // Parameter `FaceAttributes` is set to include the QualityForRecognition attribute. 
         // Recognition model must be set to recognition_03 or recognition_04 as a result.
         // Result faces with insufficient quality for recognition are filtered out. 
-        // The field `faceId` in returned `DetectedFace`s will be used in Face - Find Similar, Face - Verify. and Face - Identify.
+        // The field `faceId` in returned `DetectedFace`s will be used in Face - Face - Verify and Face - Identify.
         // It will expire 24 hours after the detection call.
         private static async Task<List<DetectedFace>> DetectFaceRecognize(IFaceClient faceClient, string url, string recognition_model)
         {
             // Detect faces from image URL. Since only recognizing, use the recognition model 1.
             // We use detection model 3 because we are not retrieving attributes.
-            IList<DetectedFace> detectedFaces = await faceClient.Face.DetectWithUrlAsync(url, recognitionModel: recognition_model, detectionModel: DetectionModel.Detection03, FaceAttributes: new List<FaceAttributeType> { FaceAttributeType.QualityForRecognition });
+            IList<DetectedFace> detectedFaces = await faceClient.Face.DetectWithUrlAsync(url, recognitionModel: recognition_model, detectionModel: DetectionModel.Detection03, returnFaceAttributes: new List<FaceAttributeType> { FaceAttributeType.QualityForRecognition });
             List<DetectedFace> sufficientQualityFaces = new List<DetectedFace>();
             foreach (DetectedFace detectedFace in detectedFaces){
                 var faceQualityForRecognition = detectedFace.FaceAttributes.QualityForRecognition;
@@ -117,14 +117,14 @@ namespace FaceQuickstart
                 foreach (var similarImage in personDictionary[groupedFace])
                 {
                     Console.WriteLine($"Check whether image is of sufficient quality for recognition");
-                    IList<DetectedFace> detectedFaces = await client.Face.DetectWithUrlAsync($"{url}{similarImage}", 
-                        recognitionModel: recognition_model, 
+                    IList<DetectedFace> detectedFaces1 = await client.Face.DetectWithUrlAsync($"{url}{similarImage}", 
+                        recognitionModel: recognitionModel, 
                         detectionModel: DetectionModel.Detection03,
                         returnFaceAttributes: new List<FaceAttributeType> { FaceAttributeType.QualityForRecognition });
                     bool sufficientQuality = true;
-                    foreach (var face in detectedFaces)
+                    foreach (var face1 in detectedFaces1)
                     {
-                        var faceQualityForRecognition = face.FaceAttributes.QualityForRecognition;
+                        var faceQualityForRecognition = face1.FaceAttributes.QualityForRecognition;
                         //  Only "high" quality images are recommended for person enrollment
                         if (faceQualityForRecognition.HasValue && (faceQualityForRecognition.Value != QualityForRecognition.High)){
                             sufficientQuality = false;
@@ -136,7 +136,7 @@ namespace FaceQuickstart
                         continue;
                     }
 
-
+                    // add face to the person group
                     Console.WriteLine($"Add face to the person group person({groupedFace}) from image `{similarImage}`");
                     PersistedFace face = await client.PersonGroupPerson.AddFaceFromUrlAsync(personGroupId, person.PersonId,
                         $"{url}{similarImage}", similarImage);
@@ -177,6 +177,9 @@ namespace FaceQuickstart
                 Person person = await client.PersonGroupPerson.GetAsync(personGroupId, identifyResult.Candidates[0].PersonId);
                 Console.WriteLine($"Person '{person.Name}' is identified for the face in: {sourceImageFileName} - {identifyResult.FaceId}," +
                     $" confidence: {identifyResult.Candidates[0].Confidence}.");
+
+                VerifyResult verifyResult = await client.Face.VerifyFaceToPersonAsync(identifyResult.FaceId, person.PersonId, personGroupId);
+                Console.WriteLine($"Verification result: is a match? {verifyResult.IsIdentical}. confidence: {verifyResult.Confidence}");
             }
             Console.WriteLine();
         }
