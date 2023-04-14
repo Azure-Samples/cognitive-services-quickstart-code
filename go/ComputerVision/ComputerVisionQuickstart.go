@@ -50,7 +50,7 @@ var computerVisionContext context.Context
 
 func main() {
 	// <snippet_vars>
-	computerVisionKey := "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE"
+	computerVisionKey := "PASTE_YOUR_COMPUTER_VISION_KEY_HERE"
 	endpointURL := "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE"
 	// </snippet_vars>
 	// </snippet_imports_and_vars>

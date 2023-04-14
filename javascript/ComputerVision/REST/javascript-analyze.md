@@ -18,7 +18,7 @@ To create and run the sample, do the following steps:
 1. Optionally, replace the value of the `value` attribute for the `inputImage` control with the URL of a different image that you want to analyze.
 1. Open a browser window.
 1. In the browser, drag and drop the file into the browser window.
-1. When the webpage is displayed in the browser, paste your subscription key and endpoint URL into the appropriate input boxes.
+1. When the webpage is displayed in the browser, paste your key and endpoint URL into the appropriate input boxes.
 1. Select the **Analyze Image** button.
 
 ```html
@@ -36,7 +36,7 @@ To create and run the sample, do the following steps:
         // *** Update or verify the following values. ***
         // **********************************************
 
-        var subscriptionKey = document.getElementById("subscriptionKey").value;
+        var key = document.getElementById("key").value;
         var endpoint = document.getElementById("endpointUrl").value;
         
         var uriBase = endpoint + "vision/v3.1/analyze";
@@ -60,7 +60,7 @@ To create and run the sample, do the following steps:
             beforeSend: function(xhrObj){
                 xhrObj.setRequestHeader("Content-Type","application/json");
                 xhrObj.setRequestHeader(
-                    "Ocp-Apim-Subscription-Key", subscriptionKey);
+                    "Ocp-Apim-Subscription-Key", key);
             },
 
             type: "POST",
@@ -88,8 +88,8 @@ To create and run the sample, do the following steps:
 <h1>Analyze image:</h1>
 Enter the URL to an image, then click the <strong>Analyze image</strong> button.
 <br><br>
-Subscription key: 
-<input type="text" name="subscriptionKey" id="subscriptionKey"
+key: 
+<input type="text" name="key" id="key"
     value="" /> 
 Endpoint URL:
 <input type="text" name="endpointUrl" id="endpointUrl"

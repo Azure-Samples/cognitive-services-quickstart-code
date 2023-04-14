@@ -32,7 +32,7 @@ public class ImageAnalysisQuickstart {
     // </snippet_classdef_1>
 
     // <snippet_creds>
-    static String subscriptionKey = "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE";
+    static String key = "PASTE_YOUR_COMPUTER_VISION_KEY_HERE";
     static String endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE";
     // </snippet_creds>
     // </snippet_imports_and_vars>
@@ -43,7 +43,7 @@ public class ImageAnalysisQuickstart {
         System.out.println("\nAzure Cognitive Services Computer Vision - Java Quickstart Sample");
 
         // Create an authenticated Computer Vision client.
-        ComputerVisionClient compVisClient = Authenticate(subscriptionKey, endpoint); 
+        ComputerVisionClient compVisClient = Authenticate(key, endpoint); 
 
         // Analyze local and remote images
         AnalyzeLocalImage(compVisClient);
@@ -52,8 +52,8 @@ public class ImageAnalysisQuickstart {
     // </snippet_main>
 
     // <snippet_auth>
-    public static ComputerVisionClient Authenticate(String subscriptionKey, String endpoint){
-        return ComputerVisionManager.authenticate(subscriptionKey).withEndpoint(endpoint);
+    public static ComputerVisionClient Authenticate(String key, String endpoint){
+        return ComputerVisionManager.authenticate(key).withEndpoint(endpoint);
     }
     // </snippet_auth>
 

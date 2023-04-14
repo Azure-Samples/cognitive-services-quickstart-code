@@ -5,8 +5,8 @@ const msRest = require("@azure/ms-rest-js");
 const Face = require("@azure/cognitiveservices-face");
 const { v4: uuid } = require('uuid');
 
-key = "PASTE_YOUR_FACE_SUBSCRIPTION_KEY_HERE";
-endpoint = "PASTE_YOUR_FACE_ENDPOINT_HERE";
+const key = "PASTE_YOUR_FACE_SUBSCRIPTION_KEY_HERE";
+const endpoint = "PASTE_YOUR_FACE_ENDPOINT_HERE";
 
 const credentials = new msRest.ApiKeyCredentials({ inHeader: { 'Ocp-Apim-Subscription-Key': key } });
 const client = new Face.FaceClient(credentials, endpoint);

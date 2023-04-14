@@ -27,7 +27,7 @@ Computer Vision API: https://westus.dev.cognitive.microsoft.com/docs/services/5c
 '''
 Authenticate Computer Vision client
 '''
-key = 'PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE'
+key = 'PASTE_YOUR_COMPUTER_VISION_KEY_HERE'
 endpoint = 'PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE'
 
 client = ComputerVisionClient(endpoint=endpoint, credentials=CognitiveServicesCredentials(key))

@@ -54,7 +54,7 @@ import (
 var computerVisionContext context.Context
 
 func main() {
-	computerVisionKey := "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE"
+	computerVisionKey := "PASTE_YOUR_COMPUTER_VISION_KEY_HERE"
 	endpointURL := "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE"
 
 	/*

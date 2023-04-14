@@ -27,7 +27,7 @@ To create and run the sample, do the following steps:
    1. After the package is successfully installed, close the command prompt window.
 
 1. Copy the following code into a text editor.
-1. Replace the values of `subscriptionKey` and `endpoint` with your Computer Vision subscription key and endpoint.
+1. Replace the values of `key` and `endpoint` with your Computer Vision key and endpoint.
 1. Optionally, replace the value of `imageUrl` with the URL of a different image that you want to analyze.
 1. Optionally, replace the value of the `language` request parameter with a different language.
 1. Save the code as a file with a `.js` extension. For example, `analyze-image.js`.
@@ -39,7 +39,7 @@ To create and run the sample, do the following steps:
 
 const request = require('request');
 
-let subscriptionKey = 'PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE';
+let key = 'PASTE_YOUR_COMPUTER_VISION_KEY_HERE';
 let endpoint = 'PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE';
 
 var uriBase = endpoint + 'vision/v3.1/analyze';
@@ -60,7 +60,7 @@ const options = {
     body: '{"url": ' + '"' + imageUrl + '"}',
     headers: {
         'Content-Type': 'application/json',
-        'Ocp-Apim-Subscription-Key' : subscriptionKey
+        'Ocp-Apim-Subscription-Key' : key
     }
 };
 

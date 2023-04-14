@@ -15,7 +15,7 @@
  *  - The READ (the API for performing Optical Character Recognition or doing text retrieval from PDF) example uses local images and a PDF files, which will be downloaded on demand.
  * 
  * How to run:
- *  - Replace the values of `subscriptionKey` and `endpoint` with your Computer Vision subscription key and endpoint.
+ *  - Replace the values of `key` and `endpoint` with your Computer Vision key and endpoint.
  *  - This quickstart can be run all at once (node ComputerVisionQuickstart.js from the command line) or used to copy/paste sections as needed. 
  *    If sections are extracted, make sure to copy/paste the authenticate section too, as each example relies on it.
  *
@@ -47,7 +47,7 @@ const ApiKeyCredentials = require('@azure/ms-rest-js').ApiKeyCredentials;
  * AUTHENTICATE
  * This single client is used for all examples.
  */
-const key = 'PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE';
+const key = 'PASTE_YOUR_COMPUTER_VISION_KEY_HERE';
 const endpoint = 'PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE';
 // </snippet_vars>
 // </snippet_imports_and_vars>

@@ -53,7 +53,7 @@ Authenticate
 Authenticates your credentials and creates a client.
 '''
 # <snippet_vars>
-subscription_key = "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE"
+subscription_key = "PASTE_YOUR_COMPUTER_VISION_KEY_HERE"
 endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE"
 # </snippet_vars>
 # </snippet_imports_and_vars>

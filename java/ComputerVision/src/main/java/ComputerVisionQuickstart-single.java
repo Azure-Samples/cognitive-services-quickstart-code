@@ -12,7 +12,7 @@ import java.util.UUID;
 
 public class ComputerVisionQuickstart {
 
-    static String subscriptionKey = "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE";
+    static String key = "PASTE_YOUR_COMPUTER_VISION_KEY_HERE";
     static String endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE";
 
     public static void main(String[] args) {
@@ -20,14 +20,14 @@ public class ComputerVisionQuickstart {
         System.out.println("\nAzure Cognitive Services Computer Vision - Java Quickstart Sample");
 
         // Create an authenticated Computer Vision client.
-        ComputerVisionClient compVisClient = Authenticate(subscriptionKey, endpoint); 
+        ComputerVisionClient compVisClient = Authenticate(key, endpoint); 
 
         // Read from remote image
         ReadFromUrl(compVisClient);
     }
 
-    public static ComputerVisionClient Authenticate(String subscriptionKey, String endpoint){
-        return ComputerVisionManager.authenticate(subscriptionKey).withEndpoint(endpoint);
+    public static ComputerVisionClient Authenticate(String key, String endpoint){
+        return ComputerVisionManager.authenticate(key).withEndpoint(endpoint);
     }
     
     /**

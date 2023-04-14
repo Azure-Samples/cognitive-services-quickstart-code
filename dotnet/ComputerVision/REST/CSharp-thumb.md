@@ -20,7 +20,7 @@ To create the sample in Visual Studio, do the following steps:
     1. On the menu, click **Tools**, select **NuGet Package Manager**, then **Manage NuGet Packages for Solution**.
     1. Click the **Browse** tab, and in the **Search** box type "Newtonsoft.Json".
     1. Select **Newtonsoft.Json** when it displays, then click the checkbox next to your project name, and **Install**.
-1. Replace the values of `subscriptionKey` and `endpoint` with your Computer Vision subscription key and endpoint.
+1. Replace the values of `key` and `endpoint` with your Computer Vision key and endpoint.
 1. Run the program.
 1. At the prompt, enter the path to a local image.
 
@@ -36,8 +36,8 @@ namespace CSHttpClientSample
 {
     static class Program
     {
-        // Add your Computer Vision subscription key and base endpoint.
-        static string subscriptionKey = "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE";
+        // Add your Computer Vision key and base endpoint.
+        static string key = "PASTE_YOUR_COMPUTER_VISION_KEY_HERE";
         static string endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE";
         
         // The GenerateThumbnail method endpoint
@@ -67,7 +67,7 @@ namespace CSHttpClientSample
 
                 // Request headers.
                 client.DefaultRequestHeaders.Add(
-                    "Ocp-Apim-Subscription-Key", subscriptionKey);
+                    "Ocp-Apim-Subscription-Key", key);
 
                 // Request parameters.
                 // The width and height parameters specify a thumbnail that's 
