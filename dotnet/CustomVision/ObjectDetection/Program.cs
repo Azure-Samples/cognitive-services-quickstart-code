@@ -16,10 +16,11 @@ namespace ObjectDetection
         static void Main(string[] args)
         {
             // <snippet_creds>
-            string trainingKey = "PASTE_YOUR_CUSTOM_VISION_TRAINING_SUBSCRIPTION_KEY_HERE";
-            string trainingEndpoint = "PASTE_YOUR_CUSTOM_VISION_TRAINING_ENDPOINT_HERE";
-            string predictionKey = "PASTE_YOUR_CUSTOM_VISION_PREDICTION_SUBSCRIPTION_KEY_HERE";
-			string predictionEndpoint = "PASTE_YOUR_CUSTOM_VISION_PREDICTION_ENDPOINT_HERE";
+            string trainingEndpoint = Environment.GetEnvironmentVariable("VISION_TRAINING_ENDPOINT");
+        
+            string trainingKey = Environment.GetEnvironmentVariable("VISION_TRAINING_KEY");
+            string predictionEndpoint = Environment.GetEnvironmentVariable("VISION_PREDICTION_ENDPOINT");
+            string predictionKey = Environment.GetEnvironmentVariable("VISION_PREDICTION_KEY");
             // </snippet_creds>
 
             // <snippet_maincalls>
@@ -177,7 +178,7 @@ namespace ObjectDetection
 
             // The iteration is now trained. Publish it to the prediction end point.
             var publishedModelName = "toolModel";
-            var predictionResourceId = "<target prediction resource ID>";
+            var predictionResourceId = Environment.GetEnvironmentVariable("VISION_PREDICTION_RESOURCE_ID");
             trainingApi.PublishIteration(project.Id, iteration.Id, publishedModelName, predictionResourceId);
             Console.WriteLine("Done!\n");
         }

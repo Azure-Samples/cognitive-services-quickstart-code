@@ -45,8 +45,8 @@ namespace ComputerVisionQuickstart
     class Program
     {
         // Add your Computer Vision key and endpoint
-        static string key = "PASTE_YOUR_COMPUTER_VISION_KEY_HERE";
-        static string endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE";
+        static string key = Environment.GetEnvironmentVariable("VISION_KEY");
+        static string endpoint = Environment.GetEnvironmentVariable("VISION_ENDPOINT");
 
         // URL image used for analyzing an image (image of puppy)
         private const string ANALYZE_URL_IMAGE = "https://moderatorsampleimages.blob.core.windows.net/samples/sample16.png";

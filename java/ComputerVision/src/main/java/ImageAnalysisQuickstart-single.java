@@ -27,8 +27,9 @@ import java.util.UUID;
 
 public class ImageAnalysisQuickstart {
 
-    static String key = "PASTE_YOUR_COMPUTER_VISION_KEY_HERE";
-    static String endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE";
+    // Use environment variables
+    static String key = System.getenv("VISION_KEY");
+    static String endpoint = System.getenv("VISION_ENDPOINT");
 
     public static void main(String[] args) {
         
