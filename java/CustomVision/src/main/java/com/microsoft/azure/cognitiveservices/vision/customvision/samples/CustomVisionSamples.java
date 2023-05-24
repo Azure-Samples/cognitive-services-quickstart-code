@@ -36,11 +36,13 @@ import com.microsoft.azure.cognitiveservices.vision.customvision.training.models
 public class CustomVisionSamples {
 
     // <snippet_creds>
-    final static String trainingApiKey = "PASTE_YOUR_CUSTOM_VISION_TRAINING_SUBSCRIPTION_KEY_HERE";
-    final static String trainingEndpoint = "PASTE_YOUR_CUSTOM_VISION_TRAINING_ENDPOINT_HERE";
-    final static String predictionApiKey = "PASTE_YOUR_CUSTOM_VISION_PREDICTION_SUBSCRIPTION_KEY_HERE";
-	final static String predictionEndpoint = "PASTE_YOUR_CUSTOM_VISION_PREDICTION_ENDPOINT_HERE";
-    final static String predictionResourceId = "PASTE_YOUR_CUSTOM_VISION_PREDICTION_RESOURCE_ID_HERE";
+    // retrieve environment variables
+    final static String trainingApiKey = System.getenv("VISION_TRAINING_KEY");
+    final static String trainingEndpoint = System.getenv("VISION_TRAINING_ENDPOINT");
+    final static String predictionApiKey = System.getenv("VISION_PREDICTION_KEY");
+	final static String predictionEndpoint = System.getenv("VISION_PREDICTION_ENDPOINT");
+    final static String predictionResourceId = System.getenv("VISION_PREDICTION_RESOURCE_ID");
+    
     // </snippet_creds>
 
     /**
