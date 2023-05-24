@@ -40,7 +40,7 @@ public class CustomVisionSamples {
     final static String trainingApiKey = System.getenv("VISION_TRAINING_KEY");
     final static String trainingEndpoint = System.getenv("VISION_TRAINING_ENDPOINT");
     final static String predictionApiKey = System.getenv("VISION_PREDICTION_KEY");
-	final static String predictionEndpoint = System.getenv("VISION_PREDICTION_ENDPOINT");
+    final static String predictionEndpoint = System.getenv("VISION_PREDICTION_ENDPOINT");
     final static String predictionResourceId = System.getenv("VISION_PREDICTION_RESOURCE_ID");
     
     // </snippet_creds>
