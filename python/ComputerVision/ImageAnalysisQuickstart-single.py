@@ -49,8 +49,8 @@ import time
 Authenticate
 Authenticates your credentials and creates a client.
 '''
-subscription_key = "PASTE_YOUR_COMPUTER_VISION_KEY_HERE"
-endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE"
+subscription_key = os.environ["VISION_KEY"]
+endpoint = os.environ["VISION_ENDPOINT"]
 
 computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(subscription_key))
 '''
