@@ -1,21 +1,17 @@
 // <snippet_using>
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Azure.Management.Fluent;
-using Microsoft.Azure.Management.ResourceManager.Fluent;
-using Microsoft.Azure.Management.ResourceManager.Fluent.Authentication;
-using Microsoft.Azure.Management.CognitiveServices;
-using Microsoft.Azure.Management.CognitiveServices.Models;
+using Azure.Identity;
+using Azure.Core;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Compute;
+using Azure.ResourceManager.Compute.Models;
+using Azure.ResourceManager.Network;
+using Azure.ResourceManager.Network.Models;
+using Azure.ResourceManager.Resources;
+using Azure.ResourceManager.Resources.Models;
 // </snippet_using>
 
-/* Note: Install the following NuGet packages:
-Microsoft.Azure.Management.CognitiveServices 
-Microsoft.Azure.Management.Fluent
-Microsoft.Azure.Management.ResourceManager.Fluent
-*/
 
 namespace ConsoleApp1
 {
