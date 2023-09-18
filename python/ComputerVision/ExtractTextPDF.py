@@ -33,7 +33,7 @@ https://westus.dev.cognitive.microsoft.com/docs/services/5cd27ec07268f6c679a3e64
 '''
 Authenticate
 '''
-key = 'PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE'
+key = 'PASTE_YOUR_COMPUTER_VISION_KEY_HERE'
 endpoint = 'PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE'
 
 # Set credentials

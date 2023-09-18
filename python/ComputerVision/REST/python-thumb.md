@@ -9,7 +9,7 @@ In this quickstart, you'll generate a thumbnail from an image using the Computer
 * Once you have your Azure subscription, <a href="https://portal.azure.com/#create/Microsoft.CognitiveServicesComputerVision"  title="Create a Computer Vision resource"  target="_blank">create a Computer Vision resource <span class="docon docon-navigate-external x-hidden-focus"></span></a> in the Azure portal to get your key and endpoint. After it deploys, click **Go to resource**.
     * You will need the key and endpoint from the resource you create to connect your application to the Computer Vision service. You'll paste your key and endpoint into the code below later in the quickstart.
     * You can use the free pricing tier (`F0`) to try the service, and upgrade later to a paid tier for production.
-* [Create environment variables](../../cognitive-services-apis-create-account.md#configure-an-environment-variable-for-authentication) for the key and endpoint URL, named `COMPUTER_VISION_SUBSCRIPTION_KEY` and `COMPUTER_VISION_ENDPOINT`, respectively.
+* [Create environment variables](../../cognitive-services-apis-create-account.md#configure-an-environment-variable-for-authentication) for the key and endpoint URL, named `COMPUTER_VISION_KEY` and `COMPUTER_VISION_ENDPOINT`, respectively.
 - A code editor such as [Visual Studio Code](https://code.visualstudio.com/download).
 
 ## Create and run the sample
@@ -26,8 +26,8 @@ import requests
 from PIL import Image
 from io import BytesIO
 
-# Add your Computer Vision subscription key and endpoint to your environment variables.
-subscription_key = os.environ['COMPUTER_VISION_SUBSCRIPTION_KEY']
+# Add your Computer Vision key and endpoint to your environment variables.
+subscription_key = os.environ['COMPUTER_VISION_KEY']
 endpoint = os.environ['COMPUTER_VISION_ENDPOINT']
 
 thumbnail_url = endpoint + "vision/v3.1/generateThumbnail"

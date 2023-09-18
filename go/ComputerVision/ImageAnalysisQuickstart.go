@@ -59,7 +59,7 @@ var computerVisionContext context.Context
 
 func main() {
 	// <snippet_vars>
-	computerVisionKey := "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE"
+	computerVisionKey := "PASTE_YOUR_COMPUTER_VISION_KEY_HERE"
 	endpointURL := "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE"
 	// </snippet_vars>
 	// </snippet_imports_and_vars>
@@ -119,24 +119,306 @@ func main() {
 	DetectImageTypesLocalImage(computerVisionClient, clipartImagePath)
 	GenerateThumbnailLocalImage(computerVisionClient, objectsImagePath)
 
-	// <snippet_analyze>
+	// <snippet_analyze_call>
 	// Analyze features of an image, remote
-	DescribeRemoteImage(computerVisionClient, landmarkImageURL)
-	CategorizeRemoteImage(computerVisionClient, landmarkImageURL)
-	TagRemoteImage(computerVisionClient, landmarkImageURL)
-	DetectFacesRemoteImage(computerVisionClient, facesImageURL)
-	DetectObjectsRemoteImage(computerVisionClient, objectsImageURL)
-	DetectBrandsRemoteImage(computerVisionClient, brandsImageURL)
-	DetectAdultOrRacyContentRemoteImage(computerVisionClient, adultRacyImageURL)
-	DetectColorSchemeRemoteImage(computerVisionClient, brandsImageURL)
-	DetectDomainSpecificContentRemoteImage(computerVisionClient, landmarkImageURL)
-	DetectImageTypesRemoteImage(computerVisionClient, detectTypeImageURL)
+	AnalyzeRemoteImage(computerVisionClient, facesImageURL)
+	// </snippet_analyze_call>
+
 	GenerateThumbnailRemoteImage(computerVisionClient, adultRacyImageURL)
-	// </snippet_analyze>
 
 	fmt.Println("-----------------------------------------")
 	fmt.Println("End of quickstart.")
 }
+
+
+
+/*  
+ * Describe Image - remote
+ */
+// <snippet_analyze_describe>
+func AnalyzeRemoteImage(client computervision.BaseClient, remoteImageURL string) {
+	fmt.Println("-----------------------------------------")
+	fmt.Println("DESCRIBE IMAGE - remote")
+	fmt.Println()
+	var remoteImage computervision.ImageURL
+	remoteImage.URL = &remoteImageURL
+
+	maxNumberDescriptionCandidates := new(int32)
+	*maxNumberDescriptionCandidates = 1
+
+	remoteImageDescription, err := client.DescribeImage(
+			computerVisionContext,
+			remoteImage,
+			maxNumberDescriptionCandidates,
+			"") // language
+		if err != nil { log.Fatal(err) }
+
+	fmt.Println("Captions from remote image: ")
+	if len(*remoteImageDescription.Captions) == 0 {
+		fmt.Println("No captions detected.")
+	} else {
+		for _, caption := range *remoteImageDescription.Captions {
+			fmt.Printf("'%v' with confidence %.2f%%\n", *caption.Text, *caption.Confidence * 100)
+		}
+	}
+	fmt.Println()
+}
+// </snippet_analyze_describe>
+/*
+ * END - Describe Image - remote
+ */
+
+/*  
+ * Analyze Image - remote
+ */
+// <snippet_analyze_categorize>
+func CategorizeRemoteImage(client computervision.BaseClient, remoteImageURL string) {
+	fmt.Println("-----------------------------------------")
+	fmt.Println("CATEGORIZE IMAGE - remote")
+	fmt.Println()
+	var remoteImage computervision.ImageURL
+	remoteImage.URL = &remoteImageURL
+
+// Analyze call
+	// <snippet_features>
+	features := []computervision.VisualFeatureTypes{computervision.VisualFeatureTypesCategories, computervision.VisualFeatureTypesDescription, computervision.VisualFeatureTypesAdult, computervision.VisualFeatureTypesBrands, computervision.VisualFeatureTypesColor, computervision.VisualFeatureTypesFaces, computervision.VisualFeatureTypesImageType, computervision.VisualFeatureTypesObjects, computervision.VisualFeatureTypesTags}
+	// </snippet_features>
+	
+// <snippet_analyze>
+	imageAnalysis, err := client.AnalyzeImage(
+			computerVisionContext,
+			remoteImage,
+			features,
+			[]computervision.Details{},
+			"")
+	if err != nil { log.Fatal(err) }
+
+// Parse results
+	// Categories
+	fmt.Println("Categories from remote image: ")
+	if len(*imageAnalysis.Categories) == 0 {
+		fmt.Println("No categories detected.")
+	} else {
+		for _, category := range *imageAnalysis.Categories {
+			fmt.Printf("'%v' with confidence %.2f%%\n", *category.Name, *category.Score * 100)
+		}
+	}
+	fmt.Println()
+
+	// Descriptions
+	fmt.Println("Captions from remote image: ")
+	if len(*imageAnalysis.Captions) == 0 {
+		fmt.Println("No captions detected.")
+	} else {
+		for _, caption := range *imageAnalysis.Captions {
+			fmt.Printf("'%v' with confidence %.2f%%\n", *caption.Text, *caption.Confidence * 100)
+		}
+	}
+	fmt.Println()
+
+	// Tags
+	fmt.Println("Tags in the remote image: ")
+	if len(*imageAnalysis.Tags) == 0 {
+		fmt.Println("No tags detected.")
+	} else {
+		for _, tag := range *imageAnalysis.Tags {
+			fmt.Printf("'%v' with confidence %.2f%%\n", *tag.Name, *tag.Confidence * 100)
+		}
+	}
+	fmt.Println()
+
+	// Faces
+	fmt.Println("Detecting faces in a remote image ...")
+	if len(*imageAnalysis.Faces) == 0 {
+		fmt.Println("No faces detected.")
+	} else {
+		// Print the bounding box locations of the found faces.
+		for _, face := range *imageAnalysis.Faces {
+			fmt.Printf("'%v' of age %v at location (%v, %v), (%v, %v)\n",
+				face.Gender, *face.Age,
+				*face.FaceRectangle.Left, *face.FaceRectangle.Top,
+				*face.FaceRectangle.Left + *face.FaceRectangle.Width,
+				*face.FaceRectangle.Top + *face.FaceRectangle.Height)
+		}
+	}
+	fmt.Println()
+
+	// Adult content
+	// Print whether or not there is questionable content.
+	// Confidence levels: low means content is OK, high means it's not.
+	fmt.Println("Analyzing remote image for adult or racy content: ");
+	fmt.Printf("Is adult content: %v with confidence %.2f%%\n", *imageAnalysis.Adult.IsAdultContent, *imageAnalysis.Adult.AdultScore * 100)
+	fmt.Printf("Has racy content: %v with confidence %.2f%%\n", *imageAnalysis.Adult.IsRacyContent, *imageAnalysis.Adult.RacyScore * 100)
+	fmt.Println()
+
+	// Color scheme
+	fmt.Println("Color scheme of the remote image: ");
+	fmt.Printf("Is black and white: %v\n", *imageAnalysis.Color.IsBWImg)
+	fmt.Printf("Accent color: 0x%v\n", *imageAnalysis.Color.AccentColor)
+	fmt.Printf("Dominant background color: %v\n", *imageAnalysis.Color.DominantColorBackground)
+	fmt.Printf("Dominant foreground color: %v\n", *imageAnalysis.Color.DominantColorForeground)
+	fmt.Printf("Dominant colors: %v\n", strings.Join(*imageAnalysis.Color.DominantColors, ", "))
+	fmt.Println()
+
+	// Image type
+	fmt.Println("Image type of remote image:")
+
+	fmt.Println("\nClip art type: ")
+	switch *imageAnalysis.ImageType.ClipArtType {
+	case 0:
+		fmt.Println("Image is not clip art.")
+	case 1:
+		fmt.Println("Image is ambiguously clip art.")
+	case 2:
+		fmt.Println("Image is normal clip art.")
+	case 3:
+		fmt.Println("Image is good clip art.")
+	}
+
+	fmt.Println("\nLine drawing type: ")
+	if *imageAnalysis.ImageType.LineDrawingType == 1 {
+		fmt.Println("Image is a line drawing.")
+	}	else {
+		fmt.Println("Image is not a line drawing.")
+	}
+	fmt.Println()
+
+	// Objects
+	fmt.Println("Detecting objects in remote image: ")
+	if len(*imageAnalysis.Objects) == 0 {
+		fmt.Println("No objects detected.")
+	} else {
+		// Print the objects found with confidence level and bounding box locations.
+		for _, object := range *imageAnalysis.Objects {
+			fmt.Printf("'%v' with confidence %.2f%% at location (%v, %v), (%v, %v)\n",
+				*object.Object, *object.Confidence * 100,
+				*object.Rectangle.X, *object.Rectangle.X + *object.Rectangle.W,
+				*object.Rectangle.Y, *object.Rectangle.Y + *object.Rectangle.H)
+		}
+	}
+	fmt.Println()
+
+	// Brands
+	fmt.Println("Detecting brands in remote image: ")
+	if len(*imageAnalysis.Brands) == 0 {
+		fmt.Println("No brands detected.")
+	} else {
+		// Get bounding box around the brand and confidence level it's correctly identified.
+		for _, brand := range *imageAnalysis.Brands {
+			fmt.Printf("'%v' with confidence %.2f%% at location (%v, %v), (%v, %v)\n",
+				*brand.Name, *brand.Confidence * 100,
+				*brand.Rectangle.X, *brand.Rectangle.X + *brand.Rectangle.W,
+				*brand.Rectangle.Y, *brand.Rectangle.Y + *brand.Rectangle.H)
+		}
+	}
+	fmt.Println()
+}
+// </snippet_analyze>
+
+
+ /*  
+ * Detect Domain-specific Content - remote
+ */
+// <snippet_celebs>
+func DetectDomainSpecificContentRemoteImage(client computervision.BaseClient, remoteImageURL string) {
+	fmt.Println("-----------------------------------------")
+	fmt.Println("DETECT DOMAIN-SPECIFIC CONTENT - remote")
+	fmt.Println()
+	var remoteImage computervision.ImageURL
+	remoteImage.URL = &remoteImageURL
+
+	fmt.Println("Detecting domain-specific content in the local image ...")
+
+	// Check if there are any celebrities in the image.
+	celebrities, err := client.AnalyzeImageByDomain(
+			computerVisionContext,
+			"celebrities",
+			remoteImage,
+			"") // language, English is default
+	if err != nil { log.Fatal(err) }
+
+	fmt.Println("\nCelebrities: ")
+
+	// Marshal the output from AnalyzeImageByDomain into JSON.
+	data, err := json.MarshalIndent(celebrities.Result, "", "\t")
+
+	// Define structs for which to unmarshal the JSON.
+	type Celebrities struct {
+		Name string `json:"name"`
+	}
+
+	type CelebrityResult struct {
+		Celebrities	[]Celebrities `json:"celebrities"`
+	}
+
+	var celebrityResult CelebrityResult
+
+	// Unmarshal the data.
+	err = json.Unmarshal(data, &celebrityResult)
+	if err != nil { log.Fatal(err) }
+
+	//	Check if any celebrities detected.
+	if len(celebrityResult.Celebrities) == 0 {
+		fmt.Println("No celebrities detected.")
+	}	else {
+		for _, celebrity := range celebrityResult.Celebrities {
+			fmt.Printf("name: %v\n", celebrity.Name)
+		}
+	}
+	// </snippet_celebs>
+
+	// <snippet_landmarks>
+	fmt.Println("\nLandmarks: ")
+
+	// Check if there are any landmarks in the image.
+	landmarks, err := client.AnalyzeImageByDomain(
+			computerVisionContext,
+			"landmarks",
+			remoteImage,
+			"")
+	if err != nil { log.Fatal(err) }
+
+	// Marshal the output from AnalyzeImageByDomain into JSON.
+	data, err = json.MarshalIndent(landmarks.Result, "", "\t")
+
+	// Define structs for which to unmarshal the JSON.
+	type Landmarks struct {
+		Name string `json:"name"`
+	}
+
+	type LandmarkResult struct {
+		Landmarks	[]Landmarks `json:"landmarks"`
+	}
+
+	var landmarkResult LandmarkResult
+
+	// Unmarshal the data.
+	err = json.Unmarshal(data, &landmarkResult)
+	if err != nil { log.Fatal(err) }
+
+	// Check if any celebrities detected.
+	if len(landmarkResult.Landmarks) == 0 {
+		fmt.Println("No landmarks detected.")
+	}	else {
+		for _, landmark := range landmarkResult.Landmarks {
+			fmt.Printf("name: %v\n", landmark.Name)
+		}
+	}
+	fmt.Println()
+}
+// </snippet_landmarks>
+/* 
+ * END - Detect Domain-specific Content - remote
+
+
+
+
+
+
+
+
+
+
 
 /*  
  * Describe Image - local
@@ -175,42 +457,6 @@ func DescribeLocalImage(client computervision.BaseClient, localImagePath string)
  */
 
 /*  
- * Describe Image - remote
- */
-// <snippet_analyze_describe>
-func DescribeRemoteImage(client computervision.BaseClient, remoteImageURL string) {
-	fmt.Println("-----------------------------------------")
-	fmt.Println("DESCRIBE IMAGE - remote")
-	fmt.Println()
-	var remoteImage computervision.ImageURL
-	remoteImage.URL = &remoteImageURL
-
-	maxNumberDescriptionCandidates := new(int32)
-	*maxNumberDescriptionCandidates = 1
-
-	remoteImageDescription, err := client.DescribeImage(
-			computerVisionContext,
-			remoteImage,
-			maxNumberDescriptionCandidates,
-			"") // language
-		if err != nil { log.Fatal(err) }
-
-	fmt.Println("Captions from remote image: ")
-	if len(*remoteImageDescription.Captions) == 0 {
-		fmt.Println("No captions detected.")
-	} else {
-		for _, caption := range *remoteImageDescription.Captions {
-			fmt.Printf("'%v' with confidence %.2f%%\n", *caption.Text, *caption.Confidence * 100)
-		}
-	}
-	fmt.Println()
-}
-// </snippet_analyze_describe>
-/*
- * END - Describe Image - remote
- */
-
-/*  
  * Categorize Image - local
  */
 func CategorizeLocalImage(client computervision.BaseClient, localImagePath string) {
@@ -245,41 +491,6 @@ func CategorizeLocalImage(client computervision.BaseClient, localImagePath strin
  */
 
 /*  
- * Categorize Image - remote
- */
-// <snippet_analyze_categorize>
-func CategorizeRemoteImage(client computervision.BaseClient, remoteImageURL string) {
-	fmt.Println("-----------------------------------------")
-	fmt.Println("CATEGORIZE IMAGE - remote")
-	fmt.Println()
-	var remoteImage computervision.ImageURL
-	remoteImage.URL = &remoteImageURL
-
-	features := []computervision.VisualFeatureTypes{computervision.VisualFeatureTypesCategories}
-	imageAnalysis, err := client.AnalyzeImage(
-			computerVisionContext,
-			remoteImage,
-			features,
-			[]computervision.Details{},
-			"")
-	if err != nil { log.Fatal(err) }
-
-	fmt.Println("Categories from remote image: ")
-	if len(*imageAnalysis.Categories) == 0 {
-		fmt.Println("No categories detected.")
-	} else {
-		for _, category := range *imageAnalysis.Categories {
-			fmt.Printf("'%v' with confidence %.2f%%\n", *category.Name, *category.Score * 100)
-		}
-	}
-	fmt.Println()
-}
-// </snippet_analyze_categorize>
-/*
- * END - Categorize Image - remote
- */
-
-/*  
  * Tag Image - local
  */
 func TagLocalImage(client computervision.BaseClient, localImagePath string) {
@@ -308,38 +519,6 @@ func TagLocalImage(client computervision.BaseClient, localImagePath string) {
 }
 /*
  * END - Tag Image - local
- */
-
-/*  
- * Tag Image - remote
- */
-// <snippet_tags>
-func TagRemoteImage(client computervision.BaseClient, remoteImageURL string) {
-	fmt.Println("-----------------------------------------")
-	fmt.Println("TAG IMAGE - remote")
-	fmt.Println()
-	var remoteImage computervision.ImageURL
-	remoteImage.URL = &remoteImageURL
-
-	remoteImageTags, err := client.TagImage(
-			computerVisionContext,
-			remoteImage,
-			"")
-	if err != nil { log.Fatal(err) }
-
-	fmt.Println("Tags in the remote image: ")
-	if len(*remoteImageTags.Tags) == 0 {
-		fmt.Println("No tags detected.")
-	} else {
-		for _, tag := range *remoteImageTags.Tags {
-			fmt.Printf("'%v' with confidence %.2f%%\n", *tag.Name, *tag.Confidence * 100)
-		}
-	}
-	fmt.Println()
-}
-// </snippet_tags>
-/*
- * END - Tag Image - remote
  */
 
 /*  
@@ -384,46 +563,6 @@ func DetectFacesLocalImage(client computervision.BaseClient, localImagePath stri
  */
  
 /*  
- * Detect Faces - remote
- */
-// <snippet_faces>
-func DetectFacesRemoteImage(client computervision.BaseClient, remoteImageURL string) {
-	fmt.Println("-----------------------------------------")
-	fmt.Println("DETECT FACES - remote")
-	fmt.Println()
-	var remoteImage computervision.ImageURL
-	remoteImage.URL = &remoteImageURL
-
-	// Define the features you want returned with the API call.
-	features := []computervision.VisualFeatureTypes{computervision.VisualFeatureTypesFaces}
-	imageAnalysis, err := client.AnalyzeImage(
-			computerVisionContext,
-			remoteImage,
-			features,
-			[]computervision.Details{},
-			"")
-		if err != nil { log.Fatal(err) }
-
-	fmt.Println("Detecting faces in a remote image ...")
-	if len(*imageAnalysis.Faces) == 0 {
-		fmt.Println("No faces detected.")
-	} else {
-		// Print the bounding box locations of the found faces.
-		for _, face := range *imageAnalysis.Faces {
-			fmt.Printf("'%v' of age %v at location (%v, %v), (%v, %v)\n",
-				face.Gender, *face.Age,
-				*face.FaceRectangle.Left, *face.FaceRectangle.Top,
-				*face.FaceRectangle.Left + *face.FaceRectangle.Width,
-				*face.FaceRectangle.Top + *face.FaceRectangle.Height)
-		}
-	}
-	fmt.Println()
-}
-// </snippet_faces>
-/*
- * END - Detect Faces - remote
- */
-/*  
  * Detect Adult or Racy Content - local
  */
 func DetectAdultOrRacyContentLocalImage(client computervision.BaseClient, localImagePath string) {
@@ -456,40 +595,6 @@ func DetectAdultOrRacyContentLocalImage(client computervision.BaseClient, localI
  */
 
 /*  
- * Detect Adult or Racy Content - remote
- */
-// <snippet_adult>
-func DetectAdultOrRacyContentRemoteImage(client computervision.BaseClient, remoteImageURL string) {
-	fmt.Println("-----------------------------------------")
-	fmt.Println("DETECT ADULT OR RACY CONTENT - remote")
-	fmt.Println()
-	var remoteImage computervision.ImageURL
-	remoteImage.URL = &remoteImageURL
-
-	// Define the features you want returned from the API call.
-	features := []computervision.VisualFeatureTypes{computervision.VisualFeatureTypesAdult}
-	imageAnalysis, err := client.AnalyzeImage(
-			computerVisionContext,
-			remoteImage,
-			features,
-			[]computervision.Details{},
-			"") // language, English is default
-	if err != nil { log.Fatal(err) }
-
-	// Print whether or not there is questionable content.
-	// Confidence levels: low means content is OK, high means it's not.
-	fmt.Println("Analyzing remote image for adult or racy content: ");
-	fmt.Printf("Is adult content: %v with confidence %.2f%%\n", *imageAnalysis.Adult.IsAdultContent, *imageAnalysis.Adult.AdultScore * 100)
-	fmt.Printf("Has racy content: %v with confidence %.2f%%\n", *imageAnalysis.Adult.IsRacyContent, *imageAnalysis.Adult.RacyScore * 100)
-	fmt.Println()
-}
-// </snippet_adult>
-/* 
- * END - Detect Adult or Racy Content - remote
- */ 
-
-
-/*  
  * Detect Color Scheme - local
  */
 func DetectColorSchemeLocalImage(client computervision.BaseClient, localImagePath string) {
@@ -520,40 +625,6 @@ func DetectColorSchemeLocalImage(client computervision.BaseClient, localImagePat
 }
 /*
  * END - Detect Color Scheme - local
- */
-
-/*  
- * Detect Color Scheme - remote
- */
-// <snippet_color>
-func DetectColorSchemeRemoteImage(client computervision.BaseClient, remoteImageURL string) {
-	fmt.Println("-----------------------------------------")
-	fmt.Println("DETECT COLOR SCHEME - remote")
-	fmt.Println()
-	var remoteImage computervision.ImageURL
-	remoteImage.URL = &remoteImageURL
-
-	// Define the features you'd like returned with the result.
-	features := []computervision.VisualFeatureTypes{computervision.VisualFeatureTypesColor}
-	imageAnalysis, err := client.AnalyzeImage(
-			computerVisionContext,
-			remoteImage,
-			features,
-			[]computervision.Details{},
-			"") // language, English is default
-	if err != nil { log.Fatal(err) }
-
-	fmt.Println("Color scheme of the remote image: ");
-	fmt.Printf("Is black and white: %v\n", *imageAnalysis.Color.IsBWImg)
-	fmt.Printf("Accent color: 0x%v\n", *imageAnalysis.Color.AccentColor)
-	fmt.Printf("Dominant background color: %v\n", *imageAnalysis.Color.DominantColorBackground)
-	fmt.Printf("Dominant foreground color: %v\n", *imageAnalysis.Color.DominantColorForeground)
-	fmt.Printf("Dominant colors: %v\n", strings.Join(*imageAnalysis.Color.DominantColors, ", "))
-	fmt.Println()
-}
-// </snippet_color>
-/* 
- * END - Detect Color Scheme - remote
  */
 
 /*  
@@ -651,101 +722,6 @@ func DetectDomainSpecificContentLocalImage(client computervision.BaseClient, loc
  */
 
 /*  
- * Detect Domain-specific Content - remote
- */
-// <snippet_celebs>
-func DetectDomainSpecificContentRemoteImage(client computervision.BaseClient, remoteImageURL string) {
-	fmt.Println("-----------------------------------------")
-	fmt.Println("DETECT DOMAIN-SPECIFIC CONTENT - remote")
-	fmt.Println()
-	var remoteImage computervision.ImageURL
-	remoteImage.URL = &remoteImageURL
-
-	fmt.Println("Detecting domain-specific content in the local image ...")
-
-	// Check if there are any celebrities in the image.
-	celebrities, err := client.AnalyzeImageByDomain(
-			computerVisionContext,
-			"celebrities",
-			remoteImage,
-			"") // language, English is default
-	if err != nil { log.Fatal(err) }
-
-	fmt.Println("\nCelebrities: ")
-
-	// Marshal the output from AnalyzeImageByDomain into JSON.
-	data, err := json.MarshalIndent(celebrities.Result, "", "\t")
-
-	// Define structs for which to unmarshal the JSON.
-	type Celebrities struct {
-		Name string `json:"name"`
-	}
-
-	type CelebrityResult struct {
-		Celebrities	[]Celebrities `json:"celebrities"`
-	}
-
-	var celebrityResult CelebrityResult
-
-	// Unmarshal the data.
-	err = json.Unmarshal(data, &celebrityResult)
-	if err != nil { log.Fatal(err) }
-
-	//	Check if any celebrities detected.
-	if len(celebrityResult.Celebrities) == 0 {
-		fmt.Println("No celebrities detected.")
-	}	else {
-		for _, celebrity := range celebrityResult.Celebrities {
-			fmt.Printf("name: %v\n", celebrity.Name)
-		}
-	}
-	// </snippet_celebs>
-
-	// <snippet_landmarks>
-	fmt.Println("\nLandmarks: ")
-
-	// Check if there are any landmarks in the image.
-	landmarks, err := client.AnalyzeImageByDomain(
-			computerVisionContext,
-			"landmarks",
-			remoteImage,
-			"")
-	if err != nil { log.Fatal(err) }
-
-	// Marshal the output from AnalyzeImageByDomain into JSON.
-	data, err = json.MarshalIndent(landmarks.Result, "", "\t")
-
-	// Define structs for which to unmarshal the JSON.
-	type Landmarks struct {
-		Name string `json:"name"`
-	}
-
-	type LandmarkResult struct {
-		Landmarks	[]Landmarks `json:"landmarks"`
-	}
-
-	var landmarkResult LandmarkResult
-
-	// Unmarshal the data.
-	err = json.Unmarshal(data, &landmarkResult)
-	if err != nil { log.Fatal(err) }
-
-	// Check if any celebrities detected.
-	if len(landmarkResult.Landmarks) == 0 {
-		fmt.Println("No landmarks detected.")
-	}	else {
-		for _, landmark := range landmarkResult.Landmarks {
-			fmt.Printf("name: %v\n", landmark.Name)
-		}
-	}
-	fmt.Println()
-}
-// </snippet_landmarks>
-/* 
- * END - Detect Domain-specific Content - remote
-
-
-/*  
  * Detect Image Type - local
  */
 func DetectImageTypesLocalImage(client computervision.BaseClient, localImagePath string) {
@@ -794,55 +770,6 @@ func DetectImageTypesLocalImage(client computervision.BaseClient, localImagePath
  */
 
 /*  
- * Detect Image Type - remote
- * Detect the image type (clip art, line drawing) of a remote image.  
- */
-// <snippet_type>
-func DetectImageTypesRemoteImage(client computervision.BaseClient, remoteImageURL string) {
-	fmt.Println("-----------------------------------------")
-	fmt.Println("DETECT IMAGE TYPES - remote")
-	fmt.Println()
-	var remoteImage computervision.ImageURL
-	remoteImage.URL = &remoteImageURL
-
-	features := []computervision.VisualFeatureTypes{computervision.VisualFeatureTypesImageType}
-
-	imageAnalysis, err := client.AnalyzeImage(
-			computerVisionContext,
-			remoteImage,
-			features,
-			[]computervision.Details{},
-			"")
-	if err != nil { log.Fatal(err) }
-
-	fmt.Println("Image type of remote image:")
-
-	fmt.Println("\nClip art type: ")
-	switch *imageAnalysis.ImageType.ClipArtType {
-	case 0:
-		fmt.Println("Image is not clip art.")
-	case 1:
-		fmt.Println("Image is ambiguously clip art.")
-	case 2:
-		fmt.Println("Image is normal clip art.")
-	case 3:
-		fmt.Println("Image is good clip art.")
-	}
-
-	fmt.Println("\nLine drawing type: ")
-	if *imageAnalysis.ImageType.LineDrawingType == 1 {
-		fmt.Println("Image is a line drawing.")
-	}	else {
-		fmt.Println("Image is not a line drawing.")
-	}
-	fmt.Println()
-}
-// </snippet_type>
-/* 
- * END - Detect Image Type - remote
- */
-
-/*  
  * Detect Objects - local
  */
 func DetectObjectsLocalImage(client computervision.BaseClient, localImagePath string) {
@@ -877,41 +804,6 @@ func DetectObjectsLocalImage(client computervision.BaseClient, localImagePath st
  * END - Detect Objects - local
  */
 
-/*  
- * Detect Objects - remote
- */
-// <snippet_objects>
-func DetectObjectsRemoteImage(client computervision.BaseClient, remoteImageURL string) {
-	fmt.Println("-----------------------------------------")
-	fmt.Println("DETECT OBJECTS - remote")
-	fmt.Println()
-	var remoteImage computervision.ImageURL
-	remoteImage.URL = &remoteImageURL
-
-	imageAnalysis, err := client.DetectObjects(
-			computerVisionContext,
-			remoteImage,
-	)
-	if err != nil { log.Fatal(err) }
-
-	fmt.Println("Detecting objects in remote image: ")
-	if len(*imageAnalysis.Objects) == 0 {
-		fmt.Println("No objects detected.")
-	} else {
-		// Print the objects found with confidence level and bounding box locations.
-		for _, object := range *imageAnalysis.Objects {
-			fmt.Printf("'%v' with confidence %.2f%% at location (%v, %v), (%v, %v)\n",
-				*object.Object, *object.Confidence * 100,
-				*object.Rectangle.X, *object.Rectangle.X + *object.Rectangle.W,
-				*object.Rectangle.Y, *object.Rectangle.Y + *object.Rectangle.H)
-		}
-	}
-	fmt.Println()
-}
-// </snippet_objects>
-/*
- * END - Detect Objects - remote
- */
 
 /*  
  * Detect Brands - local
@@ -951,47 +843,6 @@ func DetectBrandsLocalImage(client computervision.BaseClient, localImagePath str
 }
 /*
  * END - Detect Brands - local
- */
-
-/*  
- * Detect Brands - remote
- */
-// <snippet_brands>
-func DetectBrandsRemoteImage(client computervision.BaseClient, remoteImageURL string) {
-	fmt.Println("-----------------------------------------")
-	fmt.Println("DETECT BRANDS - remote")
-	fmt.Println()
-	var remoteImage computervision.ImageURL
-	remoteImage.URL = &remoteImageURL
-
-	// Define the kinds of features you want returned.
-	features := []computervision.VisualFeatureTypes{computervision.VisualFeatureTypesBrands}
-
-	imageAnalysis, err := client.AnalyzeImage(
-		computerVisionContext,
-		remoteImage,
-		features,
-		[]computervision.Details{},
-		"en")
-	if err != nil { log.Fatal(err) }
-
-	fmt.Println("Detecting brands in remote image: ")
-	if len(*imageAnalysis.Brands) == 0 {
-		fmt.Println("No brands detected.")
-	} else {
-		// Get bounding box around the brand and confidence level it's correctly identified.
-		for _, brand := range *imageAnalysis.Brands {
-			fmt.Printf("'%v' with confidence %.2f%% at location (%v, %v), (%v, %v)\n",
-				*brand.Name, *brand.Confidence * 100,
-				*brand.Rectangle.X, *brand.Rectangle.X + *brand.Rectangle.W,
-				*brand.Rectangle.Y, *brand.Rectangle.Y + *brand.Rectangle.H)
-		}
-	}
-	fmt.Println()
-}
-// </snippet_brands>
-/*
- * END - Detect brands in remote image
  */
 
 /*

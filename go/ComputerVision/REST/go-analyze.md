@@ -17,7 +17,7 @@ In this quickstart, you'll analyze a remotely stored image to extract visual fea
 To create and run the sample, do the following steps:
 
 1. Copy the below code into a text editor.
-1. Replace the values of `subscriptionKey` and `endpoint` with your Computer Vision subscription key and endpoint.
+1. Replace the values of `key` and `endpoint` with your Computer Vision key and endpoint.
 1. Optionally, replace the value of `imageUrl` with the URL of a different image that you want to analyze.
 1. Save the code as a file with a `.go` extension. For example, `analyze-image.go`.
 1. Open a command prompt window.
@@ -38,8 +38,8 @@ import (
 )
 
 func main() {
-    // Add your Computer Vision subscription key and endpoint to your environment variables.
-    subscriptionKey := "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE"
+    // Add your Computer Vision key and endpoint to your environment variables.
+    key := "PASTE_YOUR_COMPUTER_VISION_KEY_HERE"
     endpoint := "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE"
 
     uriBase := endpoint + "vision/v3.1/analyze"
@@ -65,7 +65,7 @@ func main() {
 
     // Add request headers
     req.Header.Add("Content-Type", "application/json")
-    req.Header.Add("Ocp-Apim-Subscription-Key", subscriptionKey)
+    req.Header.Add("Ocp-Apim-Subscription-Key", key)
 
     // Send the request and retrieve the response
     resp, err := client.Do(req)

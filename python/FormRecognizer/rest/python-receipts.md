@@ -1,6 +1,6 @@
 # Quickstart: Extract receipt data using the Form Recognizer REST API with Python
 
-In this quickstart, you'll use the Azure Form Recognizer REST API with Python to extract and identify relevant information in USA sales receipts.
+In this quickstart, you'll use the Azure Form Recognizer REST API with Python to extract and identify relevant information in sales receipts.
 
 If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/cognitive-services/) before you begin.
 
@@ -75,8 +75,9 @@ To start analyzing a receipt, you call the **[Analyze Receipt](https://westus.de
         if resp.status_code != 202:
             print("POST analyze failed:\n%s" % resp.text)
             quit()
-        print("POST analyze succeeded:\n%s" % resp.headers)
-        get_url = resp.headers["operation-location"]
+        else:
+            print("POST analyze succeeded:\n%s" % resp.headers)
+            get_url = resp.headers["operation-location"]
     except Exception as e:
         print("POST analyze failed:\n%s" % str(e))
         quit()

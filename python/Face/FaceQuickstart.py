@@ -58,7 +58,7 @@ ENDPOINT = "PASTE_YOUR_FACE_ENDPOINT_HERE"
 
 # <snippet_verify_baseurl>
 # Base url for the Verify and Facelist/Large Facelist operations
-IMAGE_BASE_URL = 'https://csdx.blob.core.windows.net/resources/Face/Images/'
+IMAGE_BASE_URL = 'https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/'
 # </snippet_verify_baseurl>
 
 # <snippet_persongroupvars>

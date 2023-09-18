@@ -44,7 +44,7 @@ Authenticate
 Authenticates your credentials and creates a client.
 '''
 # <snippet_vars>
-subscription_key = "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE"
+subscription_key = "PASTE_YOUR_COMPUTER_VISION_KEY_HERE"
 endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE"
 # </snippet_vars>
 # </snippet_imports_and_vars>
@@ -54,21 +54,6 @@ computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredenti
 # </snippet_client>
 '''
 END - Authenticate
-'''
-
-'''
-Quickstart variables
-These variables are shared by several examples
-'''
-# Images used for the examples: Describe an image, Categorize an image, Tag an image, 
-# Detect faces, Detect adult or racy content, Detect the color scheme, 
-# Detect domain-specific content, Detect image types, Detect objects
-images_folder = os.path.join (os.path.dirname(os.path.abspath(__file__)), "images")
-# <snippet_remoteimage>
-remote_image_url = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/landmark.jpg"
-# </snippet_remoteimage>
-'''
-END - Quickstart variables
 '''
 
 # <snippet_read_call>

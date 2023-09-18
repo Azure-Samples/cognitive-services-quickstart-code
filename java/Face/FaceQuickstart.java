@@ -53,7 +53,7 @@ public class FaceQuickstart {
                 GROUP_FACES_URL.substring(GROUP_FACES_URL.lastIndexOf('/')+1, GROUP_FACES_URL.length());
 
         // For Identify, Verify, Group Faces, and Face Lists examples
-        final String IMAGE_BASE_URL = "https://csdx.blob.core.windows.net/resources/Face/Images/";
+        final String IMAGE_BASE_URL = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/";
 
         // Used for the Identify example and Delete examples
         final String PERSON_GROUP_ID = "my-families"; // can be any lowercase, 0-9, "-", or "_" character.

@@ -47,8 +47,8 @@ namespace ComputerVisionQuickstart
     class Program
     {
         // <snippet_vars>
-        // Add your Computer Vision subscription key and endpoint
-        static string subscriptionKey = "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE";
+        // Add your Computer Vision key and endpoint
+        static string key = "PASTE_YOUR_COMPUTER_VISION_KEY_HERE";
         static string endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE";
         // </snippet_vars>
 	// </snippet_using_and_vars>
@@ -75,7 +75,7 @@ namespace ComputerVisionQuickstart
 
             // <snippet_main_calls>
             // Create a client
-            ComputerVisionClient client = Authenticate(endpoint, subscriptionKey);
+            ComputerVisionClient client = Authenticate(endpoint, key);
 
             // Analyze an image to get features and other properties.
             AnalyzeImageUrl(client, ANALYZE_URL_IMAGE).Wait();
@@ -142,15 +142,14 @@ namespace ComputerVisionQuickstart
             };
             // </snippet_visualfeatures>
 
-            // <snippet_analyze_call>
             Console.WriteLine($"Analyzing the image {Path.GetFileName(imageUrl)}...");
             Console.WriteLine();
+            // <snippet_analyze>
             // Analyze the URL image 
             ImageAnalysis results = await client.AnalyzeImageAsync(imageUrl, visualFeatures: features);
-            // </snippet_analyze_call>
 
             // <snippet_describe>
-            // Sunmarizes the image content.
+            // Summarizes the image content.
             Console.WriteLine("Summary:");
             foreach (var caption in results.Description.Captions)
             {
@@ -239,7 +238,6 @@ namespace ComputerVisionQuickstart
             Console.WriteLine();
             // </snippet_celebs>
 
-
             // <snippet_landmarks>
             // Popular landmarks in image, if any.
             Console.WriteLine("Landmarks:");
@@ -274,6 +272,7 @@ namespace ComputerVisionQuickstart
             Console.WriteLine("Line Drawing Type: " + results.ImageType.LineDrawingType);
             Console.WriteLine();
             // </snippet_type>
+            // </snippet_analyze>
         }
         /*
          * END - ANALYZE IMAGE - URL IMAGE
@@ -308,7 +307,7 @@ namespace ComputerVisionQuickstart
                 // Analyze the local image.
                 ImageAnalysis results = await client.AnalyzeImageInStreamAsync(analyzeImageStream, visualFeatures: features);
 
-                // Sunmarizes the image content.
+                // Summarizes the image content.
                 if (null != results.Description && null != results.Description.Captions)
                 {
                     Console.WriteLine("Summary:");

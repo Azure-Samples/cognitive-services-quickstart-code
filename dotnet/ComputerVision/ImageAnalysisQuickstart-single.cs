@@ -44,9 +44,9 @@ namespace ComputerVisionQuickstart
 {
     class Program
     {
-        // Add your Computer Vision subscription key and endpoint
-        static string subscriptionKey = "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE";
-        static string endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE";
+        // Add your Computer Vision key and endpoint
+        static string key = Environment.GetEnvironmentVariable("VISION_KEY");
+        static string endpoint = Environment.GetEnvironmentVariable("VISION_ENDPOINT");
 
         // URL image used for analyzing an image (image of puppy)
         private const string ANALYZE_URL_IMAGE = "https://moderatorsampleimages.blob.core.windows.net/samples/sample16.png";
@@ -57,7 +57,7 @@ namespace ComputerVisionQuickstart
             Console.WriteLine();
 
             // Create a client
-            ComputerVisionClient client = Authenticate(endpoint, subscriptionKey);
+            ComputerVisionClient client = Authenticate(endpoint, key);
 
             // Analyze an image to get features and other properties.
             AnalyzeImageUrl(client, ANALYZE_URL_IMAGE).Wait();
@@ -93,11 +93,11 @@ namespace ComputerVisionQuickstart
             // Analyze the URL image 
             ImageAnalysis results = await client.AnalyzeImageAsync(imageUrl, visualFeatures: features);
 
-            // Sunmarizes the image content.
-            Console.WriteLine("Summary:");
-            foreach (var caption in results.Description.Captions)
+            // Image tags and their confidence score
+            Console.WriteLine("Tags:");
+            foreach (var tag in results.Tags)
             {
-                Console.WriteLine($"{caption.Text} with confidence {caption.Confidence}");
+                Console.WriteLine($"{tag.Name} {tag.Confidence}");
             }
             Console.WriteLine();
         }

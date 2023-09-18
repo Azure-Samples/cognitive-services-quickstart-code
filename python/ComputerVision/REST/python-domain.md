@@ -14,7 +14,7 @@ You can run this quickstart in a step-by step fashion using a Jupyter Notebook o
 * Once you have your Azure subscription, <a href="https://portal.azure.com/#create/Microsoft.CognitiveServicesComputerVision"  title="Create a Computer Vision resource"  target="_blank">create a Computer Vision resource <span class="docon docon-navigate-external x-hidden-focus"></span></a> in the Azure portal to get your key and endpoint. After it deploys, click **Go to resource**.
     * You will need the key and endpoint from the resource you create to connect your application to the Computer Vision service. You'll paste your key and endpoint into the code below later in the quickstart.
     * You can use the free pricing tier (`F0`) to try the service, and upgrade later to a paid tier for production.
-* [Create environment variables](../../cognitive-services-apis-create-account.md#configure-an-environment-variable-for-authentication) for the key and endpoint URL, named `COMPUTER_VISION_SUBSCRIPTION_KEY` and `COMPUTER_VISION_ENDPOINT`, respectively.
+* [Create environment variables](../../cognitive-services-apis-create-account.md#configure-an-environment-variable-for-authentication) for the key and endpoint URL, named `COMPUTER_VISION_KEY` and `COMPUTER_VISION_ENDPOINT`, respectively.
 
 ## Create and run the landmarks sample
 
@@ -36,11 +36,11 @@ import matplotlib.pyplot as plt
 from PIL import Image
 from io import BytesIO
 
-# Add your Computer Vision subscription key and endpoint to your environment variables.
-if 'COMPUTER_VISION_SUBSCRIPTION_KEY' in os.environ:
-    subscription_key = os.environ['COMPUTER_VISION_SUBSCRIPTION_KEY']
+# Add your Computer Vision key and endpoint to your environment variables.
+if 'COMPUTER_VISION_KEY' in os.environ:
+    subscription_key = os.environ['COMPUTER_VISION_KEY']
 else:
-    print("\nSet the COMPUTER_VISION_SUBSCRIPTION_KEY environment variable.\n**Restart your shell or IDE for changes to take effect.**")
+    print("\nSet the COMPUTER_VISION_KEY environment variable.\n**Restart your shell or IDE for changes to take effect.**")
     sys.exit()
 
 if 'COMPUTER_VISION_ENDPOINT' in os.environ:
@@ -103,8 +103,8 @@ To create and run the landmark sample, do the following steps:
 
 1. Copy the following code into a text editor.
 1. Make the following changes in code where needed:
-    1. Replace the value of `subscription_key` with your subscription key.
-    1. Replace the value of `vision_base_url` with the endpoint URL for the Computer Vision resource in the Azure region where you obtained your subscription keys, if necessary.
+    1. Replace the value of `subscription_key` with your key.
+    1. Replace the value of `vision_base_url` with the endpoint URL for the Computer Vision resource in the Azure region where you obtained your keys, if necessary.
     1. Optionally, replace the value of `image_url` with the URL of a different image in which you want to detect celebrities.
 1. Save the code as a file with an `.py` extension. For example, `get-celebrities.py`.
 1. Open a command prompt window.
@@ -118,8 +118,8 @@ import matplotlib.pyplot as plt
 from PIL import Image
 from io import BytesIO
 
-# Replace <Subscription Key> with your valid subscription key.
-subscription_key = "<Subscription Key>"
+# Replace <key> with your valid key.
+subscription_key = "<key>"
 assert subscription_key
 
 vision_base_url = "https://westcentralus.api.cognitive.microsoft.com/vision/v2.1/"

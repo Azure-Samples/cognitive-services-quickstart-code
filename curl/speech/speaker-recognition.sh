@@ -1,13 +1,13 @@
-# <list_profiles>
-curl --location --request GET 'INSERT_ENDPOINT_HERE/speaker/identification/v2.0/text-independent/profiles' \
---header 'Ocp-Apim-Subscription-Key: INSERT_SUBSCRIPTION_KEY_HERE'
-# </list_profiles>
-
 # Text-dependent verification
+
+# <tdv_list_profiles>
+curl --location --request GET 'INSERT_ENDPOINT_HERE/speaker-recognition/verification/text-dependent/profiles?api-version=2021-09-05' \
+--header 'Ocp-Apim-Subscription-Key: INSERT_SUBSCRIPTION_KEY_HERE'
+# </tdv_list_profiles>
 
 # <tdv_create_profile>
 # Note Change locale if needed.
-curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker/verification/v2.0/text-dependent/profiles' \
+curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker-recognition/verification/text-dependent/profiles?api-version=2021-09-05' \
 --header 'Ocp-Apim-Subscription-Key: INSERT_SUBSCRIPTION_KEY_HERE' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -31,7 +31,7 @@ curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker/verification/v2.0/t
 # </tdv_create_profile_response>
 
 # <tdv_enroll>
-curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker/verification/v2.0/text-dependent/profiles/INSERT_PROFILE_ID_HERE/enrollments' \
+curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker-recognition/verification/text-dependent/profiles/INSERT_PROFILE_ID_HERE/enrollments?api-version=2021-09-05' \
 --header 'Ocp-Apim-Subscription-Key: INSERT_SUBSCRIPTION_KEY_HERE' \
 --header 'Content-Type: audio/wav' \
 --data-binary @'INSERT_FILE_PATH_HERE'
@@ -67,7 +67,7 @@ curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker/verification/v2.0/t
 # </tdv_enroll_response_2>
 
 # <tdv_verify>
-curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker/verification/v2.0/text-dependent/profiles/INSERT_PROFILE_ID_HERE/verify' \
+curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker-recognition/verification/text-dependent/profiles/INSERT_PROFILE_ID_HERE:verify?api-version=2021-09-05' \
 --header 'Ocp-Apim-Subscription-Key: INSERT_SUBSCRIPTION_KEY_HERE' \
 --header 'Content-Type: audio/wav' \
 --data-binary @'INSERT_FILE_PATH_HERE'
@@ -82,15 +82,20 @@ curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker/verification/v2.0/t
 
 # <tdv_delete_profile>
 curl --location --request DELETE \
-'INSERT_ENDPOINT_HERE/speaker/verification/v2.0/text-dependent/profiles/INSERT_PROFILE_ID_HERE' \
+'INSERT_ENDPOINT_HERE/speaker-recognition/verification/text-dependent/profiles/INSERT_PROFILE_ID_HERE?api-version=2021-09-05' \
 --header 'Ocp-Apim-Subscription-Key: INSERT_SUBSCRIPTION_KEY_HERE'
 # </tdv_delete_profile>
-# (No response)
+# 204 (No Content)
 
 # Text-independent verification
 
+# <tdv_list_profiles>
+curl --location --request GET 'INSERT_ENDPOINT_HERE/speaker-recognition/verification/text-independent/profiles?api-version=2021-09-05' \
+--header 'Ocp-Apim-Subscription-Key: INSERT_SUBSCRIPTION_KEY_HERE'
+# </tdv_list_profiles>
+
 # <tiv_create_profile>
-curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker/verification/v2.0/text-independent/profiles' \
+curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker-recognition/verification/text-independent/profiles?api-version=2021-09-05' \
 --header 'Ocp-Apim-Subscription-Key: INSERT_SUBSCRIPTION_KEY_HERE' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -100,21 +105,39 @@ curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker/verification/v2.0/t
 
 # <tiv_create_profile_response>
 {
+    "profileStatus": "Inactive",
     "remainingEnrollmentsSpeechLength": 20.0,
-    "locale": "en-us",
-    "createdDateTime": "2020-09-29T16:08:52.409Z",
-    "enrollmentStatus": "Enrolling",
-    "modelVersion": null,
     "profileId": "3f85dca9-ffc9-4011-bf21-37fad2beb4d2",
+    "locale": "en-us",
+    "enrollmentStatus": "Enrolling",
+    "createdDateTime": "2020-09-29T16:08:52.409Z",
     "lastUpdatedDateTime": null,
     "enrollmentsCount": 0,
     "enrollmentsLength": 0.0,
     "enrollmentSpeechLength": 0.0
+    "modelVersion": null,
 }
 # </tiv_create_profile_response>
 
+# <tiv_pass_phrase>
+# Note Change locale if needed.
+curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker-recognition/verification/text-independent/phrases/en-us?api-version=2021-09-05' \
+--header 'Ocp-Apim-Subscription-Key: INSERT_SUBSCRIPTION_KEY_HERE'
+# </tiv_pass_phrase
+
+# <tiv_pass_phrase_response>
+# Must use phrase as the first enrollment phrase
+{
+    "value": [
+        {
+            "activationPhrase": "I'll talk for a few seconds so you can recognize my voice in the future."
+        }
+    ]
+}
+# </tiv_pass_phrase_response>
+
 # <tiv_enroll>
-curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker/verification/v2.0/text-independent/profiles/INSERT_PROFILE_ID_HERE/enrollments' \
+curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker-recognition/verification/text-independent/profiles/INSERT_PROFILE_ID_HERE/enrollments?api-version=2021-09-05' \
 --header 'Ocp-Apim-Subscription-Key: INSERT_SUBSCRIPTION_KEY_HERE' \
 --header 'Content-Type: audio/wav' \
 --data-binary @'INSERT_FILE_PATH_HERE'
@@ -134,7 +157,7 @@ curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker/verification/v2.0/t
 # </tiv_enroll_response>
 
 # <tiv_verify>
-curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker/verification/v2.0/text-independent/profiles/INSERT_PROFILE_ID_HERE/verify' \
+curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker-recognition/verification/text-independent/profiles/INSERT_PROFILE_ID_HERE:verify?api-version=2021-09-05' \
 --header 'Ocp-Apim-Subscription-Key: INSERT_SUBSCRIPTION_KEY_HERE' \
 --header 'Content-Type: audio/wav' \
 --data-binary @'INSERT_FILE_PATH_HERE'
@@ -148,16 +171,21 @@ curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker/verification/v2.0/t
 # </tiv_verify_response>
 
 # <tiv_delete_profile>
-curl --location --request DELETE 'INSERT_ENDPOINT_HERE/speaker/verification/v2.0/text-independent/profiles/INSERT_PROFILE_ID_HERE' \
+curl --location --request DELETE 'INSERT_ENDPOINT_HERE/speaker-recognition/verification/text-independent/profiles/INSERT_PROFILE_ID_HERE?api-version=2021-09-05' \
 --header 'Ocp-Apim-Subscription-Key: INSERT_SUBSCRIPTION_KEY_HERE'
 # </tiv_delete_profile>
-# (No response>
+# 204 (No Content)
 
 # Text-independent identification
 
+# <tii_list_profiles>
+curl --location --request GET 'INSERT_ENDPOINT_HERE/speaker-recognition/identification/text-independent/profiles?api-version=2021-09-05' \
+--header 'Ocp-Apim-Subscription-Key: INSERT_SUBSCRIPTION_KEY_HERE'
+# </tii_list_profiles>
+
 # <tii_create_profile>
 # Note Change locale if needed.
-curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker/identification/v2.0/text-independent/profiles' \
+curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker-recognition/identification/text-independent/profiles?api-version=2021-09-05' \
 --header 'Ocp-Apim-Subscription-Key: INSERT_SUBSCRIPTION_KEY_HERE' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -167,21 +195,22 @@ curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker/identification/v2.0
 
 # <tii_create_profile_response>
 {
-    "remainingEnrollmentsSpeechLength": 20.0,
-    "locale": "en-us",
-    "createdDateTime": "2020-09-22T17:25:48.642Z",
-    "enrollmentStatus": "Enrolling",
-    "modelVersion": null,
+    "profileStatus": "Inactive",
+    "remainingEnrollmentsSpeechLengthInSec": 20.0,
     "profileId": "de99ab38-36c8-4b82-b137-510907c61fe8",
+    "locale": "en-us",
+    "enrollmentStatus": "Enrolling",
+    "createdDateTime": "2020-09-22T17:25:48.642Z",
     "lastUpdatedDateTime": null,
     "enrollmentsCount": 0,
-    "enrollmentsLength": 0.0,
-    "enrollmentSpeechLength": 0.0
+    "enrollmentsLengthInSec": 0.0,
+    "enrollmentsSpeechLengthInSec": 0.0,
+    "modelVersion": null
 }
 # </tii_create_profile_response>
 
 # <tii_enroll>
-curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker/identification/v2.0/text-independent/profiles/INSERT_PROFILE_ID_HERE/enrollments' \
+curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker-recognition/identification/text-independent/profiles/INSERT_PROFILE_ID_HERE/enrollments?api-version=2021-09-05' \
 --header 'Ocp-Apim-Subscription-Key: INSERT_SUBSCRIPTION_KEY_HERE' \
 --header 'Content-Type: audio/wav' \
 --data-binary @'INSERT_FILE_PATH_HERE'
@@ -203,7 +232,7 @@ curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker/identification/v2.0
 # After calling get profiles again:
 # <tii_list_profiles>
 {
-    "profiles": [
+    "value": [
         {
             "remainingEnrollmentsSpeechLength": 17.259999999999998,
             "locale": "en-us",
@@ -236,7 +265,8 @@ curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker/identification/v2.0
 # </tii_enroll_response_2>
 
 # <tii_identify>
-curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker/identification/v2.0/text-independent/profiles/identifySingleSpeaker?profileIds=INSERT_PROFILE_ID_HERE' \
+# Profile ids comma seperated list
+curl --location --request POST 'INSERT_ENDPOINT_HERE/speaker-recognition/identification/text-independent/profiles:identifySingleSpeaker?api-version=2021-09-05&profileIds=INSERT_PROFILE_ID_HERE' \
 --header 'Ocp-Apim-Subscription-Key: INSERT_SUBSCRIPTION_KEY_HERE' \
 --header 'Content-Type: audio/wav' \
 --data-binary @'INSERT_FILE_PATH_HERE'
@@ -280,7 +310,7 @@ Success:
 
 # <tii_delete_profile>
 curl --location --request DELETE \
-'INSERT_ENDPOINT_HERE/speaker/identification/v2.0/text-independent/profiles/INSERT_PROFILE_ID_HERE' \
+'INSERT_ENDPOINT_HERE/speaker-recognition/identification/text-independent/profiles/INSERT_PROFILE_ID_HERE?api-version=2021-09-05' \
 --header 'Ocp-Apim-Subscription-Key: INSERT_SUBSCRIPTION_KEY_HERE'
 # </tii_delete_profile>
-# (No response)
+# 204 (No Content)

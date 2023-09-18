@@ -41,23 +41,12 @@ import time
 Authenticate
 Authenticates your credentials and creates a client.
 '''
-subscription_key = "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE"
-endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE"
+subscription_key = os.environ["VISION_KEY"]
+endpoint = os.environ["VISION_ENDPOINT"]
 
 computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(subscription_key))
 '''
 END - Authenticate
-'''
-
-'''
-Quickstart variables
-These variables are shared by several examples
-'''
-
-remote_image_url = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/landmark.jpg"
-
-'''
-END - Quickstart variables
 '''
 
 '''
@@ -71,7 +60,6 @@ read_image_url = "https://learn.microsoft.com/azure/ai-services/computer-vision/
 
 # Call API with URL and raw response (allows you to get the operation location)
 read_response = computervision_client.read(read_image_url,  raw=True)
-
 
 # Get the operation location (URL with an ID at the end) from the response
 read_operation_location = read_response.headers["Operation-Location"]

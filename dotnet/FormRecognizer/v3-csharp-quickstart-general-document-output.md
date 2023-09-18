@@ -1,14 +1,179 @@
-# Quickstart output: C# SDK v3.0 layout model
+# Quickstart output: C# SDK general document model (beta)
 
 [Reference documentation](https://docs.microsoft.com/dotnet/api/azure.ai.formrecognizer.documentanalysis?view=azure-dotnet-preview&preserve-view=true) | [Library Source Code](https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/) | [Package (NuGet)](https://www.nuget.org/packages/Azure.AI.FormRecognizer/4.0.0-beta.3) | [Samples](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/README.md)
 
-You can get started using the Azure Form Recognizer layout model with the [C# programming language quickstart](https://docs.microsoft.com/azure/applied-ai-services/form-recognizer/quickstarts/try-v3-csharp-sdk#layout-model). The layout model analyzes and extracts tables, lines, words, and selection marks like radio buttons and check boxes from forms and documents, without the need to train a model. Here is the expected outcome from the layout model quickstart code:
+You can get started using the Azure Form Recognizer general document model with the [C# programming language quickstart](https://docs.microsoft.com/azure/applied-ai-services/form-recognizer/quickstarts/try-v3-csharp-sdk#general-document-model). The general document model analyzes and extracts text, tables, structure, key-value pairs, and named entities from forms and documents. Here is the expected outcome from the general document model quickstart code:
 
-## Layout model output
+## General document model output
+  
+
+Detected key-value pairs:
+
+  Found key with no value: '?'
+
+  Found key-value pair: 'QUARTERLY REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF 1934' and ':selected:'
+
+  Found key-value pair: 'For the Quarterly Period Ended March 31, 2020' and 'OR'
+
+  Found key with no value: '?'
+
+  Found key-value pair: 'TRANSITION REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF 1934' and ':unselected:'
+
+  Found key with no value: 'For the Transition Period From'
+
+  Found key-value pair: 'to Commission File Number' and '001-37845'
+
+  Found key-value pair: '(I.R.S. ID)' and '91-1144442'
+
+  Found key-value pair: 'Securities registered pursuant to Section 12(g) of the Act:' and 'NONE'
+
+  Found key-value pair: 'Yes ?' and ':selected:'
+
+  Found key-value pair: 'No ?' and ':unselected:'
+
+  Found key-value pair: 'Yes ?' and ':selected:'
+
+  Found key-value pair: 'No ?' and ':unselected:'
+
+  Found key-value pair: 'Large accelerated filer ?' and ':selected:'
+
+  Found key-value pair: 'Accelerated filer ?' and ':unselected:'
+
+  Found key-value pair: 'Non-accelerated filer ?' and ':unselected:'
+
+  Found key with no value: 'Smaller reporting company'
+
+  Found key with no value: '?'
+
+  Found key-value pair: 'Emerging growth company' and ':unselected:'
+
+  Found key with no value: '?'
+
+  Found key with no value: '?'
+
+  Found key-value pair: 'No ?' and ':selected:'
+
+Detected entities:
+
+  Found entity '$0.00000625' with category 'Quantity' and sub-category 'Currency'.
+
+  Found entity 'MSFT' with category 'Organization'.
+
+  Found entity 'NASDAQ' with category 'Organization' and sub-category 'StockExchange'.
+
+  Found entity '2.125%' with category 'Quantity' and sub-category 'Percentage'.
+
+  Found entity '2021' with category 'DateTime' and sub-category 'DateRange'.
+
+  Found entity 'MSFT' with category 'Organization'.
+
+  Found entity 'NASDAQ' with category 'Organization' and sub-category 'StockExchange'.
+
+  Found entity '3.125%' with category 'Quantity' and sub-category 'Percentage'.
+
+  Found entity '2028' with category 'DateTime' and sub-category 'DateRange'.
+
+  Found entity 'MSFT' with category 'Organization'.
+
+  Found entity 'NASDAQ' with category 'Organization' and sub-category 'StockExchange'.
+
+  Found entity '2.625%' with category 'Quantity' and sub-category 'Percentage'.
+
+  Found entity '2033' with category 'DateTime' and sub-category 'DateRange'.
+
+  Found entity 'MSFT' with category 'Organization'.
+
+  Found entity 'NASDAQ' with category 'Organization' and sub-category 'StockExchange'.
+
+  Found entity 'April 24, 2020' with category 'DateTime' and sub-category 'Date'.
+
+  Found entity '$0.00000625' with category 'Quantity' and sub-category 'Currency'.
+
+  Found entity '7,583,440,247' with category 'Quantity' and sub-category 'Number'.
+
+  Found entity 'UNITED STATES' with category 'Location' and sub-category 'GPE'.
+
+  Found entity 'EXCHANGE' with category 'Organization' and sub-category 'Medical'.
+
+  Found entity 'Washington, D.C.' with category 'Location' and sub-category 'GPE'.
+
+  Found entity '20549' with category 'Quantity' and sub-category 'Number'.
+
+  Found entity '10' with category 'Quantity' and sub-category 'Number'.
+
+  Found entity 'QUARTERLY' with category 'DateTime' and sub-category 'Set'.
+
+  Found entity '13' with category 'Quantity' and sub-category 'Number'.
+
+  Found entity '15' with category 'Quantity' and sub-category 'Number'.
+
+  Found entity '1934' with category 'DateTime' and sub-category 'DateRange'.
+
+  Found entity 'Quarterly' with category 'DateTime' and sub-category 'Set'.
+
+  Found entity 'March 31, 2020' with category 'DateTime' and sub-category 'Date'.
+
+  Found entity '13' with category 'Quantity' and sub-category 'Number'.
+
+  Found entity '15' with category 'Quantity' and sub-category 'Number'.
+
+  Found entity '1934' with category 'DateTime' and sub-category 'DateRange'.
+
+  Found entity 'MICROSOFT CORPORATION' with category 'Organization'.
+
+  Found entity 'WASHINGTON' with category 'Location' and sub-category 'GPE'.
+
+  Found entity 'ONE MICROSOFT WAY' with category 'Address'.
+
+  Found entity 'ONE' with category 'Quantity' and sub-category 'Number'.
+
+  Found entity 'REDMOND, WASHINGTON' with category 'Address'.
+
+  Found entity '98052-6399
+
+ (425) 882-8080
+
+ www.microsoft.com/investor
+
+ Securities registered pursuant to Section 12(b) of the Act:
+
+ Securities registered pursuant to Section 12(g)' with category 'Quantity' and sub-category 'Dimension'.
+
+  Found entity 'www.microsoft.com/investor' with category 'URL'.
+
+  Found entity '1' with category 'Quantity' and sub-category 'Number'.
+
+  Found entity '13' with category 'Quantity' and sub-category 'Number'.
+
+  Found entity '15' with category 'Quantity' and sub-category 'Number'.
+
+  Found entity '1934' with category 'DateTime' and sub-category 'DateRange'.
+
+  Found entity '12 months' with category 'DateTime' and sub-category 'Duration'.
+
+  Found entity '2' with category 'Quantity' and sub-category 'Number'.
+
+  Found entity '90 days' with category 'DateTime' and sub-category 'Duration'.
+
+  Found entity '405' with category 'Quantity' and sub-category 'Number'.
+
+  Found entity '232.405' with category 'Quantity' and sub-category 'Number'.
+
+  Found entity '12 months' with category 'DateTime' and sub-category 'Duration'.
+
+  Found entity '12b' with category 'Quantity' and sub-category 'Number'.
+
+  Found entity '2' with category 'Quantity' and sub-category 'Number'.
+
+  Found entity '13' with category 'Quantity' and sub-category 'Number'.
+
+  Found entity '12b' with category 'Quantity' and sub-category 'Number'.
+
+  Found entity '2' with category 'Quantity' and sub-category 'Number'.
 
 Document Page 1 has 69 line(s), 425 word(s),
 
-and 15 selection mark(s).
+and 14 selection mark(s).
 
   Line 0 has content: 'UNITED STATES'.
 
@@ -862,19 +1027,7 @@ and 15 selection mark(s).
 
       Lower left => X: 0.6694, Y= 2.8042
 
-  Selection Mark 2 is Unselected.
-
-    Its bounding box is:
-
-      Upper left => X: 6.7693, Y= 5.6511
-
-      Upper right => X: 6.8613, Y= 5.6511
-
-      Lower right => X: 6.8613, Y= 5.7394
-
-      Lower left => X: 6.7693, Y= 5.7394
-
-  Selection Mark 3 is Selected.
+  Selection Mark 2 is Selected.
 
     Its bounding box is:
 
@@ -886,7 +1039,7 @@ and 15 selection mark(s).
 
       Lower left => X: 4.2484, Y= 6.6371
 
-  Selection Mark 4 is Unselected.
+  Selection Mark 3 is Unselected.
 
     Its bounding box is:
 
@@ -898,7 +1051,7 @@ and 15 selection mark(s).
 
       Lower left => X: 4.7134, Y= 6.6358
 
-  Selection Mark 5 is Selected.
+  Selection Mark 4 is Selected.
 
     Its bounding box is:
 
@@ -910,7 +1063,7 @@ and 15 selection mark(s).
 
       Lower left => X: 1.9708, Y= 7.1171
 
-  Selection Mark 6 is Unselected.
+  Selection Mark 5 is Unselected.
 
     Its bounding box is:
 
@@ -922,7 +1075,7 @@ and 15 selection mark(s).
 
       Lower left => X: 2.4242, Y= 7.1158
 
-  Selection Mark 7 is Selected.
+  Selection Mark 6 is Selected.
 
     Its bounding box is:
 
@@ -934,7 +1087,7 @@ and 15 selection mark(s).
 
       Lower left => X: 1.8666, Y= 7.7971
 
-  Selection Mark 8 is Unselected.
+  Selection Mark 7 is Unselected.
 
     Its bounding box is:
 
@@ -946,7 +1099,7 @@ and 15 selection mark(s).
 
       Lower left => X: 6.2307, Y= 7.7958
 
-  Selection Mark 9 is Unselected.
+  Selection Mark 8 is Unselected.
 
     Its bounding box is:
 
@@ -958,7 +1111,7 @@ and 15 selection mark(s).
 
       Lower left => X: 1.7882, Y= 7.9708
 
-  Selection Mark 10 is Unselected.
+  Selection Mark 9 is Unselected.
 
     Its bounding box is:
 
@@ -970,7 +1123,7 @@ and 15 selection mark(s).
 
       Lower left => X: 6.7957, Y= 7.9708
 
-  Selection Mark 11 is Unselected.
+  Selection Mark 10 is Unselected.
 
     Its bounding box is:
 
@@ -982,7 +1135,7 @@ and 15 selection mark(s).
 
       Lower left => X: 6.7891, Y= 8.1467
 
-  Selection Mark 12 is Unselected.
+  Selection Mark 11 is Unselected.
 
     Its bounding box is:
 
@@ -994,7 +1147,7 @@ and 15 selection mark(s).
 
       Lower left => X: 6.5447, Y= 8.5
 
-  Selection Mark 13 is Unselected.
+  Selection Mark 12 is Unselected.
 
     Its bounding box is:
 
@@ -1006,7 +1159,7 @@ and 15 selection mark(s).
 
       Lower left => X: 6.795, Y= 8.7033
 
-  Selection Mark 14 is Selected.
+  Selection Mark 13 is Selected.
 
     Its bounding box is:
 
@@ -1050,7 +1203,7 @@ The following tables were extracted:
 
     Cell (4, 1) has kind '' and content: 'MSFT'.
 
-    Cell (4, 2) has kind '' and content: 'NASDAQ :unselected:'.
+    Cell (4, 2) has kind '' and content: 'NASDAQ'.
 
   Table 1 has 2 rows and 2 columns.
 
@@ -1061,6 +1214,5 @@ The following tables were extracted:
     Cell (1, 0) has kind '' and content: 'Common Stock, $0.00000625 par value per share'.
 
     Cell (1, 1) has kind '' and content: '7,583,440,247 shares'.
-
-
-  
+    
+    

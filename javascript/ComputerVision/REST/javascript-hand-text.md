@@ -38,9 +38,9 @@ To create and run the sample, do the following steps:
         // *** Update or verify the following values. ***
         // **********************************************
 
-        let subscriptionKey = document.getElementById("key").value;
+        let key = document.getElementById("key").value;
         let endpoint = document.getElementById("endpoint").value;
-        if (!subscriptionKey) { throw new Error('Please enter your subscription key and endpoint.'); }
+        if (!key) { throw new Error('Please enter your key and endpoint.'); }
         
         var uriBase = endpoint + "/vision/v3.1/read/analyze";
 
@@ -59,7 +59,7 @@ To create and run the sample, do the following steps:
             // Request headers.
             beforeSend: function(jqXHR){
                 jqXHR.setRequestHeader("Content-Type","application/json");
-                jqXHR.setRequestHeader("Ocp-Apim-Subscription-Key", subscriptionKey);
+                jqXHR.setRequestHeader("Ocp-Apim-Subscription-Key", key);
             },
 
             type: "POST",
@@ -92,7 +92,7 @@ To create and run the sample, do the following steps:
                     beforeSend: function(jqXHR){
                         jqXHR.setRequestHeader("Content-Type","application/json");
                         jqXHR.setRequestHeader(
-                            "Ocp-Apim-Subscription-Key", subscriptionKey);
+                            "Ocp-Apim-Subscription-Key", key);
                     },
 
                     type: "GET",
@@ -138,7 +138,7 @@ the <strong>Read image</strong> button.
 Endpoint: 
 <input type="text" name="endpoint" id="endpoint" value="" style="width: 300px;"/>
 <div style="margin: 20px;">Example: https://westus2.api.cognitive.microsoft.com</div>
-Subscription Key:    
+key:    
 <input type="text" name="key" id="key" value="" style="width: 300px;"/>
 <br><br>
 

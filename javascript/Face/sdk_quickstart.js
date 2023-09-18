@@ -13,7 +13,7 @@ const client = new Face.FaceClient(credentials, endpoint);
 // </credentials>
 
 // <globals>
-const image_base_url = "https://csdx.blob.core.windows.net/resources/Face/Images/";
+const image_base_url = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/";
 const person_group_id = uuid();
 // </globals>
 
@@ -143,6 +143,7 @@ async function DetectFaceRecognize(url) {
 	// Result faces with quality for recognition lower than "medium" are filtered out.
     let detected_faces = await client.face.detectWithUrl(url,
 		{
+			returnFaceId: true,
 			detectionModel: "detection_03",
 			recognitionModel: "recognition_04",
             returnFaceAttributes: ["QualityForRecognition"]
@@ -151,11 +152,11 @@ async function DetectFaceRecognize(url) {
 }
 // </recognize>
 
-// <find_similar>
 async function FindSimilar() {
     console.log("========FIND SIMILAR========");
     console.log();
 
+	// <snippet_loadfaces>
 	const source_image_file_name = "findsimilar.jpg";
     const target_image_file_names = [
 		"Family1-Dad1.jpg",
@@ -177,15 +178,17 @@ async function FindSimilar() {
 
     // Detect faces from source image url.
 	let detected_faces = await DetectFaceRecognize(image_base_url + source_image_file_name);
+	// </snippet_loadfaces>
 
+	// <find_similar>
     // Find a similar face(s) in the list of IDs. Comapring only the first in list for testing purposes.
     let results = await client.face.findSimilar(detected_faces[0].faceId, { faceIds : target_face_ids });
 	results.forEach (function (result) {
 		console.log("Faces from: " + source_image_file_name + " and ID: " + result.faceId + " are similar with confidence: " + result.confidence + ".");
 	});
 	console.log();
+	// </find_similar>
 }
-// </find_similar>
 
 // <add_faces>
 async function AddFacesToPersonGroup(person_dictionary, person_group_id) {

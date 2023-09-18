@@ -16,7 +16,7 @@ In this quickstart, you'll generate a thumbnail from an image using the Computer
 To create and run the sample, do the following steps:
 
 1. Copy the following code into a text editor.
-1. Replace the values of `subscriptionKey` and `endpoint` with your Computer Vision subscription key and endpoint.
+1. Replace the values of `key` and `endpoint` with your Computer Vision key and endpoint.
 1. Optionally, replace the value of `imageUrl` with the URL of a different image from which you want to generate a thumbnail.
 1. Save the code as a file with a `.go` extension. For example, `get-thumbnail.go`.
 1. Open a command prompt window.
@@ -39,8 +39,8 @@ import (
 )
 
 func main() {
-    // Add your Computer Vision subscription key and endpoint to your environment variables.
-    subscriptionKey := "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE"
+    // Add your Computer Vision key and endpoint to your environment variables.
+    key := "PASTE_YOUR_COMPUTER_VISION_KEY_HERE"
     endpoint := "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE"
 
     uriBase := endpoint + "vision/v3.1/generateThumbnail"
@@ -65,7 +65,7 @@ func main() {
 
     // Add headers
     req.Header.Add("Content-Type", "application/json")
-    req.Header.Add("Ocp-Apim-Subscription-Key", subscriptionKey)
+    req.Header.Add("Ocp-Apim-Subscription-Key", key)
 
     // Send the request and retrieve the response
     resp, err := client.Do(req)
