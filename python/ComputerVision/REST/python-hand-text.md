@@ -67,7 +67,7 @@ if missing_env:
 text_recognition_url = endpoint + "/vision/v3.1/read/analyze"
 
 # Set image_url to the URL of an image that you want to recognize.
-image_url = "https://raw.githubusercontent.com/MicrosoftDocs/azure-docs/master/articles/cognitive-services/Computer-vision/Images/readsample.jpg"
+image_url = "https://learn.microsoft.com/azure/ai-services/computer-vision/media/quickstarts/presentation.png"
 
 headers = {'Ocp-Apim-Subscription-Key': subscription_key}
 data = {'url': image_url}
