@@ -6,21 +6,28 @@ using System.IO;
 using NUnit.Framework;
 using Azure.AI.Vision.ImageAnalysis;
 
-
 public class HowTo
 {
     static void AnalyzeImage() {
+
+        // <snippet_client>
         string endpoint = Environment.GetEnvironmentVariable("VISION_ENDPOINT");
         string key = Environment.GetEnvironmentVariable("VISION_KEY");
 
         // Create an Image Analysis client.
         ImageAnalysisClient client = new ImageAnalysisClient(new Uri(endpoint), new AzureKeyCredential(key));
-        
-        Uri imageURL = new Uri("https://aka.ms/azai/vision/image-analysis-sample.jpg");
+        // </snippet_client>
 
+        // <snippet_url>
+        Uri imageURL = new Uri("https://aka.ms/azai/vision/image-analysis-sample.jpg");
+        // </snippet_url>
+
+        // <snippet_file>
         using FileStream stream = new FileStream("image-analysis-sample.jpg", FileMode.Open);
         BinaryData imageStream = BinaryData.FromStream(stream)
+        // </snippet_file>
 
+        // <snippet_features>
         List visualFeatures = [
             VisualFeatures.Caption, 
             VisualFeatures.DenseCaptions,
@@ -29,14 +36,22 @@ public class HowTo
             VisualFeatures.Tags,
             VisualFeatures.People,
             VisualFeatures.SmartCrops];
+        // </snippet_features>
 
-        ImageAnalysisOptions options = new ImageAnalysisOptions { GenderNeutralCaption = true, language="en"};
+        // <snippet_options>
+        ImageAnalysisOptions options = new ImageAnalysisOptions { 
+            GenderNeutralCaption = true, 
+            language="en"};
+        // </snippet_options>
 
+        // <snippet_call>
         ImageAnalysisResult result = client.Analyze(
             imageURL,
             visualFeatures,
             options);
+        // </snippet_call>
 
+        // <snippet_results>
         Console.WriteLine($"Image analysis results:");
         Console.WriteLine($" Caption:");
         Console.WriteLine($"   '{result.Caption.Text}', Confidence {result.Caption.Confidence:F4}");
@@ -94,6 +109,7 @@ public class HowTo
         {
             Console.WriteLine($"   Aspect ratio: {cropRegion.AspectRatio}, Bounding box: {cropRegion.BoundingBox}");
         }
+        // </snippet_results>
     }
 
     static void Main()
