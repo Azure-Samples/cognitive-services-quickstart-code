@@ -29,7 +29,7 @@ const features = [
 // </snippet_features>
 
 // <snippet_url>
-const imageUrl = 'https://aka.ms/azai/vision/image-analysis-sample.jpg';
+const imageUrl = 'https://learn.microsoft.com/azure/ai-services/computer-vision/media/quickstarts/presentation.png';
 // </snippet_url>
 
 // <snippet_file>
