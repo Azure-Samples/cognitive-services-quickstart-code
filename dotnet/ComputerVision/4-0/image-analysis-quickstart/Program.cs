@@ -1,14 +1,14 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+// <snippet_single>
+
 using System;
 using System.IO;
 using NUnit.Framework;
 
-
 public class Program
 {
-
     static void AnalyzeImage(){
     string endpoint = Environment.GetEnvironmentVariable("VISION_ENDPOINT");
     string key = Environment.GetEnvironmentVariable("VISION_KEY");
@@ -55,3 +55,4 @@ public class Program
         }
     }
 }
+// </snippet_single>
