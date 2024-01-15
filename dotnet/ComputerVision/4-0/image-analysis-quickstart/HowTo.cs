@@ -19,7 +19,7 @@ public class HowTo
         // </snippet_client>
 
         // <snippet_url>
-        Uri imageURL = new Uri("https://aka.ms/azai/vision/image-analysis-sample.jpg");
+        Uri imageURL = new Uri("https://aka.ms/azsdk/image-analysis/sample.jpg");
         // </snippet_url>
 
         // <snippet_file>
