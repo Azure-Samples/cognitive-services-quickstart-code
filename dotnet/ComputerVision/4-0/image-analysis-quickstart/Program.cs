@@ -17,7 +17,7 @@ public class Program
     ImageAnalysisClient client = new ImageAnalysisClient(new Uri(endpoint), new AzureKeyCredential(key));
 
     List visualFeatures = [VisualFeatures.Caption, VisualFeatures.Read];
-    Uri imageURL = new Uri("https://aka.ms/azai/vision/image-analysis-sample.jpg");
+    Uri imageURL = new Uri("https://aka.ms/azsdk/image-analysis/sample.jpg");
 
     ImageAnalysisResult result = client.Analyze(
         imageURL,

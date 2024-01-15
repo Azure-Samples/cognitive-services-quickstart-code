@@ -16,7 +16,7 @@ public class HowTo
         // Create an Image Analysis client.
         ImageAnalysisClient client = new ImageAnalysisClient(new Uri(endpoint), new AzureKeyCredential(key));
         
-        Uri imageURL = new Uri("https://aka.ms/azai/vision/image-analysis-sample.jpg");
+        Uri imageURL = new Uri("https://aka.ms/azsdk/image-analysis/sample.jpg");
 
         using FileStream stream = new FileStream("image-analysis-sample.jpg", FileMode.Open);
         BinaryData imageStream = BinaryData.FromStream(stream)
