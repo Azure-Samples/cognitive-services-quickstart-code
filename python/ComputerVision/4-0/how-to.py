@@ -3,22 +3,13 @@
 # Licensed under the MIT License.
 # ------------------------------------
 """
-DESCRIPTION:
-    This sample demonstrates how to analyze all supported visual features from the image file sample.jpg,
-    using a synchronous client.
-
-    The synchronous (blocking) `analyze` method makes a single REST call to the Azure AI Vision
-    service, where all visual features are analyzed in parallel. When the service responds, the method returns
-    an `ImageAnalysisResult` object, which contains separate result properties for each one of the visual features.
-    This sample prints all the results to the console.
-
-    The sample also shows how to turn on SDK logs, which may be needed for troubleshooting purposes.
-
-    For more information on a particular visual feature, and optional setting associated with it,
-    have a look at the sample in this folder dedicated to that visual feature.
-
 USAGE:
-    python sample_analyze_all_image_file.py
+    - Install latest public package:
+      pip install azure-ai-vision-imageanalysis
+    - Or, install a local package file:
+      pip install azure_ai_vision_imageanalysis-1.0.0b1-py3-none-any.whl --user --force-reinstall
+    - Run the sample:
+      python how-to.py
 
     Set these two environment variables before running the sample:
     1) VISION_ENDPOINT - Your endpoint URL, in the form https://your-resource-name.cognitiveservices.azure.com
@@ -33,7 +24,7 @@ def sample_analyze_all_image_file():
     from azure.ai.vision.imageanalysis.models import VisualFeatures
     from azure.core.credentials import AzureKeyCredential
 
-    # [START logging]
+    # <snippet_logging>
     import sys
     import logging
 
@@ -53,7 +44,7 @@ def sample_analyze_all_image_file():
     # Optional: change the default logging format. Here we add a timestamp.
     formatter = logging.Formatter("%(asctime)s:%(levelname)s:%(name)s:%(message)s")
     handler.setFormatter(formatter)
-    # [END logging]
+    # </snippet_logging>
 
     # Set the values of your computer vision endpoint and computer vision key as environment variables:
     try:
