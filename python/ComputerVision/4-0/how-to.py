@@ -76,12 +76,10 @@ def sample_analyze_all_image_file():
     # </snippet_url>
 
     # <snippet_client>
-    # Create an Image Analysis client with none redacted log
     client = ImageAnalysisClient(
         endpoint=endpoint,
-        credential=AzureKeyCredential(key),
-        logging_enable=True
-    )
+        credential=AzureKeyCredential(key)
+        )
     # </snippet_client>
 
     # <snippet_features>
@@ -99,7 +97,7 @@ def sample_analyze_all_image_file():
     # <snippet_call>
     # Analyze all visual features from an image stream. This will be a synchronously (blocking) call.
     result = client.analyze(
-        image_data=image_data,
+        image_url=image_url,
         visual_features=visual_features,  # Mandatory. Select one or more visual features to analyze.
         smart_crops_aspect_ratios=[0.9, 1.33],  # Optional. Relevant only if SMART_CROPS was specified above.
         gender_neutral_caption=True,  # Optional. Relevant only if CAPTION or DENSE_CAPTIONS were specified above.

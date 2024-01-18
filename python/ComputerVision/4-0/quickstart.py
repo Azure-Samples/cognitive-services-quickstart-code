@@ -56,14 +56,13 @@ def sample_caption_image_url():
         gender_neutral_caption=True,  # Optional (default is False)
     )
 
-    # Print caption results to the console
     print("Image analysis results:")
+    # Print caption results to the console
     print(" Caption:")
     if result.caption is not None:
         print(f"   '{result.caption.text}', Confidence {result.caption.confidence:.4f}")
     
     # Print text (OCR) analysis results to the console
-    print("Image analysis results:")
     print(" Read:")
     if result.read is not None:
         for line in result.read.blocks[0].lines:

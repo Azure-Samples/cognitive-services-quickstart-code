@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 // <snippet_single>
-
 using System;
 using System.IO;
 using NUnit.Framework;
@@ -13,7 +12,6 @@ public class Program
     string endpoint = Environment.GetEnvironmentVariable("VISION_ENDPOINT");
     string key = Environment.GetEnvironmentVariable("VISION_KEY");
 
-    // Create an Image Analysis client.
     ImageAnalysisClient client = new ImageAnalysisClient(new Uri(endpoint), new AzureKeyCredential(key));
 
     List visualFeatures = [VisualFeatures.Caption, VisualFeatures.Read];
@@ -28,10 +26,7 @@ public class Program
     Console.WriteLine($" Caption:");
     Console.WriteLine($"   '{result.Caption.Text}', Confidence {result.Caption.Confidence:F4}");
 
-    // Print text (OCR) analysis results to the console
-    Console.WriteLine("Image analysis results:");
     Console.WriteLine(" Read:");
-
     foreach (DetectedTextBlock block in result.Read.Blocks)
         foreach (DetectedTextLine line in block.Lines)
         {
