@@ -3,22 +3,9 @@
 # Licensed under the MIT License.
 # ------------------------------------
 """
-DESCRIPTION:
-    This sample demonstrates how to generate a human-readable sentence that describes the content
-    of a publicly accessible image URL, using a synchronous client.
-
-    By default the caption may contain gender terms such as "man", "woman", or "boy", "girl".
-    You have the option to request gender-neutral terms such as "person" or "child" by setting
-    `gender_neutral_caption = True` when calling `analyze`, as shown in this example.
-
-    The synchronous (blocking) `analyze` method call returns an `ImageAnalysisResult` object.
-    Its `caption` property (a `CaptionResult` object) contains:
-    - The text of the caption. Captions are only supported in English at the moment. 
-    - A confidence score in the range [0, 1], with higher values indicating greater confidences in
-      the caption.
-
 USAGE:
-    python sample_caption_image_url.py
+    pip install azure-ai-vision-imageanalysis
+    python quickstart.py
 
     Set these two environment variables before running the sample:
     1) VISION_ENDPOINT - Your endpoint URL, in the form https://your-resource-name.cognitiveservices.azure.com
