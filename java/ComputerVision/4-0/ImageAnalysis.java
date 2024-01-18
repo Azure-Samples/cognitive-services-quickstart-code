@@ -61,7 +61,7 @@ public class ImageAnalysis {
             .credential(new KeyCredential(key))
             .buildClient();
 
-        // his is a synchronous (blocking) call.
+        // This is a synchronous (blocking) call.
         ImageAnalysisResult result = client.analyze(
             new URL("https://learn.microsoft.com/azure/ai-services/computer-vision/media/quickstarts/presentation.png"), // imageUrl: the URL of the image to analyze
             Arrays.asList(VisualFeatures.CAPTION, VisualFeatures.READ), // visualFeatures

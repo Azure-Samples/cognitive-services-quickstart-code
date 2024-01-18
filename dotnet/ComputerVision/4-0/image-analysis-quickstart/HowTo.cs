@@ -41,7 +41,8 @@ public class HowTo
         // <snippet_options>
         ImageAnalysisOptions options = new ImageAnalysisOptions { 
             GenderNeutralCaption = true, 
-            language="en"};
+            language="en",
+            SmartCropsAspectRatios = new float[] { 0.9F, 1.33F }};
         // </snippet_options>
 
         // <snippet_call>

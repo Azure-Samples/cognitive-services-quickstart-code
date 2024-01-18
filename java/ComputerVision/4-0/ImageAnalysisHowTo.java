@@ -73,7 +73,7 @@ public class ImageAnalysisHowTo {
         // </snippet_client>
 
         // <snippet_file>
-        BinaryData imageFile = BinaryData.fromFile(new File("sample.png").toPath()); // imageData: the image file loaded into memory as BinaryData
+        BinaryData imageBuffer = BinaryData.fromFile(new File("sample.png").toPath()); // imageData: the image file loaded into memory as BinaryData
         // </snippet_file>
         // <snippet_url>
         URL imageURL = new URL("https://learn.microsoft.com/azure/ai-services/computer-vision/media/quickstarts/presentation.png");
