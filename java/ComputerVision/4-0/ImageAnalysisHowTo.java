@@ -1,58 +1,32 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 //
-// DESCRIPTION:
-//     This sample demonstrates how to analyze all supported visual features from the image file sample.jpg,
-//     using a synchronous client.
-//
-//     The synchronous (blocking) `analyze` method makes a single REST call to the Azure AI Vision
-//     service, where all visual features are analyzed in parallel. When the service responds, the method returns
-//     an `ImageAnalysisResult` object, which contains separate result properties for each one of the visual features.
-//     This sample prints all the results to the console.
-//
-//     The sample also shows how to turn on console SDK logs by calling httpLogOptions, which may be needed
-//     for troubleshooting purposes. You will also need to set environment variable `AZURE_LOG_LEVEL` to `debug`
-//     to see the logs.
-//
-//     For more information on a particular visual feature, and optional setting associated with it,
-//     have a look at the sample in this folder dedicated to that visual feature.
-//
 // USAGE:
 //     Compile the sample:
 //         mvn clean dependency:copy-dependencies
-//         javac SampleAnalyzeAllImageFile.java -cp target\dependency\*
+//         javac ImageAnalysisHowTo.java -cp target\dependency\*
 //     Run the sample:
-//         java -cp ".;target\dependency\*" SampleAnalyzeAllImageFile
+//         java -cp ".;target\dependency\*" ImageAnalysisHowTo
 //
 //     Set these two environment variables before running the sample:
 //     1) VISION_ENDPOINT - Your endpoint URL, in the form https://your-resource-name.cognitiveservices.azure.com
 //                          where `your-resource-name` is your unique Azure Computer Vision resource name.
 //     2) VISION_KEY - Your Computer Vision key (a 32-character Hexadecimal number)
 
-import com.azure.ai.vision.imageanalysis.ImageAnalysisClient;
-import com.azure.ai.vision.imageanalysis.ImageAnalysisClientBuilder;
-import com.azure.ai.vision.imageanalysis.models.CropRegion;
-import com.azure.ai.vision.imageanalysis.models.DenseCaption;
-import com.azure.ai.vision.imageanalysis.models.DetectedObject;
-import com.azure.ai.vision.imageanalysis.models.DetectedPerson;
-import com.azure.ai.vision.imageanalysis.models.DetectedTag;
-import com.azure.ai.vision.imageanalysis.models.DetectedTextLine;
-import com.azure.ai.vision.imageanalysis.models.DetectedTextWord;
-import com.azure.ai.vision.imageanalysis.models.ImageAnalysisOptions;
-import com.azure.ai.vision.imageanalysis.models.ImageAnalysisResult;
-import com.azure.ai.vision.imageanalysis.models.VisualFeatures;
+import com.azure.ai.vision.imageanalysis.*;
+import com.azure.ai.vision.imageanalysis.models.*;
 import com.azure.core.credential.KeyCredential;
 import com.azure.core.exception.HttpResponseException;
-import com.azure.core.http.policy.HttpLogDetailLevel;
-import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.util.BinaryData;
 import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.List;
 
 public class ImageAnalysisHowTo {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws MalformedURLException {
 
         // <snippet_client>
         String endpoint = System.getenv("VISION_ENDPOINT");
@@ -64,8 +38,7 @@ public class ImageAnalysisHowTo {
             System.exit(1);
         }
 
-        // Create a synchronous Image Analysis client, with logging enabled.
-        // For log levels, see: https://learn.microsoft.com/java/api/com.azure.core.http.policy.httplogdetaillevel?view=azure-java-stable
+        // Create a synchronous Image Analysis client.
         ImageAnalysisClient client = new ImageAnalysisClientBuilder()
             .endpoint(endpoint)
             .credential(new KeyCredential(key))
@@ -73,7 +46,7 @@ public class ImageAnalysisHowTo {
         // </snippet_client>
 
         // <snippet_file>
-        BinaryData imageBuffer = BinaryData.fromFile(new File("sample.png").toPath()); // imageData: the image file loaded into memory as BinaryData
+        BinaryData imageBuffer = BinaryData.fromFile(new File("sample.png").toPath());
         // </snippet_file>
         // <snippet_url>
         URL imageURL = new URL("https://learn.microsoft.com/azure/ai-services/computer-vision/media/quickstarts/presentation.png");
@@ -82,15 +55,14 @@ public class ImageAnalysisHowTo {
         // <snippet_options>
         // Specify analysis options (or set `options` to null for defaults)
         ImageAnalysisOptions options = new ImageAnalysisOptions()
-            .setLanguage("en") // language (optional): Relevant only for TAGS. See https://aka.ms/cv-languages for supported languages.
-            .setGenderNeutralCaption(true) // genderNeutralCaption (optional): Relevant only if CAPTION or DENSE_CAPTIONS were specified above.
-            .setSmartCropsAspectRatios(Arrays.asList(0.9, 1.33)) // smartCropsAspectRatios (optional). Relevant only if SMART_CROPS was specified above.
-            .setModelVersion("latest"); // modelVersion (optional): The model version to use. When not specified, the default value of "latest" is used.
+            .setLanguage("en")
+            .setGenderNeutralCaption(true)
+            .setSmartCropsAspectRatios(Arrays.asList(0.9, 1.33, 1.78));
         // </snippet_options>
 
         // <snippet_features>
         // visualFeatures: Select one or more visual features to analyze.
-        List visualFeatures = Arrays.asList(  
+        List<VisualFeatures> visualFeatures = Arrays.asList(
                     VisualFeatures.SMART_CROPS,
                     VisualFeatures.CAPTION,
                     VisualFeatures.DENSE_CAPTIONS,
@@ -102,7 +74,7 @@ public class ImageAnalysisHowTo {
 
         // <snippet_call>
         try {
-            // Analyze all visual features from an image stream. This is a synchronous (blocking) call.
+            // Analyze all visual features from an image URL. This is a synchronous (blocking) call.
             ImageAnalysisResult result = client.analyze(
                 imageURL,
                 visualFeatures,
