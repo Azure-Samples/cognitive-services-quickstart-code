@@ -27,7 +27,7 @@ public class Program
 
         // <snippet_file>
         using FileStream stream = new FileStream("sample.jpg", FileMode.Open);
-        BinaryData imageStream = BinaryData.FromStream(stream);
+        BinaryData imageData = BinaryData.FromStream(stream);
         // </snippet_file>
 
         // <snippet_features>

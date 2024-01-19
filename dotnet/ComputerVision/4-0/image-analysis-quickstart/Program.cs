@@ -18,7 +18,7 @@ public class Program
             new AzureKeyCredential(key));
 
         ImageAnalysisResult result = client.Analyze(
-            new Uri("https://aka.ms/azsdk/image-analysis/sample.jpg"),
+            new Uri("https://learn.microsoft.com/azure/ai-services/computer-vision/media/quickstarts/presentation.png"),
             VisualFeatures.Caption | VisualFeatures.Read,
             new ImageAnalysisOptions { GenderNeutralCaption = true });
 

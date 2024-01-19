@@ -34,7 +34,7 @@ const imageUrl = 'https://learn.microsoft.com/azure/ai-services/computer-vision/
 
 // <snippet_file>
 const imagePath = '../sample.jpg';
-const imageBuffer = fs.readFileSync(imagePath);
+const imageData = fs.readFileSync(imagePath);
 // </snippet_file>
 
 

@@ -70,7 +70,7 @@ def sample_analyze_all_image_file():
     client = ImageAnalysisClient(
         endpoint=endpoint,
         credential=AzureKeyCredential(key)
-        )
+    )
     # </snippet_client>
 
     # <snippet_features>
@@ -89,11 +89,10 @@ def sample_analyze_all_image_file():
     # Analyze all visual features from an image stream. This will be a synchronously (blocking) call.
     result = client.analyze(
         image_url=image_url,
-        visual_features=visual_features,  # Mandatory. Select one or more visual features to analyze.
-        smart_crops_aspect_ratios=[0.9, 1.33],  # Optional. Relevant only if SMART_CROPS was specified above.
-        gender_neutral_caption=True,  # Optional. Relevant only if CAPTION or DENSE_CAPTIONS were specified above.
-        language="en",  # Optional. Relevant only if TAGS is specified above. See https://aka.ms/cv-languages for supported languages.
-        model_version="latest",  # Optional. Analysis model version to use. Defaults to "latest".
+        visual_features=visual_features,
+        smart_crops_aspect_ratios=[0.9, 1.33],
+        gender_neutral_caption=True,
+        language="en"
     )
     # </snippet_call>
 
