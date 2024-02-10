@@ -47,7 +47,7 @@ public class ImageAnalysisHowTo {
         BinaryData imageData = BinaryData.fromFile(new File("sample.png").toPath());
         // </snippet_file>
         // <snippet_url>
-        String imageURL = "https://learn.microsoft.com/azure/ai-services/computer-vision/media/quickstarts/presentation.png";
+        String imageUrl = "https://learn.microsoft.com/azure/ai-services/computer-vision/media/quickstarts/presentation.png";
         // </snippet_url>
 
         // <snippet_options>
@@ -74,7 +74,7 @@ public class ImageAnalysisHowTo {
         try {
             // Analyze all visual features from an image URL. This is a synchronous (blocking) call.
             ImageAnalysisResult result = client.analyzeFromUrl(
-                imageURL,
+                imageUrl,
                 visualFeatures,
                 options);
 
