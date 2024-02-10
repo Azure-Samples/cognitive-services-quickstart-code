@@ -14,13 +14,11 @@
 import com.azure.ai.vision.imageanalysis.*;
 import com.azure.ai.vision.imageanalysis.models.*;
 import com.azure.core.credential.KeyCredential;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Arrays;
 
 public class ImageAnalysisQuickStart {
 
-    public static void main(String[] args) throws MalformedURLException {
+    public static void main(String[] args) {
 
         String endpoint = System.getenv("VISION_ENDPOINT");
         String key = System.getenv("VISION_KEY");
@@ -38,8 +36,8 @@ public class ImageAnalysisQuickStart {
             .buildClient();
 
         // This is a synchronous (blocking) call.
-        ImageAnalysisResult result = client.analyze(
-            new URL("https://learn.microsoft.com/azure/ai-services/computer-vision/media/quickstarts/presentation.png"),
+        ImageAnalysisResult result = client.analyzeFromUrl(
+            "https://learn.microsoft.com/azure/ai-services/computer-vision/media/quickstarts/presentation.png",
             Arrays.asList(VisualFeatures.CAPTION, VisualFeatures.READ),
             new ImageAnalysisOptions().setGenderNeutralCaption(true));
 
