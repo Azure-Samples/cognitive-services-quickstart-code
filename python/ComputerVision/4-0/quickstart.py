@@ -37,7 +37,7 @@ def sample_caption_image_url():
     )
 
     # Get a caption for the image. This will be a synchronously (blocking) call.
-    result = client.analyze(
+    result = client.analyze_from_url(
         image_url="https://learn.microsoft.com/azure/ai-services/computer-vision/media/quickstarts/presentation.png",
         visual_features=[VisualFeatures.CAPTION, VisualFeatures.READ],
         gender_neutral_caption=True,  # Optional (default is False)

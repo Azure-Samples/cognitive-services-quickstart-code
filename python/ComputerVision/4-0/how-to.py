@@ -7,7 +7,7 @@ USAGE:
     - Install latest public package:
       pip install azure-ai-vision-imageanalysis
     - Or, install a local package file:
-      pip install azure_ai_vision_imageanalysis-1.0.0b1-py3-none-any.whl --user --force-reinstall
+      pip install azure_ai_vision_imageanalysis-1.0.0b2-py3-none-any.whl --user --force-reinstall
     - Run the sample:
       python how-to.py
 
@@ -87,7 +87,7 @@ def sample_analyze_all_image_file():
 
     # <snippet_call>
     # Analyze all visual features from an image stream. This will be a synchronously (blocking) call.
-    result = client.analyze(
+    result = client.analyze_from_url(
         image_url=image_url,
         visual_features=visual_features,
         smart_crops_aspect_ratios=[0.9, 1.33],

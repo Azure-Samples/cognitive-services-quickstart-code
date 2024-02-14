@@ -19,14 +19,12 @@ import com.azure.core.credential.KeyCredential;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.util.BinaryData;
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
 public class ImageAnalysisHowTo {
 
-    public static void main(String[] args) throws MalformedURLException {
+    public static void main(String[] args) {
 
         // <snippet_client>
         String endpoint = System.getenv("VISION_ENDPOINT");
@@ -49,7 +47,7 @@ public class ImageAnalysisHowTo {
         BinaryData imageData = BinaryData.fromFile(new File("sample.png").toPath());
         // </snippet_file>
         // <snippet_url>
-        URL imageURL = new URL("https://learn.microsoft.com/azure/ai-services/computer-vision/media/quickstarts/presentation.png");
+        String imageUrl = "https://learn.microsoft.com/azure/ai-services/computer-vision/media/quickstarts/presentation.png";
         // </snippet_url>
 
         // <snippet_options>
@@ -75,8 +73,8 @@ public class ImageAnalysisHowTo {
         // <snippet_call>
         try {
             // Analyze all visual features from an image URL. This is a synchronous (blocking) call.
-            ImageAnalysisResult result = client.analyze(
-                imageURL,
+            ImageAnalysisResult result = client.analyzeFromUrl(
+                imageUrl,
                 visualFeatures,
                 options);
 
