@@ -7,18 +7,18 @@ curl.exe -v -X POST "https://{resource endpoint}/face/v1.0/detect?returnFaceId=t
 
 # Create persongroup
 # <identify_create_persongroup>
-curl.exe -v -X PUT "https://{resource endpoint}/face/v1.0/largepersongroups/{largePersonGroupId}" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: {subscription key}" --data-ascii "{ `
-    ""name"": ""large-person-group-name"", `
-    ""userData"": ""User-provided data attached to the large person group."", `
-    ""recognitionModel"": ""recognition_04"" `
+curl.exe -v -X PUT "https://{resource endpoint}/face/v1.0/largepersongroups/{largePersonGroupId}" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: {subscription key}" --data-ascii "{
+    ""name"": ""large-person-group-name"",
+    ""userData"": ""User-provided data attached to the large person group."",
+    ""recognitionModel"": ""recognition_04""
 }" 
 # </identify_create_persongroup>
 
 # create persons 
 # <identify_create_person>
-curl.exe -v -X POST "https://{resource endpoint}/face/v1.0/largepersongroups/{largePersonGroupId}/persons" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: {subscription key}" --data-ascii "{ `
-    ""name"": ""Family1-Dad"", `
-    ""userData"": ""User-provided data attached to the person."" `
+curl.exe -v -X POST "https://{resource endpoint}/face/v1.0/largepersongroups/{largePersonGroupId}/persons" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: {subscription key}" --data-ascii "{
+    ""name"": ""Family1-Dad"",
+    ""userData"": ""User-provided data attached to the person.""
 }" 
 # </identify_create_person>
 
@@ -39,13 +39,13 @@ curl.exe -v "https://{resource endpoint}/face/v1.0/largepersongroups/{largePerso
 
 # call identify operation
 # <identify_identify>
-curl.exe -v -X POST "https://{resource endpoint}/face/v1.0/identify" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: {subscription key}" --data-ascii "{ `
-    ""largePersonGroupId"": ""INSERT_PERSONGROUP_ID"", `
-    ""faceIds"": [ `
-        ""INSERT_SOURCE_FACE_ID"" `
-    ], `
-    ""maxNumOfCandidatesReturned"": 1, `
-    ""confidenceThreshold"": 0.5 `
+curl.exe -v -X POST "https://{resource endpoint}/face/v1.0/identify" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: {subscription key}" --data-ascii "{
+    ""largePersonGroupId"": ""INSERT_PERSONGROUP_ID"",
+    ""faceIds"": [
+        ""INSERT_SOURCE_FACE_ID""
+    ],
+    ""maxNumOfCandidatesReturned"": 1,
+    ""confidenceThreshold"": 0.5
 }"
 # </identify_identify>
 
@@ -58,9 +58,9 @@ curl.exe -v -X DELETE "https://{resource endpoint}/face/v1.0/largepersongroups/{
 curl.exe -v -X POST "https://{resource endpoint}/face/v1.0/verify" `
 -H "Content-Type: application/json" `
 -H "Ocp-Apim-Subscription-Key: {subscription key}" `
---data-ascii "{ `
-    ""faceId"": ""INSERT_SOURCE_FACE_ID"", `
-    ""personId"": ""INSERT_PERSON_ID"", `
-    ""largePersonGroupId"": ""INSERT_PERSONGROUP_ID"" `
+--data-ascii "{
+    ""faceId"": ""INSERT_SOURCE_FACE_ID"",
+    ""personId"": ""INSERT_PERSON_ID"",
+    ""largePersonGroupId"": ""INSERT_PERSONGROUP_ID""
 }" 
 # </verify>
