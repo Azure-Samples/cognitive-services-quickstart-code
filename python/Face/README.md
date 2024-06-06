@@ -1,24 +1,18 @@
 # Face quickstart and examples
 
-This quickstart and example use the [Face SDK](https://docs.microsoft.com/en-us/python/api/azure-cognitiveservices-vision-face/?view=azure-python) for Cognitive Services.
+This quickstart and example use the [Azure Ai Vision Face SDK](https://learn.microsoft.com/en-us/python/api/overview/azure/ai-vision-face-readme?view=azure-python).
 
 ## Prerequisites
-    - Python 3+
-    - Install Face SDK: pip install azure-cognitiveservices-vision-face
-    
-### Images    
-    - To your root folder, add all images downloaded mentioned in the quickstart.
-    - For the DetectIdentifyFace example, download all "woman" and "child" images.
-    
-      https://github.com/Azure-examples/cognitive-services-sample-data-files/tree/master/Face/images
-      
+    - Python 3.8+
+    - Install Face SDK: python -m pip install azure-ai-vision-face
+    - Please refer to [SDK source code](https://github.com/Azure/azure-sdk-for-python/tree/main/sdk/face/azure-ai-vision-face) to get more information.
+
 ## Run
     - Run from your favorite IDE, or using this from the command line:
-    
-      python FaceQuickstart.py 
-      python DetectIdentifyFace.py 
-    
+
+      python FaceQuickstart-single.py
+
 ## References
-    - Documentation: https://docs.microsoft.com/en-us/azure/cognitive-services/face/
-    - SDK: https://docs.microsoft.com/en-us/python/api/azure-cognitiveservices-vision-face/azure.cognitiveservices.vision.face?view=azure-python
-    - All Face APIs: https://docs.microsoft.com/en-us/azure/cognitive-services/face/APIReference
+    - Documentation: https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview-identity
+    - SDK: https://learn.microsoft.com/en-us/python/api/overview/azure/ai-vision-face-readme?view=azure-python
+    - All Face APIs: https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/identity-api-reference
