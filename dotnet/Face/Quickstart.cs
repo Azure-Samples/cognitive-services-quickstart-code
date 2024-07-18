@@ -17,8 +17,8 @@ namespace FaceQuickstart
         const string IMAGE_BASE_URL = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/";
 
         // From your Face subscription in the Azure portal, get your subscription key and endpoint.
-        static readonly string SUBSCRIPTION_KEY = Environment.GetEnvironmentVariable("VISION_KEY") ?? "<apikey>";
-        static readonly string ENDPOINT = Environment.GetEnvironmentVariable("VISION_ENDPOINT") ?? "<endpoint>";
+        static readonly string SUBSCRIPTION_KEY = Environment.GetEnvironmentVariable("FACE_APIKEY") ?? "<apikey>";
+        static readonly string ENDPOINT = Environment.GetEnvironmentVariable("FACE_ENDPOINT") ?? "<endpoint>";
 
         static void Main(string[] args)
         {

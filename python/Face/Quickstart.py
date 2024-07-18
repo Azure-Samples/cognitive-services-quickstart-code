@@ -15,10 +15,10 @@ from azure.ai.vision.face.models import (
 
 
 # This key will serve all examples in this document.
-KEY = os.environ["VISION_KEY"]
+KEY = os.environ["FACE_APIKEY"]
 
 # This endpoint will be used in all examples in this quickstart.
-ENDPOINT = os.environ["VISION_ENDPOINT"]
+ENDPOINT = os.environ["FACE_ENDPOINT"]
 
 # Used in the Person Group Operations and Delete Person Group examples.
 # PERSON_GROUP_ID should be all lowercase and alphanumeric. For example, 'mygroupname' (dashes are OK).

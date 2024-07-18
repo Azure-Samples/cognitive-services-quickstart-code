@@ -9,8 +9,8 @@ const createFaceClient = require("@azure-rest/ai-vision-face").default,
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const main = async () => {
-  const endpoint = process.env["VISION_ENDPOINT"] ?? "<endpoint>";
-  const apikey = process.env["VISION_KEY"] ?? "<apikey>";
+  const endpoint = process.env["FACE_ENDPOINT"] ?? "<endpoint>";
+  const apikey = process.env["FACE_APIKEY"] ?? "<apikey>";
   const credential = new AzureKeyCredential(apikey);
   const client = createFaceClient(endpoint, credential);
 

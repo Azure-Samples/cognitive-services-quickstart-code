@@ -12,8 +12,8 @@ namespace FaceQuickstart
         // </snippet_image_url>
 
         // <snippet_creds>
-        static readonly string SUBSCRIPTION_KEY = Environment.GetEnvironmentVariable("VISION_KEY") ?? "<apikey>";
-        static readonly string ENDPOINT = Environment.GetEnvironmentVariable("VISION_ENDPOINT") ?? "<endpoint>";
+        static readonly string SUBSCRIPTION_KEY = Environment.GetEnvironmentVariable("FACE_APIKEY") ?? "<apikey>";
+        static readonly string ENDPOINT = Environment.GetEnvironmentVariable("FACE_ENDPOINT") ?? "<endpoint>";
         // </snippet_creds>
 
         static void Main(string[] args)
