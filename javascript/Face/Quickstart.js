@@ -16,7 +16,7 @@ const main = async () => {
 
   const imageBaseUrl =
     "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/";
-  const personGroupId = randomUUID();
+  const largePersonGroupId = randomUUID();
 
   console.log("========IDENTIFY FACES========");
   console.log();
@@ -31,27 +31,27 @@ const main = async () => {
   // A group photo that includes some of the persons you seek to identify from your dictionary.
   const sourceImageFileName = "identification1.jpg";
 
-  // Create a person group.
-  console.log(`Creating a person group with ID: ${personGroupId}`);
-  await client.path("/largepersongroups/{personGroupId}", personGroupId).put({
+  // Create a large person group.
+  console.log(`Creating a person group with ID: ${largePersonGroupId}`);
+  await client.path("/largepersongroups/{largePersonGroupId}", largePersonGroupId).put({
     body: {
-      name: personGroupId,
+      name: largePersonGroupId,
       recognitionModel: "recognition_04",
     },
   });
 
-  // The similar faces will be grouped into a single person group person.
+  // The similar faces will be grouped into a single large person group person.
   console.log("Adding faces to person group...");
   await Promise.all(
     Object.keys(personDictionary).map(async (name) => {
       console.log(`Create a persongroup person: ${name}`);
-      const createPersonGroupPersonResponse = await client
-        .path("/largepersongroups/{personGroupId}/persons", personGroupId)
+      const createLargePersonGroupPersonResponse = await client
+        .path("/largepersongroups/{largePersonGroupId}/persons", largePersonGroupId)
         .post({
           body: { name },
         });
 
-      const { personId } = createPersonGroupPersonResponse.body;
+      const { personId } = createLargePersonGroupPersonResponse.body;
 
       await Promise.all(
         personDictionary[name].map(async (similarImage) => {
@@ -84,8 +84,8 @@ const main = async () => {
           );
           await client
             .path(
-              "/largepersongroups/{personGroupId}/persons/{personId}/persistedfaces",
-              personGroupId,
+              "/largepersongroups/{largePersonGroupId}/persons/{personId}/persistedfaces",
+              largePersonGroupId,
               personId,
             )
             .post({
@@ -98,11 +98,11 @@ const main = async () => {
   );
   console.log("Done adding faces to person group.");
 
-  // Start to train the person group.
+  // Start to train the large person group.
   console.log();
-  console.log(`Training person group: ${personGroupId}`);
+  console.log(`Training person group: ${largePersonGroupId}`);
   const trainResponse = await client
-    .path("/largepersongroups/{personGroupId}/train", personGroupId)
+    .path("/largepersongroups/{largePersonGroupId}/train", largePersonGroupId)
     .post();
   const poller = await getLongRunningPoller(client, trainResponse);
   await poller.pollUntilDone();
@@ -127,21 +127,21 @@ const main = async () => {
   });
   const faceIds = detectResponse.body.filter((face) => face.faceAttributes?.qualityForRecognition !== "low").map((face) => face.faceId);
 
-  // Identify the faces in a person group.
+  // Identify the faces in a large person group.
   const identifyResponse = await client.path("/identify").post({
-    body: { faceIds, largePersonGroupId: personGroupId },
+    body: { faceIds, largePersonGroupId: largePersonGroupId },
   });
   await Promise.all(
     identifyResponse.body.map(async (result) => {
       try {
-        const getPersonGroupPersonResponse = await client
+        const getLargePersonGroupPersonResponse = await client
           .path(
-            "/largepersongroups/{personGroupId}/persons/{personId}",
-            personGroupId,
+            "/largepersongroups/{largePersonGroupId}/persons/{personId}",
+            largePersonGroupId,
             result.candidates[0].personId,
           )
           .get();
-        const person = getPersonGroupPersonResponse.body;
+        const person = getLargePersonGroupPersonResponse.body;
         console.log(
           `Person: ${person.name} is identified for face in: ${sourceImageFileName} with ID: ${result.faceId}. Confidence: ${result.candidates[0].confidence}`,
         );
@@ -150,7 +150,7 @@ const main = async () => {
         const verifyResponse = await client.path("/verify").post({
           body: {
             faceId: result.faceId,
-            largePersonGroupId: personGroupId,
+            largePersonGroupId: largePersonGroupId,
             personId: person.personId,
           },
         });
@@ -164,9 +164,9 @@ const main = async () => {
   );
   console.log();
 
-  // Delete person group.
-  console.log(`Deleting person group: ${personGroupId}`);
-  await client.path("/largepersongroups/{personGroupId}", personGroupId).delete();
+  // Delete large person group.
+  console.log(`Deleting person group: ${largePersonGroupId}`);
+  await client.path("/largepersongroups/{largePersonGroupId}", largePersonGroupId).delete();
   console.log();
 
   console.log("Done.");
