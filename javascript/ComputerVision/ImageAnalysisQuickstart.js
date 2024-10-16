@@ -288,7 +288,7 @@ function computerVision() {
       console.log('GENERATE THUMBNAIL');
       console.log();
       // Image of a dog.
-      const dogURL = 'https://moderatorsampleimages.blob.core.windows.net/samples/sample16.png';
+      const dogURL = 'https://github.com/Azure-Samples/cognitive-services-sample-data-files/blob/master/ComputerVision/Images/dog.jpg';
       console.log('Generating thumbnail...')
       await computerVisionClient.generateThumbnail(100, 100, dogURL, { smartCropping: true })
         .then((thumbResponse) => {

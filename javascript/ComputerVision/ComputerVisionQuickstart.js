@@ -195,7 +195,7 @@ function computerVision() {
       // <snippet_read_images>
       // URL images containing printed and/or handwritten text. 
       // The URL can point to image files (.jpg/.png/.bmp) or multi-page files (.pdf, .tiff).
-      const printedTextSampleURL = 'https://moderatorsampleimages.blob.core.windows.net/samples/sample2.jpg';
+      const printedTextSampleURL = 'https://github.com/Azure-Samples/cognitive-services-sample-data-files/blob/master/ComputerVision/Images/printed_text.jpg?raw=true';
       const multiLingualTextURL = 'https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/MultiLingual.png';
       const mixedMultiPagePDFURL = 'https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/MultiPageHandwrittenForm.pdf';
       // </snippet_read_images>
