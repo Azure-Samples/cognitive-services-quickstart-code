@@ -34,15 +34,14 @@ namespace ImageClassification
     class Program
     {
         // <snippet_creds>
-        // You can obtain these values from the Keys and Endpoint page for your Custom Vision resource in the Azure Portal.
-        private static string trainingEndpoint = "PASTE_YOUR_CUSTOM_VISION_TRAINING_ENDPOINT_HERE";
-        private static string trainingKey = "PASTE_YOUR_CUSTOM_VISION_TRAINING_SUBSCRIPTION_KEY_HERE";
-        // You can obtain these values from the Keys and Endpoint page for your Custom Vision Prediction resource in the Azure Portal.
-        private static string predictionEndpoint = "PASTE_YOUR_CUSTOM_VISION_PREDICTION_ENDPOINT_HERE";
-        private static string predictionKey = "PASTE_YOUR_CUSTOM_VISION_PREDICTION_SUBSCRIPTION_KEY_HERE";
-        // You can obtain this value from the Properties page for your Custom Vision Prediction resource in the Azure Portal. See the "Resource ID" field. This typically has a value such as:
-        // /subscriptions/<your subscription ID>/resourceGroups/<your resource group>/providers/Microsoft.CognitiveServices/accounts/<your Custom Vision prediction resource name>
-        private static string predictionResourceId = "PASTE_YOUR_CUSTOM_VISION_PREDICTION_RESOURCE_ID_HERE";
+        // Retrieve the environment variables for your credentials:
+        private static string trainingEndpoint = Environment.GetEnvironmentVariable("VISION_TRAINING_ENDPOINT");
+        
+        private static string trainingKey = Environment.GetEnvironmentVariable("VISION_TRAINING_KEY");
+        private static string predictionEndpoint = Environment.GetEnvironmentVariable("VISION_PREDICTION_ENDPOINT");
+        private static string predictionKey = Environment.GetEnvironmentVariable("VISION_PREDICTION_KEY");
+
+        private static string predictionResourceId = Environment.GetEnvironmentVariable("VISION_PREDICTION_RESOURCE_ID");
         
         private static List<string> hemlockImages;
         private static List<string> japaneseCherryImages;

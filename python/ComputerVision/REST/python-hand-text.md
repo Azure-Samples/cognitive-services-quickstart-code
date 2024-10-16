@@ -19,7 +19,7 @@ You can run this quickstart in a step-by step fashion using a Jupyter Notebook o
 * Once you have your Azure subscription, <a href="https://portal.azure.com/#create/Microsoft.CognitiveServicesComputerVision"  title="Create a Computer Vision resource"  target="_blank">create a Computer Vision resource <span class="docon docon-navigate-external x-hidden-focus"></span></a> in the Azure portal to get your key and endpoint. After it deploys, click **Go to resource**.
     * You will need the key and endpoint from the resource you create to connect your application to the Computer Vision service. You'll paste your key and endpoint into the code below later in the quickstart.
     * You can use the free pricing tier (`F0`) to try the service, and upgrade later to a paid tier for production.
-* [Create environment variables](../../cognitive-services-apis-create-account.md#configure-an-environment-variable-for-authentication) for the key and endpoint URL, named `COMPUTER_VISION_SUBSCRIPTION_KEY` and `COMPUTER_VISION_ENDPOINT`, respectively.
+* [Create environment variables](../../cognitive-services-apis-create-account.md#configure-an-environment-variable-for-authentication) for the key and endpoint URL, named `COMPUTER_VISION_KEY` and `COMPUTER_VISION_ENDPOINT`, respectively.
 
 ## Create and run the sample
 
@@ -45,19 +45,19 @@ from PIL import Image
 from io import BytesIO
 
 missing_env = False
-# Add your Computer Vision subscription key and endpoint to your environment variables.
+# Add your Computer Vision key and endpoint to your environment variables.
 if 'COMPUTER_VISION_ENDPOINT' in os.environ:
     endpoint = os.environ['COMPUTER_VISION_ENDPOINT']
 else:
-    print("From Azure Cognitive Service, retrieve your endpoint and subscription key.")
+    print("From Azure Cognitive Service, retrieve your endpoint and key.")
     print("\nSet the COMPUTER_VISION_ENDPOINT environment variable, such as \"https://westus2.api.cognitive.microsoft.com\".\n")
     missing_env = True
 
-if 'COMPUTER_VISION_SUBSCRIPTION_KEY' in os.environ:
-    subscription_key = os.environ['COMPUTER_VISION_SUBSCRIPTION_KEY']
+if 'COMPUTER_VISION_KEY' in os.environ:
+    subscription_key = os.environ['COMPUTER_VISION_KEY']
 else:
-    print("From Azure Cognitive Service, retrieve your endpoint and subscription key.")
-    print("\nSet the COMPUTER_VISION_SUBSCRIPTION_KEY environment variable, such as \"1234567890abcdef1234567890abcdef\".\n")
+    print("From Azure Cognitive Service, retrieve your endpoint and key.")
+    print("\nSet the COMPUTER_VISION_KEY environment variable, such as \"1234567890abcdef1234567890abcdef\".\n")
     missing_env = True
 
 if missing_env:
@@ -67,7 +67,7 @@ if missing_env:
 text_recognition_url = endpoint + "/vision/v3.1/read/analyze"
 
 # Set image_url to the URL of an image that you want to recognize.
-image_url = "https://raw.githubusercontent.com/MicrosoftDocs/azure-docs/master/articles/cognitive-services/Computer-vision/Images/readsample.jpg"
+image_url = "https://learn.microsoft.com/azure/ai-services/computer-vision/media/quickstarts/presentation.png"
 
 headers = {'Ocp-Apim-Subscription-Key': subscription_key}
 data = {'url': image_url}

@@ -34,7 +34,6 @@ References:
     - API: https://westus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-2/operations/5d986960601faab4bf452005
 '''
 # <snippet_single>
-
 from azure.cognitiveservices.vision.computervision import ComputerVisionClient
 from azure.cognitiveservices.vision.computervision.models import OperationStatusCodes
 from azure.cognitiveservices.vision.computervision.models import VisualFeatureTypes
@@ -45,14 +44,13 @@ import os
 from PIL import Image
 import sys
 import time
-# </snippet_imports>
 
 '''
 Authenticate
 Authenticates your credentials and creates a client.
 '''
-subscription_key = "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE"
-endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE"
+subscription_key = os.environ["VISION_KEY"]
+endpoint = os.environ["VISION_ENDPOINT"]
 
 computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(subscription_key))
 '''
@@ -88,10 +86,10 @@ if (len(tags_result_remote.tags) == 0):
 else:
     for tag in tags_result_remote.tags:
         print("'{}' with confidence {:.2f}%".format(tag.name, tag.confidence * 100))
-# </snippet_tags>
 print()
 '''
 END - Tag an Image - remote
 '''
-
 print("End of Computer Vision quickstart.")
+# </snippet_single>
+

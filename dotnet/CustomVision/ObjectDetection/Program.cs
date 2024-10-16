@@ -13,17 +13,21 @@ namespace ObjectDetection
 {
     class Program
     {
-        static void Main(string[] args)
-        {
-            // <snippet_creds>
-            string trainingKey = "PASTE_YOUR_CUSTOM_VISION_TRAINING_SUBSCRIPTION_KEY_HERE";
-            string trainingEndpoint = "PASTE_YOUR_CUSTOM_VISION_TRAINING_ENDPOINT_HERE";
-            string predictionKey = "PASTE_YOUR_CUSTOM_VISION_PREDICTION_SUBSCRIPTION_KEY_HERE";
-			string predictionEndpoint = "PASTE_YOUR_CUSTOM_VISION_PREDICTION_ENDPOINT_HERE";
+        // <snippet_creds>
+            string trainingEndpoint = Environment.GetEnvironmentVariable("VISION_TRAINING_ENDPOINT");
+        
+            string trainingKey = Environment.GetEnvironmentVariable("VISION_TRAINING_KEY");
+            string predictionEndpoint = Environment.GetEnvironmentVariable("VISION_PREDICTION_ENDPOINT");
+            string predictionKey = Environment.GetEnvironmentVariable("VISION_PREDICTION_KEY");
+
+            private static Iteration iteration;
+            private static string publishedModelName = "CustomODModel";
             // </snippet_creds>
 
+        static void Main(string[] args)
+        {
             // <snippet_maincalls>
-            CustomVisionTrainingClient TrainingApi = AuthenticateTraining(trainingEndpoint, trainingKey);
+            CustomVisionTrainingClient trainingApi = AuthenticateTraining(trainingEndpoint, trainingKey);
             CustomVisionPredictionClient predictionApi = AuthenticatePrediction(predictionEndpoint, predictionKey);
 
             Project project = CreateProject(trainingApi);
@@ -67,6 +71,8 @@ namespace ObjectDetection
             // Create a new project
             Console.WriteLine("Creating new project:");
             project = trainingApi.CreateProject("My New Project", null, objDetectionDomain.Id);
+
+            return project;
         }
         // </snippet_create>
 
@@ -80,7 +86,7 @@ namespace ObjectDetection
         // </snippet_tags>
 
         // <snippet_upload_regions>
-        private void UploadImages(CustomVisionTrainingClient trainingApi)
+        private void UploadImages(CustomVisionTrainingClient trainingApi, Project project)
         {
             Dictionary<string, double[]> fileToRegionMap = new Dictionary<string, double[]>()
             {
@@ -158,7 +164,7 @@ namespace ObjectDetection
 
             // Now there are images with tags start training the project
             Console.WriteLine("\tTraining");
-            var iteration = trainingApi.TrainProject(project.Id);
+            iteration = trainingApi.TrainProject(project.Id);
 
             // The returned iteration will be in progress, and can be queried periodically to see when it has completed
             while (iteration.Status == "Training")
@@ -176,8 +182,7 @@ namespace ObjectDetection
         {
 
             // The iteration is now trained. Publish it to the prediction end point.
-            var publishedModelName = "toolModel";
-            var predictionResourceId = "<target prediction resource ID>";
+            var predictionResourceId = Environment.GetEnvironmentVariable("VISION_PREDICTION_RESOURCE_ID");
             trainingApi.PublishIteration(project.Id, iteration.Id, publishedModelName, predictionResourceId);
             Console.WriteLine("Done!\n");
         }

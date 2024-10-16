@@ -37,7 +37,7 @@ To create and run the sample, do the following steps:
    ```
 
 1. Replace the `AnalyzeImage` public class with the following code.
-1. Replace the values of `subscriptionKey` and `endpoint` with your Computer Vision subscription key and endpoint.
+1. Replace the values of `key` and `endpoint` with your Computer Vision key and endpoint.
 1. Optionally, replace the value of `imageToAnalyze` with the URL of a different image that you want to analyze.
 
 ```java
@@ -46,7 +46,7 @@ public class AnalyzeImage {
     // *** Update or verify the following values. ***
     // **********************************************
 
-    private static String subscriptionKey = "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE";
+    private static String key = "PASTE_YOUR_COMPUTER_VISION_KEY_HERE";
     private static String endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE";
 
     private static final String uriBase = endpoint + "vision/v3.1/analyze";
@@ -69,7 +69,7 @@ public class AnalyzeImage {
 
             // Request headers.
             request.setHeader("Content-Type", "application/json");
-            request.setHeader("Ocp-Apim-Subscription-Key", subscriptionKey);
+            request.setHeader("Ocp-Apim-Subscription-Key", key);
 
             // Request body.
             StringEntity requestEntity =

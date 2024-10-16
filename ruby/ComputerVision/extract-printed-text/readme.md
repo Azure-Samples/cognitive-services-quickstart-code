@@ -8,7 +8,7 @@ If you don't have an Azure subscription, create a [free account](https://azure.m
 ## Prerequisites
 
 - You must have [Ruby](https://www.ruby-lang.org/en/downloads/) 2.4.x or later installed.
-- You must have a subscription key for Computer Vision. You can visit [the Microsoft Cognitive Services Web site](https://azure.microsoft.com/free/cognitive-services/), create a new Azure account, and try Cognitive Services for free. Or, follow the instructions in [Create a Cognitive Services account](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account) to subscribe to Computer Vision and get your key.
+- You must have a key for Computer Vision. You can visit [the Microsoft Cognitive Services Web site](https://azure.microsoft.com/free/cognitive-services/), create a new Azure account, and try Cognitive Services for free. Or, follow the instructions in [Create a Cognitive Services account](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account) to subscribe to Computer Vision and get your key.
 
 ## Create and run the sample
 
@@ -16,8 +16,8 @@ To create and run the sample, do the following steps:
 
 1. Copy the code below into a text editor.
 1. Make the following changes to the code:
-    1. Replace `<Subscription Key>` with your subscription key.
-    1. Replace `https://westcentralus.api.cognitive.microsoft.com/vision/v2.0/ocr` with the endpoint URL for the [OCR](https://westcentralus.dev.cognitive.microsoft.com/docs/services/5adf991815e1060e6355ad44/operations/56f91f2e778daf14a499e1fc) method in the Azure region where you obtained your subscription keys, if necessary.
+    1. Replace `<key>` with your key.
+    1. Replace `https://westcentralus.api.cognitive.microsoft.com/vision/v2.0/ocr` with the endpoint URL for the [OCR](https://westcentralus.dev.cognitive.microsoft.com/docs/services/5adf991815e1060e6355ad44/operations/56f91f2e778daf14a499e1fc) method in the Azure region where you obtained your keys, if necessary.
     1. Optionally, replace `https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Atomist_quote_from_Democritus.png/338px-Atomist_quote_from_Democritus.png\` with the URL of a different image from which you want to extract printed text.
 1. Save the code as a file with an `.rb` extension. For example, `get-printed-text.rb`.
 1. Open a command prompt window.
@@ -27,7 +27,7 @@ To create and run the sample, do the following steps:
 require 'net/http'
 
 # You must use the same location in your REST call as you used to get your
-# subscription keys. For example, if you got your subscription keys from westus,
+# keys. For example, if you got your keys from westus,
 # replace "westcentralus" in the URL below with "westus".
 uri = URI('https://westcentralus.api.cognitive.microsoft.com/vision/v2.0/ocr')
 uri.query = URI.encode_www_form({
@@ -39,8 +39,8 @@ uri.query = URI.encode_www_form({
 request = Net::HTTP::Post.new(uri.request_uri)
 
 # Request headers
-# Replace <Subscription Key> with your valid subscription key.
-request['Ocp-Apim-Subscription-Key'] = '<Subscription Key>'
+# Replace <key> with your valid key.
+request['Ocp-Apim-Subscription-Key'] = '<key>'
 request['Content-Type'] = 'application/json'
 
 request.body =

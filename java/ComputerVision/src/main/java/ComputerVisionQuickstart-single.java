@@ -1,9 +1,3 @@
-/*  This Quickstart for the Azure Cognitive Services Computer Vision API shows how to analyze
- *  an image and recognize text for both a local and remote (URL) image.
- *
- *  - Extract Text (OCR) with the new Read API to find text in an image or document.
- */
-
 // <snippet_single>
 import com.microsoft.azure.cognitiveservices.vision.computervision.*;
 import com.microsoft.azure.cognitiveservices.vision.computervision.implementation.ComputerVisionImpl;
@@ -18,7 +12,7 @@ import java.util.UUID;
 
 public class ComputerVisionQuickstart {
 
-    static String subscriptionKey = "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE";
+    static String key = "PASTE_YOUR_COMPUTER_VISION_KEY_HERE";
     static String endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE";
 
     public static void main(String[] args) {
@@ -26,41 +20,37 @@ public class ComputerVisionQuickstart {
         System.out.println("\nAzure Cognitive Services Computer Vision - Java Quickstart Sample");
 
         // Create an authenticated Computer Vision client.
-        ComputerVisionClient compVisClient = Authenticate(subscriptionKey, endpoint); 
+        ComputerVisionClient compVisClient = Authenticate(key, endpoint); 
 
-        // Read from local file
-        ReadFromFile(compVisClient);
+        // Read from remote image
+        ReadFromUrl(compVisClient);
     }
 
-    public static ComputerVisionClient Authenticate(String subscriptionKey, String endpoint){
-        return ComputerVisionManager.authenticate(subscriptionKey).withEndpoint(endpoint);
+    public static ComputerVisionClient Authenticate(String key, String endpoint){
+        return ComputerVisionManager.authenticate(key).withEndpoint(endpoint);
     }
     
     /**
-     * OCR with READ : Performs a Read Operation on a local image
+     * OCR with READ : Performs a Read Operation
      * @param client instantiated vision client
-     * @param localFilePath local file path from which to perform the read operation against
      */
-    private static void ReadFromFile(ComputerVisionClient client) {
+    private static void ReadFromUrl(ComputerVisionClient client) {
         System.out.println("-----------------------------------------------");
         
-        String localFilePath = "src\\main\\resources\\myImage.png";
-        System.out.println("Read with local file: " + localFilePath);
+        String remoteTextImageURL = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/printed_text.jpg";
+        System.out.println("Read with URL: " + remoteTextImageURL);
 
         try {
-            File rawImage = new File(localFilePath);
-            byte[] localImageBytes = Files.readAllBytes(rawImage.toPath());
-
             // Cast Computer Vision to its implementation to expose the required methods
             ComputerVisionImpl vision = (ComputerVisionImpl) client.computerVision();
 
             // Read in remote image and response header
-            ReadInStreamHeaders responseHeader =
-                    vision.readInStreamWithServiceResponseAsync(localImageBytes, null, null)
-                        .toBlocking()
-                        .single()
-                        .headers();
-            // Extract the operationLocation from the response header
+            ReadHeaders responseHeader = vision.readWithServiceResponseAsync(remoteTextImageURL, null)
+            .toBlocking()
+            .single()
+            .headers();
+
+            // Extract the operation Id from the operationLocation header
             String operationLocation = responseHeader.operationLocation();
             System.out.println("Operation Location:" + operationLocation);
 

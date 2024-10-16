@@ -24,7 +24,7 @@ To create the sample in Visual Studio:
     1. Click the **Browse** tab, and in the **Search** box type "Newtonsoft.Json".
     1. Select **Newtonsoft.Json** when it displays, then click the checkbox next to your project name, and **Install**.
 1. Copy and paste the code below into the Program.cs file in your solution.
-1. Replace the values of `subscriptionKey` and `endpoint` with your Computer Vision subscription key and endpoint.
+1. Replace the values of `key` and `endpoint` with your Computer Vision key and endpoint.
 1. Set `imageFilePath` to the path of your own image. You can download a [sample image](https://raw.githubusercontent.com/MicrosoftDocs/azure-docs/master/articles/cognitive-services/Computer-vision/Images/readsample.jpg) to use.
 1. Run the program.
 
@@ -42,8 +42,8 @@ namespace CSHttpClientSample
 {
     static class Program
     {
-        // Add your Computer Vision subscription key and base endpoint.
-        static string subscriptionKey = "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE";
+        // Add your Computer Vision key and base endpoint.
+        static string key = "PASTE_YOUR_COMPUTER_VISION_KEY_HERE";
         static string endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE";
 
         // the Batch Read method endpoint
@@ -76,7 +76,7 @@ namespace CSHttpClientSample
 
                 // Request headers.
                 client.DefaultRequestHeaders.Add(
-                    "Ocp-Apim-Subscription-Key", subscriptionKey);
+                    "Ocp-Apim-Subscription-Key", key);
 
                 string url = uriBase;
 

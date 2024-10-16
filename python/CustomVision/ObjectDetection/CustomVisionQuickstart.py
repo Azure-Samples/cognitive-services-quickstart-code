@@ -25,10 +25,10 @@ This sample looks for images in the following paths:
 
 # <snippet_creds>
 # Replace with valid values
-ENDPOINT = "PASTE_YOUR_CUSTOM_VISION_TRAINING_ENDPOINT_HERE"
-training_key = "PASTE_YOUR_CUSTOM_VISION_TRAINING_SUBSCRIPTION_KEY_HERE"
-prediction_key = "PASTE_YOUR_CUSTOM_VISION_PREDICTION_SUBSCRIPTION_KEY_HERE"
-prediction_resource_id = "PASTE_YOUR_CUSTOM_VISION_PREDICTION_RESOURCE_ID_HERE"
+ENDPOINT = os.environ["VISION_TRAINING_ENDPOINT"]
+training_key = os.environ["VISION_TRAINING_KEY"]
+prediction_key = os.environ["VISION_PREDICTION_KEY"]
+prediction_resource_id = os.environ["VISION_PREDICTION_RESOURCE_ID"]
 # </snippet_creds>
 
 # <snippet_auth>

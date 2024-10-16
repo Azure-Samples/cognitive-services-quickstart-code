@@ -7,11 +7,13 @@ const msRest = require("@azure/ms-rest-js");
 // </snippet_imports>
 
 // <snippet_creds>
-const trainingKey = "PASTE_YOUR_CUSTOM_VISION_TRAINING_SUBSCRIPTION_KEY_HERE";
-const trainingEndpoint = "PASTE_YOUR_CUSTOM_VISION_TRAINING_ENDPOINT_HERE";
-const predictionKey = "PASTE_YOUR_CUSTOM_VISION_PREDICTION_SUBSCRIPTION_KEY_HERE";
-const predictionResourceId = "PASTE_YOUR_CUSTOM_VISION_PREDICTION_RESOURCE_ID_HERE";
-const predictionEndpoint = "PASTE_YOUR_CUSTOM_VISION_PREDICTION_ENDPOINT_HERE";
+// retrieve environment variables
+const trainingKey = process.env["VISION_TRAINING_KEY"];
+const trainingEndpoint = process.env["VISION_TRAINING_ENDPOINT"];
+
+const predictionKey = process.env["VISION_PREDICTION_KEY"];
+const predictionResourceId = process.env["VISION_PREDICTION_RESOURCE_ID"];
+const predictionEndpoint = process.env["VISION_PREDICTION_ENDPOINT"];
 // </snippet_creds>
 
 // <snippet_vars>

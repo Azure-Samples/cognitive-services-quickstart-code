@@ -27,23 +27,24 @@ import java.util.UUID;
 
 public class ImageAnalysisQuickstart {
 
-    static String subscriptionKey = "PASTE_YOUR_COMPUTER_VISION_SUBSCRIPTION_KEY_HERE";
-    static String endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE";
+    // Use environment variables
+    static String key = System.getenv("VISION_KEY");
+    static String endpoint = System.getenv("VISION_ENDPOINT");
 
     public static void main(String[] args) {
         
         System.out.println("\nAzure Cognitive Services Computer Vision - Java Quickstart Sample");
 
         // Create an authenticated Computer Vision client.
-        ComputerVisionClient compVisClient = Authenticate(subscriptionKey, endpoint); 
+        ComputerVisionClient compVisClient = Authenticate(key, endpoint); 
 
         // Analyze local and remote images
         AnalyzeRemoteImage(compVisClient);
 
     }
 
-    public static ComputerVisionClient Authenticate(String subscriptionKey, String endpoint){
-        return ComputerVisionManager.authenticate(subscriptionKey).withEndpoint(endpoint);
+    public static ComputerVisionClient Authenticate(String key, String endpoint){
+        return ComputerVisionManager.authenticate(key).withEndpoint(endpoint);
     }
 
 
