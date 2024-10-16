@@ -49,7 +49,7 @@ namespace ComputerVisionQuickstart
         static string endpoint = "PASTE_YOUR_COMPUTER_VISION_ENDPOINT_HERE";
 
         // URL image used for analyzing an image (image of puppy)
-        private const string ANALYZE_URL_IMAGE = "https://moderatorsampleimages.blob.core.windows.net/samples/sample16.png";
+        private const string ANALYZE_URL_IMAGE = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/landmark.jpg";
 
         static void Main(string[] args)
         {

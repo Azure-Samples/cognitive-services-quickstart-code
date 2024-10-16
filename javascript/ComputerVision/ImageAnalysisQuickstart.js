@@ -195,7 +195,7 @@ function computerVision() {
       console.log();
 
       // Image of different kind of dog.
-      const tagsURL = 'https://moderatorsampleimages.blob.core.windows.net/samples/sample16.png';
+      const tagsURL = 'https://github.com/Azure-Samples/cognitive-services-sample-data-files/blob/master/ComputerVision/Images/house.jpg';
 
       // Analyze URL image
       console.log('Analyzing tags in image...', tagsURL.split('/').pop());
@@ -252,7 +252,7 @@ function computerVision() {
       console.log();
 
       // <snippet_categories>
-      const categoryURLImage = 'https://moderatorsampleimages.blob.core.windows.net/samples/sample16.png';
+      const categoryURLImage = 'https://github.com/Azure-Samples/cognitive-services-sample-data-files/blob/master/ComputerVision/Images/landmark.png';
 
       // Analyze URL image
       console.log('Analyzing category in image...', categoryURLImage.split('/').pop());
@@ -338,7 +338,7 @@ function computerVision() {
       console.log('GENERATE THUMBNAIL');
       console.log();
       // Image of a dog.
-      const dogURL = 'https://moderatorsampleimages.blob.core.windows.net/samples/sample16.png';
+      const dogURL = 'https://github.com/Azure-Samples/cognitive-services-sample-data-files/blob/master/ComputerVision/Images/dog.jpg';
       console.log('Generating thumbnail...')
       await computerVisionClient.generateThumbnail(100, 100, dogURL, { smartCropping: true })
         .then((thumbResponse) => {

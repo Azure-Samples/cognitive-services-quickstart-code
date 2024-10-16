@@ -83,11 +83,11 @@ func main() {
 	// <snippet_analyze_url>
 	landmarkImageURL := "https://github.com/Azure-Samples/cognitive-services-sample-data-files/raw/master/ComputerVision/Images/landmark.jpg"
 	// </snippet_analyze_url>
-	objectsImageURL := "https://moderatorsampleimages.blob.core.windows.net/samples/sample6.png"
+	objectsImageURL := "https://github.com/Azure-Samples/cognitive-services-sample-data-files/blob/master/ComputerVision/Images/objects.jpg"
 	// <snippet_brand_url>
 	brandsImageURL := "https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/images/gray-shirt-logo.jpg"
 	// </snippet_brand_url>
-	adultRacyImageURL := "https://moderatorsampleimages.blob.core.windows.net/samples/sample3.png"
+	adultRacyImageURL := "https://github.com/Azure-Samples/cognitive-services-sample-data-files/blob/master/ComputerVision/Images/objects.jpg"
 	detectTypeImageURL := "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/lion_drawing.png"
 	/*
 	 * END - URL images
