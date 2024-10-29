@@ -1,24 +1,19 @@
 // <snippet_single>
-using System.Net.Http.Headers;
-using System.Text;
-
 using Azure;
 using Azure.AI.Vision.Face;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace FaceQuickstart
 {
     class Program
     {
-        static readonly string largePersonGroupId = Guid.NewGuid().ToString();
+        static readonly string LargePersonGroupId = Guid.NewGuid().ToString();
 
         // URL path for the images.
-        const string IMAGE_BASE_URL = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/";
+        const string ImageBaseUrl = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/";
 
         // From your Face subscription in the Azure portal, get your subscription key and endpoint.
-        static readonly string SUBSCRIPTION_KEY = Environment.GetEnvironmentVariable("FACE_APIKEY") ?? "<apikey>";
-        static readonly string ENDPOINT = Environment.GetEnvironmentVariable("FACE_ENDPOINT") ?? "<endpoint>";
+        static readonly string SubscriptionKey = Environment.GetEnvironmentVariable("FACE_APIKEY") ?? "<apikey>";
+        static readonly string Endpoint = Environment.GetEnvironmentVariable("FACE_ENDPOINT") ?? "<endpoint>";
 
         static void Main(string[] args)
         {
@@ -27,13 +22,13 @@ namespace FaceQuickstart
             // on faces wearing masks compared with model 3,
             // and its overall accuracy is improved compared
             // with models 1 and 2.
-            FaceRecognitionModel RECOGNITION_MODEL4 = FaceRecognitionModel.Recognition04;
+            FaceRecognitionModel RecognitionModel4 = FaceRecognitionModel.Recognition04;
 
             // Authenticate.
-            FaceClient client = Authenticate(ENDPOINT, SUBSCRIPTION_KEY);
+            FaceClient client = Authenticate(Endpoint, SubscriptionKey);
 
             // Identify - recognize a face(s) in a large person group (a large person group is created in this example).
-            IdentifyInLargePersonGroup(client, IMAGE_BASE_URL, RECOGNITION_MODEL4).Wait();
+            IdentifyInLargePersonGroup(client, ImageBaseUrl, RecognitionModel4).Wait();
 
             Console.WriteLine("End of quickstart.");
         }
@@ -54,15 +49,15 @@ namespace FaceQuickstart
         // Result faces with insufficient quality for recognition are filtered out. 
         // The field `faceId` in returned `DetectedFace`s will be used in Verify and Identify.
         // It will expire 24 hours after the detection call.
-        private static async Task<List<FaceDetectionResult>> DetectFaceRecognize(FaceClient faceClient, string url, FaceRecognitionModel recognition_model)
+        private static async Task<List<FaceDetectionResult>> DetectFaceRecognize(FaceClient faceClient, string url, FaceRecognitionModel recognitionModel)
         {
             // Detect faces from image URL.
-            Response<IReadOnlyList<FaceDetectionResult>> response = await faceClient.DetectAsync(new Uri(url), FaceDetectionModel.Detection03, recognition_model, returnFaceId: true, [FaceAttributeType.QualityForRecognition]);
+            var response = await faceClient.DetectAsync(new Uri(url), FaceDetectionModel.Detection03, recognitionModel, true, [FaceAttributeType.QualityForRecognition]);
             IReadOnlyList<FaceDetectionResult> detectedFaces = response.Value;
             List<FaceDetectionResult> sufficientQualityFaces = new List<FaceDetectionResult>();
             foreach (FaceDetectionResult detectedFace in detectedFaces)
             {
-                var faceQualityForRecognition = detectedFace.FaceAttributes.QualityForRecognition;
+                QualityForRecognition? faceQualityForRecognition = detectedFace.FaceAttributes.QualityForRecognition;
                 if (faceQualityForRecognition.HasValue && (faceQualityForRecognition.Value != QualityForRecognition.Low))
                 {
                     sufficientQualityFaces.Add(detectedFace);
@@ -96,41 +91,28 @@ namespace FaceQuickstart
             string sourceImageFileName = "identification1.jpg";
 
             // Create a large person group.
-            Console.WriteLine($"Create a person group ({largePersonGroupId}).");
-            HttpClient httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", SUBSCRIPTION_KEY);
-            using (var content = new ByteArrayContent(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new Dictionary<string, object> { ["name"] = largePersonGroupId, ["recognitionModel"] = recognitionModel.ToString() }))))
-            {
-                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                await httpClient.PutAsync($"{ENDPOINT}/face/v1.0/largepersongroups/{largePersonGroupId}", content);
-            }
+            Console.WriteLine($"Create a person group ({LargePersonGroupId}).");
+            LargePersonGroupClient largePersonGroupClient = new FaceAdministrationClient(new Uri(Endpoint), new AzureKeyCredential(SubscriptionKey)).GetLargePersonGroupClient(LargePersonGroupId);
+            await largePersonGroupClient.CreateAsync(LargePersonGroupId, recognitionModel: recognitionModel);
             // The similar faces will be grouped into a single large person group person.
-            foreach (var groupedFace in personDictionary.Keys)
+            foreach (string groupedFace in personDictionary.Keys)
             {
                 // Limit TPS
                 await Task.Delay(250);
-                string? personId = null;
-                using (var content = new ByteArrayContent(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new Dictionary<string, object> { ["name"] = groupedFace }))))
-                {
-                    content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                    using (var response = await httpClient.PostAsync($"{ENDPOINT}/face/v1.0/largepersongroups/{largePersonGroupId}/persons", content))
-                    {
-                        string contentString = await response.Content.ReadAsStringAsync();
-                        personId = (string?)(JsonConvert.DeserializeObject<Dictionary<string, object>>(contentString)?["personId"]);
-                    }
-                }
+                var createPersonResponse = await largePersonGroupClient.CreatePersonAsync(groupedFace);
+                Guid personId = createPersonResponse.Value.PersonId;
                 Console.WriteLine($"Create a person group person '{groupedFace}'.");
 
                 // Add face to the large person group person.
-                foreach (var similarImage in personDictionary[groupedFace])
+                foreach (string similarImage in personDictionary[groupedFace])
                 {
                     Console.WriteLine($"Check whether image is of sufficient quality for recognition");
-                    Response<IReadOnlyList<FaceDetectionResult>> response = await client.DetectAsync(new Uri($"{url}{similarImage}"), FaceDetectionModel.Detection03, recognitionModel, returnFaceId: false, [FaceAttributeType.QualityForRecognition]);
-                    IReadOnlyList<FaceDetectionResult> detectedFaces1 = response.Value;
+                    var detectResponse = await client.DetectAsync(new Uri($"{url}{similarImage}"), FaceDetectionModel.Detection03, recognitionModel, false, [FaceAttributeType.QualityForRecognition]);
+                    IReadOnlyList<FaceDetectionResult> facesInImage = detectResponse.Value;
                     bool sufficientQuality = true;
-                    foreach (var face1 in detectedFaces1)
+                    foreach (FaceDetectionResult face in facesInImage)
                     {
-                        var faceQualityForRecognition = face1.FaceAttributes.QualityForRecognition;
+                        QualityForRecognition? faceQualityForRecognition = face.FaceAttributes.QualityForRecognition;
                         //  Only "high" quality images are recommended for person enrollment
                         if (faceQualityForRecognition.HasValue && (faceQualityForRecognition.Value != QualityForRecognition.High))
                         {
@@ -144,39 +126,25 @@ namespace FaceQuickstart
                         continue;
                     }
 
-                    if (detectedFaces1.Count != 1)
+                    if (facesInImage.Count != 1)
                     {
                         continue;
                     }
 
                     // add face to the large person group
                     Console.WriteLine($"Add face to the person group person({groupedFace}) from image `{similarImage}`");
-                    using (var content = new ByteArrayContent(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new Dictionary<string, object> { ["url"] = $"{url}{similarImage}" }))))
-                    {
-                        content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                        await httpClient.PostAsync($"{ENDPOINT}/face/v1.0/largepersongroups/{largePersonGroupId}/persons/{personId}/persistedfaces?detectionModel=detection_03", content);
-                    }
+                    await largePersonGroupClient.AddFaceAsync(personId, new Uri($"{url}{similarImage}"), detectionModel: FaceDetectionModel.Detection03);
                 }
             }
 
             // Start to train the large person group.
             Console.WriteLine();
-            Console.WriteLine($"Train person group {largePersonGroupId}.");
-            await httpClient.PostAsync($"{ENDPOINT}/face/v1.0/largepersongroups/{largePersonGroupId}/train", null);
+            Console.WriteLine($"Train person group {LargePersonGroupId}.");
+            Operation operation = await largePersonGroupClient.TrainAsync(WaitUntil.Completed);
 
             // Wait until the training is completed.
-            while (true)
-            {
-                await Task.Delay(1000);
-                string? trainingStatus = null;
-                using (var response = await httpClient.GetAsync($"{ENDPOINT}/face/v1.0/largepersongroups/{largePersonGroupId}/training"))
-                {
-                    string contentString = await response.Content.ReadAsStringAsync();
-                    trainingStatus = (string?)(JsonConvert.DeserializeObject<Dictionary<string, object>>(contentString)?["status"]);
-                }
-                Console.WriteLine($"Training status: {trainingStatus}.");
-                if ("succeeded".Equals(trainingStatus)) { break; }
-            }
+            await operation.WaitForCompletionResponseAsync();
+            Console.WriteLine("Training status: succeeded.");
             Console.WriteLine();
 
             Console.WriteLine("Pausing for 60 seconds to avoid triggering rate limit on free account...");
@@ -187,58 +155,35 @@ namespace FaceQuickstart
             List<FaceDetectionResult> detectedFaces = await DetectFaceRecognize(client, $"{url}{sourceImageFileName}", recognitionModel);
 
             // Add detected faceId to sourceFaceIds.
-            foreach (var detectedFace in detectedFaces) { sourceFaceIds.Add(detectedFace.FaceId.Value); }
+            foreach (FaceDetectionResult detectedFace in detectedFaces) { sourceFaceIds.Add(detectedFace.FaceId.Value); }
 
             // Identify the faces in a large person group.
-            List<Dictionary<string, object>> identifyResults = new List<Dictionary<string, object>>();
-            using (var content = new ByteArrayContent(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new Dictionary<string, object> { ["faceIds"] = sourceFaceIds, ["largePersonGroupId"] = largePersonGroupId }))))
+            var identifyResponse = await client.IdentifyFromLargePersonGroupAsync(sourceFaceIds, LargePersonGroupId);
+            IReadOnlyList<FaceIdentificationResult> identifyResults = identifyResponse.Value;
+            foreach (FaceIdentificationResult identifyResult in identifyResults)
             {
-                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                using (var response = await httpClient.PostAsync($"{ENDPOINT}/face/v1.0/identify", content))
+                if (identifyResult.Candidates.Count == 0)
                 {
-                    string contentString = await response.Content.ReadAsStringAsync();
-                    identifyResults = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(contentString) ?? [];
-                }
-            }
-
-            foreach (var identifyResult in identifyResults)
-            {
-                string faceId = (string)identifyResult["faceId"];
-                List<Dictionary<string, object>> candidates = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(((JArray)identifyResult["candidates"]).ToString()) ?? [];
-                if (candidates.Count == 0)
-                {
-                    Console.WriteLine($"No person is identified for the face in: {sourceImageFileName} - {faceId},");
+                    Console.WriteLine($"No person is identified for the face in: {sourceImageFileName} - {identifyResult.FaceId},");
                     continue;
                 }
 
-                string? personName = null;
-                using (var response = await httpClient.GetAsync($"{ENDPOINT}/face/v1.0/largepersongroups/{largePersonGroupId}/persons/{candidates.First()["personId"]}"))
-                {
-                    string contentString = await response.Content.ReadAsStringAsync();
-                    personName = (string?)(JsonConvert.DeserializeObject<Dictionary<string, object>>(contentString)?["name"]);
-                }
-                Console.WriteLine($"Person '{personName}' is identified for the face in: {sourceImageFileName} - {faceId}," +
-                    $" confidence: {candidates.First()["confidence"]}.");
+                FaceIdentificationCandidate candidate = identifyResult.Candidates.First();
+                var getPersonResponse = await largePersonGroupClient.GetPersonAsync(candidate.PersonId);
+                string personName = getPersonResponse.Value.Name;
+                Console.WriteLine($"Person '{personName}' is identified for the face in: {sourceImageFileName} - {identifyResult.FaceId}," + $" confidence: {candidate.Confidence}.");
 
-                Dictionary<string, object> verifyResult = new Dictionary<string, object>();
-                using (var content = new ByteArrayContent(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new Dictionary<string, object> { ["faceId"] = faceId, ["personId"] = candidates.First()["personId"], ["largePersonGroupId"] = largePersonGroupId }))))
-                {
-                    content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                    using (var response = await httpClient.PostAsync($"{ENDPOINT}/face/v1.0/verify", content))
-                    {
-                        string contentString = await response.Content.ReadAsStringAsync();
-                        verifyResult = JsonConvert.DeserializeObject<Dictionary<string, object>>(contentString) ?? [];
-                    }
-                }
-                Console.WriteLine($"Verification result: is a match? {verifyResult["isIdentical"]}. confidence: {verifyResult["confidence"]}");
+                var verifyResponse = await client.VerifyFromLargePersonGroupAsync(identifyResult.FaceId, LargePersonGroupId, candidate.PersonId);
+                FaceVerificationResult verifyResult = verifyResponse.Value;
+                Console.WriteLine($"Verification result: is a match? {verifyResult.IsIdentical}. confidence: {verifyResult.Confidence}");
             }
             Console.WriteLine();
 
             // Delete large person group.
             Console.WriteLine("========DELETE PERSON GROUP========");
             Console.WriteLine();
-            await httpClient.DeleteAsync($"{ENDPOINT}/face/v1.0/largepersongroups/{largePersonGroupId}");
-            Console.WriteLine($"Deleted the person group {largePersonGroupId}.");
+            await largePersonGroupClient.DeleteAsync();
+            Console.WriteLine($"Deleted the person group {LargePersonGroupId}.");
             Console.WriteLine();
         }
     }
