@@ -1,5 +1,5 @@
 # <detect_for_similar>
-curl -H "Ocp-Apim-Subscription-Key: TODO_INSERT_YOUR_FACE_SUBSCRIPTION_KEY_HERE" "TODO_INSERT_YOUR_FACE_ENDPOINT_HERE/face/v1.0/detect?detectionModel=detection_03&returnFaceId=true&returnFaceLandmarks=false" -H "Content-Type: application/json" --data-ascii "{\"url\":\"https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/Family1-Dad1.jpg\"}"
+curl -v -X POST "https://{resource endpoint}/face/v1.0/detect?detectionModel=detection_03&recognitionModel=recognition_04&returnFaceId=true" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: {subscription key}" --data-ascii "{\"url\":\"https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/Face/images/Family1-Dad1.jpg\"}"
 # </detect_for_similar>
 
 # <similar_group>
@@ -17,7 +17,7 @@ https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-f
 # </similar_matcher>
 
 # <similar>
-curl -v -X POST "https:/{endpoint}/face/v1.0/findsimilars" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: {subscription key}" --data-ascii "{body}" 
+curl -v -X POST "https://{resource endpoint}/face/v1.0/findsimilars" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: {subscription key}" --data-ascii "{body}" 
 # </similar>
 
 # <similar_body>

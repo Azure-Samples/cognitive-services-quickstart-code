@@ -8,27 +8,21 @@ import java.util.UUID;
 
 import com.azure.ai.vision.face.FaceClient;
 import com.azure.ai.vision.face.FaceClientBuilder;
+import com.azure.ai.vision.face.administration.FaceAdministrationClient;
+import com.azure.ai.vision.face.administration.FaceAdministrationClientBuilder;
+import com.azure.ai.vision.face.administration.LargePersonGroupClient;
 import com.azure.ai.vision.face.models.DetectOptions;
 import com.azure.ai.vision.face.models.FaceAttributeType;
 import com.azure.ai.vision.face.models.FaceDetectionModel;
 import com.azure.ai.vision.face.models.FaceDetectionResult;
+import com.azure.ai.vision.face.models.FaceIdentificationCandidate;
+import com.azure.ai.vision.face.models.FaceIdentificationResult;
 import com.azure.ai.vision.face.models.FaceRecognitionModel;
+import com.azure.ai.vision.face.models.FaceTrainingResult;
+import com.azure.ai.vision.face.models.FaceVerificationResult;
 import com.azure.ai.vision.face.models.QualityForRecognition;
 import com.azure.core.credential.KeyCredential;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import org.apache.http.HttpHeaders;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicHeader;
-import org.apache.http.util.EntityUtils;
+import com.azure.core.util.polling.SyncPoller;
 
 public class Quickstart {
     // LARGE_PERSON_GROUP_ID should be all lowercase and alphanumeric. For example, 'mygroupname' (dashes are OK).
@@ -105,49 +99,43 @@ public class Quickstart {
 
         // Create a large person group.
         System.out.println("Create a person group (" + LARGE_PERSON_GROUP_ID + ").");
-        List<BasicHeader> headers = Arrays.asList(new BasicHeader("Ocp-Apim-Subscription-Key", SUBSCRIPTION_KEY), new BasicHeader(HttpHeaders.CONTENT_TYPE, "application/json"));
-        HttpClient httpClient = HttpClients.custom().setDefaultHeaders(headers).build();
-        createLargePersonGroup(httpClient, recognitionModel);
+        FaceAdministrationClient faceAdministrationClient = new FaceAdministrationClientBuilder().endpoint(ENDPOINT).credential(new KeyCredential(SUBSCRIPTION_KEY)).buildClient();
+        LargePersonGroupClient largePersonGroupClient = faceAdministrationClient.getLargePersonGroupClient(LARGE_PERSON_GROUP_ID);
+        largePersonGroupClient.create(LARGE_PERSON_GROUP_ID, null, recognitionModel);
         // The similar faces will be grouped into a single large person group person.
         for (String groupedFace : personDictionary.keySet()) {
             // Limit TPS
             Thread.sleep(250);
-            String personId = createLargePersonGroupPerson(httpClient, groupedFace);
+            String personId = largePersonGroupClient.createPerson(groupedFace).getPersonId();
             System.out.println("Create a person group person '" + groupedFace + "'.");
 
             // Add face to the large person group person.
             for (String similarImage : personDictionary.get(groupedFace)) {
                 System.out.println("Check whether image is of sufficient quality for recognition");
                 DetectOptions options = new DetectOptions(FaceDetectionModel.DETECTION_03, recognitionModel, false).setReturnFaceAttributes(Arrays.asList(FaceAttributeType.QUALITY_FOR_RECOGNITION));
-                List<FaceDetectionResult> detectedFaces1 = client.detect(url + similarImage, options);
-                if (detectedFaces1.stream().anyMatch(f -> f.getFaceAttributes().getQualityForRecognition() != QualityForRecognition.HIGH)) {
+                List<FaceDetectionResult> facesInImage = client.detect(url + similarImage, options);
+                if (facesInImage.stream().anyMatch(f -> f.getFaceAttributes().getQualityForRecognition() != QualityForRecognition.HIGH)) {
                     continue;
                 }
 
-                if (detectedFaces1.size() != 1) {
+                if (facesInImage.size() != 1) {
                     continue;
                 }
 
                 // add face to the large person group
                 System.out.println("Add face to the person group person(" + groupedFace + ") from image `" + similarImage + "`");
-                addFaceToLargePersonGroup(httpClient, personId, url + similarImage);
+                largePersonGroupClient.addFace(personId, url + similarImage, null, FaceDetectionModel.DETECTION_03, null);
             }
         }
 
         // Start to train the large person group.
         System.out.println();
         System.out.println("Train person group " + LARGE_PERSON_GROUP_ID + ".");
-        trainLargePersonGroup(httpClient);
+        SyncPoller<FaceTrainingResult, Void> poller = largePersonGroupClient.beginTrain();
 
         // Wait until the training is completed.
-        while (true) {
-            Thread.sleep(1000);
-            String trainingStatus = getLargePersonGroupTrainingStatus(httpClient);
-            System.out.println("Training status: " + trainingStatus + ".");
-            if ("succeeded".equals(trainingStatus)) {
-                break;
-            }
-        }
+        poller.waitForCompletion();
+        System.out.println("Training status: succeeded.");
         System.out.println();
 
         System.out.println("Pausing for 60 seconds to avoid triggering rate limit on free account...");
@@ -159,97 +147,29 @@ public class Quickstart {
         List<String> sourceFaceIds = detectedFaces.stream().map(FaceDetectionResult::getFaceId).collect(Collectors.toList());
 
         // Identify the faces in a large person group.
-        List<Map<String, Object>> identifyResults = identifyFacesInLargePersonGroup(httpClient, sourceFaceIds);
+        List<FaceIdentificationResult> identifyResults = client.identifyFromLargePersonGroup(sourceFaceIds, LARGE_PERSON_GROUP_ID);
 
-        for (Map<String, Object> identifyResult : identifyResults) {
-            String faceId = identifyResult.get("faceId").toString();
-            List<Map<String, Object>> candidates = new Gson().fromJson(new Gson().toJson(identifyResult.get("candidates")), new TypeToken<List<Map<String, Object>>>(){});
-            if (candidates.isEmpty()) {
-                System.out.println("No person is identified for the face in: " + sourceImageFileName + " - " + faceId + ".");
+        for (FaceIdentificationResult identifyResult : identifyResults) {
+            if (identifyResult.getCandidates().isEmpty()) {
+                System.out.println("No person is identified for the face in: " + sourceImageFileName + " - " + identifyResult.getFaceId() + ".");
                 continue;
             }
 
-            Map<String, Object> candidate = candidates.stream().findFirst().orElseThrow();
-            String personName = getLargePersonGroupPersonName(httpClient, candidate.get("personId").toString());
-            System.out.println("Person '" + personName + "' is identified for the face in: " + sourceImageFileName + " - " + faceId + ", confidence: " + candidate.get("confidence") + ".");
+            FaceIdentificationCandidate candidate = identifyResult.getCandidates().stream().findFirst().orElseThrow();
+            String personName = largePersonGroupClient.getPerson(candidate.getPersonId()).getName();
+            System.out.println("Person '" + personName + "' is identified for the face in: " + sourceImageFileName + " - " + identifyResult.getFaceId() + ", confidence: " + candidate.getConfidence() + ".");
 
-            Map<String, Object> verifyResult = verifyFaceWithLargePersonGroupPerson(httpClient, faceId, candidate.get("personId").toString());
-            System.out.println("Verification result: is a match? " + verifyResult.get("isIdentical") + ". confidence: " + verifyResult.get("confidence"));
+            FaceVerificationResult verifyResult = client.verifyFromLargePersonGroup(identifyResult.getFaceId(), LARGE_PERSON_GROUP_ID, candidate.getPersonId());
+            System.out.println("Verification result: is a match? " + verifyResult.isIdentical() + ". confidence: " + verifyResult.getConfidence());
         }
         System.out.println();
 
         // Delete large person group.
         System.out.println("========DELETE PERSON GROUP========");
         System.out.println();
-        deleteLargePersonGroup(httpClient);
+        largePersonGroupClient.delete();
         System.out.println("Deleted the person group " + LARGE_PERSON_GROUP_ID + ".");
         System.out.println();
-    }
-
-    private static void createLargePersonGroup(HttpClient httpClient, FaceRecognitionModel recognitionModel) throws Exception {
-        HttpPut request = new HttpPut(new URIBuilder(ENDPOINT + "/face/v1.0/largepersongroups/" + LARGE_PERSON_GROUP_ID).build());
-        request.setEntity(new StringEntity(new Gson().toJson(Map.of("name", LARGE_PERSON_GROUP_ID, "recognitionModel", recognitionModel.toString()))));
-        httpClient.execute(request);
-        request.releaseConnection();
-    }
-
-    private static String createLargePersonGroupPerson(HttpClient httpClient, String name) throws Exception {
-        HttpPost request = new HttpPost(new URIBuilder(ENDPOINT + "/face/v1.0/largepersongroups/" + LARGE_PERSON_GROUP_ID + "/persons").build());
-        request.setEntity(new StringEntity(new Gson().toJson(Map.of("name", name))));
-        String response = EntityUtils.toString(httpClient.execute(request).getEntity());
-        request.releaseConnection();
-        return new Gson().fromJson(response, new TypeToken<Map<String, Object>>(){}).get("personId").toString();
-    }
-
-    private static void addFaceToLargePersonGroup(HttpClient httpClient, String personId, String url) throws Exception {
-        URIBuilder builder = new URIBuilder(ENDPOINT + "/face/v1.0/largepersongroups/" + LARGE_PERSON_GROUP_ID + "/persons/" + personId + "/persistedfaces");
-        builder.setParameter("detectionModel", "detection_03");
-        HttpPost request = new HttpPost(builder.build());
-        request.setEntity(new StringEntity(new Gson().toJson(Map.of("url", url))));
-        httpClient.execute(request);
-        request.releaseConnection();
-    }
-
-    private static void trainLargePersonGroup(HttpClient httpClient) throws Exception {
-        HttpPost request = new HttpPost(new URIBuilder(ENDPOINT + "/face/v1.0/largepersongroups/" + LARGE_PERSON_GROUP_ID + "/train").build());
-        httpClient.execute(request);
-        request.releaseConnection();
-    }
-
-    private static String getLargePersonGroupTrainingStatus(HttpClient httpClient) throws Exception {
-        HttpGet request = new HttpGet(new URIBuilder(ENDPOINT + "/face/v1.0/largepersongroups/" + LARGE_PERSON_GROUP_ID + "/training").build());
-        String response = EntityUtils.toString(httpClient.execute(request).getEntity());
-        request.releaseConnection();
-        return new Gson().fromJson(response, new TypeToken<Map<String, Object>>(){}).get("status").toString();
-    }
-
-    private static List<Map<String, Object>> identifyFacesInLargePersonGroup(HttpClient httpClient, List<String> sourceFaceIds) throws Exception {
-        HttpPost request = new HttpPost(new URIBuilder(ENDPOINT + "/face/v1.0/identify").build());
-        request.setEntity(new StringEntity(new Gson().toJson(Map.of("faceIds", sourceFaceIds, "largePersonGroupId", LARGE_PERSON_GROUP_ID))));
-        String response = EntityUtils.toString(httpClient.execute(request).getEntity());
-        request.releaseConnection();
-        return new Gson().fromJson(response, new TypeToken<List<Map<String, Object>>>(){});
-    }
-
-    private static String getLargePersonGroupPersonName(HttpClient httpClient, String personId) throws Exception {
-        HttpGet request = new HttpGet(new URIBuilder(ENDPOINT + "/face/v1.0/largepersongroups/" + LARGE_PERSON_GROUP_ID + "/persons/" + personId).build());
-        String response = EntityUtils.toString(httpClient.execute(request).getEntity());
-        request.releaseConnection();
-        return new Gson().fromJson(response, new TypeToken<Map<String, Object>>(){}).get("name").toString();
-    }
-
-    private static Map<String, Object> verifyFaceWithLargePersonGroupPerson(HttpClient httpClient, String faceId, String personId) throws Exception {
-        HttpPost request = new HttpPost(new URIBuilder(ENDPOINT + "/face/v1.0/verify").build());
-        request.setEntity(new StringEntity(new Gson().toJson(Map.of("faceId", faceId, "personId", personId, "largePersonGroupId", LARGE_PERSON_GROUP_ID))));
-        String response = EntityUtils.toString(httpClient.execute(request).getEntity());
-        request.releaseConnection();
-        return new Gson().fromJson(response, new TypeToken<Map<String, Object>>(){});
-    }
-
-    private static void deleteLargePersonGroup(HttpClient httpClient) throws Exception {
-        HttpDelete request = new HttpDelete(new URIBuilder(ENDPOINT + "/face/v1.0/largepersongroups/" + LARGE_PERSON_GROUP_ID).build());
-        httpClient.execute(request);
-        request.releaseConnection();
     }
 }
 // </snippet_single>
