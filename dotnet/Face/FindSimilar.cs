@@ -18,14 +18,9 @@ namespace FaceQuickstart
 
         static void Main(string[] args)
         {
-
-            // <snippet_detect_models>
-            FaceRecognitionModel RecognitionModel4 = FaceRecognitionModel.Recognition04;
-            // </snippet_detect_models>
-
             // <snippet_maincalls>
             FaceClient client = Authenticate(Endpoint, SubscriptionKey);
-            FindSimilar(client, ImageBaseUrl, RecognitionModel4).Wait();
+            FindSimilar(client, ImageBaseUrl).Wait();
             // </snippet_maincalls>
         }
 
@@ -37,10 +32,10 @@ namespace FaceQuickstart
         // </snippet_auth>
 
         // <snippet_face_detect_recognize>
-        private static async Task<List<FaceDetectionResult>> DetectFaceRecognize(FaceClient faceClient, string url, FaceRecognitionModel recognitionModel)
+        private static async Task<List<FaceDetectionResult>> DetectFaceRecognize(FaceClient faceClient, string url)
         {
             // Detect faces from image URL.
-            var response = await faceClient.DetectAsync(new Uri(url), FaceDetectionModel.Detection03, recognitionModel, true, [FaceAttributeType.QualityForRecognition]);
+            var response = await faceClient.DetectAsync(new Uri(url), FaceDetectionModel.Detection03, FaceRecognitionModel.Recognition04, true, [FaceAttributeType.QualityForRecognition]);
             IReadOnlyList<FaceDetectionResult> detectedFaces = response.Value;
             List<FaceDetectionResult> sufficientQualityFaces = new List<FaceDetectionResult>();
             foreach (FaceDetectionResult detectedFace in detectedFaces)
@@ -57,7 +52,7 @@ namespace FaceQuickstart
         }
         // </snippet_face_detect_recognize>
 
-        public static async Task FindSimilar(FaceClient client, string baseUrl, FaceRecognitionModel recognitionModel)
+        public static async Task FindSimilar(FaceClient client, string baseUrl)
         {
             // <snippet_loadfaces>
             Console.WriteLine("========FIND SIMILAR========");
@@ -80,13 +75,13 @@ namespace FaceQuickstart
             foreach (string targetImageFileName in targetImageFileNames)
             {
                 // Detect faces from target image url.
-                List<FaceDetectionResult> faces = await DetectFaceRecognize(client, $"{baseUrl}{targetImageFileName}", recognitionModel);
+                List<FaceDetectionResult> faces = await DetectFaceRecognize(client, $"{baseUrl}{targetImageFileName}");
                 // Add detected faceId to list of GUIDs.
                 targetFaceIds.Add(faces[0].FaceId.Value);
             }
 
             // Detect faces from source image url.
-            List<FaceDetectionResult> detectedFaces = await DetectFaceRecognize(client, $"{baseUrl}{sourceImageFileName}", recognitionModel);
+            List<FaceDetectionResult> detectedFaces = await DetectFaceRecognize(client, $"{baseUrl}{sourceImageFileName}");
             Console.WriteLine();
             // </snippet_loadfaces>
 
