@@ -10,7 +10,17 @@
 
 # The name of the Azure resource group in which you want to create the resource.
 # You can find resource groups in the Azure Dashboard under Home > Resource groups.
-$resource_group_name = "TODO_REPLACE";
+$resource_group_name = "PASTE_YOUR_RESOURCE_GROUP_NAME_HERE";
+
+# The name of the resource you want to create.
+# Note Azure resources are also sometimes referred to as accounts.
+$resource_name = "PASTE_YOUR_RESOURCE_NAME_HERE";
+
+# The name of the custom subdomain to use when you create the resource. This is optional.
+# For example, if you create a Bing Search v7 resource with the custom subdomain name 'my-search-resource',
+# your resource would have the endpoint https://my-search-resource.cognitiveservices.azure.com/.
+# Note not all Cognitive Services allow custom subdomain names.
+$subdomain_name = "PASTE_YOUR_SUBDOMAIN_NAME_HERE";
 
 echo "Connecting to Azure account."
 Connect-AzAccount
@@ -28,11 +38,11 @@ Get-AzCognitiveServicesAccount -ResourceGroupName $resource_group_name
 # For more information see:
 # https://docs.microsoft.com/en-us/powershell/module/az.cognitiveservices/new-azcognitiveservicesaccount?view=azps-3.3.0
 echo "Creating a resource with kind Text Translation, SKU F0 (free tier), location global."
-$result = New-AzCognitiveServicesAccount -ResourceGroupName $resource_group_name -Name "test_resource" -Type "TextTranslation" -SkuName "F0" -Location "Global"
+$result = New-AzCognitiveServicesAccount -ResourceGroupName $resource_group_name -Name $resource_name -Type "TextTranslation" -SkuName "F0" -Location "Global" -CustomSubdomainName $subdomain_name
 echo "Result:"
 echo $result
 
 # For more information see:
 # https://docs.microsoft.com/en-us/powershell/module/az.cognitiveservices/remove-azcognitiveservicesaccount?view=azps-3.3.0
 echo "Removing resource."
-Remove-AzCognitiveServicesAccount -ResourceGroupName $resource_group_name -Name "test_resource"
+Remove-AzCognitiveServicesAccount -ResourceGroupName $resource_group_name -Name $resource_name
