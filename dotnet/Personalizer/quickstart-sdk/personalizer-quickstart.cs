@@ -268,12 +268,10 @@ class Program
             }
             else if (actionFeatures.ItemAttributes.Price >= 10 && !context.Location.Equals("midwest"))
             {
-                rewardScore = 1.0f;
                 Console.WriteLine($"\nBill didn't buy {actionId} because the price was too high when not visting his friend Warren in the midwest.");
             }
-            else if (actionFeatures.DietaryAttributes.LowCarb && context.Location.Equals("midwest"))
+            else if (!actionFeatures.DietaryAttributes.LowCarb && context.Location.Equals("midwest"))
             {
-                rewardScore = 1.0f;
                 Console.WriteLine($"\nBill didn't buy {actionId} because it's not low-carb, and he's in the midwest visitng his friend Warren.");
             }
         }
