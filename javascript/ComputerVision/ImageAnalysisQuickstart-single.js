@@ -71,7 +71,7 @@ function computerVision() {
       console.log();
 
       // Image of different kind of dog.
-      const tagsURL = 'https://moderatorsampleimages.blob.core.windows.net/samples/sample16.png';
+      const tagsURL = 'https://github.com/Azure-Samples/cognitive-services-sample-data-files/blob/master/ComputerVision/Images/house.jpg';
 
       // Analyze URL image
       console.log('Analyzing tags in image...', tagsURL.split('/').pop());

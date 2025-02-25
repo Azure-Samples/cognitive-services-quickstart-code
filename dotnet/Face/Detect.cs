@@ -7,12 +7,12 @@ namespace FaceQuickstart
 {
     class Program
     {
-        static string SUBSCRIPTION_KEY = "PASTE_YOUR_FACE_SUBSCRIPTION_KEY_HERE";
-        static string ENDPOINT = "PASTE_YOUR_FACE_ENDPOINT_HERE";
+        static string SubscriptionKey = "PASTE_YOUR_FACE_SUBSCRIPTION_KEY_HERE";
+        static string Endpoint = "PASTE_YOUR_FACE_ENDPOINT_HERE";
 
         async static void Quickstart()
         {
-            FaceClient faceClient = new FaceClient(new Uri(ENDPOINT), new AzureKeyCredential(SUBSCRIPTION_KEY));
+            FaceClient faceClient = new FaceClient(new Uri(Endpoint), new AzureKeyCredential(SubscriptionKey));
 
             var imageUrl = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/faces.jpg";
 
@@ -48,7 +48,6 @@ namespace FaceQuickstart
 
                 double rightPupilX = landmarks.PupilRight.X;
                 double rightPupilY = landmarks.PupilRight.Y;
-
                 var upperLipBottom = landmarks.UpperLipBottom;
                 var underLipTop = landmarks.UnderLipTop;
 

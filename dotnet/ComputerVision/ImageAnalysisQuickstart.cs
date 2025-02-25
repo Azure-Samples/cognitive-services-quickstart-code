@@ -60,10 +60,10 @@ namespace ComputerVisionQuickstart
 
         // <snippet_analyze_url>
         // URL image used for analyzing an image (image of puppy)
-        private const string ANALYZE_URL_IMAGE = "https://moderatorsampleimages.blob.core.windows.net/samples/sample16.png";
+        private const string ANALYZE_URL_IMAGE = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/refs/heads/master/ComputerVision/Images/dog.jpg";
         // </snippet_analyze_url>
         // URL image for detecting objects (image of man on skateboard)
-        private const string DETECT_URL_IMAGE = "https://moderatorsampleimages.blob.core.windows.net/samples/sample9.png";
+        private const string DETECT_URL_IMAGE = "https://github.com/Azure-Samples/cognitive-services-sample-data-files/blob/master/ComputerVision/Images/objects.jpg";
         // URL image for detecting domain-specific content (image of ancient ruins)
         private const string DETECT_DOMAIN_SPECIFIC_URL = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/landmark.jpg";
 
