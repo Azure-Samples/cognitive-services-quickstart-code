@@ -48,9 +48,7 @@ namespace FaceQuickstart
 
                 double rightPupilX = landmarks.PupilRight.X;
                 double rightPupilY = landmarks.PupilRight.Y;
-                // </landmarks2>
 
-                // <direction>
                 var upperLipBottom = landmarks.UpperLipBottom;
                 var underLipTop = landmarks.UnderLipTop;
 
@@ -65,6 +63,9 @@ namespace FaceQuickstart
                     (int)((eyeLeftInner.X + eyeRightInner.X) / 2),
                     (int)((eyeLeftInner.Y + eyeRightInner.Y) / 2));
 
+                // </landmarks2>
+
+                // <direction>
                 var faceDirectionVectorX = centerOfTwoEyes.X - centerOfMouth.X;
                 var faceDirectionVectorY = centerOfTwoEyes.Y - centerOfMouth.Y;
             }
