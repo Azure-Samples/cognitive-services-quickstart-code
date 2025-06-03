@@ -24,8 +24,9 @@ This sample looks for images in the following paths:
 '''
 
 # <snippet_creds>
-# Replace with valid values
+# Replace with vprediction_endpointalid values
 ENDPOINT = os.environ["VISION_TRAINING_ENDPOINT"]
+prediction_endpoint = os.environ["VISION_PREDICTION_ENDPOINT"]
 training_key = os.environ["VISION_TRAINING_KEY"]
 prediction_key = os.environ["VISION_PREDICTION_KEY"]
 prediction_resource_id = os.environ["VISION_PREDICTION_RESOURCE_ID"]
@@ -35,7 +36,7 @@ prediction_resource_id = os.environ["VISION_PREDICTION_RESOURCE_ID"]
 credentials = ApiKeyCredentials(in_headers={"Training-key": training_key})
 trainer = CustomVisionTrainingClient(ENDPOINT, credentials)
 prediction_credentials = ApiKeyCredentials(in_headers={"Prediction-key": prediction_key})
-predictor = CustomVisionPredictionClient(ENDPOINT, prediction_credentials)
+predictor = CustomVisionPredictionClient(prediction_endpoint, prediction_credentials)
 # </snippet_auth>
 
 # <snippet_create>
