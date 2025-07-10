@@ -22,7 +22,7 @@ public class Program
         // </snippet_client>
 
         // <snippet_url>
-        Uri imageURL = new Uri("https://aka.ms/azsdk/image-analysis/sample.jpg");
+        Uri imageUrl = new Uri("https://learn.microsoft.com/azure/ai-services/computer-vision/media/quickstarts/presentation.png");
         // </snippet_url>
 
         // <snippet_file>
