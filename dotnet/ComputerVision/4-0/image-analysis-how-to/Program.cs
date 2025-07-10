@@ -1,11 +1,13 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+// <snippet_imports>
 using Azure;
 using Azure.AI.Vision.ImageAnalysis;
 using System;
 using System.IO;
 using System.Linq;
+// </snippet_imports>
 
 public class Program
 {
@@ -22,7 +24,7 @@ public class Program
         // </snippet_client>
 
         // <snippet_url>
-        Uri imageURL = new Uri("https://aka.ms/azsdk/image-analysis/sample.jpg");
+        Uri imageUrl = new Uri("https://learn.microsoft.com/azure/ai-services/computer-vision/media/quickstarts/presentation.png");
         // </snippet_url>
 
         // <snippet_file>
