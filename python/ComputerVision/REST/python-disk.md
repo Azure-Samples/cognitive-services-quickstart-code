@@ -60,7 +60,9 @@ image_path = "C:/Documents/ImageToAnalyze.jpg"
 image_data = open(image_path, "rb").read()
 headers = {'Ocp-Apim-Subscription-Key': subscription_key,
            'Content-Type': 'application/octet-stream'}
-params = {'visualFeatures': 'Categories,Description,Color'}
+#params = {'visualFeatures': 'Categories,Description,Color'}
+# You will recieve 400 Bad Request if you fill multiple features here.
+params = {'visualFeatures': 'Description'}
 response = requests.post(
     analyze_url, headers=headers, params=params, data=image_data)
 response.raise_for_status()
