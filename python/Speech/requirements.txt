@@ -1,0 +1,6 @@
+azure-ai-projects>=2.0.0b3
+openai
+azure-ai-voicelive>=1.2.0b4
+pyaudio
+python-dotenv
+azure-identity
