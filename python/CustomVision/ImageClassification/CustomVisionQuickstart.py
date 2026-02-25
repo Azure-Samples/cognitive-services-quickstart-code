@@ -26,6 +26,7 @@ This sample looks for images in the following paths:
 # <snippet_creds>
 # retrieve environment variables
 ENDPOINT = os.environ["VISION_TRAINING_ENDPOINT"]
+prediction_endpoint = os.environ["VISION_PREDICTION_ENDPOINT"]
 training_key = os.environ["VISION_TRAINING_KEY"]
 prediction_key = os.environ["VISION_PREDICTION_KEY"]
 prediction_resource_id = os.environ["VISION_PREDICTION_RESOURCE_ID"]
@@ -36,7 +37,7 @@ prediction_resource_id = os.environ["VISION_PREDICTION_RESOURCE_ID"]
 credentials = ApiKeyCredentials(in_headers={"Training-key": training_key})
 trainer = CustomVisionTrainingClient(ENDPOINT, credentials)
 prediction_credentials = ApiKeyCredentials(in_headers={"Prediction-key": prediction_key})
-predictor = CustomVisionPredictionClient(ENDPOINT, prediction_credentials)
+predictor = CustomVisionPredictionClient(prediction_endpoint, prediction_credentials)
 # </snippet_auth>
 
 # <snippet_create>
@@ -101,7 +102,7 @@ print ("Done!")
 # <snippet_test>
 # Now there is a trained endpoint that can be used to make a prediction
 prediction_credentials = ApiKeyCredentials(in_headers={"Prediction-key": prediction_key})
-predictor = CustomVisionPredictionClient(ENDPOINT, prediction_credentials)
+predictor = CustomVisionPredictionClient(prediction_endpoint, prediction_credentials)
 
 with open(os.path.join (base_image_location, "Test/test_image.jpg"), "rb") as image_contents:
     results = predictor.classify_image(

@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <!-- Exclude CreateAgentWithVoiceLive.cs from the main build.
+       It's a separate utility that should be compiled independently:
+       dotnet run CreateAgentWithVoiceLive.cs -->
+  <ItemGroup>
+    <Compile Remove="CreateAgentWithVoiceLive.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Azure.AI.VoiceLive" Version="1.1.0-beta.2" />
+    <PackageReference Include="Azure.AI.Projects" Version="1.0.0-beta.8" />
+    <PackageReference Include="Azure.Identity" Version="1.13.2" />
+    <PackageReference Include="NAudio" Version="2.2.1" />
+  </ItemGroup>
+
+</Project>
