@@ -6,7 +6,6 @@ import com.azure.ai.voicelive.VoiceLiveClientBuilder;
 import com.azure.ai.voicelive.VoiceLiveSessionAsyncClient;
 import com.azure.ai.voicelive.models.AgentSessionConfig;
 import com.azure.ai.voicelive.models.ClientEventConversationItemCreate;
-import com.azure.ai.voicelive.models.ClientEventResponseCancel;
 import com.azure.ai.voicelive.models.ClientEventResponseCreate;
 import com.azure.ai.voicelive.models.ClientEventSessionUpdate;
 import com.azure.ai.voicelive.models.ConversationRequestItem;
@@ -237,8 +236,6 @@ public class VoiceLiveWithAgentV2 {
         private AudioProcessor audioProcessor;
         private boolean sessionReady = false;
         private boolean greetingSent = false;
-        private boolean activeResponse = false;
-        private boolean responseApiDone = false;
 
         // <agent_config>
         BasicVoiceAssistant(String endpoint, String agentName, String projectName,
@@ -393,28 +390,12 @@ public class VoiceLiveWithAgentV2 {
                 System.out.println("🎤 Listening...");
                 audioProcessor.skipPendingAudio();
 
-                // Cancel in-progress response for barge-in
-                if (activeResponse && !responseApiDone) {
-                    try {
-                        session.sendEvent(new ClientEventResponseCancel()).block();
-                        logger.fine("Cancelled in-progress response due to barge-in");
-                    } catch (Exception e) {
-                        if (e.getMessage() != null && e.getMessage().toLowerCase().contains("no active response")) {
-                            logger.fine("Cancel ignored - response already completed");
-                        } else {
-                            logger.warning("Cancel failed: " + e.getMessage());
-                        }
-                    }
-                }
-
             } else if (type == ServerEventType.INPUT_AUDIO_BUFFER_SPEECH_STOPPED) {
                 logger.info("User stopped speaking");
                 System.out.println("🤔 Processing...");
 
             } else if (type == ServerEventType.RESPONSE_CREATED) {
                 logger.info("Assistant response created");
-                activeResponse = true;
-                responseApiDone = false;
 
             } else if (type == ServerEventType.RESPONSE_AUDIO_DELTA) {
                 logger.fine("Received audio delta");
@@ -430,18 +411,12 @@ public class VoiceLiveWithAgentV2 {
 
             } else if (type == ServerEventType.RESPONSE_DONE) {
                 logger.info("Response complete");
-                activeResponse = false;
-                responseApiDone = true;
 
             } else if (type == ServerEventType.ERROR) {
                 SessionUpdateError errorEvent = (SessionUpdateError) event;
                 String msg = errorEvent.getError().getMessage();
-                if (msg != null && msg.contains("Cancellation failed: no active response")) {
-                    logger.fine("Benign cancellation error: " + msg);
-                } else {
-                    logger.severe("VoiceLive error: " + msg);
-                    System.out.println("Error: " + msg);
-                }
+                logger.severe("VoiceLive error: " + msg);
+                System.out.println("Error: " + msg);
 
             } else {
                 logger.fine("Unhandled event type: " + type);

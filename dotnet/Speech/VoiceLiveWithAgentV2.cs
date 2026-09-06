@@ -181,8 +181,6 @@ class BasicVoiceAssistant : IDisposable
     private VoiceLiveSession? _session;
     private AudioProcessor? _audioProcessor;
     private bool _greetingSent;
-    private bool _activeResponse;
-    private bool _responseApiDone;
 
     // Conversation log
     private static readonly string LogFilename = $"conversation_{DateTime.Now:yyyyMMdd_HHmmss}.log";
@@ -341,28 +339,10 @@ class BasicVoiceAssistant : IDisposable
             case SessionUpdateInputAudioBufferSpeechStarted:
                 Console.WriteLine("🎤 Listening...");
                 _audioProcessor?.SkipPendingAudio();
-
-                // Cancel in-progress response for barge-in
-                if (_activeResponse && !_responseApiDone)
-                {
-                    try
-                    {
-                        await _session!.CancelResponseAsync(cancellationToken).ConfigureAwait(false);
-                    }
-                    catch (Exception ex) when (ex.Message?.Contains("no active response") == true)
-                    {
-                        // Benign - response already completed
-                    }
-                }
                 break;
 
             case SessionUpdateInputAudioBufferSpeechStopped:
                 Console.WriteLine("🤔 Processing...");
-                break;
-
-            case SessionUpdateResponseCreated:
-                _activeResponse = true;
-                _responseApiDone = false;
                 break;
 
             case SessionUpdateResponseAudioDelta audioDelta:
@@ -376,21 +356,9 @@ class BasicVoiceAssistant : IDisposable
                 Console.WriteLine("🎤 Ready for next input...");
                 break;
 
-            case SessionUpdateResponseDone:
-                _activeResponse = false;
-                _responseApiDone = true;
-                break;
-
             case SessionUpdateError errorEvent:
                 var errorMsg = errorEvent.Error?.Message;
-                if (errorMsg?.Contains("Cancellation failed: no active response") == true)
-                {
-                    // Benign cancellation error
-                }
-                else
-                {
-                    Console.Error.WriteLine($"VoiceLive error: {errorMsg}");
-                }
+                Console.Error.WriteLine($"VoiceLive error: {errorMsg}");
                 break;
         }
     }
