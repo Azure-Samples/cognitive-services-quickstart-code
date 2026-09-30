@@ -62,15 +62,16 @@ To create a new resource, run the following command.
 - Replace `<resource type>` with the resource type of the new resource (for example, "Text Translation").
 - Replace `<location>` with the location of the new resource (for example, "westus" or "global").
 - Replace `<sku name>` with the subscription tier of the new resource (for example, "F0").
+- Replace `<subdomain name>` with a custom subdomain name (for example, "my-text-translation-resource"). This is optional.
 - Replace `<token>` with your Azure access token.
 
 ```
-curl https://management.azure.com/subscriptions/<subscription ID>/resourceGroups/<resource group name>/providers/Microsoft.CognitiveServices/accounts/<account name>?api-version=2017-04-18 -X PUT -H "Content-Type: application/json" -d "{ 'kind' : '<resource type>', 'location' : '<location>', 'sku' : { 'name' : '<sku name>' }}" -H "Authorization: Bearer <token>"
+curl https://management.azure.com/subscriptions/<subscription ID>/resourceGroups/<resource group name>/providers/Microsoft.CognitiveServices/accounts/<account name>?api-version=2017-04-18 -X PUT -H "Content-Type: application/json" -d "{ 'kind' : '<resource type>', 'location' : '<location>', 'sku' : { 'name' : '<sku name>' }, 'properties' : { 'customSubDomainName' : '<subdomain name>' }}" -H "Authorization: Bearer <token>"
 ```
 
-For example, the following creates a resource with kind Text Translation, SKU F0 (free tier), location global. You will still need to replace `<subscription ID>`, `<resource group name>`, `<account name>`, and `<token>`.
+For example, the following creates a resource with kind Text Translation, SKU F0 (free tier), location global. You will still need to replace `<subscription ID>`, `<resource group name>`, `<account name>`, `<subdomain name>`, and `<token>`.
 ```
-curl https://management.azure.com/subscriptions/<subscription ID>/resourceGroups/<resource group name>/providers/Microsoft.CognitiveServices/accounts/<account name>?api-version=2017-04-18 -X PUT -H "Content-Type: application/json" -d "{ 'kind' : 'TextTranslation', 'location' : 'Global', 'sku' : { 'name' : 'F0' }}" -H "Authorization: Bearer <token>"
+curl https://management.azure.com/subscriptions/<subscription ID>/resourceGroups/<resource group name>/providers/Microsoft.CognitiveServices/accounts/<account name>?api-version=2017-04-18 -X PUT -H "Content-Type: application/json" -d "{ 'kind' : 'TextTranslation', 'location' : 'Global', 'sku' : { 'name' : 'F0' }, 'properties' : { 'customSubDomainName' : '<subdomain name>' }}" -H "Authorization: Bearer <token>"
 ```
 
 For more information see:
