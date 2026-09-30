@@ -165,7 +165,7 @@ namespace ComputerVisionQuickstart
             Console.WriteLine("READ FILE FROM LOCAL");
             Console.WriteLine();
 
-            // Read text from URL
+            // Read text from file
             var textHeaders = await client.ReadInStreamAsync(File.OpenRead(localFile));
             // After the request, get the operation location (operation ID)
             string operationLocation = textHeaders.OperationLocation;
