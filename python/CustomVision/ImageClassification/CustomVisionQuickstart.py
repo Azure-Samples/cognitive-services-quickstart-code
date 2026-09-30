@@ -79,7 +79,7 @@ upload_result = trainer.create_images_from_files(project.id, ImageFileCreateBatc
 if not upload_result.is_batch_successful:
     print("Image batch upload failed.")
     for image in upload_result.images:
-        print("Image status: ", image.status)
+        print(image.source_url,"Image status: ", image.status) # Proposed change to identify images which are duplicate by their file name
     exit(-1)
 # </snippet_upload>
 
